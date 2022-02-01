@@ -6,6 +6,7 @@ sectionPagesMenu: main
 params:
   highlight: true
   github: https://github.com/FontysVenlo/prc2_web
+  fontawesome: true
 security:
   enableInlineShortcodes: false
   exec:
@@ -32,6 +33,4 @@ markup:
       toclevels: 2
       topics: content/docs/topics
       imagesdir: /prc2_web/images
-      icons: image
-      icontype: svg
-      iconsdir: /prc2_web/icons
+      icons: font
