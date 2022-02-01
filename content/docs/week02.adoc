@@ -1,0 +1,29 @@
+---
+title: "Parameterized tests"
+description: ""
+date: 2022-02-01T14:17:33+01:00
+draft: true
+images: []
+slug: "parameterized-tests"
+menu: 
+  docs:
+    parent: ""
+weight: 020
+toc: true
+---
+
+:imagesdir: /prc2_web/
+
+include::{topics}/parameterizedtests.adoc[]
+
+[TIP]
+====
+Think test driven! So write tests FIRST, and then code. Testing is ensuring that the code is usable.
+To make code testable is also a design exercise: you need to make decisions about the design of your program when you write your tests. If you cannot test it, you cannot use it.
+====
+
+== Links
+
+* https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests[JUnit 5 Parameterized Tests ^]
+* https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-sources-CsvSource[CSV Source Tests ^]
+* https://www.baeldung.com/parameterized-tests-junit-5[Baeldung on Parameterized Tests with JUnit 5 ^]
