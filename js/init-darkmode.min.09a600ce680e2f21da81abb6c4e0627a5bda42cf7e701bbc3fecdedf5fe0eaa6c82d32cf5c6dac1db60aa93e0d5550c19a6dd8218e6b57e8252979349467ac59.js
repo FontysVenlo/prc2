@@ -1,0 +1,1 @@
+(()=>{var a=localStorage.getItem("theme");(!!a&&a==="Dark"||!("theme"in localStorage)&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.documentElement.classList.add("dark")})()
