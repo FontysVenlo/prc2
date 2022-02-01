@@ -480,9 +480,9 @@ brew install subversion
 . Open command prompt and check that svn is added to the path with `svn --version`
 
 
-include::{topics}/configuringmaven.adoc[]
+include::configuringmaven.adoc[]
 
-include::{topics}/sebipom.adoc[]
+include::sebipom.adoc[]
 
 == Additional Pointers
 
