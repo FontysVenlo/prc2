@@ -1,0 +1,474 @@
+<!doctype html><html lang=en-us><head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>PRC2</title>
+<link rel=stylesheet href=http://example.org/css/main.min.9b259c8209db4f982f6230a3d294648d65ebb4ecc6af9c50476d203095e86b33c8f69ae71342a56e3a4d9befd47903a14172ce484105d1f66b46cc454878f24d.css integrity="sha512-myWcggnbT5gvYjCj0pRkjWXrtOzGr5xQR20gMJXoazPI9prnE0KlbjpNm+/UeQOhQXLOSEEF0fZrRsxFSHjyTQ==" crossorigin=anonymous>
+<link rel=stylesheet href=http://example.org/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
+</head><body class="antialiased text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800"><header class="sticky top-0 z-40 w-full flex-none lg:border-b lg:border-gray-900/10 dark:border-gray-50/[0.06] bg-white dark:bg-gray-800">
+<div class="max-w-8xl mx-auto">
+<div class="py-4 border-b border-slate-900/10 lg:px-8 lg:border-0 dark:border-slate-300/10 mx-4 lg:mx-0">
+<div class="relative flex items-center">
+<a class="mr-3 flex-none overflow-hidden md:w-auto" href=/>
+<span class=sr-only>PRC2</span>PRC2
+</a>
+<div class="relative flex ml-auto">
+<nav class="hidden lg:flex items-center text-sm leading-6 font-semibold text-gray-700 dark:text-gray-200">
+<ul class="flex space-x-8">
+</ul>
+</nav>
+<div class="flex items-center lg:border-l border-gray-200 ml-6 pl-6 dark:border-gray-700">
+<button type=button id=theme-toggle>
+<span class="dark:hidden hover:text-sky-500"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+<span class="hidden dark:inline hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+</button>
+<a href=https://github.com/FontysVenlo/prc2_web class="ml-6 block hover:text-sky-500 dark:hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center p-4 border-b border-slate-900/10 lg:hidden dark:border-slate-50/[0.06]">
+<button id=menu-toggle type=button class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+<span class=sr-only>Navigation</span><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+</button>
+</div>
+</div>
+</header><div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8"><aside id=menu class="hidden lg:block fixed z-20 inset-0 top-[7rem] lg:top-[3.8125rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto bg-white dark:bg-gray-800">
+<nav class="lg:leading-6 relative">
+<ul>
+<li class="mt-12 lg:mt-8">
+<h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">Weeks</h5>
+<ul class="space-y-6 lg:space-y-2 border-l border-gray-100 dark:border-gray-700">
+<li>
+<a href=/docs/unit-testing-basics/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+Unit Testing Basics
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside><div class=lg:pl-[19.5rem]>
+<div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
+<article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
+<div class=sect1>
+<h2 id=_assertj_examples>AssertJ examples.</h2>
+<div class=sectionbody>
+<div class=paragraph>
+<p>In our course we to stick to <a href=https://assertj.github.io/doc/>AssertJ</a> library where possible.</p>
+</div>
+<div class=paragraph>
+<p>The rationale for that is:</p>
+</div>
+<div class=ulist>
+<ul>
+<li>
+<p>The AssertJ assertion API is very powerful and can easily turn overly strict or brittle tests into more effective tests.<br>
+You have come across tests in the mooc that insisted on specific formatting.
+With AssertJ you can specify elements you want to see and do not want to see. See examples below.</p>
+</li>
+<li>
+<p>AssertJ tests tend to be quite <strong>readable</strong>, once you get used to the fluent style. You will see long method names,
+but they help understanding what is going on a no-brainer.</p>
+</li>
+<li>
+<p>AssertJ can protect the test methods against unexpected exceptions, such as null pointers (NPE) before doing further tests.</p>
+</li>
+<li>
+<p>With the exception of <em>testing exceptions</em>, the userinterface and api of AssertJ is quite consistent.<br>
+You always start with <code>assertThat( objectOfInterest ).assertingMethod(…​)</code>.<br></p>
+</li>
+</ul>
+</div>
+<div class=paragraph>
+<p>We try to use the latest stable version of AssertJ and Junit 5.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class=icon>
+<div class=title>Tip</div>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>Either use sebipom version 3.0.0 and up or add assertj.core to your test dependencies.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class=sect2>
+<h3 id=_simple_tests>Simple Tests</h3>
+<div class=listingblock>
+<div class=title>test boolean value.</div>
+<div class=content>
+<pre class=highlight><code class=language-java data-lang=java>  car.start();
+  assertThat( car.motorIsOn() ) // <b class=conum>(1)</b>
+      .as(&#34;Motor should be on after start&#34;) // <b class=conum>(2)</b>
+      .isTrue(); //<b class=conum>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Object of interest, return value of method, which in the test fails if not true.</p>
+</li>
+<li>
+<p>Optional description, use in particular when testing primitive values such as boolean.<br>
+Use it to improved the information you get when the test fails.</p>
+</li>
+<li>
+<p>The actual verification. Use <code>isTrue()</code> and <code>isFalse()</code> for <code>boolean</code>, <code>isEqualTo()</code> and <code>isEquals()</code> for other types.</p>
+</li>
+</ol>
+</div>
+<div class=listingblock>
+<div class=title>Another SimpleTest</div>
+<div class=content>
+<pre class=highlight><code class=language-java data-lang=java>  assertThat(car.speedLimit())
+      .as(&#34;Make it a legal car?&#34;)
+      .isEqualTo(250);</code></pre>
+</div>
+</div>
+<div class=listingblock>
+<div class=title>Equals or same?</div>
+<div class=content>
+<pre class=highlight><code class=language-java data-lang=java>    assertThat( f1Champ ).isEqualTo( louis );
+    assertThat( f1Champ ).isSameAs( louis );</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>Quiz: what is the difference between the two here: equals and same?</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class=icon>
+<div class=title>Tip</div>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>To follow along, tweak your IDE. Make sure you have the <a href=/2021/tips.html#_adding_your_own_code_templates_to_netbeans_ide>code template</a> to create a test method.
+Note that the template adds a <strong>fail</strong> line, which should be disabled once the test and the business code agree.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_string_containment>String Containment</h3>
+<div class=listingblock>
+<div class=title>test string containment</div>
+<div class=content>
+<pre class=highlight><code class=language-java data-lang=java>  Student student = ....
+
+  assertThat( student.toString() )
+      .isNotNull()                              // <b class=conum>(1)</b>
+      .doesNotContainIgnoringCase(&#34;student{&#34;)    // <b class=conum>(2)</b>
+      .contains( &#34;Harry&#34;, &#34;Potter&#34;, &#34;1980-07-31&#34;, &#34;12345&#34;); //<b class=conum>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Ensure that the next test can inspect a String without tripping over a NPE.</p>
+</li>
+<li>
+<p><em>Auto generated is too simple.</em> Such autogenerated string typically starts with "Student{" for NetBeans IDE.</p>
+</li>
+<li>
+<p>The test ensures that the birth date is contained, and 12345 is Harry’s student number.</p>
+</li>
+</ol>
+</div>
+<div class=paragraph>
+<p>How the string is formatted does not matter for this test to pass. It only requires the shown strings in any order.</p>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_collection_containment>Collection Containment</h3>
+<div class=paragraph>
+<p>For collections there are numerous tests. Collections in this context includes
+everything <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Iterable.html>Iterable</a>,
+making it very powerful as can be seen in the Javadoc page of Iterable
+by following the link in this sentence. Look at the sub-interfaces and the implementing classes.</p>
+</div>
+<div class=listingblock>
+<div class=title>simple containment.</div>
+<div class=content>
+<pre class=highlight><code class=language-java data-lang=java>    List&lt;Professor&gt; professors = List.of( SNAPE, DUMBLEDORE, MCGONAGALL ); //<b class=conum>(1)</b>
+
+    List&lt;Professor&gt; teachesTransfiguration = professors.stream()
+            .filter( p -&gt; p.teaches( &#34;Transfigurations&#34; ) ).collect( toList() );
+
+    assertThat( teachesTransfiguration )
+            .isNotNull()                         //<b class=conum>(2)</b>
+            .hasSizeGreaterThanOrEqualTo( 2 )    //<b class=conum>(3)</b>
+            .contains( DUMBLEDORE, MCGONAGALL ); //<b class=conum>(4)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Assume this to be in the business code or SUT.</p>
+</li>
+<li>
+<p>Not really required by a good tip to make sure the test does not trip
+over an NPE, which might be confusing.</p>
+</li>
+<li>
+<p>The following contains test makes this actually redundant</p>
+</li>
+<li>
+<p>because we want these two at least.</p>
+</li>
+</ol>
+</div>
+<div class=listingblock>
+<div class=content>
+<pre class=highlight><code class=language-java data-lang=java>//  List&lt;Student&gt; hogwartsStudents = ...; // <b class=conum>(1)</b>
+  List&lt;Student&gt; hogwartsStudents = List.of( HARRY, HERMIONE, RON ); //<b class=conum>(1)</b>
+
+  assertThat( hogwartsStudents )
+          .isNotNull()                                // <b class=conum>(2)</b>
+          .hasSizeGreaterThanOrEqualTo( 3 )           // <b class=conum>(3)</b>
+          .extracting( s -&gt; s.getStudentNumber() )    // <b class=conum>(4)</b>
+          .containsExactlyInAnyOrder( 12346, 12345, 12347 ); // <b class=conum>(5)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Assume that the business code produces such list.</p>
+</li>
+<li>
+<p>Mostly self (test) protect.</p>
+</li>
+<li>
+<p>Just to show that you can test for not empty, but also exact size, greater etc. This assertion is actually made redundant by the test in 5.</p>
+</li>
+<li>
+<p>Extract a feature out of each student using a lambda. Its function should be obvious</p>
+</li>
+<li>
+<p>Then test the list of extracted values for containment.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class=icon>
+<div class=title>Tip</div>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>Because adding a <strong>Non-Null</strong> test is easy and cheap in the fluent style of AssertJ,
+it can be beneficial to always do that, so your test can show it as a failure instead of tripping over
+an unexpected <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/NullPointerException.html>NPE</a>.
+It more or less self-protects the test.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_assert_exceptions>Assert Exceptions</h3>
+<div class=paragraph>
+<p>In most business processes you want to avoid exceptions, but when they are expected,
+they must be thrown by the code under test, so that too needs to be tested.</p>
+</div>
+<div class=paragraph>
+<p>There are three cases:</p>
+</div>
+<div class="olist arabic">
+<ol class=arabic>
+<li>
+<p>You are not expecting an exception and do not (want to) care about it.<br>
+Then let it simply occur and if it is a checked exception make your test method throw it.</p>
+</li>
+<li>
+<p>You want specific code <strong class=red>not</strong> to throw an exception and your want to test for that.<br>
+Wrap the suspect code in a lambda and invoke it using <code>assertThatCode( suspectCode )</code>.</p>
+</li>
+<li>
+<p>You <strong class=green>want</strong> a specific exception to be thrown under specific a circumstance.<br>
+Wrap the exception causing code in a lambda and catch and inspect the resulting exception using <code>assertThatThrownBy( causingCode )</code>.</p>
+</li>
+</ol>
+</div>
+<div class=paragraph>
+<p>In AssertJ the exception testing helper have a format that deviates from the <code>assertThat().someCheck(…​)</code> style.
+This inconsistency has to do with the way the exceptions causing code must be called, and cannot easily be avoided.
+We propagate one form, declaring a lambda first and use that as the parameter to exception asserter.</p>
+</div>
+<div class=sect3>
+<h4 id=_ignore_or_pass_on>Ignore or pass on</h4>
+<div class=paragraph>
+<p>In case you are not interested in an exception in your test, but it is a checked exception, simply declare your test method to throw it.</p>
+</div>
+<div class=listingblock>
+<div class=title>Case 1: not interested in the (checked) exception, add a throws clause.</div>
+<div class=content>
+<pre class=highlight><code class=language-java data-lang=java>    @Test
+    public void fileUsingMethod() throws IOException { // <b class=conum>(1)</b>
+        Files.lines(Path.of (&#34;puk.txt&#34;) );  // <b class=conum>(2)</b>
+    }</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>This code potentially throws an <code>IOException</code>, but you are not interested in testing the exception. If it occurs,
+let the caller (Test Runner) deal with this unexpected situation. The IOException is an example.</p>
+</li>
+<li>
+<p>This is the method that throws the checked exception. This is an example. Normally it should be a business method.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class=sect3>
+<h4 id=_exception_not_wanted>Exception NOT wanted.</h4>
+<div class=paragraph>
+<p>If you want the check for an exception NOT to occur when invoking a code sequence, isolate the sequence
+in a lambda expression of the form <code>ThrowingCallable code =() → { suspectCode(); }</code>.<br>
+ThrowingCallable is a Functional interface and is part of AssertJ.</p>
+</div>
+<div class=listingblock>
+<div class=title>Case 2: the business code should explicitly NOT throw an exception.</div>
+<div class=content>
+<pre class=highlight><code class=language-java data-lang=java>    Student draco = new Student(&#34;Draco&#34;, &#34;Malfoy&#34;, LocalDate.of (1980,6,5));
+    ThrowingCallable code = () -&gt; {
+        hogwarts.addStudent( draco );  // <b class=conum>(1)</b>
+    };
+
+    assertThatCode( code)
+            .as( &#34;draco should be accepted to make the adventures possible&#34;)
+            .doesNotThrowAnyException();</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Is the only code that is checked for exceptions. This isolates the "suspect" code from
+any other code that may cause issues.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class=icon>
+<div class=title>Note</div>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>Sometimes you may have the situation that exceptions appear to come out of the blue, as in you have
+no idea what causes it and the stack trace is not very helpful either. In such cases, use this test method
+to isolate the problematic code.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class=sect3>
+<h4 id=_exception_needs_to_occur>Exception needs to occur.</h4>
+<div class=paragraph>
+<p>When you want your business code to throw an exception, wrap that business code (the method invocations) in a lambda expression,
+in the same way as in the previous paragraph, then pass that <code>code</code> to the exception assert method.</p>
+</div>
+<div class=listingblock>
+<div class=title>Catch a specific exception.</div>
+<div class=content>
+<pre class=highlight><code class=language-java data-lang=java>    @Test
+    public void addIllegalProfessor() {
+        var malfoy = new Professor( &#34;Lucius&#34;, &#34;Malfoy&#34;, LocalDate.of( 1953, 10, 9 ) ); //<b class=conum>(1)</b>
+
+        ThrowingCallable code = () -&gt; { // <b class=conum>(2)</b>
+            hogwarts.addProfessor( malfoy );
+        };
+
+        assertThatThrownBy( code )
+                .isInstanceOf( Exception.class) // <b class=conum>(3)</b>
+                .isExactlyInstanceOf( IllegalArgumentException.class) // <b class=conum>(4)</b>
+                .hasMessageContainingAll( &#34;should&#34;,&#34;teach&#34;); // <b class=conum>(5)</b>
+        // fail( &#34;addIllegalProfessor completed succesfully; you know what to do&#34; );
+    }</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Someone that knows his classics understands that this crook can’t be professor at Hogwarts.</p>
+</li>
+<li>
+<p>The lambda defines the throwing code. <code>org.assertj.core.api.ThrowableAssert.ThrowingCallable</code> is the functional interface for this purpose.</p>
+</li>
+<li>
+<p>Sometimes it is good to be a bit relaxed on the exception type like in this line.</p>
+</li>
+<li>
+<p>Or you need to be quite specific. You need only one, so choose either line 2 or 3. This is just an illustration.</p>
+</li>
+<li>
+<p>You might want to inspect the message for keywords.</p>
+</li>
+</ol>
+</div>
+<div class=paragraph>
+<p>In this fluent style you can check many more things. See the <a href=https://assertj.github.io/doc/>AssertJ user guide</a>
+and <a href=https://javadoc.io/doc/org.assertj/assertj-core/latest/index.html>API</a> for that.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class=icon>
+<div class=title>Tip</div>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>The general advise is to have only one (1) assert per test method. This makes the test method very focused.
+Stick to this rule and do not test unrelated features.
+Also note that when a failure occurs (a test fails or an exception is thrown), the rest of the test is not executed anymore,
+and this will therefor obscure further asserts in the same test method.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div><footer class="text-sm leading-6 mt-12">
+Footer
+</footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
+<h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#_assertj_examples>AssertJ examples.</a>
+<ul>
+<li><a href=#_simple_tests>Simple Tests</a></li>
+<li><a href=#_string_containment>String Containment</a></li>
+<li><a href=#_collection_containment>Collection Containment</a></li>
+<li><a href=#_assert_exceptions>Assert Exceptions</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div></div>
+<div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
+</div><script src=/js/main.min.f1aab0f377564ee438c29317379d3f3a0f439940032b9f85b111f678488256c83855d0eb3ea171cc9d86f0739f20537604bd541b05eb8a127b5162a683ea8b4a.js integrity="sha512-8aqw83dWTuQ4wpMXN50/Og9DmUADK5+FsRH2eEiCVsg4VdDrPqFxzJ2G8HOfIFN2BL1UGwXrihJ7UWKmg+qLSg==" crossorigin=anonymous></script>
+<script src=/js/highlight.min.f1690c458d098f45f338cfee7494988dcfae16778ad557952b7362e8ba6c54c90c6982d2663244333dd0b5105dc09e030729fbd812e33acddf2537a737e4dc87.js integrity="sha512-8WkMRY0Jj0XzOM/udJSYjc+uFneK1VeVK3Ni6LpsVMkMaYLSZjJEMz3QtRBdwJ4DByn72BLjOs3fJTenN+Tchw==" crossorigin=anonymous defer></script>
+<div id=copied-alert class="invisible opacity-0 transition-all ease-in-out duration-400 fixed bottom-3 right-10 z-50 flex p-4 mb-4 text-sm text-gray-800 bg-gray-200 rounded-lg dark:bg-gray-500 dark:text-gray-200" role=alert><svg class="inline flex-shrink-0 mr-3 w-5 h-5" viewBox="0 0 24 24" width="24" height="24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+<div>
+<span class=font-medium>Code copied</span>
+</div>
+</div>
+</body>
+</html>
