@@ -61,57 +61,90 @@ Parameterized tests
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
 <div class=sect1>
-<h2 id=_soft_assertions>Soft Assertions</h2>
+<h2 id=_configuring_maven>Configuring Maven</h2>
 <div class=sectionbody>
 <div class=paragraph>
-<p>Sometimes you have a pressing need to assert more than one thing in a test method,
-because two or more values always come in pairs and setting stuff up and dividing it over multiple
-methods would make the test less readable, which is bad.</p>
+<p>Maven and maven projects are first class citizens in the NetBeans world.</p>
 </div>
 <div class=paragraph>
-<p>However, having multiple asserts in one method is bad style, because
-the first problem that occurs is the only failure that will be reported by the test. You could say that the first
-failure dominates or monopolizes the test method.</p>
+<p>Since we build with maven, we are not really bound to particular IDE,
+other than for editing and maybe the odd debug session.<sup class=footnote>[<a id=_footnoteref_1 class=footnote href=#_footnotedef_1 title="View footnote.">1</a>]</sup>.
+This means that you can use other IDE’s, but expect no help from the teachers.</p>
 </div>
 <div class=paragraph>
-<p>However the rule above makes writing tests a bit awkward. In particular when there are multiple aspects to be tested on the
-same result object. In that case a soft assertion may be helpful.
-A soft assertion will fail "softly", meaning that the failure is recorded, but the test can still continue to verify another aspect.
-The soft assertion will collect all failures and will report them after the soft assertion is <strong>closed</strong>.</p>
+<p>We have many things to share with you, and we use maven for that.</p>
+</div>
+<div class=paragraph>
+<p>We share libraries and project configuration files (pom.xml) with our students. To make them
+work as intended, you will need to configure the maven <code>settings.xml</code> only once. Since this is a maven setting, your IDE should
+pick these settings up as well. Certainly NetBeans IDE will.</p>
+</div>
+<div class=paragraph>
+<p>Start NetBeans IDE and create a Java project with New Project ▷ Java with Maven ▷ Java Application.</p>
+</div>
+<div class=paragraph>
+<p>In the project, right click on Project Files and choose <strong>create settings.xml</strong>.
+Add the Fontys Venlo repository to the settings, which is best done by replacing the xml in the settings
+file with</p>
 </div>
 <div class=listingblock>
-<div class=title>soft assertion, testing both key and value of a KeyValue object.</div>
+<div class=title>settings.xml which adds <a href=https://www.fontysvenlo.org/repository class=bare>https://www.fontysvenlo.org/repository</a> as repository</div>
 <div class=content>
-<pre class=highlight><code class=language-java data-lang=java>   void testGetResult(){
-    // some setup
-    Optional&lt;KeyValue&lt;Integer,Double&gt;&gt; = new gf(student).gradeFor(&#34;PRC2&#34;);
-    SoftAssertions.assertSoftly( softly -&gt; { <i class=conum data-value=1></i><b>(1)</b>
-                AbstractMap.SimpleEntry&lt;Integer, Double&gt; result = gf.getResult();
-                softly.assertThat( result )
-                    .extracting( &#34;key&#34; )
-                    .isEqualTo( student.getStudentId() );
-                softly.assertThat( result )
-                    .extracting( &#34;value&#34; )
-                    .isEqualTo( grade );
-    }); <i class=conum data-value=2></i><b>(2)</b>
-  }</code></pre>
+<pre class=highlight><code class=language-xml data-lang=xml>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+&lt;settings xmlns=&#34;http://maven.apache.org/SETTINGS/1.0.0&#34;
+          xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
+          xsi:schemaLocation=&#34;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&#34;&gt;
+    &lt;profiles&gt;
+        &lt;profile&gt;                    <i class=conum data-value=1></i><b>(1)</b>
+            &lt;id&gt;sebivenlo&lt;/id&gt;
+            &lt;repositories&gt;
+                &lt;repository&gt;
+                    &lt;id&gt;fontysvenlo.org&lt;/id&gt;   <i class=conum data-value=2></i><b>(2)</b>
+                    &lt;url&gt;https://www.fontysvenlo.org/repository&lt;/url&gt; <i class=conum data-value=3></i><b>(3)</b>
+                &lt;/repository&gt;
+            &lt;/repositories&gt;
+        &lt;/profile&gt;
+    &lt;/profiles&gt;
+    &lt;activeProfiles&gt;
+        &lt;activeProfile&gt;sebivenlo&lt;/activeProfile&gt;  <i class=conum data-value=4></i><b>(4)</b>
+    &lt;/activeProfiles&gt;
+    &lt;offline&gt;false&lt;/offline&gt;
+&lt;/settings&gt;</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tbody><tr>
 <td><i class=conum data-value=1></i><b>1</b></td>
-<td>Starts the lambda that encloses the soft assertions. <strong>Softly</strong> serves as the collector of the failures</td>
+<td>You define a profile inside the profiles section of your settings.xml.</td>
 </tr>
 <tr>
 <td><i class=conum data-value=2></i><b>2</b></td>
-<td>Closes the sequence of soft assertions. This is the spot where SoftAssertion will report the the failures, if any.</td>
+<td>Give the profile a name.</td>
+</tr>
+<tr>
+<td><i class=conum data-value=3></i><b>3</b></td>
+<td>Specify the URL.</td>
+</tr>
+<tr>
+<td><i class=conum data-value=4></i><b>4</b></td>
+<td>Use the given name to make it an active profile by default.</td>
 </tr>
 </tbody></table>
 </div>
 <div class=paragraph>
-<p>In the example, the key and value in the KeyValue pair are related, making a soft assertion applicable.</p>
+<p>The <a href=topics/settings.xml.txt>raw settings file</a>.</p>
 </div>
+<div class=paragraph>
+<p>Note that the project provided through the PRC2 personal repository will <strong class=role:red>NOT</strong> work without
+the settings file above. From February 2020 will use sebipom version 2.3.0 or above.</p>
+</div>
+</div>
+</div>
+<div id=footnotes>
+<hr>
+<div class=footnote id=_footnotedef_1>
+<a href=#_footnoteref_1>1</a>. Working test driven will typically not need those
 </div>
 </div>
 </article>
@@ -121,7 +154,7 @@ Footer
 <h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#_soft_assertions>Soft Assertions</a></li>
+<li><a href=#_configuring_maven>Configuring Maven</a></li>
 </ul>
 </nav>
 </div></div>

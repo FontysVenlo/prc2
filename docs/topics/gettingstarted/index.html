@@ -1,0 +1,1142 @@
+<!doctype html><html lang=en-us><head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>PRC2</title>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.9647f4ee04c07faf550964e08e5e18060624a5d5021eb1d72457131147268e5e6fb2a4cfc1d3f7409b368f42691eaabd2fd0289592b440477677168cdc9ff314.css integrity="sha512-lkf07gTAf69VCWTgjl4YBgYkpdUCHrHXJFcTEUcmjl5vsqTPwdP3QJs2j0JpHqq9L9AolZK0QEd2dxaM3J/zFA==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
+</head><body class="antialiased text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800"><header class="sticky top-0 z-40 w-full flex-none lg:border-b lg:border-gray-900/10 dark:border-gray-50/[0.06] bg-white dark:bg-gray-800">
+<div class="max-w-8xl mx-auto">
+<div class="py-4 border-b border-slate-900/10 lg:px-8 lg:border-0 dark:border-slate-300/10 mx-4 lg:mx-0">
+<div class="relative flex items-center">
+<a class="mr-3 flex-none overflow-hidden md:w-auto" href=/>
+<span class=sr-only>PRC2</span>PRC2
+</a>
+<div class="relative flex ml-auto">
+<nav class="hidden lg:flex items-center text-sm leading-6 font-semibold text-gray-700 dark:text-gray-200">
+<ul class="flex space-x-8">
+<li>
+<a href=https://fontysvenlo.github.io/prc2_web/pages/setup/ class="hover:text-sky-500 dark:hover:text-sky-400">Setup</a>
+</li>
+</ul>
+</nav>
+<div class="flex items-center lg:border-l border-gray-200 ml-6 pl-6 dark:border-gray-700">
+<button type=button id=theme-toggle>
+<span class="dark:hidden hover:text-sky-500"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+<span class="hidden dark:inline hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+</button>
+<a href=https://github.com/FontysVenlo/prc2_web class="ml-6 block hover:text-sky-500 dark:hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center p-4 border-b border-slate-900/10 lg:hidden dark:border-slate-50/[0.06]">
+<button id=menu-toggle type=button class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+<span class=sr-only>Navigation</span><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+</button>
+</div>
+</div>
+</header><div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8"><aside id=menu class="hidden lg:block fixed z-20 inset-0 top-[7rem] lg:top-[3.8125rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto bg-white dark:bg-gray-800">
+<nav class="lg:leading-6 relative">
+<ul>
+<li class="mt-12 lg:mt-8">
+<h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">Weeks</h5>
+<ul class="space-y-6 lg:space-y-2 border-l border-gray-100 dark:border-gray-700">
+<li>
+<a href=https://fontysvenlo.github.io/prc2_web/docs/unit-testing-basics/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+Unit Testing Basics
+</a>
+</li>
+<li>
+<a href=https://fontysvenlo.github.io/prc2_web/docs/parameterized-tests/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+Parameterized tests
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside><div class=lg:pl-[19.5rem]>
+<div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
+<article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
+<div class=sect1>
+<h2 id=_getting_started>Getting Started</h2>
+<div class=sectionbody>
+<div class=paragraph>
+<p>To work successfully with the programs needed for PRC2, you need to install them first.
+Properly installing Java and other programs is not hard but must be done precisely.
+What will follow is a description on how to do that under Ubuntu Linux, macOS and Windows.
+You can adapt this configuration for other operating systems too, possibly with a few tweaks.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-tip" title=Tip></i>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>It is best to get fairly familiar with the command line pretty soon, because in the end it will make you much more effective.
+Since 2018, <a href="https://www.youtube.com/watch?v=x73WTEltyHU">bash</a> is also available on Windows 10, and it is the default shell of Ubuntu-Linux and was the default shell on macOS until version 10.15. The default shell on macOS is now Zsh, we will specify the differences between bash and zsh where necessary.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-warning" title=Warning></i>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>Before you install any software from the internet, please validate the the package. You typically see signature files such as SHA-256 or PGP-ASC, os something similar,
+which can help to ascertain that the package is the one you think it is. For instance with:</p>
+</div>
+<div class=paragraph>
+<p><span class=icon><i class="fa fa-linux fa-fw"></i></span> <code>$ sha512sum /path/to/file</code><br>
+<span class=icon><i class="fa fa-apple fa-fw"></i></span> <code>$ shasum -a 256 /path/to/file</code><br>
+<span class=icon><i class="fa fa-windows fa-fw"></i></span> <code>$ certUtil -hashfile /path/to/file SHA256</code></p>
+</div>
+<div class=paragraph>
+<p>You can check the download of that version of netbeans, and the command should produce the same signature as is available on the download website.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class=sect1>
+<h2 id=_setting_up_the_correct_environment>Setting up the correct environment</h2>
+<div class=sectionbody>
+<div class=sect2>
+<h3 id=_install_java>Install Java</h3>
+<div class=paragraph>
+<p>The default installation paths are:</p>
+</div>
+<div class=paragraph>
+<p><span class=icon><i class="fa fa-linux fa-fw"></i></span> <code>/usr/lib/jvm</code><br>
+<span class=icon><i class="fa fa-apple fa-fw"></i></span> <code>/Library/Java/JavaVirtualMachines/</code><br>
+<span class=icon><i class="fa fa-windows fa-fw"></i></span> <code>C:\Program Files\AdoptOpenJDK\</code></p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-warning" title=Warning></i>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>Do <strong class=red>NOT</strong> use <code>Program Files</code> under Windows, because of the space in the name,
+but instead create a separate directory simply called
+e.g. <code>c:\usr\lib\jvm</code> if you insist on using Windows.
+On other OSs it is also important to make sure paths do NOT contains spaces,
+as spaces are also used as separators for arguments</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>Installation of Java can be done either through a package manager or by downloading the
+the Java distribution from <a href=https://adoptopenjdk.net/ target=_blank rel=noopener>AdoptOpenJDK </a>.
+For PRC2 we will use <strong class=blue>Java 11</strong> as a minimum, but you may want to pick up
+Java 8 for older projects and maybe Java 15 (or even Java 16 when it becomes available) too.</p>
+</div>
+<div class=sect3>
+<h4 id=_linux><span class=icon><i class="fa fa-linux fa-fw"></i></span> Linux</h4>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-note" title=Note></i>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>We are using Debian based Linux, such as Ubuntu, for the instructions on this page.
+We assume that that if you are running a different distribution of Linux that you can adapt the
+instructions to apply to that distribution (e.g. use the correct package manager Zypper, PacMan, etc.).</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>With a package manager:</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-linux fa-fw"></i></span> install via apt-get</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
+sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+sudo apt update
+sudo apt install adoptopenjdk-11-hotspot</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>Manual installation:</p>
+</div>
+<div class=paragraph>
+<p>In the example below we assume that the distribution is packed as a <code>tar.gz</code> archive.
+The example shows the archive name as of 10 February 2021,
+OpenJDK11U-jdk_x64_linux_hotspot_11.0.10_9.tar.gz</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-linux fa-fw"></i></span> unpack java distribution using the command-line</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>sudo mkdir -p /usr/lib/jvm
+cd /usr/lib/jvm
+sudo tar xf ~/Downloads/OpenJDK11U-jdk_x64_linux_hotspot_11.0.10_9.tar.gz</code></pre>
+</div>
+</div>
+</div>
+<div class=sect3>
+<h4 id=_macos><span class=icon><i class="fa fa-apple fa-fw"></i></span> macOS</h4>
+<div class=paragraph>
+<p>With HomeBrew:</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-apple fa-fw"></i></span> install via HomeBrew</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>brew tap AdoptOpenJDK/openjdk
+brew install --cask adoptopenjdk11</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>Manual installation:</p>
+</div>
+<div class=paragraph>
+<p>Download the correct distribution/version of choice from
+<a href=https://adoptopenjdk.net/ target=_blank rel=noopener>AdoptOpenJDK </a>.
+Install the same way as normal programs.</p>
+</div>
+</div>
+<div class=sect3>
+<h4 id=_windows><span class=icon><i class="fa fa-windows fa-fw"></i></span> Windows</h4>
+<div class=paragraph>
+<p>With Chocolatey:</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-windows fa-fw"></i></span> install via Chocolatey</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>choco install adoptopenjdk11 --params=&#34;/ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome /INSTALLDIR=C:\usr\lib\jvm\ /quiet&#34;</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>Manual installation:</p>
+</div>
+<div class=paragraph>
+<p>Download the correct distribution/version of choice from
+<a href=https://adoptopenjdk.net/ target=_blank rel=noopener>AdoptOpenJDK </a>.
+Install the same way as normal programs,</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-warning" title=Warning></i>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>Do <strong class=red>NOT</strong> forget to change the install path during installation.<br>
+e.g. <code>C:\usr\lib\jvm\</code><br>
+Also make sure to check Add to path and Add JAVA HOME.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_make_java_available_on_the_path>Make Java available on the PATH</h3>
+<div class=paragraph>
+<p>If you used a package manager or an installer to install Java, then Java should already be added to your path.
+However if you manually extracted the binaries then you should still add Java to the path.</p>
+</div>
+<div class=paragraph>
+<p>The <code>$PATH</code> environment variable is used by the command line processor to find the commands or programs whose name you type as first word in a command line.
+If you type <code>java -version</code>, and your shell says <code>command not found</code>, then your path does not include the java program yet.</p>
+</div>
+<div class=paragraph>
+<p>Since we want the best Java experience, we will use some common environment variables.</p>
+</div>
+<div class=sect3>
+<h4 id=_linux_2><span class=icon><i class="fa fa-linux fa-fw"></i></span> Linux</h4>
+<div class=paragraph>
+<p><strong>JAVA_HOME</strong> Define JAVA_HOME first. That will help Java, but also tell other programs to find the desired Java version.</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-linux fa-fw"></i></span> Define JAVA_HOME</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>export JAVA_HOME=/usr/lib/jvm/jdk-11.0.10+9 <i class=conum data-value=1></i><b>(1)</b>
+export JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64 <i class=conum data-value=2></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class=conum data-value=1></i><b>1</b></td>
+<td>Path for manual installation</td>
+</tr>
+<tr>
+<td><i class=conum data-value=2></i><b>2</b></td>
+<td>Path for package manager installation</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p><strong>PATH</strong> Prepend the directory under JAVA_HOME to your path, so all java related programs, such as <code>java</code> , <code>javac</code>, <code>jar</code> etc can be found, by just typing the name.</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-linux fa-fw"></i></span> Append Java to the path</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>export PATH=${JAVA_HOME}/bin:$PATH</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>To avoid having to do this every time you start the command-line, add the commands to your <code>~.bashrc</code> script file, at the bottom.</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-linux fa-fw"></i></span> Add the previous commands to <code>~/.bashrc</code></div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>export JAVA_HOME=/usr/lib/jvm/jdk-11.0.10+9
+export PATH=${JAVA_HOME}/bin:$PATH</code></pre>
+</div>
+</div>
+</div>
+<div class=sect3>
+<h4 id=_macos_2><span class=icon><i class="fa fa-apple fa-fw"></i></span> macOS</h4>
+<div class=paragraph>
+<p>These instructions will guide you to setup the correct environment on macOS
+and to make it easy to switch between Java versions.</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-apple fa-fw"></i></span> List version(s) of Java</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>/usr/libexec/java_home <i class=conum data-value=1></i><b>(1)</b>
+/usr/libexec/java_home -V <i class=conum data-value=2></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class=conum data-value=1></i><b>1</b></td>
+<td>List the most recent version of Java on your system</td>
+</tr>
+<tr>
+<td><i class=conum data-value=2></i><b>2</b></td>
+<td>List all installed versions of Java on your system</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>We can now setup an environment to easily switch between Java versions and later on even launch Netbeans with the intended Java version.
+The only thing we need to do for this is set the <code>JAVA_HOME</code> environment variable to link to the correct Java version.</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-apple fa-fw"></i></span> Set the <code>JAVA_HOME</code> environment</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>export JAVA_HOME=&lt;path_to_java_home&gt;</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>Where the &lt;path_to_java_home> can be obtained by:</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-apple fa-fw"></i></span> Obtaining the path to Java home</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>/usr/libexec/java_home -v &#39;15*&#39; <i class=conum data-value=1></i><b>(1)</b>
+/usr/libexec/java_home -v &#39;15.0.2&#39;<i class=conum data-value=2></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class=conum data-value=1></i><b>1</b></td>
+<td>Retrieve the path to Java 15 if installed</td>
+</tr>
+<tr>
+<td><i class=conum data-value=2></i><b>2</b></td>
+<td>Retrieve the path to a specific subversion of Java 15</td>
+</tr>
+</tbody></table>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-apple fa-fw"></i></span> Check that <code>JAVA_HOME</code> is set correctly</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>echo $JAVA_HOME</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>However instead of hardcoding the path it is better to retrieve the path while setting the environment.</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-apple fa-fw"></i></span> Set <code>JAVA_HOME</code> dynamically with the following command (e.g. for Java 15):</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>export JAVA_HOME=$(/usr/libexec/java_home -v &#39;15*&#39;) <i class=conum data-value=1></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class=conum data-value=1></i><b>1</b></td>
+<td>$() means that the invocation between parenthesis is resolved first.</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>This sets the correct Java environment for your current Terminal session.
+When opening a new terminal the default Java environment will be active again.
+To make switching between Java versions in the terminal easier we can set-up what is called an alias.
+An alias is basically a shortcut, you specify the keyboard shortcut and which commands should be executed.
+We want these aliases to always be available,
+for this we need to let the terminal know to load our aliases on startup.
+Depending on the type of terminal you are using, we need the specify the aliases at different places.</p>
+</div>
+<div class=paragraph>
+<p>Since macOS Catalina (10.15) the default shell (which is used by the terminal) is ZShell (zsh).
+This means we can specify our aliases in either <code>.zshrc</code> or in <code>.zprofile</code> in our home directory.</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-apple fa-fw"></i></span> Add the following lines to ~/.zshrc:</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>export JAVA_HOME=$(/usr/libexec/java_home -v 11) <i class=conum data-value=1></i><b>(1)</b>
+alias j11=&#34;export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version&#34; <i class=conum data-value=2></i><b>(2)</b>
+alias j15=&#34;export JAVA_HOME=`/usr/libexec/java_home -v 15`; java -version&#34; <i class=conum data-value=3></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class=conum data-value=1></i><b>1</b></td>
+<td>Set the default version of Java to version 11.</td>
+</tr>
+<tr>
+<td><i class=conum data-value=2></i><b>2</b></td>
+<td>Alias to set the Java environment to version 11.</td>
+</tr>
+<tr>
+<td><i class=conum data-value=3></i><b>3</b></td>
+<td>Alias to set the Java environment to version 15.</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>We now need to either restart the terminal for the aliases to take effect or source the <code>.zshrc</code> file.</p>
+</div>
+<div class=paragraph>
+<p><code>source ~/.zshrc</code></p>
+</div>
+<div class=paragraph>
+<p>We can now check that switching between versions works:</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-apple fa-fw"></i></span> switching between Java versions</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>java -version <i class=conum data-value=1></i><b>(1)</b>
+j11 <i class=conum data-value=2></i><b>(2)</b>
+j15 <i class=conum data-value=3></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class=conum data-value=1></i><b>1</b></td>
+<td>Check that the default Java version is correct</td>
+</tr>
+<tr>
+<td><i class=conum data-value=2></i><b>2</b></td>
+<td>Check that switching between versions works</td>
+</tr>
+<tr>
+<td><i class=conum data-value=3></i><b>3</b></td>
+<td>Check that switching between versions works</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>Now we have set-up a way to easily switch between Java versions in the terminal.</p>
+</div>
+</div>
+<div class=sect3>
+<h4 id=_windows_2><span class=icon><i class="fa fa-windows fa-fw"></i></span> Windows</h4>
+<div class=paragraph>
+<p>Java should already be added to the path by the installer,
+as it is a default setting during installation.</p>
+</div>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_install_apache_maven>Install Apache Maven</h3>
+<div class=paragraph>
+<p>We will use <strong>Apache Maven</strong>, or <strong>maven</strong> for short throughout the PRC2 course, so you will need that too.</p>
+</div>
+<div class=paragraph>
+<p>The application is called <strong>Maven</strong> but as command spelled as <code>mvn</code>.</p>
+</div>
+<div class=paragraph>
+<p>Maven is the default build tool in the Java world and can build your program from sources without the use of and IDE. This makes your
+project agnostic to the IDE used, so they work with NetBeans as first class projects out of the box and also with other IDEs with little or no tweaks to that IDE.
+It is also the way the teachers use to compile and test the students work for the practical assignments and performance assessments.</p>
+</div>
+<div class=sect3>
+<h4 id=_linux_3><span class=icon><i class="fa fa-linux fa-fw"></i></span> Linux</h4>
+<div class=paragraph>
+<p>Install with package manager:</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-linux fa-fw"></i></span> Install maven using apt-get</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>sudo apt install maven</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>Install manually:</p>
+</div>
+<div id=maven_manual class=paragraph>
+<p>Fetch a fresh copy of <a href=https://maven.apache.org/>Apache Maven</a> from the website.</p>
+</div>
+<div class=paragraph>
+<p>To install it, do (example uses version 3.6.3 as of 2019-11-03)</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-linux fa-fw"></i></span> install apache maven and add to path</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>cd /usr/share
+sudo rm -fr maven
+sudo tar xf ~/Downloads/apache-maven-3.6.3-bin.tar.gz
+sudo ln -sf apache-maven-3.6.3/ maven
+cd /usr/bin
+sudo ln -sf ../share/maven/bin/mvn .</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>Once this is done, entering <code>mvn --version</code> should produce output similar to</p>
+</div>
+<div class=listingblock>
+<div class=title>mvn --version command.</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>hom@threehundred: /usr/share
+🐧$ mvn --version
+Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
+Maven home: /usr/share/maven
+Java version: 11.0.5, vendor: AdoptOpenJDK, runtime: /usr/lib/jvm/jdk-11.0.5+10
+Default locale: en_GB, platform encoding: UTF-8
+OS name: &#34;linux&#34;, version: &#34;5.0.0-36-generic&#34;, arch: &#34;amd64&#34;, family: &#34;unix&#34;</code></pre>
+</div>
+</div>
+</div>
+<div class=sect3>
+<h4 id=_macos_3><span class=icon><i class="fa fa-apple fa-fw"></i></span> macOS</h4>
+<div class=paragraph>
+<p>Install with HomeBrew:</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-apple fa-fw"></i></span> Install Maven using HomeBrew</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>brew install maven</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>Install manually:</p>
+</div>
+<div class=paragraph>
+<p>Same instructions as for <a href=#maven_manual>Linux</a>.</p>
+</div>
+</div>
+<div class=sect3>
+<h4 id=_windows_3><span class=icon><i class="fa fa-windows fa-fw"></i></span> Windows</h4>
+<div class=paragraph>
+<p>Install with Chocolately:</p>
+</div>
+<div class=paragraph>
+<p><code>choco install maven</code></p>
+</div>
+<div class=paragraph>
+<p>Install manually:</p>
+</div>
+<div class="olist arabic">
+<ol class=arabic>
+<li>
+<p>Download the zip file from <a href=https://maven.apache.org/download.cgi class=bare>https://maven.apache.org/download.cgi</a>.</p>
+</li>
+<li>
+<p>Extract the zip file to <code>C:\usr\lib</code></p>
+</li>
+<li>
+<p>Add the <code>bin</code> directory to the <code>path</code></p>
+<div class="olist loweralpha">
+<ol class=loweralpha type=a>
+<li>
+<p>Goto <code>Settings > About > Advanced System Settings > Adavanced Tab > Environment Variables</code></p>
+</li>
+<li>
+<p>Select <code>Path</code> and <code>Edit</code></p>
+</li>
+<li>
+<p><code>New</code> and fill in the path <code>C:\usr\lib\apache-maven-3.6.3\bin</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Close <code>System Properties</code></p>
+</li>
+<li>
+<p>Start <code>cmd</code></p>
+</li>
+<li>
+<p><code>mvn -v</code> should return a version</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_install_or_update_your_ide>Install or update your IDE</h3>
+<div class=paragraph>
+<p>The official Java IDE at Fontys ICT Venlo is <a href=https://netbeans.apache.org/>Apache NetBeans IDE</a>. The long time stable version for the moment is 12.0.
+At the time of writing version 12.2 serves me very well. At the time of reading a newer version might be available.</p>
+</div>
+<div class=sect3>
+<h4 id=_linux_4><span class=icon><i class="fa fa-linux fa-fw"></i></span> Linux</h4>
+<div class=paragraph>
+<p>You can either install Netbeans from Ubuntu Software or download the binaries.</p>
+</div>
+<div id=netbeans_manual class=paragraph>
+<p>To install the binaries of Apache NetBeans on Ubuntu simply fetch the binary as zip file and unpack it,
+then either add the contained <strong>bin</strong> directory to the path, or make a wrapper <code>netbeans</code>
+command in your personal <code>~/bin</code> directory.</p>
+</div>
+<div class=paragraph>
+<p>For my installation I simply used the binaries, in the zip file, and install it
+in the traditional (as in same directories as the installer would) <code>/usr/local</code>.
+<code>/opt</code> is also a good choice as installation directory.</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-linux fa-fw"></i></span> Assuming you downloaded the binary, installing it is easy</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>cd /usr/local
+sudo unzip ~/Downloads/netbeans-12.2-bin.zip
+sudo mv netbeans{,-12.2}</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>For extra creature comfort, add a simple netbeans script to your path</p>
+</div>
+<div class=listingblock>
+<div class=title>netbeans script in ~/bin</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>#!/bin/bash
+/usr/local/netbeans-12.2/bin/netbeans &#34;$@&#34; &amp; <i class=conum data-value=1></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class=conum data-value=1></i><b>1</b></td>
+<td>Invoke netbeans using its absolute path.</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>Then make that script executable with <code>chmod +x netbeans</code>.</p>
+</div>
+<div class=paragraph>
+<p>NetBeans IDE should now be startable from the command line (fine for me) as well as from the menu.</p>
+</div>
+</div>
+<div class=sect3>
+<h4 id=_macos_4><span class=icon><i class="fa fa-apple fa-fw"></i></span> macOS</h4>
+<div class=paragraph>
+<p>It is possible to install Netbeans by downloading the installer, manual extracting the binaries of by using HomeBrew.</p>
+</div>
+<div class=paragraph>
+<p>Installing with the installer:</p>
+</div>
+<div class="olist arabic">
+<ol class=arabic>
+<li>
+<p>Download the installer from <a href=https://netbeans.apache.org/download/index.html class=bare>https://netbeans.apache.org/download/index.html</a></p>
+</li>
+<li>
+<p>Install as normal</p>
+</li>
+</ol>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-apple fa-fw"></i></span> Install Netbeans using HomeBrew</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>brew install --cask netbeans</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>Installing the binaries manually:</p>
+</div>
+<div class=paragraph>
+<p>See instruction of <a href=#netbeans_manual>Linux</a>.</p>
+</div>
+<div class=paragraph>
+<p>As an extra we can start Netbeans from the command-line using the Java version we want to use.</p>
+</div>
+<div class=paragraph>
+<p>We do this by adding an executable file to the <code>PATH</code> so we can start Netbeans from the terminal with the correct Java version.</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-apple fa-fw"></i></span> Create <code>netbeans</code> file in <code>/usr/local/bin</code></div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>cd /usr/local/bin <i class=conum data-value=1></i><b>(1)</b>
+touch netbeans <i class=conum data-value=2></i><b>(2)</b>
+echo \&#34;/Applications/NetBeans/Apache NetBeans 12.2.app/Contents/Resources/NetBeans/netbeans/bin/netbeans\&#34; --jdkhome \$JAVA_HOME \$\* \&amp; &gt; netbeans <i class=conum data-value=3></i><b>(3)</b>
+chmod +x netbeans <i class=conum data-value=4></i><b>(4)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class=conum data-value=1></i><b>1</b></td>
+<td>Change to the right directory</td>
+</tr>
+<tr>
+<td><i class=conum data-value=2></i><b>2</b></td>
+<td>Create new file called netbeans</td>
+</tr>
+<tr>
+<td><i class=conum data-value=3></i><b>3</b></td>
+<td>Write the correct command into netbeans</td>
+</tr>
+<tr>
+<td><i class=conum data-value=4></i><b>4</b></td>
+<td>Make the file executable</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>As you can see, when invoking it this way, you can inform Netbeans about which java version to use (as set in your <code>JAVA_HOME</code> environment variable).
+Furthermore you can pass the project name as a parameter (defined by <code>$*`</code>) so you don’t need to open the project manually anymore in NetBeans.
+Finally the <code>&</code> means that NetBeans runs as a background process without blocking your Terminal session, so your Terminal session is immediately available again.</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-apple fa-fw"></i></span> Open <code>myProject</code> in Netbeans using Java version 15</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>j15
+netbeans myProject</code></pre>
+</div>
+</div>
+</div>
+<div class=sect3>
+<h4 id=_windows_4><span class=icon><i class="fa fa-windows fa-fw"></i></span> Windows</h4>
+<div class="olist arabic">
+<ol class=arabic>
+<li>
+<p>Download the installer from <a href=https://netbeans.apache.org/download/index.html class=bare>https://netbeans.apache.org/download/index.html</a></p>
+</li>
+<li>
+<p>Install as usual, make sure to change to <code>path</code></p>
+</li>
+</ol>
+</div>
+</div>
+<div class=sect3>
+<h4 id=_other_ides>Other IDE’s</h4>
+<div class=paragraph>
+<p>This section is left empty. We will not answer any support questions on other IDE’s but the one
+we use in the performance assessment.</p>
+</div>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_subversion>Subversion</h3>
+<div class=paragraph>
+<p>Subversion is a version control system, that will be used in this course.
+You might have used git before, which is also a version control system.
+However subversion works a bit different, as it is not decentralized as git.
+For this course you do not have to know the commands for subversion as you will be using it from
+inside Netbeans.</p>
+</div>
+<div class=paragraph>
+<p>However for Netbeans to be able to work with subversion there should first be a subversion command line
+tool be installed on the system.</p>
+</div>
+<div class=sect3>
+<h4 id=_linux_5><span class=icon><i class="fa fa-linux fa-fw"></i></span> Linux</h4>
+<div class=paragraph>
+<p>Using a package manager</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-linux fa-fw"></i></span> Installing subversion via apt-get</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>sudo apt install subversion</code></pre>
+</div>
+</div>
+</div>
+<div class=sect3>
+<h4 id=_macos_5><span class=icon><i class="fa fa-apple fa-fw"></i></span> macOS</h4>
+<div class=paragraph>
+<p>On older versions of macOS subversion was supplied with XCode.
+However on newer versions of macOS this is no longer the case and we need to manually install it.
+The easiest way to do this is using HomeBrew:</p>
+</div>
+<div class=listingblock>
+<div class=title><span class=icon><i class="fa fa-apple fa-fw"></i></span> Install subversion using HomeBrew</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>brew install subversion</code></pre>
+</div>
+</div>
+</div>
+<div class=sect3>
+<h4 id=_windows_5><span class=icon><i class="fa fa-windows fa-fw"></i></span> Windows</h4>
+<div class="olist arabic">
+<ol class=arabic>
+<li>
+<p>Download <a href=https://tortoisesvn.net/downloads.html>TortoiseSVN</a></p>
+</li>
+<li>
+<p>Make sure to install the <code>command line tools</code> during installation</p>
+</li>
+<li>
+<p>Open command prompt and check that svn is added to the path with <code>svn --version</code></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=sect1>
+<h2 id=_configuring_maven>Configuring Maven</h2>
+<div class=sectionbody>
+<div class=paragraph>
+<p>Maven and maven projects are first class citizens in the NetBeans world.</p>
+</div>
+<div class=paragraph>
+<p>Since we build with maven, we are not really bound to particular IDE,
+other than for editing and maybe the odd debug session.<sup class=footnote>[<a id=_footnoteref_1 class=footnote href=#_footnotedef_1 title="View footnote.">1</a>]</sup>.
+This means that you can use other IDE’s, but expect no help from the teachers.</p>
+</div>
+<div class=paragraph>
+<p>We have many things to share with you, and we use maven for that.</p>
+</div>
+<div class=paragraph>
+<p>We share libraries and project configuration files (pom.xml) with our students. To make them
+work as intended, you will need to configure the maven <code>settings.xml</code> only once. Since this is a maven setting, your IDE should
+pick these settings up as well. Certainly NetBeans IDE will.</p>
+</div>
+<div class=paragraph>
+<p>Start NetBeans IDE and create a Java project with New Project ▷ Java with Maven ▷ Java Application.</p>
+</div>
+<div class=paragraph>
+<p>In the project, right click on Project Files and choose <strong>create settings.xml</strong>.
+Add the Fontys Venlo repository to the settings, which is best done by replacing the xml in the settings
+file with</p>
+</div>
+<div class=listingblock>
+<div class=title>settings.xml which adds <a href=https://www.fontysvenlo.org/repository class=bare>https://www.fontysvenlo.org/repository</a> as repository</div>
+<div class=content>
+<pre class=highlight><code class=language-xml data-lang=xml>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+&lt;settings xmlns=&#34;http://maven.apache.org/SETTINGS/1.0.0&#34;
+          xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
+          xsi:schemaLocation=&#34;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&#34;&gt;
+    &lt;profiles&gt;
+        &lt;profile&gt;                    <i class=conum data-value=1></i><b>(1)</b>
+            &lt;id&gt;sebivenlo&lt;/id&gt;
+            &lt;repositories&gt;
+                &lt;repository&gt;
+                    &lt;id&gt;fontysvenlo.org&lt;/id&gt;   <i class=conum data-value=2></i><b>(2)</b>
+                    &lt;url&gt;https://www.fontysvenlo.org/repository&lt;/url&gt; <i class=conum data-value=3></i><b>(3)</b>
+                &lt;/repository&gt;
+            &lt;/repositories&gt;
+        &lt;/profile&gt;
+    &lt;/profiles&gt;
+    &lt;activeProfiles&gt;
+        &lt;activeProfile&gt;sebivenlo&lt;/activeProfile&gt;  <i class=conum data-value=4></i><b>(4)</b>
+    &lt;/activeProfiles&gt;
+    &lt;offline&gt;false&lt;/offline&gt;
+&lt;/settings&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class=conum data-value=1></i><b>1</b></td>
+<td>You define a profile inside the profiles section of your settings.xml.</td>
+</tr>
+<tr>
+<td><i class=conum data-value=2></i><b>2</b></td>
+<td>Give the profile a name.</td>
+</tr>
+<tr>
+<td><i class=conum data-value=3></i><b>3</b></td>
+<td>Specify the URL.</td>
+</tr>
+<tr>
+<td><i class=conum data-value=4></i><b>4</b></td>
+<td>Use the given name to make it an active profile by default.</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>The <a href=topics/settings.xml.txt>raw settings file</a>.</p>
+</div>
+<div class=paragraph>
+<p>Note that the project provided through the PRC2 personal repository will <strong class=role:red>NOT</strong> work without
+the settings file above. From February 2020 will use sebipom version 2.3.0 or above.</p>
+</div>
+</div>
+</div>
+<div class=sect1>
+<h2 id=_sebipom_3_0_3>Sebipom 3.0.3</h2>
+<div class=sectionbody>
+<div class=paragraph>
+<p>Spelled all lower case: <code>sebipom</code>, is a super pom to use in Fontys Venlo projects. It keeps your own pom.xml file simple and focused to declare just the
+dependencies needed. Niceties to do proper Test Driver Development are provided for in the sebipom definitions, including things as being able to create
+javadoc in a professional looking way, including code highlighted code snippets, checkstyle, reporting, code coverage with maven, pmd, spotbugs etc.</p>
+</div>
+<div class=paragraph>
+<p><a href=https://github.com/sebivenlo/sebipom>Sebipom is hosted on github</a>.</p>
+</div>
+<div class=ulist>
+<ul>
+<li>
+<p>sebipom declares no dependencies other than those for dynamic (e.g. JUnit, AssertJ etc) and static <strong>testing</strong> in the form of plugins and their configuration.</p>
+</li>
+</ul>
+</div>
+<div class=paragraph>
+<p>This way of using maven, having a <span class=blue>super</span> or parent pom defined globally (in a repository, not on a local path), is the <span class="big black">modern</span> usage.
+It can be seen in well known big java projects such as <a href=https://spring.io/projects/spring-boot>Spring Boot</a> and <a href=https://quarkus.io/>quarkus</a>, to name two contenders in the java-web technology world.</p>
+</div>
+<div class="admonitionblock tip green">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-tip" title=Tip></i>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>Note that we are using a <em>separately installed</em> maven (3.6.3 at the time of writing) which you can download from <a href=http://maven.apache.org/download.cgi>apache maven</a>,
+not the one bundled with NetBeans or any other IDE. You can tell NetBeans (via tools→ options →java→maven) to use the installed one instead of the bundled one.</p>
+</div>
+<div class=paragraph>
+<p><em class=big>Our tests will <span class=blue>always</span> use maven, not some IDE. There is no gnome inside the build server to move the mouse.</em></p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div id=sebipom-as-parent class=listingblock>
+<div class=title>Setting sebipom as parent.</div>
+<div class=content>
+<pre class=highlight><code class=language-xml data-lang=xml>    &lt;parent&gt;
+      &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
+      &lt;artifactId&gt;sebipom&lt;/artifactId&gt;
+      &lt;version&gt;3.0.3&lt;/version&gt;
+      &lt;relativePath/&gt; <i class=conum data-value=1></i><b>(1)</b>
+    &lt;/parent&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class=conum data-value=1></i><b>1</b></td>
+<td>The parent pom does not live in a local directory near (relative to) the project, but instead in a repository. This makes a parent pom 'portable'.</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>All of the starter projects we provide already use this parent in some version. To get those working, apply the settings show in the paragraph <a href=#_configuring_maven>Configuring Maven</a>.</p>
+</div>
+<div class=paragraph>
+<p>If you want to use sebipom in your own project, either copy the parent definition into the pom file or start by replacing the NetBeans provided pom.xml file in your project by
+the basic one below. Add dependencies as required.</p>
+</div>
+<div id=basic-maven class=listingblock>
+<div class=title>Basic pom.xml file setting sebipom as parent.</div>
+<div class=content>
+<pre class=highlight><code class=language-xml data-lang=xml>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+&lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt; <i class=conum data-value=1></i><b>(1)</b>
+        &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
+        &lt;artifactId&gt;sebipom&lt;/artifactId&gt;
+        &lt;version&gt;3.0.3&lt;/version&gt;
+        &lt;realtivePath/&gt;<i class=conum data-value=2></i><b>(2)</b>
+    &lt;/parent&gt; <i class=conum data-value=3></i><b>(3)</b>
+    &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
+    &lt;artifactId&gt;basicsebimaven&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;!-- The name in the IDE --&gt;
+    &lt;name&gt;My App&lt;/name&gt;
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;java.release&gt;11&lt;/java.release&gt;
+        &lt;!-- change mainClass to the proper starting point of your program, if any.--&gt;
+        &lt;exec.mainClass&gt;basicsebimaven.Hello&lt;/exec.mainClass&gt;
+    &lt;/properties&gt;
+    &lt;dependencies&gt;
+      &lt;!--example  --&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;...&lt;/groupId&gt;
+        &lt;artifactId&gt;...&lt;/artifactId&gt;
+        &lt;version&gt;...&lt;/version&gt;
+      &lt;/dependency&gt;
+    &lt;/dpendencies&gt;
+&lt;/project&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class=conum data-value=1></i><b>1</b></td>
+<td>Start of parent declaration.</td>
+</tr>
+<tr>
+<td><i class=conum data-value=2></i><b>2</b></td>
+<td>Parent comes from some other repo, not local.</td>
+</tr>
+<tr>
+<td><i class=conum data-value=3></i><b>3</b></td>
+<td>End of parent declaration.</td>
+</tr>
+</tbody></table>
+</div>
+<div class=sect2>
+<h3 id=_sebipom_and_java_fx>Sebipom and Java FX</h3>
+<div class=paragraph>
+<p>If you want to use semipom and build a JavaFX project, you need to activate the <strong>fx</strong>-profile.
+In the commandline that would be</p>
+</div>
+<div class=imageblock>
+<div class=content>
+<img src=/prc2_web/images/mvn-withfx-profile.png alt="mvn withfx profile">
+</div>
+<div class=title>Figure 1. Commandline. Real software engineers can use the command line.</div>
+</div>
+<div class=paragraph>
+<p>In netbeans you can do that by setting the configuration like in this picture:</p>
+</div>
+<div class=imageblock>
+<div class=content>
+<img src=/prc2_web/images/fx-profile-nb.png alt="fx profile nb">
+</div>
+<div class=title>Figure 2. Activate a profile in netbeans</div>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_using_the_sebipom_in_your_own_projects>Using the SeBiPom in your own projects</h3>
+<div class=paragraph>
+<p>To use the test libraries and other goodies that will be used throughout our course,
+you should add the <code>sebipom</code> as parent.</p>
+</div>
+<div class=paragraph>
+<p>Modify the pom.xml file in your project to include sebipom as parent by adding
+these lines in the previous section <a href=#sebipom-as-parent>Setting sebipom as parent.</a>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-tip" title=Tip></i>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>As of 2021-04-03, sebipom reached version 3.0.3. Not all projects may have this version number for
+the parent sebipom. We improve as we go, sometimes because of tips we receive from our students, you for instance.
+Anyway, if the version is not at the newest, set it to the newest and rebuild.
+Revisit this part of the site to check the latest version number or look in the
+<a href=https://www.fontysvenlo.org/repository/nl/fontys/sebivenlo/sebipom/>fontysvenlo maven reposity</a>
+for the sebipom version.<br>
+Sebipom 3.0.3 enables testing for modular projects but does not enforce modular projects.</p>
+</div>
+<div class=ulist>
+<ul>
+<li>
+<p>The source code of sebipom lives at github in <a href=https://github.com/sebivenlo/sebipom>sebivenlo/sebipom</a>.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_upgrade_all_projects_with_one_command>Upgrade all projects with one command</h3>
+<div class=paragraph>
+<p>Since sebipom is a somewhat moving target, you may have to update the parent pom of the projects that depend on it. All PRC2 projects do.
+This oneliner will do that for all projects below the current directory. After navigating to the parent of all such projects, do this in the shell:</p>
+</div>
+<div class=listingblock>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>for i in $(find . -name pom.xml); do (cd $(dirname $i); mvn versions:update-parent  &amp; )   ; done</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>It works on any bash supporting machine, tested on ubuntu and should work on OS-X and under windows when using
+git-bash or the windows subsystem for Linux.</p>
+</div>
+</div>
+</div>
+</div>
+<div class=sect1>
+<h2 id=_additional_pointers>Additional Pointers</h2>
+<div class=sectionbody>
+<div class=ulist>
+<ul>
+<li>
+<p><a href=https://docs.oracle.com/javase/tutorial/essential/environment/paths.html target=_blank rel=noopener>Path and ClassPath </a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id=footnotes>
+<hr>
+<div class=footnote id=_footnotedef_1>
+<a href=#_footnoteref_1>1</a>. Working test driven will typically not need those
+</div>
+</div>
+</article>
+</div><footer class="text-sm leading-6 mt-12">
+Footer
+</footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
+<h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#_getting_started>Getting Started</a></li>
+<li><a href=#_setting_up_the_correct_environment>Setting up the correct environment</a>
+<ul>
+<li><a href=#_install_java>Install Java</a></li>
+<li><a href=#_make_java_available_on_the_path>Make Java available on the PATH</a></li>
+<li><a href=#_install_apache_maven>Install Apache Maven</a></li>
+<li><a href=#_install_or_update_your_ide>Install or update your IDE</a></li>
+<li><a href=#_subversion>Subversion</a></li>
+</ul>
+</li>
+<li><a href=#_configuring_maven>Configuring Maven</a></li>
+<li><a href=#_sebipom_3_0_3>Sebipom 3.0.3</a>
+<ul>
+<li><a href=#_sebipom_and_java_fx>Sebipom and Java FX</a></li>
+<li><a href=#_using_the_sebipom_in_your_own_projects>Using the SeBiPom in your own projects</a></li>
+<li><a href=#_upgrade_all_projects_with_one_command>Upgrade all projects with one command</a></li>
+</ul>
+</li>
+<li><a href=#_additional_pointers>Additional Pointers</a></li>
+</ul>
+</nav>
+</div></div>
+<div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
+</div><script src=/prc2_web/js/main.min.f1aab0f377564ee438c29317379d3f3a0f439940032b9f85b111f678488256c83855d0eb3ea171cc9d86f0739f20537604bd541b05eb8a127b5162a683ea8b4a.js integrity="sha512-8aqw83dWTuQ4wpMXN50/Og9DmUADK5+FsRH2eEiCVsg4VdDrPqFxzJ2G8HOfIFN2BL1UGwXrihJ7UWKmg+qLSg==" crossorigin=anonymous></script>
+<script src=/prc2_web/js/highlight.min.f1690c458d098f45f338cfee7494988dcfae16778ad557952b7362e8ba6c54c90c6982d2663244333dd0b5105dc09e030729fbd812e33acddf2537a737e4dc87.js integrity="sha512-8WkMRY0Jj0XzOM/udJSYjc+uFneK1VeVK3Ni6LpsVMkMaYLSZjJEMz3QtRBdwJ4DByn72BLjOs3fJTenN+Tchw==" crossorigin=anonymous defer></script>
+<div id=copied-alert class="invisible opacity-0 transition-all ease-in-out duration-400 fixed bottom-3 right-10 z-50 flex p-4 mb-4 text-sm text-gray-800 bg-gray-200 rounded-lg dark:bg-gray-500 dark:text-gray-200" role=alert><svg class="inline flex-shrink-0 mr-3 w-5 h-5" viewBox="0 0 24 24" width="24" height="24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+<div>
+<span class=font-medium>Code copied</span>
+</div>
+</div>
+</body>
+</html>

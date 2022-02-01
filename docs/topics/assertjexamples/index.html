@@ -2,8 +2,9 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.1f4ad530bab3a8acf019ab3ecf1f428b84fcdea56c601071ed78c78b78a7db73162d2d127488c5e2fbc37812b003229902671d324b822f225e123f723bad1655.css integrity="sha512-H0rVMLqzqKzwGas+zx9Ci4T83qVsYBBx7XjHi3in23MWLS0SdIjF4vvDeBKwAyKZAmcdMkuCLyJeEj9yO60WVQ==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.9647f4ee04c07faf550964e08e5e18060624a5d5021eb1d72457131147268e5e6fb2a4cfc1d3f7409b368f42691eaabd2fd0289592b440477677168cdc9ff314.css integrity="sha512-lkf07gTAf69VCWTgjl4YBgYkpdUCHrHXJFcTEUcmjl5vsqTPwdP3QJs2j0JpHqq9L9AolZK0QEd2dxaM3J/zFA==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 </head><body class="antialiased text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800"><header class="sticky top-0 z-40 w-full flex-none lg:border-b lg:border-gray-900/10 dark:border-gray-50/[0.06] bg-white dark:bg-gray-800">
 <div class="max-w-8xl mx-auto">
 <div class="py-4 border-b border-slate-900/10 lg:px-8 lg:border-0 dark:border-slate-300/10 mx-4 lg:mx-0">
@@ -14,6 +15,9 @@
 <div class="relative flex ml-auto">
 <nav class="hidden lg:flex items-center text-sm leading-6 font-semibold text-gray-700 dark:text-gray-200">
 <ul class="flex space-x-8">
+<li>
+<a href=https://fontysvenlo.github.io/prc2_web/pages/setup/ class="hover:text-sky-500 dark:hover:text-sky-400">Setup</a>
+</li>
 </ul>
 </nav>
 <div class="flex items-center lg:border-l border-gray-200 ml-6 pl-6 dark:border-gray-700">
@@ -92,7 +96,7 @@ You always start with <code>assertThat( objectOfInterest ).assertingMethod(…�
 <table>
 <tbody><tr>
 <td class=icon>
-<img src=/prc2_web/icons/tip.svg alt=Tip>
+<i class="fa icon-tip" title=Tip></i>
 </td>
 <td class=content>
 <div class=paragraph>
@@ -108,24 +112,24 @@ You always start with <code>assertThat( objectOfInterest ).assertingMethod(…�
 <div class=title>test boolean value.</div>
 <div class=content>
 <pre class=highlight><code class=language-java data-lang=java>  car.start();
-  assertThat( car.motorIsOn() ) <img src=/prc2_web/icons/callouts/1.svg alt=1>
-      .as(&#34;Motor should be on after start&#34;) <img src=/prc2_web/icons/callouts/2.svg alt=2>
-      .isTrue(); <img src=/prc2_web/icons/callouts/3.svg alt=3></code></pre>
+  assertThat( car.motorIsOn() ) <i class=conum data-value=1></i><b>(1)</b>
+      .as(&#34;Motor should be on after start&#34;) <i class=conum data-value=2></i><b>(2)</b>
+      .isTrue(); <i class=conum data-value=3></i><b>(3)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tbody><tr>
-<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td><i class=conum data-value=1></i><b>1</b></td>
 <td>Object of interest, return value of method, which in the test fails if not true.</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/2.svg alt=2></td>
+<td><i class=conum data-value=2></i><b>2</b></td>
 <td>Optional description, use in particular when testing primitive values such as boolean.<br>
 Use it to improved the information you get when the test fails.</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/3.svg alt=3></td>
+<td><i class=conum data-value=3></i><b>3</b></td>
 <td>The actual verification. Use <code>isTrue()</code> and <code>isFalse()</code> for <code>boolean</code>, <code>isEqualTo()</code> and <code>isEquals()</code> for other types.</td>
 </tr>
 </tbody></table>
@@ -152,7 +156,7 @@ Use it to improved the information you get when the test fails.</td>
 <table>
 <tbody><tr>
 <td class=icon>
-<img src=/prc2_web/icons/tip.svg alt=Tip>
+<i class="fa icon-tip" title=Tip></i>
 </td>
 <td class=content>
 <div class=paragraph>
@@ -172,23 +176,23 @@ Note that the template adds a <strong>fail</strong> line, which should be disabl
 <pre class=highlight><code class=language-java data-lang=java>  Student student = ....
 
   assertThat( student.toString() )
-      .isNotNull()                              <img src=/prc2_web/icons/callouts/1.svg alt=1>
-      .doesNotContainIgnoringCase(&#34;student{&#34;)    <img src=/prc2_web/icons/callouts/2.svg alt=2>
-      .contains( &#34;Harry&#34;, &#34;Potter&#34;, &#34;1980-07-31&#34;, &#34;12345&#34;); <img src=/prc2_web/icons/callouts/3.svg alt=3></code></pre>
+      .isNotNull()                              <i class=conum data-value=1></i><b>(1)</b>
+      .doesNotContainIgnoringCase(&#34;student{&#34;)    <i class=conum data-value=2></i><b>(2)</b>
+      .contains( &#34;Harry&#34;, &#34;Potter&#34;, &#34;1980-07-31&#34;, &#34;12345&#34;); <i class=conum data-value=3></i><b>(3)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tbody><tr>
-<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td><i class=conum data-value=1></i><b>1</b></td>
 <td>Ensure that the next test can inspect a String without tripping over a NPE.</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/2.svg alt=2></td>
+<td><i class=conum data-value=2></i><b>2</b></td>
 <td><em>Auto generated is too simple.</em> Such autogenerated string typically starts with "Student{" for NetBeans IDE.</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/3.svg alt=3></td>
+<td><i class=conum data-value=3></i><b>3</b></td>
 <td>The test ensures that the birth date is contained, and 12345 is Harry’s student number.</td>
 </tr>
 </tbody></table>
@@ -208,70 +212,70 @@ by following the link in this sentence. Look at the sub-interfaces and the imple
 <div class=listingblock>
 <div class=title>simple containment.</div>
 <div class=content>
-<pre class=highlight><code class=language-java data-lang=java>    List&lt;Professor&gt; professors = List.of( SNAPE, DUMBLEDORE, MCGONAGALL ); <img src=/prc2_web/icons/callouts/1.svg alt=1>
+<pre class=highlight><code class=language-java data-lang=java>    List&lt;Professor&gt; professors = List.of( SNAPE, DUMBLEDORE, MCGONAGALL ); <i class=conum data-value=1></i><b>(1)</b>
 
     List&lt;Professor&gt; teachesTransfiguration = professors.stream()
             .filter( p -&gt; p.teaches( &#34;Transfigurations&#34; ) ).collect( toList() );
 
     assertThat( teachesTransfiguration )
-            .isNotNull()                         <img src=/prc2_web/icons/callouts/2.svg alt=2>
-            .hasSizeGreaterThanOrEqualTo( 2 )    <img src=/prc2_web/icons/callouts/3.svg alt=3>
-            .contains( DUMBLEDORE, MCGONAGALL ); <img src=/prc2_web/icons/callouts/4.svg alt=4></code></pre>
+            .isNotNull()                         <i class=conum data-value=2></i><b>(2)</b>
+            .hasSizeGreaterThanOrEqualTo( 2 )    <i class=conum data-value=3></i><b>(3)</b>
+            .contains( DUMBLEDORE, MCGONAGALL ); <i class=conum data-value=4></i><b>(4)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tbody><tr>
-<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td><i class=conum data-value=1></i><b>1</b></td>
 <td>Assume this to be in the business code or SUT.</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/2.svg alt=2></td>
+<td><i class=conum data-value=2></i><b>2</b></td>
 <td>Not really required by a good tip to make sure the test does not trip
 over an NPE, which might be confusing.</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/3.svg alt=3></td>
+<td><i class=conum data-value=3></i><b>3</b></td>
 <td>The following contains test makes this actually redundant</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/4.svg alt=4></td>
+<td><i class=conum data-value=4></i><b>4</b></td>
 <td>because we want these two at least.</td>
 </tr>
 </tbody></table>
 </div>
 <div class=listingblock>
 <div class=content>
-<pre class=highlight><code class=language-java data-lang=java>//  List&lt;Student&gt; hogwartsStudents = ...; <img src=/prc2_web/icons/callouts/1.svg alt=1>
-  List&lt;Student&gt; hogwartsStudents = List.of( HARRY, HERMIONE, RON ); <img src=/prc2_web/icons/callouts/1.svg alt=1>
+<pre class=highlight><code class=language-java data-lang=java>//  List&lt;Student&gt; hogwartsStudents = ...; <i class=conum data-value=1></i><b>(1)</b>
+  List&lt;Student&gt; hogwartsStudents = List.of( HARRY, HERMIONE, RON ); <i class=conum data-value=1></i><b>(1)</b>
 
   assertThat( hogwartsStudents )
-          .isNotNull()                                <img src=/prc2_web/icons/callouts/2.svg alt=2>
-          .hasSizeGreaterThanOrEqualTo( 3 )           <img src=/prc2_web/icons/callouts/3.svg alt=3>
-          .extracting( s -&gt; s.getStudentNumber() )    <img src=/prc2_web/icons/callouts/4.svg alt=4>
-          .containsExactlyInAnyOrder( 12346, 12345, 12347 ); <img src=/prc2_web/icons/callouts/5.svg alt=5></code></pre>
+          .isNotNull()                                <i class=conum data-value=2></i><b>(2)</b>
+          .hasSizeGreaterThanOrEqualTo( 3 )           <i class=conum data-value=3></i><b>(3)</b>
+          .extracting( s -&gt; s.getStudentNumber() )    <i class=conum data-value=4></i><b>(4)</b>
+          .containsExactlyInAnyOrder( 12346, 12345, 12347 ); <i class=conum data-value=5></i><b>(5)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tbody><tr>
-<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td><i class=conum data-value=1></i><b>1</b></td>
 <td>Assume that the business code produces such list.</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/2.svg alt=2></td>
+<td><i class=conum data-value=2></i><b>2</b></td>
 <td>Mostly self (test) protect.</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/3.svg alt=3></td>
+<td><i class=conum data-value=3></i><b>3</b></td>
 <td>Just to show that you can test for not empty, but also exact size, greater etc. This assertion is actually made redundant by the test in 5.</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/4.svg alt=4></td>
+<td><i class=conum data-value=4></i><b>4</b></td>
 <td>Extract a feature out of each student using a lambda. Its function should be obvious</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/5.svg alt=5></td>
+<td><i class=conum data-value=5></i><b>5</b></td>
 <td>Then test the list of extracted values for containment.</td>
 </tr>
 </tbody></table>
@@ -280,7 +284,7 @@ over an NPE, which might be confusing.</td>
 <table>
 <tbody><tr>
 <td class=icon>
-<img src=/prc2_web/icons/tip.svg alt=Tip>
+<i class="fa icon-tip" title=Tip></i>
 </td>
 <td class=content>
 <div class=paragraph>
@@ -333,20 +337,20 @@ We propagate one form, declaring a lambda first and use that as the parameter to
 <div class=title>Case 1: not interested in the (checked) exception, add a throws clause.</div>
 <div class=content>
 <pre class=highlight><code class=language-java data-lang=java>    @Test
-    public void fileUsingMethod() throws IOException { <img src=/prc2_web/icons/callouts/1.svg alt=1>
-        Files.lines(Path.of (&#34;puk.txt&#34;) );  <img src=/prc2_web/icons/callouts/2.svg alt=2>
+    public void fileUsingMethod() throws IOException { <i class=conum data-value=1></i><b>(1)</b>
+        Files.lines(Path.of (&#34;puk.txt&#34;) );  <i class=conum data-value=2></i><b>(2)</b>
     }</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tbody><tr>
-<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td><i class=conum data-value=1></i><b>1</b></td>
 <td>This code potentially throws an <code>IOException</code>, but you are not interested in testing the exception. If it occurs,
 let the caller (Test Runner) deal with this unexpected situation. The IOException is an example.</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/2.svg alt=2></td>
+<td><i class=conum data-value=2></i><b>2</b></td>
 <td>This is the method that throws the checked exception. This is an example. Normally it should be a business method.</td>
 </tr>
 </tbody></table>
@@ -364,7 +368,7 @@ ThrowingCallable is a Functional interface and is part of AssertJ.</p>
 <div class=content>
 <pre class=highlight><code class=language-java data-lang=java>    Student draco = new Student(&#34;Draco&#34;, &#34;Malfoy&#34;, LocalDate.of (1980,6,5));
     ThrowingCallable code = () -&gt; {
-        hogwarts.addStudent( draco );  <img src=/prc2_web/icons/callouts/1.svg alt=1>
+        hogwarts.addStudent( draco );  <i class=conum data-value=1></i><b>(1)</b>
     };
 
     assertThatCode( code)
@@ -375,7 +379,7 @@ ThrowingCallable is a Functional interface and is part of AssertJ.</p>
 <div class="colist arabic">
 <table>
 <tbody><tr>
-<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td><i class=conum data-value=1></i><b>1</b></td>
 <td>Is the only code that is checked for exceptions. This isolates the "suspect" code from
 any other code that may cause issues.</td>
 </tr>
@@ -385,7 +389,7 @@ any other code that may cause issues.</td>
 <table>
 <tbody><tr>
 <td class=icon>
-<img src=/prc2_web/icons/note.svg alt=Note>
+<i class="fa icon-note" title=Note></i>
 </td>
 <td class=content>
 <div class=paragraph>
@@ -409,16 +413,16 @@ in the same way as in the previous paragraph, then pass that <code>code</code> t
 <div class=content>
 <pre class=highlight><code class=language-java data-lang=java>    @Test
     public void addIllegalProfessor() {
-        var malfoy = new Professor( &#34;Lucius&#34;, &#34;Malfoy&#34;, LocalDate.of( 1953, 10, 9 ) ); <img src=/prc2_web/icons/callouts/1.svg alt=1>
+        var malfoy = new Professor( &#34;Lucius&#34;, &#34;Malfoy&#34;, LocalDate.of( 1953, 10, 9 ) ); <i class=conum data-value=1></i><b>(1)</b>
 
-        ThrowingCallable code = () -&gt; { <img src=/prc2_web/icons/callouts/2.svg alt=2>
+        ThrowingCallable code = () -&gt; { <i class=conum data-value=2></i><b>(2)</b>
             hogwarts.addProfessor( malfoy );
         };
 
         assertThatThrownBy( code )
-                .isInstanceOf( Exception.class) <img src=/prc2_web/icons/callouts/3.svg alt=3>
-                .isExactlyInstanceOf( IllegalArgumentException.class) <img src=/prc2_web/icons/callouts/4.svg alt=4>
-                .hasMessageContainingAll( &#34;should&#34;,&#34;teach&#34;); <img src=/prc2_web/icons/callouts/5.svg alt=5>
+                .isInstanceOf( Exception.class) <i class=conum data-value=3></i><b>(3)</b>
+                .isExactlyInstanceOf( IllegalArgumentException.class) <i class=conum data-value=4></i><b>(4)</b>
+                .hasMessageContainingAll( &#34;should&#34;,&#34;teach&#34;); <i class=conum data-value=5></i><b>(5)</b>
         // fail( &#34;addIllegalProfessor completed succesfully; you know what to do&#34; );
     }</code></pre>
 </div>
@@ -426,23 +430,23 @@ in the same way as in the previous paragraph, then pass that <code>code</code> t
 <div class="colist arabic">
 <table>
 <tbody><tr>
-<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td><i class=conum data-value=1></i><b>1</b></td>
 <td>Someone that knows his classics understands that this crook can’t be professor at Hogwarts.</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/2.svg alt=2></td>
+<td><i class=conum data-value=2></i><b>2</b></td>
 <td>The lambda defines the throwing code. <code>org.assertj.core.api.ThrowableAssert.ThrowingCallable</code> is the functional interface for this purpose.</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/3.svg alt=3></td>
+<td><i class=conum data-value=3></i><b>3</b></td>
 <td>Sometimes it is good to be a bit relaxed on the exception type like in this line.</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/4.svg alt=4></td>
+<td><i class=conum data-value=4></i><b>4</b></td>
 <td>Or you need to be quite specific. You need only one, so choose either line 2 or 3. This is just an illustration.</td>
 </tr>
 <tr>
-<td><img src=/prc2_web/icons/callouts/5.svg alt=5></td>
+<td><i class=conum data-value=5></i><b>5</b></td>
 <td>You might want to inspect the message for keywords.</td>
 </tr>
 </tbody></table>
@@ -455,7 +459,7 @@ and <a href=https://javadoc.io/doc/org.assertj/assertj-core/latest/index.html>AP
 <table>
 <tbody><tr>
 <td class=icon>
-<img src=/prc2_web/icons/tip.svg alt=Tip>
+<i class="fa icon-tip" title=Tip></i>
 </td>
 <td class=content>
 <div class=paragraph>
