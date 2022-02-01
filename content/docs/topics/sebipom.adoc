@@ -1,0 +1,127 @@
+== Sebipom 3.0.3
+
+Spelled all lower  case: `sebipom`, is a super pom to use in Fontys Venlo projects. It keeps your own pom.xml file simple and focused to declare just the
+dependencies needed. Niceties to do proper Test Driver Development are provided for in the sebipom definitions, including things as being able to create
+javadoc in a professional looking way, including code highlighted code snippets, checkstyle, reporting, code coverage with maven, pmd, spotbugs  etc.
+
+https://github.com/sebivenlo/sebipom[Sebipom is hosted on github].
+
+* sebipom declares no dependencies other than those for dynamic (e.g. JUnit, AssertJ etc) and static *testing* in the form of plugins and their configuration.
+
+This way of using maven, having a [blue]#super# or parent pom defined globally (in a repository, not on a local path), is the [big black]#modern# usage.
+ It can be seen in well known big java projects such as https://spring.io/projects/spring-boot[Spring Boot] and https://quarkus.io/[quarkus], to name two contenders in the java-web technology world.
+
+[TIP,role="green"]
+====
+Note that we are using a _separately installed_ maven (3.6.3 at the time of writing) which you can download from http://maven.apache.org/download.cgi[apache maven],
+  not the one bundled with NetBeans or any other IDE. You can tell NetBeans (via tools-> options ->java->maven) to use the installed one instead of the bundled one.
+
+[big]_Our tests will [blue]#always# use maven, not some IDE. There is no gnome inside the build server to move the mouse._
+====
+
+[[sebipom-as-parent]]
+.Setting sebipom as parent.
+[source,xml]
+----
+    <parent>
+      <groupId>nl.fontys.sebivenlo</groupId>
+      <artifactId>sebipom</artifactId>
+      <version>3.0.3</version>
+      <relativePath/> // <!--1-->
+    </parent>
+----
+
+<1> The parent pom does not live in a local directory near (relative to) the project, but instead in a repository. This makes a parent pom 'portable'.
+
+All of the starter projects we provide already use this parent in some version. To get those working, apply the settings show in the paragraph <<Configuring Maven>>.
+
+If you want to use sebipom in your own project, either copy the parent definition into the pom file or start by replacing the NetBeans provided pom.xml file in your project by
+the basic one below. Add dependencies as required.
+
+[[basic-maven]]
+.Basic pom.xml file setting sebipom as parent.
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent> <!--1-->
+        <groupId>nl.fontys.sebivenlo</groupId>
+        <artifactId>sebipom</artifactId>
+        <version>3.0.3</version>
+        <realtivePath/><!--2-->
+    </parent> <!--3-->
+    <groupId>nl.fontys.sebivenlo</groupId>
+    <artifactId>basicsebimaven</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    <!-- The name in the IDE -->
+    <name>My App</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.release>11</java.release>
+        <!-- change mainClass to the proper starting point of your program, if any.-->
+        <exec.mainClass>basicsebimaven.Hello</exec.mainClass>
+    </properties>
+    <dependencies>
+      <!--example  -->
+      <dependency>
+        <groupId>...</groupId>
+        <artifactId>...</artifactId>
+        <version>...</version>
+      </dependency>
+    </dpendencies>
+</project>
+----
+
+<1> Start of parent declaration.
+<2> Parent comes from some other repo, not local.
+<3> End of parent declaration.
+
+=== Sebipom and Java FX
+
+If you want to use semipom and build a JavaFX project, you need to activate the *fx*-profile.
+In the commandline that would be
+
+.Commandline. Real software engineers can use the command line.
+image::mvn-withfx-profile.png[]
+
+In netbeans you can do that by setting the configuration like in this picture:
+
+.Activate a profile in netbeans
+image::fx-profile-nb.png[]
+
+=== Using the SeBiPom in your own projects
+
+To use the test libraries and other goodies that will be used throughout our course,
+you should add the `sebipom` as parent.
+
+Modify the pom.xml file in your project to include sebipom as parent by adding
+these lines in the previous section <<sebipom-as-parent>>.
+
+
+[TIP]
+====
+As of 2021-04-03, sebipom reached version 3.0.3. Not all projects may have this version number for
+the parent sebipom. We improve as we go, sometimes because of tips we receive from our students, you for instance.
+Anyway, if the version is not at the newest, set it to the newest and rebuild.
+Revisit this part of the site to check the latest version number or look in the
+https://www.fontysvenlo.org/repository/nl/fontys/sebivenlo/sebipom/[fontysvenlo maven reposity]
+for the sebipom version. +
+Sebipom 3.0.3 enables testing for modular projects but does not enforce modular projects.
+
+* The  source code of sebipom lives at github in https://github.com/sebivenlo/sebipom[sebivenlo/sebipom].
+====
+
+=== Upgrade all projects with one command
+
+Since sebipom is a somewhat moving target, you may have to update the parent pom of the projects that depend on it. All PRC2 projects do.
+This oneliner will do that for all projects below the current directory. After navigating to the parent of all such projects, do this in the shell:
+
+[source,sh]
+----
+for i in $(find . -name pom.xml); do (cd $(dirname $i); mvn versions:update-parent  & )   ; done
+----
+
+It works on any bash supporting machine, tested on ubuntu and should work on OS-X and under windows when using
+git-bash or the windows subsystem for Linux.

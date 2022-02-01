@@ -1,0 +1,15 @@
+---
+title: "Setup"
+description: ""
+lead: ""
+date: 2022-02-01T14:30:36+01:00
+draft: false
+images: []
+menu: 
+  pages:
+    parent: ""
+weight: 010
+toc: true
+---
+
+include::{topics}/gettingstarted.adoc[]

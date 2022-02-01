@@ -1,0 +1,489 @@
+== Getting Started
+
+To work successfully with the programs needed for PRC2, you need to install them first.
+Properly installing Java and other programs is not hard but must be done precisely.
+What will follow is a description on how to do that under Ubuntu Linux, macOS and Windows.
+You can adapt this configuration for other operating systems too, possibly with a few tweaks.
+
+[TIP]
+====
+It is best to get fairly familiar with the command line pretty soon, because in the end it will make you much more effective.
+Since 2018, https://www.youtube.com/watch?v=x73WTEltyHU[bash] is also available on Windows 10, and it is the default shell of Ubuntu-Linux and was the default shell on macOS until version 10.15. The default shell on macOS is now Zsh, we will specify the differences between bash and zsh where necessary.
+====
+
+[WARNING]
+====
+Before you install any software from the internet, please validate the the package. You typically see signature files such as SHA-256 or PGP-ASC, os something similar,
+which can help to ascertain that the package is the one you think it is. For instance with:
+
+icon:linux[fw] `$ sha512sum /path/to/file` +
+icon:apple[fw] `$ shasum -a 256 /path/to/file` +
+icon:windows[fw] `$ certUtil -hashfile /path/to/file SHA256`
+
+You can check the download of that version of netbeans, and the command should produce the same signature as is available on the download website.
+====
+
+
+== Setting up the correct environment
+
+=== Install Java
+
+The default installation paths are:
+
+icon:linux[fw] `/usr/lib/jvm` +
+icon:apple[fw] `/Library/Java/JavaVirtualMachines/` +
+icon:windows[fw] `C:\Program Files\AdoptOpenJDK\`
+
+[WARNING]
+====
+Do [red]*NOT* use `Program Files` under Windows, because of the space in the name,
+ but instead create a separate directory simply called
+ e.g. `c:\usr\lib\jvm` if you insist on using Windows.
+ On other OSs it is also important to make sure paths do NOT contains spaces,
+ as spaces are also used as separators for arguments
+====
+
+Installation of Java can be done either through a package manager or by downloading the
+the Java distribution from  https://adoptopenjdk.net/[AdoptOpenJDK ^].
+For PRC2 we will use [blue]*Java 11* as a minimum, but you may want to pick up
+Java 8 for older projects and maybe Java 15 (or even Java 16 when it becomes available) too.
+
+==== icon:linux[fw] Linux
+
+[NOTE]
+====
+We are using Debian based Linux, such as Ubuntu, for the instructions on this page.
+We assume that that if you are running a different distribution of Linux that you can adapt the
+instructions to apply to that distribution (e.g. use the correct package manager Zypper, PacMan, etc.).
+====
+
+With a package manager:
+
+.icon:linux[fw] install via apt-get
+[source,sh]
+----
+wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
+sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+sudo apt update
+sudo apt install adoptopenjdk-11-hotspot
+----
+
+Manual installation:
+
+In the example below we assume that the distribution is packed as a `tar.gz` archive.
+The example shows the archive name as of 10 February 2021,
+OpenJDK11U-jdk_x64_linux_hotspot_11.0.10_9.tar.gz
+
+.icon:linux[fw] unpack java distribution using the command-line
+[source,sh]
+----
+sudo mkdir -p /usr/lib/jvm
+cd /usr/lib/jvm
+sudo tar xf ~/Downloads/OpenJDK11U-jdk_x64_linux_hotspot_11.0.10_9.tar.gz
+----
+
+==== icon:apple[fw] macOS
+
+With HomeBrew:
+
+.icon:apple[fw] install via HomeBrew
+[source,sh]
+----
+brew tap AdoptOpenJDK/openjdk
+brew install --cask adoptopenjdk11
+----
+
+Manual installation:
+
+Download the correct distribution/version of choice from
+https://adoptopenjdk.net/[AdoptOpenJDK ^].
+Install the same way as normal programs.
+
+==== icon:windows[fw] Windows
+
+With Chocolatey:
+
+.icon:windows[fw] install via Chocolatey
+[source,sh]
+----
+choco install adoptopenjdk11 --params="/ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome /INSTALLDIR=C:\usr\lib\jvm\ /quiet"
+----
+
+Manual installation:
+
+Download the correct distribution/version of choice from
+https://adoptopenjdk.net/[AdoptOpenJDK ^].
+Install the same way as normal programs,
+
+[WARNING]
+====
+Do [red]*NOT* forget to change the install path during installation. +
+e.g. `C:\usr\lib\jvm\` +
+Also make sure to check Add to path and Add JAVA HOME.
+====
+
+=== Make Java available on the PATH
+
+If you used a package manager or an installer to install Java, then Java should already be added to your path.
+However if you manually extracted the binaries then you should still add Java to the path.
+
+The `$PATH` environment variable is used by the command line processor to find the commands or programs whose name you type as first word in a command line.
+If you type `java -version`, and your shell says `command not found`, then your path does not include the java program yet.
+
+Since we want the best Java experience, we will use some common environment variables.
+
+==== icon:linux[fw] Linux
+
+*JAVA_HOME* Define JAVA_HOME first. That will help Java, but also tell other programs to find the desired Java version.
+
+.icon:linux[fw] Define JAVA_HOME
+[source,sh]
+----
+export JAVA_HOME=/usr/lib/jvm/jdk-11.0.10+9 #<1>
+export JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64 #<2>
+----
+<1> Path for manual installation
+<2> Path for package manager installation
+
+*PATH* Prepend the directory under JAVA_HOME to your path, so all java related programs, such as `java` , `javac`, `jar` etc can be found, by just typing the name.
+
+.icon:linux[fw] Append Java to the path
+[source,sh]
+----
+export PATH=${JAVA_HOME}/bin:$PATH
+----
+
+To avoid having to do this every time you start the command-line, add the commands to your `~.bashrc` script  file, at the bottom.
+
+.icon:linux[fw] Add the previous commands to `~/.bashrc`
+[source,sh]
+----
+export JAVA_HOME=/usr/lib/jvm/jdk-11.0.10+9
+export PATH=${JAVA_HOME}/bin:$PATH
+----
+
+==== icon:apple[fw] macOS
+
+These instructions will guide you to setup the correct environment on macOS
+and to make it easy to switch between Java versions.
+
+.icon:apple[fw] List version(s) of Java
+[source,sh]
+----
+/usr/libexec/java_home #<1>
+/usr/libexec/java_home -V #<2>
+----
+<1> List the most recent version of Java on your system
+<2> List all installed versions of Java on your system
+
+We can now setup an environment to easily switch between Java versions and later on even launch Netbeans with the intended Java version.
+The only thing we need to do for this is set the `JAVA_HOME` environment variable to link to the correct Java version.
+
+.icon:apple[fw] Set the `JAVA_HOME` environment
+[source,sh]
+----
+export JAVA_HOME=<path_to_java_home>
+----
+
+Where the <path_to_java_home> can be obtained by:
+
+.icon:apple[fw] Obtaining the path to Java home
+[source,sh]
+----
+/usr/libexec/java_home -v '15*' #<1>
+/usr/libexec/java_home -v '15.0.2'#<2>
+----
+<1> Retrieve the path to Java 15 if installed
+<2> Retrieve the path to a specific subversion of Java 15
+
+.icon:apple[fw] Check that `JAVA_HOME` is set correctly
+[source,sh]
+----
+echo $JAVA_HOME
+----
+
+However instead of hardcoding the path it is better to retrieve the path while setting the environment.
+
+.icon:apple[fw] Set `JAVA_HOME` dynamically with the following command (e.g. for Java 15):
+[source,sh]
+----
+export JAVA_HOME=$(/usr/libexec/java_home -v '15*') #<1>
+----
+<1> $() means that the invocation between parenthesis is resolved first.
+
+This sets the correct Java environment for your current Terminal session.
+When opening a new terminal the default Java environment will be active again.
+To make switching between Java versions in the terminal easier we can set-up what is called an alias.
+An alias is basically a shortcut, you specify the keyboard shortcut and which commands should be executed.
+We want these aliases to always be available,
+for this we need to let the terminal know to load our aliases on startup.
+Depending on the type of terminal you are using, we need the specify the aliases at different places.
+
+Since macOS Catalina (10.15) the default shell (which is used by the terminal) is ZShell (zsh).
+This means we can specify our aliases in either `.zshrc` or in `.zprofile` in our home directory.
+
+.icon:apple[fw] Add the following lines to ~/.zshrc:
+[source,sh]
+----
+export JAVA_HOME=$(/usr/libexec/java_home -v 11) #<1>
+alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version" #<2>
+alias j15="export JAVA_HOME=`/usr/libexec/java_home -v 15`; java -version" #<3>
+----
+<1> Set the default version of Java to version 11.
+<2> Alias to set the Java environment to version 11.
+<3> Alias to set the Java environment to version 15.
+
+We now need to either restart the terminal for the aliases to take effect or source the `.zshrc` file.
+
+`source ~/.zshrc`
+
+We can now check that switching between versions works:
+
+.icon:apple[fw] switching between Java versions
+[source,sh]
+----
+java -version #<1>
+j11 #<2>
+j15 #<3>
+----
+<1> Check that the default Java version is correct
+<2> Check that switching between versions works
+<3> Check that switching between versions works
+
+Now we have set-up a way to easily switch between Java versions in the terminal.
+
+==== icon:windows[fw] Windows
+
+Java should already be added to the path by the installer,
+as it is a default setting during installation.
+
+=== Install Apache Maven
+
+We will use *Apache Maven*, or *maven* for short throughout the PRC2 course, so you will need that too.
+
+The application is called *Maven* but as command spelled as `mvn`.
+
+Maven is the default build tool in the Java world and can build your program from sources without the use of and IDE. This makes your
+project agnostic to the IDE used, so they work with NetBeans as first class projects out of the box and also with other IDEs with little or no tweaks to that IDE.
+It is also the way the teachers use to compile and test the students work for the practical assignments and performance assessments.
+
+==== icon:linux[fw] Linux
+
+Install with package manager:
+
+.icon:linux[fw] Install maven using apt-get
+[source,sh]
+----
+sudo apt install maven
+----
+
+Install manually:
+[#maven_manual]
+
+Fetch a fresh copy of https://maven.apache.org/[Apache Maven] from the website.
+
+To install it, do (example uses version 3.6.3  as of 2019-11-03)
+
+.icon:linux[fw] install apache maven and add to path
+[source,sh]
+----
+cd /usr/share
+sudo rm -fr maven
+sudo tar xf ~/Downloads/apache-maven-3.6.3-bin.tar.gz
+sudo ln -sf apache-maven-3.6.3/ maven
+cd /usr/bin
+sudo ln -sf ../share/maven/bin/mvn .
+----
+
+Once this is done, entering  `mvn --version` should produce output similar to
+
+.mvn --version command.
+[source,sh]
+----
+hom@threehundred: /usr/share
+🐧$ mvn --version
+Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
+Maven home: /usr/share/maven
+Java version: 11.0.5, vendor: AdoptOpenJDK, runtime: /usr/lib/jvm/jdk-11.0.5+10
+Default locale: en_GB, platform encoding: UTF-8
+OS name: "linux", version: "5.0.0-36-generic", arch: "amd64", family: "unix"
+----
+
+==== icon:apple[fw] macOS
+
+Install with HomeBrew:
+
+.icon:apple[fw] Install Maven using HomeBrew
+[source,sh]
+----
+brew install maven
+----
+
+Install manually:
+
+Same instructions as for <<maven_manual, Linux>>.
+
+==== icon:windows[fw] Windows
+
+Install with Chocolately:
+
+`choco install maven`
+
+Install manually:
+
+. Download the zip file from https://maven.apache.org/download.cgi.
+. Extract the zip file to `C:\usr\lib`
+. Add the `bin` directory to the `path`
+.. Goto `Settings > About > Advanced System Settings > Adavanced Tab > Environment Variables`
+.. Select `Path` and `Edit`
+.. `New` and fill in the path `C:\usr\lib\apache-maven-3.6.3\bin`
+. Close `System Properties`
+. Start `cmd`
+. `mvn -v` should return a version
+
+
+=== Install or update your IDE
+
+The official Java IDE at Fontys ICT Venlo is https://netbeans.apache.org/[Apache NetBeans IDE]. The long time stable version for the moment is 12.0.
+At the time of writing version 12.2 serves me very well. At the time of reading a newer version might be available.
+
+==== icon:linux[fw] Linux
+
+You can either install Netbeans from Ubuntu Software or download the binaries.
+
+[#netbeans_manual]
+To install the binaries of Apache NetBeans on Ubuntu simply fetch the binary as zip file and unpack it,
+then either add the contained *bin* directory to the path, or make a wrapper `netbeans`
+command in your personal `~/bin` directory.
+
+For my installation I simply used the binaries, in the zip file, and install it
+in the traditional (as in same directories as the installer would) `/usr/local`.
+`/opt` is also a good choice as installation directory.
+
+.icon:linux[fw] Assuming you downloaded the binary, installing it is easy
+[source,sh]
+----
+cd /usr/local
+sudo unzip ~/Downloads/netbeans-12.2-bin.zip
+sudo mv netbeans{,-12.2}
+----
+
+For extra creature comfort, add a simple netbeans script to your path
+
+.netbeans script in ~/bin
+[source,sh]
+----
+#!/bin/bash
+/usr/local/netbeans-12.2/bin/netbeans "$@" & #<1>
+----
+
+<1> Invoke netbeans using its absolute path.
+
+Then make that script executable with `chmod +x netbeans`.
+
+NetBeans IDE should now be startable from the command line (fine for me) as well as from the menu.
+
+==== icon:apple[fw] macOS
+
+It is possible to install Netbeans by downloading the installer, manual extracting the binaries of by using HomeBrew.
+
+Installing with the installer:
+
+. Download the installer from https://netbeans.apache.org/download/index.html
+. Install as normal
+
+.icon:apple[fw] Install Netbeans using HomeBrew
+[source,sh]
+----
+brew install --cask netbeans
+----
+
+Installing the binaries manually:
+
+See instruction of <<netbeans_manual, Linux>>.
+
+As an extra we can start Netbeans from the command-line using the Java version we want to use.
+
+We do this by adding an executable file to the `PATH` so we can start Netbeans from the terminal with the correct Java version.
+
+.icon:apple[fw] Create `netbeans` file in `/usr/local/bin`
+[source,sh]
+----
+cd /usr/local/bin #<1>
+touch netbeans #<2>
+echo \"/Applications/NetBeans/Apache NetBeans 12.2.app/Contents/Resources/NetBeans/netbeans/bin/netbeans\" --jdkhome \$JAVA_HOME \$\* \& > netbeans #<3>
+chmod +x netbeans #<4>
+----
+<1> Change to the right directory
+<2> Create new file called netbeans
+<3> Write the correct command into netbeans
+<4> Make the file executable
+
+As you can see, when invoking it this way, you can inform Netbeans about which java version to use (as set in your `JAVA_HOME` environment variable).
+Furthermore you can pass the project name as a parameter (defined by `$*``) so you don’t need to open the project manually anymore in NetBeans.
+Finally the `&` means that NetBeans runs as a background process without blocking your Terminal session, so your Terminal session is immediately available again.
+
+.icon:apple[fw] Open `myProject` in Netbeans using Java version 15
+[source,sh]
+----
+j15
+netbeans myProject
+----
+
+==== icon:windows[fw] Windows
+
+. Download the installer from https://netbeans.apache.org/download/index.html
+. Install as usual, make sure to change to `path`
+
+==== Other IDE's
+
+This section is left empty. We will not answer any support questions on other IDE's but the one
+we use in the performance assessment.
+
+=== Subversion
+
+Subversion is a version control system, that will be used in this course.
+You might have used git before, which is also a version control system.
+However subversion works a bit different, as it is not decentralized as git.
+For this course you do not have to know the commands for subversion as you will be using it from
+inside Netbeans.
+
+However for Netbeans to be able to work with subversion there should first be a subversion command line
+tool be installed on the system.
+
+==== icon:linux[fw] Linux
+
+Using a package manager
+
+.icon:linux[fw] Installing subversion via apt-get
+[source,sh]
+----
+sudo apt install subversion
+----
+
+==== icon:apple[fw] macOS
+
+On older versions of macOS subversion was supplied with XCode.
+However on newer versions of macOS this is no longer the case and we need to manually install it.
+The easiest way to do this is using HomeBrew:
+
+.icon:apple[fw] Install subversion using HomeBrew
+[source,sh]
+----
+brew install subversion
+----
+
+==== icon:windows[fw] Windows
+
+. Download https://tortoisesvn.net/downloads.html[TortoiseSVN]
+. Make sure to install the `command line tools` during installation
+. Open command prompt and check that svn is added to the path with `svn --version`
+
+
+include::{topics}/configuringmaven.adoc[]
+
+include::{topics}/sebipom.adoc[]
+
+== Additional Pointers
+
+* https://docs.oracle.com/javase/tutorial/essential/environment/paths.html[Path and ClassPath ^]

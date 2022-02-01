@@ -1,0 +1,54 @@
+== Configuring Maven
+
+Maven and maven projects are first class citizens in the NetBeans world.
+
+Since we build with maven, we are not really bound to particular IDE,
+other than for editing and maybe the odd debug session.footnote:[Working test driven will typically not need those].
+This means that you can use other IDE's, but expect no help from the teachers.
+
+We have many things to share with you, and we use maven for that.
+
+We share libraries and project configuration files (pom.xml) with our students. To make them
+work as intended, you will need to configure the maven `settings.xml` only once. Since this is a maven setting, your IDE should
+pick these settings up as well. Certainly NetBeans IDE will.
+
+Start NetBeans IDE and create a Java project with New Project ▷ Java with Maven ▷ Java Application.
+
+In the project, right click on Project Files and choose *create settings.xml*.
+Add the Fontys Venlo repository to the settings, which is best done by replacing the xml in the settings
+file with
+
+.settings.xml which adds https://www.fontysvenlo.org/repository as repository
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <profiles>
+        <profile>                    <!--1-->
+            <id>sebivenlo</id>
+            <repositories>
+                <repository>
+                    <id>fontysvenlo.org</id>   <!--2-->
+                    <url>https://www.fontysvenlo.org/repository</url> <!--3-->
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>sebivenlo</activeProfile>  <!--4-->
+    </activeProfiles>
+    <offline>false</offline>
+</settings>
+----
+
+<1> You define a profile inside the profiles section of your settings.xml.
+<2> Give the profile a name.
+<3> Specify the URL.
+<4> Use the given name to make it an active profile by default.
+
+The link:topics/settings.xml.txt[raw settings file].
+
+Note that the project provided through the PRC2 personal repository will [role:red]*NOT* work without
+the settings file above. From February 2020 will use sebipom version 2.3.0 or above.
