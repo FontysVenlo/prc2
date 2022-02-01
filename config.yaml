@@ -31,3 +31,4 @@ markup:
       toc: true
       toclevels: 2
       topics: content/docs/topics
+      imagedir: prc2_web/
