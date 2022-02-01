@@ -1,0 +1,55 @@
+== Assumptions
+
+There are test cases that are only useful under certain conditions:
+
+* The test is only meaningful on a specific Operating System.
+* The test needs a database connection and only executes when available.
+* A file must be present.
+* A 'slow' test flag is set in some file, which only executes the test when that flag is set.
+  Used to avoid slow tests in the normal write-compile-test cycle.
+
+For this you can use *Assume*.
+
+There are two variants relevant:
+
+* the https://junit.org/junit5/docs/current/user-guide/#writing-tests-assumptions[JUnit5 style Assumptions]
+* The https://assertj.github.io/doc/#assertj-core-assumptions[Assert-J flavor Assumptions]
+
+You can use the Assumption test in the setup methods (the one with `@BeforeXXX`), to completely disable all tests in one test class,
+instead of having each test doing the  `assumeXXX` test. A test that has been canceled because of a failing assumption will
+appear as a skipped test, similar to a disabled test with `@Disabled`.
+
+[TIP]
+====
+If you want to disable a whole test class, Do the assumption in a @BeforeAll annotated static setupClass() method.
+====
+
+The JUnit 5 Assumtions are effective, but can only test for true or false, so you need to
+feed it a boolean expression. Look at the https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api/Assumptions.html[API ^] to see all features.
+But simple may be just perfect here.
+
+.Disable on staging machine. From JUnit 5 user guide.
+[source,java]
+----
+    @Test
+    void testOnlyOnDeveloperWorkstation() {
+        assumeTrue("DEV".equals(System.getenv("ENV")), "Aborting test: not on developer workstation");
+        // remainder of test is only executed if on developer machine
+    }
+----
+
+You guessed it, AssertJ Assumptions are richer. In most cases,
+the assumption has the same form as an assert that, as in replace *assert* with *assume* and you are done.
+So any `assertThat(...)` that you already have can simply be turned into an `assumeThat(...)`.
+
+If nothing else, using assertj may make your tests more readable and have a consistent look and feel.
+
+.Disable test if file does not exists
+[source,java]
+----
+
+    File f = new File(Path.of("testData.dat"));
+    assumeThat(f)
+       .as("Test data file not available, skipping test")
+       .exists();
+----

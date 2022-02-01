@@ -1,0 +1,33 @@
+baseURL: 'http://example.org/'
+languageCode: en-us
+title: PRC2
+theme: sebi-theme
+sectionPagesMenu: main
+params:
+  highlight: true
+  github: https://github.com/FontysVenlo/prc2_web
+security:
+  enableInlineShortcodes: false
+  exec:
+    allow:
+      - ^dart-sass-embedded$
+      - ^go$
+      - ^npx$
+      - ^postcss$
+      - ^asciidoctor$
+    osEnv:
+      - (?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM)$
+  funcs:
+    getenv:
+      - ^HUGO_
+  http:
+    methods:
+      - (?i)GET|POST
+    urls:
+      - .*
+markup:
+  asciidocext:
+    attributes:
+      toc: true
+      toclevels: 2
+      topics: content/docs/topics

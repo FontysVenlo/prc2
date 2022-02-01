@@ -1,0 +1,163 @@
+=== What are tests and why do we need them?
+[#_tdd]
+The way that you have worked with Java so far is that you had to write some code
+to implement something. For example you had to implement a bird watcher system
+or a telephone book, in which you could save people with their telephone numbers
+and look them up, too. You probably created classes called PhoneBook or
+BookEntry,
+and you had variables such as [blue]`String personName`, [blue]`int phoneNumber` and maybe a
+[blue]`List` or a [blue]`Map` which contained all the people and their phone numbers. You had to
+think about how the phonebook works, and then you added classes, fields (variables)
+and methods. Slowly but surely, your phonebook started to look more and more
+like a phonebook.
+
+[[tdd-oneRedTest]]
+image::/tdd-oneRedTest.png[role="related thumb right", title="Small steps. One red test at a time."]
+[[tdd-allTestsGreen]]
+image::/tdd-allTestsGreen.png[role="related thumb left", title="All the tests are green, yay!"]
+
+But how did you know that your phonebook was actually working? You could have
+implemented a method that didn't work, or maybe you forgot to add people to the
+phonebook, so the data wasn't actually stored. What you did was you ran the TMC
+tests. They kept telling you whether the phonebook was working as intended. The
+test said "when I look for Alice in your phonebook, I will receive Alice's
+phone number 1234-567.". And if the test didn't receive Alice's number, it
+would turn red and say something like "I expected 1234-567. But I received
+0042-987." Therefore, the test fails.
+
+The tests were a really useful way for you to know that you were indeed
+implementing a proper phonebook. You could have just written empty classes and
+said "here is the phonebook!" and there would have been no way to verify that
+the phonebook works. The test made sure that this doesn't happen. They also
+give you confidence as you code. Because every test that turns green gives you
+that little "yes!" feeling that you wrote something that works.
+
+Thus, tests fulfill two functions at once: they constantly probe your
+implementation and check whether it works, and they make you feel more
+confident about your programming skills. That's really neat!
+[[tdd-EnglishError]]
+image::/tdd-EnglishError.png[role="related thumb right", title="Testing in real life"]
+When you were at school, you probably had to write an English exam at some
+point. You wrote your answers, and then the teacher graded your exam. The
+teacher is just like a test: she reads your exam, expecting the correct answer.
+For example, you wrote "Alice and Bob goes to school.". Your teacher would get
+the red pen and highlight the word "goes". The teacher says "I expected: Alice
+and Bob go to school. Instead, I received: Alice and Bob goes to school." The
+teachers expectation, or assertion, was not met. Therefore, you get an error.
+As you grow older and you become more proficient at English, you write Emails
+in English, perhaps for work or at university. When you make a mistake, you
+spot your own errors: "oh hang on, I have to use  'go' instead of 'goes' here."
+You have internalized a test that checks for the correct conjugation of the
+word. You know what to expect, and when you deviate from the expectation, you
+spot the error.
+
+Many people work the same way when they write code. They say "I know what I am
+doing because I have experience and I know the rules." But of course, we always
+make mistakes. Our brains are really bad testers. We stop seeing mistakes
+because we feel so familiar with our code. Have you ever handed in a report for
+university, only to find that the lecturer finds spelling errors you swear you
+didn't do? That's what happens in programming, too.
+
+That is why we write our own little annoying English teachers that constantly
+check: is this correct? Even though we know how to program, we also acknowledge
+that our brains are terrible testers for things that you write yourself, so we
+give our brains a break and write a test instead.
+
+
+=== Test Driven Development (TDD)
+In link:https://materiaalit.github.io/2013-oo-programming/part2/week-9/[Week 9]
+we wrote a little phonebook and then we ran the test to check that the
+phonebook was working. That worked well, because we no longer have to rely on
+our brains to spot the errors on-the-fly. But here is another bad message: not
+only does our brain stop recognizing errors in our own code, but it is also
+automatically biased to want our own tests to pass. You spent all this time
+writing your phonebook, you know how it works, so you know what test to write
+for it.
+
+But your brain secretly deceives you: you have implemented a phonebook, and
+this is the only phonebook that you know. What if you removed your code, but
+leave in the tests- and ask a friend to write a phonebook? They start
+complaining that your tests are unfair. "Why do I have to use a List? I use
+Maps!" your friend says. But your tests insists that the phonebook has a List.
+So what have you done? You have written a test that proves YOUR implementation
+is correct.
+
+When you work test-driven, you don't implement the phonebook and then test it.
+You first write the test for a phonebook, and then you implement it. That
+sounds a bit weird at first. Why write tests for stuff that's not there yet? We
+know it's going to fail! But this is what we want. We need to keep telling our
+brains: this does not work. Figure out a way to make it work. This way, it is
+much harder to get married to your own code and to stop seeing problems with
+your test. You have found a way to deal with the human brain. Congratulations!
+
+[[tdd-tddLifecycle]]
+.https://medium.com/@odayibasi/tdd-test-driven-development-vs-bdd-behavior-driven-development-30e225c29c14[The TDD Lifecycle. Click for image source.]
+image::/tdd-lifecycle.png[align="center", book="keep"]
+
+
+==== So how do I know what to test?
+There is a little (actually, it's big) catch with TDD. When you write a test
+for a thing that doesn't exist yet, how do you know what to test for? If I
+write a test for a phonebook that is not implemented yet, what does my test
+expect?
+
+The truth is, you never get around having to make implementation decisions. We
+just try to minimize our margin for error. So when you start writing your first
+test for your (non-existing) phonebook, you HAVE to have an idea of what the
+phonebook does. So perhaps you start with "I expect that the phonebook let's me
+look up a person. When I look up Alice, I expect Alice's phone number.". What
+could such a test look like?
+
+==== Test selection strategies
+There is no golden rule that says "always start with text X, and then test Y,
+and finish with test Z.". Instead, we rely on heuristics: rules of thumb that
+guide us through the TDD process. There are several decisions that you can make
+when writing tests.
+
+For instance, you can decide to first write tests for all elements of the
+system under test (SUT), but not go into detail yet what each SUT needs to have
+tested. This would mean focusing on width first, and depth later. For instance,
+you could write tests for the entirety of the phonebook, but you don't, for
+instance, test each valid or invalid phonebook entry. The other approach would
+be to start with the details on one particular part of the test class, and
+moving on to other parts only when one section of the SUT is covered
+completely. In this version, you go depth-first instead of width-first. Both
+approaches have their merit and you need to decide which strategy is best in
+which situation.
+
+Another strategy is to weigh the difficulty of each test. When you look at a
+list of tests to write, do you start with the easy ones that are implemented
+quickly, or do you start with the more difficult tests that require more
+implementation thinking? When you are stuck on a particular test, it might be
+useful to first implement a number of tests that are easier to write, so that
+you make progress. It might be that whatever was causing you to be stuck on
+that test is now easier to solve now that you have a list of other tests that
+you have implemented.
+
+
+==== Where to start
+
+Choosing is always hard, including choosing where to start. The typical
+order for test driven development is:
+
+. A Constructor. You typically need instances and this is how you can construct some.
+. Getters for the fields that are defined in the constructor. If
+  such getters are not part of the public API of the class, make the
+  package private, to hide them from client classes outside of the
+  package.
+. The `public String toString()` method, which can show
+  the result of the constructor. Note that toString is often used for debugging,
+  and that is what the auto-generated to string typically is for.
+.  Setters, if needed. (They are NOT in the fraction exercise). If you can get by
+  with a class without setters, you are typically https://www.leadingagile.com/2018/03/immutability-in-java/[better off].
+.  The business methods, one by one. In case of Fraction exercise, start at
+  multiplication, because that is easiest.
+.  Further refinements, like in case of the Fraction exercise, that the
+  fraction should always be in _normalised_ form.
+
+[TIP]
+====
+Never add a member (method, field) to a class _unless_ you have a test that proves the need of it.
+====
+
+'''

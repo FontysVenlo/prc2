@@ -1,0 +1,37 @@
+== Soft Assertions
+
+Sometimes you have a pressing need to assert more than one thing in a test method,
+because two or more values always come in pairs and setting stuff up and dividing it over multiple
+methods would make the test less readable, which is bad.
+
+However, having multiple asserts in one method is bad style, because
+the first problem that occurs is the only failure that will be reported by the test. You could say that the first
+failure dominates or monopolizes the test method.
+
+However the rule above makes writing tests a bit awkward. In particular when there are multiple aspects to be tested on the
+same result object. In that case a soft assertion may be helpful.
+A soft assertion will fail "softly", meaning that the failure is recorded, but the test can still continue to verify another aspect.
+The soft assertion will collect all failures and will report them after the soft assertion is *closed*.
+
+.soft assertion, testing both key and value of a KeyValue object.
+[source,java]
+----
+   void testGetResult(){
+    // some setup
+    Optional<KeyValue<Integer,Double>> = new gf(student).gradeFor("PRC2");
+    SoftAssertions.assertSoftly( softly -> { //<1>
+                AbstractMap.SimpleEntry<Integer, Double> result = gf.getResult();
+                softly.assertThat( result )
+                    .extracting( "key" )
+                    .isEqualTo( student.getStudentId() );
+                softly.assertThat( result )
+                    .extracting( "value" )
+                    .isEqualTo( grade );
+    }); // <2>
+  }
+----
+
+<1> Starts the lambda that encloses the soft assertions. *Softly* serves as the collector of the failures
+<2> Closes the sequence of soft assertions. This is the spot where SoftAssertion will report the the failures, if any.
+
+In the example, the key and value in the KeyValue pair are related, making a soft assertion applicable.
