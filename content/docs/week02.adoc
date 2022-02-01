@@ -2,7 +2,7 @@
 title: "Parameterized tests"
 description: ""
 date: 2022-02-01T14:17:33+01:00
-draft: true
+draft: false
 images: []
 slug: "parameterized-tests"
 menu: 
