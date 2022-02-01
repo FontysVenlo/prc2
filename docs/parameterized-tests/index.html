@@ -70,12 +70,12 @@ tweak the copy a bit and you are done. Then you forget one required tweak, becau
 <table>
 <tbody><tr>
 <td class=icon>
-<div class=title>Warning</div>
+<img src=/prc2_web/icons/warning.svg alt=Warning>
 </td>
 <td class=content>
 <div class="imageblock related thumb right">
 <div class=content>
-<img src=/prc2_web/waste.jpg alt=waste width=480>
+<img src=/prc2_web/images/waste.jpg alt=waste width=480>
 </div>
 <div class=title>Figure 1. Do not become a ctrl+c, ctrl+v junky. That only produces junk.</div>
 </div>
@@ -116,15 +116,15 @@ public class FractionCSVSourceTest {
 
     @ParameterizedTest
     @CsvSource( {
-           //&#34;message,          expected,     n,   d&#34;, //<b class=conum>(1)</b>
-           &#34;&#39;two thirds&#39;,        &#39;(2/3)&#39;,     2,   3&#34;, //<b class=conum>(2)</b>
+           //&#34;message,          expected,     n,   d&#34;, <img src=/prc2_web/icons/callouts/1.svg alt=1>
+           &#34;&#39;two thirds&#39;,        &#39;(2/3)&#39;,     2,   3&#34;, <img src=/prc2_web/icons/callouts/2.svg alt=2>
            &#34;&#39;whole number,           &#39;2&#39;,     2,   1&#34;,
            &#34;&#39;one third&#39;,         &#39;(1/3)&#39;,    -3,  -9&#34;,
            &#34;&#39;minus two fifths&#39;,  &#39;(-2/5)&#39;,   12, -30&#34;,
            &#34;&#39;one + two fifths&#39;, &#39;(-1-(2/5))&#39;,   35, -25&#34;
     } )
     void fractionOps( String message, String expectedString,
-            int numerator, int denominator ) { // <b class=conum>(3)</b>
+            int numerator, int denominator ) { <img src=/prc2_web/icons/callouts/3.svg alt=3>
 
         Fraction f = new Fraction( numerator, denominator );
         assertThat( f.toString() )
@@ -135,19 +135,22 @@ public class FractionCSVSourceTest {
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>Adding a comment is always a good idea. You may also want your values aligned for improved readability.</p>
-</li>
-<li>
-<p>Parameters are separated by commas, which maybe in the test values. In that case you can demarcate Strings with single quotes inside the csv record string.
+<table>
+<tbody><tr>
+<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td>Adding a comment is always a good idea. You may also want your values aligned for improved readability.</td>
+</tr>
+<tr>
+<td><img src=/prc2_web/icons/callouts/2.svg alt=2></td>
+<td>Parameters are separated by commas, which maybe in the test values. In that case you can demarcate Strings with single quotes inside the csv record string.
 If you need another separator instead of comma, you can specify that too,
-see <a href=https://junit.org/junit5/docs/current/api/org.junit.jupiter.params/org/junit/jupiter/params/provider/CsvSource.html target=_blank rel=noopener>CsvSource API </a>.</p>
-</li>
-<li>
-<p>The parameters are passed in as the type(s) provided by the test method’s signature. The Junit-5 framework will (try to) parse the csv record elements accordingly.</p>
-</li>
-</ol>
+see <a href=https://junit.org/junit5/docs/current/api/org.junit.jupiter.params/org/junit/jupiter/params/provider/CsvSource.html target=_blank rel=noopener>CsvSource API </a>.</td>
+</tr>
+<tr>
+<td><img src=/prc2_web/icons/callouts/3.svg alt=3></td>
+<td>The parameters are passed in as the type(s) provided by the test method’s signature. The Junit-5 framework will (try to) parse the csv record elements accordingly.</td>
+</tr>
+</tbody></table>
 </div>
 <div class=paragraph>
 <p>For more details see <a href=https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests target=_blank rel=noopener>Junit 5 parameterized tests </a>.</p>
@@ -162,7 +165,7 @@ They typically fit easily on a screen. Remember the importance of readability of
 <table>
 <tbody><tr>
 <td class=icon>
-<div class=title>Warning</div>
+<img src=/prc2_web/icons/warning.svg alt=Warning>
 </td>
 <td class=content>
 <div class=paragraph>
@@ -219,26 +222,28 @@ that can be put in a csv record. You could, if you wanted, even use the lambda e
 <div class=listingblock>
 <div class=title>Map of string to lambda</div>
 <div class=content>
-<pre class=highlight><code class=language-java data-lang=java>    final Map&lt;String, BiFunction&lt;Fraction, Fraction, Fraction&gt;&gt; ops = // <b class=conum>(1)</b>
+<pre class=highlight><code class=language-java data-lang=java>    final Map&lt;String, BiFunction&lt;Fraction, Fraction, Fraction&gt;&gt; ops = <img src=/prc2_web/icons/callouts/1.svg alt=1>
       Map.of(
               &#34;times&#34;, ( f1, f2 ) -&gt; f1.times( f2 ),
               &#34;plus&#34;, ( f1, f2 ) -&gt; f1.plus( f2 ),
-              &#34;flip&#34;, ( f1, f2 ) -&gt; f1.flip(), // <b class=conum>(2)</b>
+              &#34;flip&#34;, ( f1, f2 ) -&gt; f1.flip(), <img src=/prc2_web/icons/callouts/2.svg alt=2>
               &#34;minus&#34;, ( f1, f2 ) -&gt; f1.minus( f2 ),
               &#34;divideBy&#34;, ( f1, f2 ) -&gt; f1.divideBy( f2 )
       );</code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>Note that we use a <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/BiFunction.html>BiFunction&lt;T,U,R></a>,
-with <strong>T</strong>, <strong>U</strong>, and <strong>R</strong> all of the same type: Fraction. This is legal.</p>
-</li>
-<li>
-<p>f2 is not used in the right hand side of the arrow. This is legal too.</p>
-</li>
-</ol>
+<table>
+<tbody><tr>
+<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td>Note that we use a <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/BiFunction.html>BiFunction&lt;T,U,R></a>,
+with <strong>T</strong>, <strong>U</strong>, and <strong>R</strong> all of the same type: Fraction. This is legal.</td>
+</tr>
+<tr>
+<td><img src=/prc2_web/icons/callouts/2.svg alt=2></td>
+<td>f2 is not used in the right hand side of the arrow. This is legal too.</td>
+</tr>
+</tbody></table>
 </div>
 <div class=listingblock>
 <div class=title>Using lambda names in test data</div>
@@ -246,35 +251,37 @@ with <strong>T</strong>, <strong>U</strong>, and <strong>R</strong> all of the s
 <pre class=highlight><code class=language-java data-lang=java>    @ParameterizedTest
     @CsvSource(
              {
-                &#34;&#39;one half times one third is 1 sixth&#39;, &#39;times&#39;, &#39;(1/6)&#39;,1,2,1,3&#34;, // <b class=conum>(1)</b>
+                &#34;&#39;one half times one third is 1 sixth&#39;, &#39;times&#39;, &#39;(1/6)&#39;,1,2,1,3&#34;, <img src=/prc2_web/icons/callouts/1.svg alt=1>
                 &#34;&#39;one thirds plus two thirds is 1&#39;    , &#39;plus&#39;,      &#39;1&#39;,1,3,2,3&#34;,
-                &#34;&#39;flip&#39;                               , &#39;flip&#39;,      &#39;3&#39;,1,3,1,3&#34;, // <b class=conum>(2)</b>
+                &#34;&#39;flip&#39;                               , &#39;flip&#39;,      &#39;3&#39;,1,3,1,3&#34;, <img src=/prc2_web/icons/callouts/2.svg alt=2>
                 &#34;&#39;one half minus two thirds is&#39;       , &#39;minus&#39;, &#39;(-1/6)&#39;,1,2,2,3&#34;
             } )</code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>The operation name is the second value in the csv record, here <strong>times</strong>. Note that you can quote strings, but that is not required.</p>
-</li>
-<li>
-<p>In the flip operation, the second fraction is ignored, so any legal value is allowed. Here we use the same values for both fractions.</p>
-</li>
-</ol>
+<table>
+<tbody><tr>
+<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td>The operation name is the second value in the csv record, here <strong>times</strong>. Note that you can quote strings, but that is not required.</td>
+</tr>
+<tr>
+<td><img src=/prc2_web/icons/callouts/2.svg alt=2></td>
+<td>In the flip operation, the second fraction is ignored, so any legal value is allowed. Here we use the same values for both fractions.</td>
+</tr>
+</tbody></table>
 </div>
 <div class=listingblock>
 <div class=title>Test method using the test data (Annotations left out, they are above).</div>
 <div class=content>
 <pre class=highlight><code class=language-java data-lang=java>    void fractionOps( String message, String opName, String expected,
-                  int a,int b, int c, int d ) { // <b class=conum>(1)</b>
+                  int a,int b, int c, int d ) { <img src=/prc2_web/icons/callouts/1.svg alt=1>
         // Arrange: read test values
-        Fraction f1 = frac( a, b ); // <b class=conum>(2)</b>
+        Fraction f1 = frac( a, b ); <img src=/prc2_web/icons/callouts/2.svg alt=2>
         Fraction f2 = frac( c, d );
-        BiFunction&lt;Fraction, Fraction, Fraction&gt; op = ops.get( opName ); // <b class=conum>(3)</b>
+        BiFunction&lt;Fraction, Fraction, Fraction&gt; op = ops.get( opName ); <img src=/prc2_web/icons/callouts/3.svg alt=3>
 
         // Act
-        Fraction result = op.apply( f1, f2 ); // <b class=conum>(4)</b>
+        Fraction result = op.apply( f1, f2 ); <img src=/prc2_web/icons/callouts/4.svg alt=4>
 
         // Assert(That) left out as exercise.
         // Use assertThat on the fraction object result
@@ -285,22 +292,26 @@ with <strong>T</strong>, <strong>U</strong>, and <strong>R</strong> all of the s
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>The fraction parameters a,b,c, and d are captured from the csvrecord. This makes the parameter list a<br>
+<table>
+<tbody><tr>
+<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td>The fraction parameters a,b,c, and d are captured from the csvrecord. This makes the parameter list a<br>
 tad longer, but also more understandable. JUnit 5 csvsource uses the annotation and the signature of the test method and can deal
-with most common types such as primitive, String and LocalDate (preferably in ISO-8601 format such as '2012-01-14' for the day of writing this).</p>
-</li>
-<li>
-<p>The fraction instances are created from a, b, c, and d.</p>
-</li>
-<li>
-<p>The operation (op) is looked up in the map.</p>
-</li>
-<li>
-<p>Apply the operation, or rather the function and capture the result.</p>
-</li>
-</ol>
+with most common types such as primitive, String and LocalDate (preferably in ISO-8601 format such as '2012-01-14' for the day of writing this).</td>
+</tr>
+<tr>
+<td><img src=/prc2_web/icons/callouts/2.svg alt=2></td>
+<td>The fraction instances are created from a, b, c, and d.</td>
+</tr>
+<tr>
+<td><img src=/prc2_web/icons/callouts/3.svg alt=3></td>
+<td>The operation (op) is looked up in the map.</td>
+</tr>
+<tr>
+<td><img src=/prc2_web/icons/callouts/4.svg alt=4></td>
+<td>Apply the operation, or rather the function and capture the result.</td>
+</tr>
+</tbody></table>
 </div>
 <div class=paragraph>
 <p>You can apply the same trick of looking up with enums too, even easier, because the enum itself can translate from String to value,
@@ -313,7 +324,7 @@ as long as the spelling is exact.</p>
 <table>
 <tbody><tr>
 <td class=icon>
-<div class=title>Tip</div>
+<img src=/prc2_web/icons/tip.svg alt=Tip>
 </td>
 <td class=content>
 <div class=paragraph>
@@ -353,7 +364,7 @@ to your validator.</p>
 <table>
 <tbody><tr>
 <td class=icon>
-<div class=title>Note</div>
+<img src=/prc2_web/icons/note.svg alt=Note>
 </td>
 <td class=content>
 <div class=paragraph>
@@ -423,7 +434,7 @@ to extract the sign of the actual value and assert that this is equal to the exp
     })
   void compareIngnoreCase( String a, String b, int signum ){
 
-        assertThat( Integer.signum( a.compareToIgnoreCase​(b) ) ) //<b class=conum>(1)</b>
+        assertThat( Integer.signum( a.compareToIgnoreCase​(b) ) ) <img src=/prc2_web/icons/callouts/1.svg alt=1>
             .as ( a + &#34; and &#34; + b )
             .isEqualTo( signum );
 
@@ -431,11 +442,12 @@ to extract the sign of the actual value and assert that this is equal to the exp
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p><code>compareToXXX</code> call wrapped in <code class=blue>Integer.signum(…​)</code>.</p>
-</li>
-</ol>
+<table>
+<tbody><tr>
+<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td><code>compareToXXX</code> call wrapped in <code class=blue>Integer.signum(…​)</code>.</td>
+</tr>
+</tbody></table>
 </div>
 </div>
 <div class=sect2>
@@ -558,7 +570,7 @@ with the '|' character which is both recognizable but not too obtrusive.</p>
 <div class=content>
 <pre class=highlight><code class=language-java data-lang=java>  @ParameterizedTest
   @CsvSource({
-    &#34;A, B, C|D|E|F&#34;  //<b class=conum>(1)</b>
+    &#34;A, B, C|D|E|F&#34;  <img src=/prc2_web/icons/callouts/1.svg alt=1>
   })
   void someTest(String s1, String s2, String rest) {
     String [] restAsArray=rest.split(&#34;\\|&#34;);
@@ -567,17 +579,18 @@ with the '|' character which is both recognizable but not too obtrusive.</p>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>You can add spaces in the csvsource lines to improve readability and to align stuff.</p>
-</li>
-</ol>
+<table>
+<tbody><tr>
+<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td>You can add spaces in the csvsource lines to improve readability and to align stuff.</td>
+</tr>
+</tbody></table>
 </div>
 <div class="admonitionblock tip">
 <table>
 <tbody><tr>
 <td class=icon>
-<div class=title>Tip</div>
+<img src=/prc2_web/icons/tip.svg alt=Tip>
 </td>
 <td class=content>
 If your varargs parameters provides only single characters, you can <em>split</em> with the empty string into single character <code>String</code>-s.<br>
@@ -640,27 +653,30 @@ the test method looks the same as as a normal parameterized test.</p>
 <div class=listingblock>
 <div class=content>
 <pre class=highlight><code class=language-java data-lang=java>    public static Stream&lt;Arguments&gt; allSortersAndTestCounts() {
-        SortKind[] supportedSorters = TestBase.factory.supportedSorters(); // <b class=conum>(1)</b>
-        return Stream.of( supportedSorters ).map( ss -&gt; { // <b class=conum>(2)</b>
+        SortKind[] supportedSorters = TestBase.factory.supportedSorters(); <img src=/prc2_web/icons/callouts/1.svg alt=1>
+        return Stream.of( supportedSorters ).map( ss -&gt; { <img src=/prc2_web/icons/callouts/2.svg alt=2>
             return IntStream.of( 2, 3, 10, 100, 1000 )
                     .mapToObj( i -&gt; arguments( ss, i ) );
-        } ).flatMap( x -&gt; x );  // <b class=conum>(3)</b>
+        } ).flatMap( x -&gt; x );  <img src=/prc2_web/icons/callouts/3.svg alt=3>
     }</code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>The number of ready test is determined by the factory, which return am aaar of enum values like QUICK or INSERTION.</p>
-</li>
-<li>
-<p>This stream combines each sort kind with a number of elements in a queue to be sorted, as a stream of arguments</p>
-</li>
-<li>
-<p>this identity function (lamba) as argument to flatMap unpacks the elements of the inner stream and puts each as element in
-the outer stream.</p>
-</li>
-</ol>
+<table>
+<tbody><tr>
+<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td>The number of ready test is determined by the factory, which return am aaar of enum values like QUICK or INSERTION.</td>
+</tr>
+<tr>
+<td><img src=/prc2_web/icons/callouts/2.svg alt=2></td>
+<td>This stream combines each sort kind with a number of elements in a queue to be sorted, as a stream of arguments</td>
+</tr>
+<tr>
+<td><img src=/prc2_web/icons/callouts/3.svg alt=3></td>
+<td>this identity function (lamba) as argument to flatMap unpacks the elements of the inner stream and puts each as element in
+the outer stream.</td>
+</tr>
+</tbody></table>
 </div>
 <div class=paragraph>
 <p>The stream (and lambda) will be further addressed in week 5.</p>
@@ -805,26 +821,29 @@ and then one for each field, which differs from the reference object only in sai
     void testEqualsAndHash() {
         Student ref = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 123 );
         Student equ = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 123 );
-        Student sna = new Student( &#34;Jen&#34;, LocalDate.of( 1999, 03, 23 ), 123 ); //<b class=conum>(1)</b>
-        Student sda = new Student( &#34;Jan&#34;, LocalDate.of( 1998, 03, 23 ), 123 ); //<b class=conum>(2)</b>
-        Student sid = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 456 ); //<b class=conum>(3)</b>
+        Student sna = new Student( &#34;Jen&#34;, LocalDate.of( 1999, 03, 23 ), 123 ); <img src=/prc2_web/icons/callouts/1.svg alt=1>
+        Student sda = new Student( &#34;Jan&#34;, LocalDate.of( 1998, 03, 23 ), 123 ); <img src=/prc2_web/icons/callouts/2.svg alt=2>
+        Student sid = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 456 ); <img src=/prc2_web/icons/callouts/3.svg alt=3>
         verifyEqualsAndHashCode( ref, equ, sna, sda, sid );
         //fail( &#34;testMethod reached it&#39;s and. You will know what to do.&#34; );
     }</code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>Differs in name.</p>
-</li>
-<li>
-<p>Differs in birthdate (year).</p>
-</li>
-<li>
-<p>Differs in id.</p>
-</li>
-</ol>
+<table>
+<tbody><tr>
+<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td>Differs in name.</td>
+</tr>
+<tr>
+<td><img src=/prc2_web/icons/callouts/2.svg alt=2></td>
+<td>Differs in birthdate (year).</td>
+</tr>
+<tr>
+<td><img src=/prc2_web/icons/callouts/3.svg alt=3></td>
+<td>Differs in id.</td>
+</tr>
+</tbody></table>
 </div>
 <div class=paragraph>
 <p>The implementation of the <code>verifyEqualsAndHashCode</code> has been done with generics and a dash of AssertJ stuff.</p>
@@ -921,7 +940,7 @@ resort to copy and waste.</p>
 <table>
 <tbody><tr>
 <td class=icon>
-<div class=title>Tip</div>
+<img src=/prc2_web/icons/tip.svg alt=Tip>
 </td>
 <td class=content>
 <div class=paragraph>

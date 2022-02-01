@@ -81,7 +81,7 @@ The soft assertion will collect all failures and will report them after the soft
 <pre class=highlight><code class=language-java data-lang=java>   void testGetResult(){
     // some setup
     Optional&lt;KeyValue&lt;Integer,Double&gt;&gt; = new gf(student).gradeFor(&#34;PRC2&#34;);
-    SoftAssertions.assertSoftly( softly -&gt; { //<b class=conum>(1)</b>
+    SoftAssertions.assertSoftly( softly -&gt; { <img src=/prc2_web/icons/callouts/1.svg alt=1>
                 AbstractMap.SimpleEntry&lt;Integer, Double&gt; result = gf.getResult();
                 softly.assertThat( result )
                     .extracting( &#34;key&#34; )
@@ -89,19 +89,21 @@ The soft assertion will collect all failures and will report them after the soft
                 softly.assertThat( result )
                     .extracting( &#34;value&#34; )
                     .isEqualTo( grade );
-    }); // <b class=conum>(2)</b>
+    }); <img src=/prc2_web/icons/callouts/2.svg alt=2>
   }</code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>Starts the lambda that encloses the soft assertions. <strong>Softly</strong> serves as the collector of the failures</p>
-</li>
-<li>
-<p>Closes the sequence of soft assertions. This is the spot where SoftAssertion will report the the failures, if any.</p>
-</li>
-</ol>
+<table>
+<tbody><tr>
+<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td>Starts the lambda that encloses the soft assertions. <strong>Softly</strong> serves as the collector of the failures</td>
+</tr>
+<tr>
+<td><img src=/prc2_web/icons/callouts/2.svg alt=2></td>
+<td>Closes the sequence of soft assertions. This is the spot where SoftAssertion will report the the failures, if any.</td>
+</tr>
+</tbody></table>
 </div>
 <div class=paragraph>
 <p>In the example, the key and value in the KeyValue pair are related, making a soft assertion applicable.</p>

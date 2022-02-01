@@ -189,26 +189,29 @@ and then one for each field, which differs from the reference object only in sai
     void testEqualsAndHash() {
         Student ref = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 123 );
         Student equ = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 123 );
-        Student sna = new Student( &#34;Jen&#34;, LocalDate.of( 1999, 03, 23 ), 123 ); //<b class=conum>(1)</b>
-        Student sda = new Student( &#34;Jan&#34;, LocalDate.of( 1998, 03, 23 ), 123 ); //<b class=conum>(2)</b>
-        Student sid = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 456 ); //<b class=conum>(3)</b>
+        Student sna = new Student( &#34;Jen&#34;, LocalDate.of( 1999, 03, 23 ), 123 ); <img src=/prc2_web/icons/callouts/1.svg alt=1>
+        Student sda = new Student( &#34;Jan&#34;, LocalDate.of( 1998, 03, 23 ), 123 ); <img src=/prc2_web/icons/callouts/2.svg alt=2>
+        Student sid = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 456 ); <img src=/prc2_web/icons/callouts/3.svg alt=3>
         verifyEqualsAndHashCode( ref, equ, sna, sda, sid );
         //fail( &#34;testMethod reached it&#39;s and. You will know what to do.&#34; );
     }</code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>Differs in name.</p>
-</li>
-<li>
-<p>Differs in birthdate (year).</p>
-</li>
-<li>
-<p>Differs in id.</p>
-</li>
-</ol>
+<table>
+<tbody><tr>
+<td><img src=/prc2_web/icons/callouts/1.svg alt=1></td>
+<td>Differs in name.</td>
+</tr>
+<tr>
+<td><img src=/prc2_web/icons/callouts/2.svg alt=2></td>
+<td>Differs in birthdate (year).</td>
+</tr>
+<tr>
+<td><img src=/prc2_web/icons/callouts/3.svg alt=3></td>
+<td>Differs in id.</td>
+</tr>
+</tbody></table>
 </div>
 <div class=paragraph>
 <p>The implementation of the <code>verifyEqualsAndHashCode</code> has been done with generics and a dash of AssertJ stuff.</p>
