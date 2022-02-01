@@ -31,4 +31,7 @@ markup:
       toc: true
       toclevels: 2
       topics: content/docs/topics
-      imagedir: prc2_web/
+      imagesdir: /prc2_web/images
+      icons: image
+      icontype: svg
+      iconsdir: /prc2_web/icons
