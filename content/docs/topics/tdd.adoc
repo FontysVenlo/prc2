@@ -12,9 +12,9 @@ and methods. Slowly but surely, your phonebook started to look more and more
 like a phonebook.
 
 [[tdd-oneRedTest]]
-image::/tdd-oneRedTest.png[role="related thumb right", title="Small steps. One red test at a time."]
+image::tdd-oneRedTest.png[role="related thumb right", title="Small steps. One red test at a time."]
 [[tdd-allTestsGreen]]
-image::/tdd-allTestsGreen.png[role="related thumb left", title="All the tests are green, yay!"]
+image::tdd-allTestsGreen.png[role="related thumb left", title="All the tests are green, yay!"]
 
 But how did you know that your phonebook was actually working? You could have
 implemented a method that didn't work, or maybe you forgot to add people to the
@@ -36,7 +36,7 @@ Thus, tests fulfill two functions at once: they constantly probe your
 implementation and check whether it works, and they make you feel more
 confident about your programming skills. That's really neat!
 [[tdd-EnglishError]]
-image::/tdd-EnglishError.png[role="related thumb right", title="Testing in real life"]
+image::tdd-EnglishError.png[role="related thumb right", title="Testing in real life"]
 When you were at school, you probably had to write an English exam at some
 point. You wrote your answers, and then the teacher graded your exam. The
 teacher is just like a test: she reads your exam, expecting the correct answer.
@@ -92,7 +92,7 @@ your test. You have found a way to deal with the human brain. Congratulations!
 
 [[tdd-tddLifecycle]]
 .https://medium.com/@odayibasi/tdd-test-driven-development-vs-bdd-behavior-driven-development-30e225c29c14[The TDD Lifecycle. Click for image source.]
-image::/tdd-lifecycle.png[align="center", book="keep"]
+image::tdd-lifecycle.png[align="center", book="keep"]
 
 
 ==== So how do I know what to test?

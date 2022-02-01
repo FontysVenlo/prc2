@@ -11,7 +11,7 @@ menu:
 weight: 999
 toc: true
 ---
-
+:imagesdir: /prc2_web/
 == Write your own tests!
 
 [big]#Throughout the exercises of PRC1, you have become acquainted with the value of tests: You have a way of checking if your code is any good without having to
