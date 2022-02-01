@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.36a5e80812e7fc13a44c564e001ad63d12a56fd4560b909f2b00487ecc1b636087caf05aa6218e1195098f126f0d1e6883b332c006f4ffe80bae594e6db7b131.css integrity="sha512-NqXoCBLn/BOkTFZOABrWPRKlb9RWC5CfKwBIfswbY2CHyvBapiGOEZUJjxJvDR5og7MywAb0/+gLrllObbexMQ==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.9271df0bad684930541e642d7fe426256694fee8690643479b809017d0dfd213419f146979427ed760a644ee7f7079babf9d187109f56c774eee4905f7977219.css integrity="sha512-knHfC61oSTBUHmQtf+QmJWaU/uhpBkNHm4CQF9Df0hNBnxRpeUJ+12CmRO5/cHm6v50YcQn1bHdO7kkF95dyGQ==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 <script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
@@ -804,282 +804,12 @@ The easiest way to do this is using HomeBrew:</p>
 </li>
 </ol>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class=sect1>
-<h2 id=_configuring_maven>Configuring Maven</h2>
-<div class=sectionbody>
 <div class=paragraph>
-<p>Maven and maven projects are first class citizens in the NetBeans world.</p>
+<p>Unresolved directive in &lt;stdin> - include::configuringmaven.adoc[]</p>
 </div>
 <div class=paragraph>
-<p>Since we build with maven, we are not really bound to particular IDE,
-other than for editing and maybe the odd debug session.<sup class=footnote>[<a id=_footnoteref_1 class=footnote href=#_footnotedef_1 title="View footnote.">1</a>]</sup>.
-This means that you can use other IDE’s, but expect no help from the teachers.</p>
+<p>Unresolved directive in &lt;stdin> - include::sebipom.adoc[]</p>
 </div>
-<div class=paragraph>
-<p>We have many things to share with you, and we use maven for that.</p>
-</div>
-<div class=paragraph>
-<p>We share libraries and project configuration files (pom.xml) with our students. To make them
-work as intended, you will need to configure the maven <code>settings.xml</code> only once. Since this is a maven setting, your IDE should
-pick these settings up as well. Certainly NetBeans IDE will.</p>
-</div>
-<div class=paragraph>
-<p>Start NetBeans IDE and create a Java project with New Project ▷ Java with Maven ▷ Java Application.</p>
-</div>
-<div class=paragraph>
-<p>In the project, right click on Project Files and choose <strong>create settings.xml</strong>.
-Add the Fontys Venlo repository to the settings, which is best done by replacing the xml in the settings
-file with</p>
-</div>
-<div class=listingblock>
-<div class=title>settings.xml which adds <a href=https://www.fontysvenlo.org/repository class=bare>https://www.fontysvenlo.org/repository</a> as repository</div>
-<div class=content>
-<pre class=highlight><code class=language-xml data-lang=xml>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
-&lt;settings xmlns=&#34;http://maven.apache.org/SETTINGS/1.0.0&#34;
-          xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
-          xsi:schemaLocation=&#34;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&#34;&gt;
-    &lt;profiles&gt;
-        &lt;profile&gt;                    <i class=conum data-value=1></i><b>(1)</b>
-            &lt;id&gt;sebivenlo&lt;/id&gt;
-            &lt;repositories&gt;
-                &lt;repository&gt;
-                    &lt;id&gt;fontysvenlo.org&lt;/id&gt;   <i class=conum data-value=2></i><b>(2)</b>
-                    &lt;url&gt;https://www.fontysvenlo.org/repository&lt;/url&gt; <i class=conum data-value=3></i><b>(3)</b>
-                &lt;/repository&gt;
-            &lt;/repositories&gt;
-        &lt;/profile&gt;
-    &lt;/profiles&gt;
-    &lt;activeProfiles&gt;
-        &lt;activeProfile&gt;sebivenlo&lt;/activeProfile&gt;  <i class=conum data-value=4></i><b>(4)</b>
-    &lt;/activeProfiles&gt;
-    &lt;offline&gt;false&lt;/offline&gt;
-&lt;/settings&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>You define a profile inside the profiles section of your settings.xml.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>Give the profile a name.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>Specify the URL.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=4></i><b>4</b></td>
-<td>Use the given name to make it an active profile by default.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
-<p>The <a href=topics/settings.xml.txt>raw settings file</a>.</p>
-</div>
-<div class=paragraph>
-<p>Note that the project provided through the PRC2 personal repository will <strong class=role:red>NOT</strong> work without
-the settings file above. From February 2020 will use sebipom version 2.3.0 or above.</p>
-</div>
-</div>
-</div>
-<div class=sect1>
-<h2 id=_sebipom_3_0_3>Sebipom 3.0.3</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p>Spelled all lower case: <code>sebipom</code>, is a super pom to use in Fontys Venlo projects. It keeps your own pom.xml file simple and focused to declare just the
-dependencies needed. Niceties to do proper Test Driver Development are provided for in the sebipom definitions, including things as being able to create
-javadoc in a professional looking way, including code highlighted code snippets, checkstyle, reporting, code coverage with maven, pmd, spotbugs etc.</p>
-</div>
-<div class=paragraph>
-<p><a href=https://github.com/sebivenlo/sebipom>Sebipom is hosted on github</a>.</p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>sebipom declares no dependencies other than those for dynamic (e.g. JUnit, AssertJ etc) and static <strong>testing</strong> in the form of plugins and their configuration.</p>
-</li>
-</ul>
-</div>
-<div class=paragraph>
-<p>This way of using maven, having a <span class=blue>super</span> or parent pom defined globally (in a repository, not on a local path), is the <span class="big black">modern</span> usage.
-It can be seen in well known big java projects such as <a href=https://spring.io/projects/spring-boot>Spring Boot</a> and <a href=https://quarkus.io/>quarkus</a>, to name two contenders in the java-web technology world.</p>
-</div>
-<div class="admonitionblock tip green">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>Note that we are using a <em>separately installed</em> maven (3.6.3 at the time of writing) which you can download from <a href=http://maven.apache.org/download.cgi>apache maven</a>,
-not the one bundled with NetBeans or any other IDE. You can tell NetBeans (via tools→ options →java→maven) to use the installed one instead of the bundled one.</p>
-</div>
-<div class=paragraph>
-<p><em class=big>Our tests will <span class=blue>always</span> use maven, not some IDE. There is no gnome inside the build server to move the mouse.</em></p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-<div id=sebipom-as-parent class=listingblock>
-<div class=title>Setting sebipom as parent.</div>
-<div class=content>
-<pre class=highlight><code class=language-xml data-lang=xml>    &lt;parent&gt;
-      &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
-      &lt;artifactId&gt;sebipom&lt;/artifactId&gt;
-      &lt;version&gt;3.0.3&lt;/version&gt;
-      &lt;relativePath/&gt; <i class=conum data-value=1></i><b>(1)</b>
-    &lt;/parent&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>The parent pom does not live in a local directory near (relative to) the project, but instead in a repository. This makes a parent pom 'portable'.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
-<p>All of the starter projects we provide already use this parent in some version. To get those working, apply the settings show in the paragraph <a href=#_configuring_maven>Configuring Maven</a>.</p>
-</div>
-<div class=paragraph>
-<p>If you want to use sebipom in your own project, either copy the parent definition into the pom file or start by replacing the NetBeans provided pom.xml file in your project by
-the basic one below. Add dependencies as required.</p>
-</div>
-<div id=basic-maven class=listingblock>
-<div class=title>Basic pom.xml file setting sebipom as parent.</div>
-<div class=content>
-<pre class=highlight><code class=language-xml data-lang=xml>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
-&lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;parent&gt; <i class=conum data-value=1></i><b>(1)</b>
-        &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
-        &lt;artifactId&gt;sebipom&lt;/artifactId&gt;
-        &lt;version&gt;3.0.3&lt;/version&gt;
-        &lt;realtivePath/&gt;<i class=conum data-value=2></i><b>(2)</b>
-    &lt;/parent&gt; <i class=conum data-value=3></i><b>(3)</b>
-    &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
-    &lt;artifactId&gt;basicsebimaven&lt;/artifactId&gt;
-    &lt;version&gt;1.0&lt;/version&gt;
-    &lt;packaging&gt;jar&lt;/packaging&gt;
-    &lt;!-- The name in the IDE --&gt;
-    &lt;name&gt;My App&lt;/name&gt;
-    &lt;properties&gt;
-        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-        &lt;java.release&gt;11&lt;/java.release&gt;
-        &lt;!-- change mainClass to the proper starting point of your program, if any.--&gt;
-        &lt;exec.mainClass&gt;basicsebimaven.Hello&lt;/exec.mainClass&gt;
-    &lt;/properties&gt;
-    &lt;dependencies&gt;
-      &lt;!--example  --&gt;
-      &lt;dependency&gt;
-        &lt;groupId&gt;...&lt;/groupId&gt;
-        &lt;artifactId&gt;...&lt;/artifactId&gt;
-        &lt;version&gt;...&lt;/version&gt;
-      &lt;/dependency&gt;
-    &lt;/dpendencies&gt;
-&lt;/project&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Start of parent declaration.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>Parent comes from some other repo, not local.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>End of parent declaration.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=sect2>
-<h3 id=_sebipom_and_java_fx>Sebipom and Java FX</h3>
-<div class=paragraph>
-<p>If you want to use semipom and build a JavaFX project, you need to activate the <strong>fx</strong>-profile.
-In the commandline that would be</p>
-</div>
-<div class=imageblock>
-<div class=content>
-<img src=/prc2_web/images/mvn-withfx-profile.png alt="mvn withfx profile">
-</div>
-<div class=title>Figure 1. Commandline. Real software engineers can use the command line.</div>
-</div>
-<div class=paragraph>
-<p>In netbeans you can do that by setting the configuration like in this picture:</p>
-</div>
-<div class=imageblock>
-<div class=content>
-<img src=/prc2_web/images/fx-profile-nb.png alt="fx profile nb">
-</div>
-<div class=title>Figure 2. Activate a profile in netbeans</div>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_using_the_sebipom_in_your_own_projects>Using the SeBiPom in your own projects</h3>
-<div class=paragraph>
-<p>To use the test libraries and other goodies that will be used throughout our course,
-you should add the <code>sebipom</code> as parent.</p>
-</div>
-<div class=paragraph>
-<p>Modify the pom.xml file in your project to include sebipom as parent by adding
-these lines in the previous section <a href=#sebipom-as-parent>Setting sebipom as parent.</a>.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>As of 2021-04-03, sebipom reached version 3.0.3. Not all projects may have this version number for
-the parent sebipom. We improve as we go, sometimes because of tips we receive from our students, you for instance.
-Anyway, if the version is not at the newest, set it to the newest and rebuild.
-Revisit this part of the site to check the latest version number or look in the
-<a href=https://www.fontysvenlo.org/repository/nl/fontys/sebivenlo/sebipom/>fontysvenlo maven reposity</a>
-for the sebipom version.<br>
-Sebipom 3.0.3 enables testing for modular projects but does not enforce modular projects.</p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>The source code of sebipom lives at github in <a href=https://github.com/sebivenlo/sebipom>sebivenlo/sebipom</a>.</p>
-</li>
-</ul>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_upgrade_all_projects_with_one_command>Upgrade all projects with one command</h3>
-<div class=paragraph>
-<p>Since sebipom is a somewhat moving target, you may have to update the parent pom of the projects that depend on it. All PRC2 projects do.
-This oneliner will do that for all projects below the current directory. After navigating to the parent of all such projects, do this in the shell:</p>
-</div>
-<div class=listingblock>
-<div class=content>
-<pre class=highlight><code class=language-sh data-lang=sh>for i in $(find . -name pom.xml); do (cd $(dirname $i); mvn versions:update-parent  &amp; )   ; done</code></pre>
-</div>
-</div>
-<div class=paragraph>
-<p>It works on any bash supporting machine, tested on ubuntu and should work on OS-X and under windows when using
-git-bash or the windows subsystem for Linux.</p>
 </div>
 </div>
 </div>
@@ -1094,12 +824,6 @@ git-bash or the windows subsystem for Linux.</p>
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div id=footnotes>
-<hr>
-<div class=footnote id=_footnotedef_1>
-<a href=#_footnoteref_1>1</a>. Working test driven will typically not need those
 </div>
 </div>
 </article>
@@ -1119,21 +843,13 @@ Footer
 <li><a href=#_subversion>Subversion</a></li>
 </ul>
 </li>
-<li><a href=#_configuring_maven>Configuring Maven</a></li>
-<li><a href=#_sebipom_3_0_3>Sebipom 3.0.3</a>
-<ul>
-<li><a href=#_sebipom_and_java_fx>Sebipom and Java FX</a></li>
-<li><a href=#_using_the_sebipom_in_your_own_projects>Using the SeBiPom in your own projects</a></li>
-<li><a href=#_upgrade_all_projects_with_one_command>Upgrade all projects with one command</a></li>
-</ul>
-</li>
 <li><a href=#_additional_pointers>Additional Pointers</a></li>
 </ul>
 </nav>
 </div></div>
 <div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
 </div><script src=/prc2_web/js/main.min.f81f470d8401e50ac95632a129f42b551213a5ce2a2be157ea33282ac9897ffbd08e490881aa703e5ca6b9543ea82eb7601c53f02b9e92612bc401a392253026.js integrity="sha512-+B9HDYQB5QrJVjKhKfQrVRITpc4qK+FX6jMoKsmJf/vQjkkIgapwPlymuVQ+qC63YBxT8CuekmErxAGjkiUwJg==" crossorigin=anonymous></script>
-<script src=/prc2_web/js/highlight.min.f1690c458d098f45f338cfee7494988dcfae16778ad557952b7362e8ba6c54c90c6982d2663244333dd0b5105dc09e030729fbd812e33acddf2537a737e4dc87.js integrity="sha512-8WkMRY0Jj0XzOM/udJSYjc+uFneK1VeVK3Ni6LpsVMkMaYLSZjJEMz3QtRBdwJ4DByn72BLjOs3fJTenN+Tchw==" crossorigin=anonymous defer></script>
+<script src=/prc2_web/js/highlight.min.4fdca95e2d3efe7ce1c14ca536fc0df95963ccad74d0bad12c90a493703df6fb4607d9a24ee5645fa5df22667b8f1dca010ce51922423191d22aad54e802ba99.js integrity="sha512-T9ypXi0+/nzhwUylNvwN+VljzK100LrRLJCkk3A99vtGB9miTuVkX6XfImZ7jx3KAQzlGSJCMZHSKq1U6AK6mQ==" crossorigin=anonymous defer></script>
 <div id=copied-alert class="invisible opacity-0 transition-all ease-in-out duration-400 fixed bottom-3 right-10 z-50 flex p-4 mb-4 text-sm text-gray-800 bg-gray-200 rounded-lg dark:bg-gray-500 dark:text-gray-200" role=alert><svg class="inline flex-shrink-0 mr-3 w-5 h-5" viewBox="0 0 24 24" width="24" height="24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
 <div>
 <span class=font-medium>Code copied</span>
