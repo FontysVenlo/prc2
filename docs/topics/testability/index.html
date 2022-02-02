@@ -1,0 +1,303 @@
+<!doctype html><html lang=en-us><head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>PRC2</title>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.6bbfac3e9ea7b164109aa40012f29e9029127151833cdc96df151e0caaebaa8d86c1455928064e1683797924394669a9d05834762cd13d252eb572e3ca5cee52.css integrity="sha512-a7+sPp6nsWQQmqQAEvKekCkScVGDPNyW3xUeDKrrqo2GwUVZKAZOFoN5eSQ5Rmmp0Fg0dizRPSUutXLjylzuUg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
+<script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
+</head><body class="antialiased text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800"><header class="sticky top-0 z-40 w-full flex-none lg:border-b lg:border-gray-900/10 dark:border-gray-50/[0.06] bg-white dark:bg-gray-800">
+<div class="max-w-8xl mx-auto">
+<div class="py-4 border-b border-slate-900/10 lg:px-8 lg:border-0 dark:border-slate-300/10 mx-4 lg:mx-0">
+<div class="relative flex items-center">
+<a class="mr-3 flex-none overflow-hidden md:w-auto" href=/>
+<span class=sr-only>PRC2</span>PRC2
+</a>
+<div class="relative flex ml-auto">
+<nav class="hidden lg:flex items-center text-sm leading-6 font-semibold text-gray-700 dark:text-gray-200">
+<ul class="flex space-x-8">
+<li>
+<a href=https://fontysvenlo.github.io/prc2_web/pages/tips/ class="hover:text-sky-500 dark:hover:text-sky-400">Tips</a>
+</li>
+<li>
+<a href=https://fontysvenlo.github.io/prc2_web/pages/setup/ class="hover:text-sky-500 dark:hover:text-sky-400">Setup</a>
+</li>
+</ul>
+</nav>
+<div class="flex items-center lg:border-l border-gray-200 ml-6 pl-6 dark:border-gray-700">
+<button type=button id=theme-toggle>
+<span class="dark:hidden hover:text-sky-500"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+<span class="hidden dark:inline hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+</button>
+<a href=https://github.com/FontysVenlo/prc2_web class="ml-6 block hover:text-sky-500 dark:hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center p-4 border-b border-slate-900/10 lg:hidden dark:border-slate-50/[0.06]">
+<button id=menu-toggle type=button class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+<span class=sr-only>Navigation</span><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+</button>
+</div>
+</div>
+</header><div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8"><aside id=menu class="hidden lg:block fixed z-20 inset-0 top-[6.75rem] lg:top-[3.8125rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto bg-white dark:bg-gray-800">
+<nav class="lg:leading-6 relative">
+<ul>
+<li class="mt-12 lg:mt-8">
+<h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">Weeks</h5>
+<ul class="space-y-6 lg:space-y-2 border-l border-gray-100 dark:border-gray-700">
+<li>
+<a href=https://fontysvenlo.github.io/prc2_web/docs/unit-testing-basics/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+Unit Testing Basics
+</a>
+</li>
+<li>
+<a href=https://fontysvenlo.github.io/prc2_web/docs/parameterized-tests/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+Parameterized tests
+</a>
+</li>
+<li>
+<a href=https://fontysvenlo.github.io/prc2_web/docs/design-for-testability/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+Desgin for testability
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside><div class=lg:pl-[19.5rem]>
+<div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
+<article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
+<div class=sect1>
+<h2 id=_design_for_test_ability>Design for Test-ability</h2>
+<div class=sectionbody>
+<div class=paragraph>
+<p>Also known as dependency injection made simple.</p>
+</div>
+<div class=paragraph>
+<p><strong class=big>A very important <span class=green>non functional</span> requirement of good software is <em class=green>Test-ability</em>.<br>
+Test-ability can be achieved or improved by decoupling the class you are developing (the SUT) from it’s environment, such that you have
+full control over that environment in your test and can exactly control and observe what goes in or out of the SUT.</strong></p>
+</div>
+<div class=paragraph>
+<p>One first easy setup is to use <strong class=blue>package private</strong> visibility more often. It is actually the <em>default</em> in java, and with reason.
+When you then put your unit test in the same package (but it its own source tree), you can have the test class look at
+or use the package private members of the class in its <em>assertion</em> or verification very easily.
+Most of unit testing is <a href=https://en.wikipedia.org/wiki/White-box_testing>white box testing</a> anyway, which almost always includes inspecting private members.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-note" title=Note></i>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>For <strong>business</strong> code, organize your packages according to the collaborations the classes will have. In particular do <strong class=red>NOT</strong> organize classes according to type or kind,
+like collections with collections and exceptions with exceptions. To express it as a metaphor: If you always keep your screws, seats, and backrests in separate
+boxes, they will never build chairs. You need to put them together, to make them cooperate.<br>
+For a <strong>library</strong> code, other aspects such as find-ability may take precedence over tight packages. But when you study the java libraries
+your will see classes in packages that are package private, to help the public types in the package to do their bidding.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>Test-ability is also improved by using the design rule <strong class=green>program against interfaces, not concrete classes</strong>.<br>
+If you do that in your design, you can very easily make specialized implementations of those interface methods that you need in your test, to provide
+those specific values or reactions that you need in your test, without having to jump through a lot of hoops to get the test set up.<br>
+This easy setup is where <strong class=green>Mockito</strong> comes in.</p>
+</div>
+<div class=paragraph>
+<p>It is <span class=red>not</span> the business' business to worry about:<br>
+<span class=icon><i class="fa fa-times fa-fw red"></i></span> <span class=line-through>persistence</span><br>
+<span class=icon><i class="fa fa-times fa-fw red"></i></span> <span class=line-through>where service come from or who implements them.</span></p>
+</div>
+<div class=paragraph>
+<p>By <em>injecting</em> or otherwise providing the business with the services it <em>needs</em> makes
+the business code testable without making it dependent or even know the actual implementing classes. And that is really all that counts. The business code
+makes the application valuable, the rest is either plumbing or already available code.<sup class=footnote>[<a id=_footnoteref_1 class=footnote href=#_footnotedef_1 title="View footnote.">1</a>]</sup>.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-warning" title=Warning></i>
+</td>
+<td class=content>
+<strong class=red>Never</strong> let the business code <em>create</em> its own persistence or or service object. You would
+<strong class="big red">loose control</strong> over what flows between service and business class,
+and makes it <em class=red>unobservable</em>, which is bad from the testing standpoint.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>Instead hand the service or resource to the business, or give it some provider of a resource.</p>
+</div>
+<div class=sect2>
+<h3 id=_business_class_fit_for_testing>Business class fit for testing.</h3>
+<div class=paragraph>
+<p>Let us look at an example as a class diagram.</p>
+</div>
+<div class=imageblock>
+<div class=content>
+<img src=/prc2_web/images/testable-business.gif alt="testable business">
+</div>
+<div class=title>Figure 1. Giving the business what it really needs make the business testable</div>
+</div>
+<div class=paragraph>
+<p>For readers that like to watch still pictures:</p>
+</div>
+<div class=imageblock>
+<div class=content>
+<img src=/prc2_web/images/businessarch.svg alt=businessarch>
+</div>
+<div class=title>Figure 2. business class in the application</div>
+</div>
+<div class=imageblock>
+<div class=content>
+<img src=/prc2_web/images/businesstest.svg alt=businesstest>
+</div>
+<div class=title>Figure 3. business class in the test lab</div>
+</div>
+<div class=paragraph>
+<p>In the picture above you see a class diagram which shows a detail in which a business class
+'lives' in an environment that is designed to make sure the business class sticks to its business:</p>
+</div>
+<div class=paragraph>
+<p><span class=icon><i class="fa fa-check fa-fw green"></i></span> Dealing with business entities such as customers and products.<br>
+<span class=icon><i class="fa fa-check fa-fw green"></i></span> Uses services to do the business' bidding, such as saving stuff to a database,
+provided as a service to the business class.<br>
+<span class=icon><i class="fa fa-check fa-fw green"></i></span> And the business code <strong class=red>NOT</strong> responsible for <em class=blue>how</em> to show things in a UI.</p>
+</div>
+<div class=paragraph>
+<p>In the above example we provide a <span class=blue>factory</span> or <span class=blue>provider</span> of the services that the business code requires.</p>
+</div>
+<div class=paragraph>
+<p>The business class appears in two worlds:</p>
+</div>
+<div class="olist arabic">
+<ol class=arabic>
+<li>
+<p>A <em class=blue>business</em> world, the <strong class=blue>Application</strong>. This is the actual use and role in the whole application.
+In that world there is a so called Assembler, that stitches the parts of the application together and sets it on its way. Typically this Assembler
+role is what the <strong>main</strong> class in a project does. Find the parts, put them together, and put them to work.</p>
+</li>
+<li>
+<p>In the <strong class=red>Test</strong> world, call it the laboratory or <em>business</em>.<sup class=footnote>[<a id=_footnoteref_2 class=footnote href=#_footnotedef_2 title="View footnote.">2</a>]</sup> school, where the business class is trained and tested.
+Here the test class does the assembling with a dash of Mockito to get good grips on what goes into and out of the business class.</p>
+</li>
+</ol>
+</div>
+<div class=paragraph>
+<p>Before the business class can used in real life, it has to be trained and tested. Feels a bit like a student right?</p>
+</div>
+<div class=paragraph>
+<p>You should note the arrows in the diagram. They provide direction and make it the diagram a <a href=https://en.wikipedia.org/wiki/Directed_graph>directed graph</a>,
+and lets a <em>dependent</em> point to a <em>depends-on</em>, like
+the <strong>BusinessClass</strong> depends on a <strong>Service</strong>, which is an <em>abstract</em> class or better still, an <em>interface</em>.
+Also note that the service does not point to, or is dependent on the business, which is good, because it makes the service reusable in other contexts.<br>
+The service implementing classes are dependent on the Service definition which is shown with the inheritance arrow, pointing from sub to super type.
+In the example you could think of the service being a <a href=https://en.wikipedia.org/wiki/Data_access_object>Data Access Object</a> or <strong class=blue>DAO</strong>
+and the <strong>ServiceImpl</strong> a specific <strong>DAO</strong>, like <code>DAO&lt;Product></code>, or <code>DAO&lt;Customer></code>.</p>
+</div>
+<div class=paragraph>
+<p>In the business school, there is a test class, that creates instances of the business class and hands it implementations of the services the business
+needs, but does that by giving it a specialized service factory that produces <em class=green>mock</em>
+service implementations. The business class is <strong class=green>NOT</strong> aware of that.
+It uses the service in the way it is programmed, which allows the test class to verify that that programming is correct.
+The test class is in complete control and can also give the business class situations
+that are extensions to the normal <em class=green>happy</em> path to ensure that those situations are also handled properly. If that sounds like an
+exam setting at school, you would be right.</p>
+</div>
+<div class=paragraph>
+<p>You can tell these worlds in the class diagrams apart by the fact that one has a pink <strong>BusinessTest</strong> class with test methods.</p>
+</div>
+<div class=paragraph>
+<p>In the 'normal' non-testing <strong class=blue>Application world</strong>, the design has taken some provisions to make sure the business class can work in both worlds.
+To provide the business class with a <em>factory</em> from which it can obtain Service implementations, a so called <strong>Assembler</strong> is added. This <strong class=cyan>Assembler</strong>,
+in the figure at the top of the application class diagram, typically creates or instantiates the business class and provides it with all it needs,
+in this case an implementation of a <strong>ServiceFactory</strong>.
+Note that the assembler in this case also creates the UI part. In desktop applications this is what the <strong>Main</strong> class of the application typically is for.</p>
+</div>
+<div class=paragraph>
+<p>This approach of <em>providing</em> an instance of some class implementing an interface or
+realizing an abstract class to a business class that needs it is called <strong>dependency injection</strong>.</p>
+</div>
+<div class=paragraph>
+<p><a href=https://martinfowler.com/articles/injection.html><strong>Dependency injection</strong></a> <em>is providing the services
+required by some class by means of constructor parameters, setters or otherwise,
+to avoid that the dependencies of the class are created by that class itself.</em></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-tip" title=Tip></i>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>The code in your tests also serve as a kind of <strong class=blue>documentation</strong>, at least for
+the maintainer of the test and code. This implies that any mock that you configure
+should match the test scenario, no more no less.<br>
+That’s why Mockito <strong class=red>complains</strong> when you mock something or train a method, but do <strong class=red>not</strong> use it in the test.</p>
+</div>
+<div class=listingblock>
+<div class=title>example Mockito Warning</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>Unnecessary stubbings detected.
+Clean &amp; maintainable test code requires zero unnecessary code.
+Following stubbings are unnecessary (click to navigate to relevant line of code):
+1. -&gt; at ps.CashRegisterTest.isProductLookedUpAndDisplayed(CashRegisterTest.java:71)
+Please remove unnecessary stubbings or use &#39;lenient&#39; strictness.
+More info: javadoc for UnnecessaryStubbingException class.</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>When a mock is not used, and unverified, Mockito warns you about the fact. It might be an oversight on the side of the
+test or indeed a smell of a flaw in the business code. So take the Mockito warning <span class="big green">seriously</span>.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+<div id=footnotes>
+<hr>
+<div class=footnote id=_footnotedef_1>
+<a href=#_footnoteref_1>1</a>. And hopefully tested
+</div>
+<div class=footnote id=_footnotedef_2>
+<a href=#_footnoteref_2>2</a>. pun intended
+</div>
+</div>
+</article>
+</div><footer class="text-sm leading-6 mt-12 mb-5">
+Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
+</footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
+<h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#_design_for_test_ability>Design for Test-ability</a>
+<ul>
+<li><a href=#_business_class_fit_for_testing>Business class fit for testing.</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div></div>
+<div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
+</div><script src=/prc2_web/js/main.min.b2d2aacc67a4fbfee5649e3e537fc94f29bf22f190969d5f638686db689d5ca8807e2cceb3fb584dc3a750507a50fdd438390deb2a79e5edd1800de8f026cdd3.js integrity="sha512-stKqzGek+/7lZJ4+U3/JTym/IvGQlp1fY4aG22idXKiAfizOs/tYTcOnUFB6UP3UODkN6yp55e3RgA3o8CbN0w==" crossorigin=anonymous></script>
+<script src=/prc2_web/js/highlight.min.4fdca95e2d3efe7ce1c14ca536fc0df95963ccad74d0bad12c90a493703df6fb4607d9a24ee5645fa5df22667b8f1dca010ce51922423191d22aad54e802ba99.js integrity="sha512-T9ypXi0+/nzhwUylNvwN+VljzK100LrRLJCkk3A99vtGB9miTuVkX6XfImZ7jx3KAQzlGSJCMZHSKq1U6AK6mQ==" crossorigin=anonymous defer></script>
+<div id=copied-alert class="invisible opacity-0 transition-all ease-in-out duration-400 fixed bottom-3 right-10 z-50 flex p-4 mb-4 text-sm text-gray-800 bg-gray-200 rounded-lg dark:bg-gray-500 dark:text-gray-200" role=alert><svg class="inline flex-shrink-0 mr-3 w-5 h-5" viewBox="0 0 24 24" width="24" height="24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+<div>
+<span class=font-medium>Code copied</span>
+</div>
+</div>
+</body>
+</html>

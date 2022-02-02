@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.8e9615183c20270bfd34ccda27da54e44f62816de773361b885a66ae9ea8524cad7504a05ace0cfccdec766f6a517a2ba3f7cd7499277b4940e03aa7d65e75d5.css integrity="sha512-jpYVGDwgJwv9NMzaJ9pU5E9igW3nczYbiFpmrp6oUkytdQSgWs4M/M3sdm9qUXoro/fNdJkne0lA4Dqn1l511Q==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.6bbfac3e9ea7b164109aa40012f29e9029127151833cdc96df151e0caaebaa8d86c1455928064e1683797924394669a9d05834762cd13d252eb572e3ca5cee52.css integrity="sha512-a7+sPp6nsWQQmqQAEvKekCkScVGDPNyW3xUeDKrrqo2GwUVZKAZOFoN5eSQ5Rmmp0Fg0dizRPSUutXLjylzuUg==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 <script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
@@ -55,6 +55,11 @@ Unit Testing Basics
 <li>
 <a href=https://fontysvenlo.github.io/prc2_web/docs/parameterized-tests/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
 Parameterized tests
+</a>
+</li>
+<li>
+<a href=https://fontysvenlo.github.io/prc2_web/docs/design-for-testability/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+Desgin for testability
 </a>
 </li>
 </ul>
@@ -294,7 +299,13 @@ Theme provided by <a class="text-pink-500 underline" href=https://github.com/Fon
 <nav id=TableOfContents>
 <ul>
 <li><a href=#_what_are_tests_and_why_do_we_need_them>What are tests and why do we need them?</a></li>
-<li><a href=#_test_driven_development_tdd>Test Driven Development (TDD)</a></li>
+<li><a href=#_test_driven_development_tdd>Test Driven Development (TDD)</a>
+<ul>
+<li><a href=#_so_how_do_i_know_what_to_test>So how do I know what to test?</a></li>
+<li><a href=#_test_selection_strategies>Test selection strategies</a></li>
+<li><a href=#_where_to_start>Where to start</a></li>
+</ul>
+</li>
 </ul>
 </nav>
 </div></div>
