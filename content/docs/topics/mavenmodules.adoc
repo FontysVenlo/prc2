@@ -1,0 +1,85 @@
+=== Maven Modules
+
+Many projects will have more than just one component (jar or war file).
+Think of the parallel project project 2.
+
+It is a good idea to reflect this design in the way your structure you source code:
+Use multiple modules.
+
+==== Module
+
+A module is just a maven project. Has a pom.xml  which defines the relation with
+other modules.
+
+
+.Modules and parent.
+image::mavenmodules.svg[]
+
+
+As you see in the figure, the parent lists its children. The children may have
+inter-dependencies. Otherwise it is just plain maven.
+
+.Snippet from a parent pom
+[source,xml]
+----
+    <groupId>nl.fontys.sebivenlo</groupId>
+    <artifactId>parentpom</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <properties>
+      <version>1.0</version>
+    </properties>
+    <modules>
+        <module>entities</module>
+        <module>db</module>
+        <module>app-logic</module>
+        <module>ui</module>
+        <module>restserver</module>
+    </modules>
+----
+
+As is usual between parents and children, there is an inheritance relationship.
+The children inherit setting and groupid, and version, if defined as a property.
+
+[WARNING]
+====
+Do not declare dependencies of the children in the parent pom, because that introduces a cycle
+in the dependencies: parent depends on child, which depends on parent, which depend .... etc.
+====
+
+
+The parent pom can declare all external dependencies, that are shared between the children, such as the testing frameworks,
+any other external dependencies. The parent can declare its own parent, allowing it to inherit and pass on anything that
+inherits from such parent.
+
+The parent defines the packaging as `pom`, the children what ever is required, typically jar, war, or ear.
+
+.example pom for rest server.
+[source,xml]
+----
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>nl.fontys.sebivenlo</groupId>
+        <artifactId>parentpom</artifactId>
+        <version>1.0</version>
+         <!-- parent directory .. as parent is natural but not mandatory -->
+        <relativePath>..</relativePath>
+    </parent>
+    <artifactId>restserver</artifactId>
+    <version>${version}</version>
+    <packaging>war</packaging>
+    <name>Rest server</name>
+</project>
+----
+
+Putting things in modules has the following advantages:
+
+* It promotes loose coupling.
+* It can avoid the hen and egg problem: In a normal build, it wants all tests to pass, to be able
+  to continue. For business code that is correct, but things like integration tests need a built war file, which cannot be built with failing tests. +
+  Solution: Put the integration tests in a separate module of its own, which can be run at any time and will not slow you down or
+  worse, disable testing or not having any tests.

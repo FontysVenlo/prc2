@@ -1,0 +1,27 @@
+---
+title: "Tips"
+description: ""
+lead: ""
+date: 2022-02-02T10:43:27+01:00
+draft: false
+images: []
+menu: 
+  pages:
+    parent: ""
+weight: 010
+toc: true
+---
+
+include::{topics}/javastyle.adoc[]
+
+include::{topics}/netbeansProductivity.adoc[]
+
+include::{topics}/mavensettingsandrepo.adoc[]
+
+include::{topics}/sebipom.adoc[]
+
+include::{topics}/mavenonsteroids.adoc[]
+
+include::{topics}/mavenmodules.adoc[]
+
+include::{topics}/flexjava.adoc[]

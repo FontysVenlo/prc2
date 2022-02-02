@@ -1,0 +1,32 @@
+== Adding your own code templates to NetBeans IDE
+
+Productivity can be helped big time, if you add code templates
+to NetBeans. Quite a few are predefined but you can add your own too.
+
+Go to Tools > Options > Editor > Code Templates.
+
+You get this dialog:
+
+image::codetemplatedialog.png[]
+
+You can add one with the new button, Duh.
+
+I find this one quite convenient:
+
+.Definition of my codetemplate *jutm*
+[source,java]
+----
+//@Disabled("think TDD")
+@${baseType type="org.junit.jupiter.api.Test" default="Test" editable="false"}
+public void ${method}(){
+    fail("method ${method} reached end. You know what to do.");
+}
+----
+
+* As of January 2020 `jutm` is junit 5 specific.
+* Note that `@Disabled` is a tag that is only used when writing all test bodies beforehand.
+* Once you start writing the test, you should remove or comment (best) the `@Disabled` to make the test effective.
+
+'''
+
+video::1SUHFMvM39Y[youtube,title=Adding Code templates]

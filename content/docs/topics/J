@@ -1,0 +1,44 @@
+#!/bin/bash
+
+## This script assumes that the JAVA_HOME environment variable is set
+##   and that the PATH contains ${JAVA_HOME}/bin
+## The java variant that is to be put in JAVA_HOME and PATH is determined
+##   by how what this script is called.
+## J8 for Java 8, J11 for Java 11 and J12 for Java 12. It could easily be
+##   extended to include Java 9 and 10 too, buy at the time of writing I see
+##   little point because 12 is the current open JDK and 11 the LTS version.
+##   J8 is in because it is the default for many still.
+##
+## You typically have (sym) links pointing to this script, so it appears
+##   to have different names, changing its meaning.
+##
+## Usage: eval $(scriptname) e.g. eval $(J12)
+## By using  bash aliases, such as alias j8='eval $(J8)' the use of
+##   this script will become a feast.
+
+
+## get this script name
+thisname=$(basename $0)
+## get the current path setting
+OPATH=${PATH}
+
+## Let my name do the choosing
+case ${thisname} in
+    J8)
+	NJAVA_HOME=/usr/lib/jvm/java-8-oracle;;
+    J11)
+	NJAVA_HOME=/usr/lib/jvm/jdk-11.0.2;;
+    J12)
+	NJAVA_HOME=/usr/lib/jvm/jdk-12;;
+    *)
+	echo call me as 'eval $(J8)', 'eval $(J11)' or 'eval $(J12)'
+	exit 1
+	;;
+esac
+
+## edit path to use the new java_home
+p=$(echo ${OPATH} | sed -e "s@${JAVA_HOME}/bin@${NJAVA_HOME}/bin@")
+
+##
+echo export JAVA_HOME=${NJAVA_HOME}
+echo export PATH=${p}

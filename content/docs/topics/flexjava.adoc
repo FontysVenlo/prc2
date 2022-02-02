@@ -1,0 +1,65 @@
+== Flex Your Java Muscles
+
+No, it is not about heavy lifting. It is about reconfiguring your Java
+environment easily.
+It also assumes that you are in the habit of using the command line over the GUI.
+
+Sure, a GUI is 'user friendly' if you are willing to look for the things your want to use, and know where
+you need to look for it. But what about the computer listening to you for a change, instead of you having to scroll through its wealth of
+options and other stuff you may have installed.
+
+This is a *POSIX* hack, meaning that it applies to Linux and to Mac OS-X (with a little tweaking) alike.
+It may also apply to Windows when using git-bash, MINGW, Powershell or the 'Linux extensions for windows'. You mileage may vary though.
+
+=== Concepts used
+
+* `$PATH` The PATH environment variable that determines the way programs are found in the command line. +
+  all commands that you can enter on the commandline are found using the `$PATH` variable.
+* `$JAVA_HOME` The environment variable that tells where your java installation lives. It is used by apache-ant (ant) and apache-maven (mvn) alike.
+* You set these variables in your start-up script, like `.bashrc`.
+* You use aliases to abbreviate your commands.
+* You start the IDE from the command line. Always, so YOU are in control of where and how it's started.
+
+The whole operation involves three modifications:
+
+. Set the variables in your `~/.bashrc`.
+. Add a helper script, called J, put it in a directory in your PATH. ${HOME}/bin is a good place, if that is on your path.
+. Create aliases, to make typing the command simple, like *j8* to switch to Java 8 and *j12* to do the same for Java 12.
+
+=== Setting in startup script
+
+.setting JAVA_HOME and PATH in ~/.bashrc
+[source,sh]
+----
+## DEFAULT IS JAVA 8 HERE
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+export PATH=${JAVA_HOME}/bin:$PATH
+----
+
+=== Switching to other Java version
+
+.updating  JAVA_HOME and PATH to switch java version.
+[source,sh]
+----
+include::J[]
+----
+
+===  All made simple with aliases
+
+You can tie this all together with some https://www.tldp.org/LDP/abs/html/aliases.html[aliases] which classically are stored
+in a file called `${HOME}/.bash_aliases` and are loaded on login and each time you open a terminal.
+
+.using aliases to switch with simple command. Excerpt from my .bash_aliases file.
+[source,sh]
+----
+alias j12='eval $(J12)'
+alias j11='eval $(J11)'
+alias j8='eval $(J8)'
+----
+
+.see it all work
+image::j8j11-terminal.png[]
+
+As you will notice, switching Java versions in this way is _very fast_.
+
+'''

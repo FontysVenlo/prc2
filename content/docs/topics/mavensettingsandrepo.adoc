@@ -1,0 +1,58 @@
+== Maven
+
+From week two onwards we will use https://books.sonatype.com/mvnref-book/reference/index.html[Maven] as the preferred build tool. The link in the previous sentence
+points to the very readable complete reference manual, which also has some pointers for beginners, might you categorize yourselves as one.
+
+=== Maven Repositories
+
+A maven repository is a server that provides ready built maven 'artifacts', such as (binary) jar files containing libraries, frameworks or APIs and in many (but not all) companion jar files containing the javadoc (often) and sources of the same binary. A maven repository is *NOT* a source code management system (CMS),footnote:[Guess why] although it typically holds several versions of a binary, and there are tools, such as https://www.sonatype.com/nexus-repository-sonatype[Nexus Repository Manager]. +
+
+There is a default repository, called https://mvnrepository.com/repos/central[maven central]. You (as a team or company) can have your own repository. We at sebi Venlo do that too. Our repository lives at https://www.fontysvenlo.org/repository.
+
+Our https://www.fontysvenlo.org/repository/[sebi Venlo maven repository] at fontysvenlo.org is the simplest of simple: A plain (apache2) web server that does automatic indexing. Users with write access, such as your dear teachers (:P), can simply publish their maven artifacts using maven itself, which, with the help of secure copy, places the artifact in the appropriate directory structure, considering names and versions.
+
+If you look at a maven repository you will see that it is organized along the three axes: groupId, artifactId and version.
+
+=== Maven Settings
+
+To make the sebi Venlo repository available for your own projects, add the following to
+your `~/.m2/settings.xml` in the profiles section. You may also want to make that profile active.
+
+If you create or open a maven project in NetBeans and  open the *Project Files* folder,
+it should show a settings.xml file. If not, you can easily create your own in the proper spot
+on you platform (Linux, Windows, Mac OS-X) by right-clicking on the folder and choose *create settings.xml*.
+The settings file applies to all your maven projects, irrespective  of the fact of using maven from the IDE or the command line.
+
+.Creating settings.xml
+image::create-setting-xml.png[]
+
+.adding fontysvenlo repo to your maven settings.xml file.
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <profiles>
+        <profile>  <!--1-->
+            <id>sebivenlo</id>
+            <repositories>
+                <repository>
+                    <id>fontysvenlo.org</id> <!--2-->
+                    <url>https://www.fontysvenlo.org/repository</url> <!--3-->
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>sebivenlo</activeProfile> <!--4-->
+    </activeProfiles>
+</settings>
+----
+
+<1> You define a profile inside the profiles section of your settings.xml.
+<2> Give the profile a name.
+<3> Specify the URL.
+<4> Use the given name to make it an active profile by default.
+
+You could of course also simply copy (ctrl-C) the xml above and slam (ctrl-V) it into your newly created settings.xml file.

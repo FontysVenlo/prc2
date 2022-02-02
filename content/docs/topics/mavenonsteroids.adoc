@@ -1,0 +1,44 @@
+=== Maven on Steroids or: use it properly
+
+Sometimes you think, maven is not your thing because it is slowing you down, certainly if you are trying to work your way through
+your code TDD style: Write test, run test red, implement code, run test green, be happy.
+
+But reconsider: Maven takes it's job very serious, but since it is a computer program
+it is stubbornly stupid, so it might be that _you_ are using it in the *wrong* way.
+
+Let me explain what maven does:
+
+* Maven uses build phases: *initialize*, *compile*, *compile tests*, *run tests*, *package* the application etc., when you build your application.
+It will check if all is in order, look if any updates are needed etc. This keeps maven busy and you waiting.
+
+*Packaging* (which is what you do when you click _build_ in the IDE) the application and +
+is only useful when your are really done: all  tests are complete and the code turns them a nice green.
+
+* So do not _mvn build_, but instead *mvn test*, then maven will do the minimum required.
+
+So if you are in the habit of clicking build and then run your tests, you might want to change you habit.
+
+[TIP]
+====
+sebipom sets the default goal to test, so if you run mvn from the command line, you only need to type `mvn`
+====
+
+==== Maven the proper way, when still in the TDD phase
+
+As long as you are writing test and writing code, just do:
+
+`mvn test`, or the equivalent in you IDE (click the test button, not the build button) +
+ or `mvn clean` and then `mvn test`. (click clean, click test).
+
+Only when you are done with all your tests, do
+
+. clean (mvn clean)
+. build (mvn package  mvn -P fx package for fx projects)
+
+and then *run* your application.
+
+Then maven can do all of it's serious work of assembling your application for deployment
+
+// TODO maven tweaking.....
+
+'''

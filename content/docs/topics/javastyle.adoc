@@ -1,0 +1,157 @@
+== Java Style
+
+Java is a language (sort of anyway) and languages come with a culture.
+One such cultural aspect is the way you format your code, like placing your brackets, parenthesis, spaces and curly braces.
+This coding style is intended to help you read the code, recognize the structure at a glance and find the interesting details easily and spot on.
+
+The official Java style is derived from the Kernighan and Ritchie (K&R) style for the *C* programming language. Since syntactically Java inherits quite a lot from C, that would be logical choice.
+
+The current and preferred way of using this java style is best described in the https://google.github.io/styleguide/javaguide.html[Google Java Style Guide].
+
+=== Where have you put your Curly Braces.
+
+Most holy wars are fought over the placement of the curlies '{}', and in some cases other brackets `[]` or parenthesis `()` and `<>` too.
+In particular: Put them at the beginning of the line or at the end. The Java Style Guide is quite clear about that: https://google.github.io/styleguide/javaguide.html#s4.1-braces[Braces].
+
+My personal motivation would be: If your understand that C and Java are block oriented languages, then you immediately will understand that placing a brace at the beginning of a line
+can only mean that you start a new block. This allows you to define a local scope. This is what you already know from for loops. Well the loop need not be there to allow yourselves to have some very local variables, like in the example below.
+
+If you understand this block aspect of the K&R style, you know that you do not have to search for the name of a method, a class start or anything else. The block is just a block with local scope. It helps readability, because you can define
+your local variables at the place your need them and confine them there, without having the locals interfere with anything else in the method or class.
+
+
+.example of block with scoped local variable
+[source,Java]
+----
+        {
+            int i=0;
+            // do something with i
+        }
+----
+
+This often overlooked feature can help big time to help improve the readability
+of your code, in particular when the method is getting big. But since having big methods is a bit of a no go area in a modern programming
+style.footnote:[if your method gets big, you should break it up in smaller parts, like private methods], your rarely see it in practice.
+
+In Java there is also another reason. You can have blocks at the class level, which allow you to define some kind of anonymous constructor. Remember Anonymous Inner Classes? Well, sometimes
+you want to have a constructor, just to initialise things. Here is an examples from the Java FX binding chapter.
+
+.initialize a binding in an 'Anonymous' constructor, lines 10..12, which is a block with no name...
+[source,Java,linenumbers]
+----
+    public static void main( String[] args ) {
+
+        final DoubleProperty a = new SimpleDoubleProperty( 1 );
+        final DoubleProperty b = new SimpleDoubleProperty( 2 );
+        final DoubleProperty c = new SimpleDoubleProperty( 3 );
+        final DoubleProperty d = new SimpleDoubleProperty( 4 );
+
+        DoubleBinding db = new DoubleBinding() {
+
+            { // <1>
+                super.bind( a, b, c, d );
+            } // <2>
+
+            @Override
+            protected double computeValue() {
+                return ( a.get() * b.get() ) + ( c.get() * d.get() );
+            }
+        };
+
+        System.out.println( db.get() );
+        b.set( 3 );
+        System.err.println( db.get() );
+    }
+----
+
+<1> Start of anonymous block in line 10.
+<2> End of anonymous block in line 12.
+
+[TIP]
+====
+So whenever you find a closing bracket, you only have to look up in the same column to find what it belongs to. If you find the start of a method, then that's what its is, if you find
+an opening bracket, stop looking, you have found its meaning, a block.
+====
+
+=== Javadoc style
+
+See https://google.github.io/styleguide/javaguide.html#s7-javadoc[Javadoc style guide] and
+https://www.oracle.com/technetwork/java/javase/documentation/index-137868.html[How to write doc comments].
+
+Not only does Java code have a proper style, the same applies to java-doc.
+
+* Public means documented, as in proper javadoc.
+** Everything that is marked public is part of the public API and must be documented.
+** `protected` and `public` are alike here. They provide access to members from classes
+  outside the package and must be documented.
+* Because all footnote:[In java 11 you can have private static methods in interfaces ] members
+ in an interface default to public you need to document them too.
+
+You can skip on documentation if
+* The member is not public or protected
+* For methods: it overwrites a method in a (documented) interface or super class.
+
+Javadoc starts with `/**` and ends with `*/`
+
+==== Class javadoc
+
+A (public|protected) class or interface needs javadoc at its class definition, just before `class` or `interface`.
+A required tag is `@author`, and you are allowed to have that multiple times in a class, in particular if
+multiple authors contributed substantially. See the the jdk libraries for examples.
+
+.Excerpt from the String javadoc.
+[source,java]
+----
+<p>A {@code String} represents a string in the UTF-16 format
+ * in which <em>supplementary characters</em> are represented by <em>surrogate
+ * pairs</em> (see the section <a href="Character.html#unicode">Unicode
+ * Character Representations</a> in the {@code Character} class for
+ * more information).
+ * Index values refer to {@code char} code units, so a supplementary
+ * character uses two positions in a {@code String}.
+ * <p>The {@code String} class provides methods for dealing with
+ * Unicode code points (i.e., characters), in addition to those for
+ * dealing with Unicode code units (i.e., {@code char} values).
+ *
+ * @author  Lee Boynton
+ * @author  Arthur van Hoff
+ * @author  Martin Buchholz
+ * @author  Ulf Zibis
+ * @see     java.lang.Object#toString()
+ * @see     java.lang.StringBuffer
+ * @see     java.lang.StringBuilder
+ * @see     java.nio.charset.Charset
+ * @since   JDK1.0
+----
+
+As a minimum for class javadoc, have one short sentence describing the purpose of the class.
+End that line with a period., followed by the author tag. It is considered bad style to leave
+out author or make substantial changes to a file without adding the author of those changes.
+
+.Class java doc
+[source,java]
+----
+/**
+ * Friendly and well known program.
+ *
+ * @author John Doe
+ * @author Jane Doe
+ */
+ public class HelloWorld {
+   public static void main(String... args){
+     /// wot goes here should be obvious.
+   }
+
+ }
+----
+
+In particular in a project like PRJ2, you should have multiple authors if that best describes how a program came about.
+
+[TIP]
+====
+You can configure your IDE to insert the proper author info. In NetBeans IDE go to templates, settings, and
+uncomment the `user` property and make it have the proper information. This is particularly important if
+your user name on your machine is `pattatje` or some other obscure name that the teachers might not know.
+====
+
+Do Not skimp on Javadoc style. It is just as wrong as writing  "Alice and Bob [role="red"]*goes* to town".
