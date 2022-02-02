@@ -1,0 +1,300 @@
+[big]*When you can't or won't make it, Fake it.*
+
+== Faking as a testing technique.
+
+Let's revisit the movie making metaphor. We know that almost everything in that industry
+is fake, or maybe more politely _make-belief_. In that it only needs to look convincing without being the real thing.
+So for instance, when someone needs to be hit hard in the face, it will not really be done and to make sure nothing untoward happens to
+the expensive actors, they may be replaced by _stunt_ men and women, so the punch will never land on the pretty face.
+
+In our industry we have other reasons to _not_ use the real thing.
+
+* It is not available (yet).
+* It is expensive (as in slow) to use and we want our tests to be quick.
+* We want to test behavior under circumstances that are rare, and difficult to achieve with the real thing.
+* It is inconvenient to use.
+// more needed
+
+What we do is replace the Dependent On Components by so called [blue]*mocks*. +
+*In all cases*, the System Under Test, the class we are testing *is always used as is*. So we have no stunt doubles for our protagonist.
+When testing, we want it to take all the punches, because we want to make sure it can handle them.
+
+[CAUTION]
+====
+A very common mistake made when using mocking as a testing technique, is [red]*faking the protagonist or SUT*.
+This is [red]*very wrong*. What you are testing in that case is the mock, not the class you hope to test. [red]*None* of the code of the SUT will be used in such tests.
+====
+
+image::fitness.jpg[role="right thumb", width=360, title="Never imagined coding as a work out."]
+Suppose you have an application in which one of the required effects is
+that a business class prints something to a printer. Turning this into a test will
+give you a hard time, because you have to run between your desk an printer, but hey,
+it will improve your fitness.footnote:[(source picture "https://www.menshealth.com/nl/fitness/")].
+
+To verify that the system under test (*SUT*) does indeed use the printer, make that fact _observable_,
+so that you can verify that the printer call has been made.
+You can use a trick common to many informatics problems and is available to you too: *add a level of indirection*,
+or do not give the actual printer to the business class but _instead_ something that the business code
+thinks it is a printer and replace that with whatever suits you for the test.
+
+
+image:annoyed-32.png[role="right,thumb"]
+*'Nice'* you say, [red]*now I have two problems'*:
+
+. change the application and
+. create a printer just for my tests.
+
+=== Stay cool, have a Mockito.
+
+image::mockito-drink.jpg[role="left thumb", title="it gets better."]
+You are not the first developer in this situation, so someone has automated the creation of 'fake' objects or mocks for us: +
+https://site.mockito.org/[Mockito ^] is a framework that can create various objects that are useful for testing.
+
+*Mock* is an object that behave like a (alternate) implementation of a class or interface. This is akin to an actor (or actress) or stunt-double that
+behaves exactly like you tell it to. A mock also saves any method call that you do on it. +
+*Stub* just holds data that you provide and are presented to the SUT. +
+  Both mock and stub are stand-ins for dependent on components (DOC) or collaborators for the SUT. +
+There is also a +
+*Spy* which is in fact a wrapper around an actual implementation, that allows you to observe what goes in (method call+ parameters) and comes
+out of (return values) of the real object while it is used by the SUT. You can make the spy only spy on certain method calls, and leave the rest unchanged.
+
+image::mockstubsspies.svg[title="Class diagram explaining mocks, stubs and spies"]
+
+Lets see what this looks like in code.
+
+.The printer interface.
+[source,java]
+----
+include::code/myfirstmock/src/main/java/myfirstmock/Printer.java[lines=8..19]
+----
+
+Now over to the test class, which creates a mocked printer and hands it to the *Business* class.
+
+.Business test class.
+[source,java]
+----
+include::code/myfirstmock/src/test/java/myfirstmock/BusinessTest.java[lines=27..37]
+----
+
+<1> Create the mocked printer.
+<2> Create a Business object passing it the printer.
+<3> Make the business class work.
+<4> ask the mocked printer if it was used.
+
+This is of course a simple test and the only thing that it verifies is that the `printer.printLn(String)` has been used.
+
+.Verify that what is printed is okay.
+[source,java]
+----
+include::code/myfirstmock/src/test/java/myfirstmock/BusinessTest.java[lines=39..57]
+----
+
+<1> Setup mock as field
+<2> and business in a setup method, so tests can avoid repeating this, +
+    again passing the printer object via the business constructor.
+<3> Prepare a mockito helper object to capture the data passed to the printer.
+<4> Make business do it's thing.
+<5> Verify that `printer.println(...)` is called. The captor object is used to
+collect all that has been received by the printer's `printLn` method.
+<6> And the expected data is passed to the printer, so a real printer would
+  print it. The method `lineCaptor.getAllValues()` produces a List of the captured things, strings in this case.
+
+Mockito is well documented with lots of examples in its https://javadoc.io/static/org.mockito/mockito-core/3.2.4/org/mockito/Mockito.html[java doc].
+When you look to the test dependencies of your Maven project in NetBeans-IDE, right-click on the
+mockito dependency, then download the javadoc, you can enjoy that while you are developing.
+During a performance assessment the Javadoc should have been pre-loaded so is available in the same way.
+
+=== To Mock or To Configure
+
+Sometimes the class that you want to pass as a mock to the business code has a [big]*big* interface, with
+many methods, and you do not want to restrict the business code to just a few trained methods. That would
+constrain the methods the business class could use, and that serves no real purpose. In such cases it
+may be better to provide a differently configured [blue]*real class*.
+
+
+==== Input stubbing with a real,class.
+
+An object that contains preconfigured data is called a *Stub*. +
+As an example: Assume you business class
+uses a Scanner as it's input. Scanner has 50-odd methods, which you certainly do not want to train _all_ when mocking.
+
+But since you will pass a special Scanner to the business class anyway, the better way is to use a Scanner configured with one of
+it's constructors.
+In this case use `new Scanner( String s )`, in which the string `s` contains exactly the input you want to use in your test. The string
+can contain newlines, so that it appears as if the user entered multiple lines. This allows you to test a program with a dialog.
+Something along the line of  `new Scanner("12\n13\n");`, that is 12 newline 13.
+
+==== Output mocking with a real classes
+
+For the output side something similar is in effect. The most common way of outputting something
+is to use System.out to print or otherwise output the results of the program. But [blue]`System.out` is
+just a [blue]`PrintStream`, which also has a lot of convenience methods with a total of 33 methods and 10 constructors.
+You do not want to restrict the use of any of its methods in the business class.
+
+The trick her is to use one of the constructors to given PrintStream something to 'print on', which you can inspect afterwards.
+Usage: The business class has a constructor.footnote:[best] or setter to take a PrintStream and always uses that to print to, if
+it needs to print anyway.
+
+.Usage is business code
+[source,java]
+----
+class PrintingBusiness
+      final PrintStream out; // <1>
+
+      PrintingBusiness() { // <2>
+          this.out=System.out;
+      }
+
+      PrintingBusiness( PrintStream ps ) { //<3>
+          this.out=ps;
+      }
+
+      void businessMethod(){
+          out.format( "%s at %d", "Oplegkaas", 957 ); // <4>
+      }
+}
+----
+
+<1> final to have a constructor set it
+<2> Default constructor uses System.out to print to
+<3> Redirect output to other output, for test or 'printing' in a GUI.
+<4> All facilities of PrintStream are available, including formatted printing.
+
+.Use in tests
+[source,java]
+----
+    @Test
+    public void tformattedPrint() {
+        ConsoleOutput cout = new ConsoleOutput();
+        PrintStream out = cout.asPrintStream();
+
+        out.format( "%s at %d", "Oplegkaas", 957 );
+
+        assertThat( cout.toString() ).contains( "at", "Opleg kaas", "957" );
+    }
+----
+
+By implementing the AppendAndClear interface you can print to anything, for instance
+by using a StringBuilder as intermediate and then transfer the output to a GUI element in JavaFX or Swing.
+
+.Definition of AppendAndClear interface.
+[source,java]
+----
+@FunctionalInterface
+public interface AppendAndClear {
+
+    /**
+     * Append a string to this AppendAndClear.
+     *
+     * @param toAppend text to add.
+     */
+    void appendText( String toAppend );
+
+    /**
+     * Clear the output. Optional operation.
+     */
+    default void clear() {
+    }
+}
+----
+
+.Implementation of ConsoleOutput
+[source,java]
+----
+package consoleoutput;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
+/**
+ * Test helper, to be able to redirect a PrintStream to any writable.
+ *
+ * Use case: write to string or StringBuilder for test or e.g. javafx
+ * TextInputControl for UI. Implement AppendAndClear (which can be done as a
+ * lambda) and you're set.
+ *
+ * @author Pieter van den Hombergh {@code <p.vandenhombergh@fontys.nl>}
+ */
+public class ConsoleOutput extends OutputStream {
+
+    protected final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    final AppendAndClear aac;
+
+    /**
+     * Create a Console output copying data to given AppendAndClear.
+     *
+     * @param ta append and clear to copy all written text to.
+     */
+    public ConsoleOutput( AppendAndClear ta ) {
+        this.aac = ta;
+    }
+
+    /**
+     * Without appendable.
+     */
+    public ConsoleOutput() {
+        this( null );
+    }
+
+    @Override
+    public void write( int b ) throws IOException {
+        if ( aac != null ) {
+            String s = "" + ( (char) b );
+            aac.appendText( s );
+        }
+        baos.write( (byte) b );
+    }
+
+    /**
+     * Clear and discard output.
+     */
+    public void clear() {
+        if ( aac != null ) {
+            aac.clear();
+        }
+        baos.reset();
+    }
+
+    /**
+     * Get the accumulated string since start or clear.
+     *
+     * @return the string
+     */
+    @Override
+    public String toString() {
+        return new String( baos.toByteArray(), StandardCharsets.UTF_8 );
+    }
+
+    /**
+     * Factory method to get this ConsoleOutput as PrintStream.
+     *
+     * @return the print stream.
+     */
+    public PrintStream asPrintStream() {
+        return new PrintStream( this, true, Charset.defaultCharset() );
+    }
+} // eof ConsoleOutput
+----
+
+.You can redirect standard output and standard error this way
+****
+You can modify standard output, a.k.a. [blue]`System.out` so that it writes to somewhere else,
+for instance to something like the console output above. https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/System.html#setOut(java.io.PrintStream)[`System.setOut(PrintStream)`]
+can be used for standrad output. This is also the trick that the PRC1 MOOC used to test output by the first programs.
+Important is that it can also be applied to  [blue]*static*
+method such as the well known `public static void main(String[])` that can't be used with Dependency Inversion as we do here.
+****
+
+[TIP]
+====
+Real class configuration, if applicable, beats mocking. So if there is an existing class, first study it's API, before you
+consider mocking it. Using the [big]*Real Thing* may be the better choice [green]*AND* less work. +
+Along that line: It is seldom useful to mock an _entity_ class, like a `Student` or `Product`, because the mock will have no benefit
+over the real thing, since the entity is just a data carrier with no logic. The typical shape of an entity is a constructor,
+a few getters and some other generated boilerplate code, such as `toString()`, `equals(Object)` and `hashCode()`.
+Java 14+ records will be a good substitute for such classes.
+====

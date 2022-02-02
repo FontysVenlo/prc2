@@ -1,0 +1,132 @@
+== Design for Test-ability
+
+Also known as dependency injection made simple.
+
+[big]*A very important [green]#non functional# requirement of good software is [green]_Test-ability_. +
+Test-ability can be achieved or improved by decoupling the class you are developing (the SUT) from it's environment, such that you have
+full control over that environment in your test and can exactly control and observe what goes in or out of the SUT.*
+
+One first easy setup is to use [blue]*package private* visibility more often. It is actually the _default_ in java, and with reason.
+When you then put your unit test in the same package (but it its own source tree), you can have the test class look at
+or use the package private members of the class in its _assertion_ or verification very easily.
+Most of unit testing is https://en.wikipedia.org/wiki/White-box_testing[white box testing] anyway, which almost always includes inspecting private members.
+
+[NOTE]
+====
+For *business* code, organize your packages according to the collaborations the classes will have. In particular do [red]*NOT* organize classes according to type or kind,
+like collections with collections and exceptions with exceptions. To express it as a metaphor: If you always keep your screws, seats, and backrests in separate
+boxes, they will never build chairs. You need to put them together, to make them cooperate. +
+For a *library* code, other aspects such as find-ability may take precedence over tight packages. But when you study the java libraries
+your will see classes in packages that are package private, to help the public types in the package to do their bidding.
+====
+
+Test-ability is also improved by using the design rule [green]*program against interfaces, not concrete classes*. +
+If you do that in your design, you can very easily make specialized implementations of those interface methods that you need in your test, to provide
+those specific values or reactions that you need in your test, without having to jump through a lot of hoops to get the test set up. +
+This easy setup is where [green]*Mockito* comes in.
+
+It is [red]#not# the business' business to worry about: +
+icon:times[fw red] [line-through]#persistence# +
+icon:times[fw red] [line-through]#where service come from or who implements them.#
+
+By _injecting_ or otherwise providing the business with the services it _needs_ makes
+the business code testable without making it dependent or even know the actual implementing classes. And that is really all that counts. The business code
+makes the application valuable, the rest is either plumbing or already available code.footnote:[And hopefully tested].
+
+[WARNING]
+[red]*Never* let the business code _create_ its own persistence or or service object. You would
+[big red]*loose control* over what flows between service and business class,
+and makes it [red]_unobservable_, which is bad from the testing standpoint.
+
+Instead hand the service or resource to the business, or give it some provider of a resource.
+
+=== Business class fit for testing.
+
+Let us look at an example as a class diagram.
+
+.Giving the business what it really needs make the business testable
+image::testable-business.gif[]
+
+For readers that like to watch still pictures:
+
+.business class in the application
+image::businessarch.svg[]
+
+.business class in the test lab
+image::businesstest.svg[]
+
+In the picture above you see a class diagram which shows a detail in which a business class
+'lives' in an environment that is designed to make sure the business class sticks to its business:
+
+icon:check[fw green] Dealing with business entities such as customers and products. +
+icon:check[fw green] Uses services to do the business' bidding, such as saving stuff to a database,
+  provided as a service to the business class. +
+icon:check[fw green] And the business code [red]*NOT* responsible for [blue]_how_ to show things in a UI.
+
+In the above example we provide a [blue]#factory# or [blue]#provider# of the services that the business code requires.
+
+The business class appears in two worlds:
+
+. A [blue]_business_ world, the [blue]*Application*. This is the actual use and role in the whole application.
+In that world there is a so called Assembler, that stitches the parts of the application together and sets it on its way. Typically this Assembler
+role is what the *main* class in a project does. Find the parts, put them together, and put them to work.
+. In the [red]*Test* world, call it the laboratory or _business_.footnote:[pun intended] school, where the business class is trained and tested.
+Here the test class does the assembling with a dash of Mockito to get good grips on what goes into and out of the business class.
+
+Before the business class can used in real life, it has to be trained and tested. Feels a bit like a student right?
+
+You should note the arrows in the diagram. They provide direction and make it the diagram a https://en.wikipedia.org/wiki/Directed_graph[directed graph],
+and lets a _dependent_ point to a _depends-on_, like
+the *BusinessClass* depends on a *Service*, which is an _abstract_ class or better still, an _interface_.
+Also note that the service does not point to, or is dependent on the business, which is good, because it makes the service reusable in other contexts. +
+The service implementing classes are dependent on the Service definition which is shown with the inheritance arrow, pointing from sub to super type.
+In the example you could think of the service being a https://en.wikipedia.org/wiki/Data_access_object[Data Access Object] or [blue]*DAO*
+and the *ServiceImpl* a specific *DAO*, like `DAO<Product>`, or `DAO<Customer>`.
+
+In the business school, there is a test class, that creates instances of the business class and hands it implementations of the services the business
+needs, but does that by giving it a specialized service factory that produces [green]_mock_
+service implementations. The business class is [green]*NOT* aware of that.
+It uses the service in the way it is programmed, which allows the test class to verify that that programming is correct.
+The test class is in complete control and can also give the business class situations
+that are extensions to the normal [green]_happy_ path to ensure that those situations are also handled properly. If that sounds like an
+exam setting at school, you would be right.
+
+You can tell these worlds in the class diagrams apart by the fact that one has a pink *BusinessTest* class with test methods.
+
+In the 'normal' non-testing [blue]*Application world*, the design has taken some provisions to make sure the business class can work in both worlds.
+To provide the business class with a _factory_ from which it can obtain Service implementations, a so called *Assembler* is added. This [cyan]*Assembler*,
+in the figure at the top of the application class diagram, typically creates or instantiates the business class and provides it with all it needs,
+in this case an implementation of a *ServiceFactory*.
+Note that the assembler in this case also creates the UI part. In desktop applications this is what the *Main* class of the application typically is for.
+
+// In a Java web container, which we will use for our rest services,
+// the web container provides this assembler service to your application code.
+
+This approach of _providing_ an instance of some class implementing an interface or
+realizing an abstract class to a business class that needs it is called *dependency injection*.
+
+https://martinfowler.com/articles/injection.html[*Dependency injection*] _is providing the services
+required by some class by means of constructor parameters, setters or otherwise,
+to avoid that the dependencies of the class are created by that class itself._
+
+[TIP]
+====
+The code in your tests also serve as a kind of [blue]*documentation*, at least for
+the maintainer of the test and code. This implies that any mock that you configure
+should match the test scenario, no more no less. +
+That's why Mockito [red]*complains* when you mock something or train a method, but do [red]*not* use it in the test.
+
+.example Mockito Warning
+[source,sh]
+----
+Unnecessary stubbings detected.
+Clean & maintainable test code requires zero unnecessary code.
+Following stubbings are unnecessary (click to navigate to relevant line of code):
+1. -> at ps.CashRegisterTest.isProductLookedUpAndDisplayed(CashRegisterTest.java:71)
+Please remove unnecessary stubbings or use 'lenient' strictness.
+More info: javadoc for UnnecessaryStubbingException class.
+----
+
+When a mock is not used, and unverified, Mockito warns you about the fact. It might be an oversight on the side of the
+test or indeed a smell of a flaw in the business code. So take the Mockito warning [big green]#seriously#.
+====
