@@ -30,6 +30,7 @@ markup:
   tableOfContents:
     endLevel: 3
   asciidocext:
+    backend: html5s
     attributes:
       toc: true
       toclevels: 3
