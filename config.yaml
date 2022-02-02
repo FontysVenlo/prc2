@@ -30,10 +30,12 @@ markup:
   tableOfContents:
     endLevel: 3
   asciidocext:
-    backend: html5s
+    backend: html5
+    extensions:
+      - "asciidoctor-html5s"
     attributes:
       toc: true
-      toclevels: 3
+      toclevels: 2
       topics: content/docs/topics
       imagesdir: /prc2_web/images
       icons: font
