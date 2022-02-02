@@ -27,10 +27,12 @@ security:
     urls:
       - .*
 markup:
+  tableOfContents:
+    endLevel: 3
   asciidocext:
     attributes:
       toc: true
-      toclevels: 2
+      toclevels: 3
       topics: content/docs/topics
       imagesdir: /prc2_web/images
       icons: font
