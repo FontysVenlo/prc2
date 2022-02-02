@@ -1,4 +1,4 @@
-baseURL: 'https://fontysvenlo.github.io/prc2_web/'
+baseURL: 'https://fontysvenlo.github.io/prc2/'
 languageCode: en-us
 title: PRC2
 theme: sebi-theme
@@ -37,5 +37,5 @@ markup:
       toc: true
       toclevels: 2
       topics: content/docs/topics
-      imagesdir: /prc2_web/images
+      imagesdir: /prc2/images
       icons: font
