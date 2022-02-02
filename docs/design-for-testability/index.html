@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.6bbfac3e9ea7b164109aa40012f29e9029127151833cdc96df151e0caaebaa8d86c1455928064e1683797924394669a9d05834762cd13d252eb572e3ca5cee52.css integrity="sha512-a7+sPp6nsWQQmqQAEvKekCkScVGDPNyW3xUeDKrrqo2GwUVZKAZOFoN5eSQ5Rmmp0Fg0dizRPSUutXLjylzuUg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.356ec2ba03cdae42868c30d28814db5ef90d1cc106dd9e2844e17d2c9d8c78c1d462a67a6ba488bc7241161206086f4c09455c4cb49f6a00f7190bf42e2f6add.css integrity="sha512-NW7CugPNrkKGjDDSiBTbXvkNHMEG3Z4oROF9LJ2MeMHUYqZ6a6SIvHJBFhIGCG9MCUVcTLSfagD3GQv0Li9q3Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 <script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
@@ -69,103 +69,36 @@ Desgin for testability
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<div class=paragraph>
-<p><strong class=big>When you can’t or won’t make it, Fake it.</strong></p>
-</div>
-<div class=sect1>
-<h2 id=_faking_as_a_testing_technique>Faking as a testing technique.</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p>Let’s revisit the movie making metaphor. We know that almost everything in that industry
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_faking_as_a_testing_technique>Faking as a testing technique.</a><ol class="toc-list level-2"><li><a href=#_stay_cool_have_a_mockito>Stay cool, have a Mockito.</a></li><li><a href=#_to_mock_or_to_configure>To Mock or To Configure</a></li></ol></li><li><a href=#_design_for_test_ability>Design for Test-ability</a><ol class="toc-list level-2"><li><a href=#_business_class_fit_for_testing>Business class fit for testing.</a></li></ol></li></ol></nav><p><strong class=big>When you can’t or won’t make it, Fake it.</strong></p>
+<section class="doc-section level-1"><h2 id=_faking_as_a_testing_technique>Faking as a testing technique.</h2><p>Let’s revisit the movie making metaphor. We know that almost everything in that industry
 is fake, or maybe more politely <em>make-belief</em>. In that it only needs to look convincing without being the real thing.
 So for instance, when someone needs to be hit hard in the face, it will not really be done and to make sure nothing untoward happens to
 the expensive actors, they may be replaced by <em>stunt</em> men and women, so the punch will never land on the pretty face.</p>
-</div>
-<div class=paragraph>
 <p>In our industry we have other reasons to <em>not</em> use the real thing.</p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>It is not available (yet).</p>
-</li>
-<li>
-<p>It is expensive (as in slow) to use and we want our tests to be quick.</p>
-</li>
-<li>
-<p>We want to test behavior under circumstances that are rare, and difficult to achieve with the real thing.</p>
-</li>
-<li>
-<p>It is inconvenient to use.</p>
-</li>
-</ul>
-</div>
-<div class=paragraph>
+<div class=ulist><ul><li>It is not available (yet).</li><li>It is expensive (as in slow) to use and we want our tests to be quick.</li><li>We want to test behavior under circumstances that are rare, and difficult to achieve with the real thing.</li><li>It is inconvenient to use.</li></ul></div>
 <p>What we do is replace the Dependent On Components by so called <strong class=blue>mocks</strong>.<br>
 <strong>In all cases</strong>, the System Under Test, the class we are testing <strong>is always used as is</strong>. So we have no stunt doubles for our protagonist.
 When testing, we want it to take all the punches, because we want to make sure it can handle them.</p>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-caution" title=Caution></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>A very common mistake made when using mocking as a testing technique, is <strong class=red>faking the protagonist or SUT</strong>.
-This is <strong class=red>very wrong</strong>. What you are testing in that case is the mock, not the class you hope to test. <strong class=red>None</strong> of the code of the SUT will be used in such tests.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-<div class="imageblock right thumb">
-<div class=content>
-<img src=/prc2_web/images/fitness.jpg alt=fitness width=360>
-</div>
-<div class=title>Figure 1. Never imagined coding as a work out.</div>
-</div>
-<div class=paragraph>
+<section class="admonition-block caution" role=doc-notice><h6 class="block-title label-only"><span class=title-label>Caution: </span></h6><p>A very common mistake made when using mocking as a testing technique, is <strong class=red>faking the protagonist or SUT</strong>.
+This is <strong class=red>very wrong</strong>. What you are testing in that case is the mock, not the class you hope to test. <strong class=red>None</strong> of the code of the SUT will be used in such tests.</p></section>
+<figure class="image-block right thumb"><img src=/prc2_web/images/fitness.jpg alt=fitness width=360>
+<figcaption>Figure 1. Never imagined coding as a work out.</figcaption></figure>
 <p>Suppose you have an application in which one of the required effects is
 that a business class prints something to a printer. Turning this into a test will
 give you a hard time, because you have to run between your desk an printer, but hey,
-it will improve your fitness.<sup class=footnote>[<a id=_footnoteref_1 class=footnote href=#_footnotedef_1 title="View footnote.">1</a>]</sup>.</p>
-</div>
-<div class=paragraph>
+it will improve your fitness.<a class=footnote-ref id=_footnoteref_1 href=#_footnote_1 title="View footnote 1" role=doc-noteref>[1]</a>.</p>
 <p>To verify that the system under test (<strong>SUT</strong>) does indeed use the printer, make that fact <em>observable</em>,
 so that you can verify that the printer call has been made.
 You can use a trick common to many informatics problems and is available to you too: <strong>add a level of indirection</strong>,
 or do not give the actual printer to the business class but <em>instead</em> something that the business code
 thinks it is a printer and replace that with whatever suits you for the test.</p>
-</div>
-<div class=paragraph>
-<p><span class="image right,thumb"><img src=/prc2_web/images/annoyed-32.png alt="annoyed 32"></span>
+<p><img src=/prc2_web/images/annoyed-32.png alt="annoyed 32" class=right,thumb>
 <strong>'Nice'</strong> you say, <strong class=red>now I have two problems'</strong>:</p>
-</div>
-<div class="olist arabic">
-<ol class=arabic>
-<li>
-<p>change the application and</p>
-</li>
-<li>
-<p>create a printer just for my tests.</p>
-</li>
-</ol>
-</div>
-<div class=sect2>
-<h3 id=_stay_cool_have_a_mockito>Stay cool, have a Mockito.</h3>
-<div class="imageblock left thumb">
-<div class=content>
-<img src=/prc2_web/images/mockito-drink.jpg alt="mockito drink">
-</div>
-<div class=title>Figure 2. it gets better.</div>
-</div>
-<div class=paragraph>
+<div class="olist arabic"><ol class=arabic><li>change the application and</li><li>create a printer just for my tests.</li></ol></div>
+<section class="doc-section level-2"><h3 id=_stay_cool_have_a_mockito>Stay cool, have a Mockito.</h3><figure class="image-block left thumb"><img src=/prc2_web/images/mockito-drink.jpg alt="mockito drink">
+<figcaption>Figure 2. it gets better.</figcaption></figure>
 <p>You are not the first developer in this situation, so someone has automated the creation of 'fake' objects or mocks for us:<br>
 <a href=https://site.mockito.org/ target=_blank rel=noopener>Mockito </a> is a framework that can create various objects that are useful for testing.</p>
-</div>
-<div class=paragraph>
 <p><strong>Mock</strong> is an object that behave like a (alternate) implementation of a class or interface. This is akin to an actor (or actress) or stunt-double that
 behaves exactly like you tell it to. A mock also saves any method call that you do on it.<br>
 <strong>Stub</strong> just holds data that you provide and are presented to the SUT.<br>
@@ -173,19 +106,10 @@ Both mock and stub are stand-ins for dependent on components (DOC) or collaborat
 There is also a<br>
 <strong>Spy</strong> which is in fact a wrapper around an actual implementation, that allows you to observe what goes in (method call+ parameters) and comes
 out of (return values) of the real object while it is used by the SUT. You can make the spy only spy on certain method calls, and leave the rest unchanged.</p>
-</div>
-<div class=imageblock>
-<div class=content>
-<img src=/prc2_web/images/mockstubsspies.svg alt=mockstubsspies>
-</div>
-<div class=title>Figure 3. Class diagram explaining mocks, stubs and spies</div>
-</div>
-<div class=paragraph>
+<figure class=image-block><img src=/prc2_web/images/mockstubsspies.svg alt=mockstubsspies>
+<figcaption>Figure 3. Class diagram explaining mocks, stubs and spies</figcaption></figure>
 <p>Lets see what this looks like in code.</p>
-</div>
-<div class=listingblock>
-<div class=title>The printer interface.</div>
-<div class=content>
+<figure class=listing-block><figcaption>The printer interface.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>public interface Printer {
 
     void println( String print );
@@ -197,192 +121,84 @@ out of (return values) of the real object while it is used by the SUT. You can m
     default void println( Object o ) {
         printLn( o.toString() );
     }
-}</code></pre>
-</div>
-</div>
-<div class=paragraph>
+}</code></pre></figure>
 <p>Now over to the test class, which creates a mocked printer and hands it to the <strong>Business</strong> class.</p>
-</div>
-<div class=listingblock>
-<div class=title>Business test class.</div>
-<div class=content>
+<figure class=listing-block><figcaption>Business test class.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    @Test
     public void doesItPrint() {
-        Printer pr = mock( Printer.class );  <i class=conum data-value=1></i><b>(1)</b>
+        Printer pr = mock( Printer.class );  <b class=conum>1</b>
 
-        Business b = new Business( pr );     <i class=conum data-value=2></i><b>(2)</b>
+        Business b = new Business( pr );     <b class=conum>2</b>
 
-        b.work();                                 <i class=conum data-value=3></i><b>(3)</b>
+        b.work();                                 <b class=conum>3</b>
 
-        verify( pr ).println( anyString() ); <i class=conum data-value=4></i><b>(4)</b>
+        verify( pr ).println( anyString() ); <b class=conum>4</b>
 
-    }</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Create the mocked printer.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>Create a Business object passing it the printer.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>Make the business class work.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=4></i><b>4</b></td>
-<td>ask the mocked printer if it was used.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
+    }</code></pre><ol class="callout-list arabic"><li>Create the mocked printer.</li><li>Create a Business object passing it the printer.</li><li>Make the business class work.</li><li>ask the mocked printer if it was used.</li></ol></figure>
 <p>This is of course a simple test and the only thing that it verifies is that the <code>printer.printLn(String)</code> has been used.</p>
-</div>
-<div class=listingblock>
-<div class=title>Verify that what is printed is okay.</div>
-<div class=content>
+<figure class=listing-block><figcaption>Verify that what is printed is okay.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    @Mock
-    Printer printer; <i class=conum data-value=1></i><b>(1)</b>
+    Printer printer; <b class=conum>1</b>
 
     Business business;
 
     @BeforeEach
     void setup() {
-        business = new Business( printer );  <i class=conum data-value=2></i><b>(2)</b>
+        business = new Business( printer );  <b class=conum>2</b>
     }
 
     @Test
     void doesItPrintBusiness() {
-        ArgumentCaptor&lt;String&gt; lineCaptor = ArgumentCaptor.forClass( String.class ); <i class=conum data-value=3></i><b>(3)</b>
+        ArgumentCaptor&lt;String&gt; lineCaptor = ArgumentCaptor.forClass( String.class ); <b class=conum>3</b>
 
-        business.work( &#34;Linda&#34; ); <i class=conum data-value=4></i><b>(4)</b>
+        business.work( &#34;Linda&#34; ); <b class=conum>4</b>
 
-        verify( printer ).println( lineCaptor.capture() ); <i class=conum data-value=5></i><b>(5)</b>
-        assertThat( lineCaptor.getAllValues() ).contains( &#34;Hello Linda&#34; ); <i class=conum data-value=6></i><b>(6)</b>
-        fail(&#34;test does It print ended. You know what to do.&#34;);</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Setup mock as field</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>and business in a setup method, so tests can avoid repeating this,<br>
-again passing the printer object via the business constructor.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>Prepare a mockito helper object to capture the data passed to the printer.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=4></i><b>4</b></td>
-<td>Make business do it’s thing.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=5></i><b>5</b></td>
-<td>Verify that <code>printer.println(…​)</code> is called. The captor object is used to
-collect all that has been received by the printer’s <code>printLn</code> method.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=6></i><b>6</b></td>
-<td>And the expected data is passed to the printer, so a real printer would
-print it. The method <code>lineCaptor.getAllValues()</code> produces a List of the captured things, strings in this case.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
+        verify( printer ).println( lineCaptor.capture() ); <b class=conum>5</b>
+        assertThat( lineCaptor.getAllValues() ).contains( &#34;Hello Linda&#34; ); <b class=conum>6</b>
+        fail(&#34;test does It print ended. You know what to do.&#34;);</code></pre><ol class="callout-list arabic"><li>Setup mock as field</li><li>and business in a setup method, so tests can avoid repeating this,<br>
+again passing the printer object via the business constructor.</li><li>Prepare a mockito helper object to capture the data passed to the printer.</li><li>Make business do it’s thing.</li><li>Verify that <code>printer.println(…​)</code> is called. The captor object is used to
+collect all that has been received by the printer’s <code>printLn</code> method.</li><li>And the expected data is passed to the printer, so a real printer would
+print it. The method <code>lineCaptor.getAllValues()</code> produces a List of the captured things, strings in this case.</li></ol></figure>
 <p>Mockito is well documented with lots of examples in its <a href=https://javadoc.io/static/org.mockito/mockito-core/3.2.4/org/mockito/Mockito.html>java doc</a>.
 When you look to the test dependencies of your Maven project in NetBeans-IDE, right-click on the
 mockito dependency, then download the javadoc, you can enjoy that while you are developing.
-During a performance assessment the Javadoc should have been pre-loaded so is available in the same way.</p>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_to_mock_or_to_configure>To Mock or To Configure</h3>
-<div class=paragraph>
-<p>Sometimes the class that you want to pass as a mock to the business code has a <strong class=big>big</strong> interface, with
+During a performance assessment the Javadoc should have been pre-loaded so is available in the same way.</p></section>
+<section class="doc-section level-2"><h3 id=_to_mock_or_to_configure>To Mock or To Configure</h3><p>Sometimes the class that you want to pass as a mock to the business code has a <strong class=big>big</strong> interface, with
 many methods, and you do not want to restrict the business code to just a few trained methods. That would
 constrain the methods the business class could use, and that serves no real purpose. In such cases it
 may be better to provide a differently configured <strong class=blue>real class</strong>.</p>
-</div>
-<div class=sect3>
-<h4 id=_input_stubbing_with_a_realclass>Input stubbing with a real,class.</h4>
-<div class=paragraph>
-<p>An object that contains preconfigured data is called a <strong>Stub</strong>.<br>
+<section class="doc-section level-3"><h4 id=_input_stubbing_with_a_realclass>Input stubbing with a real,class.</h4><p>An object that contains preconfigured data is called a <strong>Stub</strong>.<br>
 As an example: Assume you business class
 uses a Scanner as it’s input. Scanner has 50-odd methods, which you certainly do not want to train <em>all</em> when mocking.</p>
-</div>
-<div class=paragraph>
 <p>But since you will pass a special Scanner to the business class anyway, the better way is to use a Scanner configured with one of
 it’s constructors.
 In this case use <code>new Scanner( String s )</code>, in which the string <code>s</code> contains exactly the input you want to use in your test. The string
 can contain newlines, so that it appears as if the user entered multiple lines. This allows you to test a program with a dialog.
-Something along the line of <code>new Scanner("12\n13\n");</code>, that is 12 newline 13.</p>
-</div>
-</div>
-<div class=sect3>
-<h4 id=_output_mocking_with_a_real_classes>Output mocking with a real classes</h4>
-<div class=paragraph>
-<p>For the output side something similar is in effect. The most common way of outputting something
+Something along the line of <code>new Scanner("12\n13\n");</code>, that is 12 newline 13.</p></section>
+<section class="doc-section level-3"><h4 id=_output_mocking_with_a_real_classes>Output mocking with a real classes</h4><p>For the output side something similar is in effect. The most common way of outputting something
 is to use System.out to print or otherwise output the results of the program. But <code class=blue>System.out</code> is
 just a <code class=blue>PrintStream</code>, which also has a lot of convenience methods with a total of 33 methods and 10 constructors.
 You do not want to restrict the use of any of its methods in the business class.</p>
-</div>
-<div class=paragraph>
 <p>The trick her is to use one of the constructors to given PrintStream something to 'print on', which you can inspect afterwards.
-Usage: The business class has a constructor.<sup class=footnote>[<a id=_footnoteref_2 class=footnote href=#_footnotedef_2 title="View footnote.">2</a>]</sup> or setter to take a PrintStream and always uses that to print to, if
+Usage: The business class has a constructor.<a class=footnote-ref id=_footnoteref_2 href=#_footnote_2 title="View footnote 2" role=doc-noteref>[2]</a> or setter to take a PrintStream and always uses that to print to, if
 it needs to print anyway.</p>
-</div>
-<div class=listingblock>
-<div class=title>Usage is business code</div>
-<div class=content>
+<figure class=listing-block><figcaption>Usage is business code</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>class PrintingBusiness
-      final PrintStream out; <i class=conum data-value=1></i><b>(1)</b>
+      final PrintStream out; <b class=conum>1</b>
 
-      PrintingBusiness() { <i class=conum data-value=2></i><b>(2)</b>
+      PrintingBusiness() { <b class=conum>2</b>
           this.out=System.out;
       }
 
-      PrintingBusiness( PrintStream ps ) { <i class=conum data-value=3></i><b>(3)</b>
+      PrintingBusiness( PrintStream ps ) { <b class=conum>3</b>
           this.out=ps;
       }
 
       void businessMethod(){
-          out.format( &#34;%s at %d&#34;, &#34;Oplegkaas&#34;, 957 ); <i class=conum data-value=4></i><b>(4)</b>
+          out.format( &#34;%s at %d&#34;, &#34;Oplegkaas&#34;, 957 ); <b class=conum>4</b>
       }
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>final to have a constructor set it</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>Default constructor uses System.out to print to</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>Redirect output to other output, for test or 'printing' in a GUI.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=4></i><b>4</b></td>
-<td>All facilities of PrintStream are available, including formatted printing.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=listingblock>
-<div class=title>Use in tests</div>
-<div class=content>
+}</code></pre><ol class="callout-list arabic"><li>final to have a constructor set it</li><li>Default constructor uses System.out to print to</li><li>Redirect output to other output, for test or 'printing' in a GUI.</li><li>All facilities of PrintStream are available, including formatted printing.</li></ol></figure>
+<figure class=listing-block><figcaption>Use in tests</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    @Test
     public void tformattedPrint() {
         ConsoleOutput cout = new ConsoleOutput();
@@ -391,16 +207,10 @@ it needs to print anyway.</p>
         out.format( &#34;%s at %d&#34;, &#34;Oplegkaas&#34;, 957 );
 
         assertThat( cout.toString() ).contains( &#34;at&#34;, &#34;Opleg kaas&#34;, &#34;957&#34; );
-    }</code></pre>
-</div>
-</div>
-<div class=paragraph>
+    }</code></pre></figure>
 <p>By implementing the AppendAndClear interface you can print to anything, for instance
 by using a StringBuilder as intermediate and then transfer the output to a GUI element in JavaFX or Swing.</p>
-</div>
-<div class=listingblock>
-<div class=title>Definition of AppendAndClear interface.</div>
-<div class=content>
+<figure class=listing-block><figcaption>Definition of AppendAndClear interface.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>@FunctionalInterface
 public interface AppendAndClear {
 
@@ -416,12 +226,8 @@ public interface AppendAndClear {
      */
     default void clear() {
     }
-}</code></pre>
-</div>
-</div>
-<div class=listingblock>
-<div class=title>Implementation of ConsoleOutput</div>
-<div class=content>
+}</code></pre></figure>
+<figure class=listing-block><figcaption>Implementation of ConsoleOutput</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>package consoleoutput;
 
 import java.io.ByteArrayOutputStream;
@@ -498,171 +304,66 @@ public class ConsoleOutput extends OutputStream {
     public PrintStream asPrintStream() {
         return new PrintStream( this, true, Charset.defaultCharset() );
     }
-} // eof ConsoleOutput</code></pre>
-</div>
-</div>
-<div class=sidebarblock>
-<div class=content>
-<div class=title>You can redirect standard output and standard error this way</div>
-<div class=paragraph>
-<p>You can modify standard output, a.k.a. <code class=blue>System.out</code> so that it writes to somewhere else,
+} // eof ConsoleOutput</code></pre></figure>
+<aside class=sidebar><h6 class=block-title>You can redirect standard output and standard error this way</h6><p>You can modify standard output, a.k.a. <code class=blue>System.out</code> so that it writes to somewhere else,
 for instance to something like the console output above. <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/System.html#setOut(java.io.PrintStream)><code>System.setOut(PrintStream)</code></a>
 can be used for standrad output. This is also the trick that the PRC1 MOOC used to test output by the first programs.
 Important is that it can also be applied to <strong class=blue>static</strong>
-method such as the well known <code>public static void main(String[])</code> that can’t be used with Dependency Inversion as we do here.</p>
-</div>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>Real class configuration, if applicable, beats mocking. So if there is an existing class, first study it’s API, before you
+method such as the well known <code>public static void main(String[])</code> that can’t be used with Dependency Inversion as we do here.</p></aside>
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>Real class configuration, if applicable, beats mocking. So if there is an existing class, first study it’s API, before you
 consider mocking it. Using the <strong class=big>Real Thing</strong> may be the better choice <strong class=green>AND</strong> less work.<br>
 Along that line: It is seldom useful to mock an <em>entity</em> class, like a <code>Student</code> or <code>Product</code>, because the mock will have no benefit
 over the real thing, since the entity is just a data carrier with no logic. The typical shape of an entity is a constructor,
 a few getters and some other generated boilerplate code, such as <code>toString()</code>, <code>equals(Object)</code> and <code>hashCode()</code>.
-Java 14+ records will be a good substitute for such classes.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class=sect1>
-<h2 id=_design_for_test_ability>Design for Test-ability</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p>Also known as dependency injection made simple.</p>
-</div>
-<div class=paragraph>
+Java 14+ records will be a good substitute for such classes.</p></aside></section></section></section>
+<section class="doc-section level-1"><h2 id=_design_for_test_ability>Design for Test-ability</h2><p>Also known as dependency injection made simple.</p>
 <p><strong class=big>A very important <span class=green>non functional</span> requirement of good software is <em class=green>Test-ability</em>.<br>
 Test-ability can be achieved or improved by decoupling the class you are developing (the SUT) from it’s environment, such that you have
 full control over that environment in your test and can exactly control and observe what goes in or out of the SUT.</strong></p>
-</div>
-<div class=paragraph>
 <p>One first easy setup is to use <strong class=blue>package private</strong> visibility more often. It is actually the <em>default</em> in java, and with reason.
 When you then put your unit test in the same package (but it its own source tree), you can have the test class look at
 or use the package private members of the class in its <em>assertion</em> or verification very easily.
 Most of unit testing is <a href=https://en.wikipedia.org/wiki/White-box_testing>white box testing</a> anyway, which almost always includes inspecting private members.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-note" title=Note></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>For <strong>business</strong> code, organize your packages according to the collaborations the classes will have. In particular do <strong class=red>NOT</strong> organize classes according to type or kind,
+<aside class="admonition-block note" role=note><h6 class="block-title label-only"><span class=title-label>Note: </span></h6><p>For <strong>business</strong> code, organize your packages according to the collaborations the classes will have. In particular do <strong class=red>NOT</strong> organize classes according to type or kind,
 like collections with collections and exceptions with exceptions. To express it as a metaphor: If you always keep your screws, seats, and backrests in separate
 boxes, they will never build chairs. You need to put them together, to make them cooperate.<br>
 For a <strong>library</strong> code, other aspects such as find-ability may take precedence over tight packages. But when you study the java libraries
-your will see classes in packages that are package private, to help the public types in the package to do their bidding.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
+your will see classes in packages that are package private, to help the public types in the package to do their bidding.</p></aside>
 <p>Test-ability is also improved by using the design rule <strong class=green>program against interfaces, not concrete classes</strong>.<br>
 If you do that in your design, you can very easily make specialized implementations of those interface methods that you need in your test, to provide
 those specific values or reactions that you need in your test, without having to jump through a lot of hoops to get the test set up.<br>
 This easy setup is where <strong class=green>Mockito</strong> comes in.</p>
-</div>
-<div class=paragraph>
 <p>It is <span class=red>not</span> the business' business to worry about:<br>
-<span class=icon><i class="fa fa-times fa-fw red"></i></span> <span class=line-through>persistence</span><br>
-<span class=icon><i class="fa fa-times fa-fw red"></i></span> <span class=line-through>where service come from or who implements them.</span></p>
-</div>
-<div class=paragraph>
+<i class="fa fa-times fa-fw red"></i> <s>persistence</s><br>
+<i class="fa fa-times fa-fw red"></i> <s>where service come from or who implements them.</s></p>
 <p>By <em>injecting</em> or otherwise providing the business with the services it <em>needs</em> makes
 the business code testable without making it dependent or even know the actual implementing classes. And that is really all that counts. The business code
-makes the application valuable, the rest is either plumbing or already available code.<sup class=footnote>[<a id=_footnoteref_3 class=footnote href=#_footnotedef_3 title="View footnote.">3</a>]</sup>.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-warning" title=Warning></i>
-</td>
-<td class=content>
-<strong class=red>Never</strong> let the business code <em>create</em> its own persistence or or service object. You would
+makes the application valuable, the rest is either plumbing or already available code.<a class=footnote-ref id=_footnoteref_3 href=#_footnote_3 title="View footnote 3" role=doc-noteref>[3]</a>.</p>
+<section class="admonition-block warning" role=doc-notice><h6 class="block-title label-only"><span class=title-label>Warning: </span></h6><p><strong class=red>Never</strong> let the business code <em>create</em> its own persistence or or service object. You would
 <strong class="big red">loose control</strong> over what flows between service and business class,
-and makes it <em class=red>unobservable</em>, which is bad from the testing standpoint.
-</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
+and makes it <em class=red>unobservable</em>, which is bad from the testing standpoint.</p></section>
 <p>Instead hand the service or resource to the business, or give it some provider of a resource.</p>
-</div>
-<div class=sect2>
-<h3 id=_business_class_fit_for_testing>Business class fit for testing.</h3>
-<div class=paragraph>
-<p>Let us look at an example as a class diagram.</p>
-</div>
-<div class=imageblock>
-<div class=content>
-<img src=/prc2_web/images/testable-business.gif alt="testable business">
-</div>
-<div class=title>Figure 4. Giving the business what it really needs make the business testable</div>
-</div>
-<div class=paragraph>
+<section class="doc-section level-2"><h3 id=_business_class_fit_for_testing>Business class fit for testing.</h3><p>Let us look at an example as a class diagram.</p>
+<figure class=image-block><img src=/prc2_web/images/testable-business.gif alt="testable business">
+<figcaption>Figure 4. Giving the business what it really needs make the business testable</figcaption></figure>
 <p>For readers that like to watch still pictures:</p>
-</div>
-<div class=imageblock>
-<div class=content>
-<img src=/prc2_web/images/businessarch.svg alt=businessarch>
-</div>
-<div class=title>Figure 5. business class in the application</div>
-</div>
-<div class=imageblock>
-<div class=content>
-<img src=/prc2_web/images/businesstest.svg alt=businesstest>
-</div>
-<div class=title>Figure 6. business class in the test lab</div>
-</div>
-<div class=paragraph>
+<figure class=image-block><img src=/prc2_web/images/businessarch.svg alt=businessarch>
+<figcaption>Figure 5. business class in the application</figcaption></figure>
+<figure class=image-block><img src=/prc2_web/images/businesstest.svg alt=businesstest>
+<figcaption>Figure 6. business class in the test lab</figcaption></figure>
 <p>In the picture above you see a class diagram which shows a detail in which a business class
 'lives' in an environment that is designed to make sure the business class sticks to its business:</p>
-</div>
-<div class=paragraph>
-<p><span class=icon><i class="fa fa-check fa-fw green"></i></span> Dealing with business entities such as customers and products.<br>
-<span class=icon><i class="fa fa-check fa-fw green"></i></span> Uses services to do the business' bidding, such as saving stuff to a database,
+<p><i class="fa fa-check fa-fw green"></i> Dealing with business entities such as customers and products.<br>
+<i class="fa fa-check fa-fw green"></i> Uses services to do the business' bidding, such as saving stuff to a database,
 provided as a service to the business class.<br>
-<span class=icon><i class="fa fa-check fa-fw green"></i></span> And the business code <strong class=red>NOT</strong> responsible for <em class=blue>how</em> to show things in a UI.</p>
-</div>
-<div class=paragraph>
+<i class="fa fa-check fa-fw green"></i> And the business code <strong class=red>NOT</strong> responsible for <em class=blue>how</em> to show things in a UI.</p>
 <p>In the above example we provide a <span class=blue>factory</span> or <span class=blue>provider</span> of the services that the business code requires.</p>
-</div>
-<div class=paragraph>
 <p>The business class appears in two worlds:</p>
-</div>
-<div class="olist arabic">
-<ol class=arabic>
-<li>
-<p>A <em class=blue>business</em> world, the <strong class=blue>Application</strong>. This is the actual use and role in the whole application.
+<div class="olist arabic"><ol class=arabic><li>A <em class=blue>business</em> world, the <strong class=blue>Application</strong>. This is the actual use and role in the whole application.
 In that world there is a so called Assembler, that stitches the parts of the application together and sets it on its way. Typically this Assembler
-role is what the <strong>main</strong> class in a project does. Find the parts, put them together, and put them to work.</p>
-</li>
-<li>
-<p>In the <strong class=red>Test</strong> world, call it the laboratory or <em>business</em>.<sup class=footnote>[<a id=_footnoteref_4 class=footnote href=#_footnotedef_4 title="View footnote.">4</a>]</sup> school, where the business class is trained and tested.
-Here the test class does the assembling with a dash of Mockito to get good grips on what goes into and out of the business class.</p>
-</li>
-</ol>
-</div>
-<div class=paragraph>
+role is what the <strong>main</strong> class in a project does. Find the parts, put them together, and put them to work.</li><li>In the <strong class=red>Test</strong> world, call it the laboratory or <em>business</em>.<a class=footnote-ref id=_footnoteref_4 href=#_footnote_4 title="View footnote 4" role=doc-noteref>[4]</a> school, where the business class is trained and tested.
+Here the test class does the assembling with a dash of Mockito to get good grips on what goes into and out of the business class.</li></ol></div>
 <p>Before the business class can used in real life, it has to be trained and tested. Feels a bit like a student right?</p>
-</div>
-<div class=paragraph>
 <p>You should note the arrows in the diagram. They provide direction and make it the diagram a <a href=https://en.wikipedia.org/wiki/Directed_graph>directed graph</a>,
 and lets a <em>dependent</em> point to a <em>depends-on</em>, like
 the <strong>BusinessClass</strong> depends on a <strong>Service</strong>, which is an <em>abstract</em> class or better still, an <em>interface</em>.
@@ -670,8 +371,6 @@ Also note that the service does not point to, or is dependent on the business, w
 The service implementing classes are dependent on the Service definition which is shown with the inheritance arrow, pointing from sub to super type.
 In the example you could think of the service being a <a href=https://en.wikipedia.org/wiki/Data_access_object>Data Access Object</a> or <strong class=blue>DAO</strong>
 and the <strong>ServiceImpl</strong> a specific <strong>DAO</strong>, like <code>DAO&lt;Product></code>, or <code>DAO&lt;Customer></code>.</p>
-</div>
-<div class=paragraph>
 <p>In the business school, there is a test class, that creates instances of the business class and hands it implementations of the services the business
 needs, but does that by giving it a specialized service factory that produces <em class=green>mock</em>
 service implementations. The business class is <strong class=green>NOT</strong> aware of that.
@@ -679,96 +378,36 @@ It uses the service in the way it is programmed, which allows the test class to 
 The test class is in complete control and can also give the business class situations
 that are extensions to the normal <em class=green>happy</em> path to ensure that those situations are also handled properly. If that sounds like an
 exam setting at school, you would be right.</p>
-</div>
-<div class=paragraph>
 <p>You can tell these worlds in the class diagrams apart by the fact that one has a pink <strong>BusinessTest</strong> class with test methods.</p>
-</div>
-<div class=paragraph>
 <p>In the 'normal' non-testing <strong class=blue>Application world</strong>, the design has taken some provisions to make sure the business class can work in both worlds.
 To provide the business class with a <em>factory</em> from which it can obtain Service implementations, a so called <strong>Assembler</strong> is added. This <strong class=cyan>Assembler</strong>,
 in the figure at the top of the application class diagram, typically creates or instantiates the business class and provides it with all it needs,
 in this case an implementation of a <strong>ServiceFactory</strong>.
 Note that the assembler in this case also creates the UI part. In desktop applications this is what the <strong>Main</strong> class of the application typically is for.</p>
-</div>
-<div class=paragraph>
 <p>This approach of <em>providing</em> an instance of some class implementing an interface or
 realizing an abstract class to a business class that needs it is called <strong>dependency injection</strong>.</p>
-</div>
-<div class=paragraph>
 <p><a href=https://martinfowler.com/articles/injection.html><strong>Dependency injection</strong></a> <em>is providing the services
 required by some class by means of constructor parameters, setters or otherwise,
 to avoid that the dependencies of the class are created by that class itself.</em></p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>The code in your tests also serve as a kind of <strong class=blue>documentation</strong>, at least for
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>The code in your tests also serve as a kind of <strong class=blue>documentation</strong>, at least for
 the maintainer of the test and code. This implies that any mock that you configure
 should match the test scenario, no more no less.<br>
 That’s why Mockito <strong class=red>complains</strong> when you mock something or train a method, but do <strong class=red>not</strong> use it in the test.</p>
-</div>
-<div class=listingblock>
-<div class=title>example Mockito Warning</div>
-<div class=content>
+<figure class=listing-block><figcaption>example Mockito Warning</figcaption>
 <pre class=highlight><code class=language-sh data-lang=sh>Unnecessary stubbings detected.
 Clean &amp; maintainable test code requires zero unnecessary code.
 Following stubbings are unnecessary (click to navigate to relevant line of code):
 1. -&gt; at ps.CashRegisterTest.isProductLookedUpAndDisplayed(CashRegisterTest.java:71)
 Please remove unnecessary stubbings or use &#39;lenient&#39; strictness.
-More info: javadoc for UnnecessaryStubbingException class.</code></pre>
-</div>
-</div>
-<div class=paragraph>
+More info: javadoc for UnnecessaryStubbingException class.</code></pre></figure>
 <p>When a mock is not used, and unverified, Mockito warns you about the fact. It might be an oversight on the side of the
-test or indeed a smell of a flaw in the business code. So take the Mockito warning <span class="big green">seriously</span>.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-</div>
-</div>
-<div id=footnotes>
-<hr>
-<div class=footnote id=_footnotedef_1>
-<a href=#_footnoteref_1>1</a>. (source picture "https://www.menshealth.com/nl/fitness/")
-</div>
-<div class=footnote id=_footnotedef_2>
-<a href=#_footnoteref_2>2</a>. best
-</div>
-<div class=footnote id=_footnotedef_3>
-<a href=#_footnoteref_3>3</a>. And hopefully tested
-</div>
-<div class=footnote id=_footnotedef_4>
-<a href=#_footnoteref_4>4</a>. pun intended
-</div>
-</div>
+test or indeed a smell of a flaw in the business code. So take the Mockito warning <span class="big green">seriously</span>.</p></aside></section></section><section class=footnotes aria-label=Footnotes role=doc-endnotes><hr><ol class=footnotes><li class=footnote id=_footnote_1 role=doc-endnote>(source picture "https://www.menshealth.com/nl/fitness/") <a class=footnote-backref href=#_footnoteref_1 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li><li class=footnote id=_footnote_2 role=doc-endnote>best <a class=footnote-backref href=#_footnoteref_2 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li><li class=footnote id=_footnote_3 role=doc-endnote>And hopefully tested <a class=footnote-backref href=#_footnoteref_3 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li><li class=footnote id=_footnote_4 role=doc-endnote>pun intended <a class=footnote-backref href=#_footnoteref_4 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li></ol></section>
 </article>
 </div><footer class="text-sm leading-6 mt-12 mb-5">
 Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
 </footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
 <h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#_faking_as_a_testing_technique>Faking as a testing technique.</a>
-<ul>
-<li><a href=#_stay_cool_have_a_mockito>Stay cool, have a Mockito.</a></li>
-<li><a href=#_to_mock_or_to_configure>To Mock or To Configure</a></li>
-</ul>
-</li>
-<li><a href=#_design_for_test_ability>Design for Test-ability</a>
-<ul>
-<li><a href=#_business_class_fit_for_testing>Business class fit for testing.</a></li>
-</ul>
-</li>
-</ul>
-</nav>
+<nav id=TableOfContents></nav>
 </div></div>
 <div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
 </div><script src=/prc2_web/js/main.min.b2d2aacc67a4fbfee5649e3e537fc94f29bf22f190969d5f638686db689d5ca8807e2cceb3fb584dc3a750507a50fdd438390deb2a79e5edd1800de8f026cdd3.js integrity="sha512-stKqzGek+/7lZJ4+U3/JTym/IvGQlp1fY4aG22idXKiAfizOs/tYTcOnUFB6UP3UODkN6yp55e3RgA3o8CbN0w==" crossorigin=anonymous></script>

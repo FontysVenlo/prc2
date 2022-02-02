@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.6bbfac3e9ea7b164109aa40012f29e9029127151833cdc96df151e0caaebaa8d86c1455928064e1683797924394669a9d05834762cd13d252eb572e3ca5cee52.css integrity="sha512-a7+sPp6nsWQQmqQAEvKekCkScVGDPNyW3xUeDKrrqo2GwUVZKAZOFoN5eSQ5Rmmp0Fg0dizRPSUutXLjylzuUg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.356ec2ba03cdae42868c30d28814db5ef90d1cc106dd9e2844e17d2c9d8c78c1d462a67a6ba488bc7241161206086f4c09455c4cb49f6a00f7190bf42e2f6add.css integrity="sha512-NW7CugPNrkKGjDDSiBTbXvkNHMEG3Z4oROF9LJ2MeMHUYqZ6a6SIvHJBFhIGCG9MCUVcTLSfagD3GQv0Li9q3Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 <script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
@@ -69,100 +69,40 @@ Desgin for testability
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<div class=sect1>
-<h2 id=_test_recipe_i_test_equals_and_hashcode>Test Recipe I, Test Equals and hashCode</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p>We may sprinkle our testing stuff with a few recipes for often occurring tests.
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_test_recipe_i_test_equals_and_hashcode>Test Recipe I, Test Equals and hashCode</a></li></ol></nav><section class="doc-section level-1"><h2 id=_test_recipe_i_test_equals_and_hashcode>Test Recipe I, Test Equals and hashCode</h2><p>We may sprinkle our testing stuff with a few recipes for often occurring tests.
 This is the the first installment.</p>
-</div>
-<div class=paragraph>
 <p><strong>Equals</strong> and <strong>hashCode</strong> are not twins in the direct sense, but indeed methods whose implementation should
 have a very direct connection.
 From the java <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#hashCode() target=_blank rel=noopener>Object API </a> follows
 that:</p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>Two objects that are equal by their equal method, than their hashCode should also be equal.</p>
-</li>
-<li>
-<p>Note that the reverse is not true. If two hashCode are the same, that does not imply that the objects are equal.</p>
-</li>
-<li>
-<p>A good hashCode 'spreads' the objects well, but this is not a very strict requirement or a requirement that can be enforced. A poor hashCode
-will lead to poor Hash{Map|Set} lookup performance.</p>
-</li>
-</ul>
-</div>
-<div class=paragraph>
+<div class=ulist><ul><li>Two objects that are equal by their equal method, than their hashCode should also be equal.</li><li>Note that the reverse is not true. If two hashCode are the same, that does not imply that the objects are equal.</li><li>A good hashCode 'spreads' the objects well, but this is not a very strict requirement or a requirement that can be enforced. A poor hashCode
+will lead to poor Hash{Map|Set} lookup performance.</li></ul></div>
 <p>Although hashCodes are invented to speedup finding object in a hash map or hash set, these collections use hashCode in the first part of the search,
 but must verify equality as final step(s).</p>
-</div>
-<div class=paragraph>
 <p>The thing is that the equals method must consider quite a few things, expressed with conditional evaluation (if-then-else).
 The good thing is an IDE typically provides a way to generate equals and hashCode for you and these implementations are typically of good quality. But
 in particular the equals method there are quite some ifs, sometimes in disguise, coded as <code>&&</code>, so this will throw some flies in your code-coverage ointment.</p>
-</div>
-<div class=paragraph>
 <p>However, we can balance this generated code by a piece of reusable test code, that can be used for almost all cases.
 In fact we have not found a case where it does not apply.<br>
 Let us first explain the usage and then the implementation.<br>
 Suppose you have an object with three fields, <code>name</code>, <code>birthDate</code> and <code>id</code>. All these fields should be considered in equals and hashCode.<br>
 As an exercise, create such and object now in your IDE, call it Student, why not.</p>
-</div>
-<div class=listingblock>
-<div class=content>
-<pre class=highlight><code class=language-java data-lang=java>class Student {
+<div class=listing-block><pre class=highlight><code class=language-java data-lang=java>class Student {
   final String name;
   final LocalDate birthDate;
   final int id;
-}</code></pre>
-</div>
-</div>
-<div class=paragraph>
+}</code></pre></div>
 <p>From the above, the IDE can generate a <strong>constructor</strong>, <strong>equals</strong> and <strong>hashCode</strong> and <strong>toString</strong>. What are you waiting for? Because it is not test driven?
 You would be almost right, but why test drive something that can be generated.<br>
 However, if your spec does <strong class=red>not</strong> demand equals and hashCode,
 then <strong class="red big">do not write/generate</strong> them. That would be unwanted code. But if the requirements DO insist on equals and hashCode,
 make sure that the fields to be considered match the requirements. Choose only final fields.</p>
-</div>
-<div class=paragraph>
 <p>After having such a generated equals and hashCode you have the predicament of writing a test. HashCode is relatively easy. It should produce an
 integer, but what value is unspecified, so just invoking it would do the trick for test coverage.
 The devil is in the equals details, because it has to consider:</p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>Is the other object <code>this</code>? If yes, return <code>true</code>.</p>
-</li>
-<li>
-<p>Is the other object <code>null</code>? Return <code>false</code> if it is.</p>
-</li>
-<li>
-<p>Now consider the type.<sup class=footnote>[<a id=_footnoteref_1 class=footnote href=#_footnotedef_1 title="View footnote.">1</a>]</sup>.</p>
-<div class=ulist>
-<ul>
-<li>
-<p>Is the other of the same type as <code>this</code>? If not return <code>false</code>.</p>
-</li>
-<li>
-<p>Now we are in known terrain, the other is of the same type, so the object has the same fields.<br>
-For each field test it <code>this.field.equals(other.field)</code>. If not return false.</p>
-</li>
-<li>
-<p>Using <code>Objects.equals(this.fieldA, other.fieldB)</code> can be an efficient solution to avoid testing for nullity of either field.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class=listingblock>
-<div class=title>Generated equals. It is fine.</div>
-<div class=content>
+<div class=ulist><ul><li>Is the other object <code>this</code>? If yes, return <code>true</code>.</li><li>Is the other object <code>null</code>? Return <code>false</code> if it is.</li><li>Now consider the type.<a class=footnote-ref id=_footnoteref_1 href=#_footnote_1 title="View footnote 1" role=doc-noteref>[1]</a>.<ul><li>Is the other of the same type as <code>this</code>? If not return <code>false</code>.</li><li>Now we are in known terrain, the other is of the same type, so the object has the same fields.<br>
+For each field test it <code>this.field.equals(other.field)</code>. If not return false.</li><li>Using <code>Objects.equals(this.fieldA, other.fieldB)</code> can be an efficient solution to avoid testing for nullity of either field.</li></ul></li></ul></div>
+<figure class=listing-block><figcaption>Generated equals. It is fine.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    @Override
     public boolean equals( Object obj ) {
         if ( this == obj ) {
@@ -182,56 +122,26 @@ For each field test it <code>this.field.equals(other.field)</code>. If not retur
             return false;
         }
         return Objects.equals( this.birthDate, other.birthDate );
-    }</code></pre>
-</div>
-</div>
-<div class=paragraph>
+    }</code></pre></figure>
 <p>You see a pattern here: The number of ifs is 3 + the number of fields.<br>
 To test this, and to make sure you hit all code paths, you need to test with this,
 with null, with an distinct (read newly constructed) object with all fields equal,
 and then one for each field, which differs from the reference object only in said field.</p>
-</div>
-<div class=paragraph>
 <p>Define those instances (for this example) as follows.</p>
-</div>
-<div class=listingblock>
-<div class=title>Instances for complete equals and hashCode test and coverage</div>
-<div class=content>
+<figure class=listing-block><figcaption>Instances for complete equals and hashCode test and coverage</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    //@Disabled
     @Test
     void testEqualsAndHash() {
         Student ref = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 123 );
         Student equ = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 123 );
-        Student sna = new Student( &#34;Jen&#34;, LocalDate.of( 1999, 03, 23 ), 123 ); <i class=conum data-value=1></i><b>(1)</b>
-        Student sda = new Student( &#34;Jan&#34;, LocalDate.of( 1998, 03, 23 ), 123 ); <i class=conum data-value=2></i><b>(2)</b>
-        Student sid = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 456 ); <i class=conum data-value=3></i><b>(3)</b>
+        Student sna = new Student( &#34;Jen&#34;, LocalDate.of( 1999, 03, 23 ), 123 ); <b class=conum>1</b>
+        Student sda = new Student( &#34;Jan&#34;, LocalDate.of( 1998, 03, 23 ), 123 ); <b class=conum>2</b>
+        Student sid = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 456 ); <b class=conum>3</b>
         verifyEqualsAndHashCode( ref, equ, sna, sda, sid );
         //fail( &#34;testMethod reached it&#39;s and. You will know what to do.&#34; );
-    }</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Differs in name.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>Differs in birthdate (year).</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>Differs in id.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
+    }</code></pre><ol class="callout-list arabic"><li>Differs in name.</li><li>Differs in birthdate (year).</li><li>Differs in id.</li></ol></figure>
 <p>The implementation of the <code>verifyEqualsAndHashCode</code> has been done with generics and a dash of AssertJ stuff.</p>
-</div>
-<div class=listingblock>
-<div class=title>Sample test helper in separate class.</div>
-<div class=content>
+<figure class=listing-block><figcaption>Sample test helper in separate class.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    /**
      * Helper for equals tests, which are tedious to get completely covered.
      *
@@ -306,35 +216,17 @@ and then one for each field, which differs from the reference object only in sai
                     + Integer.toHexString( System.identityHashCode( x ) )
                     + &#34; causes an exception &#34; + e.toString();
         }
-    }</code></pre>
-</div>
-</div>
-<div class=paragraph>
+    }</code></pre></figure>
 <p>The above code has been used before but now adapted for AssertJ and JUnit 5.</p>
-</div>
-<div class=paragraph>
 <p>It is of course best to put this in some kind of test helper library, so you can reuse it over and over without having to
 resort to copy and waste.</p>
-</div>
-<hr>
-</div>
-</div>
-<div id=footnotes>
-<hr>
-<div class=footnote id=_footnotedef_1>
-<a href=#_footnoteref_1>1</a>. Not all equals implementation look at the type of this, See the java.util.List doc for a counter example
-</div>
-</div>
+<hr></section><section class=footnotes aria-label=Footnotes role=doc-endnotes><hr><ol class=footnotes><li class=footnote id=_footnote_1 role=doc-endnote>Not all equals implementation look at the type of this, See the java.util.List doc for a counter example <a class=footnote-backref href=#_footnoteref_1 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li></ol></section>
 </article>
 </div><footer class="text-sm leading-6 mt-12 mb-5">
 Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
 </footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
 <h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#_test_recipe_i_test_equals_and_hashcode>Test Recipe I, Test Equals and hashCode</a></li>
-</ul>
-</nav>
+<nav id=TableOfContents></nav>
 </div></div>
 <div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
 </div><script src=/prc2_web/js/main.min.b2d2aacc67a4fbfee5649e3e537fc94f29bf22f190969d5f638686db689d5ca8807e2cceb3fb584dc3a750507a50fdd438390deb2a79e5edd1800de8f026cdd3.js integrity="sha512-stKqzGek+/7lZJ4+U3/JTym/IvGQlp1fY4aG22idXKiAfizOs/tYTcOnUFB6UP3UODkN6yp55e3RgA3o8CbN0w==" crossorigin=anonymous></script>

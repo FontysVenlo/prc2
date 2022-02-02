@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.6bbfac3e9ea7b164109aa40012f29e9029127151833cdc96df151e0caaebaa8d86c1455928064e1683797924394669a9d05834762cd13d252eb572e3ca5cee52.css integrity="sha512-a7+sPp6nsWQQmqQAEvKekCkScVGDPNyW3xUeDKrrqo2GwUVZKAZOFoN5eSQ5Rmmp0Fg0dizRPSUutXLjylzuUg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.356ec2ba03cdae42868c30d28814db5ef90d1cc106dd9e2844e17d2c9d8c78c1d462a67a6ba488bc7241161206086f4c09455c4cb49f6a00f7190bf42e2f6add.css integrity="sha512-NW7CugPNrkKGjDDSiBTbXvkNHMEG3Z4oROF9LJ2MeMHUYqZ6a6SIvHJBFhIGCG9MCUVcTLSfagD3GQv0Li9q3Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 <script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
@@ -69,126 +69,40 @@ Desgin for testability
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<div class=sect1>
-<h2 id=_flex_your_java_muscles>Flex Your Java Muscles</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p>No, it is not about heavy lifting. It is about reconfiguring your Java
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_flex_your_java_muscles>Flex Your Java Muscles</a><ol class="toc-list level-2"><li><a href=#_concepts_used>Concepts used</a></li><li><a href=#_setting_in_startup_script>Setting in startup script</a></li><li><a href=#_switching_to_other_java_version>Switching to other Java version</a></li><li><a href=#_all_made_simple_with_aliases>All made simple with aliases</a></li></ol></li></ol></nav><section class="doc-section level-1"><h2 id=_flex_your_java_muscles>Flex Your Java Muscles</h2><p>No, it is not about heavy lifting. It is about reconfiguring your Java
 environment easily.
 It also assumes that you are in the habit of using the command line over the GUI.</p>
-</div>
-<div class=paragraph>
 <p>Sure, a GUI is 'user friendly' if you are willing to look for the things your want to use, and know where
 you need to look for it. But what about the computer listening to you for a change, instead of you having to scroll through its wealth of
 options and other stuff you may have installed.</p>
-</div>
-<div class=paragraph>
 <p>This is a <strong>POSIX</strong> hack, meaning that it applies to Linux and to Mac OS-X (with a little tweaking) alike.
 It may also apply to Windows when using git-bash, MINGW, Powershell or the 'Linux extensions for windows'. You mileage may vary though.</p>
-</div>
-<div class=sect2>
-<h3 id=_concepts_used>Concepts used</h3>
-<div class=ulist>
-<ul>
-<li>
-<p><code>$PATH</code> The PATH environment variable that determines the way programs are found in the command line.<br>
-all commands that you can enter on the commandline are found using the <code>$PATH</code> variable.</p>
-</li>
-<li>
-<p><code>$JAVA_HOME</code> The environment variable that tells where your java installation lives. It is used by apache-ant (ant) and apache-maven (mvn) alike.</p>
-</li>
-<li>
-<p>You set these variables in your start-up script, like <code>.bashrc</code>.</p>
-</li>
-<li>
-<p>You use aliases to abbreviate your commands.</p>
-</li>
-<li>
-<p>You start the IDE from the command line. Always, so YOU are in control of where and how it’s started.</p>
-</li>
-</ul>
-</div>
-<div class=paragraph>
+<section class="doc-section level-2"><h3 id=_concepts_used>Concepts used</h3><div class=ulist><ul><li><code>$PATH</code> The PATH environment variable that determines the way programs are found in the command line.<br>
+all commands that you can enter on the commandline are found using the <code>$PATH</code> variable.</li><li><code>$JAVA_HOME</code> The environment variable that tells where your java installation lives. It is used by apache-ant (ant) and apache-maven (mvn) alike.</li><li>You set these variables in your start-up script, like <code>.bashrc</code>.</li><li>You use aliases to abbreviate your commands.</li><li>You start the IDE from the command line. Always, so YOU are in control of where and how it’s started.</li></ul></div>
 <p>The whole operation involves three modifications:</p>
-</div>
-<div class="olist arabic">
-<ol class=arabic>
-<li>
-<p>Set the variables in your <code>~/.bashrc</code>.</p>
-</li>
-<li>
-<p>Add a helper script, called J, put it in a directory in your PATH. ${HOME}/bin is a good place, if that is on your path.</p>
-</li>
-<li>
-<p>Create aliases, to make typing the command simple, like <strong>j8</strong> to switch to Java 8 and <strong>j12</strong> to do the same for Java 12.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_setting_in_startup_script>Setting in startup script</h3>
-<div class=listingblock>
-<div class=title>setting JAVA_HOME and PATH in ~/.bashrc</div>
-<div class=content>
+<div class="olist arabic"><ol class=arabic><li>Set the variables in your <code>~/.bashrc</code>.</li><li>Add a helper script, called J, put it in a directory in your PATH. ${HOME}/bin is a good place, if that is on your path.</li><li>Create aliases, to make typing the command simple, like <strong>j8</strong> to switch to Java 8 and <strong>j12</strong> to do the same for Java 12.</li></ol></div></section>
+<section class="doc-section level-2"><h3 id=_setting_in_startup_script>Setting in startup script</h3><figure class=listing-block><figcaption>setting JAVA_HOME and PATH in ~/.bashrc</figcaption>
 <pre class=highlight><code class=language-sh data-lang=sh>## DEFAULT IS JAVA 8 HERE
 export JAVA_HOME=/usr/lib/jvm/java-8-oracle
-export PATH=${JAVA_HOME}/bin:$PATH</code></pre>
-</div>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_switching_to_other_java_version>Switching to other Java version</h3>
-<div class=listingblock>
-<div class=title>updating JAVA_HOME and PATH to switch java version.</div>
-<div class=content>
-<pre class=highlight><code class=language-sh data-lang=sh>Unresolved directive in &lt;stdin&gt; - include::J[]</code></pre>
-</div>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_all_made_simple_with_aliases>All made simple with aliases</h3>
-<div class=paragraph>
-<p>You can tie this all together with some <a href=https://www.tldp.org/LDP/abs/html/aliases.html>aliases</a> which classically are stored
+export PATH=${JAVA_HOME}/bin:$PATH</code></pre></figure></section>
+<section class="doc-section level-2"><h3 id=_switching_to_other_java_version>Switching to other Java version</h3><figure class=listing-block><figcaption>updating JAVA_HOME and PATH to switch java version.</figcaption>
+<pre class=highlight><code class=language-sh data-lang=sh>Unresolved directive in &lt;stdin&gt; - include::J[]</code></pre></figure></section>
+<section class="doc-section level-2"><h3 id=_all_made_simple_with_aliases>All made simple with aliases</h3><p>You can tie this all together with some <a href=https://www.tldp.org/LDP/abs/html/aliases.html>aliases</a> which classically are stored
 in a file called <code>${HOME}/.bash_aliases</code> and are loaded on login and each time you open a terminal.</p>
-</div>
-<div class=listingblock>
-<div class=title>using aliases to switch with simple command. Excerpt from my .bash_aliases file.</div>
-<div class=content>
+<figure class=listing-block><figcaption>using aliases to switch with simple command. Excerpt from my .bash_aliases file.</figcaption>
 <pre class=highlight><code class=language-sh data-lang=sh>alias j12=&#39;eval $(J12)&#39;
 alias j11=&#39;eval $(J11)&#39;
-alias j8=&#39;eval $(J8)&#39;</code></pre>
-</div>
-</div>
-<div class=imageblock>
-<div class=content>
-<img src=/prc2_web/images/j8j11-terminal.png alt="j8j11 terminal">
-</div>
-<div class=title>Figure 1. see it all work</div>
-</div>
-<div class=paragraph>
+alias j8=&#39;eval $(J8)&#39;</code></pre></figure>
+<figure class=image-block><img src=/prc2_web/images/j8j11-terminal.png alt="j8j11 terminal">
+<figcaption>Figure 1. see it all work</figcaption></figure>
 <p>As you will notice, switching Java versions in this way is <em>very fast</em>.</p>
-</div>
-<hr>
-</div>
-</div>
-</div>
+<hr></section></section>
 </article>
 </div><footer class="text-sm leading-6 mt-12 mb-5">
 Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
 </footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
 <h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#_flex_your_java_muscles>Flex Your Java Muscles</a>
-<ul>
-<li><a href=#_concepts_used>Concepts used</a></li>
-<li><a href=#_setting_in_startup_script>Setting in startup script</a></li>
-<li><a href=#_switching_to_other_java_version>Switching to other Java version</a></li>
-<li><a href=#_all_made_simple_with_aliases>All made simple with aliases</a></li>
-</ul>
-</li>
-</ul>
-</nav>
+<nav id=TableOfContents></nav>
 </div></div>
 <div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
 </div><script src=/prc2_web/js/main.min.b2d2aacc67a4fbfee5649e3e537fc94f29bf22f190969d5f638686db689d5ca8807e2cceb3fb584dc3a750507a50fdd438390deb2a79e5edd1800de8f026cdd3.js integrity="sha512-stKqzGek+/7lZJ4+U3/JTym/IvGQlp1fY4aG22idXKiAfizOs/tYTcOnUFB6UP3UODkN6yp55e3RgA3o8CbN0w==" crossorigin=anonymous></script>

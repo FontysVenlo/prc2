@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.6bbfac3e9ea7b164109aa40012f29e9029127151833cdc96df151e0caaebaa8d86c1455928064e1683797924394669a9d05834762cd13d252eb572e3ca5cee52.css integrity="sha512-a7+sPp6nsWQQmqQAEvKekCkScVGDPNyW3xUeDKrrqo2GwUVZKAZOFoN5eSQ5Rmmp0Fg0dizRPSUutXLjylzuUg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.356ec2ba03cdae42868c30d28814db5ef90d1cc106dd9e2844e17d2c9d8c78c1d462a67a6ba488bc7241161206086f4c09455c4cb49f6a00f7190bf42e2f6add.css integrity="sha512-NW7CugPNrkKGjDDSiBTbXvkNHMEG3Z4oROF9LJ2MeMHUYqZ6a6SIvHJBFhIGCG9MCUVcTLSfagD3GQv0Li9q3Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 <script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
@@ -69,35 +69,17 @@ Desgin for testability
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<div class=sect2>
-<h3 id=_maven_modules>Maven Modules</h3>
-<div class=paragraph>
-<p>Many projects will have more than just one component (jar or war file).
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-2"><li><a href=#_maven_modules>Maven Modules</a></li></ol></nav><section class="doc-section level-2"><h3 id=_maven_modules>Maven Modules</h3><p>Many projects will have more than just one component (jar or war file).
 Think of the parallel project project 2.</p>
-</div>
-<div class=paragraph>
 <p>It is a good idea to reflect this design in the way your structure you source code:
 Use multiple modules.</p>
-</div>
-<div class=sect3>
-<h4 id=_module>Module</h4>
-<div class=paragraph>
-<p>A module is just a maven project. Has a pom.xml which defines the relation with
+<section class="doc-section level-3"><h4 id=_module>Module</h4><p>A module is just a maven project. Has a pom.xml which defines the relation with
 other modules.</p>
-</div>
-<div class=imageblock>
-<div class=content>
-<img src=/prc2_web/images/mavenmodules.svg alt=mavenmodules>
-</div>
-<div class=title>Figure 1. Modules and parent.</div>
-</div>
-<div class=paragraph>
+<figure class=image-block><img src=/prc2_web/images/mavenmodules.svg alt=mavenmodules>
+<figcaption>Figure 1. Modules and parent.</figcaption></figure>
 <p>As you see in the figure, the parent lists its children. The children may have
 inter-dependencies. Otherwise it is just plain maven.</p>
-</div>
-<div class=listingblock>
-<div class=title>Snippet from a parent pom</div>
-<div class=content>
+<figure class=listing-block><figcaption>Snippet from a parent pom</figcaption>
 <pre class=highlight><code class=language-xml data-lang=xml>    &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
     &lt;artifactId&gt;parentpom&lt;/artifactId&gt;
     &lt;version&gt;1.0&lt;/version&gt;
@@ -111,39 +93,16 @@ inter-dependencies. Otherwise it is just plain maven.</p>
         &lt;module&gt;app-logic&lt;/module&gt;
         &lt;module&gt;ui&lt;/module&gt;
         &lt;module&gt;restserver&lt;/module&gt;
-    &lt;/modules&gt;</code></pre>
-</div>
-</div>
-<div class=paragraph>
+    &lt;/modules&gt;</code></pre></figure>
 <p>As is usual between parents and children, there is an inheritance relationship.
 The children inherit setting and groupid, and version, if defined as a property.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-warning" title=Warning></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>Do not declare dependencies of the children in the parent pom, because that introduces a cycle
-in the dependencies: parent depends on child, which depends on parent, which depend …​. etc.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
+<section class="admonition-block warning" role=doc-notice><h6 class="block-title label-only"><span class=title-label>Warning: </span></h6><p>Do not declare dependencies of the children in the parent pom, because that introduces a cycle
+in the dependencies: parent depends on child, which depends on parent, which depend …​. etc.</p></section>
 <p>The parent pom can declare all external dependencies, that are shared between the children, such as the testing frameworks,
 any other external dependencies. The parent can declare its own parent, allowing it to inherit and pass on anything that
 inherits from such parent.</p>
-</div>
-<div class=paragraph>
 <p>The parent defines the packaging as <code>pom</code>, the children what ever is required, typically jar, war, or ear.</p>
-</div>
-<div class=listingblock>
-<div class=title>example pom for rest server.</div>
-<div class=content>
+<figure class=listing-block><figcaption>example pom for rest server.</figcaption>
 <pre class=highlight><code class=language-xml data-lang=xml>&lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34;
   xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
   xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt;
@@ -160,37 +119,18 @@ inherits from such parent.</p>
     &lt;version&gt;${version}&lt;/version&gt;
     &lt;packaging&gt;war&lt;/packaging&gt;
     &lt;name&gt;Rest server&lt;/name&gt;
-&lt;/project&gt;</code></pre>
-</div>
-</div>
-<div class=paragraph>
+&lt;/project&gt;</code></pre></figure>
 <p>Putting things in modules has the following advantages:</p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>It promotes loose coupling.</p>
-</li>
-<li>
-<p>It can avoid the hen and egg problem: In a normal build, it wants all tests to pass, to be able
+<div class=ulist><ul><li>It promotes loose coupling.</li><li>It can avoid the hen and egg problem: In a normal build, it wants all tests to pass, to be able
 to continue. For business code that is correct, but things like integration tests need a built war file, which cannot be built with failing tests.<br>
 Solution: Put the integration tests in a separate module of its own, which can be run at any time and will not slow you down or
-worse, disable testing or not having any tests.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
+worse, disable testing or not having any tests.</li></ul></div></section></section>
 </article>
 </div><footer class="text-sm leading-6 mt-12 mb-5">
 Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
 </footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
 <h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#_maven_modules>Maven Modules</a></li>
-</ul>
-</nav>
+<nav id=TableOfContents></nav>
 </div></div>
 <div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
 </div><script src=/prc2_web/js/main.min.b2d2aacc67a4fbfee5649e3e537fc94f29bf22f190969d5f638686db689d5ca8807e2cceb3fb584dc3a750507a50fdd438390deb2a79e5edd1800de8f026cdd3.js integrity="sha512-stKqzGek+/7lZJ4+U3/JTym/IvGQlp1fY4aG22idXKiAfizOs/tYTcOnUFB6UP3UODkN6yp55e3RgA3o8CbN0w==" crossorigin=anonymous></script>

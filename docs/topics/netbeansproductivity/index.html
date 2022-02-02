@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.6bbfac3e9ea7b164109aa40012f29e9029127151833cdc96df151e0caaebaa8d86c1455928064e1683797924394669a9d05834762cd13d252eb572e3ca5cee52.css integrity="sha512-a7+sPp6nsWQQmqQAEvKekCkScVGDPNyW3xUeDKrrqo2GwUVZKAZOFoN5eSQ5Rmmp0Fg0dizRPSUutXLjylzuUg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.356ec2ba03cdae42868c30d28814db5ef90d1cc106dd9e2844e17d2c9d8c78c1d462a67a6ba488bc7241161206086f4c09455c4cb49f6a00f7190bf42e2f6add.css integrity="sha512-NW7CugPNrkKGjDDSiBTbXvkNHMEG3Z4oROF9LJ2MeMHUYqZ6a6SIvHJBFhIGCG9MCUVcTLSfagD3GQv0Li9q3Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 <script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
@@ -69,72 +69,29 @@ Desgin for testability
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<div class=sect1>
-<h2 id=_adding_your_own_code_templates_to_netbeans_ide>Adding your own code templates to NetBeans IDE</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p>Productivity can be helped big time, if you add code templates
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_adding_your_own_code_templates_to_netbeans_ide>Adding your own code templates to NetBeans IDE</a></li></ol></nav><section class="doc-section level-1"><h2 id=_adding_your_own_code_templates_to_netbeans_ide>Adding your own code templates to NetBeans IDE</h2><p>Productivity can be helped big time, if you add code templates
 to NetBeans. Quite a few are predefined but you can add your own too.</p>
-</div>
-<div class=paragraph>
 <p>Go to Tools > Options > Editor > Code Templates.</p>
-</div>
-<div class=paragraph>
 <p>You get this dialog:</p>
-</div>
-<div class=imageblock>
-<div class=content>
-<img src=/prc2_web/images/codetemplatedialog.png alt=codetemplatedialog>
-</div>
-</div>
-<div class=paragraph>
+<div class=image-block><img src=/prc2_web/images/codetemplatedialog.png alt=codetemplatedialog></div>
 <p>You can add one with the new button, Duh.</p>
-</div>
-<div class=paragraph>
 <p>I find this one quite convenient:</p>
-</div>
-<div class=listingblock>
-<div class=title>Definition of my codetemplate <strong>jutm</strong></div>
-<div class=content>
+<figure class=listing-block><figcaption>Definition of my codetemplate <strong>jutm</strong></figcaption>
 <pre class=highlight><code class=language-java data-lang=java>//@Disabled(&#34;think TDD&#34;)
 @${baseType type=&#34;org.junit.jupiter.api.Test&#34; default=&#34;Test&#34; editable=&#34;false&#34;}
 public void ${method}(){
     fail(&#34;method ${method} reached end. You know what to do.&#34;);
-}</code></pre>
-</div>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>As of January 2020 <code>jutm</code> is junit 5 specific.</p>
-</li>
-<li>
-<p>Note that <code>@Disabled</code> is a tag that is only used when writing all test bodies beforehand.</p>
-</li>
-<li>
-<p>Once you start writing the test, you should remove or comment (best) the <code>@Disabled</code> to make the test effective.</p>
-</li>
-</ul>
-</div>
+}</code></pre></figure>
+<div class=ulist><ul><li>As of January 2020 <code>jutm</code> is junit 5 specific.</li><li>Note that <code>@Disabled</code> is a tag that is only used when writing all test bodies beforehand.</li><li>Once you start writing the test, you should remove or comment (best) the <code>@Disabled</code> to make the test effective.</li></ul></div>
 <hr>
-<div class=videoblock>
-<div class=title>Adding Code templates</div>
-<div class=content>
-<iframe src="https://www.youtube.com/embed/1SUHFMvM39Y?rel=0" frameborder=0 allowfullscreen></iframe>
-</div>
-</div>
-</div>
-</div>
+<figure class=video-block><iframe src="//www.youtube.com/embed/1SUHFMvM39Y?rel=0" frameborder=0 allowfullscreen></iframe>
+<figcaption>Adding Code templates</figcaption></figure></section>
 </article>
 </div><footer class="text-sm leading-6 mt-12 mb-5">
 Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
 </footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
 <h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#_adding_your_own_code_templates_to_netbeans_ide>Adding your own code templates to NetBeans IDE</a></li>
-</ul>
-</nav>
+<nav id=TableOfContents></nav>
 </div></div>
 <div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
 </div><script src=/prc2_web/js/main.min.b2d2aacc67a4fbfee5649e3e537fc94f29bf22f190969d5f638686db689d5ca8807e2cceb3fb584dc3a750507a50fdd438390deb2a79e5edd1800de8f026cdd3.js integrity="sha512-stKqzGek+/7lZJ4+U3/JTym/IvGQlp1fY4aG22idXKiAfizOs/tYTcOnUFB6UP3UODkN6yp55e3RgA3o8CbN0w==" crossorigin=anonymous></script>

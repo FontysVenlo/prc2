@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.6bbfac3e9ea7b164109aa40012f29e9029127151833cdc96df151e0caaebaa8d86c1455928064e1683797924394669a9d05834762cd13d252eb572e3ca5cee52.css integrity="sha512-a7+sPp6nsWQQmqQAEvKekCkScVGDPNyW3xUeDKrrqo2GwUVZKAZOFoN5eSQ5Rmmp0Fg0dizRPSUutXLjylzuUg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.356ec2ba03cdae42868c30d28814db5ef90d1cc106dd9e2844e17d2c9d8c78c1d462a67a6ba488bc7241161206086f4c09455c4cb49f6a00f7190bf42e2f6add.css integrity="sha512-NW7CugPNrkKGjDDSiBTbXvkNHMEG3Z4oROF9LJ2MeMHUYqZ6a6SIvHJBFhIGCG9MCUVcTLSfagD3GQv0Li9q3Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 <script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
@@ -69,84 +69,36 @@ Desgin for testability
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<div class=sect1>
-<h2 id=_sebipom_3_0_3>Sebipom 3.0.3</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p>Spelled all lower case: <code>sebipom</code>, is a super pom to use in Fontys Venlo projects. It keeps your own pom.xml file simple and focused to declare just the
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_sebipom_3_0_3>Sebipom 3.0.3</a><ol class="toc-list level-2"><li><a href=#_sebipom_and_java_fx>Sebipom and Java FX</a></li><li><a href=#_using_the_sebipom_in_your_own_projects>Using the SeBiPom in your own projects</a></li><li><a href=#_upgrade_all_projects_with_one_command>Upgrade all projects with one command</a></li></ol></li></ol></nav><section class="doc-section level-1"><h2 id=_sebipom_3_0_3>Sebipom 3.0.3</h2><p>Spelled all lower case: <code>sebipom</code>, is a super pom to use in Fontys Venlo projects. It keeps your own pom.xml file simple and focused to declare just the
 dependencies needed. Niceties to do proper Test Driver Development are provided for in the sebipom definitions, including things as being able to create
 javadoc in a professional looking way, including code highlighted code snippets, checkstyle, reporting, code coverage with maven, pmd, spotbugs etc.</p>
-</div>
-<div class=paragraph>
 <p><a href=https://github.com/sebivenlo/sebipom>Sebipom is hosted on github</a>.</p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>sebipom declares no dependencies other than those for dynamic (e.g. JUnit, AssertJ etc) and static <strong>testing</strong> in the form of plugins and their configuration.</p>
-</li>
-</ul>
-</div>
-<div class=paragraph>
+<div class=ulist><ul><li>sebipom declares no dependencies other than those for dynamic (e.g. JUnit, AssertJ etc) and static <strong>testing</strong> in the form of plugins and their configuration.</li></ul></div>
 <p>This way of using maven, having a <span class=blue>super</span> or parent pom defined globally (in a repository, not on a local path), is the <span class="big black">modern</span> usage.
 It can be seen in well known big java projects such as <a href=https://spring.io/projects/spring-boot>Spring Boot</a> and <a href=https://quarkus.io/>quarkus</a>, to name two contenders in the java-web technology world.</p>
-</div>
-<div class="admonitionblock tip green">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>Note that we are using a <em>separately installed</em> maven (3.6.3 at the time of writing) which you can download from <a href=http://maven.apache.org/download.cgi>apache maven</a>,
+<aside class="admonition-block tip green" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>Note that we are using a <em>separately installed</em> maven (3.6.3 at the time of writing) which you can download from <a href=http://maven.apache.org/download.cgi>apache maven</a>,
 not the one bundled with NetBeans or any other IDE. You can tell NetBeans (via tools→ options →java→maven) to use the installed one instead of the bundled one.</p>
-</div>
-<div class=paragraph>
-<p><em class=big>Our tests will <span class=blue>always</span> use maven, not some IDE. There is no gnome inside the build server to move the mouse.</em></p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-<div id=sebipom-as-parent class=listingblock>
-<div class=title>Setting sebipom as parent.</div>
-<div class=content>
+<p><em class=big>Our tests will <span class=blue>always</span> use maven, not some IDE. There is no gnome inside the build server to move the mouse.</em></p></aside>
+<figure class=listing-block id=sebipom-as-parent><figcaption>Setting sebipom as parent.</figcaption>
 <pre class=highlight><code class=language-xml data-lang=xml>    &lt;parent&gt;
       &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
       &lt;artifactId&gt;sebipom&lt;/artifactId&gt;
       &lt;version&gt;3.0.3&lt;/version&gt;
-      &lt;relativePath/&gt; <i class=conum data-value=1></i><b>(1)</b>
-    &lt;/parent&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>The parent pom does not live in a local directory near (relative to) the project, but instead in a repository. This makes a parent pom 'portable'.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
+      &lt;relativePath/&gt; <b class=conum>1</b>
+    &lt;/parent&gt;</code></pre><ol class="callout-list arabic"><li>The parent pom does not live in a local directory near (relative to) the project, but instead in a repository. This makes a parent pom 'portable'.</li></ol></figure>
 <p>All of the starter projects we provide already use this parent in some version. To get those working, apply the settings show in the paragraph <a href="#Configuring Maven">[Configuring Maven]</a>.</p>
-</div>
-<div class=paragraph>
 <p>If you want to use sebipom in your own project, either copy the parent definition into the pom file or start by replacing the NetBeans provided pom.xml file in your project by
 the basic one below. Add dependencies as required.</p>
-</div>
-<div id=basic-maven class=listingblock>
-<div class=title>Basic pom.xml file setting sebipom as parent.</div>
-<div class=content>
+<figure class=listing-block id=basic-maven><figcaption>Basic pom.xml file setting sebipom as parent.</figcaption>
 <pre class=highlight><code class=language-xml data-lang=xml>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
 &lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt;
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;parent&gt; <i class=conum data-value=1></i><b>(1)</b>
+    &lt;parent&gt; <b class=conum>1</b>
         &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
         &lt;artifactId&gt;sebipom&lt;/artifactId&gt;
         &lt;version&gt;3.0.3&lt;/version&gt;
-        &lt;realtivePath/&gt;<i class=conum data-value=2></i><b>(2)</b>
-    &lt;/parent&gt; <i class=conum data-value=3></i><b>(3)</b>
+        &lt;realtivePath/&gt;<b class=conum>2</b>
+    &lt;/parent&gt; <b class=conum>3</b>
     &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
     &lt;artifactId&gt;basicsebimaven&lt;/artifactId&gt;
     &lt;version&gt;1.0&lt;/version&gt;
@@ -167,119 +119,37 @@ the basic one below. Add dependencies as required.</p>
         &lt;version&gt;...&lt;/version&gt;
       &lt;/dependency&gt;
     &lt;/dpendencies&gt;
-&lt;/project&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Start of parent declaration.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>Parent comes from some other repo, not local.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>End of parent declaration.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=sect2>
-<h3 id=_sebipom_and_java_fx>Sebipom and Java FX</h3>
-<div class=paragraph>
-<p>If you want to use semipom and build a JavaFX project, you need to activate the <strong>fx</strong>-profile.
+&lt;/project&gt;</code></pre><ol class="callout-list arabic"><li>Start of parent declaration.</li><li>Parent comes from some other repo, not local.</li><li>End of parent declaration.</li></ol></figure>
+<section class="doc-section level-2"><h3 id=_sebipom_and_java_fx>Sebipom and Java FX</h3><p>If you want to use semipom and build a JavaFX project, you need to activate the <strong>fx</strong>-profile.
 In the commandline that would be</p>
-</div>
-<div class=imageblock>
-<div class=content>
-<img src=/prc2_web/images/mvn-withfx-profile.png alt="mvn withfx profile">
-</div>
-<div class=title>Figure 1. Commandline. Real software engineers can use the command line.</div>
-</div>
-<div class=paragraph>
+<figure class=image-block><img src=/prc2_web/images/mvn-withfx-profile.png alt="mvn withfx profile">
+<figcaption>Figure 1. Commandline. Real software engineers can use the command line.</figcaption></figure>
 <p>In netbeans you can do that by setting the configuration like in this picture:</p>
-</div>
-<div class=imageblock>
-<div class=content>
-<img src=/prc2_web/images/fx-profile-nb.png alt="fx profile nb">
-</div>
-<div class=title>Figure 2. Activate a profile in netbeans</div>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_using_the_sebipom_in_your_own_projects>Using the SeBiPom in your own projects</h3>
-<div class=paragraph>
-<p>To use the test libraries and other goodies that will be used throughout our course,
+<figure class=image-block><img src=/prc2_web/images/fx-profile-nb.png alt="fx profile nb">
+<figcaption>Figure 2. Activate a profile in netbeans</figcaption></figure></section>
+<section class="doc-section level-2"><h3 id=_using_the_sebipom_in_your_own_projects>Using the SeBiPom in your own projects</h3><p>To use the test libraries and other goodies that will be used throughout our course,
 you should add the <code>sebipom</code> as parent.</p>
-</div>
-<div class=paragraph>
 <p>Modify the pom.xml file in your project to include sebipom as parent by adding
 these lines in the previous section <a href=#sebipom-as-parent>Setting sebipom as parent.</a>.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>As of 2021-04-03, sebipom reached version 3.0.3. Not all projects may have this version number for
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>As of 2021-04-03, sebipom reached version 3.0.3. Not all projects may have this version number for
 the parent sebipom. We improve as we go, sometimes because of tips we receive from our students, you for instance.
 Anyway, if the version is not at the newest, set it to the newest and rebuild.
 Revisit this part of the site to check the latest version number or look in the
 <a href=https://www.fontysvenlo.org/repository/nl/fontys/sebivenlo/sebipom/>fontysvenlo maven reposity</a>
 for the sebipom version.<br>
 Sebipom 3.0.3 enables testing for modular projects but does not enforce modular projects.</p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>The source code of sebipom lives at github in <a href=https://github.com/sebivenlo/sebipom>sebivenlo/sebipom</a>.</p>
-</li>
-</ul>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_upgrade_all_projects_with_one_command>Upgrade all projects with one command</h3>
-<div class=paragraph>
-<p>Since sebipom is a somewhat moving target, you may have to update the parent pom of the projects that depend on it. All PRC2 projects do.
+<div class=ulist><ul><li>The source code of sebipom lives at github in <a href=https://github.com/sebivenlo/sebipom>sebivenlo/sebipom</a>.</li></ul></div></aside></section>
+<section class="doc-section level-2"><h3 id=_upgrade_all_projects_with_one_command>Upgrade all projects with one command</h3><p>Since sebipom is a somewhat moving target, you may have to update the parent pom of the projects that depend on it. All PRC2 projects do.
 This oneliner will do that for all projects below the current directory. After navigating to the parent of all such projects, do this in the shell:</p>
-</div>
-<div class=listingblock>
-<div class=content>
-<pre class=highlight><code class=language-sh data-lang=sh>for i in $(find . -name pom.xml); do (cd $(dirname $i); mvn versions:update-parent  &amp; )   ; done</code></pre>
-</div>
-</div>
-<div class=paragraph>
+<div class=listing-block><pre class=highlight><code class=language-sh data-lang=sh>for i in $(find . -name pom.xml); do (cd $(dirname $i); mvn versions:update-parent  &amp; )   ; done</code></pre></div>
 <p>It works on any bash supporting machine, tested on ubuntu and should work on OS-X and under windows when using
-git-bash or the windows subsystem for Linux.</p>
-</div>
-</div>
-</div>
-</div>
+git-bash or the windows subsystem for Linux.</p></section></section>
 </article>
 </div><footer class="text-sm leading-6 mt-12 mb-5">
 Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
 </footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
 <h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#_sebipom_3_0_3>Sebipom 3.0.3</a>
-<ul>
-<li><a href=#_sebipom_and_java_fx>Sebipom and Java FX</a></li>
-<li><a href=#_using_the_sebipom_in_your_own_projects>Using the SeBiPom in your own projects</a></li>
-<li><a href=#_upgrade_all_projects_with_one_command>Upgrade all projects with one command</a></li>
-</ul>
-</li>
-</ul>
-</nav>
+<nav id=TableOfContents></nav>
 </div></div>
 <div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
 </div><script src=/prc2_web/js/main.min.b2d2aacc67a4fbfee5649e3e537fc94f29bf22f190969d5f638686db689d5ca8807e2cceb3fb584dc3a750507a50fdd438390deb2a79e5edd1800de8f026cdd3.js integrity="sha512-stKqzGek+/7lZJ4+U3/JTym/IvGQlp1fY4aG22idXKiAfizOs/tYTcOnUFB6UP3UODkN6yp55e3RgA3o8CbN0w==" crossorigin=anonymous></script>

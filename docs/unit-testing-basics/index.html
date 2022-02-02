@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.6bbfac3e9ea7b164109aa40012f29e9029127151833cdc96df151e0caaebaa8d86c1455928064e1683797924394669a9d05834762cd13d252eb572e3ca5cee52.css integrity="sha512-a7+sPp6nsWQQmqQAEvKekCkScVGDPNyW3xUeDKrrqo2GwUVZKAZOFoN5eSQ5Rmmp0Fg0dizRPSUutXLjylzuUg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.356ec2ba03cdae42868c30d28814db5ef90d1cc106dd9e2844e17d2c9d8c78c1d462a67a6ba488bc7241161206086f4c09455c4cb49f6a00f7190bf42e2f6add.css integrity="sha512-NW7CugPNrkKGjDDSiBTbXvkNHMEG3Z4oROF9LJ2MeMHUYqZ6a6SIvHJBFhIGCG9MCUVcTLSfagD3GQv0Li9q3Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 <script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
@@ -69,65 +69,15 @@ Desgin for testability
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<div class=sect1>
-<h2 id=_write_your_own_tests>Write your own tests!</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p><span class=big>Throughout the exercises of PRC1, you have become acquainted with the value of tests: You have a way of checking if your code is any good without having to
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_write_your_own_tests>Write your own tests!</a></li><li><a href=#_testing_test_driven_development>Testing / Test Driven Development</a><ol class="toc-list level-2"><li><a href=#_what_are_tests_and_why_do_we_need_them>What are tests and why do we need them?</a></li><li><a href=#_test_driven_development_tdd>Test Driven Development (TDD)</a></li></ol></li><li><a href=#_arrange_act_assert>Arrange Act Assert</a></li><li><a href=#_clues_needed>Clues needed</a></li><li><a href=#_assertj_examples>AssertJ examples.</a><ol class="toc-list level-2"><li><a href=#_simple_tests>Simple Tests</a></li><li><a href=#_string_containment>String Containment</a></li><li><a href=#_collection_containment>Collection Containment</a></li><li><a href=#_assert_exceptions>Assert Exceptions</a></li></ol></li><li><a href=#_soft_assertions>Soft Assertions</a></li><li><a href=#_assumptions>Assumptions</a></li><li><a href=#_additional_pointers>Additional pointers</a></li></ol></nav><section class="doc-section level-1"><h2 id=_write_your_own_tests>Write your own tests!</h2><p><span class=big>Throughout the exercises of PRC1, you have become acquainted with the value of tests: You have a way of checking if your code is any good without having to
 test each and every part manually. You clicked on the nice TMC button in NetBeans and then you could see which parts of your code worked, and which didn’t.
 There is a catch though: Out there in the real world, there won’t be any NetBeans button doing that magic for you, nor will some teacher or school
 provide the tests for you, so <strong class=red>you will be on your own</strong>.</span></p>
-</div>
-<div class=paragraph>
 <p>But fret not! Writing tests is typically much simpler than writing the actual code. At least, it is when you follow a basic set of steps:</p>
-</div>
-<div class="olist arabic">
-<ol class=arabic>
-<li>
-<p><strong class=blue>A</strong>rrange: Prepare or set up the thing you want to test</p>
-</li>
-<li>
-<p><strong class=blue>A</strong>ct: Interact with the object you are testing</p>
-</li>
-<li>
-<p><strong class=blue>A</strong>ssert or Ensure that the observable result(s) is/are as expected.</p>
-</li>
-<li>
-<p>If it says <strong class=red>boom</strong>, then at least you learned something …​.</p>
-</li>
-</ol>
-</div>
-<div class=paragraph>
+<div class="olist arabic"><ol class=arabic><li><strong class=blue>A</strong>rrange: Prepare or set up the thing you want to test</li><li><strong class=blue>A</strong>ct: Interact with the object you are testing</li><li><strong class=blue>A</strong>ssert or Ensure that the observable result(s) is/are as expected.</li><li>If it says <strong class=red>boom</strong>, then at least you learned something …​.</li></ol></div>
 <p><strong>Topics week 1</strong></p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>Test Driven Development.</p>
-</li>
-<li>
-<p>Maven configuration as exercise.</p>
-</li>
-<li>
-<p><strong>A</strong>rrange <strong>A</strong>ct <strong>A</strong>ssert</p>
-</li>
-<li>
-<p>JUnit (5) as test framework.</p>
-</li>
-<li>
-<p>AssertJ as assertion library.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class=sect1>
-<h2 id=_testing_test_driven_development>Testing / Test Driven Development</h2>
-<div class=sectionbody>
-<div class=sect2>
-<h3 id=_what_are_tests_and_why_do_we_need_them>What are tests and why do we need them?</h3>
-<div id=_tdd class=paragraph>
-<p>The way that you have worked with Java so far is that you had to write some code
+<div class=ulist><ul><li>Test Driven Development.</li><li>Maven configuration as exercise.</li><li><strong>A</strong>rrange <strong>A</strong>ct <strong>A</strong>ssert</li><li>JUnit (5) as test framework.</li><li>AssertJ as assertion library.</li></ul></div></section>
+<section class="doc-section level-1"><h2 id=_testing_test_driven_development>Testing / Test Driven Development</h2><section class="doc-section level-2"><h3 id=_what_are_tests_and_why_do_we_need_them>What are tests and why do we need them?</h3><p id=_tdd>The way that you have worked with Java so far is that you had to write some code
 to implement something. For example you had to implement a bird watcher system
 or a telephone book, in which you could save people with their telephone numbers
 and look them up, too. You probably created classes called PhoneBook or
@@ -137,20 +87,10 @@ and you had variables such as <code class=blue>String personName</code>, <code c
 think about how the phonebook works, and then you added classes, fields (variables)
 and methods. Slowly but surely, your phonebook started to look more and more
 like a phonebook.</p>
-</div>
-<div id=tdd-oneRedTest class="imageblock related thumb right">
-<div class=content>
-<img src=/prc2_web/images/tdd-oneRedTest.png alt="tdd oneRedTest">
-</div>
-<div class=title>Figure 1. Small steps. One red test at a time.</div>
-</div>
-<div id=tdd-allTestsGreen class="imageblock related thumb left">
-<div class=content>
-<img src=/prc2_web/images/tdd-allTestsGreen.png alt="tdd allTestsGreen">
-</div>
-<div class=title>Figure 2. All the tests are green, yay!</div>
-</div>
-<div class=paragraph>
+<figure class="image-block related thumb right" id=tdd-oneRedTest><img src=/prc2_web/images/tdd-oneRedTest.png alt="tdd oneRedTest">
+<figcaption>Figure 1. Small steps. One red test at a time.</figcaption></figure>
+<figure class="image-block related thumb left" id=tdd-allTestsGreen><img src=/prc2_web/images/tdd-allTestsGreen.png alt="tdd allTestsGreen">
+<figcaption>Figure 2. All the tests are green, yay!</figcaption></figure>
 <p>But how did you know that your phonebook was actually working? You could have
 implemented a method that didn’t work, or maybe you forgot to add people to the
 phonebook, so the data wasn’t actually stored. What you did was you ran the TMC
@@ -159,27 +99,17 @@ test said "when I look for Alice in your phonebook, I will receive Alice’s
 phone number 1234-567.". And if the test didn’t receive Alice’s number, it
 would turn red and say something like "I expected 1234-567. But I received
 0042-987." Therefore, the test fails.</p>
-</div>
-<div class=paragraph>
 <p>The tests were a really useful way for you to know that you were indeed
 implementing a proper phonebook. You could have just written empty classes and
 said "here is the phonebook!" and there would have been no way to verify that
 the phonebook works. The test made sure that this doesn’t happen. They also
 give you confidence as you code. Because every test that turns green gives you
 that little "yes!" feeling that you wrote something that works.</p>
-</div>
-<div class=paragraph>
 <p>Thus, tests fulfill two functions at once: they constantly probe your
 implementation and check whether it works, and they make you feel more
 confident about your programming skills. That’s really neat!</p>
-</div>
-<div id=tdd-EnglishError class="imageblock related thumb right">
-<div class=content>
-<img src=/prc2_web/images/tdd-EnglishError.png alt="tdd EnglishError">
-</div>
-<div class=title>Figure 3. Testing in real life</div>
-</div>
-<div class=paragraph>
+<figure class="image-block related thumb right" id=tdd-EnglishError><img src=/prc2_web/images/tdd-EnglishError.png alt="tdd EnglishError">
+<figcaption>Figure 3. Testing in real life</figcaption></figure>
 <p>When you were at school, you probably had to write an English exam at some
 point. You wrote your answers, and then the teacher graded your exam. The
 teacher is just like a test: she reads your exam, expecting the correct answer.
@@ -193,26 +123,17 @@ spot your own errors: "oh hang on, I have to use 'go' instead of 'goes' here."
 You have internalized a test that checks for the correct conjugation of the
 word. You know what to expect, and when you deviate from the expectation, you
 spot the error.</p>
-</div>
-<div class=paragraph>
 <p>Many people work the same way when they write code. They say "I know what I am
 doing because I have experience and I know the rules." But of course, we always
 make mistakes. Our brains are really bad testers. We stop seeing mistakes
 because we feel so familiar with our code. Have you ever handed in a report for
 university, only to find that the lecturer finds spelling errors you swear you
 didn’t do? That’s what happens in programming, too.</p>
-</div>
-<div class=paragraph>
 <p>That is why we write our own little annoying English teachers that constantly
 check: is this correct? Even though we know how to program, we also acknowledge
 that our brains are terrible testers for things that you write yourself, so we
-give our brains a break and write a test instead.</p>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_test_driven_development_tdd>Test Driven Development (TDD)</h3>
-<div class=paragraph>
-<p>In <a href=https://materiaalit.github.io/2013-oo-programming/part2/week-9/>Week 9</a>
+give our brains a break and write a test instead.</p></section>
+<section class="doc-section level-2"><h3 id=_test_driven_development_tdd>Test Driven Development (TDD)</h3><p>In <a href=https://materiaalit.github.io/2013-oo-programming/part2/week-9/>Week 9</a>
 we wrote a little phonebook and then we ran the test to check that the
 phonebook was working. That worked well, because we no longer have to rely on
 our brains to spot the errors on-the-fly. But here is another bad message: not
@@ -220,8 +141,6 @@ only does our brain stop recognizing errors in our own code, but it is also
 automatically biased to want our own tests to pass. You spent all this time
 writing your phonebook, you know how it works, so you know what test to write
 for it.</p>
-</div>
-<div class=paragraph>
 <p>But your brain secretly deceives you: you have implemented a phonebook, and
 this is the only phonebook that you know. What if you removed your code, but
 leave in the tests- and ask a friend to write a phonebook? They start
@@ -229,8 +148,6 @@ complaining that your tests are unfair. "Why do I have to use a List? I use
 Maps!" your friend says. But your tests insists that the phonebook has a List.
 So what have you done? You have written a test that proves YOUR implementation
 is correct.</p>
-</div>
-<div class=paragraph>
 <p>When you work test-driven, you don’t implement the phonebook and then test it.
 You first write the test for a phonebook, and then you implement it. That
 sounds a bit weird at first. Why write tests for stuff that’s not there yet? We
@@ -238,39 +155,22 @@ know it’s going to fail! But this is what we want. We need to keep telling our
 brains: this does not work. Figure out a way to make it work. This way, it is
 much harder to get married to your own code and to stop seeing problems with
 your test. You have found a way to deal with the human brain. Congratulations!</p>
-</div>
-<div id=tdd-tddLifecycle class="imageblock text-center">
-<div class=content>
-<img src=/prc2_web/images/tdd-lifecycle.png alt="tdd lifecycle">
-</div>
-<div class=title>Figure 4. <a href=https://medium.com/@odayibasi/tdd-test-driven-development-vs-bdd-behavior-driven-development-30e225c29c14>The TDD Lifecycle. Click for image source.</a></div>
-</div>
-<div class=sect3>
-<h4 id=_so_how_do_i_know_what_to_test>So how do I know what to test?</h4>
-<div class=paragraph>
-<p>There is a little (actually, it’s big) catch with TDD. When you write a test
+<figure class=image-block style=text-align:center id=tdd-tddLifecycle><img src=/prc2_web/images/tdd-lifecycle.png alt="tdd lifecycle">
+<figcaption>Figure 4. <a href=https://medium.com/@odayibasi/tdd-test-driven-development-vs-bdd-behavior-driven-development-30e225c29c14>The TDD Lifecycle. Click for image source.</a></figcaption></figure>
+<section class="doc-section level-3"><h4 id=_so_how_do_i_know_what_to_test>So how do I know what to test?</h4><p>There is a little (actually, it’s big) catch with TDD. When you write a test
 for a thing that doesn’t exist yet, how do you know what to test for? If I
 write a test for a phonebook that is not implemented yet, what does my test
 expect?</p>
-</div>
-<div class=paragraph>
 <p>The truth is, you never get around having to make implementation decisions. We
 just try to minimize our margin for error. So when you start writing your first
 test for your (non-existing) phonebook, you HAVE to have an idea of what the
 phonebook does. So perhaps you start with "I expect that the phonebook let’s me
 look up a person. When I look up Alice, I expect Alice’s phone number.". What
-could such a test look like?</p>
-</div>
-</div>
-<div class=sect3>
-<h4 id=_test_selection_strategies>Test selection strategies</h4>
-<div class=paragraph>
-<p>There is no golden rule that says "always start with text X, and then test Y,
+could such a test look like?</p></section>
+<section class="doc-section level-3"><h4 id=_test_selection_strategies>Test selection strategies</h4><p>There is no golden rule that says "always start with text X, and then test Y,
 and finish with test Z.". Instead, we rely on heuristics: rules of thumb that
 guide us through the TDD process. There are several decisions that you can make
 when writing tests.</p>
-</div>
-<div class=paragraph>
 <p>For instance, you can decide to first write tests for all elements of the
 system under test (SUT), but not go into detail yet what each SUT needs to have
 tested. This would mean focusing on width first, and depth later. For instance,
@@ -281,8 +181,6 @@ moving on to other parts only when one section of the SUT is covered
 completely. In this version, you go depth-first instead of width-first. Both
 approaches have their merit and you need to decide which strategy is best in
 which situation.</p>
-</div>
-<div class=paragraph>
 <p>Another strategy is to weigh the difficulty of each test. When you look at a
 list of tests to write, do you start with the easy ones that are implemented
 quickly, or do you start with the more difficult tests that require more
@@ -290,74 +188,22 @@ implementation thinking? When you are stuck on a particular test, it might be
 useful to first implement a number of tests that are easier to write, so that
 you make progress. It might be that whatever was causing you to be stuck on
 that test is now easier to solve now that you have a list of other tests that
-you have implemented.</p>
-</div>
-</div>
-<div class=sect3>
-<h4 id=_where_to_start>Where to start</h4>
-<div class=paragraph>
-<p>Choosing is always hard, including choosing where to start. The typical
+you have implemented.</p></section>
+<section class="doc-section level-3"><h4 id=_where_to_start>Where to start</h4><p>Choosing is always hard, including choosing where to start. The typical
 order for test driven development is:</p>
-</div>
-<div class="olist arabic">
-<ol class=arabic>
-<li>
-<p>A Constructor. You typically need instances and this is how you can construct some.</p>
-</li>
-<li>
-<p>Getters for the fields that are defined in the constructor. If
+<div class="olist arabic"><ol class=arabic><li>A Constructor. You typically need instances and this is how you can construct some.</li><li>Getters for the fields that are defined in the constructor. If
 such getters are not part of the public API of the class, make the
 package private, to hide them from client classes outside of the
-package.</p>
-</li>
-<li>
-<p>The <code>public String toString()</code> method, which can show
+package.</li><li>The <code>public String toString()</code> method, which can show
 the result of the constructor. Note that toString is often used for debugging,
-and that is what the auto-generated to string typically is for.</p>
-</li>
-<li>
-<p>Setters, if needed. (They are NOT in the fraction exercise). If you can get by
-with a class without setters, you are typically <a href=https://www.leadingagile.com/2018/03/immutability-in-java/>better off</a>.</p>
-</li>
-<li>
-<p>The business methods, one by one. In case of Fraction exercise, start at
-multiplication, because that is easiest.</p>
-</li>
-<li>
-<p>Further refinements, like in case of the Fraction exercise, that the
-fraction should always be in <em>normalised</em> form.</p>
-</li>
-</ol>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>Never add a member (method, field) to a class <em>unless</em> you have a test that proves the need of it.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-<hr>
-</div>
-</div>
-</div>
-</div>
-<div class=sect1>
-<h2 id=_arrange_act_assert>Arrange Act Assert</h2>
-<div class=sectionbody>
-<div class=videoblock>
-<div class=title>Some action.</div>
-<div class=content>
-<iframe src="https://www.youtube.com/embed/GJFGXYyKvns?rel=0" frameborder=0 allowfullscreen></iframe>
-</div>
-</div>
-<div class=paragraph>
+and that is what the auto-generated to string typically is for.</li><li>Setters, if needed. (They are NOT in the fraction exercise). If you can get by
+with a class without setters, you are typically <a href=https://www.leadingagile.com/2018/03/immutability-in-java/>better off</a>.</li><li>The business methods, one by one. In case of Fraction exercise, start at
+multiplication, because that is easiest.</li><li>Further refinements, like in case of the Fraction exercise, that the
+fraction should always be in <em>normalised</em> form.</li></ol></div>
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>Never add a member (method, field) to a class <em>unless</em> you have a test that proves the need of it.</p></aside>
+<hr></section></section></section>
+<section class="doc-section level-1"><h2 id=_arrange_act_assert>Arrange Act Assert</h2><figure class=video-block><iframe src="//www.youtube.com/embed/GJFGXYyKvns?rel=0" frameborder=0 allowfullscreen></iframe>
+<figcaption>Some action.</figcaption></figure>
 <p>When designing tests it is good to keep the ideas of making <em>action movies</em> in the back of your head.
 Looking at some <em>the making of…​</em> can be quite instructive in this case.
 For a scene to be taken, there is typically quite some preparation involved like hanging Spiderman
@@ -365,47 +211,15 @@ on a thin cable from the ceiling, making sure the <strong>crook</strong> is in t
 Then the director calls <strong>action</strong> and the scene is acted out<br>
 If the director is satisfied, al is okay<br>
 If not, he will want a redo later on.</p>
-</div>
-<div class=paragraph>
 <p>A very popular style to write unit tests is the triple-A or <strong>Arrange-Act-Assert</strong>.</p>
-</div>
-<div class=paragraph>
 <p><strong class=blue>Arrange</strong> simply means that you set up the objects you need in the tests:</p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>The <strong>S</strong>ystem <strong>U</strong>nder <strong>T</strong>est, the <strong class=blue>SUT</strong> its the term in the tesing world. In movies it is the protagonist or main actor.</p>
-</li>
-<li>
-<p>The <strong>D</strong>ependent <strong>O</strong>n <strong>C</strong>omponents or <strong class=blue>DOC</strong>s, the scenario needs to play out the action. Supporting actors or even props in the movies.</p>
-</li>
-</ul>
-</div>
-<div class=paragraph>
+<div class=ulist><ul><li>The <strong>S</strong>ystem <strong>U</strong>nder <strong>T</strong>est, the <strong class=blue>SUT</strong> its the term in the tesing world. In movies it is the protagonist or main actor.</li><li>The <strong>D</strong>ependent <strong>O</strong>n <strong>C</strong>omponents or <strong class=blue>DOC</strong>s, the scenario needs to play out the action. Supporting actors or even props in the movies.</li></ul></div>
 <p><strong class=blue>Act</strong> is quite similar to a film directory shouting <strong>action</strong>, that is do what you prepared for.<br></p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>This typically is one method call on the SUT.</p>
-</li>
-</ul>
-</div>
-<div class=paragraph>
+<div class=ulist><ul><li>This typically is one method call on the SUT.</li></ul></div>
 <p><strong class=blue>Assert</strong> to test if the actual result of the action is what is expected.<br></p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>The actual value can be the return value of the called method, but also the (new) state of the SUT. In the movie: did the explosion happen, was the punch landed correctly
-and was the emotion credible.</p>
-</li>
-</ul>
-</div>
-<div class=listingblock>
-<div class=title>AAA in action</div>
-<div class=content>
+<div class=ulist><ul><li>The actual value can be the return value of the called method, but also the (new) state of the SUT. In the movie: did the explosion happen, was the punch landed correctly
+and was the emotion credible.</li></ul></div>
+<figure class=listing-block><figcaption>AAA in action</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>@Test
 public void shouldAllowToAddAddress() {
   // Arrange
@@ -417,520 +231,165 @@ public void shouldAllowToAddAddress() {
 
   // Assert
   assertThat( client.getAddresses() ).contains( addressA ));
-}</code></pre>
-</div>
-</div>
-<div class=paragraph>
+}</code></pre></figure>
 <p>Of course, Arrange, Act and Assert will vary with the actual business requirement, much
 as the setup, play, and act in movie making. And also, quite similar to movie making
 the arrange can be expensive or cheap, the action be fraught with risk or easy, and the assert can be complex or simple.</p>
-</div>
-<div class=paragraph>
 <p>We hope to teach to keep all three <em>as simple as possible</em>, to keep the costs of testing so low that to make it never an argument to skip testing.</p>
-</div>
-<div class=paragraph>
-<p>Later in this course we see some more complex scenarios, in which we need <a href=https://en.wikipedia.org/wiki/Extra_(acting)>Extras</a> as one would say in the movie industry.</p>
-</div>
-</div>
-</div>
-<div class=sect1>
-<h2 id=_clues_needed>Clues needed</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p>A smart person is able to avoid work. A common strategy is to let others do it. You can achieve such smartness as well by using your tools properly.</p>
-</div>
-<div class=paragraph>
+<p>Later in this course we see some more complex scenarios, in which we need <a href=https://en.wikipedia.org/wiki/Extra_(acting)>Extras</a> as one would say in the movie industry.</p></section>
+<section class="doc-section level-1"><h2 id=_clues_needed>Clues needed</h2><p>A smart person is able to avoid work. A common strategy is to let others do it. You can achieve such smartness as well by using your tools properly.</p>
 <p>For instance your IDE will gladly <em class=green>complete</em> code that your started by showing
 a list of possible completions of the code that you already provided. However, the IDE
 can only do that if you provide it with sufficient clues. For instance when you want the IDE
 to generate a non-existing generic class, create two instance with different type parameters before your accept the hint to create class.</p>
-</div>
-<div class=listingblock>
-<div class=title>complete a generic</div>
-<div class=content>
+<figure class=listing-block><figcaption>complete a generic</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>Box&lt;String&gt; sb= new Box&lt;String&gt;(); // compiler will complain for non existing Box class.
 Box&lt;Integer&gt; ib= new Box&lt;Integer&gt;(); // compiler will complain for non existing Box class.
-// now you can let the IDE to follow its urge to do the typing for you.</code></pre>
-</div>
-</div>
-<div class=paragraph>
+// now you can let the IDE to follow its urge to do the typing for you.</code></pre></figure>
 <p>Same applies to methods. If you want a specific return type, provide that in a declaration where you specify such type.</p>
-</div>
-<div class=paragraph>
 <p>The same applies to frameworks such as AssertJ, that provides an <code>assertThat(…​)</code> method as entry for almost all asserts.
 But what you put on the dots is important, because the IDE will inspect the <strong class=blue>type</strong> of the <em>expression</em> and then will look for the possible
 completions. The completions for an Integer or int are very different from that of a <code>Collection</code> or <code>Iterable</code>.</p>
-</div>
-<div class=paragraph>
 <p>Combine this with the previous tip. First specify a variable with a type, that
 use the variable inside the <code>assertThat(…​)</code> and the IDE will be able to find the available completions.</p>
-</div>
-<div class=paragraph>
 <p>Sometimes you have to nudge the IDE a bit, for instance when it suggest to create two constructors from the above example.
 Accept one of the suggestions, but then modify the generated constructor to accept the type parameter of the class as input type of the constructor.
 After saving all files, you will have convinced both IDE and compiler.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<div class=title>It is good to have a thinking pause</div>
-<p>Let the IDE and framework do (most) of the typing work for you, by providing clues. If you do that smartly, it
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><section class=paragraph><h6 class=block-title>It is good to have a thinking pause</h6><p>Let the IDE and framework do (most) of the typing work for you, by providing clues. If you do that smartly, it
 will be easy to write code that is correct and acceptable by the compiler.<br>
-<strong class=big>Being lazy is good, both for code and smart people.</strong></p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-</div>
-<div class=sect1>
-<h2 id=_assertj_examples>AssertJ examples.</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p>In our course we to stick to <a href=https://assertj.github.io/doc/>AssertJ</a> library where possible.</p>
-</div>
-<div class=paragraph>
+<strong class=big>Being lazy is good, both for code and smart people.</strong></p></section></aside></section>
+<section class="doc-section level-1"><h2 id=_assertj_examples>AssertJ examples.</h2><p>In our course we to stick to <a href=https://assertj.github.io/doc/>AssertJ</a> library where possible.</p>
 <p>The rationale for that is:</p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>The AssertJ assertion API is very powerful and can easily turn overly strict or brittle tests into more effective tests.<br>
+<div class=ulist><ul><li>The AssertJ assertion API is very powerful and can easily turn overly strict or brittle tests into more effective tests.<br>
 You have come across tests in the mooc that insisted on specific formatting.
-With AssertJ you can specify elements you want to see and do not want to see. See examples below.</p>
-</li>
-<li>
-<p>AssertJ tests tend to be quite <strong>readable</strong>, once you get used to the fluent style. You will see long method names,
-but they help understanding what is going on a no-brainer.</p>
-</li>
-<li>
-<p>AssertJ can protect the test methods against unexpected exceptions, such as null pointers (NPE) before doing further tests.</p>
-</li>
-<li>
-<p>With the exception of <em>testing exceptions</em>, the userinterface and api of AssertJ is quite consistent.<br>
-You always start with <code>assertThat( objectOfInterest ).assertingMethod(…​)</code>.<br></p>
-</li>
-</ul>
-</div>
-<div class=paragraph>
+With AssertJ you can specify elements you want to see and do not want to see. See examples below.</li><li>AssertJ tests tend to be quite <strong>readable</strong>, once you get used to the fluent style. You will see long method names,
+but they help understanding what is going on a no-brainer.</li><li>AssertJ can protect the test methods against unexpected exceptions, such as null pointers (NPE) before doing further tests.</li><li>With the exception of <em>testing exceptions</em>, the userinterface and api of AssertJ is quite consistent.<br>
+You always start with <code>assertThat( objectOfInterest ).assertingMethod(…​)</code>.<br></li></ul></div>
 <p>We try to use the latest stable version of AssertJ and Junit 5.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>Either use sebipom version 3.0.0 and up or add assertj.core to your test dependencies.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-<div class=sect2>
-<h3 id=_simple_tests>Simple Tests</h3>
-<div class=listingblock>
-<div class=title>test boolean value.</div>
-<div class=content>
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>Either use sebipom version 3.0.0 and up or add assertj.core to your test dependencies.</p></aside>
+<section class="doc-section level-2"><h3 id=_simple_tests>Simple Tests</h3><figure class=listing-block><figcaption>test boolean value.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>  car.start();
-  assertThat( car.motorIsOn() ) <i class=conum data-value=1></i><b>(1)</b>
-      .as(&#34;Motor should be on after start&#34;) <i class=conum data-value=2></i><b>(2)</b>
-      .isTrue(); <i class=conum data-value=3></i><b>(3)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Object of interest, return value of method, which in the test fails if not true.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>Optional description, use in particular when testing primitive values such as boolean.<br>
-Use it to improved the information you get when the test fails.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>The actual verification. Use <code>isTrue()</code> and <code>isFalse()</code> for <code>boolean</code>, <code>isEqualTo()</code> and <code>isEquals()</code> for other types.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=listingblock>
-<div class=title>Another SimpleTest</div>
-<div class=content>
+  assertThat( car.motorIsOn() ) <b class=conum>1</b>
+      .as(&#34;Motor should be on after start&#34;) <b class=conum>2</b>
+      .isTrue(); <b class=conum>3</b></code></pre><ol class="callout-list arabic"><li>Object of interest, return value of method, which in the test fails if not true.</li><li>Optional description, use in particular when testing primitive values such as boolean.<br>
+Use it to improved the information you get when the test fails.</li><li>The actual verification. Use <code>isTrue()</code> and <code>isFalse()</code> for <code>boolean</code>, <code>isEqualTo()</code> and <code>isEquals()</code> for other types.</li></ol></figure>
+<figure class=listing-block><figcaption>Another SimpleTest</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>  assertThat(car.speedLimit())
       .as(&#34;Make it a legal car?&#34;)
-      .isEqualTo(250);</code></pre>
-</div>
-</div>
-<div class=listingblock>
-<div class=title>Equals or same?</div>
-<div class=content>
+      .isEqualTo(250);</code></pre></figure>
+<figure class=listing-block><figcaption>Equals or same?</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    assertThat( f1Champ ).isEqualTo( louis );
-    assertThat( f1Champ ).isSameAs( louis );</code></pre>
-</div>
-</div>
-<div class=paragraph>
+    assertThat( f1Champ ).isSameAs( louis );</code></pre></figure>
 <p>Quiz: what is the difference between the two here: equals and same?</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>To follow along, tweak your IDE. Make sure you have the <a href=/2021/tips.html#_adding_your_own_code_templates_to_netbeans_ide>code template</a> to create a test method.
-Note that the template adds a <strong>fail</strong> line, which should be disabled once the test and the business code agree.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_string_containment>String Containment</h3>
-<div class=listingblock>
-<div class=title>test string containment</div>
-<div class=content>
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>To follow along, tweak your IDE. Make sure you have the <a href=/2021/tips.html#_adding_your_own_code_templates_to_netbeans_ide>code template</a> to create a test method.
+Note that the template adds a <strong>fail</strong> line, which should be disabled once the test and the business code agree.</p></aside></section>
+<section class="doc-section level-2"><h3 id=_string_containment>String Containment</h3><figure class=listing-block><figcaption>test string containment</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>  Student student = ....
 
   assertThat( student.toString() )
-      .isNotNull()                              <i class=conum data-value=1></i><b>(1)</b>
-      .doesNotContainIgnoringCase(&#34;student{&#34;)    <i class=conum data-value=2></i><b>(2)</b>
-      .contains( &#34;Harry&#34;, &#34;Potter&#34;, &#34;1980-07-31&#34;, &#34;12345&#34;); <i class=conum data-value=3></i><b>(3)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Ensure that the next test can inspect a String without tripping over a NPE.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td><em>Auto generated is too simple.</em> Such autogenerated string typically starts with "Student{" for NetBeans IDE.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>The test ensures that the birth date is contained, and 12345 is Harry’s student number.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
-<p>How the string is formatted does not matter for this test to pass. It only requires the shown strings in any order.</p>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_collection_containment>Collection Containment</h3>
-<div class=paragraph>
-<p>For collections there are numerous tests. Collections in this context includes
+      .isNotNull()                              <b class=conum>1</b>
+      .doesNotContainIgnoringCase(&#34;student{&#34;)    <b class=conum>2</b>
+      .contains( &#34;Harry&#34;, &#34;Potter&#34;, &#34;1980-07-31&#34;, &#34;12345&#34;); <b class=conum>3</b></code></pre><ol class="callout-list arabic"><li>Ensure that the next test can inspect a String without tripping over a NPE.</li><li><em>Auto generated is too simple.</em> Such autogenerated string typically starts with "Student{" for NetBeans IDE.</li><li>The test ensures that the birth date is contained, and 12345 is Harry’s student number.</li></ol></figure>
+<p>How the string is formatted does not matter for this test to pass. It only requires the shown strings in any order.</p></section>
+<section class="doc-section level-2"><h3 id=_collection_containment>Collection Containment</h3><p>For collections there are numerous tests. Collections in this context includes
 everything <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Iterable.html>Iterable</a>,
 making it very powerful as can be seen in the Javadoc page of Iterable
 by following the link in this sentence. Look at the sub-interfaces and the implementing classes.</p>
-</div>
-<div class=listingblock>
-<div class=title>simple containment.</div>
-<div class=content>
-<pre class=highlight><code class=language-java data-lang=java>    List&lt;Professor&gt; professors = List.of( SNAPE, DUMBLEDORE, MCGONAGALL ); <i class=conum data-value=1></i><b>(1)</b>
+<figure class=listing-block><figcaption>simple containment.</figcaption>
+<pre class=highlight><code class=language-java data-lang=java>    List&lt;Professor&gt; professors = List.of( SNAPE, DUMBLEDORE, MCGONAGALL ); <b class=conum>1</b>
 
     List&lt;Professor&gt; teachesTransfiguration = professors.stream()
             .filter( p -&gt; p.teaches( &#34;Transfigurations&#34; ) ).collect( toList() );
 
     assertThat( teachesTransfiguration )
-            .isNotNull()                         <i class=conum data-value=2></i><b>(2)</b>
-            .hasSizeGreaterThanOrEqualTo( 2 )    <i class=conum data-value=3></i><b>(3)</b>
-            .contains( DUMBLEDORE, MCGONAGALL ); <i class=conum data-value=4></i><b>(4)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Assume this to be in the business code or SUT.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>Not really required by a good tip to make sure the test does not trip
-over an NPE, which might be confusing.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>The following contains test makes this actually redundant</td>
-</tr>
-<tr>
-<td><i class=conum data-value=4></i><b>4</b></td>
-<td>because we want these two at least.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=listingblock>
-<div class=content>
-<pre class=highlight><code class=language-java data-lang=java>//  List&lt;Student&gt; hogwartsStudents = ...; <i class=conum data-value=1></i><b>(1)</b>
-  List&lt;Student&gt; hogwartsStudents = List.of( HARRY, HERMIONE, RON ); <i class=conum data-value=1></i><b>(1)</b>
+            .isNotNull()                         <b class=conum>2</b>
+            .hasSizeGreaterThanOrEqualTo( 2 )    <b class=conum>3</b>
+            .contains( DUMBLEDORE, MCGONAGALL ); <b class=conum>4</b></code></pre><ol class="callout-list arabic"><li>Assume this to be in the business code or SUT.</li><li>Not really required by a good tip to make sure the test does not trip
+over an NPE, which might be confusing.</li><li>The following contains test makes this actually redundant</li><li>because we want these two at least.</li></ol></figure>
+<div class=listing-block><pre class=highlight><code class=language-java data-lang=java>//  List&lt;Student&gt; hogwartsStudents = ...; <b class=conum>1</b>
+  List&lt;Student&gt; hogwartsStudents = List.of( HARRY, HERMIONE, RON ); <b class=conum>1</b>
 
   assertThat( hogwartsStudents )
-          .isNotNull()                                <i class=conum data-value=2></i><b>(2)</b>
-          .hasSizeGreaterThanOrEqualTo( 3 )           <i class=conum data-value=3></i><b>(3)</b>
-          .extracting( s -&gt; s.getStudentNumber() )    <i class=conum data-value=4></i><b>(4)</b>
-          .containsExactlyInAnyOrder( 12346, 12345, 12347 ); <i class=conum data-value=5></i><b>(5)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Assume that the business code produces such list.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>Mostly self (test) protect.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>Just to show that you can test for not empty, but also exact size, greater etc. This assertion is actually made redundant by the test in 5.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=4></i><b>4</b></td>
-<td>Extract a feature out of each student using a lambda. Its function should be obvious</td>
-</tr>
-<tr>
-<td><i class=conum data-value=5></i><b>5</b></td>
-<td>Then test the list of extracted values for containment.</td>
-</tr>
-</tbody></table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>Because adding a <strong>Non-Null</strong> test is easy and cheap in the fluent style of AssertJ,
+          .isNotNull()                                <b class=conum>2</b>
+          .hasSizeGreaterThanOrEqualTo( 3 )           <b class=conum>3</b>
+          .extracting( s -&gt; s.getStudentNumber() )    <b class=conum>4</b>
+          .containsExactlyInAnyOrder( 12346, 12345, 12347 ); <b class=conum>5</b></code></pre><ol class="callout-list arabic"><li>Assume that the business code produces such list.</li><li>Mostly self (test) protect.</li><li>Just to show that you can test for not empty, but also exact size, greater etc. This assertion is actually made redundant by the test in 5.</li><li>Extract a feature out of each student using a lambda. Its function should be obvious</li><li>Then test the list of extracted values for containment.</li></ol></div>
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>Because adding a <strong>Non-Null</strong> test is easy and cheap in the fluent style of AssertJ,
 it can be beneficial to always do that, so your test can show it as a failure instead of tripping over
 an unexpected <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/NullPointerException.html>NPE</a>.
-It more or less self-protects the test.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_assert_exceptions>Assert Exceptions</h3>
-<div class=paragraph>
-<p>In most business processes you want to avoid exceptions, but when they are expected,
+It more or less self-protects the test.</p></aside></section>
+<section class="doc-section level-2"><h3 id=_assert_exceptions>Assert Exceptions</h3><p>In most business processes you want to avoid exceptions, but when they are expected,
 they must be thrown by the code under test, so that too needs to be tested.</p>
-</div>
-<div class=paragraph>
 <p>There are three cases:</p>
-</div>
-<div class="olist arabic">
-<ol class=arabic>
-<li>
-<p>You are not expecting an exception and do not (want to) care about it.<br>
-Then let it simply occur and if it is a checked exception make your test method throw it.</p>
-</li>
-<li>
-<p>You want specific code <strong class=red>not</strong> to throw an exception and your want to test for that.<br>
-Wrap the suspect code in a lambda and invoke it using <code>assertThatCode( suspectCode )</code>.</p>
-</li>
-<li>
-<p>You <strong class=green>want</strong> a specific exception to be thrown under specific a circumstance.<br>
-Wrap the exception causing code in a lambda and catch and inspect the resulting exception using <code>assertThatThrownBy( causingCode )</code>.</p>
-</li>
-</ol>
-</div>
-<div class=paragraph>
+<div class="olist arabic"><ol class=arabic><li>You are not expecting an exception and do not (want to) care about it.<br>
+Then let it simply occur and if it is a checked exception make your test method throw it.</li><li>You want specific code <strong class=red>not</strong> to throw an exception and your want to test for that.<br>
+Wrap the suspect code in a lambda and invoke it using <code>assertThatCode( suspectCode )</code>.</li><li>You <strong class=green>want</strong> a specific exception to be thrown under specific a circumstance.<br>
+Wrap the exception causing code in a lambda and catch and inspect the resulting exception using <code>assertThatThrownBy( causingCode )</code>.</li></ol></div>
 <p>In AssertJ the exception testing helper have a format that deviates from the <code>assertThat().someCheck(…​)</code> style.
 This inconsistency has to do with the way the exceptions causing code must be called, and cannot easily be avoided.
 We propagate one form, declaring a lambda first and use that as the parameter to exception asserter.</p>
-</div>
-<div class=sect3>
-<h4 id=_ignore_or_pass_on>Ignore or pass on</h4>
-<div class=paragraph>
-<p>In case you are not interested in an exception in your test, but it is a checked exception, simply declare your test method to throw it.</p>
-</div>
-<div class=listingblock>
-<div class=title>Case 1: not interested in the (checked) exception, add a throws clause.</div>
-<div class=content>
+<section class="doc-section level-3"><h4 id=_ignore_or_pass_on>Ignore or pass on</h4><p>In case you are not interested in an exception in your test, but it is a checked exception, simply declare your test method to throw it.</p>
+<figure class=listing-block><figcaption>Case 1: not interested in the (checked) exception, add a throws clause.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    @Test
-    public void fileUsingMethod() throws IOException { <i class=conum data-value=1></i><b>(1)</b>
-        Files.lines(Path.of (&#34;puk.txt&#34;) );  <i class=conum data-value=2></i><b>(2)</b>
-    }</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>This code potentially throws an <code>IOException</code>, but you are not interested in testing the exception. If it occurs,
-let the caller (Test Runner) deal with this unexpected situation. The IOException is an example.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>This is the method that throws the checked exception. This is an example. Normally it should be a business method.</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<div class=sect3>
-<h4 id=_exception_not_wanted>Exception NOT wanted.</h4>
-<div class=paragraph>
-<p>If you want the check for an exception NOT to occur when invoking a code sequence, isolate the sequence
+    public void fileUsingMethod() throws IOException { <b class=conum>1</b>
+        Files.lines(Path.of (&#34;puk.txt&#34;) );  <b class=conum>2</b>
+    }</code></pre><ol class="callout-list arabic"><li>This code potentially throws an <code>IOException</code>, but you are not interested in testing the exception. If it occurs,
+let the caller (Test Runner) deal with this unexpected situation. The IOException is an example.</li><li>This is the method that throws the checked exception. This is an example. Normally it should be a business method.</li></ol></figure>
+</section>
+<section class="doc-section level-3"><h4 id=_exception_not_wanted>Exception NOT wanted.</h4><p>If you want the check for an exception NOT to occur when invoking a code sequence, isolate the sequence
 in a lambda expression of the form <code>ThrowingCallable code =() → { suspectCode(); }</code>.<br>
 ThrowingCallable is a Functional interface and is part of AssertJ.</p>
-</div>
-<div class=listingblock>
-<div class=title>Case 2: the business code should explicitly NOT throw an exception.</div>
-<div class=content>
+<figure class=listing-block><figcaption>Case 2: the business code should explicitly NOT throw an exception.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    Student draco = new Student(&#34;Draco&#34;, &#34;Malfoy&#34;, LocalDate.of (1980,6,5));
     ThrowingCallable code = () -&gt; {
-        hogwarts.addStudent( draco );  <i class=conum data-value=1></i><b>(1)</b>
+        hogwarts.addStudent( draco );  <b class=conum>1</b>
     };
 
     assertThatCode( code)
             .as( &#34;draco should be accepted to make the adventures possible&#34;)
-            .doesNotThrowAnyException();</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Is the only code that is checked for exceptions. This isolates the "suspect" code from
-any other code that may cause issues.</td>
-</tr>
-</tbody></table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-note" title=Note></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>Sometimes you may have the situation that exceptions appear to come out of the blue, as in you have
+            .doesNotThrowAnyException();</code></pre><ol class="callout-list arabic"><li>Is the only code that is checked for exceptions. This isolates the "suspect" code from
+any other code that may cause issues.</li></ol></figure>
+<aside class="admonition-block note" role=note><h6 class="block-title label-only"><span class=title-label>Note: </span></h6><p>Sometimes you may have the situation that exceptions appear to come out of the blue, as in you have
 no idea what causes it and the stack trace is not very helpful either. In such cases, use this test method
-to isolate the problematic code.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<div class=sect3>
-<h4 id=_exception_needs_to_occur>Exception needs to occur.</h4>
-<div class=paragraph>
-<p>When you want your business code to throw an exception, wrap that business code (the method invocations) in a lambda expression,
+to isolate the problematic code.</p></aside></section>
+<section class="doc-section level-3"><h4 id=_exception_needs_to_occur>Exception needs to occur.</h4><p>When you want your business code to throw an exception, wrap that business code (the method invocations) in a lambda expression,
 in the same way as in the previous paragraph, then pass that <code>code</code> to the exception assert method.</p>
-</div>
-<div class=listingblock>
-<div class=title>Catch a specific exception.</div>
-<div class=content>
+<figure class=listing-block><figcaption>Catch a specific exception.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    @Test
     public void addIllegalProfessor() {
-        var malfoy = new Professor( &#34;Lucius&#34;, &#34;Malfoy&#34;, LocalDate.of( 1953, 10, 9 ) ); <i class=conum data-value=1></i><b>(1)</b>
+        var malfoy = new Professor( &#34;Lucius&#34;, &#34;Malfoy&#34;, LocalDate.of( 1953, 10, 9 ) ); <b class=conum>1</b>
 
-        ThrowingCallable code = () -&gt; { <i class=conum data-value=2></i><b>(2)</b>
+        ThrowingCallable code = () -&gt; { <b class=conum>2</b>
             hogwarts.addProfessor( malfoy );
         };
 
         assertThatThrownBy( code )
-                .isInstanceOf( Exception.class) <i class=conum data-value=3></i><b>(3)</b>
-                .isExactlyInstanceOf( IllegalArgumentException.class) <i class=conum data-value=4></i><b>(4)</b>
-                .hasMessageContainingAll( &#34;should&#34;,&#34;teach&#34;); <i class=conum data-value=5></i><b>(5)</b>
+                .isInstanceOf( Exception.class) <b class=conum>3</b>
+                .isExactlyInstanceOf( IllegalArgumentException.class) <b class=conum>4</b>
+                .hasMessageContainingAll( &#34;should&#34;,&#34;teach&#34;); <b class=conum>5</b>
         // fail( &#34;addIllegalProfessor completed succesfully; you know what to do&#34; );
-    }</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Someone that knows his classics understands that this crook can’t be professor at Hogwarts.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>The lambda defines the throwing code. <code>org.assertj.core.api.ThrowableAssert.ThrowingCallable</code> is the functional interface for this purpose.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>Sometimes it is good to be a bit relaxed on the exception type like in this line.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=4></i><b>4</b></td>
-<td>Or you need to be quite specific. You need only one, so choose either line 2 or 3. This is just an illustration.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=5></i><b>5</b></td>
-<td>You might want to inspect the message for keywords.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
+    }</code></pre><ol class="callout-list arabic"><li>Someone that knows his classics understands that this crook can’t be professor at Hogwarts.</li><li>The lambda defines the throwing code. <code>org.assertj.core.api.ThrowableAssert.ThrowingCallable</code> is the functional interface for this purpose.</li><li>Sometimes it is good to be a bit relaxed on the exception type like in this line.</li><li>Or you need to be quite specific. You need only one, so choose either line 2 or 3. This is just an illustration.</li><li>You might want to inspect the message for keywords.</li></ol></figure>
 <p>In this fluent style you can check many more things. See the <a href=https://assertj.github.io/doc/>AssertJ user guide</a>
 and <a href=https://javadoc.io/doc/org.assertj/assertj-core/latest/index.html>API</a> for that.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>The general advise is to have only one (1) assert per test method. This makes the test method very focused.
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>The general advise is to have only one (1) assert per test method. This makes the test method very focused.
 Stick to this rule and do not test unrelated features.
 Also note that when a failure occurs (a test fails or an exception is thrown), the rest of the test is not executed anymore,
-and this will therefor obscure further asserts in the same test method.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class=sect1>
-<h2 id=_soft_assertions>Soft Assertions</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p>Sometimes you have a pressing need to assert more than one thing in a test method,
+and this will therefor obscure further asserts in the same test method.</p></aside></section></section></section>
+<section class="doc-section level-1"><h2 id=_soft_assertions>Soft Assertions</h2><p>Sometimes you have a pressing need to assert more than one thing in a test method,
 because two or more values always come in pairs and setting stuff up and dividing it over multiple
 methods would make the test less readable, which is bad.</p>
-</div>
-<div class=paragraph>
 <p>However, having multiple asserts in one method is bad style, because
 the first problem that occurs is the only failure that will be reported by the test. You could say that the first
 failure dominates or monopolizes the test method.</p>
-</div>
-<div class=paragraph>
 <p>However the rule above makes writing tests a bit awkward. In particular when there are multiple aspects to be tested on the
 same result object. In that case a soft assertion may be helpful.
 A soft assertion will fail "softly", meaning that the failure is recorded, but the test can still continue to verify another aspect.
 The soft assertion will collect all failures and will report them after the soft assertion is <strong>closed</strong>.</p>
-</div>
-<div class=listingblock>
-<div class=title>soft assertion, testing both key and value of a KeyValue object.</div>
-<div class=content>
+<figure class=listing-block><figcaption>soft assertion, testing both key and value of a KeyValue object.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>   void testGetResult(){
     // some setup
     Optional&lt;KeyValue&lt;Integer,Double&gt;&gt; = new gf(student).gradeFor(&#34;PRC2&#34;);
-    SoftAssertions.assertSoftly( softly -&gt; { <i class=conum data-value=1></i><b>(1)</b>
+    SoftAssertions.assertSoftly( softly -&gt; { <b class=conum>1</b>
                 AbstractMap.SimpleEntry&lt;Integer, Double&gt; result = gf.getResult();
                 softly.assertThat( result )
                     .extracting( &#34;key&#34; )
@@ -938,178 +397,46 @@ The soft assertion will collect all failures and will report them after the soft
                 softly.assertThat( result )
                     .extracting( &#34;value&#34; )
                     .isEqualTo( grade );
-    }); <i class=conum data-value=2></i><b>(2)</b>
-  }</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Starts the lambda that encloses the soft assertions. <strong>Softly</strong> serves as the collector of the failures</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>Closes the sequence of soft assertions. This is the spot where SoftAssertion will report the the failures, if any.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
-<p>In the example, the key and value in the KeyValue pair are related, making a soft assertion applicable.</p>
-</div>
-</div>
-</div>
-<div class=sect1>
-<h2 id=_assumptions>Assumptions</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p>There are test cases that are only useful under certain conditions:</p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>The test is only meaningful on a specific Operating System.</p>
-</li>
-<li>
-<p>The test needs a database connection and only executes when available.</p>
-</li>
-<li>
-<p>A file must be present.</p>
-</li>
-<li>
-<p>A 'slow' test flag is set in some file, which only executes the test when that flag is set.
-Used to avoid slow tests in the normal write-compile-test cycle.</p>
-</li>
-</ul>
-</div>
-<div class=paragraph>
+    }); <b class=conum>2</b>
+  }</code></pre><ol class="callout-list arabic"><li>Starts the lambda that encloses the soft assertions. <strong>Softly</strong> serves as the collector of the failures</li><li>Closes the sequence of soft assertions. This is the spot where SoftAssertion will report the the failures, if any.</li></ol></figure>
+<p>In the example, the key and value in the KeyValue pair are related, making a soft assertion applicable.</p></section>
+<section class="doc-section level-1"><h2 id=_assumptions>Assumptions</h2><p>There are test cases that are only useful under certain conditions:</p>
+<div class=ulist><ul><li>The test is only meaningful on a specific Operating System.</li><li>The test needs a database connection and only executes when available.</li><li>A file must be present.</li><li>A 'slow' test flag is set in some file, which only executes the test when that flag is set.
+Used to avoid slow tests in the normal write-compile-test cycle.</li></ul></div>
 <p>For this you can use <strong>Assume</strong>.</p>
-</div>
-<div class=paragraph>
 <p>There are two variants relevant:</p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>the <a href=https://junit.org/junit5/docs/current/user-guide/#writing-tests-assumptions>JUnit5 style Assumptions</a></p>
-</li>
-<li>
-<p>The <a href=https://assertj.github.io/doc/#assertj-core-assumptions>Assert-J flavor Assumptions</a></p>
-</li>
-</ul>
-</div>
-<div class=paragraph>
+<div class=ulist><ul><li>the <a href=https://junit.org/junit5/docs/current/user-guide/#writing-tests-assumptions>JUnit5 style Assumptions</a></li><li>The <a href=https://assertj.github.io/doc/#assertj-core-assumptions>Assert-J flavor Assumptions</a></li></ul></div>
 <p>You can use the Assumption test in the setup methods (the one with <code>@BeforeXXX</code>), to completely disable all tests in one test class,
 instead of having each test doing the <code>assumeXXX</code> test. A test that has been canceled because of a failing assumption will
 appear as a skipped test, similar to a disabled test with <code>@Disabled</code>.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>If you want to disable a whole test class, Do the assumption in a @BeforeAll annotated static setupClass() method.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>If you want to disable a whole test class, Do the assumption in a @BeforeAll annotated static setupClass() method.</p></aside>
 <p>The JUnit 5 Assumtions are effective, but can only test for true or false, so you need to
 feed it a boolean expression. Look at the <a href=https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api/Assumptions.html target=_blank rel=noopener>API </a> to see all features.
 But simple may be just perfect here.</p>
-</div>
-<div class=listingblock>
-<div class=title>Disable on staging machine. From JUnit 5 user guide.</div>
-<div class=content>
+<figure class=listing-block><figcaption>Disable on staging machine. From JUnit 5 user guide.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    @Test
     void testOnlyOnDeveloperWorkstation() {
         assumeTrue(&#34;DEV&#34;.equals(System.getenv(&#34;ENV&#34;)), &#34;Aborting test: not on developer workstation&#34;);
         // remainder of test is only executed if on developer machine
-    }</code></pre>
-</div>
-</div>
-<div class=paragraph>
+    }</code></pre></figure>
 <p>You guessed it, AssertJ Assumptions are richer. In most cases,
 the assumption has the same form as an assert that, as in replace <strong>assert</strong> with <strong>assume</strong> and you are done.
 So any <code>assertThat(…​)</code> that you already have can simply be turned into an <code>assumeThat(…​)</code>.</p>
-</div>
-<div class=paragraph>
 <p>If nothing else, using assertj may make your tests more readable and have a consistent look and feel.</p>
-</div>
-<div class=listingblock>
-<div class=title>Disable test if file does not exists</div>
-<div class=content>
+<figure class=listing-block><figcaption>Disable test if file does not exists</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    File f = new File(Path.of(&#34;testData.dat&#34;));
     assumeThat(f)
        .as(&#34;Test data file not available, skipping test&#34;)
-       .exists();</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class=sect1>
-<h2 id=_additional_pointers>Additional pointers</h2>
-<div class=sectionbody>
-<div class=ulist>
-<ul>
-<li>
-<p><a href=https://assertj.github.io/doc/ target=_blank rel=noopener>AssertJ - fluent assertions java library </a></p>
-</li>
-<li>
-<p><a href=https://junit.org/junit5/docs/current/user-guide/ target=_blank rel=noopener>JUnit 5 User Guide </a></p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-note" title=Note></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>Check out <a href=https://assertj.github.io/doc/#assertj-core-assertions-guide>this guide on assertions with AssertJ</a>!</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-<hr>
-</div>
-</div>
+       .exists();</code></pre></figure></section>
+<section class="doc-section level-1"><h2 id=_additional_pointers>Additional pointers</h2><div class=ulist><ul><li><a href=https://assertj.github.io/doc/ target=_blank rel=noopener>AssertJ - fluent assertions java library </a></li><li><a href=https://junit.org/junit5/docs/current/user-guide/ target=_blank rel=noopener>JUnit 5 User Guide </a></li></ul></div>
+<aside class="admonition-block note" role=note><h6 class="block-title label-only"><span class=title-label>Note: </span></h6><p>Check out <a href=https://assertj.github.io/doc/#assertj-core-assertions-guide>this guide on assertions with AssertJ</a>!</p></aside>
+<hr></section>
 </article>
 </div><footer class="text-sm leading-6 mt-12 mb-5">
 Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
 </footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
 <h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#_write_your_own_tests>Write your own tests!</a></li>
-<li><a href=#_testing_test_driven_development>Testing / Test Driven Development</a>
-<ul>
-<li><a href=#_what_are_tests_and_why_do_we_need_them>What are tests and why do we need them?</a></li>
-<li><a href=#_test_driven_development_tdd>Test Driven Development (TDD)</a></li>
-</ul>
-</li>
-<li><a href=#_arrange_act_assert>Arrange Act Assert</a></li>
-<li><a href=#_clues_needed>Clues needed</a></li>
-<li><a href=#_assertj_examples>AssertJ examples.</a>
-<ul>
-<li><a href=#_simple_tests>Simple Tests</a></li>
-<li><a href=#_string_containment>String Containment</a></li>
-<li><a href=#_collection_containment>Collection Containment</a></li>
-<li><a href=#_assert_exceptions>Assert Exceptions</a></li>
-</ul>
-</li>
-<li><a href=#_soft_assertions>Soft Assertions</a></li>
-<li><a href=#_assumptions>Assumptions</a></li>
-<li><a href=#_additional_pointers>Additional pointers</a></li>
-</ul>
-</nav>
+<nav id=TableOfContents></nav>
 </div></div>
 <div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
 </div><script src=/prc2_web/js/main.min.b2d2aacc67a4fbfee5649e3e537fc94f29bf22f190969d5f638686db689d5ca8807e2cceb3fb584dc3a750507a50fdd438390deb2a79e5edd1800de8f026cdd3.js integrity="sha512-stKqzGek+/7lZJ4+U3/JTym/IvGQlp1fY4aG22idXKiAfizOs/tYTcOnUFB6UP3UODkN6yp55e3RgA3o8CbN0w==" crossorigin=anonymous></script>

@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.6bbfac3e9ea7b164109aa40012f29e9029127151833cdc96df151e0caaebaa8d86c1455928064e1683797924394669a9d05834762cd13d252eb572e3ca5cee52.css integrity="sha512-a7+sPp6nsWQQmqQAEvKekCkScVGDPNyW3xUeDKrrqo2GwUVZKAZOFoN5eSQ5Rmmp0Fg0dizRPSUutXLjylzuUg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.356ec2ba03cdae42868c30d28814db5ef90d1cc106dd9e2844e17d2c9d8c78c1d462a67a6ba488bc7241161206086f4c09455c4cb49f6a00f7190bf42e2f6add.css integrity="sha512-NW7CugPNrkKGjDDSiBTbXvkNHMEG3Z4oROF9LJ2MeMHUYqZ6a6SIvHJBFhIGCG9MCUVcTLSfagD3GQv0Li9q3Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 <script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
@@ -69,439 +69,129 @@ Desgin for testability
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<div class=sect1>
-<h2 id=_assertj_examples>AssertJ examples.</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p>In our course we to stick to <a href=https://assertj.github.io/doc/>AssertJ</a> library where possible.</p>
-</div>
-<div class=paragraph>
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_assertj_examples>AssertJ examples.</a><ol class="toc-list level-2"><li><a href=#_simple_tests>Simple Tests</a></li><li><a href=#_string_containment>String Containment</a></li><li><a href=#_collection_containment>Collection Containment</a></li><li><a href=#_assert_exceptions>Assert Exceptions</a></li></ol></li></ol></nav><section class="doc-section level-1"><h2 id=_assertj_examples>AssertJ examples.</h2><p>In our course we to stick to <a href=https://assertj.github.io/doc/>AssertJ</a> library where possible.</p>
 <p>The rationale for that is:</p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>The AssertJ assertion API is very powerful and can easily turn overly strict or brittle tests into more effective tests.<br>
+<div class=ulist><ul><li>The AssertJ assertion API is very powerful and can easily turn overly strict or brittle tests into more effective tests.<br>
 You have come across tests in the mooc that insisted on specific formatting.
-With AssertJ you can specify elements you want to see and do not want to see. See examples below.</p>
-</li>
-<li>
-<p>AssertJ tests tend to be quite <strong>readable</strong>, once you get used to the fluent style. You will see long method names,
-but they help understanding what is going on a no-brainer.</p>
-</li>
-<li>
-<p>AssertJ can protect the test methods against unexpected exceptions, such as null pointers (NPE) before doing further tests.</p>
-</li>
-<li>
-<p>With the exception of <em>testing exceptions</em>, the userinterface and api of AssertJ is quite consistent.<br>
-You always start with <code>assertThat( objectOfInterest ).assertingMethod(…​)</code>.<br></p>
-</li>
-</ul>
-</div>
-<div class=paragraph>
+With AssertJ you can specify elements you want to see and do not want to see. See examples below.</li><li>AssertJ tests tend to be quite <strong>readable</strong>, once you get used to the fluent style. You will see long method names,
+but they help understanding what is going on a no-brainer.</li><li>AssertJ can protect the test methods against unexpected exceptions, such as null pointers (NPE) before doing further tests.</li><li>With the exception of <em>testing exceptions</em>, the userinterface and api of AssertJ is quite consistent.<br>
+You always start with <code>assertThat( objectOfInterest ).assertingMethod(…​)</code>.<br></li></ul></div>
 <p>We try to use the latest stable version of AssertJ and Junit 5.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>Either use sebipom version 3.0.0 and up or add assertj.core to your test dependencies.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-<div class=sect2>
-<h3 id=_simple_tests>Simple Tests</h3>
-<div class=listingblock>
-<div class=title>test boolean value.</div>
-<div class=content>
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>Either use sebipom version 3.0.0 and up or add assertj.core to your test dependencies.</p></aside>
+<section class="doc-section level-2"><h3 id=_simple_tests>Simple Tests</h3><figure class=listing-block><figcaption>test boolean value.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>  car.start();
-  assertThat( car.motorIsOn() ) <i class=conum data-value=1></i><b>(1)</b>
-      .as(&#34;Motor should be on after start&#34;) <i class=conum data-value=2></i><b>(2)</b>
-      .isTrue(); <i class=conum data-value=3></i><b>(3)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Object of interest, return value of method, which in the test fails if not true.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>Optional description, use in particular when testing primitive values such as boolean.<br>
-Use it to improved the information you get when the test fails.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>The actual verification. Use <code>isTrue()</code> and <code>isFalse()</code> for <code>boolean</code>, <code>isEqualTo()</code> and <code>isEquals()</code> for other types.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=listingblock>
-<div class=title>Another SimpleTest</div>
-<div class=content>
+  assertThat( car.motorIsOn() ) <b class=conum>1</b>
+      .as(&#34;Motor should be on after start&#34;) <b class=conum>2</b>
+      .isTrue(); <b class=conum>3</b></code></pre><ol class="callout-list arabic"><li>Object of interest, return value of method, which in the test fails if not true.</li><li>Optional description, use in particular when testing primitive values such as boolean.<br>
+Use it to improved the information you get when the test fails.</li><li>The actual verification. Use <code>isTrue()</code> and <code>isFalse()</code> for <code>boolean</code>, <code>isEqualTo()</code> and <code>isEquals()</code> for other types.</li></ol></figure>
+<figure class=listing-block><figcaption>Another SimpleTest</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>  assertThat(car.speedLimit())
       .as(&#34;Make it a legal car?&#34;)
-      .isEqualTo(250);</code></pre>
-</div>
-</div>
-<div class=listingblock>
-<div class=title>Equals or same?</div>
-<div class=content>
+      .isEqualTo(250);</code></pre></figure>
+<figure class=listing-block><figcaption>Equals or same?</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    assertThat( f1Champ ).isEqualTo( louis );
-    assertThat( f1Champ ).isSameAs( louis );</code></pre>
-</div>
-</div>
-<div class=paragraph>
+    assertThat( f1Champ ).isSameAs( louis );</code></pre></figure>
 <p>Quiz: what is the difference between the two here: equals and same?</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>To follow along, tweak your IDE. Make sure you have the <a href=/2021/tips.html#_adding_your_own_code_templates_to_netbeans_ide>code template</a> to create a test method.
-Note that the template adds a <strong>fail</strong> line, which should be disabled once the test and the business code agree.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_string_containment>String Containment</h3>
-<div class=listingblock>
-<div class=title>test string containment</div>
-<div class=content>
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>To follow along, tweak your IDE. Make sure you have the <a href=/2021/tips.html#_adding_your_own_code_templates_to_netbeans_ide>code template</a> to create a test method.
+Note that the template adds a <strong>fail</strong> line, which should be disabled once the test and the business code agree.</p></aside></section>
+<section class="doc-section level-2"><h3 id=_string_containment>String Containment</h3><figure class=listing-block><figcaption>test string containment</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>  Student student = ....
 
   assertThat( student.toString() )
-      .isNotNull()                              <i class=conum data-value=1></i><b>(1)</b>
-      .doesNotContainIgnoringCase(&#34;student{&#34;)    <i class=conum data-value=2></i><b>(2)</b>
-      .contains( &#34;Harry&#34;, &#34;Potter&#34;, &#34;1980-07-31&#34;, &#34;12345&#34;); <i class=conum data-value=3></i><b>(3)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Ensure that the next test can inspect a String without tripping over a NPE.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td><em>Auto generated is too simple.</em> Such autogenerated string typically starts with "Student{" for NetBeans IDE.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>The test ensures that the birth date is contained, and 12345 is Harry’s student number.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
-<p>How the string is formatted does not matter for this test to pass. It only requires the shown strings in any order.</p>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_collection_containment>Collection Containment</h3>
-<div class=paragraph>
-<p>For collections there are numerous tests. Collections in this context includes
+      .isNotNull()                              <b class=conum>1</b>
+      .doesNotContainIgnoringCase(&#34;student{&#34;)    <b class=conum>2</b>
+      .contains( &#34;Harry&#34;, &#34;Potter&#34;, &#34;1980-07-31&#34;, &#34;12345&#34;); <b class=conum>3</b></code></pre><ol class="callout-list arabic"><li>Ensure that the next test can inspect a String without tripping over a NPE.</li><li><em>Auto generated is too simple.</em> Such autogenerated string typically starts with "Student{" for NetBeans IDE.</li><li>The test ensures that the birth date is contained, and 12345 is Harry’s student number.</li></ol></figure>
+<p>How the string is formatted does not matter for this test to pass. It only requires the shown strings in any order.</p></section>
+<section class="doc-section level-2"><h3 id=_collection_containment>Collection Containment</h3><p>For collections there are numerous tests. Collections in this context includes
 everything <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Iterable.html>Iterable</a>,
 making it very powerful as can be seen in the Javadoc page of Iterable
 by following the link in this sentence. Look at the sub-interfaces and the implementing classes.</p>
-</div>
-<div class=listingblock>
-<div class=title>simple containment.</div>
-<div class=content>
-<pre class=highlight><code class=language-java data-lang=java>    List&lt;Professor&gt; professors = List.of( SNAPE, DUMBLEDORE, MCGONAGALL ); <i class=conum data-value=1></i><b>(1)</b>
+<figure class=listing-block><figcaption>simple containment.</figcaption>
+<pre class=highlight><code class=language-java data-lang=java>    List&lt;Professor&gt; professors = List.of( SNAPE, DUMBLEDORE, MCGONAGALL ); <b class=conum>1</b>
 
     List&lt;Professor&gt; teachesTransfiguration = professors.stream()
             .filter( p -&gt; p.teaches( &#34;Transfigurations&#34; ) ).collect( toList() );
 
     assertThat( teachesTransfiguration )
-            .isNotNull()                         <i class=conum data-value=2></i><b>(2)</b>
-            .hasSizeGreaterThanOrEqualTo( 2 )    <i class=conum data-value=3></i><b>(3)</b>
-            .contains( DUMBLEDORE, MCGONAGALL ); <i class=conum data-value=4></i><b>(4)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Assume this to be in the business code or SUT.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>Not really required by a good tip to make sure the test does not trip
-over an NPE, which might be confusing.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>The following contains test makes this actually redundant</td>
-</tr>
-<tr>
-<td><i class=conum data-value=4></i><b>4</b></td>
-<td>because we want these two at least.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=listingblock>
-<div class=content>
-<pre class=highlight><code class=language-java data-lang=java>//  List&lt;Student&gt; hogwartsStudents = ...; <i class=conum data-value=1></i><b>(1)</b>
-  List&lt;Student&gt; hogwartsStudents = List.of( HARRY, HERMIONE, RON ); <i class=conum data-value=1></i><b>(1)</b>
+            .isNotNull()                         <b class=conum>2</b>
+            .hasSizeGreaterThanOrEqualTo( 2 )    <b class=conum>3</b>
+            .contains( DUMBLEDORE, MCGONAGALL ); <b class=conum>4</b></code></pre><ol class="callout-list arabic"><li>Assume this to be in the business code or SUT.</li><li>Not really required by a good tip to make sure the test does not trip
+over an NPE, which might be confusing.</li><li>The following contains test makes this actually redundant</li><li>because we want these two at least.</li></ol></figure>
+<div class=listing-block><pre class=highlight><code class=language-java data-lang=java>//  List&lt;Student&gt; hogwartsStudents = ...; <b class=conum>1</b>
+  List&lt;Student&gt; hogwartsStudents = List.of( HARRY, HERMIONE, RON ); <b class=conum>1</b>
 
   assertThat( hogwartsStudents )
-          .isNotNull()                                <i class=conum data-value=2></i><b>(2)</b>
-          .hasSizeGreaterThanOrEqualTo( 3 )           <i class=conum data-value=3></i><b>(3)</b>
-          .extracting( s -&gt; s.getStudentNumber() )    <i class=conum data-value=4></i><b>(4)</b>
-          .containsExactlyInAnyOrder( 12346, 12345, 12347 ); <i class=conum data-value=5></i><b>(5)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Assume that the business code produces such list.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>Mostly self (test) protect.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>Just to show that you can test for not empty, but also exact size, greater etc. This assertion is actually made redundant by the test in 5.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=4></i><b>4</b></td>
-<td>Extract a feature out of each student using a lambda. Its function should be obvious</td>
-</tr>
-<tr>
-<td><i class=conum data-value=5></i><b>5</b></td>
-<td>Then test the list of extracted values for containment.</td>
-</tr>
-</tbody></table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>Because adding a <strong>Non-Null</strong> test is easy and cheap in the fluent style of AssertJ,
+          .isNotNull()                                <b class=conum>2</b>
+          .hasSizeGreaterThanOrEqualTo( 3 )           <b class=conum>3</b>
+          .extracting( s -&gt; s.getStudentNumber() )    <b class=conum>4</b>
+          .containsExactlyInAnyOrder( 12346, 12345, 12347 ); <b class=conum>5</b></code></pre><ol class="callout-list arabic"><li>Assume that the business code produces such list.</li><li>Mostly self (test) protect.</li><li>Just to show that you can test for not empty, but also exact size, greater etc. This assertion is actually made redundant by the test in 5.</li><li>Extract a feature out of each student using a lambda. Its function should be obvious</li><li>Then test the list of extracted values for containment.</li></ol></div>
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>Because adding a <strong>Non-Null</strong> test is easy and cheap in the fluent style of AssertJ,
 it can be beneficial to always do that, so your test can show it as a failure instead of tripping over
 an unexpected <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/NullPointerException.html>NPE</a>.
-It more or less self-protects the test.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_assert_exceptions>Assert Exceptions</h3>
-<div class=paragraph>
-<p>In most business processes you want to avoid exceptions, but when they are expected,
+It more or less self-protects the test.</p></aside></section>
+<section class="doc-section level-2"><h3 id=_assert_exceptions>Assert Exceptions</h3><p>In most business processes you want to avoid exceptions, but when they are expected,
 they must be thrown by the code under test, so that too needs to be tested.</p>
-</div>
-<div class=paragraph>
 <p>There are three cases:</p>
-</div>
-<div class="olist arabic">
-<ol class=arabic>
-<li>
-<p>You are not expecting an exception and do not (want to) care about it.<br>
-Then let it simply occur and if it is a checked exception make your test method throw it.</p>
-</li>
-<li>
-<p>You want specific code <strong class=red>not</strong> to throw an exception and your want to test for that.<br>
-Wrap the suspect code in a lambda and invoke it using <code>assertThatCode( suspectCode )</code>.</p>
-</li>
-<li>
-<p>You <strong class=green>want</strong> a specific exception to be thrown under specific a circumstance.<br>
-Wrap the exception causing code in a lambda and catch and inspect the resulting exception using <code>assertThatThrownBy( causingCode )</code>.</p>
-</li>
-</ol>
-</div>
-<div class=paragraph>
+<div class="olist arabic"><ol class=arabic><li>You are not expecting an exception and do not (want to) care about it.<br>
+Then let it simply occur and if it is a checked exception make your test method throw it.</li><li>You want specific code <strong class=red>not</strong> to throw an exception and your want to test for that.<br>
+Wrap the suspect code in a lambda and invoke it using <code>assertThatCode( suspectCode )</code>.</li><li>You <strong class=green>want</strong> a specific exception to be thrown under specific a circumstance.<br>
+Wrap the exception causing code in a lambda and catch and inspect the resulting exception using <code>assertThatThrownBy( causingCode )</code>.</li></ol></div>
 <p>In AssertJ the exception testing helper have a format that deviates from the <code>assertThat().someCheck(…​)</code> style.
 This inconsistency has to do with the way the exceptions causing code must be called, and cannot easily be avoided.
 We propagate one form, declaring a lambda first and use that as the parameter to exception asserter.</p>
-</div>
-<div class=sect3>
-<h4 id=_ignore_or_pass_on>Ignore or pass on</h4>
-<div class=paragraph>
-<p>In case you are not interested in an exception in your test, but it is a checked exception, simply declare your test method to throw it.</p>
-</div>
-<div class=listingblock>
-<div class=title>Case 1: not interested in the (checked) exception, add a throws clause.</div>
-<div class=content>
+<section class="doc-section level-3"><h4 id=_ignore_or_pass_on>Ignore or pass on</h4><p>In case you are not interested in an exception in your test, but it is a checked exception, simply declare your test method to throw it.</p>
+<figure class=listing-block><figcaption>Case 1: not interested in the (checked) exception, add a throws clause.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    @Test
-    public void fileUsingMethod() throws IOException { <i class=conum data-value=1></i><b>(1)</b>
-        Files.lines(Path.of (&#34;puk.txt&#34;) );  <i class=conum data-value=2></i><b>(2)</b>
-    }</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>This code potentially throws an <code>IOException</code>, but you are not interested in testing the exception. If it occurs,
-let the caller (Test Runner) deal with this unexpected situation. The IOException is an example.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>This is the method that throws the checked exception. This is an example. Normally it should be a business method.</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<div class=sect3>
-<h4 id=_exception_not_wanted>Exception NOT wanted.</h4>
-<div class=paragraph>
-<p>If you want the check for an exception NOT to occur when invoking a code sequence, isolate the sequence
+    public void fileUsingMethod() throws IOException { <b class=conum>1</b>
+        Files.lines(Path.of (&#34;puk.txt&#34;) );  <b class=conum>2</b>
+    }</code></pre><ol class="callout-list arabic"><li>This code potentially throws an <code>IOException</code>, but you are not interested in testing the exception. If it occurs,
+let the caller (Test Runner) deal with this unexpected situation. The IOException is an example.</li><li>This is the method that throws the checked exception. This is an example. Normally it should be a business method.</li></ol></figure>
+</section>
+<section class="doc-section level-3"><h4 id=_exception_not_wanted>Exception NOT wanted.</h4><p>If you want the check for an exception NOT to occur when invoking a code sequence, isolate the sequence
 in a lambda expression of the form <code>ThrowingCallable code =() → { suspectCode(); }</code>.<br>
 ThrowingCallable is a Functional interface and is part of AssertJ.</p>
-</div>
-<div class=listingblock>
-<div class=title>Case 2: the business code should explicitly NOT throw an exception.</div>
-<div class=content>
+<figure class=listing-block><figcaption>Case 2: the business code should explicitly NOT throw an exception.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    Student draco = new Student(&#34;Draco&#34;, &#34;Malfoy&#34;, LocalDate.of (1980,6,5));
     ThrowingCallable code = () -&gt; {
-        hogwarts.addStudent( draco );  <i class=conum data-value=1></i><b>(1)</b>
+        hogwarts.addStudent( draco );  <b class=conum>1</b>
     };
 
     assertThatCode( code)
             .as( &#34;draco should be accepted to make the adventures possible&#34;)
-            .doesNotThrowAnyException();</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Is the only code that is checked for exceptions. This isolates the "suspect" code from
-any other code that may cause issues.</td>
-</tr>
-</tbody></table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-note" title=Note></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>Sometimes you may have the situation that exceptions appear to come out of the blue, as in you have
+            .doesNotThrowAnyException();</code></pre><ol class="callout-list arabic"><li>Is the only code that is checked for exceptions. This isolates the "suspect" code from
+any other code that may cause issues.</li></ol></figure>
+<aside class="admonition-block note" role=note><h6 class="block-title label-only"><span class=title-label>Note: </span></h6><p>Sometimes you may have the situation that exceptions appear to come out of the blue, as in you have
 no idea what causes it and the stack trace is not very helpful either. In such cases, use this test method
-to isolate the problematic code.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<div class=sect3>
-<h4 id=_exception_needs_to_occur>Exception needs to occur.</h4>
-<div class=paragraph>
-<p>When you want your business code to throw an exception, wrap that business code (the method invocations) in a lambda expression,
+to isolate the problematic code.</p></aside></section>
+<section class="doc-section level-3"><h4 id=_exception_needs_to_occur>Exception needs to occur.</h4><p>When you want your business code to throw an exception, wrap that business code (the method invocations) in a lambda expression,
 in the same way as in the previous paragraph, then pass that <code>code</code> to the exception assert method.</p>
-</div>
-<div class=listingblock>
-<div class=title>Catch a specific exception.</div>
-<div class=content>
+<figure class=listing-block><figcaption>Catch a specific exception.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    @Test
     public void addIllegalProfessor() {
-        var malfoy = new Professor( &#34;Lucius&#34;, &#34;Malfoy&#34;, LocalDate.of( 1953, 10, 9 ) ); <i class=conum data-value=1></i><b>(1)</b>
+        var malfoy = new Professor( &#34;Lucius&#34;, &#34;Malfoy&#34;, LocalDate.of( 1953, 10, 9 ) ); <b class=conum>1</b>
 
-        ThrowingCallable code = () -&gt; { <i class=conum data-value=2></i><b>(2)</b>
+        ThrowingCallable code = () -&gt; { <b class=conum>2</b>
             hogwarts.addProfessor( malfoy );
         };
 
         assertThatThrownBy( code )
-                .isInstanceOf( Exception.class) <i class=conum data-value=3></i><b>(3)</b>
-                .isExactlyInstanceOf( IllegalArgumentException.class) <i class=conum data-value=4></i><b>(4)</b>
-                .hasMessageContainingAll( &#34;should&#34;,&#34;teach&#34;); <i class=conum data-value=5></i><b>(5)</b>
+                .isInstanceOf( Exception.class) <b class=conum>3</b>
+                .isExactlyInstanceOf( IllegalArgumentException.class) <b class=conum>4</b>
+                .hasMessageContainingAll( &#34;should&#34;,&#34;teach&#34;); <b class=conum>5</b>
         // fail( &#34;addIllegalProfessor completed succesfully; you know what to do&#34; );
-    }</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Someone that knows his classics understands that this crook can’t be professor at Hogwarts.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>The lambda defines the throwing code. <code>org.assertj.core.api.ThrowableAssert.ThrowingCallable</code> is the functional interface for this purpose.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>Sometimes it is good to be a bit relaxed on the exception type like in this line.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=4></i><b>4</b></td>
-<td>Or you need to be quite specific. You need only one, so choose either line 2 or 3. This is just an illustration.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=5></i><b>5</b></td>
-<td>You might want to inspect the message for keywords.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
+    }</code></pre><ol class="callout-list arabic"><li>Someone that knows his classics understands that this crook can’t be professor at Hogwarts.</li><li>The lambda defines the throwing code. <code>org.assertj.core.api.ThrowableAssert.ThrowingCallable</code> is the functional interface for this purpose.</li><li>Sometimes it is good to be a bit relaxed on the exception type like in this line.</li><li>Or you need to be quite specific. You need only one, so choose either line 2 or 3. This is just an illustration.</li><li>You might want to inspect the message for keywords.</li></ol></figure>
 <p>In this fluent style you can check many more things. See the <a href=https://assertj.github.io/doc/>AssertJ user guide</a>
 and <a href=https://javadoc.io/doc/org.assertj/assertj-core/latest/index.html>API</a> for that.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>The general advise is to have only one (1) assert per test method. This makes the test method very focused.
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>The general advise is to have only one (1) assert per test method. This makes the test method very focused.
 Stick to this rule and do not test unrelated features.
 Also note that when a failure occurs (a test fails or an exception is thrown), the rest of the test is not executed anymore,
-and this will therefor obscure further asserts in the same test method.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-</div>
-</div>
-</div>
+and this will therefor obscure further asserts in the same test method.</p></aside></section></section></section>
 </article>
 </div><footer class="text-sm leading-6 mt-12 mb-5">
 Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
 </footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
 <h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#_assertj_examples>AssertJ examples.</a>
-<ul>
-<li><a href=#_simple_tests>Simple Tests</a></li>
-<li><a href=#_string_containment>String Containment</a></li>
-<li><a href=#_collection_containment>Collection Containment</a></li>
-<li><a href=#_assert_exceptions>Assert Exceptions</a></li>
-</ul>
-</li>
-</ul>
-</nav>
+<nav id=TableOfContents></nav>
 </div></div>
 <div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
 </div><script src=/prc2_web/js/main.min.b2d2aacc67a4fbfee5649e3e537fc94f29bf22f190969d5f638686db689d5ca8807e2cceb3fb584dc3a750507a50fdd438390deb2a79e5edd1800de8f026cdd3.js integrity="sha512-stKqzGek+/7lZJ4+U3/JTym/IvGQlp1fY4aG22idXKiAfizOs/tYTcOnUFB6UP3UODkN6yp55e3RgA3o8CbN0w==" crossorigin=anonymous></script>

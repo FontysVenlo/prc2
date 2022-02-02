@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.6bbfac3e9ea7b164109aa40012f29e9029127151833cdc96df151e0caaebaa8d86c1455928064e1683797924394669a9d05834762cd13d252eb572e3ca5cee52.css integrity="sha512-a7+sPp6nsWQQmqQAEvKekCkScVGDPNyW3xUeDKrrqo2GwUVZKAZOFoN5eSQ5Rmmp0Fg0dizRPSUutXLjylzuUg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.356ec2ba03cdae42868c30d28814db5ef90d1cc106dd9e2844e17d2c9d8c78c1d462a67a6ba488bc7241161206086f4c09455c4cb49f6a00f7190bf42e2f6add.css integrity="sha512-NW7CugPNrkKGjDDSiBTbXvkNHMEG3Z4oROF9LJ2MeMHUYqZ6a6SIvHJBFhIGCG9MCUVcTLSfagD3GQv0Li9q3Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 <script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
@@ -69,10 +69,7 @@ Desgin for testability
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<div class=sect2>
-<h3 id=_what_are_tests_and_why_do_we_need_them>What are tests and why do we need them?</h3>
-<div id=_tdd class=paragraph>
-<p>The way that you have worked with Java so far is that you had to write some code
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-2"><li><a href=#_what_are_tests_and_why_do_we_need_them>What are tests and why do we need them?</a></li><li><a href=#_test_driven_development_tdd>Test Driven Development (TDD)</a></li></ol></nav><section class="doc-section level-2"><h3 id=_what_are_tests_and_why_do_we_need_them>What are tests and why do we need them?</h3><p id=_tdd>The way that you have worked with Java so far is that you had to write some code
 to implement something. For example you had to implement a bird watcher system
 or a telephone book, in which you could save people with their telephone numbers
 and look them up, too. You probably created classes called PhoneBook or
@@ -82,20 +79,10 @@ and you had variables such as <code class=blue>String personName</code>, <code c
 think about how the phonebook works, and then you added classes, fields (variables)
 and methods. Slowly but surely, your phonebook started to look more and more
 like a phonebook.</p>
-</div>
-<div id=tdd-oneRedTest class="imageblock related thumb right">
-<div class=content>
-<img src=/prc2_web/images/tdd-oneRedTest.png alt="tdd oneRedTest">
-</div>
-<div class=title>Figure 1. Small steps. One red test at a time.</div>
-</div>
-<div id=tdd-allTestsGreen class="imageblock related thumb left">
-<div class=content>
-<img src=/prc2_web/images/tdd-allTestsGreen.png alt="tdd allTestsGreen">
-</div>
-<div class=title>Figure 2. All the tests are green, yay!</div>
-</div>
-<div class=paragraph>
+<figure class="image-block related thumb right" id=tdd-oneRedTest><img src=/prc2_web/images/tdd-oneRedTest.png alt="tdd oneRedTest">
+<figcaption>Figure 1. Small steps. One red test at a time.</figcaption></figure>
+<figure class="image-block related thumb left" id=tdd-allTestsGreen><img src=/prc2_web/images/tdd-allTestsGreen.png alt="tdd allTestsGreen">
+<figcaption>Figure 2. All the tests are green, yay!</figcaption></figure>
 <p>But how did you know that your phonebook was actually working? You could have
 implemented a method that didn’t work, or maybe you forgot to add people to the
 phonebook, so the data wasn’t actually stored. What you did was you ran the TMC
@@ -104,27 +91,17 @@ test said "when I look for Alice in your phonebook, I will receive Alice’s
 phone number 1234-567.". And if the test didn’t receive Alice’s number, it
 would turn red and say something like "I expected 1234-567. But I received
 0042-987." Therefore, the test fails.</p>
-</div>
-<div class=paragraph>
 <p>The tests were a really useful way for you to know that you were indeed
 implementing a proper phonebook. You could have just written empty classes and
 said "here is the phonebook!" and there would have been no way to verify that
 the phonebook works. The test made sure that this doesn’t happen. They also
 give you confidence as you code. Because every test that turns green gives you
 that little "yes!" feeling that you wrote something that works.</p>
-</div>
-<div class=paragraph>
 <p>Thus, tests fulfill two functions at once: they constantly probe your
 implementation and check whether it works, and they make you feel more
 confident about your programming skills. That’s really neat!</p>
-</div>
-<div id=tdd-EnglishError class="imageblock related thumb right">
-<div class=content>
-<img src=/prc2_web/images/tdd-EnglishError.png alt="tdd EnglishError">
-</div>
-<div class=title>Figure 3. Testing in real life</div>
-</div>
-<div class=paragraph>
+<figure class="image-block related thumb right" id=tdd-EnglishError><img src=/prc2_web/images/tdd-EnglishError.png alt="tdd EnglishError">
+<figcaption>Figure 3. Testing in real life</figcaption></figure>
 <p>When you were at school, you probably had to write an English exam at some
 point. You wrote your answers, and then the teacher graded your exam. The
 teacher is just like a test: she reads your exam, expecting the correct answer.
@@ -138,26 +115,17 @@ spot your own errors: "oh hang on, I have to use 'go' instead of 'goes' here."
 You have internalized a test that checks for the correct conjugation of the
 word. You know what to expect, and when you deviate from the expectation, you
 spot the error.</p>
-</div>
-<div class=paragraph>
 <p>Many people work the same way when they write code. They say "I know what I am
 doing because I have experience and I know the rules." But of course, we always
 make mistakes. Our brains are really bad testers. We stop seeing mistakes
 because we feel so familiar with our code. Have you ever handed in a report for
 university, only to find that the lecturer finds spelling errors you swear you
 didn’t do? That’s what happens in programming, too.</p>
-</div>
-<div class=paragraph>
 <p>That is why we write our own little annoying English teachers that constantly
 check: is this correct? Even though we know how to program, we also acknowledge
 that our brains are terrible testers for things that you write yourself, so we
-give our brains a break and write a test instead.</p>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_test_driven_development_tdd>Test Driven Development (TDD)</h3>
-<div class=paragraph>
-<p>In <a href=https://materiaalit.github.io/2013-oo-programming/part2/week-9/>Week 9</a>
+give our brains a break and write a test instead.</p></section>
+<section class="doc-section level-2"><h3 id=_test_driven_development_tdd>Test Driven Development (TDD)</h3><p>In <a href=https://materiaalit.github.io/2013-oo-programming/part2/week-9/>Week 9</a>
 we wrote a little phonebook and then we ran the test to check that the
 phonebook was working. That worked well, because we no longer have to rely on
 our brains to spot the errors on-the-fly. But here is another bad message: not
@@ -165,8 +133,6 @@ only does our brain stop recognizing errors in our own code, but it is also
 automatically biased to want our own tests to pass. You spent all this time
 writing your phonebook, you know how it works, so you know what test to write
 for it.</p>
-</div>
-<div class=paragraph>
 <p>But your brain secretly deceives you: you have implemented a phonebook, and
 this is the only phonebook that you know. What if you removed your code, but
 leave in the tests- and ask a friend to write a phonebook? They start
@@ -174,8 +140,6 @@ complaining that your tests are unfair. "Why do I have to use a List? I use
 Maps!" your friend says. But your tests insists that the phonebook has a List.
 So what have you done? You have written a test that proves YOUR implementation
 is correct.</p>
-</div>
-<div class=paragraph>
 <p>When you work test-driven, you don’t implement the phonebook and then test it.
 You first write the test for a phonebook, and then you implement it. That
 sounds a bit weird at first. Why write tests for stuff that’s not there yet? We
@@ -183,39 +147,22 @@ know it’s going to fail! But this is what we want. We need to keep telling our
 brains: this does not work. Figure out a way to make it work. This way, it is
 much harder to get married to your own code and to stop seeing problems with
 your test. You have found a way to deal with the human brain. Congratulations!</p>
-</div>
-<div id=tdd-tddLifecycle class="imageblock text-center">
-<div class=content>
-<img src=/prc2_web/images/tdd-lifecycle.png alt="tdd lifecycle">
-</div>
-<div class=title>Figure 4. <a href=https://medium.com/@odayibasi/tdd-test-driven-development-vs-bdd-behavior-driven-development-30e225c29c14>The TDD Lifecycle. Click for image source.</a></div>
-</div>
-<div class=sect3>
-<h4 id=_so_how_do_i_know_what_to_test>So how do I know what to test?</h4>
-<div class=paragraph>
-<p>There is a little (actually, it’s big) catch with TDD. When you write a test
+<figure class=image-block style=text-align:center id=tdd-tddLifecycle><img src=/prc2_web/images/tdd-lifecycle.png alt="tdd lifecycle">
+<figcaption>Figure 4. <a href=https://medium.com/@odayibasi/tdd-test-driven-development-vs-bdd-behavior-driven-development-30e225c29c14>The TDD Lifecycle. Click for image source.</a></figcaption></figure>
+<section class="doc-section level-3"><h4 id=_so_how_do_i_know_what_to_test>So how do I know what to test?</h4><p>There is a little (actually, it’s big) catch with TDD. When you write a test
 for a thing that doesn’t exist yet, how do you know what to test for? If I
 write a test for a phonebook that is not implemented yet, what does my test
 expect?</p>
-</div>
-<div class=paragraph>
 <p>The truth is, you never get around having to make implementation decisions. We
 just try to minimize our margin for error. So when you start writing your first
 test for your (non-existing) phonebook, you HAVE to have an idea of what the
 phonebook does. So perhaps you start with "I expect that the phonebook let’s me
 look up a person. When I look up Alice, I expect Alice’s phone number.". What
-could such a test look like?</p>
-</div>
-</div>
-<div class=sect3>
-<h4 id=_test_selection_strategies>Test selection strategies</h4>
-<div class=paragraph>
-<p>There is no golden rule that says "always start with text X, and then test Y,
+could such a test look like?</p></section>
+<section class="doc-section level-3"><h4 id=_test_selection_strategies>Test selection strategies</h4><p>There is no golden rule that says "always start with text X, and then test Y,
 and finish with test Z.". Instead, we rely on heuristics: rules of thumb that
 guide us through the TDD process. There are several decisions that you can make
 when writing tests.</p>
-</div>
-<div class=paragraph>
 <p>For instance, you can decide to first write tests for all elements of the
 system under test (SUT), but not go into detail yet what each SUT needs to have
 tested. This would mean focusing on width first, and depth later. For instance,
@@ -226,8 +173,6 @@ moving on to other parts only when one section of the SUT is covered
 completely. In this version, you go depth-first instead of width-first. Both
 approaches have their merit and you need to decide which strategy is best in
 which situation.</p>
-</div>
-<div class=paragraph>
 <p>Another strategy is to weigh the difficulty of each test. When you look at a
 list of tests to write, do you start with the easy ones that are implemented
 quickly, or do you start with the more difficult tests that require more
@@ -235,73 +180,26 @@ implementation thinking? When you are stuck on a particular test, it might be
 useful to first implement a number of tests that are easier to write, so that
 you make progress. It might be that whatever was causing you to be stuck on
 that test is now easier to solve now that you have a list of other tests that
-you have implemented.</p>
-</div>
-</div>
-<div class=sect3>
-<h4 id=_where_to_start>Where to start</h4>
-<div class=paragraph>
-<p>Choosing is always hard, including choosing where to start. The typical
+you have implemented.</p></section>
+<section class="doc-section level-3"><h4 id=_where_to_start>Where to start</h4><p>Choosing is always hard, including choosing where to start. The typical
 order for test driven development is:</p>
-</div>
-<div class="olist arabic">
-<ol class=arabic>
-<li>
-<p>A Constructor. You typically need instances and this is how you can construct some.</p>
-</li>
-<li>
-<p>Getters for the fields that are defined in the constructor. If
+<div class="olist arabic"><ol class=arabic><li>A Constructor. You typically need instances and this is how you can construct some.</li><li>Getters for the fields that are defined in the constructor. If
 such getters are not part of the public API of the class, make the
 package private, to hide them from client classes outside of the
-package.</p>
-</li>
-<li>
-<p>The <code>public String toString()</code> method, which can show
+package.</li><li>The <code>public String toString()</code> method, which can show
 the result of the constructor. Note that toString is often used for debugging,
-and that is what the auto-generated to string typically is for.</p>
-</li>
-<li>
-<p>Setters, if needed. (They are NOT in the fraction exercise). If you can get by
-with a class without setters, you are typically <a href=https://www.leadingagile.com/2018/03/immutability-in-java/>better off</a>.</p>
-</li>
-<li>
-<p>The business methods, one by one. In case of Fraction exercise, start at
-multiplication, because that is easiest.</p>
-</li>
-<li>
-<p>Further refinements, like in case of the Fraction exercise, that the
-fraction should always be in <em>normalised</em> form.</p>
-</li>
-</ol>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>Never add a member (method, field) to a class <em>unless</em> you have a test that proves the need of it.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-<hr>
-</div>
-</div>
+and that is what the auto-generated to string typically is for.</li><li>Setters, if needed. (They are NOT in the fraction exercise). If you can get by
+with a class without setters, you are typically <a href=https://www.leadingagile.com/2018/03/immutability-in-java/>better off</a>.</li><li>The business methods, one by one. In case of Fraction exercise, start at
+multiplication, because that is easiest.</li><li>Further refinements, like in case of the Fraction exercise, that the
+fraction should always be in <em>normalised</em> form.</li></ol></div>
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>Never add a member (method, field) to a class <em>unless</em> you have a test that proves the need of it.</p></aside>
+<hr></section></section>
 </article>
 </div><footer class="text-sm leading-6 mt-12 mb-5">
 Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
 </footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
 <h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#_what_are_tests_and_why_do_we_need_them>What are tests and why do we need them?</a></li>
-<li><a href=#_test_driven_development_tdd>Test Driven Development (TDD)</a></li>
-</ul>
-</nav>
+<nav id=TableOfContents></nav>
 </div></div>
 <div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
 </div><script src=/prc2_web/js/main.min.b2d2aacc67a4fbfee5649e3e537fc94f29bf22f190969d5f638686db689d5ca8807e2cceb3fb584dc3a750507a50fdd438390deb2a79e5edd1800de8f026cdd3.js integrity="sha512-stKqzGek+/7lZJ4+U3/JTym/IvGQlp1fY4aG22idXKiAfizOs/tYTcOnUFB6UP3UODkN6yp55e3RgA3o8CbN0w==" crossorigin=anonymous></script>

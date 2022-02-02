@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.6bbfac3e9ea7b164109aa40012f29e9029127151833cdc96df151e0caaebaa8d86c1455928064e1683797924394669a9d05834762cd13d252eb572e3ca5cee52.css integrity="sha512-a7+sPp6nsWQQmqQAEvKekCkScVGDPNyW3xUeDKrrqo2GwUVZKAZOFoN5eSQ5Rmmp0Fg0dizRPSUutXLjylzuUg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.356ec2ba03cdae42868c30d28814db5ef90d1cc106dd9e2844e17d2c9d8c78c1d462a67a6ba488bc7241161206086f4c09455c4cb49f6a00f7190bf42e2f6add.css integrity="sha512-NW7CugPNrkKGjDDSiBTbXvkNHMEG3Z4oROF9LJ2MeMHUYqZ6a6SIvHJBFhIGCG9MCUVcTLSfagD3GQv0Li9q3Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 <script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
@@ -69,117 +69,47 @@ Desgin for testability
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<div class=sect1>
-<h2 id=_maven>Maven</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p>From week two onwards we will use <a href=https://books.sonatype.com/mvnref-book/reference/index.html>Maven</a> as the preferred build tool. The link in the previous sentence
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_maven>Maven</a><ol class="toc-list level-2"><li><a href=#_maven_repositories>Maven Repositories</a></li><li><a href=#_maven_settings>Maven Settings</a></li></ol></li></ol></nav><section class="doc-section level-1"><h2 id=_maven>Maven</h2><p>From week two onwards we will use <a href=https://books.sonatype.com/mvnref-book/reference/index.html>Maven</a> as the preferred build tool. The link in the previous sentence
 points to the very readable complete reference manual, which also has some pointers for beginners, might you categorize yourselves as one.</p>
-</div>
-<div class=sect2>
-<h3 id=_maven_repositories>Maven Repositories</h3>
-<div class=paragraph>
-<p>A maven repository is a server that provides ready built maven 'artifacts', such as (binary) jar files containing libraries, frameworks or APIs and in many (but not all) companion jar files containing the javadoc (often) and sources of the same binary. A maven repository is <strong>NOT</strong> a source code management system (CMS),<sup class=footnote>[<a id=_footnoteref_1 class=footnote href=#_footnotedef_1 title="View footnote.">1</a>]</sup> although it typically holds several versions of a binary, and there are tools, such as <a href=https://www.sonatype.com/nexus-repository-sonatype>Nexus Repository Manager</a>.<br></p>
-</div>
-<div class=paragraph>
-<p>There is a default repository, called <a href=https://mvnrepository.com/repos/central>maven central</a>. You (as a team or company) can have your own repository. We at sebi Venlo do that too. Our repository lives at <a href=https://www.fontysvenlo.org/repository class=bare>https://www.fontysvenlo.org/repository</a>.</p>
-</div>
-<div class=paragraph>
+<section class="doc-section level-2"><h3 id=_maven_repositories>Maven Repositories</h3><p>A maven repository is a server that provides ready built maven 'artifacts', such as (binary) jar files containing libraries, frameworks or APIs and in many (but not all) companion jar files containing the javadoc (often) and sources of the same binary. A maven repository is <strong>NOT</strong> a source code management system (CMS),<a class=footnote-ref id=_footnoteref_1 href=#_footnote_1 title="View footnote 1" role=doc-noteref>[1]</a> although it typically holds several versions of a binary, and there are tools, such as <a href=https://www.sonatype.com/nexus-repository-sonatype>Nexus Repository Manager</a>.<br></p>
+<p>There is a default repository, called <a href=https://mvnrepository.com/repos/central>maven central</a>. You (as a team or company) can have your own repository. We at sebi Venlo do that too. Our repository lives at <a class=bare href=https://www.fontysvenlo.org/repository>https://www.fontysvenlo.org/repository</a>.</p>
 <p>Our <a href=https://www.fontysvenlo.org/repository/>sebi Venlo maven repository</a> at fontysvenlo.org is the simplest of simple: A plain (apache2) web server that does automatic indexing. Users with write access, such as your dear teachers (:P), can simply publish their maven artifacts using maven itself, which, with the help of secure copy, places the artifact in the appropriate directory structure, considering names and versions.</p>
-</div>
-<div class=paragraph>
-<p>If you look at a maven repository you will see that it is organized along the three axes: groupId, artifactId and version.</p>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_maven_settings>Maven Settings</h3>
-<div class=paragraph>
-<p>To make the sebi Venlo repository available for your own projects, add the following to
+<p>If you look at a maven repository you will see that it is organized along the three axes: groupId, artifactId and version.</p></section>
+<section class="doc-section level-2"><h3 id=_maven_settings>Maven Settings</h3><p>To make the sebi Venlo repository available for your own projects, add the following to
 your <code>~/.m2/settings.xml</code> in the profiles section. You may also want to make that profile active.</p>
-</div>
-<div class=paragraph>
 <p>If you create or open a maven project in NetBeans and open the <strong>Project Files</strong> folder,
 it should show a settings.xml file. If not, you can easily create your own in the proper spot
 on you platform (Linux, Windows, Mac OS-X) by right-clicking on the folder and choose <strong>create settings.xml</strong>.
 The settings file applies to all your maven projects, irrespective of the fact of using maven from the IDE or the command line.</p>
-</div>
-<div class=imageblock>
-<div class=content>
-<img src=/prc2_web/images/create-setting-xml.png alt="create setting xml">
-</div>
-<div class=title>Figure 1. Creating settings.xml</div>
-</div>
-<div class=listingblock>
-<div class=title>adding fontysvenlo repo to your maven settings.xml file.</div>
-<div class=content>
+<figure class=image-block><img src=/prc2_web/images/create-setting-xml.png alt="create setting xml">
+<figcaption>Figure 1. Creating settings.xml</figcaption></figure>
+<figure class=listing-block><figcaption>adding fontysvenlo repo to your maven settings.xml file.</figcaption>
 <pre class=highlight><code class=language-xml data-lang=xml>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
 &lt;settings xmlns=&#34;http://maven.apache.org/SETTINGS/1.0.0&#34;
           xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
           xsi:schemaLocation=&#34;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&#34;&gt;
     &lt;profiles&gt;
-        &lt;profile&gt;  <i class=conum data-value=1></i><b>(1)</b>
+        &lt;profile&gt;  <b class=conum>1</b>
             &lt;id&gt;sebivenlo&lt;/id&gt;
             &lt;repositories&gt;
                 &lt;repository&gt;
-                    &lt;id&gt;fontysvenlo.org&lt;/id&gt; <i class=conum data-value=2></i><b>(2)</b>
-                    &lt;url&gt;https://www.fontysvenlo.org/repository&lt;/url&gt; <i class=conum data-value=3></i><b>(3)</b>
+                    &lt;id&gt;fontysvenlo.org&lt;/id&gt; <b class=conum>2</b>
+                    &lt;url&gt;https://www.fontysvenlo.org/repository&lt;/url&gt; <b class=conum>3</b>
                 &lt;/repository&gt;
             &lt;/repositories&gt;
         &lt;/profile&gt;
     &lt;/profiles&gt;
     &lt;activeProfiles&gt;
-        &lt;activeProfile&gt;sebivenlo&lt;/activeProfile&gt; <i class=conum data-value=4></i><b>(4)</b>
+        &lt;activeProfile&gt;sebivenlo&lt;/activeProfile&gt; <b class=conum>4</b>
     &lt;/activeProfiles&gt;
-&lt;/settings&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>You define a profile inside the profiles section of your settings.xml.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>Give the profile a name.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>Specify the URL.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=4></i><b>4</b></td>
-<td>Use the given name to make it an active profile by default.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
-<p>You could of course also simply copy (ctrl-C) the xml above and slam (ctrl-V) it into your newly created settings.xml file.</p>
-</div>
-</div>
-</div>
-</div>
-<div id=footnotes>
-<hr>
-<div class=footnote id=_footnotedef_1>
-<a href=#_footnoteref_1>1</a>. Guess why
-</div>
-</div>
+&lt;/settings&gt;</code></pre><ol class="callout-list arabic"><li>You define a profile inside the profiles section of your settings.xml.</li><li>Give the profile a name.</li><li>Specify the URL.</li><li>Use the given name to make it an active profile by default.</li></ol></figure>
+<p>You could of course also simply copy (ctrl-C) the xml above and slam (ctrl-V) it into your newly created settings.xml file.</p></section></section><section class=footnotes aria-label=Footnotes role=doc-endnotes><hr><ol class=footnotes><li class=footnote id=_footnote_1 role=doc-endnote>Guess why <a class=footnote-backref href=#_footnoteref_1 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li></ol></section>
 </article>
 </div><footer class="text-sm leading-6 mt-12 mb-5">
 Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
 </footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
 <h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#_maven>Maven</a>
-<ul>
-<li><a href=#_maven_repositories>Maven Repositories</a></li>
-<li><a href=#_maven_settings>Maven Settings</a></li>
-</ul>
-</li>
-</ul>
-</nav>
+<nav id=TableOfContents></nav>
 </div></div>
 <div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
 </div><script src=/prc2_web/js/main.min.b2d2aacc67a4fbfee5649e3e537fc94f29bf22f190969d5f638686db689d5ca8807e2cceb3fb584dc3a750507a50fdd438390deb2a79e5edd1800de8f026cdd3.js integrity="sha512-stKqzGek+/7lZJ4+U3/JTym/IvGQlp1fY4aG22idXKiAfizOs/tYTcOnUFB6UP3UODkN6yp55e3RgA3o8CbN0w==" crossorigin=anonymous></script>

@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.6bbfac3e9ea7b164109aa40012f29e9029127151833cdc96df151e0caaebaa8d86c1455928064e1683797924394669a9d05834762cd13d252eb572e3ca5cee52.css integrity="sha512-a7+sPp6nsWQQmqQAEvKekCkScVGDPNyW3xUeDKrrqo2GwUVZKAZOFoN5eSQ5Rmmp0Fg0dizRPSUutXLjylzuUg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.356ec2ba03cdae42868c30d28814db5ef90d1cc106dd9e2844e17d2c9d8c78c1d462a67a6ba488bc7241161206086f4c09455c4cb49f6a00f7190bf42e2f6add.css integrity="sha512-NW7CugPNrkKGjDDSiBTbXvkNHMEG3Z4oROF9LJ2MeMHUYqZ6a6SIvHJBFhIGCG9MCUVcTLSfagD3GQv0Li9q3Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 <script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
@@ -69,55 +69,23 @@ Desgin for testability
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<div class=sect1>
-<h2 id=_parameterized_tests>Parameterized tests</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p><span class=big>You will often see that test methods look a lot like each other. As an example:
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_parameterized_tests>Parameterized tests</a><ol class="toc-list level-2"><li><a href=#_parameterized_test_junit_5_style>Parameterized test, Junit 5 style</a></li><li><a href=#_lookup_in_a_map>Lookup in a map.</a></li><li><a href=#_test_data_from_a_file>Test data from a file</a></li><li><a href=#_repeated_use_of_same_data>Repeated use of same data.</a></li><li><a href=#_testing_compare_results>Testing compare results.</a></li><li><a href=#_test_data_using_argumentsprovider>Test Data Using ArgumentsProvider</a></li><li><a href=#_split_it_yourselves>Split it yourselves</a></li><li><a href=#_using_a_method_as_a_source_for_the_test_data>Using a method as a Source for the test Data</a></li></ol></li></ol></nav><section class="doc-section level-1"><h2 id=_parameterized_tests>Parameterized tests</h2><p><span class=big>You will often see that test methods look a lot like each other. As an example:
 In the fraction exercise, in most test methods you have two inputs and one or two results,
 then an operation is done followed by some assertion, often of the same kind.
 This quickly leads to the habit of <em>copy and waste</em> programming. Many errors are introduced this way: You copy the original,
 tweak the copy a bit and you are done. Then you forget one required tweak, because they are easy to miss, but you do not notice it until too late.</span></p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-warning" title=Warning></i>
-</td>
-<td class=content>
-<div class="imageblock related thumb right">
-<div class=content>
-<img src=/prc2_web/images/waste.jpg alt=waste width=480>
-</div>
-<div class=title>Figure 1. Do not become a ctrl+c, ctrl+v junky. That only produces junk.</div>
-</div>
-<div class=paragraph>
+<section class="admonition-block warning" role=doc-notice><h6 class="block-title label-only"><span class=title-label>Warning: </span></h6><figure class="image-block related thumb right"><img src=/prc2_web/images/waste.jpg alt=waste width=480>
+<figcaption>Figure 1. Do not become a ctrl+c, ctrl+v junky. That only produces junk.</figcaption></figure>
 <p>Avoid <em class=big>copy and waste</em> at almost all times. It is <strong class="big red">NOT</strong> a good programming style. If you see it in your code, refactor it to
 remove the copies, but instead make calls to one version of it. This will make you have <em>less</em> code overall. Coding excellence is never measured
 in number of code lines, but in quality of the code. Think of gems. They are precious because they are rare.</p>
-</div>
-<div class=paragraph>
 <p>The <em>copy and waste</em> problem can even become worse: When the original has a flaw, you are just multiplying the
 number of flaws in your code. This observation applies to test code just as well.<br></p>
-</div>
-<div class=paragraph>
-<p><strong>CODE THAT ISN’T WRITTEN CAN’T BE WRONG</strong>.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-<div class=sect2>
-<h3 id=_parameterized_test_junit_5_style>Parameterized test, Junit 5 style</h3>
-<div class=paragraph>
-<p>Below you see an example on how you can condense the <code>toString()</code> tests of fraction from 5 very similar test methods into 5 strings containing the test data
+<p><strong>CODE THAT ISN’T WRITTEN CAN’T BE WRONG</strong>.</p></section>
+<section class="doc-section level-2"><h3 id=_parameterized_test_junit_5_style>Parameterized test, Junit 5 style</h3><p>Below you see an example on how you can condense the <code>toString()</code> tests of fraction from 5 very similar test methods into 5 strings containing the test data
 and 1 (say one) test method.<br>
 Paraphrasing a saying: <em class="green big">Killing many bugs with one test</em>.</p>
-</div>
-<div class=listingblock>
-<div class=title>Complete fraction test class with parameterized test, using an in-code csv source</div>
-<div class=content>
+<figure class=listing-block><figcaption>Complete fraction test class with parameterized test, using an in-code csv source</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>package fraction;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -129,316 +97,134 @@ public class FractionCSVSourceTest {
 
     @ParameterizedTest
     @CsvSource( {
-           //&#34;message,          expected,     n,   d&#34;, <i class=conum data-value=1></i><b>(1)</b>
-           &#34;&#39;two thirds&#39;,        &#39;(2/3)&#39;,     2,   3&#34;, <i class=conum data-value=2></i><b>(2)</b>
+           //&#34;message,          expected,     n,   d&#34;, <b class=conum>1</b>
+           &#34;&#39;two thirds&#39;,        &#39;(2/3)&#39;,     2,   3&#34;, <b class=conum>2</b>
            &#34;&#39;whole number,           &#39;2&#39;,     2,   1&#34;,
            &#34;&#39;one third&#39;,         &#39;(1/3)&#39;,    -3,  -9&#34;,
            &#34;&#39;minus two fifths&#39;,  &#39;(-2/5)&#39;,   12, -30&#34;,
            &#34;&#39;one + two fifths&#39;, &#39;(-1-(2/5))&#39;,   35, -25&#34;
     } )
     void fractionOps( String message, String expectedString,
-            int numerator, int denominator ) { <i class=conum data-value=3></i><b>(3)</b>
+            int numerator, int denominator ) { <b class=conum>3</b>
 
         Fraction f = new Fraction( numerator, denominator );
         assertThat( f.toString() )
                 .as( message )
                 .isEqualTo( expectedString );
     }
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Adding a comment is always a good idea. You may also want your values aligned for improved readability.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>Parameters are separated by commas, which maybe in the test values. In that case you can demarcate Strings with single quotes inside the csv record string.
+}</code></pre><ol class="callout-list arabic"><li>Adding a comment is always a good idea. You may also want your values aligned for improved readability.</li><li>Parameters are separated by commas, which maybe in the test values. In that case you can demarcate Strings with single quotes inside the csv record string.
 If you need another separator instead of comma, you can specify that too,
-see <a href=https://junit.org/junit5/docs/current/api/org.junit.jupiter.params/org/junit/jupiter/params/provider/CsvSource.html target=_blank rel=noopener>CsvSource API </a>.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>The parameters are passed in as the type(s) provided by the test method’s signature. The Junit-5 framework will (try to) parse the csv record elements accordingly.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
+see <a href=https://junit.org/junit5/docs/current/api/org.junit.jupiter.params/org/junit/jupiter/params/provider/CsvSource.html target=_blank rel=noopener>CsvSource API </a>.</li><li>The parameters are passed in as the type(s) provided by the test method’s signature. The Junit-5 framework will (try to) parse the csv record elements accordingly.</li></ol></figure>
 <p>For more details see <a href=https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests target=_blank rel=noopener>Junit 5 parameterized tests </a>.</p>
-</div>
-<div class=paragraph>
 <p>The CsvSource version of parameterized test is the simplest to use and easily understood.
 It keeps data and the test together, nicely near to each other, so it make it easy to read the
 tests and data in one glance.
 They typically fit easily on a screen. Remember the importance of readability of code. That too applies to test code.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-warning" title=Warning></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>We want to make sure that the assignment project is acceptable by the compiler.
+<section class="admonition-block warning" role=doc-notice><h6 class="block-title label-only"><span class=title-label>Warning: </span></h6><p>We want to make sure that the assignment project is acceptable by the compiler.
 We create the project ourselves first, making sure it works and then strip our solution. All TDD of course.</p>
-</div>
-<div class=paragraph>
 <p>To make that work, we sometime have to <em class=gray>comment out</em> code in the test or in the business part of the code,
 because that code is not yet ready (because the student did not write it yet).
 In such cases we comment out using two slashes, which both best and easiest.<br>
 If you want to un-comment such part, select the lines and press kbd:[Ctrl+/] pronounced <em>control slash</em>.+
-For Mac fans, its different, of course. kbd:[{Command}+/] pronounce <em>Command slash</em>.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-<hr>
-</div>
-<div class=sect2>
-<h3 id=_lookup_in_a_map>Lookup in a map.</h3>
-<div class=paragraph>
-<p>Sometimes there is no easy way to get from a string to some object, or even class.
+For Mac fans, its different, of course. kbd:[{Command}+/] pronounce <em>Command slash</em>.</p></section>
+<hr></section>
+<section class="doc-section level-2"><h3 id=_lookup_in_a_map>Lookup in a map.</h3><p>Sometimes there is no easy way to get from a string to some object, or even class.
 Examples are that you want to test for the correct <strong>type</strong> or <strong>exception</strong>, or supply a method name, but you cannot put that into a string without doing complex
 things like reflection which we may only do in later parts of the course. The trick is to use a <code>Map</code> that maps a string to the object of choice.</p>
-</div>
-<div class=paragraph>
 <p>The lookup trick might also be applicable when you want to have short values in your test data table, like a message number which is mapped
 to the actual longer expected message, or even a message that is a format string and can be used in <code>Assertion.as( formatString, Object…​ args)</code>.</p>
-</div>
-<div class=listingblock>
-<div class=title>map from short string to test (Person) object.</div>
-<div class=content>
+<figure class=listing-block><figcaption>map from short string to test (Person) object.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java> static Map&lt;String, Person&gt; emap = Map.of(
             &#34;piet&#34;, new Person(&#34;Piet&#34;, &#34;Puk&#34;, LocalDate.of(1955-03-18),&#34;M&#34;),
             &#34;piet2&#34;, new Person(&#34;Piet&#34;, &#34;Puk&#34;, LocalDate.of(1955-03-18),&#34;M&#34;), // for equals test.
             &#34;rembrandt&#34;, new Person(&#34;Rembrandt&#34;, &#34;van Rijn&#34;, LocalDate.of(1606,7,15),&#34;M&#34;),
             &#34;saskia&#34;, new Person(&#34;Saskia&#34;, &#34;van Uylenburgh&#34;, LocalDate.of(1612,8,11),&#34;F&#34;),
-    );</code></pre>
-</div>
-</div>
-<div class=paragraph>
+    );</code></pre></figure>
 <p>It is particularly applicable to lambda expressions.<br>
 Lambdas are special. They have no name and not a very useful toString, and you can’t overwrite them either.<br>
 But you can do the reverse: translate a string into a lambda, by using a map. You can then use simple names (strings),
 that can be put in a csv record. You could, if you wanted, even use the lambda expression in String form as a key.</p>
-</div>
-<div class=listingblock>
-<div class=title>Lambda as string/key and as value in a map.</div>
-<div class=content>
-<pre class=highlight><code class=language-java data-lang=java>   Map.of(&#34;(a,b)-&gt;a+b&#34;, (a,b)-&gt;a+b );</code></pre>
-</div>
-</div>
-<div class=listingblock>
-<div class=title>Map of string to lambda</div>
-<div class=content>
-<pre class=highlight><code class=language-java data-lang=java>    final Map&lt;String, BiFunction&lt;Fraction, Fraction, Fraction&gt;&gt; ops = <i class=conum data-value=1></i><b>(1)</b>
+<figure class=listing-block><figcaption>Lambda as string/key and as value in a map.</figcaption>
+<pre class=highlight><code class=language-java data-lang=java>   Map.of(&#34;(a,b)-&gt;a+b&#34;, (a,b)-&gt;a+b );</code></pre></figure>
+<figure class=listing-block><figcaption>Map of string to lambda</figcaption>
+<pre class=highlight><code class=language-java data-lang=java>    final Map&lt;String, BiFunction&lt;Fraction, Fraction, Fraction&gt;&gt; ops = <b class=conum>1</b>
       Map.of(
               &#34;times&#34;, ( f1, f2 ) -&gt; f1.times( f2 ),
               &#34;plus&#34;, ( f1, f2 ) -&gt; f1.plus( f2 ),
-              &#34;flip&#34;, ( f1, f2 ) -&gt; f1.flip(), <i class=conum data-value=2></i><b>(2)</b>
+              &#34;flip&#34;, ( f1, f2 ) -&gt; f1.flip(), <b class=conum>2</b>
               &#34;minus&#34;, ( f1, f2 ) -&gt; f1.minus( f2 ),
               &#34;divideBy&#34;, ( f1, f2 ) -&gt; f1.divideBy( f2 )
-      );</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Note that we use a <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/BiFunction.html>BiFunction&lt;T,U,R></a>,
-with <strong>T</strong>, <strong>U</strong>, and <strong>R</strong> all of the same type: Fraction. This is legal.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>f2 is not used in the right hand side of the arrow. This is legal too.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=listingblock>
-<div class=title>Using lambda names in test data</div>
-<div class=content>
+      );</code></pre><ol class="callout-list arabic"><li>Note that we use a <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/BiFunction.html>BiFunction&lt;T,U,R></a>,
+with <strong>T</strong>, <strong>U</strong>, and <strong>R</strong> all of the same type: Fraction. This is legal.</li><li>f2 is not used in the right hand side of the arrow. This is legal too.</li></ol></figure>
+<figure class=listing-block><figcaption>Using lambda names in test data</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    @ParameterizedTest
     @CsvSource(
              {
-                &#34;&#39;one half times one third is 1 sixth&#39;, &#39;times&#39;, &#39;(1/6)&#39;,1,2,1,3&#34;, <i class=conum data-value=1></i><b>(1)</b>
+                &#34;&#39;one half times one third is 1 sixth&#39;, &#39;times&#39;, &#39;(1/6)&#39;,1,2,1,3&#34;, <b class=conum>1</b>
                 &#34;&#39;one thirds plus two thirds is 1&#39;    , &#39;plus&#39;,      &#39;1&#39;,1,3,2,3&#34;,
-                &#34;&#39;flip&#39;                               , &#39;flip&#39;,      &#39;3&#39;,1,3,1,3&#34;, <i class=conum data-value=2></i><b>(2)</b>
+                &#34;&#39;flip&#39;                               , &#39;flip&#39;,      &#39;3&#39;,1,3,1,3&#34;, <b class=conum>2</b>
                 &#34;&#39;one half minus two thirds is&#39;       , &#39;minus&#39;, &#39;(-1/6)&#39;,1,2,2,3&#34;
-            } )</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>The operation name is the second value in the csv record, here <strong>times</strong>. Note that you can quote strings, but that is not required.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>In the flip operation, the second fraction is ignored, so any legal value is allowed. Here we use the same values for both fractions.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=listingblock>
-<div class=title>Test method using the test data (Annotations left out, they are above).</div>
-<div class=content>
+            } )</code></pre><ol class="callout-list arabic"><li>The operation name is the second value in the csv record, here <strong>times</strong>. Note that you can quote strings, but that is not required.</li><li>In the flip operation, the second fraction is ignored, so any legal value is allowed. Here we use the same values for both fractions.</li></ol></figure>
+<figure class=listing-block><figcaption>Test method using the test data (Annotations left out, they are above).</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    void fractionOps( String message, String opName, String expected,
-                  int a,int b, int c, int d ) { <i class=conum data-value=1></i><b>(1)</b>
+                  int a,int b, int c, int d ) { <b class=conum>1</b>
         // Arrange: read test values
-        Fraction f1 = frac( a, b ); <i class=conum data-value=2></i><b>(2)</b>
+        Fraction f1 = frac( a, b ); <b class=conum>2</b>
         Fraction f2 = frac( c, d );
-        BiFunction&lt;Fraction, Fraction, Fraction&gt; op = ops.get( opName ); <i class=conum data-value=3></i><b>(3)</b>
+        BiFunction&lt;Fraction, Fraction, Fraction&gt; op = ops.get( opName ); <b class=conum>3</b>
 
         // Act
-        Fraction result = op.apply( f1, f2 ); <i class=conum data-value=4></i><b>(4)</b>
+        Fraction result = op.apply( f1, f2 ); <b class=conum>4</b>
 
         // Assert(That) left out as exercise.
         // Use assertThat on the fraction object result
         //   and check if it has the correct string value.
         // Use the message in the as(...) method.
 
-    }</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>The fraction parameters a,b,c, and d are captured from the csvrecord. This makes the parameter list a<br>
+    }</code></pre><ol class="callout-list arabic"><li>The fraction parameters a,b,c, and d are captured from the csvrecord. This makes the parameter list a<br>
 tad longer, but also more understandable. JUnit 5 csvsource uses the annotation and the signature of the test method and can deal
-with most common types such as primitive, String and LocalDate (preferably in ISO-8601 format such as '2012-01-14' for the day of writing this).</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>The fraction instances are created from a, b, c, and d.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>The operation (op) is looked up in the map.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=4></i><b>4</b></td>
-<td>Apply the operation, or rather the function and capture the result.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
+with most common types such as primitive, String and LocalDate (preferably in ISO-8601 format such as '2012-01-14' for the day of writing this).</li><li>The fraction instances are created from a, b, c, and d.</li><li>The operation (op) is looked up in the map.</li><li>Apply the operation, or rather the function and capture the result.</li></ol></figure>
 <p>You can apply the same trick of looking up with enums too, even easier, because the enum itself can translate from String to value,
 as long as the spelling is exact.</p>
-</div>
-<div class=paragraph>
 <p>Study the examples above, they might give you inspiration with the exercises coming up and will score you points during the exam.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>As of the moment of writing (Januari 2021, Junit 5.7), the parameterized test <strong class=red>can’t</strong> deal with varargs parameters, that is a varying
-list of parameters, with the triple dot notation.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_test_data_from_a_file>Test data from a file</h3>
-<div class=paragraph>
-<p>Sometimes the amount of data you have in your test data-set is so big that it does not comfortable fit inside a <code>@CsvSoure</code> annotation.
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>As of the moment of writing (Januari 2021, Junit 5.7), the parameterized test <strong class=red>can’t</strong> deal with varargs parameters, that is a varying
+list of parameters, with the triple dot notation.</p></aside></section>
+<section class="doc-section level-2"><h3 id=_test_data_from_a_file>Test data from a file</h3><p>Sometimes the amount of data you have in your test data-set is so big that it does not comfortable fit inside a <code>@CsvSoure</code> annotation.
 You specify an external file as data source with to achieve the same, the annotation now is <code>@CsvFileSource</code>, which takes files as argument.</p>
-</div>
-<div class=paragraph>
 <p>The file, as you might have guessed, can be a csv file, which can be edited quite comfortably with a <a href=http://plugins.netbeans.org/plugin/48312/nb-csv-editor>NetBeans plugin</a>
 or with the help of a spreadsheet program like Libreoffice calc or Microsoft excel.</p>
-</div>
-<div class=paragraph>
 <p>Suppose you need to develop an input validator that has many test cases. Putting the inputs in a file along with other information relevant
 to your validator.</p>
-</div>
-<div class=listingblock>
-<div class=title>csvfile source</div>
-<div class=content>
+<figure class=listing-block><figcaption>csvfile source</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>  @ParameterizedTest
   @CsvFileSource( resources = { &#34;testdata.csv&#34; } )
   void testRegex( String message, String input, boolean matches, int groupCount ){
     // your code here
-  }</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-note" title=Note></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>At the time of writing JUnit wants the csv file for CsvFileSource to be<br>
+  }</code></pre></figure>
+<aside class="admonition-block note" role=note><h6 class="block-title label-only"><span class=title-label>Note: </span></h6><p>At the time of writing JUnit wants the csv file for CsvFileSource to be<br>
 in the <code>{project-directory}src/test/resources</code> folder or a child folder thereof.
 To be able to do that, you <strong>first</strong> need to create a new folder.<br>
 A pro would simply open the terminal in the project directory and do mkdir -p src/test/resources,
-but if you rather push mouse, then in netbeans you can also do New→Other→Folder, which allows you to select folder name (resources) and parent folder (src/test). Take your pick.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_repeated_use_of_same_data>Repeated use of same data.</h3>
-<div class=paragraph>
-<p>In some cases, multiple tests need the same data. In the case of a CsvSourceFile, that is easily covered: Simple copy the annotations to all places where you need
+but if you rather push mouse, then in netbeans you can also do New→Other→Folder, which allows you to select folder name (resources) and parent folder (src/test). Take your pick.</p></aside></section>
+<section class="doc-section level-2"><h3 id=_repeated_use_of_same_data>Repeated use of same data.</h3><p>In some cases, multiple tests need the same data. In the case of a CsvSourceFile, that is easily covered: Simple copy the annotations to all places where you need
 them. This is an <em>acceptable form</em> of copy and waste, because the annotations all point to one source of truth, the CSV file.</p>
-</div>
-<div class=paragraph>
 <p>Sometimes you would like to keep or even generate the test data inside the test class.
 Do not take the simple and naive route to simply copy-and-waste the (largish) cvssource data,
 but instead stick to the <a href=https://en.wikipedia.org/wiki/Don%27t_repeat_yourself>D.R.Y. rule</a>.</p>
-</div>
-<div class=paragraph>
 <p>One problem is that a method in Java can return only one result, either object or primitive type. Luckily
 an array is also an object in Java.</p>
-</div>
-<div class=paragraph>
 <p>There are two solutions to this issue.</p>
-</div>
-<div class="olist arabic">
-<ol class=arabic>
-<li>
-<p>Create special test data objects of a special test data class, either inside your or outside your test class
+<div class="olist arabic"><ol class=arabic><li>Create special test data objects of a special test data class, either inside your or outside your test class
 easy to make a test data class to carry the test data. In this case make a data providing method and use the method name in the <code>@MethodSource</code> annotation.
-The test method should understand the test data object.</p>
-</li>
-<li>
-<p>Use the JUnit5 provided <code>ArgumentsProvider</code>. This warps an array of objects into one object, so that all can be returned as one (array) value in a stream.<br>
-This saves the implementation of a (simple) test data class.</p>
-</li>
-</ol>
-</div>
-<div class=paragraph>
-<p>We will use the later approach, simply because it is less work on the programmer, either you or me.</p>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_testing_compare_results>Testing compare results.</h3>
-<div class=paragraph>
-<p>You may already know, but <strong class="red big">do not insist</strong> that a comparator (or the <code>compareTo()</code> method)
+The test method should understand the test data object.</li><li>Use the JUnit5 provided <code>ArgumentsProvider</code>. This warps an array of objects into one object, so that all can be returned as one (array) value in a stream.<br>
+This saves the implementation of a (simple) test data class.</li></ol></div>
+<p>We will use the later approach, simply because it is less work on the programmer, either you or me.</p></section>
+<section class="doc-section level-2"><h3 id=_testing_compare_results>Testing compare results.</h3><p>You may already know, but <strong class="red big">do not insist</strong> that a comparator (or the <code>compareTo()</code> method)
 should return 1, 0 or -1, because that is <strong class=red>not</strong> how it is specified.
 The value should be greater, equal, or less than zero (0).<br>
 To test that, use <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Integer.html#signum(int) target=_blank rel=noopener>Integer.signum() </a>
 to extract the sign of the actual value and assert that this is equal to the expected value.</p>
-</div>
-<div class=listingblock>
-<div class=title>CompareTo examples</div>
-<div class=content>
+<figure class=listing-block><figcaption>CompareTo examples</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>  @ParameterizedTest
   @CsvSource({
     &#34;&#39;HELLO&#39;, &#39;world&#39; , -1&#34;,// h before w
@@ -447,210 +233,83 @@ to extract the sign of the actual value and assert that this is equal to the exp
     })
   void compareIngnoreCase( String a, String b, int signum ){
 
-        assertThat( Integer.signum( a.compareToIgnoreCase​(b) ) ) <i class=conum data-value=1></i><b>(1)</b>
+        assertThat( Integer.signum( a.compareToIgnoreCase​(b) ) ) <b class=conum>1</b>
             .as ( a + &#34; and &#34; + b )
             .isEqualTo( signum );
 
-  }</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td><code>compareToXXX</code> call wrapped in <code class=blue>Integer.signum(…​)</code>.</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_test_data_using_argumentsprovider>Test Data Using ArgumentsProvider</h3>
-<div class=paragraph>
-<p>Using an arguments provider has the advantage of very brief code. You only have to
+  }</code></pre><ol class="callout-list arabic"><li><code>compareToXXX</code> call wrapped in <code class=blue>Integer.signum(…​)</code>.</li></ol></figure>
+</section>
+<section class="doc-section level-2"><h3 id=_test_data_using_argumentsprovider>Test Data Using ArgumentsProvider</h3><p>Using an arguments provider has the advantage of very brief code. You only have to
 <strong class=blue>pay attention</strong> that the order of objects in the arrays
 that the <code>ArgumentsProvider</code>
 provides is the same as the expected order of the parameters to your test method.
 In the example below we have put the test data in a two 'dimensional array'.</p>
-</div>
-<div class=listingblock>
-<div class=title>ArgumentsProvider example.</div>
-<div class=content>
-<pre class=highlight><code class=language-java data-lang=java>Unresolved directive in &lt;stdin&gt; - include::code/cabbage/src/test/java/cabbage/CabbageArgumentsTest.java[lines=16..999]</code></pre>
-</div>
-</div>
-<div class=listingblock>
-<div class=title>The cabbage class for reference.</div>
-<div class=content>
-<pre class=highlight><code class=language-java data-lang=java>Unresolved directive in &lt;stdin&gt; - include::code/cabbage/src/main/java/cabbage/Cabbage.java[lines=9..23]</code></pre>
-</div>
-</div>
-<div class=paragraph>
-<p>The left out parts are the Constructor and getters for the fields.</p>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_split_it_yourselves>Split it yourselves</h3>
-<div class=paragraph>
-<p>Sometimes you need a varying set of values (var-args) in your test, but CsvSource does not accommodate var-args.</p>
-</div>
-<div class=paragraph>
+<figure class=listing-block><figcaption>ArgumentsProvider example.</figcaption>
+<pre class=highlight><code class=language-java data-lang=java>Unresolved directive in &lt;stdin&gt; - include::code/cabbage/src/test/java/cabbage/CabbageArgumentsTest.java[lines=16..999]</code></pre></figure>
+<figure class=listing-block><figcaption>The cabbage class for reference.</figcaption>
+<pre class=highlight><code class=language-java data-lang=java>Unresolved directive in &lt;stdin&gt; - include::code/cabbage/src/main/java/cabbage/Cabbage.java[lines=9..23]</code></pre></figure>
+<p>The left out parts are the Constructor and getters for the fields.</p></section>
+<section class="doc-section level-2"><h3 id=_split_it_yourselves>Split it yourselves</h3><p>Sometimes you need a varying set of values (var-args) in your test, but CsvSource does not accommodate var-args.</p>
 <p>In that case you can format one or more of the string such, that you can easily chop it up into an array of Strings, which could then be
 interpreted as some other type. You only need to choose a separator different than that the CsvSource records use. We have had good experience
 with the '|' character which is both recognizable but not too obtrusive.</p>
-</div>
-<div class=listingblock>
-<div class=title>Simulated varargs</div>
-<div class=content>
+<figure class=listing-block><figcaption>Simulated varargs</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>  @ParameterizedTest
   @CsvSource({
-    &#34;A, B, C|D|E|F&#34;  <i class=conum data-value=1></i><b>(1)</b>
+    &#34;A, B, C|D|E|F&#34;  <b class=conum>1</b>
   })
   void someTest(String s1, String s2, String rest) {
     String [] restAsArray=rest.split(&#34;\\|&#34;);
     // use in test.
-  }</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>You can add spaces in the csvsource lines to improve readability and to align stuff.</td>
-</tr>
-</tbody></table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-If your varargs parameters provides only single characters, you can <em>split</em> with the empty string into single character <code>String</code>-s.<br>
+  }</code></pre><ol class="callout-list arabic"><li>You can add spaces in the csvsource lines to improve readability and to align stuff.</li></ol></figure>
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>If your varargs parameters provides only single characters, you can <em>split</em> with the empty string into single character <code>String</code>-s.<br>
 For example <code>"ABC".split("")</code> produces the array <code>{"A", "B", "C"}</code>.<br>
-Alternatively you can use <code>"ABC".toCharArray()</code> which produces <code>{'A', 'B', 'C'}</code>, an array of primitive <code>char</code>.
-</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
+Alternatively you can use <code>"ABC".toCharArray()</code> which produces <code>{'A', 'B', 'C'}</code>, an array of primitive <code>char</code>.</p></aside>
 <p>If your self-split array should contain int values, you can use this helper method.
 A similar trick can be applied for long and double too and also for objects that can easily be mapped from a short String.
 In the latter case it would be best to also supply a lambda expression to do the conversion, which can then be used in a <code>map(…​)</code>
 function place of the <code>Integer::parseInt</code> in the code below.</p>
-</div>
-<div class=paragraph>
 <p>Such helper can be static an be put in your collection of test
-helpers.<sup class=footnote>[<a id=_footnoteref_1 class=footnote href=#_footnotedef_1 title="View footnote.">1</a>]</sup></p>
-</div>
-<div class=listingblock>
-<div class=title>Split to int array.</div>
-<div class=content>
+helpers.<a class=footnote-ref id=_footnoteref_1 href=#_footnote_1 title="View footnote 1" role=doc-noteref>[1]</a></p>
+<figure class=listing-block><figcaption>Split to int array.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    public static int[] stringToInts( String input ) {
        return Stream.of( input.split( &#34;\\|&#34;))
                .mapToInt( Integer::parseInt )
                .toArray();
-   }</code></pre>
-</div>
-</div>
-<div class=listingblock>
-<div class=title>Split to Object arrays</div>
-<div class=content>
+   }</code></pre></figure>
+<figure class=listing-block><figcaption>Split to Object arrays</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    public static &lt;T&gt; T[] stringToObjects( String input, Function&lt;String, T&gt; fun ) {
         return (T[]) Stream.of( input.split( &#34;\\|&#34; ) )
                 .map( fun )
                 .toArray( Object[]::new );
-    }</code></pre>
-</div>
-</div>
-<div class=paragraph>
-<p>If you do not yet fully understand what this means, pay attention in week 4.</p>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_using_a_method_as_a_source_for_the_test_data>Using a method as a Source for the test Data</h3>
-<div class=paragraph>
-<p>In all given examples above, the test data is more or less constant, at least the compiler is the last
+    }</code></pre></figure>
+<p>If you do not yet fully understand what this means, pay attention in week 4.</p></section>
+<section class="doc-section level-2"><h3 id=_using_a_method_as_a_source_for_the_test_data>Using a method as a Source for the test Data</h3><p>In all given examples above, the test data is more or less constant, at least the compiler is the last
 that somehow computes them. Sometimes you need some kind of processing of the test data. For instance the test data
 depend on an environment variable, like the amount of test data, or the test data must be compose from some dynamic value
 that is only apparent ate run time. This is where <code>@MethodSource</code> comes in. At runtime something that can be evaluated can influence the test data.</p>
-</div>
-<div class=paragraph>
 <p>The use case we had for this the ALDA sorting exercise. We want to run tests even if not all variants are available. We ask the student’s implementation
 which sorting variants are available, and then prepare a set of test data for each variant.</p>
-</div>
-<div class=paragraph>
 <p>Technically it works a lot like the ArgumentsProvider. The <code>static</code> method must return a Stream of some kind. If you choose <code>Arguments</code> as the stream-element-type,
 the test method looks the same as as a normal parameterized test.</p>
-</div>
-<div class=listingblock>
-<div class=content>
-<pre class=highlight><code class=language-java data-lang=java>    public static Stream&lt;Arguments&gt; allSortersAndTestCounts() {
-        SortKind[] supportedSorters = TestBase.factory.supportedSorters(); <i class=conum data-value=1></i><b>(1)</b>
-        return Stream.of( supportedSorters ).map( ss -&gt; { <i class=conum data-value=2></i><b>(2)</b>
+<div class=listing-block><pre class=highlight><code class=language-java data-lang=java>    public static Stream&lt;Arguments&gt; allSortersAndTestCounts() {
+        SortKind[] supportedSorters = TestBase.factory.supportedSorters(); <b class=conum>1</b>
+        return Stream.of( supportedSorters ).map( ss -&gt; { <b class=conum>2</b>
             return IntStream.of( 2, 3, 10, 100, 1000 )
                     .mapToObj( i -&gt; arguments( ss, i ) );
-        } ).flatMap( x -&gt; x );  <i class=conum data-value=3></i><b>(3)</b>
-    }</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>The number of ready test is determined by the factory, which return am aaar of enum values like QUICK or INSERTION.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>This stream combines each sort kind with a number of elements in a queue to be sorted, as a stream of arguments</td>
-</tr>
-<tr>
-<td><i class=conum data-value=3></i><b>3</b></td>
-<td>this identity function (lamba) as argument to flatMap unpacks the elements of the inner stream and puts each as element in
-the outer stream.</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
+        } ).flatMap( x -&gt; x );  <b class=conum>3</b>
+    }</code></pre><ol class="callout-list arabic"><li>The number of ready test is determined by the factory, which return am aaar of enum values like QUICK or INSERTION.</li><li>This stream combines each sort kind with a number of elements in a queue to be sorted, as a stream of arguments</li><li>this identity function (lamba) as argument to flatMap unpacks the elements of the inner stream and puts each as element in
+the outer stream.</li></ol></div>
 <p>The stream (and lambda) will be further addressed in week 5.</p>
-</div>
 <hr>
-<div class=paragraph>
 <p>Because we are collecting test tricks, here is another one:</p>
-</div>
-<div class=paragraph>
-<p>Unresolved directive in &lt;stdin> - include::testrecipes1.adoc[]</p>
-</div>
-</div>
-</div>
-</div>
-<div id=footnotes>
-<hr>
-<div class=footnote id=_footnotedef_1>
-<a href=#_footnoteref_1>1</a>. Have your own tiny project and copy parts of that to your other projects, such as a java class called TestUtils.java
-</div>
-</div>
+<p>Unresolved directive in &lt;stdin> - include::testrecipes1.adoc[]</p></section></section><section class=footnotes aria-label=Footnotes role=doc-endnotes><hr><ol class=footnotes><li class=footnote id=_footnote_1 role=doc-endnote>Have your own tiny project and copy parts of that to your other projects, such as a java class called TestUtils.java <a class=footnote-backref href=#_footnoteref_1 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li></ol></section>
 </article>
 </div><footer class="text-sm leading-6 mt-12 mb-5">
 Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
 </footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
 <h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#_parameterized_tests>Parameterized tests</a>
-<ul>
-<li><a href=#_parameterized_test_junit_5_style>Parameterized test, Junit 5 style</a></li>
-<li><a href=#_lookup_in_a_map>Lookup in a map.</a></li>
-<li><a href=#_test_data_from_a_file>Test data from a file</a></li>
-<li><a href=#_repeated_use_of_same_data>Repeated use of same data.</a></li>
-<li><a href=#_testing_compare_results>Testing compare results.</a></li>
-<li><a href=#_test_data_using_argumentsprovider>Test Data Using ArgumentsProvider</a></li>
-<li><a href=#_split_it_yourselves>Split it yourselves</a></li>
-<li><a href=#_using_a_method_as_a_source_for_the_test_data>Using a method as a Source for the test Data</a></li>
-</ul>
-</li>
-</ul>
-</nav>
+<nav id=TableOfContents></nav>
 </div></div>
 <div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
 </div><script src=/prc2_web/js/main.min.b2d2aacc67a4fbfee5649e3e537fc94f29bf22f190969d5f638686db689d5ca8807e2cceb3fb584dc3a750507a50fdd438390deb2a79e5edd1800de8f026cdd3.js integrity="sha512-stKqzGek+/7lZJ4+U3/JTym/IvGQlp1fY4aG22idXKiAfizOs/tYTcOnUFB6UP3UODkN6yp55e3RgA3o8CbN0w==" crossorigin=anonymous></script>

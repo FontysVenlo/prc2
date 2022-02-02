@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.6bbfac3e9ea7b164109aa40012f29e9029127151833cdc96df151e0caaebaa8d86c1455928064e1683797924394669a9d05834762cd13d252eb572e3ca5cee52.css integrity="sha512-a7+sPp6nsWQQmqQAEvKekCkScVGDPNyW3xUeDKrrqo2GwUVZKAZOFoN5eSQ5Rmmp0Fg0dizRPSUutXLjylzuUg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.356ec2ba03cdae42868c30d28814db5ef90d1cc106dd9e2844e17d2c9d8c78c1d462a67a6ba488bc7241161206086f4c09455c4cb49f6a00f7190bf42e2f6add.css integrity="sha512-NW7CugPNrkKGjDDSiBTbXvkNHMEG3Z4oROF9LJ2MeMHUYqZ6a6SIvHJBFhIGCG9MCUVcTLSfagD3GQv0Li9q3Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 <script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
@@ -69,56 +69,29 @@ Desgin for testability
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<div class=sect1>
-<h2 id=_java_style>Java Style</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p>Java is a language (sort of anyway) and languages come with a culture.
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_java_style>Java Style</a><ol class="toc-list level-2"><li><a href=#_where_have_you_put_your_curly_braces>Where have you put your Curly Braces.</a></li><li><a href=#_javadoc_style>Javadoc style</a></li></ol></li></ol></nav><section class="doc-section level-1"><h2 id=_java_style>Java Style</h2><p>Java is a language (sort of anyway) and languages come with a culture.
 One such cultural aspect is the way you format your code, like placing your brackets, parenthesis, spaces and curly braces.
 This coding style is intended to help you read the code, recognize the structure at a glance and find the interesting details easily and spot on.</p>
-</div>
-<div class=paragraph>
 <p>The official Java style is derived from the Kernighan and Ritchie (K&R) style for the <strong>C</strong> programming language. Since syntactically Java inherits quite a lot from C, that would be logical choice.</p>
-</div>
-<div class=paragraph>
 <p>The current and preferred way of using this java style is best described in the <a href=https://google.github.io/styleguide/javaguide.html>Google Java Style Guide</a>.</p>
-</div>
-<div class=sect2>
-<h3 id=_where_have_you_put_your_curly_braces>Where have you put your Curly Braces.</h3>
-<div class=paragraph>
-<p>Most holy wars are fought over the placement of the curlies '{}', and in some cases other brackets <code>[]</code> or parenthesis <code>()</code> and <code>&lt;></code> too.
+<section class="doc-section level-2"><h3 id=_where_have_you_put_your_curly_braces>Where have you put your Curly Braces.</h3><p>Most holy wars are fought over the placement of the curlies '{}', and in some cases other brackets <code>[]</code> or parenthesis <code>()</code> and <code>&lt;></code> too.
 In particular: Put them at the beginning of the line or at the end. The Java Style Guide is quite clear about that: <a href=https://google.github.io/styleguide/javaguide.html#s4.1-braces>Braces</a>.</p>
-</div>
-<div class=paragraph>
 <p>My personal motivation would be: If your understand that C and Java are block oriented languages, then you immediately will understand that placing a brace at the beginning of a line
 can only mean that you start a new block. This allows you to define a local scope. This is what you already know from for loops. Well the loop need not be there to allow yourselves to have some very local variables, like in the example below.</p>
-</div>
-<div class=paragraph>
 <p>If you understand this block aspect of the K&R style, you know that you do not have to search for the name of a method, a class start or anything else. The block is just a block with local scope. It helps readability, because you can define
 your local variables at the place your need them and confine them there, without having the locals interfere with anything else in the method or class.</p>
-</div>
-<div class=listingblock>
-<div class=title>example of block with scoped local variable</div>
-<div class=content>
+<figure class=listing-block><figcaption>example of block with scoped local variable</figcaption>
 <pre class=highlight><code class=language-Java data-lang=Java>        {
             int i=0;
             // do something with i
-        }</code></pre>
-</div>
-</div>
-<div class=paragraph>
+        }</code></pre></figure>
 <p>This often overlooked feature can help big time to help improve the readability
 of your code, in particular when the method is getting big. But since having big methods is a bit of a no go area in a modern programming
-style.<sup class=footnote>[<a id=_footnoteref_1 class=footnote href=#_footnotedef_1 title="View footnote.">1</a>]</sup>, your rarely see it in practice.</p>
-</div>
-<div class=paragraph>
+style.<a class=footnote-ref id=_footnoteref_1 href=#_footnote_1 title="View footnote 1" role=doc-noteref>[1]</a>, your rarely see it in practice.</p>
 <p>In Java there is also another reason. You can have blocks at the class level, which allow you to define some kind of anonymous constructor. Remember Anonymous Inner Classes? Well, sometimes
 you want to have a constructor, just to initialise things. Here is an examples from the Java FX binding chapter.</p>
-</div>
-<div class=listingblock>
-<div class=title>initialize a binding in an 'Anonymous' constructor, lines 10..12, which is a block with no name…​</div>
-<div class=content>
-<pre class=highlight><code class=language-Java data-lang=Java>    public static void main( String[] args ) {
+<figure class=listing-block><figcaption>initialize a binding in an 'Anonymous' constructor, lines 10..12, which is a block with no name…​</figcaption>
+<pre class="highlight linenums"><code class=language-Java data-lang=Java>    public static void main( String[] args ) {
 
         final DoubleProperty a = new SimpleDoubleProperty( 1 );
         final DoubleProperty b = new SimpleDoubleProperty( 2 );
@@ -127,9 +100,9 @@ you want to have a constructor, just to initialise things. Here is an examples f
 
         DoubleBinding db = new DoubleBinding() {
 
-            { <i class=conum data-value=1></i><b>(1)</b>
+            { <b class=conum>1</b>
                 super.bind( a, b, c, d );
-            } <i class=conum data-value=2></i><b>(2)</b>
+            } <b class=conum>2</b>
 
             @Override
             protected double computeValue() {
@@ -140,86 +113,23 @@ you want to have a constructor, just to initialise things. Here is an examples f
         System.out.println( db.get() );
         b.set( 3 );
         System.err.println( db.get() );
-    }</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tbody><tr>
-<td><i class=conum data-value=1></i><b>1</b></td>
-<td>Start of anonymous block in line 10.</td>
-</tr>
-<tr>
-<td><i class=conum data-value=2></i><b>2</b></td>
-<td>End of anonymous block in line 12.</td>
-</tr>
-</tbody></table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>So whenever you find a closing bracket, you only have to look up in the same column to find what it belongs to. If you find the start of a method, then that’s what its is, if you find
-an opening bracket, stop looking, you have found its meaning, a block.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-<div class=sect2>
-<h3 id=_javadoc_style>Javadoc style</h3>
-<div class=paragraph>
-<p>See <a href=https://google.github.io/styleguide/javaguide.html#s7-javadoc>Javadoc style guide</a> and
+    }</code></pre><ol class="callout-list arabic"><li>Start of anonymous block in line 10.</li><li>End of anonymous block in line 12.</li></ol></figure>
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>So whenever you find a closing bracket, you only have to look up in the same column to find what it belongs to. If you find the start of a method, then that’s what its is, if you find
+an opening bracket, stop looking, you have found its meaning, a block.</p></aside></section>
+<section class="doc-section level-2"><h3 id=_javadoc_style>Javadoc style</h3><p>See <a href=https://google.github.io/styleguide/javaguide.html#s7-javadoc>Javadoc style guide</a> and
 <a href=https://www.oracle.com/technetwork/java/javase/documentation/index-137868.html>How to write doc comments</a>.</p>
-</div>
-<div class=paragraph>
 <p>Not only does Java code have a proper style, the same applies to java-doc.</p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>Public means documented, as in proper javadoc.</p>
-<div class=ulist>
-<ul>
-<li>
-<p>Everything that is marked public is part of the public API and must be documented.</p>
-</li>
-<li>
-<p><code>protected</code> and <code>public</code> are alike here. They provide access to members from classes
-outside the package and must be documented.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Because all <sup class=footnote>[<a id=_footnoteref_2 class=footnote href=#_footnotedef_2 title="View footnote.">2</a>]</sup> members
-in an interface default to public you need to document them too.</p>
-</li>
-</ul>
-</div>
-<div class=paragraph>
+<div class=ulist><ul><li>Public means documented, as in proper javadoc.<ul><li>Everything that is marked public is part of the public API and must be documented.</li><li><code>protected</code> and <code>public</code> are alike here. They provide access to members from classes
+outside the package and must be documented.</li></ul></li><li>Because all <a class=footnote-ref id=_footnoteref_2 href=#_footnote_2 title="View footnote 2" role=doc-noteref>[2]</a> members
+in an interface default to public you need to document them too.</li></ul></div>
 <p>You can skip on documentation if
 * The member is not public or protected
 * For methods: it overwrites a method in a (documented) interface or super class.</p>
-</div>
-<div class=paragraph>
 <p>Javadoc starts with <code>/<strong>*</strong></code><strong> and ends with <code></code></strong><code>/</code></p>
-</div>
-<div class=sect3>
-<h4 id=_class_javadoc>Class javadoc</h4>
-<div class=paragraph>
-<p>A (public|protected) class or interface needs javadoc at its class definition, just before <code>class</code> or <code>interface</code>.
+<section class="doc-section level-3"><h4 id=_class_javadoc>Class javadoc</h4><p>A (public|protected) class or interface needs javadoc at its class definition, just before <code>class</code> or <code>interface</code>.
 A required tag is <code>@author</code>, and you are allowed to have that multiple times in a class, in particular if
 multiple authors contributed substantially. See the the jdk libraries for examples.</p>
-</div>
-<div class=listingblock>
-<div class=title>Excerpt from the String javadoc.</div>
-<div class=content>
+<figure class=listing-block><figcaption>Excerpt from the String javadoc.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>&lt;p&gt;A {@code String} represents a string in the UTF-16 format
  * in which &lt;em&gt;supplementary characters&lt;/em&gt; are represented by &lt;em&gt;surrogate
  * pairs&lt;/em&gt; (see the section &lt;a href=&#34;Character.html#unicode&#34;&gt;Unicode
@@ -239,17 +149,11 @@ multiple authors contributed substantially. See the the jdk libraries for exampl
  * @see     java.lang.StringBuffer
  * @see     java.lang.StringBuilder
  * @see     java.nio.charset.Charset
- * @since   JDK1.0</code></pre>
-</div>
-</div>
-<div class=paragraph>
+ * @since   JDK1.0</code></pre></figure>
 <p>As a minimum for class javadoc, have one short sentence describing the purpose of the class.
 End that line with a period., followed by the author tag. It is considered bad style to leave
 out author or make substantial changes to a file without adding the author of those changes.</p>
-</div>
-<div class=listingblock>
-<div class=title>Class java doc</div>
-<div class=content>
+<figure class=listing-block><figcaption>Class java doc</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>/**
  * Friendly and well known program.
  *
@@ -261,59 +165,18 @@ out author or make substantial changes to a file without adding the author of th
      /// wot goes here should be obvious.
    }
 
- }</code></pre>
-</div>
-</div>
-<div class=paragraph>
+ }</code></pre></figure>
 <p>In particular in a project like PRJ2, you should have multiple authors if that best describes how a program came about.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class=icon>
-<i class="fa icon-tip" title=Tip></i>
-</td>
-<td class=content>
-<div class=paragraph>
-<p>You can configure your IDE to insert the proper author info. In NetBeans IDE go to templates, settings, and
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>You can configure your IDE to insert the proper author info. In NetBeans IDE go to templates, settings, and
 uncomment the <code>user</code> property and make it have the proper information. This is particularly important if
-your user name on your machine is <code>pattatje</code> or some other obscure name that the teachers might not know.</p>
-</div>
-</td>
-</tr>
-</tbody></table>
-</div>
-<div class=paragraph>
-<p>Do Not skimp on Javadoc style. It is just as wrong as writing "Alice and Bob <strong class="role=" red"">goes</strong> to town".</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id=footnotes>
-<hr>
-<div class=footnote id=_footnotedef_1>
-<a href=#_footnoteref_1>1</a>. if your method gets big, you should break it up in smaller parts, like private methods
-</div>
-<div class=footnote id=_footnotedef_2>
-<a href=#_footnoteref_2>2</a>. In java 11 you can have private static methods in interfaces
-</div>
-</div>
+your user name on your machine is <code>pattatje</code> or some other obscure name that the teachers might not know.</p></aside>
+<p>Do Not skimp on Javadoc style. It is just as wrong as writing "Alice and Bob <strong class="role=" red"">goes</strong> to town".</p></section></section></section><section class=footnotes aria-label=Footnotes role=doc-endnotes><hr><ol class=footnotes><li class=footnote id=_footnote_1 role=doc-endnote>if your method gets big, you should break it up in smaller parts, like private methods <a class=footnote-backref href=#_footnoteref_1 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li><li class=footnote id=_footnote_2 role=doc-endnote>In java 11 you can have private static methods in interfaces <a class=footnote-backref href=#_footnoteref_2 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li></ol></section>
 </article>
 </div><footer class="text-sm leading-6 mt-12 mb-5">
 Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
 </footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
 <h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#_java_style>Java Style</a>
-<ul>
-<li><a href=#_where_have_you_put_your_curly_braces>Where have you put your Curly Braces.</a></li>
-<li><a href=#_javadoc_style>Javadoc style</a></li>
-</ul>
-</li>
-</ul>
-</nav>
+<nav id=TableOfContents></nav>
 </div></div>
 <div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
 </div><script src=/prc2_web/js/main.min.b2d2aacc67a4fbfee5649e3e537fc94f29bf22f190969d5f638686db689d5ca8807e2cceb3fb584dc3a750507a50fdd438390deb2a79e5edd1800de8f026cdd3.js integrity="sha512-stKqzGek+/7lZJ4+U3/JTym/IvGQlp1fY4aG22idXKiAfizOs/tYTcOnUFB6UP3UODkN6yp55e3RgA3o8CbN0w==" crossorigin=anonymous></script>
