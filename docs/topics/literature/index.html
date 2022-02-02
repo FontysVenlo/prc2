@@ -69,23 +69,12 @@ Desgin for testability
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_adding_your_own_code_templates_to_netbeans_ide>Adding your own code templates to NetBeans IDE</a></li></ol></nav><section class="doc-section level-1"><h2 id=_adding_your_own_code_templates_to_netbeans_ide>Adding your own code templates to NetBeans IDE</h2><p>Productivity can be helped big time, if you add code templates
-to NetBeans. Quite a few are predefined but you can add your own too.</p>
-<p>Go to Tools > Options > Editor > Code Templates.</p>
-<p>You get this dialog:</p>
-<div class=image-block><img src=/prc2_web/images/codetemplatedialog.png alt=codetemplatedialog></div>
-<p>You can add one with the new button, Duh.</p>
-<p>I find this one quite convenient:</p>
-<figure class=listing-block><figcaption>Definition of my codetemplate <strong>jutm</strong></figcaption>
-<pre class=highlight><code class=language-java data-lang=java>//@Disabled(&#34;think TDD&#34;)
-@${baseType type=&#34;org.junit.jupiter.api.Test&#34; default=&#34;Test&#34; editable=&#34;false&#34;}
-public void ${method}(){
-    fail(&#34;method ${method} reached end. You know what to do.&#34;);
-}</code></pre></figure>
-<div class=ulist><ul><li>As of January 2020 <code>jutm</code> is junit 5 specific.</li><li>Note that <code>@Disabled</code> is a tag that is only used when writing all test bodies beforehand.</li><li>Once you start writing the test, you should remove or comment (best) the <code>@Disabled</code> to make the test effective.</li></ul></div>
-<hr>
-<figure class=video-block><iframe src="//www.youtube.com/embed/1SUHFMvM39Y?rel=0" frameborder=0 allowfullscreen></iframe>
-<figcaption>Adding Code templates</figcaption></figure></section>
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_study_materials>Study materials</a></li></ol></nav><section class="doc-section level-1"><h2 id=_study_materials>Study materials</h2><div class=ulist><ul><li>For the Java basics and advanced features we are using Cay Horstmann’s fine books from the core Java series.
+They are on the book-list from September.</li><li>The exercises will be published via a personal github repository.</li><li>The Junit version is <a href=https://junit.org/junit5/docs/current/user-guide/>Junit 5</a>.</li><li>"Using frameworks for testing" will start with using <a href=https://assertj.github.io/doc/>AssertJ</a>,
+which is a modern and up to date Open Source testing framework. The documentation is of excellent quality and fun to read.</li><li><a href=http://horstmann.com/corejava/corejava_11ed-bonuschapter13-javafx.pdf target=_blank rel=noopener>JavaFX bonus chapter </a> to Core Java Volume I</li></ul></div>
+<div class="image-block related thumb left"><a class=image href=https://www.oreilly.com/library/view/core-java-volume/9780135167199/><img src=/prc2_web/images/corejava-1-11ed.jpg alt="Core Java Volume I Fundamentals"></a></div>
+<div class="image-block related thumb right"><a class=image href=https://www.oreilly.com/library/view/core-java-volume/9780135167175/><img src=/prc2_web/images/corejava-2-11ed.jpg alt="Core Java Volume II Advanced Features"></a></div>
+<div class=clear-both></div></section>
 </article>
 </div><footer class="text-sm leading-6 mt-12 mb-5">
 Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
