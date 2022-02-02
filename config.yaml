@@ -30,7 +30,7 @@ markup:
   tableOfContents:
     endLevel: 3
   asciidocext:
-    backend: html5
+    backend: html5s
     extensions:
       - "asciidoctor-html5s"
     attributes:
