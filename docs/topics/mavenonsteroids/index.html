@@ -64,127 +64,40 @@ Parameterized tests
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<div class=sect1>
-<h2 id=_arrange_act_assert>Arrange Act Assert</h2>
-<div class=sectionbody>
-<div class=videoblock>
-<div class=title>Some action.</div>
-<div class=content>
-<iframe src="https://www.youtube.com/embed/GJFGXYyKvns?rel=0" frameborder=0 allowfullscreen></iframe>
-</div>
+<div class=sect2>
+<h3 id=_maven_on_steroids_or_use_it_properly>Maven on Steroids or: use it properly</h3>
+<div class=paragraph>
+<p>Sometimes you think, maven is not your thing because it is slowing you down, certainly if you are trying to work your way through
+your code TDD style: Write test, run test red, implement code, run test green, be happy.</p>
 </div>
 <div class=paragraph>
-<p>When designing tests it is good to keep the ideas of making <em>action movies</em> in the back of your head.
-Looking at some <em>the making of…​</em> can be quite instructive in this case.
-For a scene to be taken, there is typically quite some preparation involved like hanging Spiderman
-on a thin cable from the ceiling, making sure the <strong>crook</strong> is in the right position so he can land or receive the first punches and so on.<br>
-Then the director calls <strong>action</strong> and the scene is acted out<br>
-If the director is satisfied, al is okay<br>
-If not, he will want a redo later on.</p>
+<p>But reconsider: Maven takes it’s job very serious, but since it is a computer program
+it is stubbornly stupid, so it might be that <em>you</em> are using it in the <strong>wrong</strong> way.</p>
 </div>
 <div class=paragraph>
-<p>A very popular style to write unit tests is the triple-A or <strong>Arrange-Act-Assert</strong>.</p>
-</div>
-<div class=paragraph>
-<p><strong class=blue>Arrange</strong> simply means that you set up the objects you need in the tests:</p>
+<p>Let me explain what maven does:</p>
 </div>
 <div class=ulist>
 <ul>
 <li>
-<p>The <strong>S</strong>ystem <strong>U</strong>nder <strong>T</strong>est, the <strong class=blue>SUT</strong> its the term in the tesing world. In movies it is the protagonist or main actor.</p>
-</li>
-<li>
-<p>The <strong>D</strong>ependent <strong>O</strong>n <strong>C</strong>omponents or <strong class=blue>DOC</strong>s, the scenario needs to play out the action. Supporting actors or even props in the movies.</p>
+<p>Maven uses build phases: <strong>initialize</strong>, <strong>compile</strong>, <strong>compile tests</strong>, <strong>run tests</strong>, <strong>package</strong> the application etc., when you build your application.
+It will check if all is in order, look if any updates are needed etc. This keeps maven busy and you waiting.</p>
 </li>
 </ul>
 </div>
 <div class=paragraph>
-<p><strong class=blue>Act</strong> is quite similar to a film directory shouting <strong>action</strong>, that is do what you prepared for.<br></p>
+<p><strong>Packaging</strong> (which is what you do when you click <em>build</em> in the IDE) the application and<br>
+is only useful when your are really done: all tests are complete and the code turns them a nice green.</p>
 </div>
 <div class=ulist>
 <ul>
 <li>
-<p>This typically is one method call on the SUT.</p>
+<p>So do not <em>mvn build</em>, but instead <strong>mvn test</strong>, then maven will do the minimum required.</p>
 </li>
 </ul>
 </div>
 <div class=paragraph>
-<p><strong class=blue>Assert</strong> to test if the actual result of the action is what is expected.<br></p>
-</div>
-<div class=ulist>
-<ul>
-<li>
-<p>The actual value can be the return value of the called method, but also the (new) state of the SUT. In the movie: did the explosion happen, was the punch landed correctly
-and was the emotion credible.</p>
-</li>
-</ul>
-</div>
-<div class=listingblock>
-<div class=title>AAA in action</div>
-<div class=content>
-<pre class=highlight><code class=language-java data-lang=java>@Test
-public void shouldAllowToAddAddress() {
-  // Arrange
-  Client client = new Client();
-  Address addressA = new Address(221b, &#34;Baker Street&#34;);
-
-  // Act
-  client.addAddress(addressA);
-
-  // Assert
-  assertThat( client.getAddresses() ).contains( addressA ));
-}</code></pre>
-</div>
-</div>
-<div class=paragraph>
-<p>Of course, Arrange, Act and Assert will vary with the actual business requirement, much
-as the setup, play, and act in movie making. And also, quite similar to movie making
-the arrange can be expensive or cheap, the action be fraught with risk or easy, and the assert can be complex or simple.</p>
-</div>
-<div class=paragraph>
-<p>We hope to teach to keep all three <em>as simple as possible</em>, to keep the costs of testing so low that to make it never an argument to skip testing.</p>
-</div>
-<div class=paragraph>
-<p>Later in this course we see some more complex scenarios, in which we need <a href=https://en.wikipedia.org/wiki/Extra_(acting)>Extras</a> as one would say in the movie industry.</p>
-</div>
-</div>
-</div>
-<div class=sect1>
-<h2 id=_clues_needed>Clues needed</h2>
-<div class=sectionbody>
-<div class=paragraph>
-<p>A smart person is able to avoid work. A common strategy is to let others do it. You can achieve such smartness as well by using your tools properly.</p>
-</div>
-<div class=paragraph>
-<p>For instance your IDE will gladly <em class=green>complete</em> code that your started by showing
-a list of possible completions of the code that you already provided. However, the IDE
-can only do that if you provide it with sufficient clues. For instance when you want the IDE
-to generate a non-existing generic class, create two instance with different type parameters before your accept the hint to create class.</p>
-</div>
-<div class=listingblock>
-<div class=title>complete a generic</div>
-<div class=content>
-<pre class=highlight><code class=language-java data-lang=java>Box&lt;String&gt; sb= new Box&lt;String&gt;(); // compiler will complain for non existing Box class.
-Box&lt;Integer&gt; ib= new Box&lt;Integer&gt;(); // compiler will complain for non existing Box class.
-// now you can let the IDE to follow its urge to do the typing for you.</code></pre>
-</div>
-</div>
-<div class=paragraph>
-<p>Same applies to methods. If you want a specific return type, provide that in a declaration where you specify such type.</p>
-</div>
-<div class=paragraph>
-<p>The same applies to frameworks such as AssertJ, that provides an <code>assertThat(…​)</code> method as entry for almost all asserts.
-But what you put on the dots is important, because the IDE will inspect the <strong class=blue>type</strong> of the <em>expression</em> and then will look for the possible
-completions. The completions for an Integer or int are very different from that of a <code>Collection</code> or <code>Iterable</code>.</p>
-</div>
-<div class=paragraph>
-<p>Combine this with the previous tip. First specify a variable with a type, that
-use the variable inside the <code>assertThat(…​)</code> and the IDE will be able to find the available completions.</p>
-</div>
-<div class=paragraph>
-<p>Sometimes you have to nudge the IDE a bit, for instance when it suggest to create two constructors from the above example.
-Accept one of the suggestions, but then modify the generated constructor to accept the type parameter of the class as input type of the constructor.
-After saving all files, you will have convinced both IDE and compiler.</p>
+<p>So if you are in the habit of clicking build and then run your tests, you might want to change you habit.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -194,15 +107,41 @@ After saving all files, you will have convinced both IDE and compiler.</p>
 </td>
 <td class=content>
 <div class=paragraph>
-<div class=title>It is good to have a thinking pause</div>
-<p>Let the IDE and framework do (most) of the typing work for you, by providing clues. If you do that smartly, it
-will be easy to write code that is correct and acceptable by the compiler.<br>
-<strong class=big>Being lazy is good, both for code and smart people.</strong></p>
+<p>sebipom sets the default goal to test, so if you run mvn from the command line, you only need to type <code>mvn</code></p>
 </div>
 </td>
 </tr>
 </tbody></table>
 </div>
+<div class=sect3>
+<h4 id=_maven_the_proper_way_when_still_in_the_tdd_phase>Maven the proper way, when still in the TDD phase</h4>
+<div class=paragraph>
+<p>As long as you are writing test and writing code, just do:</p>
+</div>
+<div class=paragraph>
+<p><code>mvn test</code>, or the equivalent in you IDE (click the test button, not the build button)<br>
+or <code>mvn clean</code> and then <code>mvn test</code>. (click clean, click test).</p>
+</div>
+<div class=paragraph>
+<p>Only when you are done with all your tests, do</p>
+</div>
+<div class="olist arabic">
+<ol class=arabic>
+<li>
+<p>clean (mvn clean)</p>
+</li>
+<li>
+<p>build (mvn package mvn -P fx package for fx projects)</p>
+</li>
+</ol>
+</div>
+<div class=paragraph>
+<p>and then <strong>run</strong> your application.</p>
+</div>
+<div class=paragraph>
+<p>Then maven can do all of it’s serious work of assembling your application for deployment</p>
+</div>
+<hr>
 </div>
 </div>
 </article>
@@ -212,8 +151,7 @@ Theme provided by <a class="text-pink-500 underline" href=https://github.com/Fon
 <h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#_arrange_act_assert>Arrange Act Assert</a></li>
-<li><a href=#_clues_needed>Clues needed</a></li>
+<li><a href=#_maven_on_steroids_or_use_it_properly>Maven on Steroids or: use it properly</a></li>
 </ul>
 </nav>
 </div></div>

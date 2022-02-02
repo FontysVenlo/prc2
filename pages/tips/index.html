@@ -1,0 +1,1028 @@
+<!doctype html><html lang=en-us><head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>PRC2</title>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/main.min.8e9615183c20270bfd34ccda27da54e44f62816de773361b885a66ae9ea8524cad7504a05ace0cfccdec766f6a517a2ba3f7cd7499277b4940e03aa7d65e75d5.css integrity="sha512-jpYVGDwgJwv9NMzaJ9pU5E9igW3nczYbiFpmrp6oUkytdQSgWs4M/M3sdm9qUXoro/fNdJkne0lA4Dqn1l511Q==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2_web/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
+<script src=/prc2_web/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
+</head><body class="antialiased text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800"><header class="sticky top-0 z-40 w-full flex-none lg:border-b lg:border-gray-900/10 dark:border-gray-50/[0.06] bg-white dark:bg-gray-800">
+<div class="max-w-8xl mx-auto">
+<div class="py-4 border-b border-slate-900/10 lg:px-8 lg:border-0 dark:border-slate-300/10 mx-4 lg:mx-0">
+<div class="relative flex items-center">
+<a class="mr-3 flex-none overflow-hidden md:w-auto" href=/>
+<span class=sr-only>PRC2</span>PRC2
+</a>
+<div class="relative flex ml-auto">
+<nav class="hidden lg:flex items-center text-sm leading-6 font-semibold text-gray-700 dark:text-gray-200">
+<ul class="flex space-x-8">
+<li>
+<a href=https://fontysvenlo.github.io/prc2_web/pages/tips/ class="hover:text-sky-500 dark:hover:text-sky-400">Tips</a>
+</li>
+<li>
+<a href=https://fontysvenlo.github.io/prc2_web/pages/setup/ class="hover:text-sky-500 dark:hover:text-sky-400">Setup</a>
+</li>
+</ul>
+</nav>
+<div class="flex items-center lg:border-l border-gray-200 ml-6 pl-6 dark:border-gray-700">
+<button type=button id=theme-toggle>
+<span class="dark:hidden hover:text-sky-500"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+<span class="hidden dark:inline hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+</button>
+<a href=https://github.com/FontysVenlo/prc2_web class="ml-6 block hover:text-sky-500 dark:hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center p-4 border-b border-slate-900/10 lg:hidden dark:border-slate-50/[0.06]">
+<button id=menu-toggle type=button class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+<span class=sr-only>Navigation</span><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+</button>
+</div>
+</div>
+</header><div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8"><aside id=menu class="hidden lg:block fixed z-20 inset-0 top-[6.75rem] lg:top-[3.8125rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto bg-white dark:bg-gray-800">
+<nav class="lg:leading-6 relative">
+<ul>
+<li class="mt-12 lg:mt-8">
+<h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">Weeks</h5>
+<ul class="space-y-6 lg:space-y-2 border-l border-gray-100 dark:border-gray-700">
+<li>
+<a href=https://fontysvenlo.github.io/prc2_web/docs/unit-testing-basics/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+Unit Testing Basics
+</a>
+</li>
+<li>
+<a href=https://fontysvenlo.github.io/prc2_web/docs/parameterized-tests/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+Parameterized tests
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside><div class=lg:pl-[19.5rem]>
+<div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
+<article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
+<div class=sect1>
+<h2 id=_java_style>Java Style</h2>
+<div class=sectionbody>
+<div class=paragraph>
+<p>Java is a language (sort of anyway) and languages come with a culture.
+One such cultural aspect is the way you format your code, like placing your brackets, parenthesis, spaces and curly braces.
+This coding style is intended to help you read the code, recognize the structure at a glance and find the interesting details easily and spot on.</p>
+</div>
+<div class=paragraph>
+<p>The official Java style is derived from the Kernighan and Ritchie (K&R) style for the <strong>C</strong> programming language. Since syntactically Java inherits quite a lot from C, that would be logical choice.</p>
+</div>
+<div class=paragraph>
+<p>The current and preferred way of using this java style is best described in the <a href=https://google.github.io/styleguide/javaguide.html>Google Java Style Guide</a>.</p>
+</div>
+<div class=sect2>
+<h3 id=_where_have_you_put_your_curly_braces>Where have you put your Curly Braces.</h3>
+<div class=paragraph>
+<p>Most holy wars are fought over the placement of the curlies '{}', and in some cases other brackets <code>[]</code> or parenthesis <code>()</code> and <code>&lt;></code> too.
+In particular: Put them at the beginning of the line or at the end. The Java Style Guide is quite clear about that: <a href=https://google.github.io/styleguide/javaguide.html#s4.1-braces>Braces</a>.</p>
+</div>
+<div class=paragraph>
+<p>My personal motivation would be: If your understand that C and Java are block oriented languages, then you immediately will understand that placing a brace at the beginning of a line
+can only mean that you start a new block. This allows you to define a local scope. This is what you already know from for loops. Well the loop need not be there to allow yourselves to have some very local variables, like in the example below.</p>
+</div>
+<div class=paragraph>
+<p>If you understand this block aspect of the K&R style, you know that you do not have to search for the name of a method, a class start or anything else. The block is just a block with local scope. It helps readability, because you can define
+your local variables at the place your need them and confine them there, without having the locals interfere with anything else in the method or class.</p>
+</div>
+<div class=listingblock>
+<div class=title>example of block with scoped local variable</div>
+<div class=content>
+<pre class=highlight><code class=language-Java data-lang=Java>        {
+            int i=0;
+            // do something with i
+        }</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>This often overlooked feature can help big time to help improve the readability
+of your code, in particular when the method is getting big. But since having big methods is a bit of a no go area in a modern programming
+style.<sup class=footnote>[<a id=_footnoteref_1 class=footnote href=#_footnotedef_1 title="View footnote.">1</a>]</sup>, your rarely see it in practice.</p>
+</div>
+<div class=paragraph>
+<p>In Java there is also another reason. You can have blocks at the class level, which allow you to define some kind of anonymous constructor. Remember Anonymous Inner Classes? Well, sometimes
+you want to have a constructor, just to initialise things. Here is an examples from the Java FX binding chapter.</p>
+</div>
+<div class=listingblock>
+<div class=title>initialize a binding in an 'Anonymous' constructor, lines 10..12, which is a block with no name…​</div>
+<div class=content>
+<pre class=highlight><code class=language-Java data-lang=Java>    public static void main( String[] args ) {
+
+        final DoubleProperty a = new SimpleDoubleProperty( 1 );
+        final DoubleProperty b = new SimpleDoubleProperty( 2 );
+        final DoubleProperty c = new SimpleDoubleProperty( 3 );
+        final DoubleProperty d = new SimpleDoubleProperty( 4 );
+
+        DoubleBinding db = new DoubleBinding() {
+
+            { <i class=conum data-value=1></i><b>(1)</b>
+                super.bind( a, b, c, d );
+            } <i class=conum data-value=2></i><b>(2)</b>
+
+            @Override
+            protected double computeValue() {
+                return ( a.get() * b.get() ) + ( c.get() * d.get() );
+            }
+        };
+
+        System.out.println( db.get() );
+        b.set( 3 );
+        System.err.println( db.get() );
+    }</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class=conum data-value=1></i><b>1</b></td>
+<td>Start of anonymous block in line 10.</td>
+</tr>
+<tr>
+<td><i class=conum data-value=2></i><b>2</b></td>
+<td>End of anonymous block in line 12.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-tip" title=Tip></i>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>So whenever you find a closing bracket, you only have to look up in the same column to find what it belongs to. If you find the start of a method, then that’s what its is, if you find
+an opening bracket, stop looking, you have found its meaning, a block.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_javadoc_style>Javadoc style</h3>
+<div class=paragraph>
+<p>See <a href=https://google.github.io/styleguide/javaguide.html#s7-javadoc>Javadoc style guide</a> and
+<a href=https://www.oracle.com/technetwork/java/javase/documentation/index-137868.html>How to write doc comments</a>.</p>
+</div>
+<div class=paragraph>
+<p>Not only does Java code have a proper style, the same applies to java-doc.</p>
+</div>
+<div class=ulist>
+<ul>
+<li>
+<p>Public means documented, as in proper javadoc.</p>
+<div class=ulist>
+<ul>
+<li>
+<p>Everything that is marked public is part of the public API and must be documented.</p>
+</li>
+<li>
+<p><code>protected</code> and <code>public</code> are alike here. They provide access to members from classes
+outside the package and must be documented.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Because all <sup class=footnote>[<a id=_footnoteref_2 class=footnote href=#_footnotedef_2 title="View footnote.">2</a>]</sup> members
+in an interface default to public you need to document them too.</p>
+</li>
+</ul>
+</div>
+<div class=paragraph>
+<p>You can skip on documentation if
+* The member is not public or protected
+* For methods: it overwrites a method in a (documented) interface or super class.</p>
+</div>
+<div class=paragraph>
+<p>Javadoc starts with <code>/<strong>*</strong></code><strong> and ends with <code></code></strong><code>/</code></p>
+</div>
+<div class=sect3>
+<h4 id=_class_javadoc>Class javadoc</h4>
+<div class=paragraph>
+<p>A (public|protected) class or interface needs javadoc at its class definition, just before <code>class</code> or <code>interface</code>.
+A required tag is <code>@author</code>, and you are allowed to have that multiple times in a class, in particular if
+multiple authors contributed substantially. See the the jdk libraries for examples.</p>
+</div>
+<div class=listingblock>
+<div class=title>Excerpt from the String javadoc.</div>
+<div class=content>
+<pre class=highlight><code class=language-java data-lang=java>&lt;p&gt;A {@code String} represents a string in the UTF-16 format
+ * in which &lt;em&gt;supplementary characters&lt;/em&gt; are represented by &lt;em&gt;surrogate
+ * pairs&lt;/em&gt; (see the section &lt;a href=&#34;Character.html#unicode&#34;&gt;Unicode
+ * Character Representations&lt;/a&gt; in the {@code Character} class for
+ * more information).
+ * Index values refer to {@code char} code units, so a supplementary
+ * character uses two positions in a {@code String}.
+ * &lt;p&gt;The {@code String} class provides methods for dealing with
+ * Unicode code points (i.e., characters), in addition to those for
+ * dealing with Unicode code units (i.e., {@code char} values).
+ *
+ * @author  Lee Boynton
+ * @author  Arthur van Hoff
+ * @author  Martin Buchholz
+ * @author  Ulf Zibis
+ * @see     java.lang.Object#toString()
+ * @see     java.lang.StringBuffer
+ * @see     java.lang.StringBuilder
+ * @see     java.nio.charset.Charset
+ * @since   JDK1.0</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>As a minimum for class javadoc, have one short sentence describing the purpose of the class.
+End that line with a period., followed by the author tag. It is considered bad style to leave
+out author or make substantial changes to a file without adding the author of those changes.</p>
+</div>
+<div class=listingblock>
+<div class=title>Class java doc</div>
+<div class=content>
+<pre class=highlight><code class=language-java data-lang=java>/**
+ * Friendly and well known program.
+ *
+ * @author John Doe
+ * @author Jane Doe
+ */
+ public class HelloWorld {
+   public static void main(String... args){
+     /// wot goes here should be obvious.
+   }
+
+ }</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>In particular in a project like PRJ2, you should have multiple authors if that best describes how a program came about.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-tip" title=Tip></i>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>You can configure your IDE to insert the proper author info. In NetBeans IDE go to templates, settings, and
+uncomment the <code>user</code> property and make it have the proper information. This is particularly important if
+your user name on your machine is <code>pattatje</code> or some other obscure name that the teachers might not know.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>Do Not skimp on Javadoc style. It is just as wrong as writing "Alice and Bob <strong class="role=" red"">goes</strong> to town".</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=sect1>
+<h2 id=_adding_your_own_code_templates_to_netbeans_ide>Adding your own code templates to NetBeans IDE</h2>
+<div class=sectionbody>
+<div class=paragraph>
+<p>Productivity can be helped big time, if you add code templates
+to NetBeans. Quite a few are predefined but you can add your own too.</p>
+</div>
+<div class=paragraph>
+<p>Go to Tools > Options > Editor > Code Templates.</p>
+</div>
+<div class=paragraph>
+<p>You get this dialog:</p>
+</div>
+<div class=imageblock>
+<div class=content>
+<img src=/prc2_web/images/codetemplatedialog.png alt=codetemplatedialog>
+</div>
+</div>
+<div class=paragraph>
+<p>You can add one with the new button, Duh.</p>
+</div>
+<div class=paragraph>
+<p>I find this one quite convenient:</p>
+</div>
+<div class=listingblock>
+<div class=title>Definition of my codetemplate <strong>jutm</strong></div>
+<div class=content>
+<pre class=highlight><code class=language-java data-lang=java>//@Disabled(&#34;think TDD&#34;)
+@${baseType type=&#34;org.junit.jupiter.api.Test&#34; default=&#34;Test&#34; editable=&#34;false&#34;}
+public void ${method}(){
+    fail(&#34;method ${method} reached end. You know what to do.&#34;);
+}</code></pre>
+</div>
+</div>
+<div class=ulist>
+<ul>
+<li>
+<p>As of January 2020 <code>jutm</code> is junit 5 specific.</p>
+</li>
+<li>
+<p>Note that <code>@Disabled</code> is a tag that is only used when writing all test bodies beforehand.</p>
+</li>
+<li>
+<p>Once you start writing the test, you should remove or comment (best) the <code>@Disabled</code> to make the test effective.</p>
+</li>
+</ul>
+</div>
+<hr>
+<div class=videoblock>
+<div class=title>Adding Code templates</div>
+<div class=content>
+<iframe src="https://www.youtube.com/embed/1SUHFMvM39Y?rel=0" frameborder=0 allowfullscreen></iframe>
+</div>
+</div>
+</div>
+</div>
+<div class=sect1>
+<h2 id=_maven>Maven</h2>
+<div class=sectionbody>
+<div class=paragraph>
+<p>From week two onwards we will use <a href=https://books.sonatype.com/mvnref-book/reference/index.html>Maven</a> as the preferred build tool. The link in the previous sentence
+points to the very readable complete reference manual, which also has some pointers for beginners, might you categorize yourselves as one.</p>
+</div>
+<div class=sect2>
+<h3 id=_maven_repositories>Maven Repositories</h3>
+<div class=paragraph>
+<p>A maven repository is a server that provides ready built maven 'artifacts', such as (binary) jar files containing libraries, frameworks or APIs and in many (but not all) companion jar files containing the javadoc (often) and sources of the same binary. A maven repository is <strong>NOT</strong> a source code management system (CMS),<sup class=footnote>[<a id=_footnoteref_3 class=footnote href=#_footnotedef_3 title="View footnote.">3</a>]</sup> although it typically holds several versions of a binary, and there are tools, such as <a href=https://www.sonatype.com/nexus-repository-sonatype>Nexus Repository Manager</a>.<br></p>
+</div>
+<div class=paragraph>
+<p>There is a default repository, called <a href=https://mvnrepository.com/repos/central>maven central</a>. You (as a team or company) can have your own repository. We at sebi Venlo do that too. Our repository lives at <a href=https://www.fontysvenlo.org/repository class=bare>https://www.fontysvenlo.org/repository</a>.</p>
+</div>
+<div class=paragraph>
+<p>Our <a href=https://www.fontysvenlo.org/repository/>sebi Venlo maven repository</a> at fontysvenlo.org is the simplest of simple: A plain (apache2) web server that does automatic indexing. Users with write access, such as your dear teachers (:P), can simply publish their maven artifacts using maven itself, which, with the help of secure copy, places the artifact in the appropriate directory structure, considering names and versions.</p>
+</div>
+<div class=paragraph>
+<p>If you look at a maven repository you will see that it is organized along the three axes: groupId, artifactId and version.</p>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_maven_settings>Maven Settings</h3>
+<div class=paragraph>
+<p>To make the sebi Venlo repository available for your own projects, add the following to
+your <code>~/.m2/settings.xml</code> in the profiles section. You may also want to make that profile active.</p>
+</div>
+<div class=paragraph>
+<p>If you create or open a maven project in NetBeans and open the <strong>Project Files</strong> folder,
+it should show a settings.xml file. If not, you can easily create your own in the proper spot
+on you platform (Linux, Windows, Mac OS-X) by right-clicking on the folder and choose <strong>create settings.xml</strong>.
+The settings file applies to all your maven projects, irrespective of the fact of using maven from the IDE or the command line.</p>
+</div>
+<div class=imageblock>
+<div class=content>
+<img src=/prc2_web/images/create-setting-xml.png alt="create setting xml">
+</div>
+<div class=title>Figure 1. Creating settings.xml</div>
+</div>
+<div class=listingblock>
+<div class=title>adding fontysvenlo repo to your maven settings.xml file.</div>
+<div class=content>
+<pre class=highlight><code class=language-xml data-lang=xml>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+&lt;settings xmlns=&#34;http://maven.apache.org/SETTINGS/1.0.0&#34;
+          xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
+          xsi:schemaLocation=&#34;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&#34;&gt;
+    &lt;profiles&gt;
+        &lt;profile&gt;  <i class=conum data-value=1></i><b>(1)</b>
+            &lt;id&gt;sebivenlo&lt;/id&gt;
+            &lt;repositories&gt;
+                &lt;repository&gt;
+                    &lt;id&gt;fontysvenlo.org&lt;/id&gt; <i class=conum data-value=2></i><b>(2)</b>
+                    &lt;url&gt;https://www.fontysvenlo.org/repository&lt;/url&gt; <i class=conum data-value=3></i><b>(3)</b>
+                &lt;/repository&gt;
+            &lt;/repositories&gt;
+        &lt;/profile&gt;
+    &lt;/profiles&gt;
+    &lt;activeProfiles&gt;
+        &lt;activeProfile&gt;sebivenlo&lt;/activeProfile&gt; <i class=conum data-value=4></i><b>(4)</b>
+    &lt;/activeProfiles&gt;
+&lt;/settings&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class=conum data-value=1></i><b>1</b></td>
+<td>You define a profile inside the profiles section of your settings.xml.</td>
+</tr>
+<tr>
+<td><i class=conum data-value=2></i><b>2</b></td>
+<td>Give the profile a name.</td>
+</tr>
+<tr>
+<td><i class=conum data-value=3></i><b>3</b></td>
+<td>Specify the URL.</td>
+</tr>
+<tr>
+<td><i class=conum data-value=4></i><b>4</b></td>
+<td>Use the given name to make it an active profile by default.</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>You could of course also simply copy (ctrl-C) the xml above and slam (ctrl-V) it into your newly created settings.xml file.</p>
+</div>
+</div>
+</div>
+</div>
+<div class=sect1>
+<h2 id=_sebipom_3_0_3>Sebipom 3.0.3</h2>
+<div class=sectionbody>
+<div class=paragraph>
+<p>Spelled all lower case: <code>sebipom</code>, is a super pom to use in Fontys Venlo projects. It keeps your own pom.xml file simple and focused to declare just the
+dependencies needed. Niceties to do proper Test Driver Development are provided for in the sebipom definitions, including things as being able to create
+javadoc in a professional looking way, including code highlighted code snippets, checkstyle, reporting, code coverage with maven, pmd, spotbugs etc.</p>
+</div>
+<div class=paragraph>
+<p><a href=https://github.com/sebivenlo/sebipom>Sebipom is hosted on github</a>.</p>
+</div>
+<div class=ulist>
+<ul>
+<li>
+<p>sebipom declares no dependencies other than those for dynamic (e.g. JUnit, AssertJ etc) and static <strong>testing</strong> in the form of plugins and their configuration.</p>
+</li>
+</ul>
+</div>
+<div class=paragraph>
+<p>This way of using maven, having a <span class=blue>super</span> or parent pom defined globally (in a repository, not on a local path), is the <span class="big black">modern</span> usage.
+It can be seen in well known big java projects such as <a href=https://spring.io/projects/spring-boot>Spring Boot</a> and <a href=https://quarkus.io/>quarkus</a>, to name two contenders in the java-web technology world.</p>
+</div>
+<div class="admonitionblock tip green">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-tip" title=Tip></i>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>Note that we are using a <em>separately installed</em> maven (3.6.3 at the time of writing) which you can download from <a href=http://maven.apache.org/download.cgi>apache maven</a>,
+not the one bundled with NetBeans or any other IDE. You can tell NetBeans (via tools→ options →java→maven) to use the installed one instead of the bundled one.</p>
+</div>
+<div class=paragraph>
+<p><em class=big>Our tests will <span class=blue>always</span> use maven, not some IDE. There is no gnome inside the build server to move the mouse.</em></p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div id=sebipom-as-parent class=listingblock>
+<div class=title>Setting sebipom as parent.</div>
+<div class=content>
+<pre class=highlight><code class=language-xml data-lang=xml>    &lt;parent&gt;
+      &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
+      &lt;artifactId&gt;sebipom&lt;/artifactId&gt;
+      &lt;version&gt;3.0.3&lt;/version&gt;
+      &lt;relativePath/&gt; <i class=conum data-value=1></i><b>(1)</b>
+    &lt;/parent&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class=conum data-value=1></i><b>1</b></td>
+<td>The parent pom does not live in a local directory near (relative to) the project, but instead in a repository. This makes a parent pom 'portable'.</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>All of the starter projects we provide already use this parent in some version. To get those working, apply the settings show in the paragraph <a href="#Configuring Maven">[Configuring Maven]</a>.</p>
+</div>
+<div class=paragraph>
+<p>If you want to use sebipom in your own project, either copy the parent definition into the pom file or start by replacing the NetBeans provided pom.xml file in your project by
+the basic one below. Add dependencies as required.</p>
+</div>
+<div id=basic-maven class=listingblock>
+<div class=title>Basic pom.xml file setting sebipom as parent.</div>
+<div class=content>
+<pre class=highlight><code class=language-xml data-lang=xml>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+&lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt; <i class=conum data-value=1></i><b>(1)</b>
+        &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
+        &lt;artifactId&gt;sebipom&lt;/artifactId&gt;
+        &lt;version&gt;3.0.3&lt;/version&gt;
+        &lt;realtivePath/&gt;<i class=conum data-value=2></i><b>(2)</b>
+    &lt;/parent&gt; <i class=conum data-value=3></i><b>(3)</b>
+    &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
+    &lt;artifactId&gt;basicsebimaven&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;!-- The name in the IDE --&gt;
+    &lt;name&gt;My App&lt;/name&gt;
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;java.release&gt;11&lt;/java.release&gt;
+        &lt;!-- change mainClass to the proper starting point of your program, if any.--&gt;
+        &lt;exec.mainClass&gt;basicsebimaven.Hello&lt;/exec.mainClass&gt;
+    &lt;/properties&gt;
+    &lt;dependencies&gt;
+      &lt;!--example  --&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;...&lt;/groupId&gt;
+        &lt;artifactId&gt;...&lt;/artifactId&gt;
+        &lt;version&gt;...&lt;/version&gt;
+      &lt;/dependency&gt;
+    &lt;/dpendencies&gt;
+&lt;/project&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class=conum data-value=1></i><b>1</b></td>
+<td>Start of parent declaration.</td>
+</tr>
+<tr>
+<td><i class=conum data-value=2></i><b>2</b></td>
+<td>Parent comes from some other repo, not local.</td>
+</tr>
+<tr>
+<td><i class=conum data-value=3></i><b>3</b></td>
+<td>End of parent declaration.</td>
+</tr>
+</tbody></table>
+</div>
+<div class=sect2>
+<h3 id=_sebipom_and_java_fx>Sebipom and Java FX</h3>
+<div class=paragraph>
+<p>If you want to use semipom and build a JavaFX project, you need to activate the <strong>fx</strong>-profile.
+In the commandline that would be</p>
+</div>
+<div class=imageblock>
+<div class=content>
+<img src=/prc2_web/images/mvn-withfx-profile.png alt="mvn withfx profile">
+</div>
+<div class=title>Figure 2. Commandline. Real software engineers can use the command line.</div>
+</div>
+<div class=paragraph>
+<p>In netbeans you can do that by setting the configuration like in this picture:</p>
+</div>
+<div class=imageblock>
+<div class=content>
+<img src=/prc2_web/images/fx-profile-nb.png alt="fx profile nb">
+</div>
+<div class=title>Figure 3. Activate a profile in netbeans</div>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_using_the_sebipom_in_your_own_projects>Using the SeBiPom in your own projects</h3>
+<div class=paragraph>
+<p>To use the test libraries and other goodies that will be used throughout our course,
+you should add the <code>sebipom</code> as parent.</p>
+</div>
+<div class=paragraph>
+<p>Modify the pom.xml file in your project to include sebipom as parent by adding
+these lines in the previous section <a href=#sebipom-as-parent>Setting sebipom as parent.</a>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-tip" title=Tip></i>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>As of 2021-04-03, sebipom reached version 3.0.3. Not all projects may have this version number for
+the parent sebipom. We improve as we go, sometimes because of tips we receive from our students, you for instance.
+Anyway, if the version is not at the newest, set it to the newest and rebuild.
+Revisit this part of the site to check the latest version number or look in the
+<a href=https://www.fontysvenlo.org/repository/nl/fontys/sebivenlo/sebipom/>fontysvenlo maven reposity</a>
+for the sebipom version.<br>
+Sebipom 3.0.3 enables testing for modular projects but does not enforce modular projects.</p>
+</div>
+<div class=ulist>
+<ul>
+<li>
+<p>The source code of sebipom lives at github in <a href=https://github.com/sebivenlo/sebipom>sebivenlo/sebipom</a>.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_upgrade_all_projects_with_one_command>Upgrade all projects with one command</h3>
+<div class=paragraph>
+<p>Since sebipom is a somewhat moving target, you may have to update the parent pom of the projects that depend on it. All PRC2 projects do.
+This oneliner will do that for all projects below the current directory. After navigating to the parent of all such projects, do this in the shell:</p>
+</div>
+<div class=listingblock>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>for i in $(find . -name pom.xml); do (cd $(dirname $i); mvn versions:update-parent  &amp; )   ; done</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>It works on any bash supporting machine, tested on ubuntu and should work on OS-X and under windows when using
+git-bash or the windows subsystem for Linux.</p>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_maven_on_steroids_or_use_it_properly>Maven on Steroids or: use it properly</h3>
+<div class=paragraph>
+<p>Sometimes you think, maven is not your thing because it is slowing you down, certainly if you are trying to work your way through
+your code TDD style: Write test, run test red, implement code, run test green, be happy.</p>
+</div>
+<div class=paragraph>
+<p>But reconsider: Maven takes it’s job very serious, but since it is a computer program
+it is stubbornly stupid, so it might be that <em>you</em> are using it in the <strong>wrong</strong> way.</p>
+</div>
+<div class=paragraph>
+<p>Let me explain what maven does:</p>
+</div>
+<div class=ulist>
+<ul>
+<li>
+<p>Maven uses build phases: <strong>initialize</strong>, <strong>compile</strong>, <strong>compile tests</strong>, <strong>run tests</strong>, <strong>package</strong> the application etc., when you build your application.
+It will check if all is in order, look if any updates are needed etc. This keeps maven busy and you waiting.</p>
+</li>
+</ul>
+</div>
+<div class=paragraph>
+<p><strong>Packaging</strong> (which is what you do when you click <em>build</em> in the IDE) the application and<br>
+is only useful when your are really done: all tests are complete and the code turns them a nice green.</p>
+</div>
+<div class=ulist>
+<ul>
+<li>
+<p>So do not <em>mvn build</em>, but instead <strong>mvn test</strong>, then maven will do the minimum required.</p>
+</li>
+</ul>
+</div>
+<div class=paragraph>
+<p>So if you are in the habit of clicking build and then run your tests, you might want to change you habit.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-tip" title=Tip></i>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>sebipom sets the default goal to test, so if you run mvn from the command line, you only need to type <code>mvn</code></p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class=sect3>
+<h4 id=_maven_the_proper_way_when_still_in_the_tdd_phase>Maven the proper way, when still in the TDD phase</h4>
+<div class=paragraph>
+<p>As long as you are writing test and writing code, just do:</p>
+</div>
+<div class=paragraph>
+<p><code>mvn test</code>, or the equivalent in you IDE (click the test button, not the build button)<br>
+or <code>mvn clean</code> and then <code>mvn test</code>. (click clean, click test).</p>
+</div>
+<div class=paragraph>
+<p>Only when you are done with all your tests, do</p>
+</div>
+<div class="olist arabic">
+<ol class=arabic>
+<li>
+<p>clean (mvn clean)</p>
+</li>
+<li>
+<p>build (mvn package mvn -P fx package for fx projects)</p>
+</li>
+</ol>
+</div>
+<div class=paragraph>
+<p>and then <strong>run</strong> your application.</p>
+</div>
+<div class=paragraph>
+<p>Then maven can do all of it’s serious work of assembling your application for deployment</p>
+</div>
+<hr>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_maven_modules>Maven Modules</h3>
+<div class=paragraph>
+<p>Many projects will have more than just one component (jar or war file).
+Think of the parallel project project 2.</p>
+</div>
+<div class=paragraph>
+<p>It is a good idea to reflect this design in the way your structure you source code:
+Use multiple modules.</p>
+</div>
+<div class=sect3>
+<h4 id=_module>Module</h4>
+<div class=paragraph>
+<p>A module is just a maven project. Has a pom.xml which defines the relation with
+other modules.</p>
+</div>
+<div class=imageblock>
+<div class=content>
+<img src=/prc2_web/images/mavenmodules.svg alt=mavenmodules>
+</div>
+<div class=title>Figure 4. Modules and parent.</div>
+</div>
+<div class=paragraph>
+<p>As you see in the figure, the parent lists its children. The children may have
+inter-dependencies. Otherwise it is just plain maven.</p>
+</div>
+<div class=listingblock>
+<div class=title>Snippet from a parent pom</div>
+<div class=content>
+<pre class=highlight><code class=language-xml data-lang=xml>    &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
+    &lt;artifactId&gt;parentpom&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+    &lt;packaging&gt;pom&lt;/packaging&gt;
+    &lt;properties&gt;
+      &lt;version&gt;1.0&lt;/version&gt;
+    &lt;/properties&gt;
+    &lt;modules&gt;
+        &lt;module&gt;entities&lt;/module&gt;
+        &lt;module&gt;db&lt;/module&gt;
+        &lt;module&gt;app-logic&lt;/module&gt;
+        &lt;module&gt;ui&lt;/module&gt;
+        &lt;module&gt;restserver&lt;/module&gt;
+    &lt;/modules&gt;</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>As is usual between parents and children, there is an inheritance relationship.
+The children inherit setting and groupid, and version, if defined as a property.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class=icon>
+<i class="fa icon-warning" title=Warning></i>
+</td>
+<td class=content>
+<div class=paragraph>
+<p>Do not declare dependencies of the children in the parent pom, because that introduces a cycle
+in the dependencies: parent depends on child, which depends on parent, which depend …​. etc.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class=paragraph>
+<p>The parent pom can declare all external dependencies, that are shared between the children, such as the testing frameworks,
+any other external dependencies. The parent can declare its own parent, allowing it to inherit and pass on anything that
+inherits from such parent.</p>
+</div>
+<div class=paragraph>
+<p>The parent defines the packaging as <code>pom</code>, the children what ever is required, typically jar, war, or ear.</p>
+</div>
+<div class=listingblock>
+<div class=title>example pom for rest server.</div>
+<div class=content>
+<pre class=highlight><code class=language-xml data-lang=xml>&lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34;
+  xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
+  xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;parent&gt;
+        &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
+        &lt;artifactId&gt;parentpom&lt;/artifactId&gt;
+        &lt;version&gt;1.0&lt;/version&gt;
+         &lt;!-- parent directory .. as parent is natural but not mandatory --&gt;
+        &lt;relativePath&gt;..&lt;/relativePath&gt;
+    &lt;/parent&gt;
+    &lt;artifactId&gt;restserver&lt;/artifactId&gt;
+    &lt;version&gt;${version}&lt;/version&gt;
+    &lt;packaging&gt;war&lt;/packaging&gt;
+    &lt;name&gt;Rest server&lt;/name&gt;
+&lt;/project&gt;</code></pre>
+</div>
+</div>
+<div class=paragraph>
+<p>Putting things in modules has the following advantages:</p>
+</div>
+<div class=ulist>
+<ul>
+<li>
+<p>It promotes loose coupling.</p>
+</li>
+<li>
+<p>It can avoid the hen and egg problem: In a normal build, it wants all tests to pass, to be able
+to continue. For business code that is correct, but things like integration tests need a built war file, which cannot be built with failing tests.<br>
+Solution: Put the integration tests in a separate module of its own, which can be run at any time and will not slow you down or
+worse, disable testing or not having any tests.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=sect1>
+<h2 id=_flex_your_java_muscles>Flex Your Java Muscles</h2>
+<div class=sectionbody>
+<div class=paragraph>
+<p>No, it is not about heavy lifting. It is about reconfiguring your Java
+environment easily.
+It also assumes that you are in the habit of using the command line over the GUI.</p>
+</div>
+<div class=paragraph>
+<p>Sure, a GUI is 'user friendly' if you are willing to look for the things your want to use, and know where
+you need to look for it. But what about the computer listening to you for a change, instead of you having to scroll through its wealth of
+options and other stuff you may have installed.</p>
+</div>
+<div class=paragraph>
+<p>This is a <strong>POSIX</strong> hack, meaning that it applies to Linux and to Mac OS-X (with a little tweaking) alike.
+It may also apply to Windows when using git-bash, MINGW, Powershell or the 'Linux extensions for windows'. You mileage may vary though.</p>
+</div>
+<div class=sect2>
+<h3 id=_concepts_used>Concepts used</h3>
+<div class=ulist>
+<ul>
+<li>
+<p><code>$PATH</code> The PATH environment variable that determines the way programs are found in the command line.<br>
+all commands that you can enter on the commandline are found using the <code>$PATH</code> variable.</p>
+</li>
+<li>
+<p><code>$JAVA_HOME</code> The environment variable that tells where your java installation lives. It is used by apache-ant (ant) and apache-maven (mvn) alike.</p>
+</li>
+<li>
+<p>You set these variables in your start-up script, like <code>.bashrc</code>.</p>
+</li>
+<li>
+<p>You use aliases to abbreviate your commands.</p>
+</li>
+<li>
+<p>You start the IDE from the command line. Always, so YOU are in control of where and how it’s started.</p>
+</li>
+</ul>
+</div>
+<div class=paragraph>
+<p>The whole operation involves three modifications:</p>
+</div>
+<div class="olist arabic">
+<ol class=arabic>
+<li>
+<p>Set the variables in your <code>~/.bashrc</code>.</p>
+</li>
+<li>
+<p>Add a helper script, called J, put it in a directory in your PATH. ${HOME}/bin is a good place, if that is on your path.</p>
+</li>
+<li>
+<p>Create aliases, to make typing the command simple, like <strong>j8</strong> to switch to Java 8 and <strong>j12</strong> to do the same for Java 12.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_setting_in_startup_script>Setting in startup script</h3>
+<div class=listingblock>
+<div class=title>setting JAVA_HOME and PATH in ~/.bashrc</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>## DEFAULT IS JAVA 8 HERE
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+export PATH=${JAVA_HOME}/bin:$PATH</code></pre>
+</div>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_switching_to_other_java_version>Switching to other Java version</h3>
+<div class=listingblock>
+<div class=title>updating JAVA_HOME and PATH to switch java version.</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>#!/bin/bash
+
+## This script assumes that the JAVA_HOME environment variable is set
+##   and that the PATH contains ${JAVA_HOME}/bin
+## The java variant that is to be put in JAVA_HOME and PATH is determined
+##   by how what this script is called.
+## J8 for Java 8, J11 for Java 11 and J12 for Java 12. It could easily be
+##   extended to include Java 9 and 10 too, buy at the time of writing I see
+##   little point because 12 is the current open JDK and 11 the LTS version.
+##   J8 is in because it is the default for many still.
+##
+## You typically have (sym) links pointing to this script, so it appears
+##   to have different names, changing its meaning.
+##
+## Usage: eval $(scriptname) e.g. eval $(J12)
+## By using  bash aliases, such as alias j8=&#39;eval $(J8)&#39; the use of
+##   this script will become a feast.
+
+
+## get this script name
+thisname=$(basename $0)
+## get the current path setting
+OPATH=${PATH}
+
+## Let my name do the choosing
+case ${thisname} in
+    J8)
+	NJAVA_HOME=/usr/lib/jvm/java-8-oracle;;
+    J11)
+	NJAVA_HOME=/usr/lib/jvm/jdk-11.0.2;;
+    J12)
+	NJAVA_HOME=/usr/lib/jvm/jdk-12;;
+    *)
+	echo call me as &#39;eval $(J8)&#39;, &#39;eval $(J11)&#39; or &#39;eval $(J12)&#39;
+	exit 1
+	;;
+esac
+
+## edit path to use the new java_home
+p=$(echo ${OPATH} | sed -e &#34;s@${JAVA_HOME}/bin@${NJAVA_HOME}/bin@&#34;)
+
+##
+echo export JAVA_HOME=${NJAVA_HOME}
+echo export PATH=${p}</code></pre>
+</div>
+</div>
+</div>
+<div class=sect2>
+<h3 id=_all_made_simple_with_aliases>All made simple with aliases</h3>
+<div class=paragraph>
+<p>You can tie this all together with some <a href=https://www.tldp.org/LDP/abs/html/aliases.html>aliases</a> which classically are stored
+in a file called <code>${HOME}/.bash_aliases</code> and are loaded on login and each time you open a terminal.</p>
+</div>
+<div class=listingblock>
+<div class=title>using aliases to switch with simple command. Excerpt from my .bash_aliases file.</div>
+<div class=content>
+<pre class=highlight><code class=language-sh data-lang=sh>alias j12=&#39;eval $(J12)&#39;
+alias j11=&#39;eval $(J11)&#39;
+alias j8=&#39;eval $(J8)&#39;</code></pre>
+</div>
+</div>
+<div class=imageblock>
+<div class=content>
+<img src=/prc2_web/images/j8j11-terminal.png alt="j8j11 terminal">
+</div>
+<div class=title>Figure 5. see it all work</div>
+</div>
+<div class=paragraph>
+<p>As you will notice, switching Java versions in this way is <em>very fast</em>.</p>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id=footnotes>
+<hr>
+<div class=footnote id=_footnotedef_1>
+<a href=#_footnoteref_1>1</a>. if your method gets big, you should break it up in smaller parts, like private methods
+</div>
+<div class=footnote id=_footnotedef_2>
+<a href=#_footnoteref_2>2</a>. In java 11 you can have private static methods in interfaces
+</div>
+<div class=footnote id=_footnotedef_3>
+<a href=#_footnoteref_3>3</a>. Guess why
+</div>
+</div>
+</article>
+</div><footer class="text-sm leading-6 mt-12 mb-5">
+Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
+</footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
+<h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#_java_style>Java Style</a>
+<ul>
+<li><a href=#_where_have_you_put_your_curly_braces>Where have you put your Curly Braces.</a></li>
+<li><a href=#_javadoc_style>Javadoc style</a></li>
+</ul>
+</li>
+<li><a href=#_adding_your_own_code_templates_to_netbeans_ide>Adding your own code templates to NetBeans IDE</a></li>
+<li><a href=#_maven>Maven</a>
+<ul>
+<li><a href=#_maven_repositories>Maven Repositories</a></li>
+<li><a href=#_maven_settings>Maven Settings</a></li>
+</ul>
+</li>
+<li><a href=#_sebipom_3_0_3>Sebipom 3.0.3</a>
+<ul>
+<li><a href=#_sebipom_and_java_fx>Sebipom and Java FX</a></li>
+<li><a href=#_using_the_sebipom_in_your_own_projects>Using the SeBiPom in your own projects</a></li>
+<li><a href=#_upgrade_all_projects_with_one_command>Upgrade all projects with one command</a></li>
+<li><a href=#_maven_on_steroids_or_use_it_properly>Maven on Steroids or: use it properly</a></li>
+<li><a href=#_maven_modules>Maven Modules</a></li>
+</ul>
+</li>
+<li><a href=#_flex_your_java_muscles>Flex Your Java Muscles</a>
+<ul>
+<li><a href=#_concepts_used>Concepts used</a></li>
+<li><a href=#_setting_in_startup_script>Setting in startup script</a></li>
+<li><a href=#_switching_to_other_java_version>Switching to other Java version</a></li>
+<li><a href=#_all_made_simple_with_aliases>All made simple with aliases</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div></div>
+<div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
+</div><script src=/prc2_web/js/main.min.b2d2aacc67a4fbfee5649e3e537fc94f29bf22f190969d5f638686db689d5ca8807e2cceb3fb584dc3a750507a50fdd438390deb2a79e5edd1800de8f026cdd3.js integrity="sha512-stKqzGek+/7lZJ4+U3/JTym/IvGQlp1fY4aG22idXKiAfizOs/tYTcOnUFB6UP3UODkN6yp55e3RgA3o8CbN0w==" crossorigin=anonymous></script>
+<script src=/prc2_web/js/highlight.min.4fdca95e2d3efe7ce1c14ca536fc0df95963ccad74d0bad12c90a493703df6fb4607d9a24ee5645fa5df22667b8f1dca010ce51922423191d22aad54e802ba99.js integrity="sha512-T9ypXi0+/nzhwUylNvwN+VljzK100LrRLJCkk3A99vtGB9miTuVkX6XfImZ7jx3KAQzlGSJCMZHSKq1U6AK6mQ==" crossorigin=anonymous defer></script>
+<div id=copied-alert class="invisible opacity-0 transition-all ease-in-out duration-400 fixed bottom-3 right-10 z-50 flex p-4 mb-4 text-sm text-gray-800 bg-gray-200 rounded-lg dark:bg-gray-500 dark:text-gray-200" role=alert><svg class="inline flex-shrink-0 mr-3 w-5 h-5" viewBox="0 0 24 24" width="24" height="24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+<div>
+<span class=font-medium>Code copied</span>
+</div>
+</div>
+</body>
+</html>
