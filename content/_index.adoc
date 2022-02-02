@@ -1,0 +1,81 @@
+---
+title: "Welcome"
+date: 2022-02-02T15:04:33+01:00
+draft: false
+---
+
+== Module description
+
+* Module description can be found on canvas
+
+This site contains the up-to-date course material, exercises and announcements about PRC2
+(Programming Concepts 2: the Test Driven Way), starting in February 2022.
+
+Responsible Teachers for 2022 PRC2: 
+
+- Martijn Bonajo
+- Ibrahim Kouzak 
+- Richard van den Ham
+
+include::{topics}/literature.adoc[]
+
+[TIP]
+====
+Read the corresponding Horstmann book chapters and do the tutorials before you come to class. This will make
+the lessons more effective for you, because the questions that you might have
+from studying could be answered immediately. +
+Studying is not glancing over some (web) pages, but experimenting with the compiler, IDE and other
+tools, to see if you can use the presented ideas and apply it in your own code.
+====
+
+include::{topics}/topics.adoc[]
+
+[CAUTION]
+.Exercises
+====
+You should start with the exercises in the week they are listed in and hand them in
+by committing your work to your personal *github* repository. +
+*Best* is to do that before next week's lesson, so you even if you were not able to
+even when trying, you will at least have some questions.
+
+[big red]*We will use a strict deadline policy for the assignments.* +
+*The hand in deadline is two lesson weeks after the publication date.*
+
+[bigger red]*Completion of all the exercises grant admission to the performance assessment!*
+====
+
+include::{topics}/wow.adoc[]
+
+== MS Teams channel(s)
+
+For questions and answers thus documenting them and also discussions and explanations,
+sharing information, links and other things between students and lecturers, feel free to use the MS-Teams PRC2 channel:
+https://join.slack.com/t/fontysvenlo-ict/shared_invite/enQtNTU2Nzg5OTk3OTIyLTc2OWQ4Yzk0OWNjZjVmNzY5ZTgwNmFkNTc3OGIwZDIzODQzZThiNjJkY2RhODNhNTQ4ZmQ4NDhiMmNmMmE3MWU[Slack invitation link].
+
+
+Please use the channel *#prc2class*. We will use this channel to ask and and answer questions during and after class.
+
+[TIP]
+Please note that the content of this channel will appear on youtube because we are recording the lectures. So use proper language.
+
+You are only allowed to use a *student.fontys.nl* email address. Using slack is optional, but if the students share their knowledge there,
+this can be a helpful source and learning environment.
+
+
+== Automatic correction of practical exercises.
+
+In PRC1 you have become acquainted with automatic tests. In PRC2 you will not only write the implementation, but also the tests.
+These test need testing too.
+
+The approach follow is having not only a correct implementation, but also some broken implementations to test your tests.
+
+The exact details are spelled out in  https://prc2.fontysvenlo.org/2021/assessmentcorrectionrules.html[the rules for the performance assessment].
+
+In short you provide your own test code and implementation, we provide an implementation, our own tests and some broken implementations to make your
+tests have a nice red blush.
+
+The ubiquitous question is always: Where do I start?
+
+The answer is surprisingly simple: at the requirements of class, method or whatever you want to develop. And always start at the simple end.
+So if a requirement says that a fresh Stack is empty, that means you can write a test that asserts that a `new` instance of your class reports that it is
+empty when the `isEmpty()` is called.

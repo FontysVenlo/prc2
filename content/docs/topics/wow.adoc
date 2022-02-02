@@ -1,0 +1,17 @@
+== Way of Working during practical hours.
+
+
+image:tdd.png[role="related thumb right"] 
+
+The way of working with the practical assignments is as follows:
+
+* Each student has a personal github repository
+* The teachers will provide starter templates in due time via Github classroom.
+* The students will work on the assignment and work TDD style.
+** Write a test for a requirement (typically a method), +
+  see it showing failure ([red,bold]*RED*),
+** then implement the method to turn the test [green,bold]*GREEN*.
+** If [green,bold]*GREEN*, svn-commit both test-class AND implementing class.
+* If the assignment is complete (all requirements covered with tests, all tests green and code coverage at an appropriate level )
+  push the code to your repository.
+** Pushing to the repository will also start the test on CodeGrade.
