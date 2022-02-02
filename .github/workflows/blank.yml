@@ -41,6 +41,8 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7
+          
+      - run: gem install asciidoctor-html5s
 
       - uses: reitzig/actions-asciidoctor@v2.0.0
         with:
