@@ -36,6 +36,6 @@ markup:
     attributes:
       toc: true
       toclevels: 2
-      topics: content/docs/topics
+      topics: topics
       imagesdir: /prc2/images
       icons: font
