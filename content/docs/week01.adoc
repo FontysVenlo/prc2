@@ -50,7 +50,7 @@ But fret not! Writing tests is typically much simpler than writing the actual co
 // On the theory of inheritance and interfaces. we will refine later on.
 
 == Testing / Test Driven Development
-include::fail[]
+
 include::{topics}/tdd.adoc[]
 
 include::{topics}/arrangeactassert.adoc[]
