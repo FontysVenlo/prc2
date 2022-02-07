@@ -1,6 +1,8 @@
 # PRC2 Documentation
 
-This repository houses the documentation for the course PRC2 at Fontys Venlo.
+This repository houses the documentation for the course PRC2 at Fontys Venlo.  
+
+The documentation will be automatically converted to be shown as Github pages at [https://fontysvenlo.github.io/prc2/](https://fontysvenlo.github.io/prc2/)
 
 ## Building
 
