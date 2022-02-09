@@ -5,7 +5,7 @@ theme: sebi-theme
 sectionPagesMenu: main
 params:
   highlight: true
-  github: https://github.com/FontysVenlo/prc2_web
+  github: https://github.com/FontysVenlo/prc2
   fontawesome: true
 security:
   enableInlineShortcodes: false
