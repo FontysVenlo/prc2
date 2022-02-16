@@ -239,7 +239,7 @@ There are two solutions to this issue.
 . Create special test data objects of a special test data class, either inside your or outside your test class
   easy to make a test data class to carry the test data. In this case make a data providing method and use the method name in the `@MethodSource` annotation.
   The test method should understand the test data object.
-. Use the JUnit5 provided `ArgumentsProvider`. This warps an array of objects into one object, so that all can be returned as one (array) value in a stream. +
+. Use the JUnit5 provided `ArgumentsProvider`. This wraps an array of objects into one object, so that all can be returned as one (array) value in a stream. +
   This saves the implementation of a (simple) test data class.
 
 We will use the later approach, simply because it is less work on the programmer, either you or me.
