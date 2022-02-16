@@ -232,7 +232,7 @@ an array is also an object in Java.</p>
 <p>There are two solutions to this issue.</p>
 <div class="olist arabic"><ol class=arabic><li>Create special test data objects of a special test data class, either inside your or outside your test class
 easy to make a test data class to carry the test data. In this case make a data providing method and use the method name in the <code>@MethodSource</code> annotation.
-The test method should understand the test data object.</li><li>Use the JUnit5 provided <code>ArgumentsProvider</code>. This warps an array of objects into one object, so that all can be returned as one (array) value in a stream.<br>
+The test method should understand the test data object.</li><li>Use the JUnit5 provided <code>ArgumentsProvider</code>. This wraps an array of objects into one object, so that all can be returned as one (array) value in a stream.<br>
 This saves the implementation of a (simple) test data class.</li></ol></div>
 <p>We will use the later approach, simply because it is less work on the programmer, either you or me.</p></section>
 <section class="doc-section level-2"><h3 id=_testing_compare_results>Testing compare results.</h3><p>You may already know, but <strong class="red big">do not insist</strong> that a comparator (or the <code>compareTo()</code> method)
