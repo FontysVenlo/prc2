@@ -40,7 +40,9 @@ and makes it [red]_unobservable_, which is bad from the testing standpoint.
 
 Instead hand the service or resource to the business, or give it some provider of a resource.
 
-=== Business class fit for testing.
+=== Business class fit for testing
+
+WE'LL FURTHER EXPLAIN THIS CONCEPT IN CLASS AND IN THE CONTEXT OF PRJ2. THERE ARE QUITE SOME DESIGN IDEAS BEHIND IT, SO DON'T WORRY IF YOU DON'T UNDERSTAND IT IMMEDIATELY.
 
 Let us look at an example as a class diagram.
 
