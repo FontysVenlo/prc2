@@ -1,6 +1,6 @@
-[big]*When you can't or won't make it, Fake it.*
+== Faking as a testing technique
 
-== Faking as a testing technique.
+[big]*"When you can't or won't make it, Fake it"*
 
 Let's revisit the movie making metaphor. We know that almost everything in that industry
 is fake, or maybe more politely _make-belief_. In that it only needs to look convincing without being the real thing.
@@ -15,8 +15,8 @@ In our industry we have other reasons to _not_ use the real thing.
 * It is inconvenient to use.
 // more needed
 
-What we do is replace the Dependent On Components by so called [blue]*mocks*. +
-*In all cases*, the System Under Test, the class we are testing *is always used as is*. So we have no stunt doubles for our protagonist.
+What we do is replace the *"Dependent On Components"* by so called [blue]*mocks*. +
+*In all cases*, the System Under Test (SUT), the class we are testing *is always used as is*. So we have no stunt doubles for our protagonist.
 When testing, we want it to take all the punches, because we want to make sure it can handle them.
 
 [CAUTION]
@@ -54,7 +54,7 @@ https://site.mockito.org/[Mockito ^] is a framework that can create various obje
 behaves exactly like you tell it to. A mock also saves any method call that you do on it. +
 *Stub* just holds data that you provide and are presented to the SUT. +
   Both mock and stub are stand-ins for dependent on components (DOC) or collaborators for the SUT. +
-There is also a +
+There is also a
 *Spy* which is in fact a wrapper around an actual implementation, that allows you to observe what goes in (method call+ parameters) and comes
 out of (return values) of the real object while it is used by the SUT. You can make the spy only spy on certain method calls, and leave the rest unchanged.
 
@@ -79,7 +79,7 @@ include::code/myfirstmock/src/test/java/myfirstmock/BusinessTest.java[lines=27..
 <1> Create the mocked printer.
 <2> Create a Business object passing it the printer.
 <3> Make the business class work.
-<4> ask the mocked printer if it was used.
+<4> Ask the mocked printer if it was used.
 
 This is of course a simple test and the only thing that it verifies is that the `printer.printLn(String)` has been used.
 
@@ -89,20 +89,19 @@ This is of course a simple test and the only thing that it verifies is that the 
 include::code/myfirstmock/src/test/java/myfirstmock/BusinessTest.java[lines=39..57]
 ----
 
-<1> Setup mock as field
-<2> and business in a setup method, so tests can avoid repeating this, +
+<1> Setup mock as annotated field.
+<2> Create the business (SUT) object in a setup method, so tests can avoid repeating this, +
     again passing the printer object via the business constructor.
-<3> Prepare a mockito helper object to capture the data passed to the printer.
-<4> Make business do it's thing.
+<3> Prepare a Mockito helper object to capture the data passed to the printer.
+<4> Make business do its thing.
 <5> Verify that `printer.println(...)` is called. The captor object is used to
 collect all that has been received by the printer's `printLn` method.
-<6> And the expected data is passed to the printer, so a real printer would
+<6> The expected data is passed to the printer, so a real printer would
   print it. The method `lineCaptor.getAllValues()` produces a List of the captured things, strings in this case.
 
 Mockito is well documented with lots of examples in its https://javadoc.io/static/org.mockito/mockito-core/3.2.4/org/mockito/Mockito.html[java doc].
 When you look to the test dependencies of your Maven project in NetBeans-IDE, right-click on the
 mockito dependency, then download the javadoc, you can enjoy that while you are developing.
-During a performance assessment the Javadoc should have been pre-loaded so is available in the same way.
 
 === To Mock or To Configure
 
@@ -126,12 +125,14 @@ Something along the line of  `new Scanner("12\n13\n");`, that is 12 newline 13.
 
 ==== Output mocking with a real classes
 
+THIS PARAGRAPH DESCRIBES AN ADVANCED TOPIC THAT YOU DON'T NEED IMMEDIATELY. FINE IF YOU UNDERSTAND IT, IF NOT THEN JUST CONTINUE WITH THE NEXT PARAGRAPH ABOUT TESTABLE DESIGN.
+
 For the output side something similar is in effect. The most common way of outputting something
 is to use System.out to print or otherwise output the results of the program. But [blue]`System.out` is
 just a [blue]`PrintStream`, which also has a lot of convenience methods with a total of 33 methods and 10 constructors.
 You do not want to restrict the use of any of its methods in the business class.
 
-The trick her is to use one of the constructors to given PrintStream something to 'print on', which you can inspect afterwards.
+The trick here is to use one of the constructors to given PrintStream something to 'print on', which you can inspect afterwards.
 Usage: The business class has a constructor.footnote:[best] or setter to take a PrintStream and always uses that to print to, if
 it needs to print anyway.
 
@@ -155,8 +156,8 @@ class PrintingBusiness
 }
 ----
 
-<1> final to have a constructor set it
-<2> Default constructor uses System.out to print to
+<1> [blue]`final` to have a constructor set it
+<2> Default constructor uses System.out to print to.
 <3> Redirect output to other output, for test or 'printing' in a GUI.
 <4> All facilities of PrintStream are available, including formatted printing.
 
@@ -284,9 +285,9 @@ public class ConsoleOutput extends OutputStream {
 ****
 You can modify standard output, a.k.a. [blue]`System.out` so that it writes to somewhere else,
 for instance to something like the console output above. https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/System.html#setOut(java.io.PrintStream)[`System.setOut(PrintStream)`]
-can be used for standrad output. This is also the trick that the PRC1 MOOC used to test output by the first programs.
+can be used for standard output. This is also the trick that the PRC1 MOOC used to test output by the first programs.
 Important is that it can also be applied to  [blue]*static*
-method such as the well known `public static void main(String[])` that can't be used with Dependency Inversion as we do here.
+methods such as the well known `public static void main(String[])` that can't be used with Dependency Inversion as we do here.
 ****
 
 [TIP]

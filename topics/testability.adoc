@@ -79,9 +79,7 @@ You should note the arrows in the diagram. They provide direction and make it th
 and lets a _dependent_ point to a _depends-on_, like
 the *BusinessClass* depends on a *Service*, which is an _abstract_ class or better still, an _interface_.
 Also note that the service does not point to, or is dependent on the business, which is good, because it makes the service reusable in other contexts. +
-The service implementing classes are dependent on the Service definition which is shown with the inheritance arrow, pointing from sub to super type.
-In the example you could think of the service being a https://en.wikipedia.org/wiki/Data_access_object[Data Access Object] or [blue]*DAO*
-and the *ServiceImpl* a specific *DAO*, like `DAO<Product>`, or `DAO<Customer>`.
+The service implementing classes are dependent on the Service definition which is shown with the "implements arrow", pointing from sub to super type.
 
 In the business school, there is a test class, that creates instances of the business class and hands it implementations of the services the business
 needs, but does that by giving it a specialized service factory that produces [green]_mock_
