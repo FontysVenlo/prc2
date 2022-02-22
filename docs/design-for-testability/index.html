@@ -85,15 +85,15 @@ Desgin for testability
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_faking_as_a_testing_technique>Faking as a testing technique.</a><ol class="toc-list level-2"><li><a href=#_stay_cool_have_a_mockito>Stay cool, have a Mockito.</a></li><li><a href=#_to_mock_or_to_configure>To Mock or To Configure</a></li></ol></li><li><a href=#_design_for_test_ability>Design for Test-ability</a><ol class="toc-list level-2"><li><a href=#_business_class_fit_for_testing>Business class fit for testing.</a></li></ol></li></ol></nav><p><strong class=big>When you can’t or won’t make it, Fake it.</strong></p>
-<section class="doc-section level-1"><h2 id=_faking_as_a_testing_technique>Faking as a testing technique.</h2><p>Let’s revisit the movie making metaphor. We know that almost everything in that industry
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_faking_as_a_testing_technique>Faking as a testing technique</a><ol class="toc-list level-2"><li><a href=#_stay_cool_have_a_mockito>Stay cool, have a Mockito.</a></li><li><a href=#_to_mock_or_to_configure>To Mock or To Configure</a></li></ol></li><li><a href=#_design_for_test_ability>Design for Test-ability</a><ol class="toc-list level-2"><li><a href=#_business_class_fit_for_testing>Business class fit for testing</a></li></ol></li></ol></nav><section class="doc-section level-1"><h2 id=_faking_as_a_testing_technique>Faking as a testing technique</h2><p><strong class=big>"When you can’t or won’t make it, Fake it"</strong></p>
+<p>Let’s revisit the movie making metaphor. We know that almost everything in that industry
 is fake, or maybe more politely <em>make-belief</em>. In that it only needs to look convincing without being the real thing.
 So for instance, when someone needs to be hit hard in the face, it will not really be done and to make sure nothing untoward happens to
 the expensive actors, they may be replaced by <em>stunt</em> men and women, so the punch will never land on the pretty face.</p>
 <p>In our industry we have other reasons to <em>not</em> use the real thing.</p>
 <div class=ulist><ul><li>It is not available (yet).</li><li>It is expensive (as in slow) to use and we want our tests to be quick.</li><li>We want to test behavior under circumstances that are rare, and difficult to achieve with the real thing.</li><li>It is inconvenient to use.</li></ul></div>
-<p>What we do is replace the Dependent On Components by so called <strong class=blue>mocks</strong>.<br>
-<strong>In all cases</strong>, the System Under Test, the class we are testing <strong>is always used as is</strong>. So we have no stunt doubles for our protagonist.
+<p>What we do is replace the <strong>"Dependent On Components"</strong> by so called <strong class=blue>mocks</strong>.<br>
+<strong>In all cases</strong>, the System Under Test (SUT), the class we are testing <strong>is always used as is</strong>. So we have no stunt doubles for our protagonist.
 When testing, we want it to take all the punches, because we want to make sure it can handle them.</p>
 <section class="admonition-block caution" role=doc-notice><h6 class="block-title label-only"><span class=title-label>Caution: </span></h6><p>A very common mistake made when using mocking as a testing technique, is <strong class=red>faking the protagonist or SUT</strong>.
 This is <strong class=red>very wrong</strong>. What you are testing in that case is the mock, not the class you hope to test. <strong class=red>None</strong> of the code of the SUT will be used in such tests.</p></section>
@@ -119,7 +119,7 @@ thinks it is a printer and replace that with whatever suits you for the test.</p
 behaves exactly like you tell it to. A mock also saves any method call that you do on it.<br>
 <strong>Stub</strong> just holds data that you provide and are presented to the SUT.<br>
 Both mock and stub are stand-ins for dependent on components (DOC) or collaborators for the SUT.<br>
-There is also a<br>
+There is also a
 <strong>Spy</strong> which is in fact a wrapper around an actual implementation, that allows you to observe what goes in (method call+ parameters) and comes
 out of (return values) of the real object while it is used by the SUT. You can make the spy only spy on certain method calls, and leave the rest unchanged.</p>
 <figure class=image-block><img src=/prc2/images/mockstubsspies.svg alt=mockstubsspies>
@@ -150,7 +150,7 @@ out of (return values) of the real object while it is used by the SUT. You can m
 
         verify( pr ).println( anyString() ); <b class=conum>4</b>
 
-    }</code></pre><ol class="callout-list arabic"><li>Create the mocked printer.</li><li>Create a Business object passing it the printer.</li><li>Make the business class work.</li><li>ask the mocked printer if it was used.</li></ol></figure>
+    }</code></pre><ol class="callout-list arabic"><li>Create the mocked printer.</li><li>Create a Business object passing it the printer.</li><li>Make the business class work.</li><li>Ask the mocked printer if it was used.</li></ol></figure>
 <p>This is of course a simple test and the only thing that it verifies is that the <code>printer.printLn(String)</code> has been used.</p>
 <figure class=listing-block><figcaption>Verify that what is printed is okay.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    @Mock
@@ -171,14 +171,13 @@ out of (return values) of the real object while it is used by the SUT. You can m
 
         verify( printer ).println( lineCaptor.capture() ); <b class=conum>5</b>
         assertThat( lineCaptor.getAllValues() ).contains( &#34;Hello Linda&#34; ); <b class=conum>6</b>
-        fail(&#34;test does It print ended. You know what to do.&#34;);</code></pre><ol class="callout-list arabic"><li>Setup mock as field</li><li>and business in a setup method, so tests can avoid repeating this,<br>
-again passing the printer object via the business constructor.</li><li>Prepare a mockito helper object to capture the data passed to the printer.</li><li>Make business do it’s thing.</li><li>Verify that <code>printer.println(…​)</code> is called. The captor object is used to
-collect all that has been received by the printer’s <code>printLn</code> method.</li><li>And the expected data is passed to the printer, so a real printer would
+        fail(&#34;test does It print ended. You know what to do.&#34;);</code></pre><ol class="callout-list arabic"><li>Setup mock as annotated field.</li><li>Create the business (SUT) object in a setup method, so tests can avoid repeating this,<br>
+again passing the printer object via the business constructor.</li><li>Prepare a Mockito helper object to capture the data passed to the printer.</li><li>Make business do its thing.</li><li>Verify that <code>printer.println(…​)</code> is called. The captor object is used to
+collect all that has been received by the printer’s <code>printLn</code> method.</li><li>The expected data is passed to the printer, so a real printer would
 print it. The method <code>lineCaptor.getAllValues()</code> produces a List of the captured things, strings in this case.</li></ol></figure>
 <p>Mockito is well documented with lots of examples in its <a href=https://javadoc.io/static/org.mockito/mockito-core/3.2.4/org/mockito/Mockito.html>java doc</a>.
 When you look to the test dependencies of your Maven project in NetBeans-IDE, right-click on the
-mockito dependency, then download the javadoc, you can enjoy that while you are developing.
-During a performance assessment the Javadoc should have been pre-loaded so is available in the same way.</p></section>
+mockito dependency, then download the javadoc, you can enjoy that while you are developing.</p></section>
 <section class="doc-section level-2"><h3 id=_to_mock_or_to_configure>To Mock or To Configure</h3><p>Sometimes the class that you want to pass as a mock to the business code has a <strong class=big>big</strong> interface, with
 many methods, and you do not want to restrict the business code to just a few trained methods. That would
 constrain the methods the business class could use, and that serves no real purpose. In such cases it
@@ -191,11 +190,12 @@ it’s constructors.
 In this case use <code>new Scanner( String s )</code>, in which the string <code>s</code> contains exactly the input you want to use in your test. The string
 can contain newlines, so that it appears as if the user entered multiple lines. This allows you to test a program with a dialog.
 Something along the line of <code>new Scanner("12\n13\n");</code>, that is 12 newline 13.</p></section>
-<section class="doc-section level-3"><h4 id=_output_mocking_with_a_real_classes>Output mocking with a real classes</h4><p>For the output side something similar is in effect. The most common way of outputting something
+<section class="doc-section level-3"><h4 id=_output_mocking_with_a_real_classes>Output mocking with a real classes</h4><p>THIS PARAGRAPH DESCRIBES AN ADVANCED TOPIC THAT YOU DON’T NEED IMMEDIATELY. FINE IF YOU UNDERSTAND IT, IF NOT THEN JUST CONTINUE WITH THE NEXT PARAGRAPH ABOUT TESTABLE DESIGN.</p>
+<p>For the output side something similar is in effect. The most common way of outputting something
 is to use System.out to print or otherwise output the results of the program. But <code class=blue>System.out</code> is
 just a <code class=blue>PrintStream</code>, which also has a lot of convenience methods with a total of 33 methods and 10 constructors.
 You do not want to restrict the use of any of its methods in the business class.</p>
-<p>The trick her is to use one of the constructors to given PrintStream something to 'print on', which you can inspect afterwards.
+<p>The trick here is to use one of the constructors to given PrintStream something to 'print on', which you can inspect afterwards.
 Usage: The business class has a constructor.<a class=footnote-ref id=_footnoteref_2 href=#_footnote_2 title="View footnote 2" role=doc-noteref>[2]</a> or setter to take a PrintStream and always uses that to print to, if
 it needs to print anyway.</p>
 <figure class=listing-block><figcaption>Usage is business code</figcaption>
@@ -213,7 +213,7 @@ it needs to print anyway.</p>
       void businessMethod(){
           out.format( &#34;%s at %d&#34;, &#34;Oplegkaas&#34;, 957 ); <b class=conum>4</b>
       }
-}</code></pre><ol class="callout-list arabic"><li>final to have a constructor set it</li><li>Default constructor uses System.out to print to</li><li>Redirect output to other output, for test or 'printing' in a GUI.</li><li>All facilities of PrintStream are available, including formatted printing.</li></ol></figure>
+}</code></pre><ol class="callout-list arabic"><li><code class=blue>final</code> to have a constructor set it</li><li>Default constructor uses System.out to print to.</li><li>Redirect output to other output, for test or 'printing' in a GUI.</li><li>All facilities of PrintStream are available, including formatted printing.</li></ol></figure>
 <figure class=listing-block><figcaption>Use in tests</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    @Test
     public void tformattedPrint() {
@@ -323,9 +323,9 @@ public class ConsoleOutput extends OutputStream {
 } // eof ConsoleOutput</code></pre></figure>
 <aside class=sidebar><h6 class=block-title>You can redirect standard output and standard error this way</h6><p>You can modify standard output, a.k.a. <code class=blue>System.out</code> so that it writes to somewhere else,
 for instance to something like the console output above. <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/System.html#setOut(java.io.PrintStream)><code>System.setOut(PrintStream)</code></a>
-can be used for standrad output. This is also the trick that the PRC1 MOOC used to test output by the first programs.
+can be used for standard output. This is also the trick that the PRC1 MOOC used to test output by the first programs.
 Important is that it can also be applied to <strong class=blue>static</strong>
-method such as the well known <code>public static void main(String[])</code> that can’t be used with Dependency Inversion as we do here.</p></aside>
+methods such as the well known <code>public static void main(String[])</code> that can’t be used with Dependency Inversion as we do here.</p></aside>
 <aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>Real class configuration, if applicable, beats mocking. So if there is an existing class, first study it’s API, before you
 consider mocking it. Using the <strong class=big>Real Thing</strong> may be the better choice <strong class=green>AND</strong> less work.<br>
 Along that line: It is seldom useful to mock an <em>entity</em> class, like a <code>Student</code> or <code>Product</code>, because the mock will have no benefit
@@ -359,7 +359,8 @@ makes the application valuable, the rest is either plumbing or already available
 <strong class="big red">loose control</strong> over what flows between service and business class,
 and makes it <em class=red>unobservable</em>, which is bad from the testing standpoint.</p></section>
 <p>Instead hand the service or resource to the business, or give it some provider of a resource.</p>
-<section class="doc-section level-2"><h3 id=_business_class_fit_for_testing>Business class fit for testing.</h3><p>Let us look at an example as a class diagram.</p>
+<section class="doc-section level-2"><h3 id=_business_class_fit_for_testing>Business class fit for testing</h3><p>WE’LL FURTHER EXPLAIN THIS CONCEPT IN CLASS AND IN THE CONTEXT OF PRJ2. THERE ARE QUITE SOME DESIGN IDEAS BEHIND IT, SO DON’T WORRY IF YOU DON’T UNDERSTAND IT IMMEDIATELY.</p>
+<p>Let us look at an example as a class diagram.</p>
 <figure class=image-block><img src=/prc2/images/testable-business.gif alt="testable business">
 <figcaption>Figure 4. Giving the business what it really needs make the business testable</figcaption></figure>
 <p>For readers that like to watch still pictures:</p>
@@ -384,9 +385,7 @@ Here the test class does the assembling with a dash of Mockito to get good grips
 and lets a <em>dependent</em> point to a <em>depends-on</em>, like
 the <strong>BusinessClass</strong> depends on a <strong>Service</strong>, which is an <em>abstract</em> class or better still, an <em>interface</em>.
 Also note that the service does not point to, or is dependent on the business, which is good, because it makes the service reusable in other contexts.<br>
-The service implementing classes are dependent on the Service definition which is shown with the inheritance arrow, pointing from sub to super type.
-In the example you could think of the service being a <a href=https://en.wikipedia.org/wiki/Data_access_object>Data Access Object</a> or <strong class=blue>DAO</strong>
-and the <strong>ServiceImpl</strong> a specific <strong>DAO</strong>, like <code>DAO&lt;Product></code>, or <code>DAO&lt;Customer></code>.</p>
+The service implementing classes are dependent on the Service definition which is shown with the "implements arrow", pointing from sub to super type.</p>
 <p>In the business school, there is a test class, that creates instances of the business class and hands it implementations of the services the business
 needs, but does that by giving it a specialized service factory that produces <em class=green>mock</em>
 service implementations. The business class is <strong class=green>NOT</strong> aware of that.
