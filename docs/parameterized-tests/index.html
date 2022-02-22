@@ -85,7 +85,7 @@ Desgin for testability
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_parameterized_tests>Parameterized tests</a><ol class="toc-list level-2"><li><a href=#_parameterized_test_junit_5_style>Parameterized test, Junit 5 style</a></li><li><a href=#_lookup_in_a_map>Lookup in a map.</a></li><li><a href=#_test_data_from_a_file>Test data from a file</a></li><li><a href=#_repeated_use_of_same_data>Repeated use of same data.</a></li><li><a href=#_testing_compare_results>Testing compare results.</a></li><li><a href=#_test_data_using_argumentsprovider>Test Data Using ArgumentsProvider</a></li><li><a href=#_split_it_yourselves>Split it yourselves</a></li><li><a href=#_using_a_method_as_a_source_for_the_test_data>Using a method as a Source for the test Data</a></li></ol></li><li><a href=#_test_recipe_i_test_equals_and_hashcode>Test Recipe I, Test Equals and hashCode</a></li><li><a href=#_links>Links</a></li></ol></nav><section class="doc-section level-1"><h2 id=_parameterized_tests>Parameterized tests</h2><p><span class=big>You will often see that test methods look a lot like each other. As an example:
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_parameterized_tests>Parameterized tests</a><ol class="toc-list level-2"><li><a href=#_parameterized_test_junit_5_style>Parameterized test, Junit 5 style</a></li><li><a href=#_lookup_in_a_map>Lookup in a map.</a></li><li><a href=#_test_data_from_a_file>Test data from a file</a></li><li><a href=#_repeated_use_of_same_data>Repeated use of same data.</a></li></ol></li><li><a href=#_test_recipe_i_test_equals_and_hashcode>Test Recipe I, Test Equals and hashCode</a></li><li><a href=#_links>Links</a></li></ol></nav><section class="doc-section level-1"><h2 id=_parameterized_tests>Parameterized tests</h2><p><span class=big>You will often see that test methods look a lot like each other. As an example:
 In the fraction exercise, in most test methods you have two inputs and one or two results,
 then an operation is done followed by some assertion, often of the same kind.
 This quickly leads to the habit of <em>copy and waste</em> programming. Many errors are introduced this way: You copy the original,
@@ -136,13 +136,6 @@ see <a href=https://junit.org/junit5/docs/current/api/org.junit.jupiter.params/o
 It keeps data and the test together, nicely near to each other, so it make it easy to read the
 tests and data in one glance.
 They typically fit easily on a screen. Remember the importance of readability of code. That too applies to test code.</p>
-<section class="admonition-block warning" role=doc-notice><h6 class="block-title label-only"><span class=title-label>Warning: </span></h6><p>We want to make sure that the assignment project is acceptable by the compiler.
-We create the project ourselves first, making sure it works and then strip our solution. All TDD of course.</p>
-<p>To make that work, we sometime have to <em class=gray>comment out</em> code in the test or in the business part of the code,
-because that code is not yet ready (because the student did not write it yet).
-In such cases we comment out using two slashes, which both best and easiest.<br>
-If you want to un-comment such part, select the lines and press kbd:[Ctrl+/] pronounced <em>control slash</em>.+
-For Mac fans, its different, of course. kbd:[{Command}+/] pronounce <em>Command slash</em>.</p></section>
 <hr></section>
 <section class="doc-section level-2"><h3 id=_lookup_in_a_map>Lookup in a map.</h3><p>Sometimes there is no easy way to get from a string to some object, or even class.
 Examples are that you want to test for the correct <strong>type</strong> or <strong>exception</strong>, or supply a method name, but you cannot put that into a string without doing complex
@@ -156,12 +149,9 @@ to the actual longer expected message, or even a message that is a format string
             &#34;rembrandt&#34;, new Person(&#34;Rembrandt&#34;, &#34;van Rijn&#34;, LocalDate.of(1606,7,15),&#34;M&#34;),
             &#34;saskia&#34;, new Person(&#34;Saskia&#34;, &#34;van Uylenburgh&#34;, LocalDate.of(1612,8,11),&#34;F&#34;),
     );</code></pre></figure>
-<p>It is particularly applicable to lambda expressions.<br>
-Lambdas are special. They have no name and not a very useful toString, and you can’t overwrite them either.<br>
-But you can do the reverse: translate a string into a lambda, by using a map. You can then use simple names (strings),
-that can be put in a csv record. You could, if you wanted, even use the lambda expression in String form as a key.</p>
-<figure class=listing-block><figcaption>Lambda as string/key and as value in a map.</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>   Map.of(&#34;(a,b)-&gt;a+b&#34;, (a,b)-&gt;a+b );</code></pre></figure>
+<p>It is particularly applicable to lambda expressions.
+You can translate a string into a lambda, by using a map. You can then use simple names (strings),
+that can be put in a csv record.</p>
 <figure class=listing-block><figcaption>Map of string to lambda</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    final Map&lt;String, BiFunction&lt;Fraction, Fraction, Fraction&gt;&gt; ops = <b class=conum>1</b>
       Map.of(
@@ -170,7 +160,7 @@ that can be put in a csv record. You could, if you wanted, even use the lambda e
               &#34;flip&#34;, ( f1, f2 ) -&gt; f1.flip(), <b class=conum>2</b>
               &#34;minus&#34;, ( f1, f2 ) -&gt; f1.minus( f2 ),
               &#34;divideBy&#34;, ( f1, f2 ) -&gt; f1.divideBy( f2 )
-      );</code></pre><ol class="callout-list arabic"><li>Note that we use a <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/BiFunction.html>BiFunction&lt;T,U,R></a>,
+      );</code></pre><ol class="callout-list arabic"><li>Note that we use a <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/BiFunction.html>BiFunction&lt;T,U,R></a> existing functional interface,
 with <strong>T</strong>, <strong>U</strong>, and <strong>R</strong> all of the same type: Fraction. This is legal.</li><li>f2 is not used in the right hand side of the arrow. This is legal too.</li></ol></figure>
 <figure class=listing-block><figcaption>Using lambda names in test data</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    @ParameterizedTest
@@ -199,15 +189,15 @@ with <strong>T</strong>, <strong>U</strong>, and <strong>R</strong> all of the s
 
     }</code></pre><ol class="callout-list arabic"><li>The fraction parameters a,b,c, and d are captured from the csvrecord. This makes the parameter list a<br>
 tad longer, but also more understandable. JUnit 5 csvsource uses the annotation and the signature of the test method and can deal
-with most common types such as primitive, String and LocalDate (preferably in ISO-8601 format such as '2012-01-14' for the day of writing this).</li><li>The fraction instances are created from a, b, c, and d.</li><li>The operation (op) is looked up in the map.</li><li>Apply the operation, or rather the function and capture the result.</li></ol></figure>
+with most common types such as primitive, String and LocalDate (preferably in ISO-8601 format such as '2012-01-14' for the day of writing this). Strings in the csv-records will be automatically converted to the parameter types in your test methods in these cases.</li><li>The fraction instances are created from a, b, c, and d.</li><li>The operation (op) is looked up in the map.</li><li>Apply the operation, or rather the function and capture the result.</li></ol></figure>
 <p>You can apply the same trick of looking up with enums too, even easier, because the enum itself can translate from String to value,
 as long as the spelling is exact.</p>
 <p>Study the examples above, they might give you inspiration with the exercises coming up and will score you points during the exam.</p>
 <aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>As of the moment of writing (Januari 2021, Junit 5.7), the parameterized test <strong class=red>can’t</strong> deal with varargs parameters, that is a varying
 list of parameters, with the triple dot notation.</p></aside></section>
-<section class="doc-section level-2"><h3 id=_test_data_from_a_file>Test data from a file</h3><p>Sometimes the amount of data you have in your test data-set is so big that it does not comfortable fit inside a <code>@CsvSoure</code> annotation.
+<section class="doc-section level-2"><h3 id=_test_data_from_a_file>Test data from a file</h3><p>Sometimes the amount of data you have in your test data-set is so big that it does not comfortably fit inside a <code>@CsvSoure</code> annotation.
 You specify an external file as data source with to achieve the same, the annotation now is <code>@CsvFileSource</code>, which takes files as argument.</p>
-<p>The file, as you might have guessed, can be a csv file, which can be edited quite comfortably with a <a href=http://plugins.netbeans.org/plugin/48312/nb-csv-editor>NetBeans plugin</a>
+<p>The file, as you might have guessed, can be a csv file, which can be edited quite comfortably with a <a href="https://plugins.netbeans.apache.org/catalogue/?id=1">NetBeans plugin</a>
 or with the help of a spreadsheet program like Libreoffice calc or Microsoft excel.</p>
 <p>Suppose you need to develop an input validator that has many test cases. Putting the inputs in a file along with other information relevant
 to your validator.</p>
@@ -219,9 +209,7 @@ to your validator.</p>
   }</code></pre></figure>
 <aside class="admonition-block note" role=note><h6 class="block-title label-only"><span class=title-label>Note: </span></h6><p>At the time of writing JUnit wants the csv file for CsvFileSource to be<br>
 in the <code>{project-directory}src/test/resources</code> folder or a child folder thereof.
-To be able to do that, you <strong>first</strong> need to create a new folder.<br>
-A pro would simply open the terminal in the project directory and do mkdir -p src/test/resources,
-but if you rather push mouse, then in netbeans you can also do New→Other→Folder, which allows you to select folder name (resources) and parent folder (src/test). Take your pick.</p></aside></section>
+To be able to do that, you <strong>first</strong> need to create that folder.</p></aside></section>
 <section class="doc-section level-2"><h3 id=_repeated_use_of_same_data>Repeated use of same data.</h3><p>In some cases, multiple tests need the same data. In the case of a CsvSourceFile, that is easily covered: Simple copy the annotations to all places where you need
 them. This is an <em>acceptable form</em> of copy and waste, because the annotations all point to one source of truth, the CSV file.</p>
 <p>Sometimes you would like to keep or even generate the test data inside the test class.
@@ -234,169 +222,7 @@ an array is also an object in Java.</p>
 easy to make a test data class to carry the test data. In this case make a data providing method and use the method name in the <code>@MethodSource</code> annotation.
 The test method should understand the test data object.</li><li>Use the JUnit5 provided <code>ArgumentsProvider</code>. This wraps an array of objects into one object, so that all can be returned as one (array) value in a stream.<br>
 This saves the implementation of a (simple) test data class.</li></ol></div>
-<p>We will use the later approach, simply because it is less work on the programmer, either you or me.</p></section>
-<section class="doc-section level-2"><h3 id=_testing_compare_results>Testing compare results.</h3><p>You may already know, but <strong class="red big">do not insist</strong> that a comparator (or the <code>compareTo()</code> method)
-should return 1, 0 or -1, because that is <strong class=red>not</strong> how it is specified.
-The value should be greater, equal, or less than zero (0).<br>
-To test that, use <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Integer.html#signum(int) target=_blank rel=noopener>Integer.signum() </a>
-to extract the sign of the actual value and assert that this is equal to the expected value.</p>
-<figure class=listing-block><figcaption>CompareTo examples</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>  @ParameterizedTest
-  @CsvSource({
-    &#34;&#39;HELLO&#39;, &#39;world&#39; , -1&#34;,// h before w
-    &#34;&#39;piet&#39; , &#39;Piet&#39;  ,  0&#34;, // equal ignoring case
-    &#34;&#39;henk&#39; , &#39;ab&#39;    ,  1&#34; // h after a
-    })
-  void compareIngnoreCase( String a, String b, int signum ){
-
-        assertThat( Integer.signum( a.compareToIgnoreCase​(b) ) ) <b class=conum>1</b>
-            .as ( a + &#34; and &#34; + b )
-            .isEqualTo( signum );
-
-  }</code></pre><ol class="callout-list arabic"><li><code>compareToXXX</code> call wrapped in <code class=blue>Integer.signum(…​)</code>.</li></ol></figure>
-</section>
-<section class="doc-section level-2"><h3 id=_test_data_using_argumentsprovider>Test Data Using ArgumentsProvider</h3><p>Using an arguments provider has the advantage of very brief code. You only have to
-<strong class=blue>pay attention</strong> that the order of objects in the arrays
-that the <code>ArgumentsProvider</code>
-provides is the same as the expected order of the parameters to your test method.
-In the example below we have put the test data in a two 'dimensional array'.</p>
-<figure class=listing-block><figcaption>ArgumentsProvider example.</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>public class CabbageArgumentsTest {
-
-    static final Cabbage SPROUT = new Cabbage( &#34;Brussel Sprouts&#34;, 10, 0.2,
-                                               STRONG );
-    static final Cabbage CAULIFLOWER = new Cabbage( &#34;Cauliflower&#34;, 1000, 1.5,
-                                                    DISTINCT );
-    static final Cabbage KALE = new Cabbage( &#34;Kale&#34;, 500, 0.700, WEAK );
-    static final Cabbage WHITE = new Cabbage( &#34;White Cabbage&#34;, 1200, 1.2,
-                                              DISTINCT );
-    static final Cabbage CABBAGE = new Cabbage( &#34;Cabbage&#34;, 600, 0.480, STRONG );
-    static final Cabbage SAVOY = new Cabbage( &#34;Savoy Cabbage&#34;, 800, 1.8,
-                                              VERY_STRONG );
-
-    static Map&lt;String, Comparator&lt;Cabbage&gt;&gt; comparators
-            = Map.of(
-                    &#34;byStink&#34;, ( a, b ) -&gt; a.compareTo( b ),
-                    &#34;byWeight&#34;, ( a, b ) -&gt; Double.compare( a.getWeight(), b
-                                                            .getWeight() ),
-                    &#34;byWeightAlt&#34;, Comparator.comparing( Cabbage::getWeight ),
-                    &#34;byWeightNat&#34;, Cabbage::compareTo, // &#39;natural&#39; by weight
-                    &#34;byVolume&#34;, Comparator.comparing( Cabbage::getVolume ),
-                    &#34;byWeightNAt2&#34;, Comparator.naturalOrder()
-            );
-
-    /**
-     * Test data table make sure the arguments have the same order as those in
-     * the test method.
-     */
-    static Object[][] testData
-            = { // msg, lambda name, result, cab a, cab b
-                { &#34;stinks worse&#34;, &#34;byStink&#34;, 1, SPROUT, CAULIFLOWER },
-                { &#34;stinks equal&#34;, &#34;byStink&#34;, 0, WHITE, CAULIFLOWER },
-                { &#34;stinks  less&#34;, &#34;byStink&#34;, -1, CABBAGE, SAVOY }
-            // other left out
-            };
-
-    /**
-     * There is only one test, run multiple times, once for each row of test
-     * data.
-     *
-     * @param myData test datum
-     */
-    @Disabled
-    @ParameterizedTest
-    @ArgumentsSource( TestData.class )
-    void testMethod( String message, String comparatorName, int expected,
-                     Cabbage a, Cabbage b ) {
-
-        Comparator&lt;Cabbage&gt; comp = comparators.get( comparatorName );
-
-        assertThat( Integer.signum( comp.compare( a, b ) ) )
-                .as( message )
-                .isEqualTo( expected );
-    }
-
-    /**
-     * Helper class to pass array data as Arguments Object.
-     */
-    static class TestData implements ArgumentsProvider {
-
-        @Override
-        public Stream&lt;? extends Arguments&gt; provideArguments( ExtensionContext ec )
-                throws Exception {
-            return Arrays.stream( testData ).map( Arguments::of );
-        }
-    }
-
-}</code></pre></figure>
-<figure class=listing-block><figcaption>The cabbage class for reference.</figcaption>
-<pre class=highlight><code class=language-java data-lang=java> */
-public class Cabbage implements Comparable&lt;Cabbage&gt; {
-    // add the odour enum.
-
-    public enum Odour {
-        // enums are comparable and compare using their natural order. 
-        // the enum later in the list has a higher value in the comparison.
-        NONE, THRESHOLD, WEAK, DISTINCT, STRONG, VERY_STRONG, INTOLERABLE;
-    }
-
-    final String name;
-    final int weight;
-    final double volume;
-    final Odour odour;</code></pre></figure>
-<p>The left out parts are the Constructor and getters for the fields.</p></section>
-<section class="doc-section level-2"><h3 id=_split_it_yourselves>Split it yourselves</h3><p>Sometimes you need a varying set of values (var-args) in your test, but CsvSource does not accommodate var-args.</p>
-<p>In that case you can format one or more of the string such, that you can easily chop it up into an array of Strings, which could then be
-interpreted as some other type. You only need to choose a separator different than that the CsvSource records use. We have had good experience
-with the '|' character which is both recognizable but not too obtrusive.</p>
-<figure class=listing-block><figcaption>Simulated varargs</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>  @ParameterizedTest
-  @CsvSource({
-    &#34;A, B, C|D|E|F&#34;  <b class=conum>1</b>
-  })
-  void someTest(String s1, String s2, String rest) {
-    String [] restAsArray=rest.split(&#34;\\|&#34;);
-    // use in test.
-  }</code></pre><ol class="callout-list arabic"><li>You can add spaces in the csvsource lines to improve readability and to align stuff.</li></ol></figure>
-<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>If your varargs parameters provides only single characters, you can <em>split</em> with the empty string into single character <code>String</code>-s.<br>
-For example <code>"ABC".split("")</code> produces the array <code>{"A", "B", "C"}</code>.<br>
-Alternatively you can use <code>"ABC".toCharArray()</code> which produces <code>{'A', 'B', 'C'}</code>, an array of primitive <code>char</code>.</p></aside>
-<p>If your self-split array should contain int values, you can use this helper method.
-A similar trick can be applied for long and double too and also for objects that can easily be mapped from a short String.
-In the latter case it would be best to also supply a lambda expression to do the conversion, which can then be used in a <code>map(…​)</code>
-function place of the <code>Integer::parseInt</code> in the code below.</p>
-<p>Such helper can be static an be put in your collection of test
-helpers.<a class=footnote-ref id=_footnoteref_1 href=#_footnote_1 title="View footnote 1" role=doc-noteref>[1]</a></p>
-<figure class=listing-block><figcaption>Split to int array.</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>    public static int[] stringToInts( String input ) {
-       return Stream.of( input.split( &#34;\\|&#34;))
-               .mapToInt( Integer::parseInt )
-               .toArray();
-   }</code></pre></figure>
-<figure class=listing-block><figcaption>Split to Object arrays</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>    public static &lt;T&gt; T[] stringToObjects( String input, Function&lt;String, T&gt; fun ) {
-        return (T[]) Stream.of( input.split( &#34;\\|&#34; ) )
-                .map( fun )
-                .toArray( Object[]::new );
-    }</code></pre></figure>
-<p>If you do not yet fully understand what this means, pay attention in week 4.</p></section>
-<section class="doc-section level-2"><h3 id=_using_a_method_as_a_source_for_the_test_data>Using a method as a Source for the test Data</h3><p>In all given examples above, the test data is more or less constant, at least the compiler is the last
-that somehow computes them. Sometimes you need some kind of processing of the test data. For instance the test data
-depend on an environment variable, like the amount of test data, or the test data must be compose from some dynamic value
-that is only apparent ate run time. This is where <code>@MethodSource</code> comes in. At runtime something that can be evaluated can influence the test data.</p>
-<p>The use case we had for this the ALDA sorting exercise. We want to run tests even if not all variants are available. We ask the student’s implementation
-which sorting variants are available, and then prepare a set of test data for each variant.</p>
-<p>Technically it works a lot like the ArgumentsProvider. The <code>static</code> method must return a Stream of some kind. If you choose <code>Arguments</code> as the stream-element-type,
-the test method looks the same as as a normal parameterized test.</p>
-<div class=listing-block><pre class=highlight><code class=language-java data-lang=java>    public static Stream&lt;Arguments&gt; allSortersAndTestCounts() {
-        SortKind[] supportedSorters = TestBase.factory.supportedSorters(); <b class=conum>1</b>
-        return Stream.of( supportedSorters ).map( ss -&gt; { <b class=conum>2</b>
-            return IntStream.of( 2, 3, 10, 100, 1000 )
-                    .mapToObj( i -&gt; arguments( ss, i ) );
-        } ).flatMap( x -&gt; x );  <b class=conum>3</b>
-    }</code></pre><ol class="callout-list arabic"><li>The number of ready test is determined by the factory, which return am aaar of enum values like QUICK or INSERTION.</li><li>This stream combines each sort kind with a number of elements in a queue to be sorted, as a stream of arguments</li><li>this identity function (lamba) as argument to flatMap unpacks the elements of the inner stream and puts each as element in
-the outer stream.</li></ol></div>
-<p>The stream (and lambda) will be further addressed in week 5.</p>
+<p>Have a look at the <a href=https://junit.org/junit5/docs/current/user-guide/>JUnit5 documentation</a> to find a further explanation and examples.</p>
 <hr>
 <p>Because we are collecting test tricks, here is another one:</p></section></section>
 <section class="doc-section level-1"><h2 id=_test_recipe_i_test_equals_and_hashcode>Test Recipe I, Test Equals and hashCode</h2><p>We may sprinkle our testing stuff with a few recipes for often occurring tests.
@@ -430,7 +256,7 @@ make sure that the fields to be considered match the requirements. Choose only f
 <p>After having such a generated equals and hashCode you have the predicament of writing a test. HashCode is relatively easy. It should produce an
 integer, but what value is unspecified, so just invoking it would do the trick for test coverage.
 The devil is in the equals details, because it has to consider:</p>
-<div class=ulist><ul><li>Is the other object <code>this</code>? If yes, return <code>true</code>.</li><li>Is the other object <code>null</code>? Return <code>false</code> if it is.</li><li>Now consider the type.<a class=footnote-ref id=_footnoteref_2 href=#_footnote_2 title="View footnote 2" role=doc-noteref>[2]</a>.<ul><li>Is the other of the same type as <code>this</code>? If not return <code>false</code>.</li><li>Now we are in known terrain, the other is of the same type, so the object has the same fields.<br>
+<div class=ulist><ul><li>Is the other object <code>this</code>? If yes, return <code>true</code>.</li><li>Is the other object <code>null</code>? Return <code>false</code> if it is.</li><li>Now consider the type.<a class=footnote-ref id=_footnoteref_1 href=#_footnote_1 title="View footnote 1" role=doc-noteref>[1]</a>.<ul><li>Is the other of the same type as <code>this</code>? If not return <code>false</code>.</li><li>Now we are in known terrain, the other is of the same type, so the object has the same fields.<br>
 For each field test it <code>this.field.equals(other.field)</code>. If not return false.</li><li>Using <code>Objects.equals(this.fieldA, other.fieldB)</code> can be an efficient solution to avoid testing for nullity of either field.</li></ul></li></ul></div>
 <figure class=listing-block><figcaption>Generated equals. It is fine.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>    @Override
@@ -521,39 +347,14 @@ and then one for each field, which differs from the reference object only in sai
                    )
                    .isEqualTo( equal.hashCode() );
         });
-     }
-
-    /**
-     * ToString that deals with any exceptions that are thrown during its
-     * invocation.
-     *
-     * When x.toString triggers an exception, the returned string contains a
-     * message with this information plus class and system hashCode of the
-     * object.
-     *
-     * @param x to turn into string or a meaningful message.
-     * @return &#34;null&#34; when x==null, x.toString() when not.
-     */
-    public static String safeToString( Object x ) {
-        if ( x == null ) {
-            return &#34;null&#34;;
-        }
-        try {
-            return x.toString();
-        } catch ( Throwable e ) {
-            return &#34;invoking toString on instance &#34;
-                    + x.getClass().getCanonicalName() + &#34;@&#34;
-                    + Integer.toHexString( System.identityHashCode( x ) )
-                    + &#34; causes an exception &#34; + e.toString();
-        }
-    }</code></pre></figure>
+     }</code></pre></figure>
 <p>The above code has been used before but now adapted for AssertJ and JUnit 5.</p>
 <p>It is of course best to put this in some kind of test helper library, so you can reuse it over and over without having to
 resort to copy and waste.</p>
 <hr>
 <aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>Think test driven! So write tests FIRST, and then code. Testing is ensuring that the code is usable.
 To make code testable is also a design exercise: you need to make decisions about the design of your program when you write your tests. If you cannot test it, you cannot use it.</p></aside></section>
-<section class="doc-section level-1"><h2 id=_links>Links</h2><div class=ulist><ul><li><a href=https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests target=_blank rel=noopener>JUnit 5 Parameterized Tests </a></li><li><a href=https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-sources-CsvSource target=_blank rel=noopener>CSV Source Tests </a></li><li><a href=https://www.baeldung.com/parameterized-tests-junit-5 target=_blank rel=noopener>Baeldung on Parameterized Tests with JUnit 5 </a></li></ul></div></section><section class=footnotes aria-label=Footnotes role=doc-endnotes><hr><ol class=footnotes><li class=footnote id=_footnote_1 role=doc-endnote>Have your own tiny project and copy parts of that to your other projects, such as a java class called TestUtils.java <a class=footnote-backref href=#_footnoteref_1 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li><li class=footnote id=_footnote_2 role=doc-endnote>Not all equals implementation look at the type of this, See the java.util.List doc for a counter example <a class=footnote-backref href=#_footnoteref_2 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li></ol></section>
+<section class="doc-section level-1"><h2 id=_links>Links</h2><div class=ulist><ul><li><a href=https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests target=_blank rel=noopener>JUnit 5 Parameterized Tests </a></li><li><a href=https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-sources-CsvSource target=_blank rel=noopener>CSV Source Tests </a></li><li><a href=https://www.baeldung.com/parameterized-tests-junit-5 target=_blank rel=noopener>Baeldung on Parameterized Tests with JUnit 5 </a></li></ul></div></section><section class=footnotes aria-label=Footnotes role=doc-endnotes><hr><ol class=footnotes><li class=footnote id=_footnote_1 role=doc-endnote>Not all equals implementation look at the type of this, See the java.util.List doc for a counter example <a class=footnote-backref href=#_footnoteref_1 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li></ol></section>
 </article>
 </div><footer class="text-sm leading-6 mt-12 mb-5">
 Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
