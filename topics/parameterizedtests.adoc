@@ -70,18 +70,6 @@ The CsvSource version of parameterized test is the simplest to use and easily un
  tests and data in one glance.
  They typically fit easily on a screen. Remember the importance of readability of code. That too applies to test code.
 
-[WARNING]
-====
-We want to make sure that the assignment project is acceptable by the compiler.
-We create the project ourselves first, making sure it works and then strip our solution. All TDD of course.
-
-To make that work, we sometime have to [gray]_comment out_ code in the test or in the business part of the code,
-because that code is not yet ready (because the student did not write it yet).
-In such cases we comment out using two slashes, which both best and easiest. +
-If you want to un-comment such part, select the lines and press kbd:[Ctrl+/] pronounced _control slash_.+
-For Mac fans, its different, of course. kbd:[{Command}+/] pronounce _Command slash_.
-====
-
 '''
 
 === Lookup in a map.
@@ -104,16 +92,9 @@ to the actual longer expected message, or even a message that is a format string
     );
 ----
 
-It is particularly applicable to lambda expressions. +
-Lambdas are special. They have no name and not a very useful toString, and you can't overwrite them either. +
-But you can do the reverse: translate a string into a lambda, by using a map. You can then use simple names (strings),
-that can be put in a csv record. You could, if you wanted, even use the lambda expression in String form as a key.
-
-.Lambda as string/key and as value in a map.
-[source,java]
-----
-   Map.of("(a,b)->a+b", (a,b)->a+b );
-----
+It is particularly applicable to lambda expressions.
+You can translate a string into a lambda, by using a map. You can then use simple names (strings),
+that can be put in a csv record. 
 
 .Map of string to lambda
 [source,java]
@@ -128,7 +109,7 @@ that can be put in a csv record. You could, if you wanted, even use the lambda e
       );
 ----
 
-<1> Note that we use a https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/BiFunction.html[BiFunction<T,U,R>],
+<1> Note that we use a https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/BiFunction.html[BiFunction<T,U,R>] existing functional interface,
 with *T*, *U*, and *R* all of the same type: Fraction. This is legal.
 <2> f2 is not used in the right hand side of the arrow. This is legal too.
 
@@ -171,7 +152,7 @@ with *T*, *U*, and *R* all of the same type: Fraction. This is legal.
 
 <1> The fraction parameters a,b,c, and d are captured from the csvrecord. This makes the parameter list a +
   tad longer, but also more understandable. JUnit 5 csvsource uses the annotation and the signature of the test method and can deal
-  with most common types such as primitive, String and LocalDate (preferably in ISO-8601 format such as '2012-01-14' for the day of writing this).
+  with most common types such as primitive, String and LocalDate (preferably in ISO-8601 format such as '2012-01-14' for the day of writing this). Strings in the csv-records will be automatically converted to the parameter types in your test methods in these cases.
 <2> The fraction instances are created from a, b, c, and d.
 <3> The operation (op) is looked up in the map.
 <4> Apply the operation, or rather the function and capture the result.
@@ -189,10 +170,10 @@ list of parameters, with the triple dot notation.
 
 === Test data from a file
 
-Sometimes the amount of data you have in your test data-set is so big that it does not comfortable fit inside a `@CsvSoure` annotation.
+Sometimes the amount of data you have in your test data-set is so big that it does not comfortably fit inside a `@CsvSoure` annotation.
 You specify an external file as data source with to achieve the same, the annotation now is `@CsvFileSource`, which takes files as argument.
 
-The file, as you might have guessed, can be a csv file, which can be edited quite comfortably with a http://plugins.netbeans.org/plugin/48312/nb-csv-editor[NetBeans plugin]
+The file, as you might have guessed, can be a csv file, which can be edited quite comfortably with a https://plugins.netbeans.apache.org/catalogue/?id=1[NetBeans plugin]
 or with the help of a spreadsheet program like Libreoffice calc or Microsoft excel.
 
 Suppose you need to develop an input validator that has many test cases. Putting the inputs in a file along with other information relevant
@@ -215,9 +196,7 @@ to your validator.
 ====
 At the time of writing JUnit wants the csv file for CsvFileSource to be +
 in the `{project-directory}src/test/resources` folder or a child folder thereof.
-To be able to do that, you *first* need to create a new folder. +
-A pro would simply open the terminal in the project directory and do mkdir -p src/test/resources,
-but if you rather push mouse, then in netbeans you can also do New->Other->Folder, which allows you to select folder name (resources) and parent folder (src/test). Take your pick.
+To be able to do that, you *first* need to create that folder.
 ====
 
 // TODO string with | as varargs...
@@ -242,148 +221,7 @@ There are two solutions to this issue.
 . Use the JUnit5 provided `ArgumentsProvider`. This wraps an array of objects into one object, so that all can be returned as one (array) value in a stream. +
   This saves the implementation of a (simple) test data class.
 
-We will use the later approach, simply because it is less work on the programmer, either you or me.
-
-
-=== Testing compare results.
-
-You may already know, but [red big]*do not insist* that a comparator (or the `compareTo()` method)
-should return 1, 0 or -1, because that is [red]*not* how it is specified.
-The value should be greater, equal, or less than zero (0). +
-To test that, use https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Integer.html#signum(int)[Integer.signum() ^]
- to extract the sign of the actual value and assert that this is equal to the expected value.
-
-.CompareTo examples
-[source,java]
-----
-  @ParameterizedTest
-  @CsvSource({
-    "'HELLO', 'world' , -1",// h before w
-    "'piet' , 'Piet'  ,  0", // equal ignoring case
-    "'henk' , 'ab'    ,  1" // h after a
-    })
-  void compareIngnoreCase( String a, String b, int signum ){
-
-        assertThat( Integer.signum( a.compareToIgnoreCase​(b) ) ) //<1>
-            .as ( a + " and " + b )
-            .isEqualTo( signum );
-
-  }
-----
-
-<1> `compareToXXX` call wrapped in [blue]`Integer.signum(...)`.
-
-=== Test Data Using ArgumentsProvider
-
-Using an arguments provider has the advantage of very brief code. You only have to
-[blue]*pay attention* that the order of objects in the arrays
- that the `ArgumentsProvider`
-provides is the same as the expected order of the parameters to your test method.
-In the example below we have put the test data in a two 'dimensional array'.
-
-.ArgumentsProvider example.
-[source,java]
-----
-include::code/cabbage/src/test/java/cabbage/CabbageArgumentsTest.java[lines=16..999]
-----
-
-.The cabbage class for reference.
-[source,java]
-----
-include::code/cabbage/src/main/java/cabbage/Cabbage.java[lines=9..23]
-----
-
-The left out parts are the Constructor and getters for the fields.
-
-=== Split it yourselves
-
-Sometimes you need a varying set of values (var-args) in your test, but CsvSource does not accommodate var-args.
-
-In that case you can format one or more of the string such, that you can easily chop it up into an array of Strings, which could then be
-interpreted as some other type. You only need to choose a separator different than that the CsvSource records use. We have had good experience
-with the '|' character which is both recognizable but not too obtrusive.
-
-
-.Simulated varargs
-[source,java]
-----
-  @ParameterizedTest
-  @CsvSource({
-    "A, B, C|D|E|F"  //<1>
-  })
-  void someTest(String s1, String s2, String rest) {
-    String [] restAsArray=rest.split("\\|");
-    // use in test.
-  }
-----
-
-<1> You can add spaces in the csvsource lines to improve readability and to align stuff.
-
-TIP: If your varargs parameters provides only single characters, you can _split_ with the empty string into single character `String`-s. +
-For example `"ABC".split("")` produces the array `{"A", "B", "C"}`. +
-Alternatively you can use `"ABC".toCharArray()` which produces `{'A', 'B', 'C'}`, an array of primitive `char`.
-
-If your self-split array should contain int values, you can use this helper method.
-A similar trick can be applied for long and double too and also for objects that can easily be mapped from a short String.
-In the latter case it would be best to also supply a lambda expression to do the conversion, which can then be used in a `map(...)`
-function place of the `Integer::parseInt` in the code below.
-
-Such helper can be static an be put in your collection of test
-helpers.footnote:[Have your own tiny project and copy parts of that to your other projects, such as a java class called TestUtils.java]
-
-.Split to int array.
-[source,java]
-----
-    public static int[] stringToInts( String input ) {
-       return Stream.of( input.split( "\\|"))
-               .mapToInt( Integer::parseInt )
-               .toArray();
-   }
-----
-
-.Split to Object arrays
-[source,java]
-----
-    public static <T> T[] stringToObjects( String input, Function<String, T> fun ) {
-        return (T[]) Stream.of( input.split( "\\|" ) )
-                .map( fun )
-                .toArray( Object[]::new );
-    }
-----
-
-If you do not yet fully understand what this means, pay attention in week 4.
-
-=== Using a method as a Source for the test Data
-
-In all given examples above, the test data is more or less constant, at least the compiler is the last
-that somehow computes them. Sometimes you need some kind of processing of the test data. For instance the test data
-depend on an environment variable, like the amount of test data, or the test data must be compose from some dynamic value
-that is only apparent ate run time. This is where `@MethodSource` comes in. At runtime something that can be evaluated can influence the test data.
-
-The use case we had for this the ALDA sorting exercise. We want to run tests even if not all variants are available. We ask the student's implementation
-which sorting variants are available, and then prepare a set of test data for each variant.
-
-Technically it works a lot like the ArgumentsProvider. The `static` method  must return a Stream of some kind. If you choose `Arguments` as the stream-element-type,
-the test method looks the same as as a normal parameterized test.
-
-[source,java]
-----
-    public static Stream<Arguments> allSortersAndTestCounts() {
-        SortKind[] supportedSorters = TestBase.factory.supportedSorters(); // <1>
-        return Stream.of( supportedSorters ).map( ss -> { // <2>
-            return IntStream.of( 2, 3, 10, 100, 1000 )
-                    .mapToObj( i -> arguments( ss, i ) );
-        } ).flatMap( x -> x );  // <3>
-    }
-----
-
-<1> The number of ready test is determined by the factory, which return am aaar of enum values like QUICK or INSERTION.
-<2> This stream combines each sort kind with a number of elements in a queue to be sorted, as a stream of arguments
-<3> this identity function (lamba) as argument to flatMap unpacks the elements of the inner stream and puts each as element in
-the outer stream.
-
-The stream (and lambda) will be further addressed in week 5.
-
+Have a look at the https://junit.org/junit5/docs/current/user-guide/[JUnit5 documentation] to find a further explanation and examples.
 
 
 '''

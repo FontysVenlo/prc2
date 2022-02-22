@@ -161,30 +161,6 @@ The implementation of the `verifyEqualsAndHashCode` has been done with generics 
         });
      }
 
-    /**
-     * ToString that deals with any exceptions that are thrown during its
-     * invocation.
-     *
-     * When x.toString triggers an exception, the returned string contains a
-     * message with this information plus class and system hashCode of the
-     * object.
-     *
-     * @param x to turn into string or a meaningful message.
-     * @return "null" when x==null, x.toString() when not.
-     */
-    public static String safeToString( Object x ) {
-        if ( x == null ) {
-            return "null";
-        }
-        try {
-            return x.toString();
-        } catch ( Throwable e ) {
-            return "invoking toString on instance "
-                    + x.getClass().getCanonicalName() + "@"
-                    + Integer.toHexString( System.identityHashCode( x ) )
-                    + " causes an exception " + e.toString();
-        }
-    }
 ----
 
 The above code has been used before but now adapted for AssertJ and JUnit 5.
