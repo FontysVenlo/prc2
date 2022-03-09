@@ -384,7 +384,7 @@ The code below shows what all this looks like for `Bird` (providing self), `Flye
 .Animals can move and are self aware.
 [source,java]
 ----
-include::{topics}/code/genericzoo/src/main/java/zoo/Animal.java[]
+include::/code/genericzoo/src/main/java/zoo/Animal.java[]
 ----
 
 The common trait of animals is that they can move. It is in the name. Even coral can move, if not very far.
@@ -392,13 +392,13 @@ The common trait of animals is that they can move. It is in the name. Even coral
 .Flyer adds flying functionality.
 [source,java]
 ----
-include::{topics}/code/genericzoo/src/main/java/zoo/Flyer.java[]
+include::/code/genericzoo/src/main/java/zoo/Flyer.java[]
 ----
 
 .Ducks are Animals with many traits, all inherited, and little work. You might think ducks are lazy. +++&#x1F986;+++ +++&#128522;+++
 [source,java]
 ----
-include::{topics}/code/genericzoo/src/main/java/zoo/Duck.java[]
+include::/code/genericzoo/src/main/java/zoo/Duck.java[]
 ----
 
 .you know it is just a model, think movies ...
