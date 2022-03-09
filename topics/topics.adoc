@@ -3,11 +3,11 @@
 In the topics table below, *Vol I* is _Core Java Volume I, Fundamentals_ and *Vol II* is _Core Java Volume II, Advanced Features_
 both by Cay S. Horstmann and both in the eleventh edition.
 
-// This run we have ONE topic per week, either test focused, java feature focused or design focused.
 [cols="2,200,100,200",options="header"]
 |=======
 | Week | Topic | Book | Exercises
 |link:docs/unit-testing-basics/[1] | Test Driven, Unit Testing basics |  -                     | Phonebook, Minibar
 |link:docs/parameterized-tests/[2] | Parameterized Tests              | Vol I 5.6 enum classes | Fraction, Flawless Password, Enum Calculator
-|link:docs/design-for-testability/[3] | Design for testability, Mockito  | -                      | Perishable products, CandyVendingMachine as study object
+|link:docs/design-for-testability/[3] | Design for testability, Mockito  | -                      | Perishable sales
+|link:docs/generics/[4] | Generics  | Vol I 8.1 - 8.8 Generic Programming                       | Shapefilter, Generic Ranges
 |=======

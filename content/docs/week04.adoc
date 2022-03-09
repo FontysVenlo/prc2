@@ -1,0 +1,15 @@
+---
+title: "Generics"
+description: ""
+date: 2022-03-09T13:53:06+01:00
+draft: false
+images: []
+slug: "generics"
+menu: 
+  docs:
+    parent: ""
+weight: 030
+toc: true
+---
+
+include::{topics}/generics.adoc[]

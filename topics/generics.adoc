@@ -1,0 +1,419 @@
+== Generics
+
+Generics is mainly a compiler feature. In java (at least the versions up to this moment, March 2022) it
+is even more so, because after the compiler had it's go with it, it largely discards the generic information, and the runtime, the JVM,
+does not really care about generics and does not use it. The role of generics is to keep the programs type-safe.
+The compiler will check that a use of a method, field, or class complies with its definition,
+and if the use does [red]*not*, the compiler will produce an [red]*error*, to prevent the programmer from doing unsafe things.
+
+=== Generics, the fine print
+
+Generics were introduced in Java 5.
+
+Generics help keeping the language safer by giving the compiler more ways to _reason_
+about the code and reject it when it is bad. That is what a strictly typed language is all about.
+
+With generics also *auto-boxing* was introduced. The concept was borrowed from *C#* and the dot-net framework.
+Auto-boxing is auto-magically converting/wrapping an `int` into an `Integer` (auto-box) when a
+reference type is needed and backwards when the reference type Integer is given and an `int` is needed (auto-unboxing).
+This makes primitive types to play 'nicely' with generics to some degree.
+
+Generics also helps avoiding code duplication, because you can have a _something_ of _anything_
+like a [blue]`List` of [blue]`Student` without any code duplication or any code generation under the hood, to create
+specialized classes per anything type.
+So this [blue]*List* exists once and is just as applicable to Student as is to Donkey.
+
+A strong point of Java has always been the preservation of investment (in code). What worked once should still work.
+So code that was legal (and compiled) in the Java 1.1 era should still run, even if used today in its binary format. Heck, in closed
+source stuff that might be the only form you have, but your investment is preserved because of this backwards compatibility.
+
+This strong point has a flip side. Pré Java 5 does not understand generics, which would break the backwards compatibility. That
+is why the generic info, after being used by the compiler for correctness verification is then thrown away by the same compiler. Little
+if anything of the generic information is preserved for the run time. As a matter of fact, the JVM has no notion of generics, nor does it
+need it to function. This has all kind of consequences.
+
+In modern Java code, in particular since Java 8 with Functional interfaces and Streams, generics are a *must*, because the provide safety in the one hand
+and the required flexibility in the other, required to make the Java 8 features possible at all.
+
+==== Raw types, pre-Java 5
+
+The pre-java 5 days did not have generics. All types that have been generified since then still exist in their original,
+nowadays called [blue]*raw* form. From the above you can infer that this is what the JVM sees and uses.
+
+.Using a map in pre Java 5 times
+[source,java]
+----
+   Map studentsMap = new HashMap(); // <1>
+
+   studentsMap.put( Integer.valueOf( 313581 ) ,new Student( "Potter","Harry" ) );
+
+   // some time later
+   Student harry = (Student) studentsMap.get(Integer.valueOf( 313581 ) ); // <2>
+----
+
+<1> The map has no clue about of the types of key or value, so Object is the best it can do. +
+  Also note that you had to turn the `int` into an `Integer` object manually, because auto-boxing did not exist.
+<2> Retrieving the object from a map is again wrapping the `int` and also _cast_ the object back to the expected type.
+
+In the above pieces of code all kinds of things can go wrong. You could put any pair of objects of any type in the map and the compiler
+had no way of checking what you did made sense.
+
+==== Generic types, the modern way.
+.example lists and maps
+[source,java]
+----
+   List<String> l1 = new ArrayList<>();
+   List<Student> stuList = new ArrayList<>();
+   Map<String,BiFunction<Double,Integer,Integer>> operatorMap;
+----
+
+The thing is that the compiler is very finicky. It should be, very precise and meticulous.
+As an example, say you have a simple person hierarchy: Person is extended by Student.
+
+.some regular people in lists.
+[source,java]
+----
+class Person{}
+class Student extends Person{}
+
+// in some code
+    void m(){
+      Person paul = ....
+      Student serena = ...
+      List<Person> pl;
+      List<Student> sl;
+
+    }
+----
+
+The compiler will allow you to do `pl.add(serena)`, and `sl.add(serena)` because serena is a `Student` and by extension a `Person`, but
+paul can't be added to `sl`, because as far as the compiler is concerned, paul is not a Student and 'would not fit'.
+
+[green]#What the compiler tries to achieve is that if you define a collection to contain students, then it promises
+that only students will go in and will ever come out. It does that by checking and not accepting any potential violation of the promise.#
+
+By sticking to this promise, the objects you can receive will be of the correct type and you can do what the type allows, like method calls etc.
+
+
+=== Cheating the compiler
+
+You can trick the compiler into breaking its promises. In the end, of course the compiler is not the victim, but the program is.
+It will generate a [red]#ClassCastException# on retrieval of the non-fitting object. And as programs go when they generate uncaught exceptions:
+they will be aborted by the JVM.
+
+.Sneaky code. Do not do this at home. You are only fooling yourselves.
+[source,java]
+----
+public static void main( String[] args ) {
+        List<Student> sl = new ArrayList<Student>();
+        sl.add( new Student( "Hermione" )); // <1>
+        List ol = (List) sl;                // <2>
+        ol.add( new Person("Voldemort") );  // <3>
+
+        // somewhere else in the scenario
+        Student hermione = sl.get( 0 );       // <4>
+        Student lilly = sl.get( 1 );        // <5>
+        System.out.println( "lilly = " + lilly ); // <6>
+    }
+----
+
+<1> accepted.
+<2> give the compiler a raw alias.
+<3> so it will gladly accept this. You [red]#cheated!#
+<4> no sweat, our heroine pops out,
+<5> but the other object will make your program fail at this statement with a [red]`ClassCastException`.
+<6> Statement never reached because your program will have been #terminated# by now.
+
+==== Type token.
+
+image:towerguard.png[role="thumb right", title="guards guards", width="140px"]
+Sometimes you have a problem, which can only be solved by explicitly providing the generic information to
+the code at run-time. This use is called 'providing a type-token'. +
+An example of such use is the method file:///usr/share/doc/openjdk-11-doc/docs/api/java.base/java/util/Collections.html#checkedList(java.util.List,java.lang.Class)[Collections.checkedList( <List<E>, Class<E> type )], +
+whose usage example is `List<Student> studList = Collections.checkedList( students, Student.class )`. +
+The type token will play the role of a [blue]*sentinel* or [blue]*guard*, because all Class objects have a `cast` method that checks if the cast is legal, and if it is,
+applies the cast to the incoming object; if not it will throw a [red]#ClassCastException#.
+This will prevent even the sneakiest code, including code predating Java 5 and the code above, to sneak in a none-student object.
+This guard will also throw an exception, and actually the same one, but now at the side of the culprit, because the exception will be thrown at insertion.
+You should not do this as normal usage, because the check on every insertion goes with a cost (CPU cycles), but it can be helpful to detect problems caused
+by some naughty code, because now a violation against the promise will result in an exception at run-time,
+a `ClassCastException` to be exact at the moment of insertion, so any sneaky code can be caught [red]_red-handed_,
+leaving a nice big stack trace as a trail for all to see.
+
+There are other uses of type-tokens, which you may see later in the course.
+
+=== Wildcard and bounds
+
+Read Horstmann section 8.8.
+
+With the definition in the previous paragraphs, you are losing some flexibility, compared to raw types. In particular, you may want
+to insert sub types of a class into a collection, or retrieve sub types of a class from a collection.
+
+Using wildcards and bounds will give back some of the flexibility while still upholding type-safety.
+The wildcard has been given the character symbol [bold]*'?'*, the question mark.
+
+==== Unbound wildcard.
+
+The unbound wildcard is something that should be used sparingly. The best example is the new definition of the Class type.
+In pre Java-5 times that was `Class someClass` that is a raw class, nowadays it is `Class<?> someClass` which actually sounds as a class of any kind.
+There is little difference but the compiler will be nicer to you. There are some corner cases where you can't avoid it and then the form using the wildcard
+is the correct choice.
+
+==== Upper bound or Covariant
+
+[[supers]]
+.Hierarchy of shapes, assume mathematical shapes, so a line has no width and hence no surface area. Nor does an arc.
+image::acceptablesupers.svg[]
+
+.Quiz: Can you name the super types of circle in the class diagram above?
+[%collapsible,role="blue"]
+====
+Shape, Object, Serializable, ArcLike, Surface, and Circle itself.
+====
+
+When you intend to write code with high flexibility, in particular when you use inheritance as in [blue]#extends# and [blue]#implements#,
+then there are a few rules to apply to your generic code. It all has to do with what a container, defined with generic types should _accept_ or will _produce_.
+
+We will refer to the picture above. We have two scenarios:
+
+. A class that makes or _supplies_ shapes. Imagine reading the shape definitions from a drawing file with vector graphics.
+. A class that should accept shapes, like a canvas on which you can draw.
+
+The supplier or *Producer* as it is called in the documentation, could be some collection such as a _list_ of any of the types in the class diagram:
+`Object`, `Serializable` (that is probably how the Objects were read from disk), but the most likely and useful would be the `Shape` type.
+
+.Passing things to be drawn to the canvas.
+[source,java]
+----
+  interface Canvas {
+    void draw( List<Shape> shapes ); // <1>
+  }
+----
+
+<1> as far as the draw method is concerned, the list _produces_ the shapes to be drawn.
+
+Now imagine that you have a list of circles: `List<Circle> circles = new ArrayList<>()`. Then the above definition of the `Canvas.draw()` method
+forbids you to do `canvas.draw( circles );`, which is quite counter-intuitive, because the class diagram and the code says that a Circle is a Shape.
+The compiler will say: '_incompatible types: List<Circle> cannot be converted to List<Shape>_'.
+
+This is because, although a `Circle` is a sub-class of `Shape`, a `List<Circle>` is [red]#NOT# a sub-class of `List<Shape>`.
+To amend this problem, you must change the definition of the draw method so that it accepts shapes but also
+any derived type. You do that by adding the wild-card which expresses anything (within limits or bounds).
+
+.Flexible shape that also accepts lists of sub-classes of Shape.
+[source,java]
+----
+  interface Canvas {
+    void draw( List<? extends Shape> shapes ); // <1>
+  }
+----
+<1> This accepts Shape but also anything that is a sub type of Shape, so Circles, Triangles, Lines etc.
+
+This makes the draw method more flexible and reusable, because the draw method can draw any shape now. Type theory calls this kind
+of relation between Shape and List of Shape *Covariant*. They both develop in the same direction, so semantically a `List<? extends Shape>` is covariant with
+`Circle extends Shape`. You could say, both extend _down_ and therefor there is an upper bound, `Shape` in the example.
+
+=== Lower bound or Contra variant
+
+Now imagine that you have a method in some other class that wants to collect Shapes in a collection like a List.
+In the documentation such list, which should accept objects, would be called a *Consumer*.
+
+.Passing a container that should receive/consume collected shapes.
+[source,java]
+----
+  class Collector {
+    // objects are added to be added to receiver or consumer
+    void collect( List<Circle> receiver ){ // <1>
+      Circle c =...
+      receiver.add( c ); // <2>
+    }
+  }
+----
+<1> Too strict
+<2> Problematic line when widening 1 with extends.
+
+Again, the compiler will complain if you call collect with your list of Circles as input.
+Use case: you want to tally up the total area covered by circles.
+
+This time it says the same thing on the call statement `collector.collect(circles)`. Let's apply the same solution as above.
+If we define the collect method like `void collect( List<? extends Circle> receiver )`, the compiler will not complain on this line, but
+on the line `receiver.add( c );` with a nasty curse:
+
+.Compiler complaint.
+[source]
+----
+incompatible types: Circle cannot be converted to CAP#1
+  where CAP#1 is a fresh type variable:
+    CAP#1 extends Shape from capture of ? extends Shape
+----
+
+So `extends` is not the way to go. You could infer that the list should be defined such that it accepts the Circle but also any type
+that circle extends or, from the stand point of the circle, a super type of Circle. You are actually  saying that circle and any of its super types will
+be acceptable to the receiver. Circle is the *lower bound* in the example.
+
+.Super, that does it.
+[source,java]
+----
+class Collector {
+    // objects are added to receiver
+      void collect( List<? super Circle> receiver ){ // <1>
+        Circle c =...
+        receiver.add( c ); // <2>
+      }
+}
+----
+
+<1> `super` here makes any List of any super type of Circle acceptable to
+<2> the add operation.
+
+
+The `List<? super Circle>` in the above example is now contra variant with `Circle`.
+
+==== Bounds explained.
+The wild card construct with `extends` or `super` is called a bounded wild card.
+
+* With `extends`, which defines the upper-bound, the boundary is the top most type of the acceptable
+types, so that that type defines what can be done with it and all its derivatives, like draw(). +
+ `extends` puts a *upper bound* on the element type.
+* With `super`, which defines the *lower-bound*, the bound is the bottom-most type of the acceptable types. It defines the receiver
+ or consumer of the type. Because that lower bound is the sub-most type of the inheritance hierarchy it is _it_ and all above it, which says
+ that any consumer (receiver) of such super-type will accept the sub-most or lowest type but also any of the super types. +
+ [blue]`super` puts a bound on what a consumer like a collection, set or list should accept.
+
+[TIP]
+====
+All this bounds stuff is about the direction of the operation, get or put. You can _get_ from a *Producer* and _put_ into a *Consumer*.
+The extends bound puts a constraint on the element that are to be produced, the super puts a constraint what the receiver or consumer of the element should accept. +
+There is a mnemonic for this: [big]*P.E.C.S.*, which says [big]**P**roducer, use [big]**E**xtends, [big]**C**onsumer use [big]**S**uper. +
+*Note* that put and get both come with other names. For instance, *put* is sometimes called *add*, *push*, or *accept*, according to the naming convention in its context.
+Same for *get*, which may answer to the name *pull*, *pop*, *take*, *remove*, etc.
+====
+
+*Extends* and covariance is easiest to understand. Contra-variance less so. +
+As an example for *super*, have a look at the https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Consumer.html[Consumer ^]
+functional interface. There is a default helper method given that specifies that the Consumer named *after* in the `andThen(..)`
+method must be of type `Consumer<? super T>`,
+saying that said consumer must accept Ts, but may also accept any super type of T. And again any consumer that accepts T or any of its super types will do.
+You will see this pattern throughout the `java.util.function` package where a default followup method such as `andThen` or `compose` is specified.
+
+The last paragraph makes the point why Functional interfaces and all other goodies introduced in Java 8 heavily rely on generics.
+
+
+=== Self use in Generic definitions
+
+Generics is not only applicable for collections, although that aspect of the standard Java library is a big customer of this
+language feature. But it can be used in other places too, as you have seen in the functional interfaces which define the *shape* of lambda expressions.
+
+You may have come across a generic type definition that looks a bit weird as in, the type is used in its own definition.
+An example of that is the definition of the
+ https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Enum.html[Enum class],
+ which the abstract super class of all [blue]*enums*:
+
+.Enum class definition, a bit of a mouth-full.
+[source,java]
+----
+public abstract class Enum<E extends Enum<E>>
+        implements Comparable<E>, Serializable {
+}
+----
+
+This definition puts bounds or constraints on the type E, which must hence be a sub type (sub class) of `Enum` itself.
+
+[TIP]
+The _type declaring keywords_ in Java are [blue]#class#, [blue]#interface#, and since Java 5 [blue]#enum#. Java 14 introduced [blue]#record#,
+which looks a lot like enum in the technique of its definition. It makes an [blue]#enum# and a [blue]#record# final, but they can implement interfaces.
+
+Another one is in the use of `Comparable`, like in the `String` class,
+it says among others `String implements Comparable<String>`, to make Strings comparable to each other, but not to other types.
+Again a bound or constraint of types, in the example the parameter of the `int compareTo(T)` method declared in Comparable.
+
+Let us make a simple and silly but instructive example: A zoo.
+We want it to be such that a class inherits all the traits of its super,
+and we want to be able to use it in a _fluent_ style of programming.
+
+.The zoo is defined in a class diagram
+image::zoo.svg[title="Mini zoo"]
+
+In our programs we want to express things like `donald.fly().swim().walk()`,
+which is a common sequence of operations for ducks. We want each of the methods
+in the chain to return the duck, so that Donald can do his operations in any order he likes.
+
+This is also understood by the IDE, which will show _completions_ fitting for the duck when the object is a `Duck`.
+For the `Bird` class on the other hand, the IDE will not _complete_ with `swim()`, and for the `Penguin` not with `fly()`.
+
+To make this work, you need to make your classes as you could say _self-aware_.
+It means that the class in the hierarchy defines a method called `self()` whose return type is that of the class, not one of the super types.
+The self-use in the generics declaration makes this work, in combination with the fact that
+ each [green]_leaf class_ footnote:[those at the bottom in the class diagram tree]
+ has a `self()` method which, through convincing the compiler with generics, returns an object of the correct type.
+In the definition of each leaf class, the leaf class itself is the type parameter, like in `Penguin implements Bird<Penguin>, Swimmer<Penguin>` etc.
+In particular, it is [red]*not* parameterized any further such as `Penguin<P>`, because they themselves are the desired final type or leaf types.
+
+If you want a non-leaf (abstract) class or interface, your have to further use the self reference in the generic definition.
+
+.EBird is an extendable Bird
+[source,java]
+----
+public interface EBird<EB extends EBird<EB>>  extends Flyer<EB>, Walker<EB>{
+
+     EB afterBurner(){
+         System.out.println("VROOOAAAR");
+         return self();
+     }
+}
+----
+
+.Thunderbird is it's child.
+[source,java]
+----
+public class ThunderBird implements EBird<ThunderBird>{
+    public static void main( String[] args ) {
+        ThunderBird tb = new ThunderBird();
+        tb.fly().move().walk().fly().brood().fly().afterBurner();
+    }
+}
+----
+
+[TIP]
+image:LeafFarket.png[role="thumb right", width="100"]
+A leaf class is a concrete class at the bottom of the type hierarchy, which is no longer generic on self. In the current implementation you can't extend it easily.
+In java [blue]#enum# and [blue]#record# types are also all leaf classes, that cannot be extended.
+
+The code below shows what all this looks like for `Bird` (providing self), `Flyer`,  and `Duck`:
+
+.Animals can move and are self aware.
+[source,java]
+----
+include::{topics}/code/genericzoo/src/main/java/zoo/Animal.java[]
+----
+
+The common trait of animals is that they can move. It is in the name. Even coral can move, if not very far.
+
+.Flyer adds flying functionality.
+[source,java]
+----
+include::{topics}/code/genericzoo/src/main/java/zoo/Flyer.java[]
+----
+
+.Ducks are Animals with many traits, all inherited, and little work. You might think ducks are lazy. +++&#x1F986;+++ +++&#128522;+++
+[source,java]
+----
+include::{topics}/code/genericzoo/src/main/java/zoo/Duck.java[]
+----
+
+.you know it is just a model, think movies ...
+image:duckling.jpg[role="thumb left", width="150"]
+The Duck class above is the complete concrete leaf class, nothing has been left out. Everything is in the supers (the interfaces in this case), generics is
+just the thread that stitches the Duck together.
+
+This all provides the most benefit in Java 8 and up, because from Java 8 interfaces can have [blue]#default# and [blue]#static# methods,
+thereby implementing things, based on the abstract methods the implementing class must provide, as is the case with `self()`. And even self() is generified out
+by way of convincing the compiler that the default implementation does the trick. [green]*Minimal code with maximum effect*.
+
+The techniques described here are heavily used in the https://assertj.github.io/doc/[AssertJ] library.
+The details of this SELF use can be found https://web.archive.org/web/20130721224442/http:/passion.forco.de/content/emulating-self-types-using-java-generics-simplify-fluent-api-implementation[here ^].
+
+
+=== Testing generics
+
+As explained, generics is mainly used at the source code level and compiler to check the program for correct use of the declared types and methods. As such, testing of the generic aspect of your code is done when your compiler is happy with it AND you have expressed your real intent. Sometimes the last part is the trickiest.
