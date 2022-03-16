@@ -1,6 +1,6 @@
 package zoo;
 
-public abstract interface Animal<A extends Animal<A>> {
+public interface Animal<A extends Animal<A>> {
 
     default A move() {
         System.out.println( "twitch " );

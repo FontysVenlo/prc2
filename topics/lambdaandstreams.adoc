@@ -1,4 +1,4 @@
-=== Lambda and Streams
+== Lambda and Streams
 
 We will start with a short recap and some refinements on λ-expressions,
 followed by application in streams.
