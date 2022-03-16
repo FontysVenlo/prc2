@@ -13,5 +13,6 @@ toc: true
 ---
 
 include::{topics}/jpms.adoc[]
+
 include::{topics}/lambdaandstreams.adoc[]
 
