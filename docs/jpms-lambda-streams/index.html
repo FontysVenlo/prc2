@@ -127,46 +127,43 @@ which specifies what a module <strong>needs</strong> (<em>reads</em> in JPMS ter
 For instance for a module that defines all entities of a multi-module application.</li><li><span class=blue>opens</span> allows reflection of a package. Use with one per package per line.</li><li><span class=blue>provides</span> To indicate that a module implements some interface with one or more implementations.</li><li><span class=blue>requires</span> Indicates what the module itself needs or <strong>reads</strong>. One package per line.</li><li><span class=blue>transitive</span> Used with requires to indicate that there is a requirement that is then made readable to the users of this module as well.</li><li><span class=blue>to</span> Used to restrict either exports or opens to specific other module(s).</li><li><span class=blue>uses</span> To indicate that a module uses a service <span class=blue>provide</span>d by another module.</li><li><span class=blue>with</span> Used with provides to indicate which implementation(s) are available for the
 provided interface implementation. See the <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html>Service Loader API</a>.</li></ul></div>
 <p>As a rule, the module <span class=blue>java.base</span> is 'required' by default, the same a <span class=blue>java.lang</span> is available or imported by default, considering packages to import.</p>
-<p>A few examples.</p>
-<figure class=listing-block><figcaption>Generic Mapper</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>module  nl.fontys.sebivenlo.genericmapper {
-    requires java.logging;
-    requires nl.fontys.sebivenlo.sebiannotations;
-    exports genericmapper;
+<p>Some examples of module-info.java files from the PRJ2-AIS-demo-project:</p>
+<figure class=listing-block><figcaption>Assembler</figcaption>
+<pre class=highlight><code class=language-java data-lang=java>module assembler_module{
+    requires persistence_module;
+    requires datarecords_module;
+    requires businesslogic_module;
+    requires gui_module;
 }</code></pre></figure>
-<figure class=listing-block><figcaption>Generic DAO</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>module nl.fontys.sebivenlo.genericdao {
-    requires nl.fontys.sebivenlo.genericmapper;
-    requires java.logging;
-    requires java.sql;
-    requires java.naming;
-    requires org.postgresql.jdbc;
-    requires nl.fontys.sebivenlo.sebiannotations;
-    exports genericdao.dao;
-    exports genericdao.memory;
-    exports genericdao.pgdao;
+<figure class=listing-block><figcaption>DataRecords</figcaption>
+<pre class=highlight><code class=language-java data-lang=java>module datarecords_module {
+    exports datarecords;
 }</code></pre></figure>
-<figure class=listing-block><figcaption>FXTriangulate</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>module fxtriangulate {
+<figure class=listing-block><figcaption>Persistence</figcaption>
+<pre class=highlight><code class=language-java data-lang=java>module persistence_module {
+    requires datarecords_module;
+    exports persistence;
+}</code></pre></figure>
+<figure class=listing-block><figcaption>BusinessLogic</figcaption>
+<pre class=highlight><code class=language-java data-lang=java>module businesslogic_module {
+    requires transitive datarecords_module;
+    requires transitive persistence_module;
+
+    exports businesslogic;
+}</code></pre></figure>
+<figure class=listing-block><figcaption>GUI</figcaption>
+<pre class=highlight><code class=language-java data-lang=java>module gui_module {
     requires javafx.controls;
-    requires javafx.graphics;
-    requires javafx.base;
     requires javafx.fxml;
+    requires java.logging;
     requires java.base;
-    exports fxtriangulate ;
-    opens fxtriangulate to javafx.fxml;
+    requires businesslogic_module;
+
+    opens gui to javafx.fxml;
+
+    exports gui;
 }</code></pre></figure>
-<figure class=listing-block><figcaption>The FXTriangulate client, Surveyor</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>module surveyor {
-    requires java.logging;
-    requires javafx.controls;
-    requires javafx.graphics;
-    requires javafx.base;
-    requires javafx.fxml;
-    requires fxtriangulate;
-    exports surveyor;
-    opens surveyor to javafx.fxml;
-}</code></pre></figure>
+<p>And another example from our ALDA course in which a Service is provided:</p>
 <figure class=listing-block><figcaption>ALDA sorting srevices</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>module sortingserviceapi {
     exports sortingservice; <b class=conum>1</b>
@@ -177,7 +174,7 @@ open module asortingservice {
     requires sortingserviceapi;
     uses sortingservice.SortingServiceFactory; <b class=conum>2</b>
     provides sortingservice.SortingServiceFactory with asortingservice.SortingServices; <b class=conum>3</b>
-}</code></pre><ol class="callout-list arabic"><li>defines sortingservice.SortingServiceFactory in package sortingservice</li><li>uses and</li><li>provides Sorting Services presumably in tests.</li></ol></figure>
+}</code></pre><ol class="callout-list arabic"><li>defines sortingservice.SortingServiceFactory in package sortingservice; this is an interface.</li><li>uses and</li><li>provides an inplementation of the SortingServiceFactory interface with a specific implementation: SortingServices.</li></ol></figure>
 <section class="admonition-block warning" role=doc-notice><h6 class="block-title label-only"><span class=title-label>Warning: </span></h6><p>JPMS explicitely forbids:</p>
 <div class=ulist><ul><li>Split packages, that is using the same package name in different modules with different content.</li><li>Cyclic dependencies as in A requires B requires A.</li></ul></div></section>
 <p>The dependencies are validated at the startup of the JVM, when you start Java.
@@ -230,12 +227,10 @@ of your business code. This is a bit handicapped by the way the JPMS allows acce
 │           └── pgdao
 └── test
     └── java
-        ├── entities
         ├── genericdao
-        │   ├── dao
-        │   ├── memory
-        │   └── pgdao
-        └── usertypes</code></pre></figure>
+            ├── dao
+            ├── memory
+            └── pgdao</code></pre></figure>
 <p>We are using maven, in which the unit test plugin is called <strong>surefire</strong>, the integration test plugin (which we
 did not use up to this point yet) is called <strong>failsafe</strong>.</p>
 <p>The standard way source code is organized is by means of separate directories for
@@ -278,8 +273,6 @@ and adapt it for your own purposes.</p>
     <b class=conum>3</b>
   &lt;/properties&gt;</code></pre><ol class="callout-list arabic"><li>We are adding a property for the surefire plugin which is picked up by sebipom.</li><li>In particular the arguments that are passed to the JVM that runs the tests,
 which appends <strong>--add-opens</strong> commands for all packages that require unit tests.</li><li>Other properties are left out for brevity.</li></ol></figure>
-<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>The above requires sebipom version 3.0.2 or higher as parent for your project. Also works
-if the parent of your modular maven project uses sebipom as parent.</p></aside>
 <p>Of particular importance, and project specific are the <code class=blue>--add-opens</code> commands, which you must adapt to your own project’s
 pom file with your own module and package names.</p>
 <figure class=image-block><img src=/prc2/images/opens.svg alt=opens width=600>
