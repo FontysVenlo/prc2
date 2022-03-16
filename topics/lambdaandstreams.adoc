@@ -3,6 +3,6 @@
 We will start with a short recap and some refinements on λ-expressions,
 followed by application in streams.
 
-include::{topics}/lambdaandfunctions.adoc[]
+include::lambdaandfunctions.adoc[]
 
-include::{topics}/lambdastreams.adoc[]
+include::lambdastreams.adoc[]
