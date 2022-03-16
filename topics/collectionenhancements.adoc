@@ -1,0 +1,73 @@
+== Collection Enhancements and general tips
+
+It never hurts to browse through an API once in a while.
+You might get new ideas or find a cool feature.
+
+=== Improved Map in Java 8
+
+
+I personally find the java.util.Map quit interesting because it got a number of very cool features in
+Java 7 and 8 that are really very helpful if you want to implement things like *caches*.
+If you are into caching and expect many entries, consider a https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/WeakHashMap.html[WeakHashMap],
+that also helps to solve the problem of keeping the cache small and auto-evacuate when entries are no longer used.
+
+
+In order of appearance in the api doc:
+
+* https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#compute(K,java.util.function.BiFunction)[compute] Attempts to compute a mapping for the specified key and its current mapped value (or null if there is no current mapping).
+* https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#computeIfAbsent(K,java.util.function.Function)[computeIfAbsent] If the specified key is not already associated with a value (or is mapped to null), attempts to compute its value using the given mapping function and enters it into this map unless null.
+* https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#computeIfPresent(K,java.util.function.BiFunction)[computeIfPresent] If the value for the specified key is present and non-null, attempts to compute a new mapping given the key and its current mapped value.
+* https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#getOrDefault(java.lang.Object,V)[getOrDefault] Returns the value to which the specified key is mapped, or defaultValue if this map contains no mapping for the key.
+* https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#putIfAbsent(K,V)[putIfAbsent] If the specified key is not already associated with a value (or is mapped to null) associates it with the given value and returns null, else returns the current value.
+and of course
+
+* https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#forEach(java.util.function.BiConsumer)[forEach] Performs the given action for each entry in this map until all entries have been processed or the action throws an exception.
+
+.which allows you to quickly look at the contents of a map with a one-liner
+[source,java]
+----
+    map.forEach((k, v) -> System.out.println(k + "=" + v));
+----
+
+The fun thing is that all these methods are default methods, so they apply to all classes that implement the java.util.Map interface, including the ones you roll yourselves,
+might you feel the inclination. To implement a special map that has specific extra properties, you only need to extend https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/AbstractMap.html[AbstractMap]
+which needs the implementation of one or two methods only, depending if you want an unmodifiable of modifiable one.
+
+=== Use specialized collections
+
+Java provides some specialized collections that can improve performance quite a while still adhering to the general contract.
+
+* EnumSet and EnumMap use the fact that the values of an enum are consecutive, and that each value is associated with its ordinal value, which is an int.
+In many case the number of values is overseable, making a EnumSet efficiently implementable using the techniques used in a BitSet.
+The EnumMap can simply use an array or references as backing store. The enum value then maps a value if and only if the array contains a reference at the
+ordinal index of the array. These are one of the fastest maps in Java.
+
+=== BitSet
+
+Sometimes you want to quickly check the membership of an element to some set. If the
+set is an oversee-able number of int or int like values, such as characters, a https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/BitSet.html[BitSet] might be useful.
+It uses longs or arrays of longs as backing store, dependent on the number of values that can be in the set.
+This means that a bitset with 64 possible values takes only _one_ long to hold all relevant information.
+It has many set operations.
+
+For instance you could use a bitset to classify characters in a special way (if not already done in the general Character API).
+
+.Vowels
+[source,java]
+----
+    private static BitSet vowels = new BitSet(128);
+
+    static { // done when the class is loaded.
+        for ( char c : "aeiouAEIOU".toCharArray() ) {
+           vowels.set(c);
+        }
+    }
+
+    boolean isVowel(char c) {
+       return vowels.get(z);
+    }
+
+    public static void main(String... args){
+       System.out.println("z is vowel: "+isVowel('z'));
+    }
+----

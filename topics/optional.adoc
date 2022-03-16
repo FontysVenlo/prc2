@@ -1,0 +1,55 @@
+== Optional demystified
+
+Many terminal stream operations return an [blue]`Optional`. Rationale: the required element
+may not be present, or the Stream is empty to start with. Or the filter throws everything out.
+
+Optional is an interesting concept all by itself.
+
+* An Optional can be considered as a very short stream of at most one element.
+* You can apply a map operation to an Optional, which transforms the *content* of the optional (if any) and
+  produces an optional containing the result of the mapping.
+* You  can even stream() the optional, which allows you to apply all operation that a stream provides (since 9).
+
+All this can be used in an algorithm, in which you want to chain a bunch of methods, each of which
+requiring that the parameter is non-null.
+
+.Traditional returning null
+[source,java]
+----
+  SomeType result;
+  var a = m1();
+  var b=null;
+  var c=null;
+  if ( null != a ) {
+    b = m2( a );
+  }
+  if ( null != b ) {
+    c = m3( b );
+  }
+
+  if ( null != c ) {
+    result = m4( c );
+  }
+  return result;
+  // do something with result
+----
+
+.Using Optional. Returning Optional<SomeType>
+[source,java]
+----
+  Optional<SomeType> result
+     = m1ReturningOptional() // <1>
+      .map( a-> m2( a ) )
+      .map( b-> m3( b ) )
+      .map( c-> m4( c ) );
+  return result;
+  // do something with Optional result
+----
+
+<1> The chain starts with a method returning an optional. The remaining methods `m2(...)`, `m3(...)`, and `m4(...)` are unchanged.
+
+In the last example, an [blue]`Optional<SomeType>` is returned, that can either be unwrapped of passed on as such for further processing.
+
+[TIP]
+If you apply map as a chained operation to an [blue]`Optional`, the function supplied as
+ parameter to the `map(..)` method is applied to the _content _of the optional and returns the result in another Optional.

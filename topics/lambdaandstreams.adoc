@@ -6,3 +6,7 @@ followed by application in streams.
 include::lambdaandfunctions.adoc[]
 
 include::lambdastreams.adoc[]
+
+include::collectionenhancements.adoc[]
+
+include::optional.adoc[]
