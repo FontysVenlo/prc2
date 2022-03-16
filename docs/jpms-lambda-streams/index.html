@@ -2,7 +2,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>PRC2</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/main.min.d6621c5b88ffd161368965da12fdf1159636782dc4d2bf25c4864da350b7271d5c09686e6557abb46c8017ee3c0eec21d52e19fbed25705a7d53ffe268c93767.css integrity="sha512-1mIcW4j/0WE2iWXaEv3xFZY2eC3E0r8lxIZNo1C3Jx1cCWhuZVertGyAF+48Duwh1S4Z++0lcFp9U//iaMk3Zw==" crossorigin=anonymous>
+<link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/main.min.940ec686aaef2fed0e22a8d19ea19414eef7a4dc2ef5687dae9a43522bad25af0ea0ff369947683f0c609d13e14a36bc4a5083eb16cee71265291222ea47caf4.css integrity="sha512-lA7GhqrvL+0OIqjRnqGUFO73pNwu9Wh9rppDUiutJa8OoP82mUdoPwxgnRPhSja8SlCD6xbO5xJlKRIi6kfK9A==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
 <link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
 <script src=/prc2/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
@@ -95,7 +95,7 @@ JPMS, Lambda and Streams
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_java_platform_module_system>Java Platform Module System</a><ol class="toc-list level-2"><li><a href=#_changes_in_visibility>Changes in visibility</a></li></ol></li><li><a href=#_java_modules_and_testing>Java Modules and Testing</a><ol class="toc-list level-2"><li><a href=#_black_box_vs_white_box>Black box vs White Box</a></li><li><a href=#_standard_source_code_organization>Standard Source code organization.</a></li></ol></li><li><a href=#_lambda_and_streams>Lambda and Streams</a></li><li><a href=#_functional_interface_rationale>Functional Interface Rationale</a><ol class="toc-list level-2"><li><a href=#_s_h_a_p_e_of_java_util_functions><code>&lt;S.H.A.P.E.></code> of java.util.functions</a></li><li><a href=#_where_is_tostring>Where is toString?</a></li><li><a href=#_method_references>Method References</a></li></ol></li><li><a href=#_streams_sql_like_operations_expressed_in_java_8>Streams, SQL like operations expressed in Java 8</a><ol class="toc-list level-2"><li><a href=#_sql_like_functions>SQL like functions</a></li></ol></li></ol></nav><section class="doc-section level-1"><h2 id=_java_platform_module_system>Java Platform Module System</h2><p>The Java Platform Module System has been introduced with Java 9 and had a long development history at
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_java_platform_module_system>Java Platform Module System</a><ol class="toc-list level-2"><li><a href=#_changes_in_visibility>Changes in visibility</a></li></ol></li><li><a href=#_java_modules_and_testing>Java Modules and Testing</a><ol class="toc-list level-2"><li><a href=#_black_box_vs_white_box>Black box vs White Box</a></li><li><a href=#_standard_source_code_organization>Standard Source code organization.</a></li></ol></li><li><a href=#_lambda_and_streams>Lambda and Streams</a></li><li><a href=#_functional_interface_rationale>Functional Interface Rationale</a><ol class="toc-list level-2"><li><a href=#_s_h_a_p_e_of_java_util_functions><code>&lt;S.H.A.P.E.></code> of java.util.functions</a></li><li><a href=#_where_is_tostring>Where is toString?</a></li><li><a href=#_method_references>Method References</a></li></ol></li><li><a href=#_streams_sql_like_operations_expressed_in_java_8>Streams, SQL like operations expressed in Java 8</a><ol class="toc-list level-2"><li><a href=#_sql_like_functions>SQL like functions</a></li></ol></li><li><a href=#_collection_enhancements_and_general_tips>Collection Enhancements and general tips</a><ol class="toc-list level-2"><li><a href=#_improved_map_in_java_8>Improved Map in Java 8</a></li><li><a href=#_use_specialized_collections>Use specialized collections</a></li><li><a href=#_bitset>BitSet</a></li></ol></li><li><a href=#_optional_demystified>Optional demystified</a></li></ol></nav><section class="doc-section level-1"><h2 id=_java_platform_module_system>Java Platform Module System</h2><p>The Java Platform Module System has been introduced with Java 9 and had a long development history at
 the point of introduction. For the Java developers at Oracle and others involved in the OpenJDK project it
 was considered a necessary step to make Java fit for the future and make it possible to shed some old
 nasty problems. In the development of Java there have been only a few <strong>major</strong> release, although each release of
@@ -369,7 +369,83 @@ where  gender = &#39;FEMALE&#39;</code></pre></figure>
             .filter(p -&gt; p.getGender() == Person.Gender.FEMALE)
             .mapToInt( Person::getSalary )                      <b class=conum>1</b>
             .sum();</code></pre><ol class="callout-list arabic"><li>This alternative uses a <strong>method reference</strong>, which can be substituted for a lambda expression when their shapes match.</li></ol></figure>
-</section></section><section class=footnotes aria-label=Footnotes role=doc-endnotes><hr><ol class=footnotes><li class=footnote id=_footnote_1 role=doc-endnote>It was enforced in the now deprecated web applets <a class=footnote-backref href=#_footnoteref_1 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li></ol></section>
+</section></section>
+<section class="doc-section level-1"><h2 id=_collection_enhancements_and_general_tips>Collection Enhancements and general tips</h2><p>It never hurts to browse through an API once in a while.
+You might get new ideas or find a cool feature.</p>
+<section class="doc-section level-2"><h3 id=_improved_map_in_java_8>Improved Map in Java 8</h3><p>I personally find the java.util.Map quit interesting because it got a number of very cool features in
+Java 7 and 8 that are really very helpful if you want to implement things like <strong>caches</strong>.
+If you are into caching and expect many entries, consider a <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/WeakHashMap.html>WeakHashMap</a>,
+that also helps to solve the problem of keeping the cache small and auto-evacuate when entries are no longer used.</p>
+<p>In order of appearance in the api doc:</p>
+<div class=ulist><ul><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#compute(K,java.util.function.BiFunction)>compute</a> Attempts to compute a mapping for the specified key and its current mapped value (or null if there is no current mapping).</li><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#computeIfAbsent(K,java.util.function.Function)>computeIfAbsent</a> If the specified key is not already associated with a value (or is mapped to null), attempts to compute its value using the given mapping function and enters it into this map unless null.</li><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#computeIfPresent(K,java.util.function.BiFunction)>computeIfPresent</a> If the value for the specified key is present and non-null, attempts to compute a new mapping given the key and its current mapped value.</li><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#getOrDefault(java.lang.Object,V)>getOrDefault</a> Returns the value to which the specified key is mapped, or defaultValue if this map contains no mapping for the key.</li><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#putIfAbsent(K,V)>putIfAbsent</a> If the specified key is not already associated with a value (or is mapped to null) associates it with the given value and returns null, else returns the current value.
+and of course</li><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#forEach(java.util.function.BiConsumer)>forEach</a> Performs the given action for each entry in this map until all entries have been processed or the action throws an exception.</li></ul></div>
+<figure class=listing-block><figcaption>which allows you to quickly look at the contents of a map with a one-liner</figcaption>
+<pre class=highlight><code class=language-java data-lang=java>    map.forEach((k, v) -&gt; System.out.println(k + &#34;=&#34; + v));</code></pre></figure>
+<p>The fun thing is that all these methods are default methods, so they apply to all classes that implement the java.util.Map interface, including the ones you roll yourselves,
+might you feel the inclination. To implement a special map that has specific extra properties, you only need to extend <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/AbstractMap.html>AbstractMap</a>
+which needs the implementation of one or two methods only, depending if you want an unmodifiable of modifiable one.</p></section>
+<section class="doc-section level-2"><h3 id=_use_specialized_collections>Use specialized collections</h3><p>Java provides some specialized collections that can improve performance quite a while still adhering to the general contract.</p>
+<div class=ulist><ul><li>EnumSet and EnumMap use the fact that the values of an enum are consecutive, and that each value is associated with its ordinal value, which is an int.
+In many case the number of values is overseable, making a EnumSet efficiently implementable using the techniques used in a BitSet.
+The EnumMap can simply use an array or references as backing store. The enum value then maps a value if and only if the array contains a reference at the
+ordinal index of the array. These are one of the fastest maps in Java.</li></ul></div></section>
+<section class="doc-section level-2"><h3 id=_bitset>BitSet</h3><p>Sometimes you want to quickly check the membership of an element to some set. If the
+set is an oversee-able number of int or int like values, such as characters, a <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/BitSet.html>BitSet</a> might be useful.
+It uses longs or arrays of longs as backing store, dependent on the number of values that can be in the set.
+This means that a bitset with 64 possible values takes only <em>one</em> long to hold all relevant information.
+It has many set operations.</p>
+<p>For instance you could use a bitset to classify characters in a special way (if not already done in the general Character API).</p>
+<figure class=listing-block><figcaption>Vowels</figcaption>
+<pre class=highlight><code class=language-java data-lang=java>    private static BitSet vowels = new BitSet(128);
+
+    static { // done when the class is loaded.
+        for ( char c : &#34;aeiouAEIOU&#34;.toCharArray() ) {
+           vowels.set(c);
+        }
+    }
+
+    boolean isVowel(char c) {
+       return vowels.get(z);
+    }
+
+    public static void main(String... args){
+       System.out.println(&#34;z is vowel: &#34;+isVowel(&#39;z&#39;));
+    }</code></pre></figure></section></section>
+<section class="doc-section level-1"><h2 id=_optional_demystified>Optional demystified</h2><p>Many terminal stream operations return an <code class=blue>Optional</code>. Rationale: the required element
+may not be present, or the Stream is empty to start with. Or the filter throws everything out.</p>
+<p>Optional is an interesting concept all by itself.</p>
+<div class=ulist><ul><li>An Optional can be considered as a very short stream of at most one element.</li><li>You can apply a map operation to an Optional, which transforms the <strong>content</strong> of the optional (if any) and
+produces an optional containing the result of the mapping.</li><li>You can even stream() the optional, which allows you to apply all operation that a stream provides (since 9).</li></ul></div>
+<p>All this can be used in an algorithm, in which you want to chain a bunch of methods, each of which
+requiring that the parameter is non-null.</p>
+<figure class=listing-block><figcaption>Traditional returning null</figcaption>
+<pre class=highlight><code class=language-java data-lang=java>  SomeType result;
+  var a = m1();
+  var b=null;
+  var c=null;
+  if ( null != a ) {
+    b = m2( a );
+  }
+  if ( null != b ) {
+    c = m3( b );
+  }
+
+  if ( null != c ) {
+    result = m4( c );
+  }
+  return result;
+  // do something with result</code></pre></figure>
+<figure class=listing-block><figcaption>Using Optional. Returning Optional&lt;SomeType></figcaption>
+<pre class=highlight><code class=language-java data-lang=java>  Optional&lt;SomeType&gt; result
+     = m1ReturningOptional() <b class=conum>1</b>
+      .map( a-&gt; m2( a ) )
+      .map( b-&gt; m3( b ) )
+      .map( c-&gt; m4( c ) );
+  return result;
+  // do something with Optional result</code></pre><ol class="callout-list arabic"><li>The chain starts with a method returning an optional. The remaining methods <code>m2(…​)</code>, <code>m3(…​)</code>, and <code>m4(…​)</code> are unchanged.</li></ol></figure>
+<p>In the last example, an <code class=blue>Optional&lt;SomeType></code> is returned, that can either be unwrapped of passed on as such for further processing.</p>
+<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>If you apply map as a chained operation to an <code class=blue>Optional</code>, the function supplied as
+parameter to the <code>map(..)</code> method is applied to the _content _of the optional and returns the result in another Optional.</p></aside></section><section class=footnotes aria-label=Footnotes role=doc-endnotes><hr><ol class=footnotes><li class=footnote id=_footnote_1 role=doc-endnote>It was enforced in the now deprecated web applets <a class=footnote-backref href=#_footnoteref_1 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li></ol></section>
 </article>
 </div><footer class="text-sm leading-6 mt-12 mb-5">
 Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
