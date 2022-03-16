@@ -66,62 +66,65 @@ The keywords specific to the module declaration are
 
 As a rule, the module [blue]#java.base# is 'required' by default, the same a [blue]#java.lang# is available or imported by default, considering packages to import.
 
-A few examples.
+Some examples of module-info.java files from the PRJ2-AIS-demo-project:
 
-.Generic Mapper
+
+.Assembler
 [source,java]
 ----
-module  nl.fontys.sebivenlo.genericmapper {
-    requires java.logging;
-    requires nl.fontys.sebivenlo.sebiannotations;
-    exports genericmapper;
+module assembler_module{
+    requires persistence_module;
+    requires datarecords_module;
+    requires businesslogic_module;
+    requires gui_module;
 }
 ----
 
-.Generic DAO
+.DataRecords
 [source,java]
 ----
-module nl.fontys.sebivenlo.genericdao {
-    requires nl.fontys.sebivenlo.genericmapper;
-    requires java.logging;
-    requires java.sql;
-    requires java.naming;
-    requires org.postgresql.jdbc;
-    requires nl.fontys.sebivenlo.sebiannotations;
-    exports genericdao.dao;
-    exports genericdao.memory;
-    exports genericdao.pgdao;
+module datarecords_module {       
+    exports datarecords;
 }
 ----
 
-.FXTriangulate
+.Persistence
 [source,java]
 ----
-module fxtriangulate {
+module persistence_module { 
+    requires datarecords_module;
+    exports persistence;
+}
+----
+
+.BusinessLogic
+[source,java]
+----
+module businesslogic_module {   
+    requires transitive datarecords_module;
+    requires transitive persistence_module;
+    
+    exports businesslogic;
+}
+----
+
+.GUI
+[source,java]
+----
+module gui_module {
     requires javafx.controls;
-    requires javafx.graphics;
-    requires javafx.base;
     requires javafx.fxml;
+    requires java.logging;
     requires java.base;
-    exports fxtriangulate ;
-    opens fxtriangulate to javafx.fxml;
+    requires businesslogic_module;
+
+    opens gui to javafx.fxml;
+    
+    exports gui;
 }
 ----
 
-.The FXTriangulate client, Surveyor
-[source,java]
-----
-module surveyor {
-    requires java.logging;
-    requires javafx.controls;
-    requires javafx.graphics;
-    requires javafx.base;
-    requires javafx.fxml;
-    requires fxtriangulate;
-    exports surveyor;
-    opens surveyor to javafx.fxml;
-}
-----
+And another example from our ALDA course in which a Service is provided:
 
 .ALDA sorting srevices
 [source,java]
@@ -138,9 +141,9 @@ open module asortingservice {
 }
 ----
 
-<1> defines sortingservice.SortingServiceFactory in package sortingservice
+<1> defines sortingservice.SortingServiceFactory in package sortingservice; this is an interface.
 <2> uses and
-<3> provides Sorting Services presumably in tests.
+<3> provides an inplementation of the SortingServiceFactory interface with a specific implementation: SortingServices.
 
 [WARNING,BIG]
 ====
@@ -234,12 +237,11 @@ src
 │           └── pgdao
 └── test
     └── java
-        ├── entities
         ├── genericdao
-        │   ├── dao
-        │   ├── memory
-        │   └── pgdao
-        └── usertypes
+            ├── dao
+            ├── memory
+            └── pgdao
+        
 ----
 
 We are using maven, in which the unit test plugin is called *surefire*, the integration test plugin (which we
@@ -304,10 +306,6 @@ and adapt it for your own purposes.
 <2> In particular the arguments that are passed to the JVM that runs the tests,
   which appends *--add-opens* commands for all packages that require unit tests.
 <3> Other properties are left out for brevity.
-
-[TIP]
-The above requires sebipom version 3.0.2 or higher as parent for your project. Also works
-if the parent of your modular maven project uses sebipom as parent.
 
 Of particular importance, and project specific are the [blue]`--add-opens` commands, which you must adapt to your own project's
 pom file with your own module and package names.
