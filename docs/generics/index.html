@@ -325,7 +325,7 @@ In java <span class=blue>enum</span> and <span class=blue>record</span> types ar
 <figure class=listing-block><figcaption>Animals can move and are self aware.</figcaption>
 <pre class=highlight><code class=language-java data-lang=java>package zoo;
 
-public abstract interface Animal&lt;A extends Animal&lt;A&gt;&gt; {
+public interface Animal&lt;A extends Animal&lt;A&gt;&gt; {
 
     default A move() {
         System.out.println( &#34;twitch &#34; );
