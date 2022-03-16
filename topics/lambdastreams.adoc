@@ -1,0 +1,49 @@
+== Streams, SQL like operations expressed in Java 8
+
+Here too, the https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/package-summary.html[package documentation] is an interesting read.
+
+A stream can be considered a conveyor belt on which objects experience operations.
+The belt starts at a source (for instance a Supplier) and can on or more _intermediate_ operations and end with a Terminal operation.
+
+image::streamops.png[]
+
+from https://technology.amis.nl/2013/10/05/java-8-collection-enhancements-leveraging-lambda-expressions-or-how-java-emulates-sql/[Lucas Jellema of amis^] blogs
+
+Here your see a physical stream and a collect operation.
+
+image::Flexible-Conveyor.jpg[Conveyor and collecting]
+
+=== SQL like functions
+
+.assume you want to know the sum of the wages for women.
+[source,sql]
+select sum(salary)
+from   people
+where  gender = 'FEMALE'
+
+.same in Java, get the sum of payments to women.
+[source,java,numbered]
+----
+    int womensPay =
+        people.stream()                                         // <1>
+            .filter(p -> p.getGender() == Person.Gender.FEMALE) // <2>
+            .mapToInt(p -> p.getSalary())                       // <3>
+            .sum();                                             // <4>
+----
+
+<1> use people collection as source and start stream
+<2> where ... where gender = female
+<3> mapping is often retrieving the value of a member, get salary, note that it is a Map ToIntFunction<Person> specialised function
+<4> aggregation, like `sum()` here is a terminal operation
+
+.variant using a method reference.
+[source,java,numbered]
+----
+    int womensPay =
+        people.stream()
+            .filter(p -> p.getGender() == Person.Gender.FEMALE)
+            .mapToInt( Person::getSalary )                      // <1>
+            .sum();
+----
+
+<1> This alternative uses a *method reference*, which can be substituted for a lambda expression when their shapes match.

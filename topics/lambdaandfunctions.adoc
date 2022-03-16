@@ -1,0 +1,126 @@
+== Functional Interface Rationale
+
+* Java: backwards  compatible: do not break existing code with new features.
+* Way forward: enhancements to the collection framework.
+** Extending interfaces without breaking implementations
+*** add default functions
+*** add static helper functions
+
+Example: compare java 7 and java 8 `Comparator`:
+
+* The Java 7 version has *two* _abstract_ methods, which were the only kind in Java before 8.
+* The Java 8 version has *one* _abstract_ method, making it into a functional interface, +
+  *7* `default` methods and +
+  *8* `static` methods whose functionality is now __available__ to every class implementing Comparator.
+
+Have a look yourselves: https://docs.oracle.com/javase/7/docs/api/java/util/Comparator.html[Java 7 Comparator ^]
+and https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html[Java 8 Comparator ^]
+
+The concept of functional interfaces or *single abstract method* is the secret ingredient to let the compiler guess the
+appropriate __shape__ of the function that matches a lambda expression.
+
+=== `<S.H.A.P.E.>` of java.util.functions
+
+The https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/package-summary.html[java.util.functions] package,
+which was introduced in Java 8, contains only functional interfaces and nothing else.
+The package contains the most common *shapes* of functions that may occur in lambda expressions.
+You can see that all reference type functional interfaces heavily rely on generics. The use of the proper generics definition
+is essential for functional interfaces to function properly.
+
+We will use the notation `<input type> -> <result type>` for the *shape* of a Functional interface.
+  Note that the shape is determined by the one (abstract) method
+  of the functional interface. The style used in java.util.function is somewhat mnemonic
+  in choosing the generic type parameters in the type interface type definition.
+
+[TIP]
+====
+The Functional Interface is your handle to the shape of the allowed lambda expressions, _input_, _output_ and optional _throws_.
+====
+
+* T as only parameter, either a input or output  e.g.
+** `Consumer<T>`:  shape `<T> -> {}` black hole? Eats Ts.
+** `Supplier<T>` : shape `() -> <T>` , source of Ts.
+* `Function<T,R>`: shape `<T> -> <R>` also known as mapping function, from one type to another.
+* `BiFunction<T,U,R>`: shape `<T,U> -> <R>`.
+
+There are also a few specialized interfaces that deal with the primitive types `int`, `long` and `double`.
+ Their rationale is performance and memory footprint, in short: efficiency. Dealing with
+ e.g. arrays of primitive types is much more efficient than using the associated wrapper types, `int` vs `Integer`.
+ You save the object allocation memory-wise and the dereferencing and unwrapping execution time-wise.
+
+* `ToDoubleBiFunction<T,U>`: shape `<T,U> -> double` producing a double from two arguments.
+* `LongConsumer`: shape `long ->()` munges longs to make them disappear. :-)
+
+The https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/package-summary.html[package] documentation makes an interesting read.
+
+Exceptions in Lambda expressions need special consideration. In particular checked
+exceptions actually counteract the conciseness of lambda expression.
+In those cases, where the lambda expression or reference method throws an exception,
+that exceptions is commonly _wrapped_ in an unchecked exception, e.g. UncheckedIOException to wrap an IOException.
+UncheckedIOException has been introduced in Java 8 for just that purpose.
+
+You can also roll your own. +
+If you need to declare a functional interface that potentially throws an exception, the following is a way to do that:
+
+.throwing functional interface
+[source,java]
+----
+interface ThrowingBiFunction<T,U, R,<X extends Throwable>> {
+    R apply(T t, U u) throws X;
+}
+----
+
+Shape wise it looks like [blue]`<T,U> -> R | X` pronounced as from T and U to either, R the result,  _or_ X, the thrown exception.
+
+=== Where is toString?
+
+You might miss `toString()` on lambda expressions, and you would be right: Lambda expressions lack a useful toString. What you get
+by calling toString() on a lambda expression is something rather useless, concocted by the JVM.
+
+.toString() is useless with lambda expressions
+[source,java]
+----
+  Comparator<Student> gradeComp = (a,b) -> Double.compare(a.getGrade(),b.getGrade());
+----
+
+When you invoke toString() in say jshell, you get.
+
+[source,shell]
+----
+jshell> class Student{ double grade; double getGrade(){return grade;}}
+|  created class Student
+
+jshell> Comparator<Student> gradeComp = (a,b) -> Double.compare(a.getGrade(),b.getGrade());
+gradeComp ==> $Lambda$16/0x00000008000b3040@1e88b3c
+
+jshell> gradeComp
+jshell> gradeComp.toString()
+$3 ==> "$Lambda$16/0x00000008000b3040@1e88b3c"
+----
+
+=== Method References
+
+Since the shape of a functional interface has everything a method definition has, bar its name, it should
+be no surprise that this can be used to advantage. Everywhere where a functional interface is allowed you can also provide a
+so called Method  reference. Quite often, but not always this can be a shorthand and thereby improving readability.
+
+Method references have two parts, separated by two colons: [blue]`::`.
+
+* The left hand side of the [blue]`::` defines the *method context*, either instance of class (for method references to static methods)
+* The right hand side is the *method name*. The compiler will do the matching in case of overloaded methods,
+ but sometimes it may give up and will let you know by using the word *ambiguous* in its complaint.
+
+There are four kinds of references:
+
+.Source https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html[Orace tuturial].
+[cols="1,1",options="header"]
+|=======
+| Kind | Example
+| Reference to static method | ContainingClass::staticMethodName
+| Reference to an instance method of a particular object	 | containingObject::instanceMethodName
+| Reference to an instance method of an arbitrary object of a particular type	| ContainingType::methodName
+| Reference to a constructor	| ClassName::new
+| Reference to a method of this instance |  this::instanceMethodName
+|=======
+
+NOTE: You are not allowed to leave out the left hand side nor the [blue]`::`, not even if the reference context is `this`.

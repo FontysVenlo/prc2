@@ -1,0 +1,323 @@
+== Java Platform Module System
+
+The Java Platform Module System has been introduced with Java 9 and had a long development history at
+the point of introduction. For the Java developers at Oracle and others involved in the OpenJDK project it
+was considered a necessary step to make Java fit for the future and make it possible to shed some old
+nasty problems. In the development of Java there have been only a few *major* release, although each release of
+Java introduces new features that are supposed to play nice with what is already available. This is called forward
+and backward compatibility, so old programs keep working but can be maintained by using new features.
+
+The important major releases were:
+
+* Java 1. Duh.
+* Java 1.2 introducing the collection framework.
+* Java 5 introduces Generics and the first version of the concurrency framework. It also changed the naming scheme. Internally it still is Java 1.5.
+* Java 8 introduced a functional style of programming using Functional interfaces and lambda expressions
+* Java 9 introduced the Java Platform Module System, and the project under which it came into being was called *JigSaw*. +
+  That last name points to the idea of taking the JDK and run-time library apart and recompose it using a better partitioning,
+ actually applying separation of concerns in a big way. The project has been a multi year undertaking.
+
+The changes provide the following advantages for the Java platform developers (from https://openjdk.java.net/projects/jigsaw[project jigsaw])
+
+* Make it easier for developers to construct and maintain libraries and large applications;
+* Improve the security and maintainability of Java SE Platform Implementations in general, and the JDK in particular;
+* Enable improved application performance; and
+* Enable the Java SE Platform, and the JDK, to scale down for use in small computing devices and dense cloud deployments.
+
+As always with Java, the intent is that the new Java release (9) should be able to work very much the same as the earlier versions, and it does, without
+problems. If you use the JVM and JDK in [blue]*classpath* mode, it works very much like older versions. You define the jar files you need for you app and off you go.
+
+Although the intent always has been to make the transition as smooth as possible, when you want to use the module system to the fullest,
+it has some consequences.
+
+* Not everything in the JDK can be used in the same way as before, more protection is taking place as are checks.
+* A module is *closed* by default and must explicitly export [blue]##package##s, if they are needed from outside the module.
+* The classes in a module can't be reflected on by default. If that is needed, the package must be made [blue]##open##ed for reflection.
+* At the moment of writing these restrictions can be modified with startup flags of the JVM. Later Java releases may change the default settings,
+from rather permissive in Java 9 to more restricted in later releases. As an example, some settings became more strict with
+Java 16 and https://openjdk.java.net/jeps/396[JEP 396 Strongly Encapsulate JDK Internals by Default].
+
+video::l1s7R85GF1A[youtube, title=Keynote session by Mark Reinhold 2015 introducing JigSaw,width=848, height=480]
+
+.Java SE module graph
+image::module-graph.png[]
+
+
+Having a modular project or a non-modular project depends on the presence of a small file with a well defined name in a specific place.
+
+The module-info.java file should reside in the root folder of the java sources (which makes the defaul package). The name of the file
+is not a valid java type name and that is on purpose. The resulting class file contains the module declarations
+which specifies what a module *needs* (_reads_ in JPMS terms) and what it provides (exports).
+
+The keywords specific to the module declaration are
+
+* [blue]#exports# What the module provides. Use with one package per line.
+* [blue]#module# starts the declaration
+* [blue]#open# if before the module, opens the whole module for reflection.
+  For instance for a module that defines all entities of a multi-module application.
+* [blue]#opens# allows reflection of a package. Use with one per package per line.
+* [blue]#provides# To indicate that a module implements some interface with one or more implementations.
+* [blue]#requires# Indicates what the module itself needs or *reads*. One package per line.
+* [blue]#transitive# Used with requires to indicate that there is a requirement that is then made readable to the users of this module as well.
+* [blue]#to# Used to restrict either exports or opens to specific other module(s).
+* [blue]#uses# To indicate that a module uses a service [blue]##provide##d by another module.
+* [blue]#with# Used with provides to indicate which implementation(s) are available for the
+  provided interface implementation. See the https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html[Service Loader API].
+
+As a rule, the module [blue]#java.base# is 'required' by default, the same a [blue]#java.lang# is available or imported by default, considering packages to import.
+
+A few examples.
+
+.Generic Mapper
+[source,java]
+----
+module  nl.fontys.sebivenlo.genericmapper {
+    requires java.logging;
+    requires nl.fontys.sebivenlo.sebiannotations;
+    exports genericmapper;
+}
+----
+
+.Generic DAO
+[source,java]
+----
+module nl.fontys.sebivenlo.genericdao {
+    requires nl.fontys.sebivenlo.genericmapper;
+    requires java.logging;
+    requires java.sql;
+    requires java.naming;
+    requires org.postgresql.jdbc;
+    requires nl.fontys.sebivenlo.sebiannotations;
+    exports genericdao.dao;
+    exports genericdao.memory;
+    exports genericdao.pgdao;
+}
+----
+
+.FXTriangulate
+[source,java]
+----
+module fxtriangulate {
+    requires javafx.controls;
+    requires javafx.graphics;
+    requires javafx.base;
+    requires javafx.fxml;
+    requires java.base;
+    exports fxtriangulate ;
+    opens fxtriangulate to javafx.fxml;
+}
+----
+
+.The FXTriangulate client, Surveyor
+[source,java]
+----
+module surveyor {
+    requires java.logging;
+    requires javafx.controls;
+    requires javafx.graphics;
+    requires javafx.base;
+    requires javafx.fxml;
+    requires fxtriangulate;
+    exports surveyor;
+    opens surveyor to javafx.fxml;
+}
+----
+
+.ALDA sorting srevices
+[source,java]
+----
+module sortingserviceapi {
+    exports sortingservice; // <1>
+}
+// and
+open module asortingservice {
+    requires java.logging;
+    requires sortingserviceapi;
+    uses sortingservice.SortingServiceFactory; // <2>
+    provides sortingservice.SortingServiceFactory with asortingservice.SortingServices; // <3>
+}
+----
+
+<1> defines sortingservice.SortingServiceFactory in package sortingservice
+<2> uses and
+<3> provides Sorting Services presumably in tests.
+
+[WARNING,BIG]
+====
+JPMS explicitely forbids:
+
+* Split packages, that is using the same package name in different modules with different content.
+* Cyclic dependencies as in A requires B requires A.
+====
+
+The dependencies are validated at the startup of the JVM, when you start Java.
+If any of the requirements is not met, the JVM refuses to start. This has the benefit
+that it is immediately obvious what is missing, instead of having a runtime error, when a class can't be found, because
+the module has not been specified in the path, as is the case with the classpath mode.
+
+The split package has been a bit of an issue for testing, because in a modern project, (business) source and tests are separated into
+separate source trees, often with the same package structure, which looks a bit like split packages. The build tools (e.g. maven) understand
+this and can organise the files such that the JVM accepts it anyway.
+
+=== Changes in visibility
+
+Java has always had the visibility modifiers [blue]#public#, [blue]#protected#, [blue]#default#, and [blue]#private#, in descending order of access.
+This is still effective with the same rules _within_ a module. However the module boundaries add an extra line of visibility defense.
+A public element from module A is only visible to elements in module B if the public elements is part of an exported package.
+As far as reflection goes. An element in module A is accessible via reflection only if the package of the element is open (with the [blue]#opens# keyword)
+either globally or explicitly to module B ( e.g. `module A { exports aPackage to B;}`).
+
+
+== Java Modules and Testing
+
+.Encapsulation gone wrong: So much for shining security armor.
+image:shiningArmor-cropped.png[role="thumb left", 400, title="So much for shining security armor"] Project Jigsaw,
+now known as the **J**ava **P**latform **M**odule **S**ystem solves problems
+that lingered in the Java ecosystem since its inception. The standard encapsulation or visibility model
+with protection or visibility modes `private`, `package private (default)` provide too
+little defense against (ab)use of non-public API's. That plus the fact that reflection is very powerful.
+A java security manager can put up some defense against reflection abuse, but enabling this kind of security is optional.footnote:[It was enforced in the now deprecated web applets]
+This made many internal details of the JDK free game. Much like a knight in shiny armor is defenseless against a can opener.
+
+'''
+
+[TIP]
+====
+The java platform module system (JPMS) promotes loose coupling.
+====
+
+This is all fine and good, but testing, in particular Unit testing relies on access to the 'private' parts
+of a class and package, in particular the package private parts.
+
+[TIP]
+====
+API or **A**pplication **P**rogramming **I**nterface is defined as the publicly visible
+parts of classes. In Java those are *public* and *protected* members (methods and fields).
+Members that are neither public or protected should not be considered part of the API.
+
+Actually, API in this case should be spelled APPI for **A**pplication **P**ublic **P**rogramming **I**nterface, but we all know
+bad habits die slowly.
+
+A smaller API has also a smaller attack surface for real security intrusions. This is another major reason for improved encapsulation of the
+stuff in the JDK.
+
+To minimize coupling, it is also wise to keep the API minimal, but without impairing the usefulness of the
+API. Often an API can be enhanced with some convenience features that combine parts in the already public part. This does NOT enlarge exposed parts.
+See for instance the methods in
+https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/nio/file/Files.html[java.nio.file.Files].
+====
+
+=== Black box vs White Box
+
+In testing, one distinguishes between so called *black* box and *white* box tests.
+
+*Black box* in this respect means that you cannot see the internals, but only those parts defined in the API.
+This is the way that a client package will use the API. Black box testing is easily supported by the module system, because the test classes behave as ordinary
+clients. +
+*White box* would better be called transparent box, but the name _white box_ stuck. In white box tests you *DO* want access to the (package) private parts
+of your business code. This is a bit handicapped by the way the JPMS allows access.
+
+=== Standard Source code organization.
+
+
+//image::sourcetree-modular.png[title='default source tree ']
+
+.source tree of genericdao
+[source,sh]
+----
+src
+├── main
+│   └── java
+│       └── genericdao
+│           ├── dao
+│           ├── memory
+│           └── pgdao
+└── test
+    └── java
+        ├── entities
+        ├── genericdao
+        │   ├── dao
+        │   ├── memory
+        │   └── pgdao
+        └── usertypes
+----
+
+We are using maven, in which the unit test plugin is called *surefire*, the integration test plugin (which we
+  did not use up to this point yet) is called *failsafe*.
+
+The standard way source code is organized is by means of separate directories for
+the 'business' code and the test code in two separate directory trees inside the same project. +
+This practice, which prevents test code to land in the final application or library jar file is useful, so we will keep it as it is.
+
+However, JPMS does not allow so called _split packages_. Surefire addresses this problem by telling
+the JVM to _patch_ the module we are testing with the classes defined in the test source tree.
+It is as if the test classes are put in the business source tree. +
+This allows the test classes access to the package private parts of the classes, the way it worked in before JPMS.
+
+.Module definition of sebi dao.
+[soure,java]
+----
+module nl.fontys.sebidao {
+    exports nl.fontys.sebivenlo.dao;
+    exports nl.fontys.sebivenlo.dao.memory;
+    exports nl.fontys.sebivenlo.dao.pg;
+    requires java.logging;
+    requires java.naming;
+    requires java.sql;
+    requires org.postgresql.jdbc;
+}
+----
+
+// .The dependency graph of sebidao
+// image::sebidao-summary.svg[]
+
+The module definition above exports three packages and declares itself
+dependent on 3 modules from Java API and one postgresql module.
+
+Unit tests, and in particular the testing libraries such as AssertJ, and Mockito
+use reflection to do their work. The simplest example is JUnit itself, which uses reflection to read the annotations
+in the class file. So does Mockito. AssertJ uses reflection to get to fields (for deepEquals) and methods. Reflection is a tool very sharp indeed, to
+get to the guts of the **S**ystem **U**nder **T**est. Of these Test libraries JUnit and AssertJ have module definitions already. Mockito and postgresql do not have that
+at the time of writing this document (April 2020).
+
+The quickest way to allow the testing tools access is to fully OPEN the packages of the *SUT* to world.
+Because this happens during testing, surefire is instructed to tell the jvm (java), that runs the test, to
+open those packages to the world. The snippet from the maven pom file that realizes that is given below. You can copy
+and adapt it for your own purposes.
+
+.sebipom project with surefire.opens property to open op required packages for testing. Requires sebipom >= 3.0.2
+[source,xml]
+----
+  <properties>
+    <surefire.opens> <!--1-->
+        --add-opens nl.fontys.sebivenlo.genericdao/genericdao.dao=ALL-UNNAMED <!--2-->
+        --add-opens nl.fontys.sebivenlo.genericdao/genericdao.memory=ALL-UNNAMED
+        --add-opens nl.fontys.sebivenlo.genericdao/genericdao.pgdao=ALL-UNNAMED
+        --add-opens nl.fontys.sebivenlo.genericdao/usertypes=ALL-UNNAMED
+        --add-opens nl.fontys.sebivenlo.genericdao/entities=ALL-UNNAMED,genericmapper
+    </surefire.opens>
+    <!--3-->
+  </properties>
+----
+
+<1> We are adding a property for the surefire plugin which is picked up by sebipom.
+<2> In particular the arguments that are passed to the JVM that runs the tests,
+  which appends *--add-opens* commands for all packages that require unit tests.
+<3> Other properties are left out for brevity.
+
+[TIP]
+The above requires sebipom version 3.0.2 or higher as parent for your project. Also works
+if the parent of your modular maven project uses sebipom as parent.
+
+Of particular importance, and project specific are the [blue]`--add-opens` commands, which you must adapt to your own project's
+pom file with your own module and package names.
+
+.opens sets module and package
+image::opens.svg[width=600]
+
+
+*Opens* is the most powerful way of exporting a package. It allows full access (as in `exports`) plus reflection.
+We could try to make more specific export lines such as *--add-export*, but although more precise, that will not help very much, because the
+access enabling lines will only take effect during the (surefire) unit tests. +
+If you have _failsafe_ integration tests, you will have to do
+the same for the _failsafe_ plugin, although failsafe tests should stick to black box testing, where such can opener style configuration should not be required.

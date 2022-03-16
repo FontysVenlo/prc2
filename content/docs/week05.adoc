@@ -1,0 +1,17 @@
+---
+title: "JPMS, Lambda and Streams"
+description: ""
+date: 2022-03-16T13:53:06+01:00
+draft: false
+images: []
+slug: "jpms-lambda-streams"
+menu: 
+  docs:
+    parent: ""
+weight: 030
+toc: true
+---
+
+include::{topics}/jpms.adoc[]
+include::{topics}/lambdaandstreams.adoc[]
+

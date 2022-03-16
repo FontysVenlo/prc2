@@ -10,4 +10,5 @@ both by Cay S. Horstmann and both in the eleventh edition.
 |link:docs/parameterized-tests/[2] | Parameterized Tests              | Vol I 5.6 enum classes | Fraction, Flawless Password, Enum Calculator
 |link:docs/design-for-testability/[3] | Design for testability, Mockito  | -                      | Perishable sales
 |link:docs/generics/[4] | Generics  | Vol I 8.1 - 8.8 Generic Programming                       | Shapefilter, Generic Ranges
+|link:docs/jpms-lambda-streams/[4] | JPMS, Lambda & Strem  | Vol II 9 (JPMS) - Vol I 6.2 (lambda) - Vol II 1 (stream)  | Lambda Library, MinMaxCollector
 |=======
