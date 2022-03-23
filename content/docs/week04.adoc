@@ -8,7 +8,7 @@ slug: "generics"
 menu: 
   docs:
     parent: ""
-weight: 030
+weight: 040
 toc: true
 ---
 

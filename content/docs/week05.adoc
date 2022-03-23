@@ -8,7 +8,7 @@ slug: "jpms-lambda-streams"
 menu: 
   docs:
     parent: ""
-weight: 030
+weight: 050
 toc: true
 ---
 
