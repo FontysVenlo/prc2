@@ -1,0 +1,49 @@
+== Using Stored Procedures
+
+As promised in the tip, we delegate the transactional responsibility to the database,
+so calling it is relatively simple.
+
+First the top level code in the proper https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882[clean code] order.
+
+Calling the code is actually quite simple, it is like calling a prepared statement
+with a select that invokes the stored procedure.
+
+.This is what a test would look like from java through the jdbc driver.
+[source,java]
+----
+    static long  FROM_ACCOUNT= 100;
+    static long  TO_ACCOUNT= 110;
+    @Test
+    public void transferOK() throws SQLException {
+        try ( Connection con = dataSource.getConnection(); ) {
+            con.setAutoCommit( false );
+            Account pre = findAccount( con, TO_ACCOUNT );
+            long transactionId= doQuery( con, //<1>
+                System.out,  // <2>
+                "select transferlockfree(?,?,?,'should be ok')",  // <3>
+                FROM_ACCOUNT, TO_ACCOUNT,110,25 ); // <4>
+            Account post = findAccount( con, TO_ACCOUNT );
+            assertThat( post.balance )
+                .as("transaction failed")
+                .isEqualTo( pre.balance.add( new BigDecimal( "25" ) ) );
+            con.rollback(); // this is a test, leave the account in pristine state.
+        }
+    }
+----
+
+<1> Implementing doQuery is left as an exercise.
+<2> log output to system out
+<3> query text
+<4> query params
+
+A psql script that  does the above can be found under the link link:../topics/code/sql/bankingactions.sql[bankingactions.sql]
+
+
+The https://www.postgresql.org/docs/13/plpgsql.html[pgplsql] code in the link above avoids deadlocks by using the account records
+in a fixed from low to high order.
+
+[TIP]
+====
+Although this website is about Java programming, mastering database programming on
+the database level is a skill that belongs in the skill-set of a full stack developer or architect.
+====

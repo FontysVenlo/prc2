@@ -1,0 +1,288 @@
+== Java DataBase Connectivity
+
+
+=== DataBase connection credentials and Java Properties.
+
+Some things do #NOT# belong in source code. In particular do not put *credentials* of any kind
+inside files that are committed to a version control system, such as source code. Make sure you configure your
+version control system such that such files are excluded from commits.
+
+Instead put credentials in separate files, that are easily understood by both a human that uses it
+to configure access to a resource, and also by the programming language. +
+In java the tradition is to use so called properties files, which, also traditionally, have a file extension `.properties`.
+It also helps to give such files well known names, so the program can refer to them by that name.
+
+For the demonstrations in this part we will use the following properties file.
+
+.[black]#application.properties# file specifying connection details for dev and prod
+[source,properties]
+----
+include::code/simplejdbc/application.properties[]
+----
+
+You can see that the properties file supports two environments, **dev**elopment and **prod**uction.
+
+.Configuring a datasource. Put it in a utility class.
+[source,java]
+----
+    static DataSource getDataSource( final String sourceName ) {
+        // dataSourceByName is a map, serving as a cache.
+        return datasourceByName.computeIfAbsent( sourceName,
+            ( s ) -> {
+                Properties props = properties( "application.properties" );
+
+                PGSimpleDataSource source = new PGSimpleDataSource();
+
+                String prefix = sourceName + "."; //<1>
+                String[] serverNames = {
+                    props.getProperty( prefix + "dbhost" )
+                };
+                source.setServerNames( serverNames );
+
+                String user = props.getProperty( prefix + "username" );
+                source.setUser( user );
+
+                source.setDatabaseName( props.getProperty( prefix + "dbname" ) );
+                source.setPassword( props
+                        .getProperty( prefix + "password" ) );
+                String pingQuery = "SELECT current_database(), now()::TIMESTAMP as now;";
+                try ( Connection con = source.getConnection();
+                    // ping the database for success.
+                    PreparedStatement pst = con.prepareStatement( pingQuery ); ) {
+                        try ( ResultSet rs = pst.executeQuery(); ) {
+                            if ( rs.next() ) {
+                                Object db = rs.getObject(  "current_database");
+                                Object now = rs.getObject(  "now");
+                                System.out.println("connected to db "+ db.toString()+ ", date/time is " + now.toString() );
+                            }
+                        }
+
+                } catch ( SQLException ex ) {
+                    Logger.getLogger( PgJDBCUtils.class.getName() ).log( Level.SEVERE, null, ex );
+                }
+                return source;
+            }
+            ); // end of lambda.
+      }
+
+      // read properties
+      static Properties properties( String propFileName ) {
+          Properties properties = new Properties();
+          try (
+                  FileInputStream fis = new FileInputStream( propFileName ); ) {
+              properties.load( fis );
+          } catch ( IOException ignored ) {
+              Logger.getLogger( PgJDBCUtils.class.getName() ).log(
+                      Level.INFO,
+                      "attempt to read file from well known location failed'",
+                      ignored );
+          }
+          return properties;
+      }
+----
+
+<1> The sourceName is the key or namespace from where to pickup the connection details. Simple and effective.
+
+=== Using a Data source
+
+There are some traditional ways to obtain a database connection. We use a *DataSource*, which itself
+can be seen as a resource, similar to a service in the architecture diagram of the link:week03.html#_exercise_testable_design[testable design].
+The data source can then be used to obtain a connection. In the example you see a class that needs a DataSource
+that is provided at construction time of the class, so it is available when the instance is created.
+A connection is `AutoClosable` so candidate for [green]*try-with-resources*.
+
+.Using a datasource to obtain a connection and use the connection
+[source,java]
+----
+package simplejdbc;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.sql.DataSource;
+
+/**
+ *
+ * @author hom
+ */
+public class DataSourceDemo {
+
+    final DataSource datasource; // <1>
+
+    public DataSourceDemo( DataSource datasource ) { // <2>
+        this.datasource = datasource;
+    }
+
+    void demo() throws SQLException {  //<3>
+        String query
+                = "select state.name as state,p.name as president,state.year_entered \n"
+                  + " from president p join state state on(p.state_id_born=state.id)\n"
+                  + "where state.name like 'N%'";
+            doQuery( query, System.out );
+    }
+}
+----
+
+<1> Resource used in methods of this class.
+<2> Constructor receives the DataSource.
+<3> The method uses the DataSource to get a connection in the try-with-resources block +
+  and passes it on to the method that executes the query and deals with the result by printing it.
+
+
+The `doQuery(...)` method uses the supplied connection to create a statement which is then executed to produce a ResultSet.
+You will see some similarities in what you have seen in project 1, using php PDO.
+
+.doQuery
+[source,java]
+----
+    void doQuery( String query,
+                  PrintStream out ) throws SQLException {
+        try ( Connection con = datasource.getConnection();
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery( query ) ) {
+
+            new ResultSetPrinter( rs ).printTable( out );
+
+        }
+    }
+----
+
+The [blue]*ResultSetPrinter* tries to make a nice looking table of the result of the query.
+You can imagine that this is a bit of code, but that is not relevant for this demo of JDBC.
+
+=== ResultSet
+
+For all queries that return a tabular result, the first JDBC class
+you will use is the https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/ResultSet.html[*ResultSet*].
+The ResultSet also provides so called *Meta Information* that describes the types of the values
+in the columns, the number of columns, display size etc. +
+This can be used to:
+
+* produce a nice tabular format
+* by using a translation or mapping between the database types and Java types, how the column data is to be used, type wise.
+
+=== Anatomy of a prepared statement
+
+In the example earlier, the sql text used to create the statement is constant, because it needs no user input.
+If a statement does, you should always use a https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/PreparedStatement.html[PreparedStatement].
+
+In the JDBC standard you fill in the parameters from the user in multiple ways, but the simplest is to
+just use question marks (`?`)  as placeholders and specify which columns and column values
+you want to insert or update, or you want to use in your select or delete query.
+
+.sql query text to insert a student.
+[source,sql]
+----
+insert into students (student_id , lastname, firstname, dob, gender) -- <1>
+            values   (?        ,          ?,         ?,   ?,      ?) -- <2>
+returning *                                                          -- <3>
+----
+
+<1> Fields can be supplied in any order, including definition order.
+<2> You do not need the spaces before the commas, I added them for readability.
+<3> It is smart to *always* expect back what has been inserted by the database, including generated id and
+ other fields such as the database's notion of date or time. Even smarter, but a little more work
+is to specify the columns instead of a `*`, so that the order in which you receive them is independent
+of database schema organization and _stable_.
+
+[TIP]
+====
+Lots of problems can allegedly be solved with an extra level of https://en.wikipedia.org/wiki/Indirection[Indirection].
+As an example: in programming there is the rule to not program against an implementation, but against an interface.
+With databases the indirection trick is: *use views instead of tables*.
+====
+
+Now assume the SQL text contains the above.
+Also assume that we have an array of student data, simply as an array of objects.
+
+.student data in array
+[source,java]
+----
+ Object[] studentData = {123513, "Klaassen", "Jan", "1993-05-12" , "M"}; //<1>
+----
+
+<1> The most likely source of this data a Student object deconstructed by a link:week06.html#_generic_mapper[StudentMapper].
+
+Then creating the prepared statement and filling it with values is a simple loop:
+
+.loop to substitute placeholders.
+[source,java]
+----
+     try (
+          Connection con = datasource.getConnection();
+          PreparedStatement stmt = con.prepareStatement( query ); ) {
+
+            int count = 0;
+            for ( Object param : studentData ) {
+                stmt.setObject( ++count, param ); //<1>
+            }
+            return stmt.executeUpdate();
+     }
+----
+
+<1> note the pre-increment, so count starts with column *1*.
+
+
+You see that this is quite simple and other than what is specified in the query, there is
+no extra need for data conversion or named column use.
+
+[TIP]
+====
+Contrary to what the documentation suggests, you can almost always use setObject,
+because in the common case, what you put in is of the right type, as long as you keep the
+order of the parameter types intact.
+====
+
+This approach can be used to make database access even simpler, so you only have to provide the data
+in an array and the rest can be packed into utility methods.
+
+The holy grail is to find a way to do all kind of queries against tables, and the only
+thing you need to know is the table name and what entities as Java objects can be expected to
+be read from or written to the table.
+
+We combine this with the ideas presented in part 3 about testable design, part 4, generics, and part 6, reflection.
+We are quite sure that the programming style from week 5, with lambda expressions and streams will also come handy.
+
+We actually want to focus on testing the *business code*, with that business code to be oblivious of
+the actual persistence layer or service it uses to get the data, and avoid to write a lot of boiler plate code.
+As a replacement for the later we will introduce the DAO concept.
+
+== Traditional preparing statements
+
+In tests you should use traditional approaches, instead of the mechanisms your
+are testing. The code below illustrates what that means. +
+It is used by code that tests the bank transfer service implemented in the database. This example
+is filling the account tables from some List of accounts.
+
+.load accounts from list. The code is part of a test suite to prepare the database for tests.
+[source,java]
+----
+    static String addAccount = "insert into account(accountid,balance,maxdebit,customerid,astate) "
+                             + "values(?,?,?,?,?)";
+    static void loadAccounts() throws SQLException {
+
+        try ( Connection con = olifantysSource.getConnection();
+                PreparedStatement pst = con.prepareStatement( addAccount ) ) {
+            for ( Account account : accounts ) {
+                pst.setObject( 1, account.accountid );
+                pst.setBigDecimal( 2, account.balance );
+                pst.setBigDecimal( 3, account.maxdebit );
+                pst.setObject( 4, account.customerid );
+                pst.setString( 5, account.astate );
+                pst.addBatch(); // <1>
+            }
+            int[] results = pst.executeBatch();
+            System.out.println( "results = " + Arrays.toString( results ) );
+
+        } catch ( PSQLException e ) {
+            System.out.println( "caused by " + e.getNextException() );
+            throw e;
+        }
+    }
+----
+
+<1> We do multiple inserts in one batch. Auto commit is off.
+ The try-with-resources block takes care of the jdbc transaction.
+
+===  Database Meta Information
+
+DO Mention the https://www.baeldung.com/jdbc-database-metadata[metadata...]

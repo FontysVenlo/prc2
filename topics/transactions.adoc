@@ -1,0 +1,47 @@
+== Transactions
+
+Things that can go wrong will go wrong. This problem is aggravated by having to use multiple _things_.
+Murphy says hello again.
+
+[.lead]
+A *transaction* is defined as a sequence of operations that can either succeed completely or be undone
+without any residual effect. +
+In plain English: It either happens fully, or we can forget about it.
+
+For a persistence layer that means: if it cannot fulfill the obligation it should
+make sure that nothing happens to compromise the data already stored _before_ the transaction.
+
+The simple explanation of how this works is that the party that is busy with a resource gets
+the resource all for itself, locking any other parties out.
+If something fails, the mess created can either be undone (rollback) or not committed, which in effect is the same.
+
+.DReadlocks? by https://cilserolf.artstation.com/projects/W2JAqE[Cil Flores]
+image:cil-flores-jack.jpg[role="related thumb left", width="250", title="by Cil Flores"]
+Locking out sounds serious, and it is, on multiple accounts.
+
+* When using a [big]*BIG* lock, as locking out all other parties, things become [big]_VERY_ slow.
+* When lock less, like just a table, or better still, only the records we want to modify, then
+  [big]**DEAD**locks can occur, which is even more problematic than having to wait.
+* In all cases, when something goes awry, one may have to clean up mess in multiple places.
+
+All this can be related to quite difficult problems. Luckily there are solutions to that and,
+not unimportant, as far as the database goes, that can typically deal with the issues pretty well.
+
+The hello world of transactions is transferring money between bank accounts.
+In this simplest case the bank records live in the same table.
+The essential operation involves at least two database records, one to debit (take from) and the other to credit(add to).
+To modify a record without anyone interfering, you have to lock it. So you need two locks, one for each records.
+You can only request locks in sequence, one after the other. +
+Now assume that other transactions are taking place at the same time, all updating the same table.
+
+// Then the situation can arise that one transaction locks A, another locks B, a third locks D.
+// At the same time D is already
+
+[TIP]
+====
+If something is difficult, see if you can find a solution that does the job, maybe even better.
+In the solution below we choose to delegate the deadlock avoidance to a (set of) stored procedures inside the database.
+This simplifies the design and implementation of the Java layer, is probably more reliable and makes less work
+for us the Java programmers, which always is cool. But be warned that someone has to test and implement
+the stored procedure. And if you aspire to become a 'FULL STACK' developer, that could be you too.
+====
