@@ -17,6 +17,8 @@ Responsible Teachers for 2022 PRC2:
 - Ibrahim Kouzak 
 - Richard van den Ham
 
+Most contents on this website were originally developed by Pieter van den Hombergh. 
+
 include::{topics}/literature.adoc[]
 
 [TIP]
