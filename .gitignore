@@ -19,3 +19,5 @@ hugo
 node_modules
 
 **/target
+
+**/.vscode
