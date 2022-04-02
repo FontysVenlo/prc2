@@ -12,4 +12,5 @@ both by Cay S. Horstmann and both in the eleventh edition.
 |link:docs/generics/[4] | Generics  | Vol I 8.1 - 8.8 Generic Programming                       | Shapefilter, Generic Ranges
 |link:docs/jpms-lambda-streams/[5] | JPMS, Lambda & Stream  | Vol II 9 (JPMS) - Vol I 6.2 (lambda) - Vol II 1 (stream)  | Lambda Library, MinMaxCollector
 |link:docs/database-access/[6] | Database access using JDBC  | Vol II 5  | No assignments, application in PRJ2
+|link:docs/javafx/[7] | JavaFX Properties and Bindings  | Bonus Chapter https://horstmann.com/corejava  | FXTriangulate
 |=======

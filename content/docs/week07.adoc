@@ -1,0 +1,28 @@
+---
+title: "JavaFX Properties and Bindings"
+description: ""
+date: 2022-03-30T13:53:06+01:00
+draft: false
+images: []
+slug: "javafx"
+menu: 
+  docs:
+    parent: ""
+weight: 070
+toc: true
+---
+
+include::{topics}/javafx.adoc[]
+
+== Reading
+
+* Horstmann Core Java, Ed 11, Vol II, Ch 9, Bonus Chapter Volume I on JavaFX
+
+== More Links
+
+* https://openjfx.io/[openjfx landing page] and https://fxdocs.github.io/docs/html5/[fxdocs]
+* https://docs.oracle.com/javafx/2/get_started/jfxpub-get_started.htm[JavaFX at Oracle]
+* An excellent site at http://tutorials.jenkov.com/javafx/index.html[Jakob Jenkov's JavaFX Tutorials]
+* https://dlsc.com/javafx-openjfx-11-interview-series/[Dirk Lemmerman's blog on JavaFx] is an treasure trove on advanced JafaFX usage.
+* Both https://www.youtube.com/user/jjenkov[Jakob] and https://www.youtube.com/channel/UCFyRQ_euxxPDwlqyhff-x0Q[Dirk] have a presence on youtube too.
+
