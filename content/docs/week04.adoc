@@ -13,3 +13,7 @@ toc: true
 ---
 
 include::{topics}/generics.adoc[]
+
+== Reading
+
+* Horstmann, Ed 11, chapter 8, Generic Programming section 8.1-8.8

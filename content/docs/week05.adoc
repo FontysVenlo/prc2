@@ -16,3 +16,14 @@ include::{topics}/jpms.adoc[]
 
 include::{topics}/lambdaandstreams.adoc[]
 
+== Reading
+
+=== JPMS
+* https://www.oracle.com/corporate/features/understanding-java-9-modules.html[Understanding Java 9 Modules]
+* http://tutorials.jenkov.com/java/modules.html[Jakob Jenkov 
+
+=== Lambda and streams
+* Horstmann Core Java, Ed 11, Vol I CH 6.2 Lambda Expressions
+* Horstmann Core Java, Ed 11, Vol I CH 9 Collections
+* Horstmann Core Java, Ed 11, Vol II CH 1 Streams
+
