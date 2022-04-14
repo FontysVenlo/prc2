@@ -1,0 +1,91 @@
+=== State machines
+
+=== Exercise help
+You will be working with two test classes: _CsvFileSourceStateTest.java_ and _OlifantysMachineImplTest.java_.
+
+==== Part I: OlifantysMachineImplTest
+Start with _OlifantysMachineImplTest.java_. It's easier to start with
+because the implementation already exists. This test class exists
+mainly to achieve high code coverage, and the first five tests are all
+similar: test that a certain method has been called. For example. the
+`ejectCoinCallsEjectCoinWithContext()` test checks that if you call
+`ejectCoin()` on an `OlifantysBallMachine` instance, the method
+`ejectCoin(Context ctx)` on `state` gets called. So you want to first
+create an instance of the Machine, invoke the method, and then
+*verify* that the method overload with the context was called. 
+
+Not sure what a context is? It's an interface. Check out the
+_OlifantysBallMachine.java_ and see what the class implements. That
+should give you a hint what context you can use in your test.
+
+The `defaultMachinePerApiCall()` test method is a bit trickier. Here,
+you don't create an `OlifantysBallMachine` directly. Instead, you use
+`GumBallAPI.createMachine()`. What you want to find out here is
+whether creating the machine actually results in the `SOLD_OUT` state,
+which is the default. 
+
+==== Part II: CsvFileSourceStateTest
+The second part is trickier because the code you're testing hasn't
+been implemented yet, so you're working TDD. Also, the tests are
+longer and contain more logic than the ones above. So let's get
+started. 
+
+Let's look at the first test, `verifyStateTransition`. It has lots of
+parameters- this is because we are writing a _parameterized test_. We
+will be writing four test methods, but run more than 80 tests in this
+class. This is the advantage of parameterized tests. The parameters
+are passed to the test method and you can make use of them. Let's look
+at the most important parameter, the `triggerName`. This is the name
+of the method of the gumballmachine that you will invoke. If you
+scroll up a bit, you find the `triggerMap`. This maps the different
+method names to the state functions. As you know, a map has a key and
+a value. In this case, the key is a String and the value is a
+BiConsumer- a functional interface. If you are confused, go and have a
+look at the material from week 2. `c` stands for  `context`, and `s`
+stands for `state`. For example, the triggerName `insertCoin` will be
+executed (using the lambda function) on the state: so it would be like
+saying `State.insertCoin(context)`. 
+
+In this test class, we are mocking the `context (ctx)`. Because we are
+testing the states, we don't need a fully functioning gumball machine-
+we just pretend that we have one. 
+
+Going back to our first test, we want to *verify* that a state
+transition actually occurs. So what we want to have is: a beginning
+state, and end state, and then some sort of check that the end state
+has been reached. If you look at the method parameters, you find
+`initialStateName` and `finalStateName`- neat! 
+
+The pseudo code looks like this:
+----
+// var: our method from our triggerMap
+// var: the start state
+// var: the end state
+// use our method from the triggerMap (tip: look at what a BiConsumer can do)
+// verify that the gumballmachine has in fact changed states
+----
+Writing this code will cause a handful of tests to go green, but not
+all of them. This is because the state transition is not fully
+implemented yet (TDD, remember?). The _State.java_ is an interface
+that defines all the method that a state should have: `insertCoin`,
+`draw`, and others. This looks complete. But we need to look at the
+implementing class. Which class implements the State interface? Have a
+look through the files and come back here when you found it. 
+
+The first enum in our implementing class is the NO_COIN state. You see
+the `TODO` comment `1A2`. The hint says that NO_COIN reacts to
+`insertCoin` and will change to `hasCoin`. That makes sense: the
+gumball machine has no coin, but when you put a coin in, the machine
+has a coin. Press control+space to get the list of suggested
+overrides. Which method do you need to override? It's in the hint! To
+go from `NO_COIN` to `HAS_COIN`, which method needs to be called? Once
+you select the method to override, you call the `changeState` method
+on the gumball machine and select the new state. This will cause a few
+more tests to go green. 
+
+Check out the csv file (or view the table on the website) to see which
+transitions still result in red tests. For example, some transitions
+are empty; i.e. there is no end state. So your test needs to make sure
+that it checks for an empty (null) state at some point (you probably
+have test errors by now. Tip: look at verify that something _never_
+happens). Work your way through the table to get the hang of it.
