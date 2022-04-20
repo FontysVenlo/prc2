@@ -123,31 +123,31 @@ and this way of operating is often implemented using a 'state machine'.
 In this week and in the AADE course we will be using two concepts:</p>
 <div class="olist arabic"><ol class=arabic><li>The state (machine) diagram</li><li>The State pattern</li></ol></div>
 <hr>
-<p><img src=/prc2/images/lamp-battery-switch.gif alt="lamp battery switch" title="simple switch circuit, from 'https://electronics.stackexchange.com/'" class="left thumb"> A state machine
+<p><img src=/prc2/images/lamp-battery-switch.gif alt="lamp battery switch" title="simple switch circuit, from 'https://electronics.stackexchange.com/'"> A state machine
 is a software concept used to implement the behavior of something whose 'reaction'
 or outcome depends on the events that happened over time. A very simple example is a lamp and a switch.
 When properly connected and none of the parts is defect, the bulb will light up when the switch is in the on state.
 As state machine: the switch passes current when it has been turned on, which can be expressed as a turn-on event, making the bulb light up.
 From the diagram it should be obvious that a current can only flow if the switch is in the on (or closed) state.</p>
 <p>In software we model this as the <em>path</em> the code takes, which then depends on some condition or value.</p>
-<p><img src=/prc2/images/switch.svg alt=switch title="state diagram model of simple switch" class="left thumb">
+<p><img src=/prc2/images/switch.svg alt=switch title="state diagram model of simple switch">
 The state diagram is a way to express the behavior in a graphical manner. Each state of the system is drawn as a box with rounded corners, like in the diagram above.
 In the <a href=https://en.wikipedia.org/wiki/State_pattern target=_blank rel=noopener>GoF State </a> pattern, which is an object oriented way of modeling state behavior, one uses different
 objects to realize the effect of changing the software path. The objects all implement the same interface, but have a different implementation.
 Then, whenever a state switching event occurs, the current state object is replaced by the state object for the new state.</p>
-<figure class="image-block left thumb"><img src=/prc2/images/Transition.png alt=Transition>
+<figure class=image-block><img src=/prc2/images/Transition.png alt=Transition>
 <figcaption>Figure 1. Transitions</figcaption></figure>
 <p>From AADE course, we learned that a life cycle of a system changes throw using by so called transitions. To change the state from wait to lock, trigger event was needed with a guard (condition) and then we did some activity.</p>
-<figure class="image-block left thumb"><img src=/prc2/images/The-killer-rabit.png alt="The killer rabit">
+<figure class=image-block><img src=/prc2/images/The-killer-rabit.png alt="The killer rabit">
 <figcaption>Figure 2. state machine diagram</figcaption></figure>
-<p><img src=/prc2/images/railway-switch.gif alt="railway switch" title="railway switch from 'https://en.wikipedia.org/wiki/Railroad_switch'" class="right thumb"> As another analogy, you can think of a railway switch.
+<p><img src=/prc2/images/railway-switch.gif alt="railway switch" title="railway switch from 'https://en.wikipedia.org/wiki/Railroad_switch'"> As another analogy, you can think of a railway switch.
 The active state object will always have the same behavior. One makes the train go <em>straight</em>, the other makes it go <em>right</em>.
 Each state on itself always does the same, like a pure function, so with the same input (train) the same output is produced.
 The switching between states makes it possible to control the direction of the train traffic.</p>
 <p>State machines or state charts can be implemented in several ways. In this week we will apply an OO approach using the well known
 <a href=https://en.wikipedia.org/wiki/State_pattern target=_blank rel=noopener>State Pattern </a>, combined with <code class=blue>enums</code> and some Java 8 features, in particular <code class=blue>default</code> methods.</p>
 <p>The <strong>State</strong> Pattern has the following UML class diagram:</p>
-<figure class="image-block left thumb"><img src=/prc2/images/StatePattern.svg alt=StatePattern>
+<figure class=image-block><img src=/prc2/images/StatePattern.svg alt=StatePattern>
 <figcaption>Figure 3. State Pattern</figcaption></figure>
 <p>We deal with a context, an <em>abstract</em> state and multiple concrete state implementations that do the work
 and represent the state elements in the diagram. In the diagram above there
