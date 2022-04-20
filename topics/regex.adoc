@@ -1,0 +1,65 @@
+== Regular expressions
+
+An often heard saying is: _When you have a problem that can be solved with a regular
+expression, you actually have two problems, the problem and how to write the expression._
+
+There is indeed some truth in the saying: Regular expressions can be hard to read (and hence maintain), and sometime hard to write as well.
+
+The problem lies in the fact that the format of the most popular form, the Perl dialect, is quite terse.
+However you can do quite a few things to improve at least their readability.
+
+
+
+video::EkluES9Rvak[youtube]
+
+=== Basic regex syntax and rules
+
+A simple string is also a regular expression. As far as there are no meta characters involved,
+a string simply matches itself.
+
+* The first meta character you need to know is the dot [blue]`'.'`, which matches any character. So a line
+with a dot will match any line that is the same as the line with any substution for the dot character (including itself).
+* The second  meta character is the backslash [blue]`'\'`. It takes the special meaning (as in meta) of the following character away.
+ Back to our matching line: if you want exactly a dot at the place of the dot, prefix it with a backslash, so it will be understood as a dot. Like this: [red]"\.".
+  But since we using Java, and the backslash already has a special role in strings, you must double the backslash in most cases, thus: [blue]`"\\."`.
+* The next are the quantifier: how many of something do you want.
+** ? 0 or one, aka at most.  So "a?" means at most one a.
+** + at least one.
+** * any number of times, including zero.
+** numberic quantifier, using braces ('{' and  '}''). For instance "a{1,4}" means a between 1 and 4 times, inclusive.
+You can also write "a{3}" meaning exaclty 3 as. Or a lower (a{2,} for at least 2 a)  or upper boundary (a{,12}) at most 12.
+* character classes
+** user specified: [aeiou] matches the English vowels, [a-p] the first 16 characters of the alphabet, [a-pA-P] the same, but ignoring case.
+* predefined :
+** \w = word which stands for c-word, which is the set of legal characters to start a (method or variable) name in C, but also in Java and
+many other programming languages. [a-zA-Z_] a through z in both cases and the underscore.
+** \W negates the class, in this case it matches the non-word characters
+** \d the decimal digits
+** \D not a digit.
+etc.
+
+[options="header"]
+|====
+| char | Meaning
+| . | match all
+| + | at least one quantifier
+| ? | ate most one
+| { | start of quantifier spec
+| } | end of quantifier spec
+| [ | start character class
+| ] | end character class
+|====
+
+
+The definition as far as java is concerned is given in the https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html[java.util.Pattern] class.
+You do not have to know all details, the summary above suffices for the most cases. The java doc of pattern gives a complete overview.
+
+=== Grouping
+
+Sometimes you are not just interested in a match or not, but want to capture parts of the input for further processing.
+For that you use the parenthesis '(' and ')'. A group, when found, will get a number (or even a name, but that is not in this lesson).
+Group 0 is typically the whole expression, and number one the first group identified with the parenthesis.
+
+So if you have a regular expression string line "a(eiou)", group number one will be the group containing the vowel following a, if any.
+
+To get acquainted with regular expressions, it is very helpful to write some tests, to verify your pattern or assumptions on the pattern.

@@ -2,7 +2,7 @@
 title: "08 The State of Things"
 description: ""
 date: 2022-04-14T12:02:24+02:00
-draft: true
+draft: false
 images: []
 slug: "statemachine"
 menu: 
@@ -12,4 +12,4 @@ weight: 080
 toc: true
 ---
 
-include::{topics}/statemachines.adoc[] 
+include::{topics}/statemachines.adoc[]

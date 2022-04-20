@@ -26,7 +26,7 @@ In software we model this as the _path_ the code takes, which then depends on so
 
 
 image:switch.svg[role="left thumb", title="state diagram model of simple switch"]
-The state diagram is a way to express the behavior in a graphical manner. Each state of the system is drawn as a box with rounded corners, like in the diagram on the left.
+The state diagram is a way to express the behavior in a graphical manner. Each state of the system is drawn as a box with rounded corners, like in the diagram above.
 In the https://en.wikipedia.org/wiki/State_pattern[GoF State ^] pattern, which is an object oriented way of modeling state behavior, one uses different
 objects to realize the effect of changing the software path. The objects all implement the same interface, but have a different implementation.
 Then, whenever a state switching event occurs, the current state object is replaced by the state object for the new state.
@@ -99,15 +99,15 @@ In the gumball machine we chose the later. You can find the details in the javad
 .Use init method.
 [source,java]
 ----
-    StateMachine(){
-      this.initialState = State.IDLE;
+StateMachine(){
+  this.initialState = State.IDLE;
 
-    }
+}
 
-    StateMachine init(){
-      this.initialState.enter( this ); // <1>
-      return this;
-    }
+StateMachine init(){
+  this.initialState.enter( this ); // <1>
+  return this;
+}
 ----
 
 .Caller has not much extra work.
@@ -118,41 +118,66 @@ In the gumball machine we chose the later. You can find the details in the javad
 ====
 
 [TIP]
-Do not aways use all tricks you've learned so far. They are not always needed.
+Do not always use all tricks you've learned so far. They are not always needed.
 In particular, states do not have to be generic, and with
 enums that would even be impossible, because an enum value is a leaf class all by it self,
-so making it generic for later specialisation like in the link:week04.html#_self_use_in_generic_definitions[Zoo example in part 4] is futile.
+so making it generic for later specialisation like in the link:../generics/#_self_use_in_generic_definitions[Zoo example in part 4] is futile.
 If you appear to run into this situation, because your [green]*context* is generic, do not simply use raw objects but see if you can refactor out an interface that is NOT generic,
-too be implemented by the context that wants to be generic. You will see that in the JsonMarshaller, the state machine part.
+to be implemented by the context that wants to be generic. You will see that in the JsonMarshaller, the state machine part.
 
-## include::{exercises}/havingaball.adoc[]
+== State machines and regular expressions
 
-== State Machines and embedded systems
+You can find a lot on the relation between state machines and regular expressions.
+In most cases, including in Java, the regex is translated or compiled into a statemachine (just) before matches are attempted.
 
-The techniques used in the olifantysballs exercise are also applicable to real hardware automatons,
-such as coffee brewers. It is where the enter and exit methods of each states come from, to be able to turn on
-and off devices that are active in a state and inactive in another.
-In *C* the enum can be replaced by [blue]##struct##s containing function pointers, which point to the
-correct implementation of each function. Functions that do not have to be overridden can simply point to a default implementation,
-and changing state is replacing one such struct by the struct for the next state.
-The 'main' program would set up and initialize the structs.
+A nice illustration is given by the
+https://regexper.com/[REGEXPER] website, that turns a regex into a railroad diagram. This make the understanding of a regular expression way easier.
 
-.using method pointers in C
-[source,c]
+//http://ivanzuzak.info/noam/webapps/fsm_simulator/[Finite State Machine Simulator] by Ivan Zuzak.
+
+
+A simple regex : Dutch postal code: `"\d{4}\s[A-Z]{2}"`
+
+https://github.com/janissl/simple-java-regex-tester[GitHub for simple regex tester]
+
+.with diagram
+image::postcode-regex.svg[]
+
+The postcode railroad diagram reads as a digit followed by 3 more digits, a space, a letter and one more letter.
+
+
+.More complex example:
+[source,java]
 ----
-typedef struct stateHandles{
-    void (*ejectCoin)();
-    ...
-} State ;
-
-State NO_COIN= {
-  &defaultEjectCount;
-  ...
-};
-
-State state=...
-
-    state->ejectCion();
+// note that you can break off the regex in java and intersperse it with comments.
+String emailRegex="^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+"+ // quite some rubish before the at sign
+     "@"+ // the at sign followed by a more restricted set of chars,
+          //  with some lengths restrictions
+     "[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?"+ // optional non capt grp
+     // any number of letter-number combos
+     "(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
 ----
 
-'''
+.Produces this 'railroad' diagram. which is equivalent to a state machine diagram.
+image::email-regex.svg[]
+
+Note that there is not one TRUE regex for email addresses. If you want to know the nitty-gritty details
+of valid email addresses look at RFC 8398 or RFC 5322, or ask in CSAR class.
+
+[WARNING]
+====
+Once you understand that regexes are state machine specifications, and that it is easy to create state machines
+that never 'terminate', you understand that regular expressions can also be dangerous.
+
+Accepting a regular expression
+from any source may cause a denial of service attack, because such expression may put your server into an endless loop.
+
+Advice: only accept a restricted set of regexes, maybe parse them before use. In particular avoid back tracking constructs.
+
+https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS[Regular expression Denial of Service - ReDoS]
+
+[big black]*So beware*.
+====
+
+include::regex.adoc[]
+
