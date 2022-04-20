@@ -15,7 +15,7 @@ In this week and in the AADE course we will be using two concepts:
 
 '''
 
-image:lamp-battery-switch.gif[role="left thumb", title="simple switch circuit, from 'https://electronics.stackexchange.com/'"] A state machine
+image:lamp-battery-switch.gif[title="simple switch circuit, from 'https://electronics.stackexchange.com/'"] A state machine
  is a software concept used to implement the behavior of something whose 'reaction'
  or outcome depends on the events that happened over time. A very simple example is a lamp and a switch.
 When properly connected and none of the parts is defect, the bulb will light up when the switch is in the on state.
@@ -25,20 +25,20 @@ From the diagram it should be obvious that a current can only flow if the switch
 In software we model this as the _path_ the code takes, which then depends on some condition or value.
 
 
-image:switch.svg[role="left thumb", title="state diagram model of simple switch"]
+image:switch.svg[title="state diagram model of simple switch"]
 The state diagram is a way to express the behavior in a graphical manner. Each state of the system is drawn as a box with rounded corners, like in the diagram above.
 In the https://en.wikipedia.org/wiki/State_pattern[GoF State ^] pattern, which is an object oriented way of modeling state behavior, one uses different
 objects to realize the effect of changing the software path. The objects all implement the same interface, but have a different implementation.
 Then, whenever a state switching event occurs, the current state object is replaced by the state object for the new state.
 
 
-image::Transition.png[role="left thumb", title="Transitions"]
+image::Transition.png[title="Transitions"]
 From AADE course, we learned that a life cycle of a system changes throw using by so called transitions. To change the state from wait to lock, trigger event  was needed with a guard (condition) and then we did some activity.
 
-image::The-killer-rabit.png[role="left thumb", title="state machine diagram"]
+image::The-killer-rabit.png[title="state machine diagram"]
 
 
-image:railway-switch.gif[role="right thumb", title="railway switch from 'https://en.wikipedia.org/wiki/Railroad_switch'"] As another analogy, you can think of a railway switch.
+image:railway-switch.gif[title="railway switch from 'https://en.wikipedia.org/wiki/Railroad_switch'"] As another analogy, you can think of a railway switch.
 The active state object will always have the same behavior. One makes the train go _straight_, the other makes it go _right_.
 Each state on itself always does the same, like a pure function, so with the same input (train) the same output is produced.
 The switching between states makes it possible to control the direction of the train traffic.
@@ -48,7 +48,7 @@ https://en.wikipedia.org/wiki/State_pattern[State Pattern ^], combined with [blu
 
 The *State* Pattern has the following UML class diagram:
 
-image::StatePattern.svg[role="left thumb",title="State Pattern"]
+image::StatePattern.svg[title="State Pattern"]
 We deal with a context, an _abstract_ state and multiple concrete state implementations that do the work
 and represent the state elements in the diagram. In the diagram above there
 would be a state instance for both *ConcreteStateA* and *ConcreteStateB*.
