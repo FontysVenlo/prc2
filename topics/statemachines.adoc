@@ -15,7 +15,7 @@ In this week and in the AADE course we will be using two concepts:
 
 '''
 
-image:lamp-battery-switch.gif[title="simple switch circuit, from 'https://electronics.stackexchange.com/'"] A state machine
+image:lamp-battery-switch.gif[role="thumb left",title="simple switch circuit, from 'https://electronics.stackexchange.com/'"] A state machine
  is a software concept used to implement the behavior of something whose 'reaction'
  or outcome depends on the events that happened over time. A very simple example is a lamp and a switch.
 When properly connected and none of the parts is defect, the bulb will light up when the switch is in the on state.
@@ -38,7 +38,7 @@ From AADE course, we learned that a life cycle of a system changes throw using b
 image::The-killer-rabit.png[title="state machine diagram"]
 
 
-image:railway-switch.gif[title="railway switch from 'https://en.wikipedia.org/wiki/Railroad_switch'"] As another analogy, you can think of a railway switch.
+image:railway-switch.gif[role="thumb left", title="railway switch from 'https://en.wikipedia.org/wiki/Railroad_switch'"] As another analogy, you can think of a railway switch.
 The active state object will always have the same behavior. One makes the train go _straight_, the other makes it go _right_.
 Each state on itself always does the same, like a pure function, so with the same input (train) the same output is produced.
 The switching between states makes it possible to control the direction of the train traffic.
