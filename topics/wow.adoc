@@ -1,7 +1,7 @@
 == Way of Working during practical hours.
 
 
-image:tdd.png[role="related thumb right"] 
+image:tdd.png[role="thumb right"] 
 
 The way of working with the practical assignments is as follows:
 
