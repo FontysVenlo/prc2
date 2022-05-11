@@ -13,4 +13,11 @@ both by Cay S. Horstmann and both in the eleventh edition.
 |link:docs/jpms-lambda-streams/[5] | JPMS, Lambda & Stream  | Vol II 9 (JPMS) - Vol I 6.2 (lambda) - Vol II 1 (stream)  | Lambda Library, MinMaxCollector
 |link:docs/database-access/[6] | Database access using JDBC  | Vol II 5  | No assignments, application in PRJ2
 |link:docs/javafx/[7] | JavaFX Properties and Bindings  | Bonus Chapter https://horstmann.com/corejava  | FXTriangulate
+|link:docs/statemachine/[8] | State Machines  | This website  | Gumball Machine, Grade capture
+|9| Project week, no lesson  |   | 
+|link:docs/reflection/[10] | Reflection  | Vol I, ch. 5.7  | Table Generator, Genealogy
+|11| I18N / Exceptions / Logging  |   | tbd
+|12| Ascension Day, no lesson  |   |
+|13| Security  |   | tbd 
+|14| Concurrency  |   | tbd
 |=======

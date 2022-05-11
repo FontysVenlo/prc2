@@ -1,0 +1,15 @@
+---
+title: "10 Reflection"
+description: ""
+date: 2022-05-11T12:02:24+02:00
+draft: false
+images: []
+slug: "reflection"
+menu: 
+  docs:
+    parent: ""
+weight: 100
+toc: true
+---
+
+include::{topics}/reflection.adoc[]

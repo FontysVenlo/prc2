@@ -1,0 +1,34 @@
+== Reflection
+
+Reflection enables a developer to write programs that manipulate Java code dynamically. It is an API that enables you to inspect 
+types (classes, interfaces), fields, constructors, methods, packages, annotations etc. during runtime. 
+
+Reclection or class introspection is used to leverage the infomation that is avialable in classes. Using the information that is
+available about a class and by implication about the instances of the class can help to avoid _copy-and-waste_ programming.
+It helps keeping the code https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[DRY]
+
+Please find a nice tutorial here: https://www.baeldung.com/java-reflection[ Baeldung Reflection tutorial ]
+
+Reflection is a multi-edged tool.
+
+* Reflection can be used to access parts of instances that would otherwise not be available.
+* Reflection can be used to list information about fields, methods, and constructors.
+* Access via reflection is slower than regular access, because of the safety/security checks that are made on each access
+* It is also slow for the extra indirection needed to do the work when compared to the optimized instructions for say access a field.
+* It is [red]*less type-safe*, so you loose much of the comfort you have in the IDE, such as code-completion or intellisense(tm). For 
+instance you lookup a method by name (a String) and that makes you deal with at least one exception. This still does not produce
+the actual method, but instead a [blue]#Method# object which you must give the reference to the object on which you want to apply the method and the parameters
+to that method in an `Object[]` array.
+
+Some of the problems can be mitigated a little with the proper amount of smartness, in particular caching previous results.
+
+Reflection is typically used in frameworks, like Unit Testing frameworks or Object Relational Mappers (ORM). We'll have a look at these
+use cases in the lecture.
+
+=== Note
+
+Reflection should NOT be used on a daily basis but be reserved for special cases, such as making a tool set (maybe called a framework), that can then make work a bit more efficient for the programmer. Frameworks typically pay their keep with a little performance degradation, because they need some extra work either at application startup, in preparation of the executable, when used or all of the former.
+
+If the use of a framework makes the normal programming more complex, you might want to consider not using it.
+In all cases, you should be aware of the consequences.
+

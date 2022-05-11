@@ -31,8 +31,7 @@ You can also write "a{3}" meaning exaclty 3 as. Or a lower (a{2,} for at least 2
 * character classes
 ** user specified: [aeiou] matches the English vowels, [a-p] the first 16 characters of the alphabet, [a-pA-P] the same, but ignoring case.
 * predefined :
-** \w = word which stands for c-word, which is the set of legal characters to start a (method or variable) name in C, but also in Java and
-many other programming languages. [a-zA-Z_] a through z in both cases and the underscore.
+** \w = word, which is the set of characters in [a-zA-Z_0-9], so a through z in both upper and lower case, the underscore and the digits 0-9.
 ** \W negates the class, in this case it matches the non-word characters
 ** \d the decimal digits
 ** \D not a digit.
