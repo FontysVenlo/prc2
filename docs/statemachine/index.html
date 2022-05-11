@@ -114,6 +114,12 @@ border-slate-500 dark:border-slate-400 text-black dark:text-slate-200">
 08 The State of Things
 </a>
 </li>
+<li>
+<a href=https://fontysvenlo.github.io/prc2/docs/reflection/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">
+10 Reflection
+</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -242,8 +248,7 @@ a string simply matches itself.</p>
 with a dot will match any line that is the same as the line with any substution for the dot character (including itself).</li><li>The second meta character is the backslash <code class=blue>'\'</code>. It takes the special meaning (as in meta) of the following character away.
 Back to our matching line: if you want exactly a dot at the place of the dot, prefix it with a backslash, so it will be understood as a dot. Like this: [red]"\.".
 But since we using Java, and the backslash already has a special role in strings, you must double the backslash in most cases, thus: <code class=blue>"\\."</code>.</li><li>The next are the quantifier: how many of something do you want.<ul><li>? 0 or one, aka at most. So "a?" means at most one a.</li><li>+ at least one.</li><li>* any number of times, including zero.</li><li>numberic quantifier, using braces ('{' and '}''). For instance "a{1,4}" means a between 1 and 4 times, inclusive.
-You can also write "a{3}" meaning exaclty 3 as. Or a lower (a{2,} for at least 2 a) or upper boundary (a{,12}) at most 12.</li></ul></li><li>character classes<ul><li>user specified: [aeiou] matches the English vowels, [a-p] the first 16 characters of the alphabet, [a-pA-P] the same, but ignoring case.</li></ul></li><li>predefined :<ul><li>\w = word which stands for c-word, which is the set of legal characters to start a (method or variable) name in C, but also in Java and
-many other programming languages. [a-zA-Z_] a through z in both cases and the underscore.</li><li>\W negates the class, in this case it matches the non-word characters</li><li>\d the decimal digits</li><li>\D not a digit.
+You can also write "a{3}" meaning exaclty 3 as. Or a lower (a{2,} for at least 2 a) or upper boundary (a{,12}) at most 12.</li></ul></li><li>character classes<ul><li>user specified: [aeiou] matches the English vowels, [a-p] the first 16 characters of the alphabet, [a-pA-P] the same, but ignoring case.</li></ul></li><li>predefined :<ul><li>\w = word, which is the set of characters in [a-zA-Z_0-9], so a through z in both upper and lower case, the underscore and the digits 0-9.</li><li>\W negates the class, in this case it matches the non-word characters</li><li>\d the decimal digits</li><li>\D not a digit.
 etc.</li></ul></li></ul></div>
 <div class=table-block><table class="frame-all grid-all stretch"><col style=width:50%><col style=width:50%><thead><tr><th class="halign-left valign-top">char</th><th class="halign-left valign-top">Meaning</th></tr></thead><tbody><tr><td class="halign-left valign-top">.</td><td class="halign-left valign-top">match all</td></tr><tr><td class="halign-left valign-top">+</td><td class="halign-left valign-top">at least one quantifier</td></tr><tr><td class="halign-left valign-top">?</td><td class="halign-left valign-top">ate most one</td></tr><tr><td class="halign-left valign-top">{</td><td class="halign-left valign-top">start of quantifier spec</td></tr><tr><td class="halign-left valign-top">}</td><td class="halign-left valign-top">end of quantifier spec</td></tr><tr><td class="halign-left valign-top">[</td><td class="halign-left valign-top">start character class</td></tr><tr><td class="halign-left valign-top">]</td><td class="halign-left valign-top">end character class</td></tr></tbody></table></div>
 <p>The definition as far as java is concerned is given in the <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html>java.util.Pattern</a> class.
