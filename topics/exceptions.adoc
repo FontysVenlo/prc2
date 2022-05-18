@@ -1,7 +1,7 @@
 == Exceptions Summary
 
 .catching, the general idea.
-video::http://gifly.com//media_gifly/a/n/i/g/b/anigif_enhanced-buzz-14454-1341862532-13.mp4[width=640,options="autoplay,loop"]
+image::catch.gif[]
 
 === Exception-Handling
 
@@ -98,7 +98,7 @@ the resources that you are about to use. There can be more than one resource.
 .try with resources, using a scanner and a file.
 [source,java]
 ----
-include::code/trywith/src/Trywith.java[lines="16..25"]
+include::code/trywith/src/Trywith.java[lines="16..23"]
 ----
 <1> Scanner is also autoclosable.
 <2> No other catch needed, that is only required if you want to deal with the exceptions that could
