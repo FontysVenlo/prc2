@@ -1,0 +1,158 @@
+== Exceptions Summary
+
+.catching, the general idea.
+video::http://gifly.com//media_gifly/a/n/i/g/b/anigif_enhanced-buzz-14454-1341862532-13.mp4[width=640,options="autoplay,loop"]
+
+=== Exception-Handling
+
+* Throw statement (cfr. `throw new YourFavoriteException()`)
+* `try` block: the code that is executed in normal circumstances, but might throw an exception.
+* `catch` block: the code that is executed to handle an exception that was thrown in the try block. The so called _catch–block-parameter_ specifies which exception type can be caught by the `catch` block.
+* Examples:
+
+[[Quotient-With-Exception]]
+.Quotient with Exception
+[source,java]
+----
+include::code/exex/src/exex/QuotientWithException.java[lines=18..32]
+----
+
+[[Circle-With-Exception]]
+.Circle with Exception
+[source,java]
+----
+include::code/exex/src/exex/CircleWithException.java[lines=37..48]
+----
+
+=== Exception types
+
+.Exceptions thrown are instances of the classes shown in this diagram, or of subclasses of one of these classes
+[[exhier]]
+.Exception hierarchy with Throwable at the top
+image::exceptionhierarchy.svg[]
+
+* _System errors_ are thrown by JVM and represented in the `Error` class. The `Error` class describes internal system errors.
+  Such errors rarely occur. If one does, there is little you can do beyond notifying the user and trying to terminate
+  the program gracefully. Errors are unchecked exceptions. However, often you are too late and the JVM will take over or might crash itself.
+* `Exception` describes errors caused by your program and external circumstances. These errors can be caught and handled by your program.
+** `RuntimeException` is caused by programming errors, such as bad casting, accessing an out-of-bounds array, and numeric errors. Typically the
+  programmer (maybe you) is to blame.
+
+=== Checked Exceptions vs. Unchecked Exceptions
+
+* `RuntimeException`, `Error` and their subclasses are known as _unchecked exceptions_. All other exceptions are known as _checked exceptions_, meaning that the compiler forces the programmer to check and deal with the exceptions.
+* In most cases, unchecked exceptions reflect programming logic errors that are not recoverable. For example:
+**  A `NullPointerException` is thrown if you access an object through a reference variable before an object is assigned to it;
+** an `IndexOutOfBoundsException` is thrown if you access an element in an array outside the bounds of the array.
+* Unchecked exceptions can occur anywhere in the program. To avoid cumbersome overuse of try-catch blocks, Java does not mandate you to write code to catch unchecked exceptions.
+* Often runtime exceptions point to a logic fault in the program, such as forgetting a nullity check before _dereferencing_ a *reference result* from a method, or violating a precondition.
+** Null values often indicate that an expected value could not be produced, such as in a search. If you are designing an API with such search, better return an empty collection  (List, Set, Map) instead. Empty collections are https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html[predefined] and there for cheap to return. Also, since Java 8, the preferred return
+type for some method that may of may not produce a result is `java.util.Optional<T>`. Usage explanation in https://www.baeldung.com/java-optional[Guide to Java 8 Optional on Baeldung].
+
+=== More on exception handling and `finally` clause
+
+.Exception handling in Java consists of declaring exceptions, throwing exceptions, and catching and processing exceptions.
+image::throwandcatch.svg[]
+
+* The code in the optional `finally` block is executed under all circumstances, regardless of whether an exception occurs in the try block or is caught. The code is called before the method is left.
+
+=== Custom `Exception` classes
+
+You can roll your own exceptions, in case your "business" has requirements that demand this.
+
+[[Circle-With-Radius-Exception]]
+.Circle with Radius Exception
+[source,java]
+----
+include::code/exex/src/exex/CircleWithRadiusException.java[lines=26..31]
+----
+
+[[Invalid-Radius-Exception]]
+.Invalid Radius Exception
+[source,java]
+----
+include::code/exex/src/exex/InvalidRadiusException.java[lines=3..21]
+----
+
+[[Test-Circle-With-Radius-Exception]]
+.Catch Circle with Radius Exception
+[source,java]
+----
+include::code/exex/src/exex/TestCircleWithRadiusException.java[lines=11..17]
+----
+
+=== Try with resources.
+
+`File` is one of the classes that has operations (methods) that throw
+exceptions. `java.util.Scanner` implements `AutoCloseable` and as such has a `close()` method.
+When constructed with file as argument, it will use said file as input and close the file, when the scanner is closed. It is good practice to close
+a resource once it has been 'consumed', because this releases the resource. The purpose of such a close
+operation is to signal that the resource should be brought to a state
+that is safe and can be freed for other use.
+
+Classes that have such properties are known by the generic name
+*resource*, something that you need but is potentially scarce. +
+Since Java 7, we have a feature called *try with resources* . It adds a new construct to the try-catch block, namely
+the resources that you are about to use. There can be more than one resource.
+
+.try with resources, using a scanner and a file.
+[source,java]
+----
+include::code/trywith/src/Trywith.java[lines="16..25"]
+----
+<1> Scanner is also autoclosable.
+<2> No other catch needed, that is only required if you want to deal with the exceptions that could
+ occur. No finally needed to close resources.
+
+Once the try with resources is done with the resources, the resources
+are automatically closed and freed. For this to work, the resource must implement the `java.lang.Autoclosable` interface.
+You also save yourselves the tedious work of closing when an exception
+occurred. That is also taken care of. So when your Java level is
+greater or equal to Java 7, use *try-with-resources* whenever you can, because it will save you the work
+of closing the resources in the finally block.
+
+You declare the resources in the try-with-resources in the natural
+order, the earlier resource being used by those further on.
+They will be closed in the reverse order of declaration. In the above case that would mean:
+
+. Scanner scanner closed
+. InputStream in closed
+. File f closed
+
+which is the natural order of freeing or closing the resources.
+
+
+=== Choose: at least one of catch or finally block
+
+Note that the compiler insists on having at least one of
+
+* a catch block (multiple allowed) or
+* a finally block (at most one)
+
+So `try{...}` is *not* allowed, but `try(AutoCloseable resource){...}` *is*, because the compiler will construct an implicit finally block for you.
+It is the same idea of having a default constructor, when you did not write any. +
+If you decide to not deal with any *checked*  exception, your method can simply pass them on to the caller, and let the caller deal with the situation.
+
+
+=== Chaining of exceptions
+As can be seen from the class diagram in figure <<exhier>>, all exceptions are descendants of `java.lang.Throwable`.
+
+Exceptions can be *chained*, that is, one exception can hold a reference to another exception that is the actual cause of the exception being thrown. (Since Java 1.4 for all Throwables).
+
+If you look at the API doc of `java.lang.Throwable`, you will see that it provides several constructors. +
+Three of them allow you to add as parameter of type Throwable, with the formal and aptly chosen name *cause*. The receiver of the Throwable (or should I say catcher) can inspect any descendant of Throwable about a deeper cause, using the method `Throwable.getCause()`. This can be seen as chain of Throwables, also called nested exceptions.
+
+Although you cannot simply iterate through these exceptions, getting all in a loop is simple:
+
+.Reading all causes of an exception.
+[source,java]
+----
+Throwable t = ex.getCause();
+while ( t != null ) {
+  // do something with t like print or getMessage;
+
+  t= t.getCause();
+}
+----
+
+

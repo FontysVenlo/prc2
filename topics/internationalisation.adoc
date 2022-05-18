@@ -1,0 +1,141 @@
+== Internationalisation (I18N)
+
+=== The Date and Time API
+
+In Java, an `Instant` represents a point on the time line. The origin (called epoch) is arbitrarily set at midnight
+of the first of January 1970 Greenwich time (UTC). `Instant.now()` returns the current point on the time line,
+being the number of seconds since the epoch (stored as `long`) and the number of nano seconds (stored as `int`). Each
+day has 24x60x60 = 86400 seconds. A `Duration` is the amount of time between two instants. Both `Instant` and `Duration`
+are immutable.
+
+An `Instant` does not have a human readable format. The two kinds of human time in the java API are _local date/time_ and
+_zoned time_. Local date/time has a date and/or time of day, but no associated time zone. Examples:
+
+image:calendar_example_LocalDate.png[width=25%, title="Local Date example"] Local Date example.
+image:alarmclock_example_LocalTime.jpg[width=25%, title="Local Time example"] Local Time Example.
+
+Do not use zoned time, unless really necessary. Today's date can be retrieved using `LocalDate.now()`, an arbitrary date
+with `LocalDate.of(<year>, <month>, <day>)` like `LocalDate.of(2021, 5, 1)` being first of May 2021. The amount of time
+between dates is called a `Period`. Check the java API to read about convenient methods of `LocalDate` and `Period`. An
+interesting one is the `datesUntil(...)` method on `LocalDate`, which returns a `Stream<LocalDate>`.
+
+`LocalTime` objects can be created like LocalDates, e.g.: `LocalTime endOfLecture = LocalTime.now().plusHours(1);`
+
+Zoned times make use of time zomes. Java uses the IANA database: https://www.iana.org/time-zones
+To make a zoned time out of a `LocalDateTime` you can use the `ZonedDateTime.of()` method or do it like this:
+`ZonedDateTime current = LocalDateTime.now().atZone(ZoneId.of("Europe/Amsterdam"));`. Now you get a specific `Instant` in time.
+The other way around, you can can find the corresponding `ZonedDateTime` in another time zone using `instant.atZone(...)`.
+
+To represent dates and times in readable and customizable formats, use the `DateTimeFormatter` class. It can use predefined
+standard formatters, `Locale` specific formatters and formatters with custom patterns.
+
+This paragraph is based on Core Java Volume 2, 11th edition, chapter 6 by Cay Horstmann.
+
+
+=== Number Formats
+
+Some of you might have noticed that one of the teacher tests in the FXTriangulate exercise fails on your machine.
+
+This is because on the machine we developed, the locale is set to en_US.
+This causes the numbers to be formatted in the way that [blue]`Double.parseDouble(String input)` expects it.
+If you run the same tests on a machine with say a German Locale, the test that reads the length back from the label,
+use Double.parseDouble(), which is then surprised to find a comma instead of the decimal point, and fails with a format exception.
+
+To solve that, modify the test in method [blue]#tLength# such that the line +
+`double l = Double.parseDouble( ltext.split( ":" )[ 1 ] );` reads +
+`double l = getDoubleConsideringLocale( ltext.split( ":" )[ 1 ] );`,
+so that the whole test method reads
+
+.fxtriangulate.GUITest.tLength
+[source,java]
+----
+    @ParameterizedTest
+    @CsvSource( {
+        "a,greenCircle,blueCircle,500.0,400.0,100.0,100.0,500.0",
+        "b,redCircle,blueCircle,400.0,100.0,100.0,100.0,500.0",
+        "c,greenCircle,redCircle,300.0,100.0,100.0,400.0,100.0", } )
+    public void tLength( String line, String p1, String p2, double expected,
+            double x1, double y1, double x2, double y2 ) throws ParseException {
+        double xOrg = stage.getX();
+        double yOrg = stage.getY();
+        FxRobot rob = new FxRobot();
+        rob.drag( '#' + p1 ).dropTo( xOrg + x1, yOrg + y1 );
+        rob.drag( '#' + p2 ).dropTo( xOrg + x2, yOrg + y2 );
+        String ltext = labelMap.get( line ).apply( triangulator ).getText();
+        double l = getDoubleConsideringLocale( ltext.split( ":" )[ 1 ] ); // <1>
+        assertThat( l ).isCloseTo( expected, within( 0.1 ) );
+//        fail( "method tLength reached end. You know what to do." );
+    }
+----
+
+<1> changed line.
+
+.Consider the local in which the number is written.
+[source,java]
+----
+    /**
+     * Use the default locale to parse a double value from a string.
+     * @param input string
+     * @return the double
+     * @throws ParseException if the string does not parse to double.
+     */
+    static double getDoubleConsideringLocale( String input ) throws ParseException {
+        return DecimalFormat.getNumberInstance().parse( input ).doubleValue(); // <1>
+    }
+
+    /**
+    * Use the given locale to parse a double value from a string.
+    * @param locale to use.
+    * @param input string.
+    * @return the double.
+    * @throws ParseException if the string does not parse to double.
+    */
+   static double getDoubleConsideringLocale( Locale locale, String input ) throws ParseException {
+       return DecimalFormat.getNumberInstance(locale).parse( input ).doubleValue();
+   }
+----
+
+<1> DecimalFormat.getNumberInstance gets a format that understands the default locale.
+
+.Set the locale for the execution. Useful for tests.
+[source,java]
+----
+          Locale.setDefault( Locale.GERMANY ); // <1>
+----
+
+<1> Set the locale to GERMANY if it isn't already. Similar for other languages.
+
+
+=== Testing Localized Exceptions
+
+The standard way of testing exceptions with assertj is explained in link:week01.html#_assert_exceptions[week01].
+
+To get to the localized message, which contains the message as translated by the locale framework is a bit more involved.
+
+Luckily, AssertJ allows you to extract information from a Throwable, by using an extractor function. Now the Lambda bells should ring.
+
+.To make a long story very short: here is an example:
+[source,java]
+----
+    String[] keys = keyWords.split( "\\|");
+    assertThatThrownBy( () -> {
+                MainSimulation.main( args );
+    } ).isExactlyInstanceOf( exceptionMap.get( expectionClassName ) )
+            .extracting( e -> e.getLocalizedMessage() ) // <1>
+            .asString()           //<2>
+            .contains( keys ); //<3>
+----
+
+<1> extract using [blue]`Function<? super Throwable,​T>`, [black]`e -> getLocalizedMessage()` in this case.
+<2> Get the assertion for in String. Do [red]*not* use `toString()`, because that produces a _String_, not an [blue]*AbstractStringAssert*.
+<3> And use the assert to check that the string contains the required key information.
+
+.If you turn on type hints in NetBeans-IDE (or in intelij) you can see what the type is on which you call `contains(keys)`
+image::assertjtypehints.png
+
+
+=== Additional Pointers
+* If you haven't read the Horstmann book but you need an introduction into Internationalization,
+ read this tutorial from DZONE link:https://dzone.com/articles/a-beginners-guide-to-java-internationalization[here].
+ Make sure to read the bit about Resource Bundles, as you use them in the exercise for this week.
+* Jakob Jenkov also has a tutorial on http://tutorials.jenkov.com/java-internationalization/index.html[Java Internationalization ^]
