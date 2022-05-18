@@ -4,7 +4,7 @@ description: ""
 date: 2022-05-18T12:02:24+02:00
 draft: false
 images: []
-slug: "i18n"
+slug: "internationalisation"
 menu: 
   docs:
     parent: ""
