@@ -16,7 +16,7 @@ both by Cay S. Horstmann and both in the eleventh edition.
 |link:docs/statemachine/[8] | State Machines  | This website  | Gumball Machine, Grade capture
 |9| Project week, no lesson  |   | 
 |link:docs/reflection/[10] | Reflection  | Vol I, ch. 5.7  | Table Generator, Genealogy
-|11| I18N / Exceptions / Logging  | Vol I, ch. 7; Vol II, ch. 6 and 7 | Pub Exceptions
+|link:docs/i18n/[11] | I18N / Exceptions / Logging  | Vol I, ch. 7; Vol II, ch. 6 and 7 | Pub Exceptions
 |12| Ascension Day, no lesson  |   |
 |13| Security  |   | tbd 
 |14| Concurrency  |   | tbd
