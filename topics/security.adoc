@@ -189,7 +189,7 @@ public static int calc();
     Code:
        0: iconst_1  // 0x04: Push int constant 1 onto operant stack
        1: istore_0  // 0x3B: Store int into 1st local variable
-       2: iconst_2  // 0x05: Push int constant 2nd onto operant stack
+       2: iconst_2  // 0x05: Push int constant 2 onto operant stack
        3: istore_1  // 0x3C: Store int into second local variable
        4: iload_0   // 0x1A: Load int from 1st local variable
        5: iload_1   // 0x1B: Load int from 2nd local variable
@@ -226,11 +226,6 @@ Lets change `3C` to `3B`, thus not initializing variable `y`. If we now try to r
 Error: Unable to initialize main class verifier.Verifier
 Caused by: java.lang.VerifyError: Bad local variable type
 ```
-
-// Add runtime verification?
-// Array bound checks
-// No pointers
-// No manual memory management
 
 === Web application
 
