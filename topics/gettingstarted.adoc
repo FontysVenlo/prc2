@@ -222,9 +222,9 @@ However instead of hardcoding the path it is better to retrieve the path while s
 .icon:apple[fw] Set `JAVA_HOME` dynamically with the following command (e.g. for Java 15):
 [source,sh]
 ----
-export JAVA_HOME=$(/usr/libexec/java_home -v '15*') #<1>
+export JAVA_HOME=$(/usr/libexec/java_home)
 ----
-<1> $() means that the invocation between parenthesis is resolved first.
+$() means that the invocation between parenthesis is resolved first.
 
 This sets the correct Java environment for your current Terminal session.
 When opening a new terminal the default Java environment will be active again.
@@ -235,20 +235,30 @@ for this we need to let the terminal know to load our aliases on startup.
 Depending on the type of terminal you are using, we need the specify the aliases at different places.
 
 Since macOS Catalina (10.15) the default shell (which is used by the terminal) is ZShell (zsh).
-This means we can specify our aliases in either `.zshrc` or in `.zprofile` in our home directory.
+This means we can specify our aliases in either `.zshrc` or in `.zprofile` in our home directory. We suggest to 
+create an additional configuration file `.java_setup` in your home directory.
 
 .icon:apple[fw] Add the following lines to ~/.zshrc:
 [source,sh]
 ----
-export JAVA_HOME=$(/usr/libexec/java_home -v 11) #<1>
-alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version" #<2>
-alias j15="export JAVA_HOME=`/usr/libexec/java_home -v 15`; java -version" #<3>
+# Include java environment setup
+source .java_setup
 ----
-<1> Set the default version of Java to version 11.
-<2> Alias to set the Java environment to version 11.
-<3> Alias to set the Java environment to version 15.
 
-We now need to either restart the terminal for the aliases to take effect or source the `.zshrc` file.
+.icon:apple[fw] Add the following lines to ~/.java_setup:
+[source,sh]
+----
+# Set your default JAVA_HOME
+export JAVA_HOME=$(/usr/libexec/java_home -v 17.0.6)
+
+alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11.0.12`; java -version"
+alias j17="export JAVA_HOME=`/usr/libexec/java_home -v 17.0.6`; java -version"
+
+# Add maven to path
+export PATH=/Applications/maven/apache-maven-3.9.0/bin:$PATH
+----
+
+We now need to either restart the terminal for the aliases to take effect or source the `.zshrc` file:
 
 `source ~/.zshrc`
 
@@ -257,13 +267,13 @@ We can now check that switching between versions works:
 .icon:apple[fw] switching between Java versions
 [source,sh]
 ----
-java -version #<1>
-j11 #<2>
-j15 #<3>
+java -version
+j11
+j17
 ----
-<1> Check that the default Java version is correct
-<2> Check that switching between versions works
-<3> Check that switching between versions works
+Check that the default Java version is correct
+Check that switching between versions works
+Check that switching between versions works
 
 Now we have set-up a way to easily switch between Java versions in the terminal.
 
