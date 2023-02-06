@@ -167,19 +167,22 @@ For PRC2 we will use <strong class=blue>Java 17</strong>.</p>
 We assume that that if you are running a different distribution of Linux that you can adapt the
 instructions to apply to that distribution (e.g. use the correct package manager Zypper, PacMan, etc.).</p></aside>
 <p>With a package manager:</p>
-<figure class=listing-block><figcaption><i class="fa fa-linux fa-fw"></i> install via apt-get</figcaption>
-<pre class=highlight><code class=language-sh data-lang=sh>wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
-sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
-sudo apt update
-sudo apt install adoptopenjdk-11-hotspot</code></pre></figure>
+<figure class=listing-block><figcaption><i class="fa fa-linux fa-fw"></i> install openjdk via apt-get</figcaption>
+<pre class=highlight><code class=language-sh data-lang=sh>sudo apt install openjdk-17-jdk</code></pre></figure>
+<figure class=listing-block><figcaption><i class="fa fa-linux fa-fw"></i> install eclipse temurin via apt-get</figcaption>
+<pre class=highlight><code class=language-sh data-lang=sh>apt-get install -y wget apt-transport-https gnupg
+wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | apt-key add -
+echo &#34;deb https://packages.adoptium.net/artifactory/deb $(awk -F= &#39;/^VERSION_CODENAME/{print$2}&#39; /etc/os-release) main&#34; | tee /etc/apt/sources.list.d/adoptium.list
+apt-get update # update if you haven&#39;t already
+apt-get install temurin-17-jdk</code></pre></figure>
 <p>Manual installation:</p>
 <p>In the example below we assume that the distribution is packed as a <code>tar.gz</code> archive.
-The example shows the archive name as of 10 February 2021,
-OpenJDK11U-jdk_x64_linux_hotspot_11.0.10_9.tar.gz</p>
+The example shows the archive name as of 10 February 2023,
+<code>OpenJDK17U-jdk_x64_linux_hotspot_17.0.6_10.tar.gz</code></p>
 <figure class=listing-block><figcaption><i class="fa fa-linux fa-fw"></i> unpack java distribution using the command-line</figcaption>
 <pre class=highlight><code class=language-sh data-lang=sh>sudo mkdir -p /usr/lib/jvm
 cd /usr/lib/jvm
-sudo tar xf ~/Downloads/OpenJDK11U-jdk_x64_linux_hotspot_11.0.10_9.tar.gz</code></pre></figure></section>
+sudo tar xf ~/Downloads/OpenJDK17U-jdk_x64_linux_hotspot_17.0.6_10.tar.gz</code></pre></figure></section>
 <section class="doc-section level-3"><h4 id=_macos><i class="fa fa-apple fa-fw"></i> macOS</h4><p>With HomeBrew:</p>
 <figure class=listing-block><figcaption><i class="fa fa-apple fa-fw"></i> install via HomeBrew</figcaption>
 <pre class=highlight><code class=language-sh data-lang=sh># Untap AdoptOpenJDK first
@@ -212,15 +215,18 @@ If you type <code>java -version</code>, and your shell says <code>command not fo
 <p>Since we want the best Java experience, we will use some common environment variables.</p>
 <section class="doc-section level-3"><h4 id=_linux_2><i class="fa fa-linux fa-fw"></i> Linux</h4><p><strong>JAVA_HOME</strong> Define JAVA_HOME first. That will help Java, but also tell other programs to find the desired Java version.</p>
 <figure class=listing-block><figcaption><i class="fa fa-linux fa-fw"></i> Define JAVA_HOME</figcaption>
-<pre class=highlight><code class=language-sh data-lang=sh>export JAVA_HOME=/usr/lib/jvm/jdk-11.0.10+9 <b class=conum>1</b>
-export JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64 <b class=conum>2</b></code></pre><ol class="callout-list arabic"><li>Path for manual installation</li><li>Path for package manager installation</li></ol></figure>
+<pre class=highlight><code class=language-sh data-lang=sh>export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 <b class=conum>1</b>
+export JAVA_HOME=/usr/lib/jvm/temurin-17-jdk <b class=conum>2</b></code></pre><ol class="callout-list arabic"><li>Path for manual installation</li><li>Path for package manager installation</li></ol></figure>
 <p><strong>PATH</strong> Prepend the directory under JAVA_HOME to your path, so all java related programs, such as <code>java</code> , <code>javac</code>, <code>jar</code> etc can be found, by just typing the name.</p>
 <figure class=listing-block><figcaption><i class="fa fa-linux fa-fw"></i> Append Java to the path</figcaption>
 <pre class=highlight><code class=language-sh data-lang=sh>export PATH=${JAVA_HOME}/bin:$PATH</code></pre></figure>
-<p>To avoid having to do this every time you start the command-line, add the commands to your <code>~.bashrc</code> script file, at the bottom.</p>
-<figure class=listing-block><figcaption><i class="fa fa-linux fa-fw"></i> Add the previous commands to <code>~/.bashrc</code></figcaption>
-<pre class=highlight><code class=language-sh data-lang=sh>export JAVA_HOME=/usr/lib/jvm/jdk-11.0.10+9
-export PATH=${JAVA_HOME}/bin:$PATH</code></pre></figure></section>
+<p>To avoid having to do this every time you start the command-line, add the commands to your <code><sub>/.bashrc</sub></code>/<code>/.zshrc</code> script file, at the bottom.</p>
+<figure class=listing-block><figcaption><i class="fa fa-linux fa-fw"></i> Add JAVA_HOME to PATH</figcaption>
+<pre class=highlight><code class=language-sh data-lang=sh>export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+export PATH=${JAVA_HOME}/bin:$PATH</code></pre></figure>
+<p>To switch Java versions use the following command:</p>
+<figure class=listing-block><figcaption><i class="fa fa-linux fa-fw"></i> Switch Java versions</figcaption>
+<pre class=highlight><code class=language-sh data-lang=sh>sudo update-alternatives --config java</code></pre></figure></section>
 <section class="doc-section level-3"><h4 id=_macos_2><i class="fa fa-apple fa-fw"></i> macOS</h4><p>These instructions will guide you to setup the correct environment on macOS
 and to make it easy to switch between Java versions.</p>
 <figure class=listing-block><figcaption><i class="fa fa-apple fa-fw"></i> List version(s) of Java</figcaption>
@@ -271,23 +277,15 @@ It is also the way the teachers use to compile and test the students work for th
 <pre class=highlight><code class=language-sh data-lang=sh>sudo apt install maven</code></pre></figure>
 <p>Install manually:</p>
 <p id=maven_manual>Fetch a fresh copy of <a href=https://maven.apache.org/>Apache Maven</a> from the website.</p>
-<p>To install it, do (example uses version 3.6.3 as of 2019-11-03)</p>
+<p>To install it, do (example uses version 3.9.0 as of 2023-02-06)</p>
 <figure class=listing-block><figcaption><i class="fa fa-linux fa-fw"></i> install apache maven and add to path</figcaption>
 <pre class=highlight><code class=language-sh data-lang=sh>cd /usr/share
 sudo rm -fr maven
-sudo tar xf ~/Downloads/apache-maven-3.6.3-bin.tar.gz
-sudo ln -sf apache-maven-3.6.3/ maven
+sudo tar xf ~/Downloads/apache-maven-3.9.0-bin.tar.gz
+sudo ln -sf apache-maven-3.9.0/ maven
 cd /usr/bin
 sudo ln -sf ../share/maven/bin/mvn .</code></pre></figure>
-<p>Once this is done, entering <code>mvn --version</code> should produce output similar to</p>
-<figure class=listing-block><figcaption>mvn --version command.</figcaption>
-<pre class=highlight><code class=language-sh data-lang=sh>hom@threehundred: /usr/share
-🐧$ mvn --version
-Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
-Maven home: /usr/share/maven
-Java version: 11.0.5, vendor: AdoptOpenJDK, runtime: /usr/lib/jvm/jdk-11.0.5+10
-Default locale: en_GB, platform encoding: UTF-8
-OS name: &#34;linux&#34;, version: &#34;5.0.0-36-generic&#34;, arch: &#34;amd64&#34;, family: &#34;unix&#34;</code></pre></figure></section>
+<p>Once this is done, entering <code>mvn --version</code> should produce output.</p></section>
 <section class="doc-section level-3"><h4 id=_macos_3><i class="fa fa-apple fa-fw"></i> macOS</h4><p>Install with HomeBrew:</p>
 <figure class=listing-block><figcaption><i class="fa fa-apple fa-fw"></i> Install Maven using HomeBrew</figcaption>
 <pre class=highlight><code class=language-sh data-lang=sh>brew install maven</code></pre></figure>
@@ -297,9 +295,8 @@ OS name: &#34;linux&#34;, version: &#34;5.0.0-36-generic&#34;, arch: &#34;amd64&
 <p><code>choco install maven</code></p>
 <p>Install manually:</p>
 <div class="olist arabic"><ol class=arabic><li>Download the zip file from <a class=bare href=https://maven.apache.org/download.cgi>https://maven.apache.org/download.cgi</a>.</li><li>Extract the zip file to <code>C:\usr\lib</code></li><li>Add the <code>bin</code> directory to the <code>path</code><ol class=loweralpha type=a><li>Goto <code>Settings > About > Advanced System Settings > Adavanced Tab > Environment Variables</code></li><li>Select <code>Path</code> and <code>Edit</code></li><li><code>New</code> and fill in the path <code>C:\usr\lib\apache-maven-3.6.3\bin</code></li></ol></li><li>Close <code>System Properties</code></li><li>Start <code>cmd</code></li><li><code>mvn -v</code> should return a version</li></ol></div></section></section>
-<section class="doc-section level-2"><h3 id=_install_or_update_your_ide>Install or update your IDE</h3><p>The official Java IDE at Fontys ICT Venlo is <a href=https://netbeans.apache.org/>Apache NetBeans IDE</a>. The long time stable version for the moment is 12.0.
-At the time of writing version 12.2 serves me very well. At the time of reading a newer version might be available.</p>
-<section class="doc-section level-3"><h4 id=_linux_4><i class="fa fa-linux fa-fw"></i> Linux</h4><p>You can either install Netbeans from Ubuntu Software or download the binaries.</p>
+<section class="doc-section level-2"><h3 id=_install_or_update_your_ide>Install or update your IDE</h3><p>The official Java IDE at Fontys ICT Venlo is <a href=https://netbeans.apache.org/>Apache NetBeans IDE</a>. The long time stable version for the moment is 16.0.</p>
+<section class="doc-section level-3"><h4 id=_linux_4><i class="fa fa-linux fa-fw"></i> Linux</h4><p>You can either install Netbeans from Ubuntu Software (Snap) or download the binaries.</p>
 <p id=netbeans_manual>To install the binaries of Apache NetBeans on Ubuntu simply fetch the binary as zip file and unpack it,
 then either add the contained <strong>bin</strong> directory to the path, or make a wrapper <code>netbeans</code>
 command in your personal <code>~/bin</code> directory.</p>
@@ -308,12 +305,12 @@ in the traditional (as in same directories as the installer would) <code>/usr/lo
 <code>/opt</code> is also a good choice as installation directory.</p>
 <figure class=listing-block><figcaption><i class="fa fa-linux fa-fw"></i> Assuming you downloaded the binary, installing it is easy</figcaption>
 <pre class=highlight><code class=language-sh data-lang=sh>cd /usr/local
-sudo unzip ~/Downloads/netbeans-12.2-bin.zip
+sudo unzip ~/Downloads/netbeans-16-bin.zip
 sudo mv netbeans{,-12.2}</code></pre></figure>
 <p>For extra creature comfort, add a simple netbeans script to your path</p>
 <figure class=listing-block><figcaption>netbeans script in ~/bin</figcaption>
-<pre class=highlight><code class=language-sh data-lang=sh>#!/bin/bash
-/usr/local/netbeans-12.2/bin/netbeans &#34;$@&#34; &amp; <b class=conum>1</b></code></pre><ol class="callout-list arabic"><li>Invoke netbeans using its absolute path.</li></ol></figure>
+<pre class=highlight><code class=language-sh data-lang=sh>#!/usr/bin/env bash
+/usr/local/netbeans-16/bin/netbeans &#34;$@&#34; &amp; <b class=conum>1</b></code></pre><ol class="callout-list arabic"><li>Invoke netbeans using its absolute path.</li></ol></figure>
 <p>Then make that script executable with <code>chmod +x netbeans</code>.</p>
 <p>NetBeans IDE should now be startable from the command line (fine for me) as well as from the menu.</p></section>
 <section class="doc-section level-3"><h4 id=_macos_4><i class="fa fa-apple fa-fw"></i> macOS</h4><p>It is possible to install Netbeans by downloading the installer, manual extracting the binaries of by using HomeBrew.</p>
