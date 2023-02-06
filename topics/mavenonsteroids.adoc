@@ -16,12 +16,8 @@ is only useful when your are really done: all  tests are complete and the code t
 
 * So do not _mvn build_, but instead *mvn test*, then maven will do the minimum required.
 
-So if you are in the habit of clicking build and then run your tests, you might want to change you habit.
+So if you are in the habit of clicking build and then run your tests, you might want to change your habit.
 
-[TIP]
-====
-sebipom sets the default goal to test, so if you run mvn from the command line, you only need to type `mvn`
-====
 
 ==== Maven the proper way, when still in the TDD phase
 
