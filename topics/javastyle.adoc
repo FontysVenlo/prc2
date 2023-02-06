@@ -1,6 +1,6 @@
 == Java Style
 
-Java is a language (sort of anyway) and languages come with a culture.
+Java is a language and languages come with a culture.
 One such cultural aspect is the way you format your code, like placing your brackets, parenthesis, spaces and curly braces.
 This coding style is intended to help you read the code, recognize the structure at a glance and find the interesting details easily and spot on.
 
