@@ -150,7 +150,11 @@ brew install --cask temurin17</code></pre></figure>
 <p>Download the correct distribution/version of choice from
 <a href="https://adoptium.net/temurin/releases/?version=17" target=_blank rel=noopener>AdoptOpenJDK </a>.
 Install the same way as normal programs.</p></section>
-<section class="doc-section level-3"><h4 id=_windows><i class="fa fa-windows fa-fw"></i> Windows</h4><p>With Chocolatey:</p>
+<section class="doc-section level-3"><h4 id=_windows><i class="fa fa-windows fa-fw"></i> Windows</h4><p>Install with the Windows Package Manager:</p>
+<p>First install the <a href=https://learn.microsoft.com/en-us/windows/package-manager/winget/#install-winget>winget</a></p>
+<figure class=listing-block><figcaption><i class="fa fa-windows fa-fw"></i> install via powershell</figcaption>
+<pre class=highlight><code class=language-sh data-lang=sh>winget install Microsoft.OpenJDK.17</code></pre></figure>
+<p>With Chocolatey:</p>
 <figure class=listing-block><figcaption><i class="fa fa-windows fa-fw"></i> install via Chocolatey</figcaption>
 <pre class=highlight><code class=language-sh data-lang=sh>choco install adoptopenjdk11 --params=&#34;/ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome /INSTALLDIR=C:\usr\lib\jvm\ /quiet&#34;</code></pre></figure>
 <p>Manual installation:</p>
