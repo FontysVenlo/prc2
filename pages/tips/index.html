@@ -336,7 +336,8 @@ inherits from such parent.</p>
 to continue. For business code that is correct, but things like integration tests need a built war file, which cannot be built with failing tests.<br>
 Solution: Put the integration tests in a separate module of its own, which can be run at any time and will not slow you down or
 worse, disable testing or not having any tests.</li></ul></div></section></section></section>
-<section class="doc-section level-1"><h2 id=_flex_your_java_muscles>Flex Your Java Muscles</h2><p>No, it is not about heavy lifting. It is about reconfiguring your Java
+<section class="doc-section level-1"><h2 id=_flex_your_java_muscles>Flex Your Java Muscles</h2><p><strong>Remark: this paragraph is not updated for newer java versions, but it shows the concept. The code / script snippets can’t be used as-is.</strong></p>
+<p>No, it is not about heavy lifting. It is about reconfiguring your Java
 environment easily.
 It also assumes that you are in the habit of using the command line over the GUI.</p>
 <p>Sure, a GUI is 'user friendly' if you are willing to look for the things your want to use, and know where
@@ -345,7 +346,7 @@ options and other stuff you may have installed.</p>
 <p>This is a <strong>POSIX</strong> hack, meaning that it applies to Linux and to Mac OS-X (with a little tweaking) alike.
 It may also apply to Windows when using git-bash, MINGW, Powershell or the 'Linux extensions for windows'. You mileage may vary though.</p>
 <section class="doc-section level-2"><h3 id=_concepts_used>Concepts used</h3><div class=ulist><ul><li><code>$PATH</code> The PATH environment variable that determines the way programs are found in the command line.<br>
-all commands that you can enter on the commandline are found using the <code>$PATH</code> variable.</li><li><code>$JAVA_HOME</code> The environment variable that tells where your java installation lives. It is used by apache-ant (ant) and apache-maven (mvn) alike.</li><li>You set these variables in your start-up script, like <code>.bashrc</code>.</li><li>You use aliases to abbreviate your commands.</li><li>You start the IDE from the command line. Always, so YOU are in control of where and how it’s started.</li></ul></div>
+all commands that you can enter on the commandline are found using the <code>$PATH</code> variable.</li><li><code>$JAVA_HOME</code> The environment variable that tells where your java installation lives. It is used by apache-ant (ant) and apache-maven (mvn) alike.</li><li>You set these variables in your start-up script, like <code>.bashrc</code> and <code>.zshrc</code>.</li><li>You use aliases to abbreviate your commands.</li><li>You start the IDE from the command line. Always, so YOU are in control of where and how it’s started.</li></ul></div>
 <p>The whole operation involves three modifications:</p>
 <div class="olist arabic"><ol class=arabic><li>Set the variables in your <code>~/.bashrc</code>.</li><li>Add a helper script, called J, put it in a directory in your PATH. ${HOME}/bin is a good place, if that is on your path.</li><li>Create aliases, to make typing the command simple, like <strong>j8</strong> to switch to Java 8 and <strong>j12</strong> to do the same for Java 12.</li></ol></div></section>
 <section class="doc-section level-2"><h3 id=_setting_in_startup_script>Setting in startup script</h3><figure class=listing-block><figcaption>setting JAVA_HOME and PATH in ~/.bashrc</figcaption>
