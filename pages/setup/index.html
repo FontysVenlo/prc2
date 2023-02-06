@@ -208,7 +208,7 @@ Depending on the type of terminal you are using, we need the specify the aliases
 <p>Since macOS Catalina (10.15) the default shell (which is used by the terminal) is ZShell (zsh).
 This means we can specify our aliases in either <code>.zshrc</code> or in <code>.zprofile</code> in our home directory. We suggest to
 create an additional configuration file <code>.java_setup</code> in your home directory.</p>
-<figure class=listing-block><figcaption><i class="fa fa-apple fa-fw"></i> Add the following lines to ~/.zshrc:</figcaption>
+<figure class=listing-block id=java_setup><figcaption><i class="fa fa-apple fa-fw"></i> Add the following lines to ~/.zshrc:</figcaption>
 <pre class=highlight><code class=language-sh data-lang=sh># Include java environment setup
 source .java_setup</code></pre></figure>
 <figure class=listing-block><figcaption><i class="fa fa-apple fa-fw"></i> Add the following lines to ~/.java_setup:</figcaption>
@@ -256,7 +256,9 @@ sudo ln -sf ../share/maven/bin/mvn .</code></pre></figure>
 <figure class=listing-block><figcaption><i class="fa fa-apple fa-fw"></i> Install Maven using HomeBrew</figcaption>
 <pre class=highlight><code class=language-sh data-lang=sh>brew install maven</code></pre></figure>
 <p>Install manually:</p>
-<p>Same instructions as for <a href=#maven_manual>Linux</a>.</p></section>
+<p>Fetch a fresh copy of <a href=https://maven.apache.org/>Apache Maven</a> from the website. Unzip the archive at
+an appropriate location (e.g. /Applications). Make sure to put maven on the path, see <a href=#java_setup>java_setup</a>.</p>
+<p>Once this is done, entering <code>mvn --version</code> should produce output.</p></section>
 <section class="doc-section level-3"><h4 id=_windows_3><i class="fa fa-windows fa-fw"></i> Windows</h4><p>Install with Chocolately:</p>
 <p><code>choco install maven</code></p>
 <p>Install manually:</p>
@@ -279,25 +281,25 @@ sudo mv netbeans{,-12.2}</code></pre></figure>
 /usr/local/netbeans-16/bin/netbeans &#34;$@&#34; &amp; <b class=conum>1</b></code></pre><ol class="callout-list arabic"><li>Invoke netbeans using its absolute path.</li></ol></figure>
 <p>Then make that script executable with <code>chmod +x netbeans</code>.</p>
 <p>NetBeans IDE should now be startable from the command line (fine for me) as well as from the menu.</p></section>
-<section class="doc-section level-3"><h4 id=_macos_4><i class="fa fa-apple fa-fw"></i> macOS</h4><p>It is possible to install Netbeans by downloading the installer, manual extracting the binaries of by using HomeBrew.</p>
+<section class="doc-section level-3"><h4 id=_macos_4><i class="fa fa-apple fa-fw"></i> macOS</h4><p>It is possible to install Netbeans by downloading the installer, manual extracting the binaries or by using HomeBrew.</p>
 <p>Installing with the installer:</p>
 <div class="olist arabic"><ol class=arabic><li>Download the installer from <a class=bare href=https://netbeans.apache.org/download/index.html>https://netbeans.apache.org/download/index.html</a></li><li>Install as normal</li></ol></div>
 <figure class=listing-block><figcaption><i class="fa fa-apple fa-fw"></i> Install Netbeans using HomeBrew</figcaption>
 <pre class=highlight><code class=language-sh data-lang=sh>brew install --cask netbeans</code></pre></figure>
-<p>Installing the binaries manually:</p>
-<p>See instruction of <a href=#netbeans_manual>Linux</a>.</p>
+<p>Installing the binaries manually, see installation guidelines for maven on MacOS.</p>
 <p>As an extra we can start Netbeans from the command-line using the Java version we want to use.</p>
 <p>We do this by adding an executable file to the <code>PATH</code> so we can start Netbeans from the terminal with the correct Java version.</p>
 <figure class=listing-block><figcaption><i class="fa fa-apple fa-fw"></i> Create <code>netbeans</code> file in <code>/usr/local/bin</code></figcaption>
 <pre class=highlight><code class=language-sh data-lang=sh>cd /usr/local/bin <b class=conum>1</b>
 touch netbeans <b class=conum>2</b>
-echo \&#34;/Applications/NetBeans/Apache NetBeans 12.2.app/Contents/Resources/NetBeans/netbeans/bin/netbeans\&#34; --jdkhome \$JAVA_HOME \$\* \&amp; &gt; netbeans <b class=conum>3</b>
+echo \&#34;/Applications/NetBeans/Apache\ NetBeans\ 16.app/Contents/Resources/NetBeans/netbeans/bin/netbeans\&#34; --jdkhome
+\$JAVA_HOME \$\* \&amp; &gt; netbeans <b class=conum>3</b>
 chmod +x netbeans <b class=conum>4</b></code></pre><ol class="callout-list arabic"><li>Change to the right directory</li><li>Create new file called netbeans</li><li>Write the correct command into netbeans</li><li>Make the file executable</li></ol></figure>
 <p>As you can see, when invoking it this way, you can inform Netbeans about which java version to use (as set in your <code>JAVA_HOME</code> environment variable).
 Furthermore you can pass the project name as a parameter (defined by <code>$*`</code>) so you don’t need to open the project manually anymore in NetBeans.
 Finally the <code>&</code> means that NetBeans runs as a background process without blocking your Terminal session, so your Terminal session is immediately available again.</p>
-<figure class=listing-block><figcaption><i class="fa fa-apple fa-fw"></i> Open <code>myProject</code> in Netbeans using Java version 15</figcaption>
-<pre class=highlight><code class=language-sh data-lang=sh>j15
+<figure class=listing-block><figcaption><i class="fa fa-apple fa-fw"></i> Open <code>myProject</code> in Netbeans using Java version 17</figcaption>
+<pre class=highlight><code class=language-sh data-lang=sh>j17
 netbeans myProject</code></pre></figure></section>
 <section class="doc-section level-3"><h4 id=_windows_4><i class="fa fa-windows fa-fw"></i> Windows</h4><div class="olist arabic"><ol class=arabic><li>Download the installer from <a class=bare href=https://netbeans.apache.org/download/index.html>https://netbeans.apache.org/download/index.html</a></li><li>Install as usual, make sure to change to <code>path</code></li></ol></div></section>
 <section class="doc-section level-3"><h4 id=_other_ides>Other IDE’s</h4><p>We use NetBeans IDE as default. We might not be able to answer any support questions on other IDE’s.</p></section></section></section>
