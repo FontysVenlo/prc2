@@ -124,14 +124,6 @@ First install the https://learn.microsoft.com/en-us/windows/package-manager/wing
 winget install Microsoft.OpenJDK.17
 ----
 
-With Chocolatey:
-
-.icon:windows[fw] install via Chocolatey
-[source,sh]
-----
-choco install adoptopenjdk11 --params="/ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome /INSTALLDIR=C:\usr\lib\jvm\ /quiet"
-----
-
 Manual installation:
 
 Download the correct distribution/version of choice from
