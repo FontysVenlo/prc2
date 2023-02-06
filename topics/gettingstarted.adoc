@@ -44,9 +44,8 @@ Do [red]*NOT* use `Program Files` under Windows, because of the space in the nam
 ====
 
 Installation of Java can be done either through a package manager or by downloading the
-the Java distribution from  https://adoptopenjdk.net/[AdoptOpenJDK ^].
-For PRC2 we will use [blue]*Java 11* as a minimum, but you may want to pick up
-Java 8 for older projects and maybe Java 15 (or even Java 16 when it becomes available) too.
+the Java distribution from  https://adoptium.net/temurin/releases/?version=17[AdoptOpenJDK ^].
+For PRC2 we will use [blue]*Java 17*.
 
 ==== icon:linux[fw] Linux
 
@@ -89,14 +88,21 @@ With HomeBrew:
 .icon:apple[fw] install via HomeBrew
 [source,sh]
 ----
-brew tap AdoptOpenJDK/openjdk
-brew install --cask adoptopenjdk11
+# Untap AdoptOpenJDK first
+brew untap AdoptOpenJDK/openjdk
+
+# If you want to download latest version
+brew install --cask temurin
+
+# To install specific version
+brew tap homebrew/cask-versions
+brew install --cask temurin17
 ----
 
 Manual installation:
 
 Download the correct distribution/version of choice from
-https://adoptopenjdk.net/[AdoptOpenJDK ^].
+https://adoptium.net/temurin/releases/?version=17[AdoptOpenJDK ^].
 Install the same way as normal programs.
 
 ==== icon:windows[fw] Windows
@@ -112,7 +118,7 @@ choco install adoptopenjdk11 --params="/ADDLOCAL=FeatureMain,FeatureEnvironment,
 Manual installation:
 
 Download the correct distribution/version of choice from
-https://adoptopenjdk.net/[AdoptOpenJDK ^].
+https://adoptium.net/temurin/releases/?version=17[AdoptOpenJDK ^].
 Install the same way as normal programs,
 
 [WARNING]
@@ -170,11 +176,11 @@ and to make it easy to switch between Java versions.
 .icon:apple[fw] List version(s) of Java
 [source,sh]
 ----
-/usr/libexec/java_home #<1>
-/usr/libexec/java_home -V #<2>
+/usr/libexec/java_home
+/usr/libexec/java_home -V
 ----
-<1> List the most recent version of Java on your system
-<2> List all installed versions of Java on your system
+The first command lists the most recent version of Java on your system
+The second command lists all installed versions of Java on your system
 
 We can now setup an environment to easily switch between Java versions and later on even launch Netbeans with the intended Java version.
 The only thing we need to do for this is set the `JAVA_HOME` environment variable to link to the correct Java version.
@@ -185,16 +191,8 @@ The only thing we need to do for this is set the `JAVA_HOME` environment variabl
 export JAVA_HOME=<path_to_java_home>
 ----
 
-Where the <path_to_java_home> can be obtained by:
+Where the <path_to_java_home> can be obtained by the command above with the -V parameter.
 
-.icon:apple[fw] Obtaining the path to Java home
-[source,sh]
-----
-/usr/libexec/java_home -v '15*' #<1>
-/usr/libexec/java_home -v '15.0.2'#<2>
-----
-<1> Retrieve the path to Java 15 if installed
-<2> Retrieve the path to a specific subversion of Java 15
 
 .icon:apple[fw] Check that `JAVA_HOME` is set correctly
 [source,sh]
@@ -437,52 +435,11 @@ netbeans myProject
 
 ==== Other IDE's
 
-This section is left empty. We will not answer any support questions on other IDE's but the one
-we use in the performance assessment.
+We use NetBeans IDE as default. We might not be able to answer any support questions on other IDE's.
 
-=== Subversion
+//include::configuringmaven.adoc[]
 
-Subversion is a version control system, that will be used in this course.
-You might have used git before, which is also a version control system.
-However subversion works a bit different, as it is not decentralized as git.
-For this course you do not have to know the commands for subversion as you will be using it from
-inside Netbeans.
-
-However for Netbeans to be able to work with subversion there should first be a subversion command line
-tool be installed on the system.
-
-==== icon:linux[fw] Linux
-
-Using a package manager
-
-.icon:linux[fw] Installing subversion via apt-get
-[source,sh]
-----
-sudo apt install subversion
-----
-
-==== icon:apple[fw] macOS
-
-On older versions of macOS subversion was supplied with XCode.
-However on newer versions of macOS this is no longer the case and we need to manually install it.
-The easiest way to do this is using HomeBrew:
-
-.icon:apple[fw] Install subversion using HomeBrew
-[source,sh]
-----
-brew install subversion
-----
-
-==== icon:windows[fw] Windows
-
-. Download https://tortoisesvn.net/downloads.html[TortoiseSVN]
-. Make sure to install the `command line tools` during installation
-. Open command prompt and check that svn is added to the path with `svn --version`
-
-
-include::configuringmaven.adoc[]
-
-include::sebipom.adoc[]
+//include::sebipom.adoc[]
 
 == Additional Pointers
 
