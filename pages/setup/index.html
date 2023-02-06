@@ -196,7 +196,8 @@ The only thing we need to do for this is set the <code>JAVA_HOME</code> environm
 <pre class=highlight><code class=language-sh data-lang=sh>echo $JAVA_HOME</code></pre></figure>
 <p>However instead of hardcoding the path it is better to retrieve the path while setting the environment.</p>
 <figure class=listing-block><figcaption><i class="fa fa-apple fa-fw"></i> Set <code>JAVA_HOME</code> dynamically with the following command (e.g. for Java 15):</figcaption>
-<pre class=highlight><code class=language-sh data-lang=sh>export JAVA_HOME=$(/usr/libexec/java_home -v &#39;15*&#39;) <b class=conum>1</b></code></pre><ol class="callout-list arabic"><li>$() means that the invocation between parenthesis is resolved first.</li></ol></figure>
+<pre class=highlight><code class=language-sh data-lang=sh>export JAVA_HOME=$(/usr/libexec/java_home)</code></pre></figure>
+<p>$() means that the invocation between parenthesis is resolved first.</p>
 <p>This sets the correct Java environment for your current Terminal session.
 When opening a new terminal the default Java environment will be active again.
 To make switching between Java versions in the terminal easier we can set-up what is called an alias.
@@ -205,18 +206,30 @@ We want these aliases to always be available,
 for this we need to let the terminal know to load our aliases on startup.
 Depending on the type of terminal you are using, we need the specify the aliases at different places.</p>
 <p>Since macOS Catalina (10.15) the default shell (which is used by the terminal) is ZShell (zsh).
-This means we can specify our aliases in either <code>.zshrc</code> or in <code>.zprofile</code> in our home directory.</p>
+This means we can specify our aliases in either <code>.zshrc</code> or in <code>.zprofile</code> in our home directory. We suggest to
+create an additional configuration file <code>.java_setup</code> in your home directory.</p>
 <figure class=listing-block><figcaption><i class="fa fa-apple fa-fw"></i> Add the following lines to ~/.zshrc:</figcaption>
-<pre class=highlight><code class=language-sh data-lang=sh>export JAVA_HOME=$(/usr/libexec/java_home -v 11) <b class=conum>1</b>
-alias j11=&#34;export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version&#34; <b class=conum>2</b>
-alias j15=&#34;export JAVA_HOME=`/usr/libexec/java_home -v 15`; java -version&#34; <b class=conum>3</b></code></pre><ol class="callout-list arabic"><li>Set the default version of Java to version 11.</li><li>Alias to set the Java environment to version 11.</li><li>Alias to set the Java environment to version 15.</li></ol></figure>
-<p>We now need to either restart the terminal for the aliases to take effect or source the <code>.zshrc</code> file.</p>
+<pre class=highlight><code class=language-sh data-lang=sh># Include java environment setup
+source .java_setup</code></pre></figure>
+<figure class=listing-block><figcaption><i class="fa fa-apple fa-fw"></i> Add the following lines to ~/.java_setup:</figcaption>
+<pre class=highlight><code class=language-sh data-lang=sh># Set your default JAVA_HOME
+export JAVA_HOME=$(/usr/libexec/java_home -v 17.0.6)
+
+alias j11=&#34;export JAVA_HOME=`/usr/libexec/java_home -v 11.0.12`; java -version&#34;
+alias j17=&#34;export JAVA_HOME=`/usr/libexec/java_home -v 17.0.6`; java -version&#34;
+
+# Add maven to path
+export PATH=/Applications/maven/apache-maven-3.9.0/bin:$PATH</code></pre></figure>
+<p>We now need to either restart the terminal for the aliases to take effect or source the <code>.zshrc</code> file:</p>
 <p><code>source ~/.zshrc</code></p>
 <p>We can now check that switching between versions works:</p>
 <figure class=listing-block><figcaption><i class="fa fa-apple fa-fw"></i> switching between Java versions</figcaption>
-<pre class=highlight><code class=language-sh data-lang=sh>java -version <b class=conum>1</b>
-j11 <b class=conum>2</b>
-j15 <b class=conum>3</b></code></pre><ol class="callout-list arabic"><li>Check that the default Java version is correct</li><li>Check that switching between versions works</li><li>Check that switching between versions works</li></ol></figure>
+<pre class=highlight><code class=language-sh data-lang=sh>java -version
+j11
+j17</code></pre></figure>
+<p>Check that the default Java version is correct
+Check that switching between versions works
+Check that switching between versions works</p>
 <p>Now we have set-up a way to easily switch between Java versions in the terminal.</p></section>
 <section class="doc-section level-3"><h4 id=_windows_2><i class="fa fa-windows fa-fw"></i> Windows</h4><p>Java should already be added to the path by the installer,
 as it is a default setting during installation.</p></section></section>
