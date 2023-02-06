@@ -139,7 +139,7 @@ border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate
 </aside><div class=lg:pl-[19.5rem]>
 <div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
 <article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_java_style>Java Style</a><ol class="toc-list level-2"><li><a href=#_where_have_you_put_your_curly_braces>Where have you put your Curly Braces.</a></li><li><a href=#_javadoc_style>Javadoc style</a></li></ol></li><li><a href=#_adding_your_own_code_templates_to_netbeans_ide>Adding your own code templates to NetBeans IDE</a></li><li><a href=#_maven>Maven</a><ol class="toc-list level-2"><li><a href=#_maven_repositories>Maven Repositories</a></li><li><a href=#_maven_settings>Maven Settings</a></li></ol></li><li><a href=#_sebipom_3_0_3>Sebipom 3.0.3</a><ol class="toc-list level-2"><li><a href=#_sebipom_and_java_fx>Sebipom and Java FX</a></li><li><a href=#_using_the_sebipom_in_your_own_projects>Using the SeBiPom in your own projects</a></li><li><a href=#_upgrade_all_projects_with_one_command>Upgrade all projects with one command</a></li><li><a href=#_maven_on_steroids_or_use_it_properly>Maven on Steroids or: use it properly</a></li><li><a href=#_maven_modules>Maven Modules</a></li></ol></li><li><a href=#_flex_your_java_muscles>Flex Your Java Muscles</a><ol class="toc-list level-2"><li><a href=#_concepts_used>Concepts used</a></li><li><a href=#_setting_in_startup_script>Setting in startup script</a></li><li><a href=#_switching_to_other_java_version>Switching to other Java version</a></li><li><a href=#_all_made_simple_with_aliases>All made simple with aliases</a></li></ol></li></ol></nav><section class="doc-section level-1"><h2 id=_java_style>Java Style</h2><p>Java is a language and languages come with a culture.
+<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_java_style>Java Style</a><ol class="toc-list level-2"><li><a href=#_where_have_you_put_your_curly_braces>Where have you put your Curly Braces.</a></li><li><a href=#_javadoc_style>Javadoc style</a></li></ol></li><li><a href=#_adding_your_own_code_templates_to_netbeans_ide>Adding your own code templates to NetBeans IDE</a></li><li><a href=#_maven>Maven</a><ol class="toc-list level-2"><li><a href=#_maven_repositories>Maven Repositories</a></li></ol></li><li><a href=#_sebipom_3_0_3>Sebipom 3.0.3</a><ol class="toc-list level-2"><li><a href=#_sebipom_and_java_fx>Sebipom and Java FX</a></li><li><a href=#_using_the_sebipom_in_your_own_projects>Using the SeBiPom in your own projects</a></li><li><a href=#_upgrade_all_projects_with_one_command>Upgrade all projects with one command</a></li><li><a href=#_maven_on_steroids_or_use_it_properly>Maven on Steroids or: use it properly</a></li><li><a href=#_maven_modules>Maven Modules</a></li></ol></li><li><a href=#_flex_your_java_muscles>Flex Your Java Muscles</a><ol class="toc-list level-2"><li><a href=#_concepts_used>Concepts used</a></li><li><a href=#_setting_in_startup_script>Setting in startup script</a></li><li><a href=#_switching_to_other_java_version>Switching to other Java version</a></li><li><a href=#_all_made_simple_with_aliases>All made simple with aliases</a></li></ol></li></ol></nav><section class="doc-section level-1"><h2 id=_java_style>Java Style</h2><p>Java is a language and languages come with a culture.
 One such cultural aspect is the way you format your code, like placing your brackets, parenthesis, spaces and curly braces.
 This coding style is intended to help you read the code, recognize the structure at a glance and find the interesting details easily and spot on.</p>
 <p>The official Java style is derived from the Kernighan and Ritchie (K&R) style for the <strong>C</strong> programming language. Since syntactically Java inherits quite a lot from C, that would be logical choice.</p>
@@ -261,38 +261,8 @@ public void ${method}(){
 <section class="doc-section level-1"><h2 id=_maven>Maven</h2><p>From week two onwards we will use <a href=https://books.sonatype.com/mvnref-book/reference/index.html>Maven</a> as the preferred build tool. The link in the previous sentence
 points to the very readable complete reference manual, which also has some pointers for beginners, might you categorize yourselves as one.</p>
 <section class="doc-section level-2"><h3 id=_maven_repositories>Maven Repositories</h3><p>A maven repository is a server that provides ready built maven 'artifacts', such as (binary) jar files containing libraries, frameworks or APIs and in many (but not all) companion jar files containing the javadoc (often) and sources of the same binary. A maven repository is <strong>NOT</strong> a source code management system (CMS),<a class=footnote-ref id=_footnoteref_3 href=#_footnote_3 title="View footnote 3" role=doc-noteref>[3]</a> although it typically holds several versions of a binary, and there are tools, such as <a href=https://www.sonatype.com/nexus-repository-sonatype>Nexus Repository Manager</a>.<br></p>
-<p>There is a default repository, called <a href=https://mvnrepository.com/repos/central>maven central</a>. You (as a team or company) can have your own repository. We at sebi Venlo do that too. Our repository lives at <a class=bare href=https://www.fontysvenlo.org/repository>https://www.fontysvenlo.org/repository</a>.</p>
-<p>Our <a href=https://www.fontysvenlo.org/repository/>sebi Venlo maven repository</a> at fontysvenlo.org is the simplest of simple: A plain (apache2) web server that does automatic indexing. Users with write access, such as your dear teachers (:P), can simply publish their maven artifacts using maven itself, which, with the help of secure copy, places the artifact in the appropriate directory structure, considering names and versions.</p>
-<p>If you look at a maven repository you will see that it is organized along the three axes: groupId, artifactId and version.</p></section>
-<section class="doc-section level-2"><h3 id=_maven_settings>Maven Settings</h3><p>To make the sebi Venlo repository available for your own projects, add the following to
-your <code>~/.m2/settings.xml</code> in the profiles section. You may also want to make that profile active.</p>
-<p>If you create or open a maven project in NetBeans and open the <strong>Project Files</strong> folder,
-it should show a settings.xml file. If not, you can easily create your own in the proper spot
-on you platform (Linux, Windows, Mac OS-X) by right-clicking on the folder and choose <strong>create settings.xml</strong>.
-The settings file applies to all your maven projects, irrespective of the fact of using maven from the IDE or the command line.</p>
-<figure class=image-block><img src=/prc2/images/create-setting-xml.png alt="create setting xml">
-<figcaption>Figure 1. Creating settings.xml</figcaption></figure>
-<figure class=listing-block><figcaption>adding fontysvenlo repo to your maven settings.xml file.</figcaption>
-<pre class=highlight><code class=language-xml data-lang=xml>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
-&lt;settings xmlns=&#34;http://maven.apache.org/SETTINGS/1.0.0&#34;
-          xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
-          xsi:schemaLocation=&#34;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&#34;&gt;
-    &lt;profiles&gt;
-        &lt;profile&gt;  <b class=conum>1</b>
-            &lt;id&gt;sebivenlo&lt;/id&gt;
-            &lt;repositories&gt;
-                &lt;repository&gt;
-                    &lt;id&gt;fontysvenlo.org&lt;/id&gt; <b class=conum>2</b>
-                    &lt;url&gt;https://www.fontysvenlo.org/repository&lt;/url&gt; <b class=conum>3</b>
-                &lt;/repository&gt;
-            &lt;/repositories&gt;
-        &lt;/profile&gt;
-    &lt;/profiles&gt;
-    &lt;activeProfiles&gt;
-        &lt;activeProfile&gt;sebivenlo&lt;/activeProfile&gt; <b class=conum>4</b>
-    &lt;/activeProfiles&gt;
-&lt;/settings&gt;</code></pre><ol class="callout-list arabic"><li>You define a profile inside the profiles section of your settings.xml.</li><li>Give the profile a name.</li><li>Specify the URL.</li><li>Use the given name to make it an active profile by default.</li></ol></figure>
-<p>You could of course also simply copy (ctrl-C) the xml above and slam (ctrl-V) it into your newly created settings.xml file.</p></section></section>
+<p>There is a default repository, called <a href=https://mvnrepository.com/repos/central>maven central</a>. You (as a team or company) can have your own repository.</p>
+<p>If you look at a maven repository you will see that it is organized along the three axes: groupId, artifactId and version. We have published our Fontys Venlo <strong>informatics pom</strong> under groupId io.github.fontysvenlo, artifactId informaticspom and current (February 2023) 0.9.</p></section></section>
 <section class="doc-section level-1"><h2 id=_sebipom_3_0_3>Sebipom 3.0.3</h2><p>Spelled all lower case: <code>sebipom</code>, is a super pom to use in Fontys Venlo projects. It keeps your own pom.xml file simple and focused to declare just the
 dependencies needed. Niceties to do proper Test Driver Development are provided for in the sebipom definitions, including things as being able to create
 javadoc in a professional looking way, including code highlighted code snippets, checkstyle, reporting, code coverage with maven, pmd, spotbugs etc.</p>
@@ -347,10 +317,10 @@ the basic one below. Add dependencies as required.</p>
 <section class="doc-section level-2"><h3 id=_sebipom_and_java_fx>Sebipom and Java FX</h3><p>If you want to use semipom and build a JavaFX project, you need to activate the <strong>fx</strong>-profile.
 In the commandline that would be</p>
 <figure class=image-block><img src=/prc2/images/mvn-withfx-profile.png alt="mvn withfx profile">
-<figcaption>Figure 2. Commandline. Real software engineers can use the command line.</figcaption></figure>
+<figcaption>Figure 1. Commandline. Real software engineers can use the command line.</figcaption></figure>
 <p>In netbeans you can do that by setting the configuration like in this picture:</p>
 <figure class=image-block><img src=/prc2/images/fx-profile-nb.png alt="fx profile nb">
-<figcaption>Figure 3. Activate a profile in netbeans</figcaption></figure></section>
+<figcaption>Figure 2. Activate a profile in netbeans</figcaption></figure></section>
 <section class="doc-section level-2"><h3 id=_using_the_sebipom_in_your_own_projects>Using the SeBiPom in your own projects</h3><p>To use the test libraries and other goodies that will be used throughout our course,
 you should add the <code>sebipom</code> as parent.</p>
 <p>Modify the pom.xml file in your project to include sebipom as parent by adding
@@ -395,7 +365,7 @@ Use multiple modules.</p>
 <section class="doc-section level-3"><h4 id=_module>Module</h4><p>A module is just a maven project. Has a pom.xml which defines the relation with
 other modules.</p>
 <figure class=image-block><img src=/prc2/images/mavenmodules.svg alt=mavenmodules>
-<figcaption>Figure 4. Modules and parent.</figcaption></figure>
+<figcaption>Figure 3. Modules and parent.</figcaption></figure>
 <p>As you see in the figure, the parent lists its children. The children may have
 inter-dependencies. Otherwise it is just plain maven.</p>
 <figure class=listing-block><figcaption>Snippet from a parent pom</figcaption>
@@ -512,7 +482,7 @@ in a file called <code>${HOME}/.bash_aliases</code> and are loaded on login and 
 alias j11=&#39;eval $(J11)&#39;
 alias j8=&#39;eval $(J8)&#39;</code></pre></figure>
 <figure class=image-block><img src=/prc2/images/j8j11-terminal.png alt="j8j11 terminal">
-<figcaption>Figure 5. see it all work</figcaption></figure>
+<figcaption>Figure 4. see it all work</figcaption></figure>
 <p>As you will notice, switching Java versions in this way is <em>very fast</em>.</p>
 <hr></section></section><section class=footnotes aria-label=Footnotes role=doc-endnotes><hr><ol class=footnotes><li class=footnote id=_footnote_1 role=doc-endnote>if your method gets big, you should break it up in smaller parts, like private methods <a class=footnote-backref href=#_footnoteref_1 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li><li class=footnote id=_footnote_2 role=doc-endnote>In java 11 you can have private static methods in interfaces <a class=footnote-backref href=#_footnoteref_2 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li><li class=footnote id=_footnote_3 role=doc-endnote>Guess why <a class=footnote-backref href=#_footnoteref_3 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li></ol></section>
 </article>
