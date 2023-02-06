@@ -290,8 +290,7 @@ It will check if all is in order, look if any updates are needed etc. This keeps
 <p><strong>Packaging</strong> (which is what you do when you click <em>build</em> in the IDE) the application and<br>
 is only useful when your are really done: all tests are complete and the code turns them a nice green.</p>
 <div class=ulist><ul><li>So do not <em>mvn build</em>, but instead <strong>mvn test</strong>, then maven will do the minimum required.</li></ul></div>
-<p>So if you are in the habit of clicking build and then run your tests, you might want to change you habit.</p>
-<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>sebipom sets the default goal to test, so if you run mvn from the command line, you only need to type <code>mvn</code></p></aside>
+<p>So if you are in the habit of clicking build and then run your tests, you might want to change your habit.</p>
 <section class="doc-section level-3"><h4 id=_maven_the_proper_way_when_still_in_the_tdd_phase>Maven the proper way, when still in the TDD phase</h4><p>As long as you are writing test and writing code, just do:</p>
 <p><code>mvn test</code>, or the equivalent in you IDE (click the test button, not the build button)<br>
 or <code>mvn clean</code> and then <code>mvn test</code>. (click clean, click test).</p>
