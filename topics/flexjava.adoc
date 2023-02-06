@@ -1,5 +1,7 @@
 == Flex Your Java Muscles
 
+*Remark: this paragraph is not updated for newer java versions, but it shows the concept. The code / script snippets can't be used as-is.*
+
 No, it is not about heavy lifting. It is about reconfiguring your Java
 environment easily.
 It also assumes that you are in the habit of using the command line over the GUI.
@@ -16,7 +18,7 @@ It may also apply to Windows when using git-bash, MINGW, Powershell or the 'Linu
 * `$PATH` The PATH environment variable that determines the way programs are found in the command line. +
   all commands that you can enter on the commandline are found using the `$PATH` variable.
 * `$JAVA_HOME` The environment variable that tells where your java installation lives. It is used by apache-ant (ant) and apache-maven (mvn) alike.
-* You set these variables in your start-up script, like `.bashrc`.
+* You set these variables in your start-up script, like `.bashrc` and `.zshrc`.
 * You use aliases to abbreviate your commands.
 * You start the IDE from the command line. Always, so YOU are in control of where and how it's started.
 
