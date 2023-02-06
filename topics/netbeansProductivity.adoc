@@ -3,7 +3,7 @@
 Productivity can be helped big time, if you add code templates
 to NetBeans. Quite a few are predefined but you can add your own too.
 
-Go to Tools > Options > Editor > Code Templates.
+Go to Tools > Options > Editor > Code Templates. (for Mac, use NetBeans > Preferences instead of Tools > Options)
 
 You get this dialog:
 
