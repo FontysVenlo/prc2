@@ -3,12 +3,12 @@
 Many projects will have more than just one component (jar or war file).
 Think of the parallel project project 2.
 
-It is a good idea to reflect this design in the way your structure you source code:
-Use multiple modules.
+It is a good idea to reflect this design in the way you structure your source code:
+use multiple modules.
 
 ==== Module
 
-A module is just a maven project. Has a pom.xml  which defines the relation with
+A Maven module is just a maven project, that has a pom.xml which defines the relation with
 other modules.
 
 
@@ -50,31 +50,31 @@ in the dependencies: parent depends on child, which depends on parent, which dep
 
 The parent pom can declare all external dependencies, that are shared between the children, such as the testing frameworks,
 any other external dependencies. The parent can declare its own parent, allowing it to inherit and pass on anything that
-inherits from such parent.
+inherits from such parent. 
 
-The parent defines the packaging as `pom`, the children what ever is required, typically jar, war, or ear.
+// The parent defines the packaging as `pom`, the children what ever is required, typically jar, war, or ear.
 
-.example pom for rest server.
-[source,xml]
-----
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+// .example pom for rest server.
+// [source,xml]
+// ----
+// <project xmlns="http://maven.apache.org/POM/4.0.0"
+//   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+//   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+//     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>nl.fontys.sebivenlo</groupId>
-        <artifactId>parentpom</artifactId>
-        <version>1.0</version>
-         <!-- parent directory .. as parent is natural but not mandatory -->
-        <relativePath>..</relativePath>
-    </parent>
-    <artifactId>restserver</artifactId>
-    <version>${version}</version>
-    <packaging>war</packaging>
-    <name>Rest server</name>
-</project>
-----
+//     <parent>
+//         <groupId>nl.fontys.sebivenlo</groupId>
+//         <artifactId>parentpom</artifactId>
+//         <version>1.0</version>
+//          <!-- parent directory .. as parent is natural but not mandatory -->
+//         <relativePath>..</relativePath>
+//     </parent>
+//     <artifactId>restserver</artifactId>
+//     <version>${version}</version>
+//     <packaging>war</packaging>
+//     <name>Rest server</name>
+// </project>
+// ----
 
 Putting things in modules has the following advantages:
 
