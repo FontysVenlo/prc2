@@ -114,6 +114,16 @@ Install the same way as normal programs.
 
 ==== icon:windows[fw] Windows
 
+Install with the Windows Package Manager:
+
+First install the https://learn.microsoft.com/en-us/windows/package-manager/winget/#install-winget[winget]
+
+.icon:windows[fw] install via powershell
+[source,sh]
+----
+winget install Microsoft.OpenJDK.17
+----
+
 With Chocolatey:
 
 .icon:windows[fw] install via Chocolatey
