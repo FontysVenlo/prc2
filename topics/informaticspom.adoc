@@ -4,7 +4,7 @@ Spelled all lower  case: `informaticspom`, is a super pom to use in Fontys Venlo
 dependencies needed. Niceties to do proper Test Driver Development are provided for in the sebipom definitions, including things as being able to create
 javadoc in a professional looking way, including code highlighted code snippets, checkstyle, reporting, code coverage with maven, pmd, spotbugs  etc.
 
-https://github.com/sebivenloFontysVenlo/informaticspom[informaticspom is hosted on github].
+https://github.com/FontysVenlo/informaticspom[informaticspom is hosted on github].
 
 This way of using maven, having a [blue]#super# or parent pom defined globally (in a repository, not on a local path), is the [big black]#modern# usage.
  It can be seen in well known big java projects such as https://spring.io/projects/spring-boot[Spring Boot] and https://quarkus.io/[quarkus], to name two contenders in the java-web technology world.
