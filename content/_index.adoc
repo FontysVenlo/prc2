@@ -9,9 +9,9 @@ draft: false
 * Module description can be found on canvas
 
 This site contains the up-to-date course material, exercises and announcements about PRC2
-(Programming Concepts 2: the Test Driven Way), starting in February 2022.
+(Programming Concepts 2: the Test Driven Way), starting in February 2023.
 
-Responsible Teachers for 2022 PRC2: 
+Responsible Teachers for 2023 PRC2: 
 
 - Martijn Bonajo
 - Ibrahim Kouzak 
@@ -43,16 +43,13 @@ even when trying, you will at least have some questions.
 [big red]*We will use a strict deadline policy for the assignments.* +
 *The hand in deadline is two lesson weeks after the publication date.*
 
-[bigger red]*Completion of all the exercises grant admission to the performance assessment!*
 ====
 
 include::{topics}/wow.adoc[]
 
-== MS Teams channel(s)
-MSTeams code 2022: nzbu87g 
 
 
-== Automatic correction of practical exercises.
+== Automatic correction of practical exercises
 
 In PRC1 you have become acquainted with automatic tests. In PRC2 you will not only write the implementation, but also the tests.
 These tests need testing too.
