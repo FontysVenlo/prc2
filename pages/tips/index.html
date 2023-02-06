@@ -301,9 +301,9 @@ or <code>mvn clean</code> and then <code>mvn test</code>. (click clean, click te
 <hr></section></section>
 <section class="doc-section level-2"><h3 id=_maven_modules>Maven Modules</h3><p>Many projects will have more than just one component (jar or war file).
 Think of the parallel project project 2.</p>
-<p>It is a good idea to reflect this design in the way your structure you source code:
-Use multiple modules.</p>
-<section class="doc-section level-3"><h4 id=_module>Module</h4><p>A module is just a maven project. Has a pom.xml which defines the relation with
+<p>It is a good idea to reflect this design in the way you structure your source code:
+use multiple modules.</p>
+<section class="doc-section level-3"><h4 id=_module>Module</h4><p>A Maven module is just a maven project, that has a pom.xml which defines the relation with
 other modules.</p>
 <figure class=image-block><img src=/prc2/images/mavenmodules.svg alt=mavenmodules>
 <figcaption>Figure 1. Modules and parent.</figcaption></figure>
@@ -331,25 +331,6 @@ in the dependencies: parent depends on child, which depends on parent, which dep
 <p>The parent pom can declare all external dependencies, that are shared between the children, such as the testing frameworks,
 any other external dependencies. The parent can declare its own parent, allowing it to inherit and pass on anything that
 inherits from such parent.</p>
-<p>The parent defines the packaging as <code>pom</code>, the children what ever is required, typically jar, war, or ear.</p>
-<figure class=listing-block><figcaption>example pom for rest server.</figcaption>
-<pre class=highlight><code class=language-xml data-lang=xml>&lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34;
-  xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
-  xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-
-    &lt;parent&gt;
-        &lt;groupId&gt;nl.fontys.sebivenlo&lt;/groupId&gt;
-        &lt;artifactId&gt;parentpom&lt;/artifactId&gt;
-        &lt;version&gt;1.0&lt;/version&gt;
-         &lt;!-- parent directory .. as parent is natural but not mandatory --&gt;
-        &lt;relativePath&gt;..&lt;/relativePath&gt;
-    &lt;/parent&gt;
-    &lt;artifactId&gt;restserver&lt;/artifactId&gt;
-    &lt;version&gt;${version}&lt;/version&gt;
-    &lt;packaging&gt;war&lt;/packaging&gt;
-    &lt;name&gt;Rest server&lt;/name&gt;
-&lt;/project&gt;</code></pre></figure>
 <p>Putting things in modules has the following advantages:</p>
 <div class=ulist><ul><li>It promotes loose coupling.</li><li>It can avoid the hen and egg problem: In a normal build, it wants all tests to pass, to be able
 to continue. For business code that is correct, but things like integration tests need a built war file, which cannot be built with failing tests.<br>
