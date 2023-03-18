@@ -10,14 +10,14 @@ both by Cay S. Horstmann and both in the 12th edition.
 |link:docs/parameterized-tests/[2] | Parameterized Tests              | Vol I 5.6 enum classes | Fraction, Flawless Password, Enum Calculator
 |link:docs/design-for-testability/[3] | Design for testability, Mockito  | -                      | Perishable sales
 |link:docs/generics/[4] | Generics  | Vol I 8.1 - 8.8 Generic Programming                       | Shapefilter, Generic Ranges
-|link:docs/jpms-lambda-streams/[5] | JPMS, Lambda & Stream  | Vol II 9 (JPMS) - Vol I 6.2 (lambda) - Vol II 1 (stream)  | Lambda Library, MinMaxCollector
-|link:docs/database-access/[6] | Database access using JDBC  | Vol II 5  | No assignments, application in PRJ2
+|link:docs/jpms-lambda-streams/[5] | JPMS, Lambda & Stream  | Vol II 9 (JPMS) - Vol I 6.2 (lambda) - Vol II 1 (stream)  | Lambda Library
+|link:docs/database-access/[6] | Database access using JDBC  | Vol II 5  | MinMaxCollector, DB programming in PRJ2
 |link:docs/javafx/[7] | JavaFX Properties and Bindings  | Bonus Chapter https://horstmann.com/corejava  | FXTriangulate
 |link:docs/statemachine/[8] | State Machines  | This website  | Gumball Machine, Grade capture
-|9| Project week, no lesson  |   | 
-|link:docs/reflection/[10] | Reflection  | Vol I, ch. 5.7  | Table Generator, Genealogy
-|link:docs/internationalisation/[11] | I18N / Exceptions / Logging  | Vol I, ch. 7; Vol II, ch. 6 and 7 | Pub Exceptions
-|12| Ascension Day, no lesson  |   |
-|13| Security  |   | tbd 
-|14| Concurrency  |   | tbd
+|link:docs/reflection/[9] | Reflection  | Vol I, ch. 5.7  | Table Generator, Genealogy
+|link:docs/internationalisation/[10] | I18N / Exceptions / Logging  | Vol I, ch. 7; Vol II, ch. 6 and 7 | Pub Exceptions
+|11| Security  |   | tbd 
+|12| Number system in Java  |   | tbd
+|13| Concurrency  |   | tbd 
+|14| Buffer  |   | 
 |=======
