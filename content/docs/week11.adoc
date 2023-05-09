@@ -1,8 +1,8 @@
 ---
-title: "11 I18N, exceptions and logging"
+title: "10 I18N, exceptions and logging"
 description: ""
 date: 2022-05-18T10:31:29+02:00
-draft: true
+draft: false
 images: []
 slug: "internationalisation"
 menu: 
