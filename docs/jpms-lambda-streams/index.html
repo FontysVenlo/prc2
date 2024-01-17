@@ -1,202 +1,50 @@
-<!doctype html><html lang=en-us><head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<title>PRC2 - 05 JPMS, Lambda and Streams</title>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/main.min.ede7dd340f864d554aac0f24504a61b25b50412db081218b3e87e08a8cac3acafa99c7a4d57e04ecb58a9416c51585b4aa787393c1b3a5b1bf22efcb28c95a19.css integrity="sha512-7efdNA+GTVVKrA8kUEphsltQQS2wgSGLPofgioysOsr6mcek1X4E7LWKlBbFFYW0qnhzk8GzpbG/Iu/LKMlaGQ==" crossorigin=anonymous>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous>
-<link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous>
-<script src=/prc2/js/init-darkmode.min.09a600ce680e2f21da81abb6c4e0627a5bda42cf7e701bbc3fecdedf5fe0eaa6c82d32cf5c6dac1db60aa93e0d5550c19a6dd8218e6b57e8252979349467ac59.js integrity="sha512-CaYAzmgOLyHagau2xOBielvaQs9+cBu8P+ze31/g6qbILTLPXG2sHbYKqT4NVVDBmm3YIY5rV+glKXk0lGesWQ==" crossorigin=anonymous></script>
-<link rel=apple-touch-icon sizes=180x180 href=https://fontysvenlo.github.io/prc2/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=https://fontysvenlo.github.io/prc2/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=https://fontysvenlo.github.io/prc2/favicon-16x16.png>
-</head><body class="antialiased text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800"><header class="sticky top-0 z-40 w-full flex-none lg:border-b lg:border-gray-900/10 dark:border-gray-50/[0.06] bg-white dark:bg-gray-800
-border-b border-slate-900/10 lg:border-0 dark:border-slate-300/10">
-<div class="max-w-8xl mx-auto">
-<div class="py-4 lg:px-8 mx-4 lg:mx-0">
-<div class="relative flex items-center">
-<button id=menu-toggle type=button class="lg:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 mr-3">
-<span class=sr-only>Navigation</span><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-</button>
-<a class="mr-3 flex-none overflow-hidden md:w-auto dark:hover:text-gray-200 hover:text-gray-900" href=https://fontysvenlo.github.io/prc2/>
-PRC2
-</a>
-<div class="relative flex ml-auto">
-<nav class="hidden md:flex items-center text-sm leading-6 font-semibold text-gray-700 dark:text-gray-200">
-<ul class="flex space-x-8">
-<li>
-<a href=https://fontysvenlo.github.io/prc2/pages/tips/ class="hover:text-sky-500 dark:hover:text-sky-400">Tips</a>
-</li>
-<li>
-<a href=https://fontysvenlo.github.io/prc2/pages/setup/ class="hover:text-sky-500 dark:hover:text-sky-400">Setup</a>
-</li>
-</ul>
-</nav>
-<div class="flex items-center lg:border-l border-gray-200 ml-6 pl-6 dark:border-gray-700">
-<button type=button id=theme-toggle>
-<span class="dark:hidden hover:text-sky-500"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
-<span class="hidden dark:inline hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
-</button>
-<a href=https://github.com/FontysVenlo/prc2 class="ml-6 block hover:text-sky-500 dark:hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>
-</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</header><div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8"><aside id=menu class="hidden lg:block fixed z-20 inset-0 top-[3.5rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto bg-white dark:bg-gray-800">
-<nav class="lg:leading-6 relative">
-<ul class="block md:hidden">
-<li class="mt-12 lg:mt-8">
-<h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">General</h5>
-<ul class="space-y-2 border-l border-gray-100 dark:border-gray-700">
-<li>
-<a href=https://fontysvenlo.github.io/prc2/pages/tips/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
-Tips
-</a>
-</li>
-<li>
-<a href=https://fontysvenlo.github.io/prc2/pages/setup/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
-Setup
-</a>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="mt-12 lg:mt-8">
-<h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">Weeks</h5>
-<ul class="space-y-2 border-l border-gray-100 dark:border-gray-700">
-<li>
-<a href=https://fontysvenlo.github.io/prc2/docs/unit-testing-basics/ class="block border-l pl-4 -ml-px
-border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">
-01 Unit Testing Basics
-</a>
-</li>
-<li>
-<a href=https://fontysvenlo.github.io/prc2/docs/parameterized-tests/ class="block border-l pl-4 -ml-px
-border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">
-02 Parameterized tests
-</a>
-</li>
-<li>
-<a href=https://fontysvenlo.github.io/prc2/docs/design-for-testability/ class="block border-l pl-4 -ml-px
-border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">
-03 Design for testability
-</a>
-</li>
-<li>
-<a href=https://fontysvenlo.github.io/prc2/docs/generics/ class="block border-l pl-4 -ml-px
-border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">
-04 Generics
-</a>
-</li>
-<li>
-<a href=https://fontysvenlo.github.io/prc2/docs/jpms-lambda-streams/ class="block border-l pl-4 -ml-px
-border-slate-500 dark:border-slate-400 text-black dark:text-slate-200">
-05 JPMS, Lambda and Streams
-</a>
-</li>
-<li>
-<a href=https://fontysvenlo.github.io/prc2/docs/database-access/ class="block border-l pl-4 -ml-px
-border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">
-06 Database Access JDBC
-</a>
-</li>
-<li>
-<a href=https://fontysvenlo.github.io/prc2/docs/javafx/ class="block border-l pl-4 -ml-px
-border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">
-07 JavaFX
-</a>
-</li>
-<li>
-<a href=https://fontysvenlo.github.io/prc2/docs/statemachine/ class="block border-l pl-4 -ml-px
-border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">
-08 The State of Things
-</a>
-</li>
-<li>
-<a href=https://fontysvenlo.github.io/prc2/docs/reflection/ class="block border-l pl-4 -ml-px
-border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">
-09 Reflection
-</a>
-</li>
-<li>
-<a href=https://fontysvenlo.github.io/prc2/docs/internationalisation/ class="block border-l pl-4 -ml-px
-border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">
-10 I18N, exceptions and logging
-</a>
-</li>
-<li>
-<a href=https://fontysvenlo.github.io/prc2/docs/security/ class="block border-l pl-4 -ml-px
-border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">
-12 Security
-</a>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
-</aside><div class=lg:pl-[19.5rem]>
-<div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
-<article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500">
-<nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_java_platform_module_system>Java Platform Module System</a><ol class="toc-list level-2"><li><a href=#_changes_in_visibility>Changes in visibility</a></li></ol></li><li><a href=#_java_modules_and_testing>Java Modules and Testing</a><ol class="toc-list level-2"><li><a href=#_black_box_vs_white_box>Black box vs White Box</a></li><li><a href=#_standard_source_code_organization>Standard Source code organization.</a></li></ol></li><li><a href=#_lambda_and_streams>Lambda and Streams</a></li><li><a href=#_functional_interface_rationale>Functional Interface Rationale</a><ol class="toc-list level-2"><li><a href=#_s_h_a_p_e_of_java_util_functions><code>&lt;S.H.A.P.E.></code> of java.util.functions</a></li><li><a href=#_where_is_tostring>Where is toString?</a></li><li><a href=#_method_references>Method References</a></li></ol></li><li><a href=#_streams_sql_like_operations_expressed_in_java_8>Streams, SQL like operations expressed in Java 8</a><ol class="toc-list level-2"><li><a href=#_sql_like_functions>SQL like functions</a></li></ol></li><li><a href=#_collection_enhancements_and_general_tips>Collection Enhancements and general tips</a><ol class="toc-list level-2"><li><a href=#_improved_map_in_java_8>Improved Map in Java 8</a></li></ol></li><li><a href=#_optional_demystified>Optional demystified</a></li><li><a href=#_reading>Reading</a><ol class="toc-list level-2"><li><a href=#_jpms>JPMS</a></li><li><a href=#_lambda_and_streams_2>Lambda and streams</a></li></ol></li></ol></nav><section class="doc-section level-1"><h2 id=_java_platform_module_system>Java Platform Module System</h2><p>The Java Platform Module System has been introduced with Java 9 and had a long development history at
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>PRC2 - 05 JPMS, Lambda and Streams</title><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/main.min.ede7dd340f864d554aac0f24504a61b25b50412db081218b3e87e08a8cac3acafa99c7a4d57e04ecb58a9416c51585b4aa787393c1b3a5b1bf22efcb28c95a19.css integrity="sha512-7efdNA+GTVVKrA8kUEphsltQQS2wgSGLPofgioysOsr6mcek1X4E7LWKlBbFFYW0qnhzk8GzpbG/Iu/LKMlaGQ==" crossorigin=anonymous><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous><script src=/prc2/js/init-darkmode.min.b7911813658cd032d0ed2d118da1fb57653d18386d8b1a26618f83f80019be21e977a1ddeeaeb51dcd1f7d21dfed542a8da077c29eb1ec03d84471bf90d3fabe.js integrity="sha512-t5EYE2WM0DLQ7S0RjaH7V2U9GDhtixomYY+D+AAZviHpd6Hd7q61Hc0ffSHf7VQqjaB3wp6x7APYRHG/kNP6vg==" crossorigin=anonymous></script>
+<link rel=apple-touch-icon sizes=180x180 href=https://fontysvenlo.github.io/prc2/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=https://fontysvenlo.github.io/prc2/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=https://fontysvenlo.github.io/prc2/favicon-16x16.png></head><body class="antialiased text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800"><header class="sticky top-0 z-40 w-full flex-none lg:border-b lg:border-gray-900/10 dark:border-gray-50/[0.06] bg-white dark:bg-gray-800
+border-b border-slate-900/10 lg:border-0 dark:border-slate-300/10"><div class="max-w-8xl mx-auto"><div class="py-4 lg:px-8 mx-4 lg:mx-0"><div class="relative flex items-center"><button id=menu-toggle type=button class="lg:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 mr-3">
+<span class=sr-only>Navigation</span><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<a class="mr-3 flex-none overflow-hidden md:w-auto dark:hover:text-gray-200 hover:text-gray-900" href=https://fontysvenlo.github.io/prc2/>PRC2</a><div class="relative flex ml-auto"><nav class="hidden md:flex items-center text-sm leading-6 font-semibold text-gray-700 dark:text-gray-200"><ul class="flex space-x-8"><li><a href=https://fontysvenlo.github.io/prc2/pages/tips/ class="hover:text-sky-500 dark:hover:text-sky-400">Tips</a></li><li><a href=https://fontysvenlo.github.io/prc2/pages/setup/ class="hover:text-sky-500 dark:hover:text-sky-400">Setup</a></li></ul></nav><div class="flex items-center lg:border-l border-gray-200 ml-6 pl-6 dark:border-gray-700"><button type=button id=theme-toggle>
+<span class="dark:hidden hover:text-sky-500"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span><span class="hidden dark:inline hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span></button>
+<a href=https://github.com/FontysVenlo/prc2 class="ml-6 block hover:text-sky-500 dark:hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a></div></div></div></div></div></header><div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8"><aside id=menu class="hidden lg:block fixed z-20 inset-0 top-[3.5rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto bg-white dark:bg-gray-800"><nav class="lg:leading-6 relative"><ul class="block md:hidden"><li class="mt-12 lg:mt-8"><h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">General</h5><ul class="space-y-2 border-l border-gray-100 dark:border-gray-700"><li><a href=https://fontysvenlo.github.io/prc2/pages/tips/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">Tips</a></li><li><a href=https://fontysvenlo.github.io/prc2/pages/setup/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">Setup</a></li></ul></li></ul><ul><li class="mt-12 lg:mt-8"><h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">Weeks</h5><ul class="space-y-2 border-l border-gray-100 dark:border-gray-700"><li><a href=https://fontysvenlo.github.io/prc2/docs/unit-testing-basics/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">01 Unit Testing Basics</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/parameterized-tests/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">02 Parameterized tests</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/design-for-testability/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">03 Design for testability</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/generics/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">04 Generics</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/jpms-lambda-streams/ class="block border-l pl-4 -ml-px
+border-slate-500 dark:border-slate-400 text-black dark:text-slate-200">05 JPMS, Lambda and Streams</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/database-access/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">06 Database Access JDBC</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/javafx/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">07 JavaFX</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/statemachine/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">08 The State of Things</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/reflection/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">09 Reflection</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/internationalisation/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">10 I18N, exceptions and logging</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/security/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">12 Security</a></li></ul></li></ul></nav></aside><div class=lg:pl-[19.5rem]><div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16"><article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500"><nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_java_platform_module_system>Java Platform Module System</a><ol class="toc-list level-2"><li><a href=#_changes_in_visibility>Changes in visibility</a></li></ol></li><li><a href=#_java_modules_and_testing>Java Modules and Testing</a><ol class="toc-list level-2"><li><a href=#_black_box_vs_white_box>Black box vs White Box</a></li><li><a href=#_standard_source_code_organization>Standard Source code organization.</a></li></ol></li><li><a href=#_lambda_and_streams>Lambda and Streams</a></li><li><a href=#_functional_interface_rationale>Functional Interface Rationale</a><ol class="toc-list level-2"><li><a href=#_s_h_a_p_e_of_java_util_functions><code>&lt;S.H.A.P.E.></code> of java.util.functions</a></li><li><a href=#_where_is_tostring>Where is toString?</a></li><li><a href=#_method_references>Method References</a></li></ol></li><li><a href=#_streams_sql_like_operations_expressed_in_java_8>Streams, SQL like operations expressed in Java 8</a><ol class="toc-list level-2"><li><a href=#_sql_like_functions>SQL like functions</a></li></ol></li><li><a href=#_collection_enhancements_and_general_tips>Collection Enhancements and general tips</a><ol class="toc-list level-2"><li><a href=#_improved_map_in_java_8>Improved Map in Java 8</a></li></ol></li><li><a href=#_optional_demystified>Optional demystified</a></li><li><a href=#_reading>Reading</a><ol class="toc-list level-2"><li><a href=#_jpms>JPMS</a></li><li><a href=#_lambda_and_streams_2>Lambda and streams</a></li></ol></li></ol></nav><section class="doc-section level-1"><h2 id=_java_platform_module_system>Java Platform Module System</h2><p>The Java Platform Module System has been introduced with Java 9 and had a long development history at
 the point of introduction. For the Java developers at Oracle and others involved in the OpenJDK project it
 was considered a necessary step to make Java fit for the future and make it possible to shed some old
 nasty problems. In the development of Java there have been only a few <strong>major</strong> release, although each release of
 Java introduces new features that are supposed to play nice with what is already available. This is called forward
-and backward compatibility, so old programs keep working but can be maintained by using new features.</p>
-<p>The important major releases were:</p>
-<div class=ulist><ul><li>Java 1. Duh.</li><li>Java 1.2 introducing the collection framework.</li><li>Java 5 introduces Generics and the first version of the concurrency framework. It also changed the naming scheme. Internally it still is Java 1.5.</li><li>Java 8 introduced a functional style of programming using Functional interfaces and lambda expressions</li><li>Java 9 introduced the Java Platform Module System, and the project under which it came into being was called <strong>JigSaw</strong>.<br>
-That last name points to the idea of taking the JDK and run-time library apart and recompose it using a better partitioning,
-actually applying separation of concerns in a big way. The project has been a multi year undertaking.</li></ul></div>
-<p>The changes provide the following advantages for the Java platform developers (from <a href=https://openjdk.java.net/projects/jigsaw>project jigsaw</a>)</p>
-<div class=ulist><ul><li>Make it easier for developers to construct and maintain libraries and large applications;</li><li>Improve the security and maintainability of Java SE Platform Implementations in general, and the JDK in particular;</li><li>Enable improved application performance; and</li><li>Enable the Java SE Platform, and the JDK, to scale down for use in small computing devices and dense cloud deployments.</li></ul></div>
-<p>As always with Java, the intent is that the new Java release (9) should be able to work very much the same as the earlier versions, and it does, without
-problems. If you use the JVM and JDK in <strong class=blue>classpath</strong> mode, it works very much like older versions. You define the jar files you need for you app and off you go.</p>
-<p>Although the intent always has been to make the transition as smooth as possible, when you want to use the module system to the fullest,
-it has some consequences.</p>
-<div class=ulist><ul><li>Not everything in the JDK can be used in the same way as before, more protection is taking place as are checks.</li><li>A module is <strong>closed</strong> by default and must explicitly export <span class=blue>package</span>s, if they are needed from outside the module.</li><li>The classes in a module can’t be reflected on by default. If that is needed, the package must be made <span class=blue>open</span>ed for reflection.</li><li>At the moment of writing these restrictions can be modified with startup flags of the JVM. Later Java releases may change the default settings,
+and backward compatibility, so old programs keep working but can be maintained by using new features.</p><p>The important major releases were:</p><div class=ulist><ul><li>Java 1. Duh.</li><li>Java 1.2 introducing the collection framework.</li><li>Java 5 introduces Generics and the first version of the concurrency framework. It also changed the naming scheme. Internally it still is Java 1.5.</li><li>Java 8 introduced a functional style of programming using Functional interfaces and lambda expressions</li><li>Java 9 introduced the Java Platform Module System, and the project under which it came into being was called <strong>JigSaw</strong>.<br>That last name points to the idea of taking the JDK and run-time library apart and recompose it using a better partitioning,
+actually applying separation of concerns in a big way. The project has been a multi year undertaking.</li></ul></div><p>The changes provide the following advantages for the Java platform developers (from <a href=https://openjdk.java.net/projects/jigsaw>project jigsaw</a>)</p><div class=ulist><ul><li>Make it easier for developers to construct and maintain libraries and large applications;</li><li>Improve the security and maintainability of Java SE Platform Implementations in general, and the JDK in particular;</li><li>Enable improved application performance; and</li><li>Enable the Java SE Platform, and the JDK, to scale down for use in small computing devices and dense cloud deployments.</li></ul></div><p>As always with Java, the intent is that the new Java release (9) should be able to work very much the same as the earlier versions, and it does, without
+problems. If you use the JVM and JDK in <strong class=blue>classpath</strong> mode, it works very much like older versions. You define the jar files you need for you app and off you go.</p><p>Although the intent always has been to make the transition as smooth as possible, when you want to use the module system to the fullest,
+it has some consequences.</p><div class=ulist><ul><li>Not everything in the JDK can be used in the same way as before, more protection is taking place as are checks.</li><li>A module is <strong>closed</strong> by default and must explicitly export <span class=blue>package</span>s, if they are needed from outside the module.</li><li>The classes in a module can’t be reflected on by default. If that is needed, the package must be made <span class=blue>open</span>ed for reflection.</li><li>At the moment of writing these restrictions can be modified with startup flags of the JVM. Later Java releases may change the default settings,
 from rather permissive in Java 9 to more restricted in later releases. As an example, some settings became more strict with
-Java 16 and <a href=https://openjdk.java.net/jeps/396>JEP 396 Strongly Encapsulate JDK Internals by Default</a>.</li></ul></div>
-<figure class=video-block><iframe src="//www.youtube.com/embed/l1s7R85GF1A?rel=0" width=848 height=480 frameborder=0 allowfullscreen></iframe>
-<figcaption>Keynote session by Mark Reinhold 2015 introducing JigSaw</figcaption></figure>
-<figure class=image-block><img src=/prc2/images/module-graph.png alt="module graph">
-<figcaption>Figure 1. Java SE module graph</figcaption></figure>
-<p>Having a modular project or a non-modular project depends on the presence of a small file with a well defined name in a specific place.</p>
-<p>The module-info.java file should reside in the root folder of the java sources (which makes the defaul package). The name of the file
+Java 16 and <a href=https://openjdk.java.net/jeps/396>JEP 396 Strongly Encapsulate JDK Internals by Default</a>.</li></ul></div><figure class=video-block><iframe src="//www.youtube.com/embed/l1s7R85GF1A?rel=0" width=848 height=480 frameborder=0 allowfullscreen></iframe><figcaption>Keynote session by Mark Reinhold 2015 introducing JigSaw</figcaption></figure><figure class=image-block><img src=/prc2/images/module-graph.png alt="module graph"><figcaption>Figure 1. Java SE module graph</figcaption></figure><p>Having a modular project or a non-modular project depends on the presence of a small file with a well defined name in a specific place.</p><p>The module-info.java file should reside in the root folder of the java sources (which makes the defaul package). The name of the file
 is not a valid java type name and that is on purpose. The resulting class file contains the module declarations
-which specifies what a module <strong>needs</strong> (<em>reads</em> in JPMS terms) and what it provides (exports).</p>
-<p>The keywords specific to the module declaration are</p>
-<div class=ulist><ul><li><span class=blue>exports</span> What the module provides. Use with one package per line.</li><li><span class=blue>module</span> starts the declaration</li><li><span class=blue>open</span> if before the module, opens the whole module for reflection.
+which specifies what a module <strong>needs</strong> (<em>reads</em> in JPMS terms) and what it provides (exports).</p><p>The keywords specific to the module declaration are</p><div class=ulist><ul><li><span class=blue>exports</span> What the module provides. Use with one package per line.</li><li><span class=blue>module</span> starts the declaration</li><li><span class=blue>open</span> if before the module, opens the whole module for reflection.
 For instance for a module that defines all entities of a multi-module application.</li><li><span class=blue>opens</span> allows reflection of a package. Use with one per package per line.</li><li><span class=blue>provides</span> To indicate that a module implements some interface with one or more implementations.</li><li><span class=blue>requires</span> Indicates what the module itself needs or <strong>reads</strong>. One package per line.</li><li><span class=blue>transitive</span> Used with requires to indicate that there is a requirement that is then made readable to the users of this module as well.</li><li><span class=blue>to</span> Used to restrict either exports or opens to specific other module(s).</li><li><span class=blue>uses</span> To indicate that a module uses a service <span class=blue>provide</span>d by another module.</li><li><span class=blue>with</span> Used with provides to indicate which implementation(s) are available for the
-provided interface implementation. See the <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html>Service Loader API</a>.</li></ul></div>
-<p>As a rule, the module <span class=blue>java.base</span> is 'required' by default, the same a <span class=blue>java.lang</span> is available or imported by default, considering packages to import.</p>
-<p>Some examples of module-info.java files from the PRJ2-AIS-demo-project:</p>
-<figure class=listing-block><figcaption>Assembler</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>module assembler_module{
+provided interface implementation. See the <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html>Service Loader API</a>.</li></ul></div><p>As a rule, the module <span class=blue>java.base</span> is 'required' by default, the same a <span class=blue>java.lang</span> is available or imported by default, considering packages to import.</p><p>Some examples of module-info.java files from the PRJ2-AIS-demo-project:</p><figure class=listing-block><figcaption>Assembler</figcaption><pre class=highlight><code class=language-java data-lang=java>module assembler_module{
     requires persistence_module;
     requires datarecords_module;
     requires businesslogic_module;
     requires gui_module;
-}</code></pre></figure>
-<figure class=listing-block><figcaption>DataRecords</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>module datarecords_module {
+}</code></pre></figure><figure class=listing-block><figcaption>DataRecords</figcaption><pre class=highlight><code class=language-java data-lang=java>module datarecords_module {
     exports datarecords;
-}</code></pre></figure>
-<figure class=listing-block><figcaption>Persistence</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>module persistence_module {
+}</code></pre></figure><figure class=listing-block><figcaption>Persistence</figcaption><pre class=highlight><code class=language-java data-lang=java>module persistence_module {
     requires datarecords_module;
     exports persistence;
-}</code></pre></figure>
-<figure class=listing-block><figcaption>BusinessLogic</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>module businesslogic_module {
+}</code></pre></figure><figure class=listing-block><figcaption>BusinessLogic</figcaption><pre class=highlight><code class=language-java data-lang=java>module businesslogic_module {
     requires transitive datarecords_module;
     requires transitive persistence_module;
 
     exports businesslogic;
-}</code></pre></figure>
-<figure class=listing-block><figcaption>GUI</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>module gui_module {
+}</code></pre></figure><figure class=listing-block><figcaption>GUI</figcaption><pre class=highlight><code class=language-java data-lang=java>module gui_module {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.logging;
@@ -206,10 +54,7 @@ provided interface implementation. See the <a href=https://docs.oracle.com/en/ja
     opens gui to javafx.fxml;
 
     exports gui;
-}</code></pre></figure>
-<p>And another example from our ALDA course in which a Service is provided:</p>
-<figure class=listing-block><figcaption>ALDA sorting srevices</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>module sortingserviceapi {
+}</code></pre></figure><p>And another example from our ALDA course in which a Service is provided:</p><figure class=listing-block><figcaption>ALDA sorting srevices</figcaption><pre class=highlight><code class=language-java data-lang=java>module sortingserviceapi {
     exports sortingservice; <b class=conum>1</b>
 }
 // and
@@ -218,51 +63,33 @@ open module asortingservice {
     requires sortingserviceapi;
     uses sortingservice.SortingServiceFactory; <b class=conum>2</b>
     provides sortingservice.SortingServiceFactory with asortingservice.SortingServices; <b class=conum>3</b>
-}</code></pre><ol class="callout-list arabic"><li>defines sortingservice.SortingServiceFactory in package sortingservice; this is an interface.</li><li>uses and</li><li>provides an inplementation of the SortingServiceFactory interface with a specific implementation: SortingServices.</li></ol></figure>
-<section class="admonition-block warning" role=doc-notice><h6 class="block-title label-only"><span class=title-label>Warning: </span></h6><p>JPMS explicitely forbids:</p>
-<div class=ulist><ul><li>Split packages, that is using the same package name in different modules with different content.</li><li>Cyclic dependencies as in A requires B requires A.</li></ul></div></section>
-<p>The dependencies are validated at the startup of the JVM, when you start Java.
+}</code></pre><ol class="callout-list arabic"><li>defines sortingservice.SortingServiceFactory in package sortingservice; this is an interface.</li><li>uses and</li><li>provides an inplementation of the SortingServiceFactory interface with a specific implementation: SortingServices.</li></ol></figure><section class="admonition-block warning" role=doc-notice><h6 class="block-title label-only"><span class=title-label>Warning:</span></h6><p>JPMS explicitely forbids:</p><div class=ulist><ul><li>Split packages, that is using the same package name in different modules with different content.</li><li>Cyclic dependencies as in A requires B requires A.</li></ul></div></section><p>The dependencies are validated at the startup of the JVM, when you start Java.
 If any of the requirements is not met, the JVM refuses to start. This has the benefit
 that it is immediately obvious what is missing, instead of having a runtime error, when a class can’t be found, because
-the module has not been specified in the path, as is the case with the classpath mode.</p>
-<p>The split package has been a bit of an issue for testing, because in a modern project, (business) source and tests are separated into
+the module has not been specified in the path, as is the case with the classpath mode.</p><p>The split package has been a bit of an issue for testing, because in a modern project, (business) source and tests are separated into
 separate source trees, often with the same package structure, which looks a bit like split packages. The build tools (e.g. maven) understand
-this and can organise the files such that the JVM accepts it anyway.</p>
-<section class="doc-section level-2"><h3 id=_changes_in_visibility>Changes in visibility</h3><p>Java has always had the visibility modifiers <span class=blue>public</span>, <span class=blue>protected</span>, <span class=blue>default</span>, and <span class=blue>private</span>, in descending order of access.
+this and can organise the files such that the JVM accepts it anyway.</p><section class="doc-section level-2"><h3 id=_changes_in_visibility>Changes in visibility</h3><p>Java has always had the visibility modifiers <span class=blue>public</span>, <span class=blue>protected</span>, <span class=blue>default</span>, and <span class=blue>private</span>, in descending order of access.
 This is still effective with the same rules <em>within</em> a module. However the module boundaries add an extra line of visibility defense.
 A public element from module A is only visible to elements in module B if the public elements is part of an exported package.
 As far as reflection goes. An element in module A is accessible via reflection only if the package of the element is open (with the <span class=blue>opens</span> keyword)
-either globally or explicitly to module B ( e.g. <code>module A { exports aPackage to B;}</code>).</p></section></section>
-<section class="doc-section level-1"><h2 id=_java_modules_and_testing>Java Modules and Testing</h2><section class=paragraph><h6 class=block-title>Encapsulation gone wrong: So much for shining security armor.</h6><p><img src=/prc2/images/shiningArmor-cropped.png alt="shiningArmor cropped" width=400 title="So much for shining security armor" class="thumb left"> Project Jigsaw,
+either globally or explicitly to module B ( e.g. <code>module A { exports aPackage to B;}</code>).</p></section></section><section class="doc-section level-1"><h2 id=_java_modules_and_testing>Java Modules and Testing</h2><section class=paragraph><h6 class=block-title>Encapsulation gone wrong: So much for shining security armor.</h6><p><img src=/prc2/images/shiningArmor-cropped.png alt="shiningArmor cropped" width=400 title="So much for shining security armor" class="thumb left"> Project Jigsaw,
 now known as the <strong>J</strong>ava <strong>P</strong>latform <strong>M</strong>odule <strong>S</strong>ystem solves problems
 that lingered in the Java ecosystem since its inception. The standard encapsulation or visibility model
 with protection or visibility modes <code>private</code>, <code>package private (default)</code> provide too
 little defense against (ab)use of non-public API’s. That plus the fact that reflection is very powerful.
 A java security manager can put up some defense against reflection abuse, but enabling this kind of security is optional.<a class=footnote-ref id=_footnoteref_1 href=#_footnote_1 title="View footnote 1" role=doc-noteref>[1]</a>
-This made many internal details of the JDK free game. Much like a knight in shiny armor is defenseless against a can opener.</p></section>
-<hr>
-<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>The java platform module system (JPMS) promotes loose coupling.</p></aside>
-<p>This is all fine and good, but testing, in particular Unit testing relies on access to the 'private' parts
-of a class and package, in particular the package private parts.</p>
-<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>API or <strong>A</strong>pplication <strong>P</strong>rogramming <strong>I</strong>nterface is defined as the publicly visible
+This made many internal details of the JDK free game. Much like a knight in shiny armor is defenseless against a can opener.</p></section><hr><aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip:</span></h6><p>The java platform module system (JPMS) promotes loose coupling.</p></aside><p>This is all fine and good, but testing, in particular Unit testing relies on access to the 'private' parts
+of a class and package, in particular the package private parts.</p><aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip:</span></h6><p>API or <strong>A</strong>pplication <strong>P</strong>rogramming <strong>I</strong>nterface is defined as the publicly visible
 parts of classes. In Java those are <strong>public</strong> and <strong>protected</strong> members (methods and fields).
-Members that are neither public or protected should not be considered part of the API.</p>
-<p>Actually, API in this case should be spelled APPI for <strong>A</strong>pplication <strong>P</strong>ublic <strong>P</strong>rogramming <strong>I</strong>nterface, but we all know
-bad habits die slowly.</p>
-<p>A smaller API has also a smaller attack surface for real security intrusions. This is another major reason for improved encapsulation of the
-stuff in the JDK.</p>
-<p>To minimize coupling, it is also wise to keep the API minimal, but without impairing the usefulness of the
+Members that are neither public or protected should not be considered part of the API.</p><p>Actually, API in this case should be spelled APPI for <strong>A</strong>pplication <strong>P</strong>ublic <strong>P</strong>rogramming <strong>I</strong>nterface, but we all know
+bad habits die slowly.</p><p>A smaller API has also a smaller attack surface for real security intrusions. This is another major reason for improved encapsulation of the
+stuff in the JDK.</p><p>To minimize coupling, it is also wise to keep the API minimal, but without impairing the usefulness of the
 API. Often an API can be enhanced with some convenience features that combine parts in the already public part. This does NOT enlarge exposed parts.
 See for instance the methods in
-<a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/nio/file/Files.html>java.nio.file.Files</a>.</p></aside>
-<section class="doc-section level-2"><h3 id=_black_box_vs_white_box>Black box vs White Box</h3><p>In testing, one distinguishes between so called <strong>black</strong> box and <strong>white</strong> box tests.</p>
-<p><strong>Black box</strong> in this respect means that you cannot see the internals, but only those parts defined in the API.
+<a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/nio/file/Files.html>java.nio.file.Files</a>.</p></aside><section class="doc-section level-2"><h3 id=_black_box_vs_white_box>Black box vs White Box</h3><p>In testing, one distinguishes between so called <strong>black</strong> box and <strong>white</strong> box tests.</p><p><strong>Black box</strong> in this respect means that you cannot see the internals, but only those parts defined in the API.
 This is the way that a client package will use the API. Black box testing is easily supported by the module system, because the test classes behave as ordinary
-clients.<br>
-<strong>White box</strong> would better be called transparent box, but the name <em>white box</em> stuck. In white box tests you <strong>DO</strong> want access to the (package) private parts
-of your business code. This is a bit handicapped by the way the JPMS allows access.</p></section>
-<section class="doc-section level-2"><h3 id=_standard_source_code_organization>Standard Source code organization.</h3><figure class=listing-block><figcaption>source tree of genericdao</figcaption>
-<pre class=highlight><code class=language-sh data-lang=sh>src
+clients.<br><strong>White box</strong> would better be called transparent box, but the name <em>white box</em> stuck. In white box tests you <strong>DO</strong> want access to the (package) private parts
+of your business code. This is a bit handicapped by the way the JPMS allows access.</p></section><section class="doc-section level-2"><h3 id=_standard_source_code_organization>Standard Source code organization.</h3><figure class=listing-block><figcaption>source tree of genericdao</figcaption><pre class=highlight><code class=language-sh data-lang=sh>src
 ├── main
 │   └── java
 │       └── genericdao
@@ -274,18 +101,11 @@ of your business code. This is a bit handicapped by the way the JPMS allows acce
         ├── genericdao
             ├── dao
             ├── memory
-            └── pgdao</code></pre></figure>
-<p>We are using maven, in which the unit test plugin is called <strong>surefire</strong>, the integration test plugin (which we
-did not use up to this point yet) is called <strong>failsafe</strong>.</p>
-<p>The standard way source code is organized is by means of separate directories for
-the 'business' code and the test code in two separate directory trees inside the same project.<br>
-This practice, which prevents test code to land in the final application or library jar file is useful, so we will keep it as it is.</p>
-<p>However, JPMS does not allow so called <em>split packages</em>. Surefire addresses this problem by telling
+            └── pgdao</code></pre></figure><p>We are using maven, in which the unit test plugin is called <strong>surefire</strong>, the integration test plugin (which we
+did not use up to this point yet) is called <strong>failsafe</strong>.</p><p>The standard way source code is organized is by means of separate directories for
+the 'business' code and the test code in two separate directory trees inside the same project.<br>This practice, which prevents test code to land in the final application or library jar file is useful, so we will keep it as it is.</p><p>However, JPMS does not allow so called <em>split packages</em>. Surefire addresses this problem by telling
 the JVM to <em>patch</em> the module we are testing with the classes defined in the test source tree.
-It is as if the test classes are put in the business source tree.<br>
-This allows the test classes access to the package private parts of the classes, the way it worked in before JPMS.</p>
-<figure class=listing-block><figcaption>Module definition of sebi dao.</figcaption>
-<pre>module nl.fontys.sebidao {
+It is as if the test classes are put in the business source tree.<br>This allows the test classes access to the package private parts of the classes, the way it worked in before JPMS.</p><figure class=listing-block><figcaption>Module definition of sebi dao.</figcaption><pre>module nl.fontys.sebidao {
     exports nl.fontys.sebivenlo.dao;
     exports nl.fontys.sebivenlo.dao.memory;
     exports nl.fontys.sebivenlo.dao.pg;
@@ -293,20 +113,15 @@ This allows the test classes access to the package private parts of the classes,
     requires java.naming;
     requires java.sql;
     requires org.postgresql.jdbc;
-}</pre></figure>
-<p>The module definition above exports three packages and declares itself
-dependent on 3 modules from Java API and one postgresql module.</p>
-<p>Unit tests, and in particular the testing libraries such as AssertJ, and Mockito
+}</pre></figure><p>The module definition above exports three packages and declares itself
+dependent on 3 modules from Java API and one postgresql module.</p><p>Unit tests, and in particular the testing libraries such as AssertJ, and Mockito
 use reflection to do their work. The simplest example is JUnit itself, which uses reflection to read the annotations
 in the class file. So does Mockito. AssertJ uses reflection to get to fields (for deepEquals) and methods. Reflection is a tool very sharp indeed, to
 get to the guts of the <strong>S</strong>ystem <strong>U</strong>nder <strong>T</strong>est. Of these Test libraries JUnit and AssertJ have module definitions already. Mockito and postgresql do not have that
-at the time of writing this document (April 2020).</p>
-<p>The quickest way to allow the testing tools access is to fully OPEN the packages of the <strong>SUT</strong> to world.
+at the time of writing this document (April 2020).</p><p>The quickest way to allow the testing tools access is to fully OPEN the packages of the <strong>SUT</strong> to world.
 Because this happens during testing, surefire is instructed to tell the jvm (java), that runs the test, to
 open those packages to the world. The snippet from the maven pom file that realizes that is given below. You can copy
-and adapt it for your own purposes.</p>
-<figure class=listing-block><figcaption>sebipom project with surefire.opens property to open op required packages for testing. Requires sebipom >= 3.0.2</figcaption>
-<pre class=highlight><code class=language-xml data-lang=xml>  &lt;properties&gt;
+and adapt it for your own purposes.</p><figure class=listing-block><figcaption>sebipom project with surefire.opens property to open op required packages for testing. Requires sebipom >= 3.0.2</figcaption><pre class=highlight><code class=language-xml data-lang=xml>  &lt;properties&gt;
     &lt;surefire.opens&gt; <b class=conum>1</b>
         --add-opens nl.fontys.sebivenlo.genericdao/genericdao.dao=ALL-UNNAMED <b class=conum>2</b>
         --add-opens nl.fontys.sebivenlo.genericdao/genericdao.memory=ALL-UNNAMED
@@ -316,62 +131,31 @@ and adapt it for your own purposes.</p>
     &lt;/surefire.opens&gt;
     <b class=conum>3</b>
   &lt;/properties&gt;</code></pre><ol class="callout-list arabic"><li>We are adding a property for the surefire plugin which is picked up by sebipom.</li><li>In particular the arguments that are passed to the JVM that runs the tests,
-which appends <strong>--add-opens</strong> commands for all packages that require unit tests.</li><li>Other properties are left out for brevity.</li></ol></figure>
-<p>Of particular importance, and project specific are the <code class=blue>--add-opens</code> commands, which you must adapt to your own project’s
-pom file with your own module and package names.</p>
-<figure class=image-block><img src=/prc2/images/opens.svg alt=opens width=600>
-<figcaption>Figure 2. opens sets module and package</figcaption></figure>
-<p><strong>Opens</strong> is the most powerful way of exporting a package. It allows full access (as in <code>exports</code>) plus reflection.
+which appends <strong>--add-opens</strong> commands for all packages that require unit tests.</li><li>Other properties are left out for brevity.</li></ol></figure><p>Of particular importance, and project specific are the <code class=blue>--add-opens</code> commands, which you must adapt to your own project’s
+pom file with your own module and package names.</p><figure class=image-block><img src=/prc2/images/opens.svg alt=opens width=600><figcaption>Figure 2. opens sets module and package</figcaption></figure><p><strong>Opens</strong> is the most powerful way of exporting a package. It allows full access (as in <code>exports</code>) plus reflection.
 We could try to make more specific export lines such as <strong>--add-export</strong>, but although more precise, that will not help very much, because the
-access enabling lines will only take effect during the (surefire) unit tests.<br>
-If you have <em>failsafe</em> integration tests, you will have to do
-the same for the <em>failsafe</em> plugin, although failsafe tests should stick to black box testing, where such can opener style configuration should not be required.</p></section></section>
-<section class="doc-section level-1"><h2 id=_lambda_and_streams>Lambda and Streams</h2><p>We will start with a short recap and some refinements on λ-expressions,
-followed by application in streams.</p></section>
-<section class="doc-section level-1"><h2 id=_functional_interface_rationale>Functional Interface Rationale</h2><div class=ulist><ul><li>Java: backwards compatible: do not break existing code with new features.</li><li>Way forward: enhancements to the collection framework.<ul><li>Extending interfaces without breaking implementations<ul><li>add default functions</li><li>add static helper functions</li></ul></li></ul></li></ul></div>
-<p>Example: compare java 7 and java 8 <code>Comparator</code>:</p>
-<div class=ulist><ul><li>The Java 7 version has <strong>two</strong> <em>abstract</em> methods, which were the only kind in Java before 8.</li><li>The Java 8 version has <strong>one</strong> <em>abstract</em> method, making it into a functional interface,<br>
-<strong>7</strong> <code>default</code> methods and<br>
-<strong>8</strong> <code>static</code> methods whose functionality is now <em>available</em> to every class implementing Comparator.</li></ul></div>
-<p>Have a look yourselves: <a href=https://docs.oracle.com/javase/7/docs/api/java/util/Comparator.html target=_blank rel=noopener>Java 7 Comparator </a>
-and <a href=https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html target=_blank rel=noopener>Java 8 Comparator </a></p>
-<p>The concept of functional interfaces or <strong>single abstract method</strong> is the secret ingredient to let the compiler guess the
-appropriate <em>shape</em> of the function that matches a lambda expression.</p>
-<section class="doc-section level-2"><h3 id=_s_h_a_p_e_of_java_util_functions><code>&lt;S.H.A.P.E.></code> of java.util.functions</h3><p>The <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/package-summary.html>java.util.functions</a> package,
+access enabling lines will only take effect during the (surefire) unit tests.<br>If you have <em>failsafe</em> integration tests, you will have to do
+the same for the <em>failsafe</em> plugin, although failsafe tests should stick to black box testing, where such can opener style configuration should not be required.</p></section></section><section class="doc-section level-1"><h2 id=_lambda_and_streams>Lambda and Streams</h2><p>We will start with a short recap and some refinements on λ-expressions,
+followed by application in streams.</p></section><section class="doc-section level-1"><h2 id=_functional_interface_rationale>Functional Interface Rationale</h2><div class=ulist><ul><li>Java: backwards compatible: do not break existing code with new features.</li><li>Way forward: enhancements to the collection framework.<ul><li>Extending interfaces without breaking implementations<ul><li>add default functions</li><li>add static helper functions</li></ul></li></ul></li></ul></div><p>Example: compare java 7 and java 8 <code>Comparator</code>:</p><div class=ulist><ul><li>The Java 7 version has <strong>two</strong> <em>abstract</em> methods, which were the only kind in Java before 8.</li><li>The Java 8 version has <strong>one</strong> <em>abstract</em> method, making it into a functional interface,<br><strong>7</strong> <code>default</code> methods and<br><strong>8</strong> <code>static</code> methods whose functionality is now <em>available</em> to every class implementing Comparator.</li></ul></div><p>Have a look yourselves: <a href=https://docs.oracle.com/javase/7/docs/api/java/util/Comparator.html target=_blank rel=noopener>Java 7 Comparator</a>
+and <a href=https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html target=_blank rel=noopener>Java 8 Comparator</a></p><p>The concept of functional interfaces or <strong>single abstract method</strong> is the secret ingredient to let the compiler guess the
+appropriate <em>shape</em> of the function that matches a lambda expression.</p><section class="doc-section level-2"><h3 id=_s_h_a_p_e_of_java_util_functions><code>&lt;S.H.A.P.E.></code> of java.util.functions</h3><p>The <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/package-summary.html>java.util.functions</a> package,
 which was introduced in Java 8, contains only functional interfaces and nothing else.
 The package contains the most common <strong>shapes</strong> of functions that may occur in lambda expressions.
 You can see that all reference type functional interfaces heavily rely on generics. The use of the proper generics definition
-is essential for functional interfaces to function properly.</p>
-<p>We will use the notation <code>&lt;input type> → &lt;result type></code> for the <strong>shape</strong> of a Functional interface.
+is essential for functional interfaces to function properly.</p><p>We will use the notation <code>&lt;input type> → &lt;result type></code> for the <strong>shape</strong> of a Functional interface.
 Note that the shape is determined by the one (abstract) method
 of the functional interface. The style used in java.util.function is somewhat mnemonic
-in choosing the generic type parameters in the type interface type definition.</p>
-<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>The Functional Interface is your handle to the shape of the allowed lambda expressions, <em>input</em>, <em>output</em> and optional <em>throws</em>.</p></aside>
-<div class=ulist><ul><li>T as only parameter, either a input or output e.g.<ul><li><code>Consumer&lt;T></code>: shape <code>&lt;T> → {}</code> black hole? Eats Ts.</li><li><code>Supplier&lt;T></code> : shape <code>() → &lt;T></code> , source of Ts.</li></ul></li><li><code>Function&lt;T,R></code>: shape <code>&lt;T> → &lt;R></code> also known as mapping function, from one type to another.</li><li><code>BiFunction&lt;T,U,R></code>: shape <code>&lt;T,U> → &lt;R></code>.</li></ul></div>
-<p>There are also a few specialized interfaces that deal with the primitive types <code>int</code>, <code>long</code> and <code>double</code>.
+in choosing the generic type parameters in the type interface type definition.</p><aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip:</span></h6><p>The Functional Interface is your handle to the shape of the allowed lambda expressions, <em>input</em>, <em>output</em> and optional <em>throws</em>.</p></aside><div class=ulist><ul><li>T as only parameter, either a input or output e.g.<ul><li><code>Consumer&lt;T></code>: shape <code>&lt;T> → {}</code> black hole? Eats Ts.</li><li><code>Supplier&lt;T></code> : shape <code>() → &lt;T></code> , source of Ts.</li></ul></li><li><code>Function&lt;T,R></code>: shape <code>&lt;T> → &lt;R></code> also known as mapping function, from one type to another.</li><li><code>BiFunction&lt;T,U,R></code>: shape <code>&lt;T,U> → &lt;R></code>.</li></ul></div><p>There are also a few specialized interfaces that deal with the primitive types <code>int</code>, <code>long</code> and <code>double</code>.
 Their rationale is performance and memory footprint, in short: efficiency. Dealing with
 e.g. arrays of primitive types is much more efficient than using the associated wrapper types, <code>int</code> vs <code>Integer</code>.
-You save the object allocation memory-wise and the dereferencing and unwrapping execution time-wise.</p>
-<div class=ulist><ul><li><code>ToDoubleBiFunction&lt;T,U></code>: shape <code>&lt;T,U> → double</code> producing a double from two arguments.</li><li><code>LongConsumer</code>: shape <code>long →()</code> munges longs to make them disappear. :-)</li></ul></div>
-<p>The <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/package-summary.html>package</a> documentation makes an interesting read.</p>
-<p>Exceptions in Lambda expressions need special consideration. In particular checked
+You save the object allocation memory-wise and the dereferencing and unwrapping execution time-wise.</p><div class=ulist><ul><li><code>ToDoubleBiFunction&lt;T,U></code>: shape <code>&lt;T,U> → double</code> producing a double from two arguments.</li><li><code>LongConsumer</code>: shape <code>long →()</code> munges longs to make them disappear. :-)</li></ul></div><p>The <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/package-summary.html>package</a> documentation makes an interesting read.</p><p>Exceptions in Lambda expressions need special consideration. In particular checked
 exceptions actually counteract the conciseness of lambda expression.
 In those cases, where the lambda expression or reference method throws an exception,
 that exceptions is commonly <em>wrapped</em> in an unchecked exception, e.g. UncheckedIOException to wrap an IOException.
-UncheckedIOException has been introduced in Java 8 for just that purpose.</p>
-<p>You can also roll your own.<br>
-If you need to declare a functional interface that potentially throws an exception, the following is a way to do that:</p>
-<figure class=listing-block><figcaption>throwing functional interface</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>interface ThrowingBiFunction&lt;T,U, R,&lt;X extends Throwable&gt;&gt; {
+UncheckedIOException has been introduced in Java 8 for just that purpose.</p><p>You can also roll your own.<br>If you need to declare a functional interface that potentially throws an exception, the following is a way to do that:</p><figure class=listing-block><figcaption>throwing functional interface</figcaption><pre class=highlight><code class=language-java data-lang=java>interface ThrowingBiFunction&lt;T,U, R,&lt;X extends Throwable&gt;&gt; {
     R apply(T t, U u) throws X;
-}</code></pre></figure>
-<p>Shape wise it looks like <code class=blue>&lt;T,U> → R | X</code> pronounced as from T and U to either, R the result, <em>or</em> X, the thrown exception.</p></section>
-<section class="doc-section level-2"><h3 id=_where_is_tostring>Where is toString?</h3><p>You might miss <code>toString()</code> on lambda expressions, and you would be right: Lambda expressions lack a useful toString. What you get
-by calling toString() on a lambda expression is something rather useless, concocted by the JVM.</p>
-<figure class=listing-block><figcaption>toString() is useless with lambda expressions</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>  Comparator&lt;Student&gt; gradeComp = (a,b) -&gt; Double.compare(a.getGrade(),b.getGrade());</code></pre></figure>
-<p>When you invoke toString() in say jshell, you get.</p>
-<div class=listing-block><pre class=highlight><code class=language-shell data-lang=shell>jshell&gt; class Student{ double grade; double getGrade(){return grade;}}
+}</code></pre></figure><p>Shape wise it looks like <code class=blue>&lt;T,U> → R | X</code> pronounced as from T and U to either, R the result, <em>or</em> X, the thrown exception.</p></section><section class="doc-section level-2"><h3 id=_where_is_tostring>Where is toString?</h3><p>You might miss <code>toString()</code> on lambda expressions, and you would be right: Lambda expressions lack a useful toString. What you get
+by calling toString() on a lambda expression is something rather useless, concocted by the JVM.</p><figure class=listing-block><figcaption>toString() is useless with lambda expressions</figcaption><pre class=highlight><code class=language-java data-lang=java>  Comparator&lt;Student&gt; gradeComp = (a,b) -&gt; Double.compare(a.getGrade(),b.getGrade());</code></pre></figure><p>When you invoke toString() in say jshell, you get.</p><div class=listing-block><pre class=highlight><code class=language-shell data-lang=shell>jshell&gt; class Student{ double grade; double getGrade(){return grade;}}
 |  created class Student
 
 jshell&gt; Comparator&lt;Student&gt; gradeComp = (a,b) -&gt; Double.compare(a.getGrade(),b.getGrade());
@@ -379,64 +163,31 @@ gradeComp ==&gt; $Lambda$16/0x00000008000b3040@1e88b3c
 
 jshell&gt; gradeComp
 jshell&gt; gradeComp.toString()
-$3 ==&gt; &#34;$Lambda$16/0x00000008000b3040@1e88b3c&#34;</code></pre></div></section>
-<section class="doc-section level-2"><h3 id=_method_references>Method References</h3><p>Since the shape of a functional interface has everything a method definition has, bar its name, it should
+$3 ==&gt; &#34;$Lambda$16/0x00000008000b3040@1e88b3c&#34;</code></pre></div></section><section class="doc-section level-2"><h3 id=_method_references>Method References</h3><p>Since the shape of a functional interface has everything a method definition has, bar its name, it should
 be no surprise that this can be used to advantage. Everywhere where a functional interface is allowed you can also provide a
-so called Method reference. Quite often, but not always this can be a shorthand and thereby improving readability.</p>
-<p>Method references have two parts, separated by two colons: <code class=blue>::</code>.</p>
-<div class=ulist><ul><li>The left hand side of the <code class=blue>::</code> defines the <strong>method context</strong>, either instance of class (for method references to static methods)</li><li>The right hand side is the <strong>method name</strong>. The compiler will do the matching in case of overloaded methods,
-but sometimes it may give up and will let you know by using the word <strong>ambiguous</strong> in its complaint.</li></ul></div>
-<p>There are four kinds of references:</p>
-<figure class=table-block><figcaption>Table 1. Source <a href=https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html>Orace tuturial</a>.</figcaption>
-<table class="frame-all grid-all stretch"><col style=width:50%><col style=width:50%><thead><tr><th class="halign-left valign-top">Kind</th><th class="halign-left valign-top">Example</th></tr></thead><tbody><tr><td class="halign-left valign-top">Reference to static method</td><td class="halign-left valign-top">ContainingClass::staticMethodName</td></tr><tr><td class="halign-left valign-top">Reference to an instance method of a particular object</td><td class="halign-left valign-top">containingObject::instanceMethodName</td></tr><tr><td class="halign-left valign-top">Reference to an instance method of an arbitrary object of a particular type</td><td class="halign-left valign-top">ContainingType::methodName</td></tr><tr><td class="halign-left valign-top">Reference to a constructor</td><td class="halign-left valign-top">ClassName::new</td></tr><tr><td class="halign-left valign-top">Reference to a method of this instance</td><td class="halign-left valign-top">this::instanceMethodName</td></tr></tbody></table></figure>
-<aside class="admonition-block note" role=note><h6 class="block-title label-only"><span class=title-label>Note: </span></h6><p>You are not allowed to leave out the left hand side nor the <code class=blue>::</code>, not even if the reference context is <code>this</code>.</p></aside></section></section>
-<section class="doc-section level-1"><h2 id=_streams_sql_like_operations_expressed_in_java_8>Streams, SQL like operations expressed in Java 8</h2><p>Here too, the <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/package-summary.html>package documentation</a> is an interesting read.</p>
-<p>A stream can be considered a conveyor belt on which objects experience operations.
-The belt starts at a source (for instance a Supplier) and can on or more <em>intermediate</em> operations and end with a Terminal operation.</p>
-<div class=image-block><img src=/prc2/images/streamops.png alt=streamops></div>
-<p>from <a href=https://technology.amis.nl/2013/10/05/java-8-collection-enhancements-leveraging-lambda-expressions-or-how-java-emulates-sql/ target=_blank rel=noopener>Lucas Jellema of amis</a> blogs</p>
-<p>Here your see a physical stream and a collect operation.</p>
-<div class=image-block><img src=/prc2/images/Flexible-Conveyor.jpg alt="Conveyor and collecting"></div>
-<section class="doc-section level-2"><h3 id=_sql_like_functions>SQL like functions</h3><figure class=listing-block><figcaption>assume you want to know the sum of the wages for women.</figcaption>
-<pre class=highlight><code class=language-sql data-lang=sql>select sum(salary)
+so called Method reference. Quite often, but not always this can be a shorthand and thereby improving readability.</p><p>Method references have two parts, separated by two colons: <code class=blue>::</code>.</p><div class=ulist><ul><li>The left hand side of the <code class=blue>::</code> defines the <strong>method context</strong>, either instance of class (for method references to static methods)</li><li>The right hand side is the <strong>method name</strong>. The compiler will do the matching in case of overloaded methods,
+but sometimes it may give up and will let you know by using the word <strong>ambiguous</strong> in its complaint.</li></ul></div><p>There are four kinds of references:</p><figure class=table-block><figcaption>Table 1. Source <a href=https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html>Orace tuturial</a>.</figcaption><table class="frame-all grid-all stretch"><col style=width:50%><col style=width:50%><thead><tr><th class="halign-left valign-top">Kind</th><th class="halign-left valign-top">Example</th></tr></thead><tbody><tr><td class="halign-left valign-top">Reference to static method</td><td class="halign-left valign-top">ContainingClass::staticMethodName</td></tr><tr><td class="halign-left valign-top">Reference to an instance method of a particular object</td><td class="halign-left valign-top">containingObject::instanceMethodName</td></tr><tr><td class="halign-left valign-top">Reference to an instance method of an arbitrary object of a particular type</td><td class="halign-left valign-top">ContainingType::methodName</td></tr><tr><td class="halign-left valign-top">Reference to a constructor</td><td class="halign-left valign-top">ClassName::new</td></tr><tr><td class="halign-left valign-top">Reference to a method of this instance</td><td class="halign-left valign-top">this::instanceMethodName</td></tr></tbody></table></figure><aside class="admonition-block note" role=note><h6 class="block-title label-only"><span class=title-label>Note:</span></h6><p>You are not allowed to leave out the left hand side nor the <code class=blue>::</code>, not even if the reference context is <code>this</code>.</p></aside></section></section><section class="doc-section level-1"><h2 id=_streams_sql_like_operations_expressed_in_java_8>Streams, SQL like operations expressed in Java 8</h2><p>Here too, the <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/package-summary.html>package documentation</a> is an interesting read.</p><p>A stream can be considered a conveyor belt on which objects experience operations.
+The belt starts at a source (for instance a Supplier) and can on or more <em>intermediate</em> operations and end with a Terminal operation.</p><div class=image-block><img src=/prc2/images/streamops.png alt=streamops></div><p>from <a href=https://technology.amis.nl/2013/10/05/java-8-collection-enhancements-leveraging-lambda-expressions-or-how-java-emulates-sql/ target=_blank rel=noopener>Lucas Jellema of amis</a> blogs</p><p>Here your see a physical stream and a collect operation.</p><div class=image-block><img src=/prc2/images/Flexible-Conveyor.jpg alt="Conveyor and collecting"></div><section class="doc-section level-2"><h3 id=_sql_like_functions>SQL like functions</h3><figure class=listing-block><figcaption>assume you want to know the sum of the wages for women.</figcaption><pre class=highlight><code class=language-sql data-lang=sql>select sum(salary)
 from   people
-where  gender = &#39;FEMALE&#39;</code></pre></figure>
-<figure class=listing-block><figcaption>same in Java, get the sum of payments to women.</figcaption>
-<pre class="highlight linenums"><code class=language-java data-lang=java>    int womensPay =
+where  gender = &#39;FEMALE&#39;</code></pre></figure><figure class=listing-block><figcaption>same in Java, get the sum of payments to women.</figcaption><pre class="highlight linenums"><code class=language-java data-lang=java>    int womensPay =
         people.stream()                                         <b class=conum>1</b>
             .filter(p -&gt; p.getGender() == Person.Gender.FEMALE) <b class=conum>2</b>
             .mapToInt(p -&gt; p.getSalary())                       <b class=conum>3</b>
-            .sum();                                             <b class=conum>4</b></code></pre><ol class="callout-list arabic"><li>use people collection as source and start stream</li><li>where …​ where gender = female</li><li>mapping is often retrieving the value of a member, get salary, note that it is a Map ToIntFunction&lt;Person> specialised function</li><li>aggregation, like <code>sum()</code> here is a terminal operation</li></ol></figure>
-<figure class=listing-block><figcaption>variant using a method reference.</figcaption>
-<pre class="highlight linenums"><code class=language-java data-lang=java>    int womensPay =
+            .sum();                                             <b class=conum>4</b></code></pre><ol class="callout-list arabic"><li>use people collection as source and start stream</li><li>where …​ where gender = female</li><li>mapping is often retrieving the value of a member, get salary, note that it is a Map ToIntFunction&lt;Person> specialised function</li><li>aggregation, like <code>sum()</code> here is a terminal operation</li></ol></figure><figure class=listing-block><figcaption>variant using a method reference.</figcaption><pre class="highlight linenums"><code class=language-java data-lang=java>    int womensPay =
         people.stream()
             .filter(p -&gt; p.getGender() == Person.Gender.FEMALE)
             .mapToInt( Person::getSalary )                      <b class=conum>1</b>
-            .sum();</code></pre><ol class="callout-list arabic"><li>This alternative uses a <strong>method reference</strong>, which can be substituted for a lambda expression when their shapes match.</li></ol></figure>
-</section></section>
-<section class="doc-section level-1"><h2 id=_collection_enhancements_and_general_tips>Collection Enhancements and general tips</h2><p>It never hurts to browse through an API once in a while.
-You might get new ideas or find a cool feature.</p>
-<section class="doc-section level-2"><h3 id=_improved_map_in_java_8>Improved Map in Java 8</h3><p>I personally find the java.util.Map quit interesting because it got a number of very cool features in
+            .sum();</code></pre><ol class="callout-list arabic"><li>This alternative uses a <strong>method reference</strong>, which can be substituted for a lambda expression when their shapes match.</li></ol></figure></section></section><section class="doc-section level-1"><h2 id=_collection_enhancements_and_general_tips>Collection Enhancements and general tips</h2><p>It never hurts to browse through an API once in a while.
+You might get new ideas or find a cool feature.</p><section class="doc-section level-2"><h3 id=_improved_map_in_java_8>Improved Map in Java 8</h3><p>I personally find the java.util.Map quit interesting because it got a number of very cool features in
 Java 7 and 8 that are really very helpful if you want to implement things like <strong>caches</strong>.
 If you are into caching and expect many entries, consider a <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/WeakHashMap.html>WeakHashMap</a>,
-that also helps to solve the problem of keeping the cache small and auto-evacuate when entries are no longer used.</p>
-<p>In order of appearance in the api doc:</p>
-<div class=ulist><ul><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#compute(K,java.util.function.BiFunction)>compute</a> Attempts to compute a mapping for the specified key and its current mapped value (or null if there is no current mapping).</li><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#computeIfAbsent(K,java.util.function.Function)>computeIfAbsent</a> If the specified key is not already associated with a value (or is mapped to null), attempts to compute its value using the given mapping function and enters it into this map unless null.</li><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#computeIfPresent(K,java.util.function.BiFunction)>computeIfPresent</a> If the value for the specified key is present and non-null, attempts to compute a new mapping given the key and its current mapped value.</li><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#getOrDefault(java.lang.Object,V)>getOrDefault</a> Returns the value to which the specified key is mapped, or defaultValue if this map contains no mapping for the key.</li><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#putIfAbsent(K,V)>putIfAbsent</a> If the specified key is not already associated with a value (or is mapped to null) associates it with the given value and returns null, else returns the current value.
-and of course</li><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#forEach(java.util.function.BiConsumer)>forEach</a> Performs the given action for each entry in this map until all entries have been processed or the action throws an exception.</li></ul></div>
-<figure class=listing-block><figcaption>which allows you to quickly look at the contents of a map with a one-liner</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>    map.forEach((k, v) -&gt; System.out.println(k + &#34;=&#34; + v));</code></pre></figure>
-<p>The fun thing is that all these methods are default methods, so they apply to all classes that implement the java.util.Map interface, including the ones you roll yourselves,
+that also helps to solve the problem of keeping the cache small and auto-evacuate when entries are no longer used.</p><p>In order of appearance in the api doc:</p><div class=ulist><ul><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#compute(K,java.util.function.BiFunction)>compute</a> Attempts to compute a mapping for the specified key and its current mapped value (or null if there is no current mapping).</li><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#computeIfAbsent(K,java.util.function.Function)>computeIfAbsent</a> If the specified key is not already associated with a value (or is mapped to null), attempts to compute its value using the given mapping function and enters it into this map unless null.</li><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#computeIfPresent(K,java.util.function.BiFunction)>computeIfPresent</a> If the value for the specified key is present and non-null, attempts to compute a new mapping given the key and its current mapped value.</li><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#getOrDefault(java.lang.Object,V)>getOrDefault</a> Returns the value to which the specified key is mapped, or defaultValue if this map contains no mapping for the key.</li><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#putIfAbsent(K,V)>putIfAbsent</a> If the specified key is not already associated with a value (or is mapped to null) associates it with the given value and returns null, else returns the current value.
+and of course</li><li><a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html#forEach(java.util.function.BiConsumer)>forEach</a> Performs the given action for each entry in this map until all entries have been processed or the action throws an exception.</li></ul></div><figure class=listing-block><figcaption>which allows you to quickly look at the contents of a map with a one-liner</figcaption><pre class=highlight><code class=language-java data-lang=java>    map.forEach((k, v) -&gt; System.out.println(k + &#34;=&#34; + v));</code></pre></figure><p>The fun thing is that all these methods are default methods, so they apply to all classes that implement the java.util.Map interface, including the ones you roll yourselves,
 might you feel the inclination. To implement a special map that has specific extra properties, you only need to extend <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/AbstractMap.html>AbstractMap</a>
-which needs the implementation of one or two methods only, depending if you want an unmodifiable of modifiable one.</p></section></section>
-<section class="doc-section level-1"><h2 id=_optional_demystified>Optional demystified</h2><p>Many terminal stream operations return an <code class=blue>Optional</code>. Rationale: the required element
-may not be present, or the Stream is empty to start with. Or the filter throws everything out.</p>
-<p>Optional is an interesting concept all by itself.</p>
-<div class=ulist><ul><li>An Optional can be considered as a very short stream of at most one element.</li><li>You can apply a map operation to an Optional, which transforms the <strong>content</strong> of the optional (if any) and
-produces an optional containing the result of the mapping.</li><li>You can even stream() the optional, which allows you to apply all operation that a stream provides (since 9).</li></ul></div>
-<p>All this can be used in an algorithm, in which you want to chain a bunch of methods, each of which
-requiring that the parameter is non-null.</p>
-<figure class=listing-block><figcaption>Traditional returning null</figcaption>
-<pre class=highlight><code class=language-java data-lang=java>  SomeType result;
+which needs the implementation of one or two methods only, depending if you want an unmodifiable of modifiable one.</p></section></section><section class="doc-section level-1"><h2 id=_optional_demystified>Optional demystified</h2><p>Many terminal stream operations return an <code class=blue>Optional</code>. Rationale: the required element
+may not be present, or the Stream is empty to start with. Or the filter throws everything out.</p><p>Optional is an interesting concept all by itself.</p><div class=ulist><ul><li>An Optional can be considered as a very short stream of at most one element.</li><li>You can apply a map operation to an Optional, which transforms the <strong>content</strong> of the optional (if any) and
+produces an optional containing the result of the mapping.</li><li>You can even stream() the optional, which allows you to apply all operation that a stream provides (since 9).</li></ul></div><p>All this can be used in an algorithm, in which you want to chain a bunch of methods, each of which
+requiring that the parameter is non-null.</p><figure class=listing-block><figcaption>Traditional returning null</figcaption><pre class=highlight><code class=language-java data-lang=java>  SomeType result;
   var a = m1();
   var b=null;
   var c=null;
@@ -451,34 +202,12 @@ requiring that the parameter is non-null.</p>
     result = m4( c );
   }
   return result;
-  // do something with result</code></pre></figure>
-<figure class=listing-block><figcaption>Using Optional. Returning Optional&lt;SomeType></figcaption>
-<pre class=highlight><code class=language-java data-lang=java>  Optional&lt;SomeType&gt; result
+  // do something with result</code></pre></figure><figure class=listing-block><figcaption>Using Optional. Returning Optional&lt;SomeType></figcaption><pre class=highlight><code class=language-java data-lang=java>  Optional&lt;SomeType&gt; result
      = m1ReturningOptional() <b class=conum>1</b>
       .map( a-&gt; m2( a ) )
       .map( b-&gt; m3( b ) )
       .map( c-&gt; m4( c ) );
   return result;
-  // do something with Optional result</code></pre><ol class="callout-list arabic"><li>The chain starts with a method returning an optional. The remaining methods <code>m2(…​)</code>, <code>m3(…​)</code>, and <code>m4(…​)</code> are unchanged.</li></ol></figure>
-<p>In the last example, an <code class=blue>Optional&lt;SomeType></code> is returned, that can either be unwrapped of passed on as such for further processing.</p>
-<aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip: </span></h6><p>If you apply map as a chained operation to an <code class=blue>Optional</code>, the function supplied as
-parameter to the <code>map(..)</code> method is applied to the _content _of the optional and returns the result in another Optional.</p></aside></section>
-<section class="doc-section level-1"><h2 id=_reading>Reading</h2><section class="doc-section level-2"><h3 id=_jpms>JPMS</h3><div class=ulist><ul><li><a href=https://www.oracle.com/corporate/features/understanding-java-9-modules.html>Understanding Java 9 Modules</a></li><li><a class=bare href=http://tutorials.jenkov.com/java/modules.html>http://tutorials.jenkov.com/java/modules.html</a>[Jakob Jenkov</li></ul></div></section>
-<section class="doc-section level-2"><h3 id=_lambda_and_streams_2>Lambda and streams</h3><div class=ulist><ul><li>Horstmann Core Java, Ed 11, Vol I CH 6.2 Lambda Expressions</li><li>Horstmann Core Java, Ed 11, Vol I CH 9 Collections</li><li>Horstmann Core Java, Ed 11, Vol II CH 1 Streams</li></ul></div></section></section><section class=footnotes aria-label=Footnotes role=doc-endnotes><hr><ol class=footnotes><li class=footnote id=_footnote_1 role=doc-endnote>It was enforced in the now deprecated web applets <a class=footnote-backref href=#_footnoteref_1 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li></ol></section>
-</article>
-</div><footer class="text-sm leading-6 mt-12 mb-5">
-Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a>
-</footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block">
-<h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5>
-<nav id=TableOfContents></nav>
-</div></div>
-<div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div>
-</div><script src=/prc2/js/main.min.bd1742c05aba189f4c216c94e3ac562239862c375877153874a03ca821813ba98fa8b3ba073316d7d69614ff2fd215030a24d80f39df03245a239d269386d6e5.js integrity="sha512-vRdCwFq6GJ9MIWyU46xWIjmGLDdYdxU4dKA8qCGBO6mPqLO6BzMW19aWFP8v0hUDCiTYDznfAyRaI50mk4bW5Q==" crossorigin=anonymous></script>
-<script src=/prc2/js/highlight.min.2efcf3cf4cc613ba2055139c4b66ef1899a0f9de4edfee3342125be6d5c3dfc95b058910a779a62f6cb96c1b2a3161501ee4314731ef4763eaaf38568d5065d9.js integrity="sha512-Lvzzz0zGE7ogVROcS2bvGJmg+d5O3+4zQhJb5tXD38lbBYkQp3mmL2y5bBsqMWFQHuQxRzHvR2PqrzhWjVBl2Q==" crossorigin=anonymous defer></script>
-<div id=copied-alert class="invisible opacity-0 transition-all ease-in-out duration-400 fixed bottom-3 right-10 z-50 flex p-4 mb-4 text-sm text-gray-800 bg-gray-200 rounded-lg dark:bg-gray-500 dark:text-gray-200" role=alert><svg class="inline flex-shrink-0 mr-3 w-5 h-5" viewBox="0 0 24 24" width="24" height="24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-<div>
-<span class=font-medium>Code copied</span>
-</div>
-</div>
-</body>
-</html>
+  // do something with Optional result</code></pre><ol class="callout-list arabic"><li>The chain starts with a method returning an optional. The remaining methods <code>m2(…​)</code>, <code>m3(…​)</code>, and <code>m4(…​)</code> are unchanged.</li></ol></figure><p>In the last example, an <code class=blue>Optional&lt;SomeType></code> is returned, that can either be unwrapped of passed on as such for further processing.</p><aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip:</span></h6><p>If you apply map as a chained operation to an <code class=blue>Optional</code>, the function supplied as
+parameter to the <code>map(..)</code> method is applied to the _content _of the optional and returns the result in another Optional.</p></aside></section><section class="doc-section level-1"><h2 id=_reading>Reading</h2><section class="doc-section level-2"><h3 id=_jpms>JPMS</h3><div class=ulist><ul><li><a href=https://www.oracle.com/corporate/features/understanding-java-9-modules.html>Understanding Java 9 Modules</a></li><li><a class=bare href=http://tutorials.jenkov.com/java/modules.html>http://tutorials.jenkov.com/java/modules.html</a>[Jakob Jenkov</li></ul></div></section><section class="doc-section level-2"><h3 id=_lambda_and_streams_2>Lambda and streams</h3><div class=ulist><ul><li>Horstmann Core Java, Ed 11, Vol I CH 6.2 Lambda Expressions</li><li>Horstmann Core Java, Ed 11, Vol I CH 9 Collections</li><li>Horstmann Core Java, Ed 11, Vol II CH 1 Streams</li></ul></div></section></section><section class=footnotes aria-label=Footnotes role=doc-endnotes><hr><ol class=footnotes><li class=footnote id=_footnote_1 role=doc-endnote>It was enforced in the now deprecated web applets <a class=footnote-backref href=#_footnoteref_1 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li></ol></section></article></div><footer class="text-sm leading-6 mt-12 mb-5">Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a></footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block"><h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5></div></div><div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div></div><script src=/prc2/js/main.min.956966b3103878d329f9460daf829f6ad1d50fc9e24d20ff0c5d93a4006065df877564edc24b6a2a5182bf4387d13d9f960a1df6fc9d259d38cfb8e83509c999.js integrity="sha512-lWlmsxA4eNMp+UYNr4KfatHVD8niTSD/DF2TpABgZd+HdWTtwktqKlGCv0OH0T2flgod9vydJZ04z7joNQnJmQ==" crossorigin=anonymous></script>
+<script src=/prc2/js/highlight.min.cd8091de05577194483fff730f723dc2379226a640ef117b33ad133cc3da2f690d95af8fc32186b11dc10628e66e325b33bee2bf443c98315905e50f22aecc50.js integrity="sha512-zYCR3gVXcZRIP/9zD3I9wjeSJqZA7xF7M60TPMPaL2kNla+PwyGGsR3BBijmbjJbM77iv0Q8mDFZBeUPIq7MUA==" crossorigin=anonymous defer></script><div id=copied-alert class="invisible opacity-0 transition-all ease-in-out duration-400 fixed bottom-3 right-10 z-50 flex p-4 mb-4 text-sm text-gray-800 bg-gray-200 rounded-lg dark:bg-gray-500 dark:text-gray-200" role=alert><svg class="inline flex-shrink-0 mr-3 w-5 h-5" viewBox="0 0 24 24" width="24" height="24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><div><span class=font-medium>Code copied</span></div></div></body></html>
