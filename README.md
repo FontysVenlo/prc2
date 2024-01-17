@@ -11,11 +11,13 @@ Prerequisites are:
 - [Hugo](https://gohugo.io/) extended edition (for `SASS` build)
 - [npm](https://nodejs.org/en/) for installing `Javascript` packages
 - [Asciidoctor](https://asciidoctor.org/) for converting `AsciiDoc`
-- [asciidoctor-html5s](https://github.com/jirutka/asciidoctor-html5s) for converting to semantic html5
+- [asciidoctor-html5s](https://github.com/jirutka/asciidoctor-html5s) for converting to semantic html5 (make sure to use the ruby version, not the nodejs version)
+- [sebi-theme](https://github.com/FontysVenlo/sebi-theme): Theme used for the website. Install by initializing the submodule under `themes/sebi-theme`
 
 To build:
 
-1. First install needed `Javascript` packages with the following command: `npm install`
+1. First install needed `Javascript` packages with the following command: `npm ci`
+2. Install needed `Javascript` packages of the theme `cd themes/sebi-theme && npm ci`
 2. Build the website using `Hugo`
     - Build production: `hugo --minify`
     - Build development: `hugo server`
