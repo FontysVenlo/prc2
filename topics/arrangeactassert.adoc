@@ -8,7 +8,7 @@ Looking at some _the making of..._ can be quite instructive in this case.
 For a scene to be taken, there is typically quite some preparation involved like hanging Spiderman
 on a thin cable from the ceiling, making sure the *crook* is in the right position so he can land or receive the first punches and so on. +
 Then the director calls *action* and the scene is acted out +
-If the director is satisfied, al is okay +
+If the director is satisfied, all is okay +
 If not, he will want a redo later on. 
 
 A very popular style to write unit tests is the triple-A or *Arrange-Act-Assert*.
@@ -24,7 +24,8 @@ A very popular style to write unit tests is the triple-A or *Arrange-Act-Assert*
 
 [blue]*Assert* to test if the actual result of the action is what is expected. +
 
-**  The actual value can be the return value of the called method, but also the (new) state of the SUT. In the movie: did the explosion happen, was the punch landed correctly
+**  The actual value can be the return value of the called method, but also the (new) state of the SUT. +
+  In the movie: did the explosion happen, was the punch landed correctly
   and was the emotion credible.
 
 .AAA in action
@@ -54,7 +55,7 @@ Later in this course we see some more complex scenarios, in which we need https:
 
 == Clues needed
 
-A smart person is able to avoid work. A common strategy is to let others do it. You can achieve such smartness as well by using your tools properly.
+A smart person is able to avoid work. A common strategy is to let others do it. You can achieve such smartness your selves by using your tools properly.
 
 For instance your IDE will gladly [green]_complete_ code that your started by showing
 a list of possible completions of the code that you already provided. However, the IDE
@@ -70,17 +71,17 @@ Box<Integer> ib= new Box<Integer>(); // compiler will complain for non existing 
 
 ----
 
-Same applies to methods. If you want a specific return type, provide that in a declaration where you specify such type.
+The same applies to methods. If you want a specific return type, provide that in a declaration where you specify such type.
 
-The same applies to frameworks such as AssertJ, that provides an `assertThat(...)` method as entry for almost all asserts.
+It also applies to frameworks such as AssertJ, that provides an `assertThat(...)` method as entry for almost all asserts.
 But what you put on the dots is important, because the IDE will inspect the [blue]*type* of the _expression_ and then will look for the possible
 completions. The completions for an Integer or int are very different from that of a `Collection` or `Iterable`.
 
-Combine this with the previous tip. First specify a variable with a type, that
-use the variable inside the `assertThat(...)` and the IDE will be able to find the available completions.
+Combine this with the previous tip. First you specify a variable with a type, that
+uses the variable inside the `assertThat(...)` and then the IDE will be able to find the possible completions.
 
 Sometimes you have to nudge the IDE a bit, for instance when it suggest to create two constructors from the above example.
-Accept one of the suggestions, but then modify the generated constructor to accept the type parameter of the class as input type of the constructor.
+Accept one of the suggestions, but then _modify_ the generated constructor to accept the type parameter of the class as input type of the constructor.
 After saving all files, you will have convinced both IDE and compiler.
 
 [TIP]
@@ -88,6 +89,7 @@ After saving all files, you will have convinced both IDE and compiler.
 
 .It is good to have a thinking pause
 Let the IDE and framework do (most) of the typing work for you, by providing clues. If you do that smartly, it
-will be easy to write code that is correct and acceptable by the compiler. +
+will be easy to write code that is correct and acceptable by the compiler. A thinking pause can also useful 
+ for the IDE, for it might need some processing first to find possible completions. +
 [big]*Being lazy is good, both for code and smart people.*
 ====
