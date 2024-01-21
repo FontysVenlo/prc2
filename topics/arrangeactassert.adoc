@@ -75,7 +75,7 @@ The same applies to methods. If you want a specific return type, provide that in
 
 It also applies to frameworks such as AssertJ, that provides an `assertThat(...)` method as entry for almost all asserts.
 But what you put on the dots is important, because the IDE will inspect the [blue]*type* of the _expression_ and then will look for the possible
-completions. The completions for an Integer or int are very different from that of a `Collection` or `Iterable`.
+completions. The completions for an Integer or int are very different from those for a `Collection` or `Iterable`.
 
 Combine this with the previous tip. First you specify a variable with a type, that
 uses the variable inside the `assertThat(...)` and then the IDE will be able to find the possible completions.
@@ -90,6 +90,6 @@ After saving all files, you will have convinced both IDE and compiler.
 .It is good to have a thinking pause
 Let the IDE and framework do (most) of the typing work for you, by providing clues. If you do that smartly, it
 will be easy to write code that is correct and acceptable by the compiler. A thinking pause can also useful 
- for the IDE, for it might need some processing first to find possible completions. +
+ for the IDE, for it might need some processing first to find possible completions.
 [big]*Being lazy is good, both for code and smart people.*
 ====
