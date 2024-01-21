@@ -22,7 +22,13 @@ inter-dependencies. Otherwise it is just plain maven.
 .Snippet from a parent pom
 [source,xml]
 ----
-    <groupId>nl.fontys.sebivenlo</groupId>
+    <<parent>
+      <groupId>io.github.fontysvenlo</groupId>
+      <artifactId>informaticspom</artifactId>
+      <version>1.2</version>
+      <relativePath/>
+    </parent>
+    groupId>nl.fontys.sebivenlo</groupId>
     <artifactId>parentpom</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
@@ -39,7 +45,9 @@ inter-dependencies. Otherwise it is just plain maven.
 ----
 
 As is usual between parents and children, there is an inheritance relationship.
-The children inherit setting and groupid, and version, if defined as a property.
+The children inherit setting and groupid, and version, if defined as a property. Note that thare is a a "grand"parent here too, the informaticspom, so
+you can apply all the good things you learned in PRC2 to your project as well.
+
 
 [WARNING]
 ====
@@ -79,7 +87,7 @@ inherits from such parent.
 Putting things in modules has the following advantages:
 
 * It promotes loose coupling.
-* It can avoid the hen and egg problem: In a normal build, it wants all tests to pass, to be able
+* It can avoid the chicken and egg problem: In a normal build, it wants all tests to pass, to be able
   to continue. For business code that is correct, but things like integration tests need a built war file, which cannot be built with failing tests. +
   Solution: Put the integration tests in a separate module of its own, which can be run at any time and will not slow you down or
   worse, disable testing or not having any tests.

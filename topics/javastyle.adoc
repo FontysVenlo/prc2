@@ -91,7 +91,7 @@ You can skip on documentation if
 * The member is not public or protected
 * For methods: it overwrites a method in a (documented) interface or super class.
 
-Javadoc starts with `/**` and ends with `*/`
+Javadoc starts with `/\**` and ends with `*/`
 
 ==== Class javadoc
 
@@ -102,7 +102,7 @@ multiple authors contributed substantially. See the the jdk libraries for exampl
 .Excerpt from the String javadoc.
 [source,java]
 ----
-<p>A {@code String} represents a string in the UTF-16 format
+ * <p>A {@code String} represents a string in the UTF-16 format
  * in which <em>supplementary characters</em> are represented by <em>surrogate
  * pairs</em> (see the section <a href="Character.html#unicode">Unicode
  * Character Representations</a> in the {@code Character} class for
@@ -154,4 +154,4 @@ uncomment the `user` property and make it have the proper information. This is p
 your user name on your machine is `pattatje` or some other obscure name that the teachers might not know.
 ====
 
-Do Not skimp on Javadoc style. It is just as wrong as writing  "Alice and Bob [role="red"]*goes* to town".
+*Do Not* skimp on Javadoc style. It is just as wrong as writing  "Alice and Bob [role="red"]*goes* to town".

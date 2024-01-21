@@ -1,7 +1,7 @@
 == Informatics pom
 
 Spelled all lower  case: `informaticspom`, is a super pom to use in Fontys Venlo projects. It keeps your own pom.xml file simple and focused to declare just the
-dependencies needed. Niceties to do proper Test Driver Development are provided for in the sebipom definitions, including things as being able to create
+dependencies needed. Niceties to do proper Test Driver Development are provided for in the informaticspom definitions, including things as being able to create
 javadoc in a professional looking way, including code highlighted code snippets, checkstyle, reporting, code coverage with maven, pmd, spotbugs  etc.
 
 https://github.com/FontysVenlo/informaticspom[informaticspom is hosted on github].
@@ -11,20 +11,20 @@ This way of using maven, having a [blue]#super# or parent pom defined globally (
 
 [TIP,role="green"]
 ====
-Note that we are using a _separately installed_ maven (3.9.0 at the time of writing) which you can download from http://maven.apache.org/download.cgi[apache maven],
+Note that we are using a _separately installed_ maven (3.9.6 at the time of writing) which you can download from http://maven.apache.org/download.cgi[apache maven],
   not the one bundled with NetBeans or any other IDE. You can tell NetBeans (via tools-> options-> java-> maven) to use the installed one instead of the bundled one. (Mac users go to NetBeans-> Preferences -> ... again).
 
 [big]_Our tests will [blue]#always# use maven, not some IDE. There is no gnome inside the build server to move the mouse._
 ====
 
-[[sebipom-as-parent]]
-.Setting sebipom as parent.
+[[informaticspom-as-parent]]
+.Setting informaticspom as parent.
 [source,xml]
 ----
     <parent>
       <groupId>io.github.fontysvenlo</groupId>
       <artifactId>informaticspom</artifactId>
-      <version>0.9</version>
+      <version>1.2</version>
       <relativePath/> // <!--1-->
     </parent>
 ----
