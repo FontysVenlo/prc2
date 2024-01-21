@@ -73,7 +73,7 @@ Now over to the test class, which creates a mocked printer and hands it to the *
 .Business test class.
 [source,java]
 ----
-include::code/myfirstmock/src/test/java/myfirstmock/BusinessTest.java[lines=27..37]
+include::code/myfirstmock/src/test/java/myfirstmock/BusinessTest.java[lines=27..58]
 ----
 
 <1> Create the mocked printer.

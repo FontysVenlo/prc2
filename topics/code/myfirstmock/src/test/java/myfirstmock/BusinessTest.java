@@ -54,6 +54,6 @@ public class BusinessTest {
 
         verify( printer ).println( lineCaptor.capture() ); //<5>
         assertThat( lineCaptor.getAllValues() ).contains( "Hello Linda" ); // <6>
-        fail("test does It print ended. You know what to do.");
+      //  fail("test does It print ended. You know what to do.");
     }
 }
