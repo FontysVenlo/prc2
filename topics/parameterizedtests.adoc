@@ -150,15 +150,15 @@ with *T*, *U*, and *R* all of the same type: Fraction. This is legal.
     }
 ----
 
-<1> The fraction parameters a,b,c, and d are captured from the csvrecord. This makes the parameter list a +
+<1> The fraction parameters a,b,c, and d are captured from the csvrecord. This makes the parameter list a 
   tad longer, but also more understandable. JUnit 5 csvsource uses the annotation and the signature of the test method and can deal
-  with most common types such as primitive, String and LocalDate (preferably in ISO-8601 format such as '2012-01-14' for the day of writing this). Strings in the csv-records will be automatically converted to the parameter types in your test methods in these cases.
+  with most common types such as primitive, String and LocalDate (preferably in ISO-8601 format such as '2021-01-14' for the day of writing this). Strings in the csv-records will be automatically converted to the parameter types in your test methods in these cases.
 <2> The fraction instances are created from a, b, c, and d.
 <3> The operation (op) is looked up in the map.
 <4> Apply the operation, or rather the function and capture the result.
 
 You can apply the same trick of looking up with enums too, even easier, because the enum itself can translate from String to value,
-as long as the spelling is exact.
+as long as the spelling is exact that is minding upper and lower case usage.
 
 Study the examples above, they might give you inspiration with the exercises coming up and will score you points during the exam.
 
@@ -194,7 +194,7 @@ to your validator.
 
 [NOTE]
 ====
-At the time of writing JUnit wants the csv file for CsvFileSource to be +
+At the time of writing JUnit wants the csv file for CsvFileSource to be 
 in the `{project-directory}src/test/resources` folder or a child folder thereof.
 To be able to do that, you *first* need to create that folder.
 ====
