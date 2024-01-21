@@ -11,7 +11,7 @@ draft: false
 This site contains the up-to-date course material, exercises and announcements about PRC2
 (Programming Concepts 2: the Test Driven Way), starting in February 2023.
 
-Responsible Teachers for 2023 PRC2: 
+Responsible Teachers for 2024 PRC2: 
 
 - Martijn Bonajo
 - Ibrahim Kouzak 
