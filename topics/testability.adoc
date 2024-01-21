@@ -97,7 +97,7 @@ In the 'normal' non-testing [blue]*Application world*, the design has taken some
 To provide the business class with a _factory_ from which it can obtain Service implementations, a so called *Assembler* is added. This [cyan]*Assembler*,
 in the figure at the top of the application class diagram, typically creates or instantiates the business class and provides it with all it needs,
 in this case an implementation of a *ServiceFactory*.
-Note that the assembler in this case also creates the UI part. In desktop applications this is what the *Main* class of the application typically is for.
+Note that the assembler in this case also creates the UI part. In desktop applications this is the responsibility of the *Main* class of the application.
 
 // In a Java web container, which we will use for our rest services,
 // the web container provides this assembler service to your application code.

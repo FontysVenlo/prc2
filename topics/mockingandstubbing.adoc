@@ -111,17 +111,16 @@ constrain the methods the business class could use, and that serves no real purp
 may be better to provide a differently configured [blue]*real class*.
 
 
-==== Input stubbing with a real,class.
+==== Input stubbing with a real class.
 
-An object that contains preconfigured data is called a *Stub*. +
-As an example: Assume you business class
-uses a Scanner as it's input. Scanner has 50-odd methods, which you certainly do not want to train _all_ when mocking.
+An object that contains pre-configured data is called a *Stub*. +
+As an example: Assume your business class uses a Scanner as it's input.
+https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Scanner.html[`Scanner`] has 50-odd methods, which you certainly do not want to train _all_ when mocking.
 
 But since you will pass a special Scanner to the business class anyway, the better way is to use a Scanner configured with one of
 it's constructors.
-In this case use `new Scanner( String s )`, in which the string `s` contains exactly the input you want to use in your test. The string
-can contain newlines, so that it appears as if the user entered multiple lines. This allows you to test a program with a dialog.
-Something along the line of  `new Scanner("12\n13\n");`, that is 12 newline 13.
+In this case use `new Scanner( String s )`, in which the string `s` contains exactly the input you want to use in your test. The string can contain newlines, so that it appears as if the user entered multiple lines. This allows you to test a program with a dialog.
+Something along the line of  `new Scanner("12\n13\n");`, that is '12', 'newline', and '13'.
 
 ==== Output mocking with a real classes
 
@@ -143,7 +142,7 @@ class PrintingBusiness
       final PrintStream out; // <1>
 
       PrintingBusiness() { // <2>
-          this.out=System.out;
+          this( System.out );
       }
 
       PrintingBusiness( PrintStream ps ) { //<3>
@@ -157,7 +156,7 @@ class PrintingBusiness
 ----
 
 <1> [blue]`final` to have a constructor set it
-<2> Default constructor uses System.out to print to.
+<2> Default constructor uses System.out to print to and forwards it to the next constructor.
 <3> Redirect output to other output, for test or 'printing' in a GUI.
 <4> All facilities of PrintStream are available, including formatted printing.
 
