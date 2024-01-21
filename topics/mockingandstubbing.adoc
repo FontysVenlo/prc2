@@ -73,7 +73,7 @@ Now over to the test class, which creates a mocked printer and hands it to the *
 .Business test class.
 [source,java]
 ----
-include::code/myfirstmock/src/test/java/myfirstmock/BusinessTest.java[lines=27..58]
+include::code/myfirstmock/src/test/java/myfirstmock/BusinessTest.java[lines=27..38]
 ----
 
 <1> Create the mocked printer.
@@ -86,7 +86,7 @@ This is of course a simple test and the only thing that it verifies is that the 
 .Verify that what is printed is okay.
 [source,java]
 ----
-include::code/myfirstmock/src/test/java/myfirstmock/BusinessTest.java[lines=39..57]
+include::code/myfirstmock/src/test/java/myfirstmock/BusinessTest.java[lines=39..58]
 ----
 
 <1> Setup mock as annotated field.
