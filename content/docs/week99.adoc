@@ -1,0 +1,18 @@
+---
+title: "99 Left Over"
+description: ""
+date: 2024-01-22T10:31:29+02:00
+draft: false
+images: []
+slug: "j17-21"
+menu: 
+  docs:
+    parent: ""
+weight: 110
+toc: true
+---
+
+include::{topics}/instanceof.adoc[]
+
+include::{topics}/sealedtypes.adoc[]
+

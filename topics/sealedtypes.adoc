@@ -1,0 +1,12 @@
+== Sealed Types
+
+You know that a `final` class is a class that can not be extended. On the other hand, a non-final class, or an interface can be extended by anyone who feels fit to do so.
+There are use cases where the designer of a API or maybe type hierarchy wants more control of what can extend or implement 
+a type. That is the problem that *sealed types* address.
+
+Sealed Classes were finalized in Java 17 with https://openjdk.org/jeps/409[JEP 409].
+
+In the code snippets below we give a complete example of a simple  shape hierarchy.
+
+.The sealed interface.
+[]
