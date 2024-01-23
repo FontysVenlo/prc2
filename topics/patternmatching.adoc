@@ -5,6 +5,7 @@ They provide a concise way to declare an _immutable_ class with the most common 
 Since the definition of records is quite strick, the compiler can do quite a few tricks, as will be shown below.
 
 .Illustration record
+[source,java]
 ----
 record Person ( String fullName, LocalDate dob, String city, String country ){
 }
