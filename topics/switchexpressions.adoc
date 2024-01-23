@@ -1,0 +1,46 @@
+== Switch expressions
+
+The switch statement is a inherited feature from the *C*-language. It has its uses but also has its pitfalls.
+
+=== `break;` is mandatory most of the time.
+
+In the time of the design of the C language it was considered cool to be able to _optimize_ by providing a fall-through feauture in
+the switch-case statement. This however makes a `break;`  statement after each set of statements for a case mandatory in most cases, so
+the optimization falls flat in most cases.
+
+Switch-case statements are also notoriously difficult to cover in tests. The way the switch-case statement is evaluated by the compiler
+produces quite a few unexpected branches in the resulting byte code.
+
+== Statements vs Expressions
+Up until now we talked about switch-*statements*. That is, each case label is followed by a colon ':' and some statements, in most cases followed by a `break`.
+A switch statement does not produce a result, but works through its side-effects. 
+
+Since java 14 we also have switch expressions through https://openjdk.org/jeps/361[JEP 361].
+A switch expression _can produce a result_ that can be returned or assigned to a variable.
+The expressions are recognizable by the use of an arrow `->`, the same as in lambda definitions. 
+The value of the expression for each case label is the value of the expression on the right of the arrow. 
+It is also possible to produce nothing or void, in case the expression itself is void.
+
+=== `yield`, not `return`
+
+Sometimes you need more that one statement to compute the result. This can be because the computation is complex or to improve the understandability of the expression.
+
+.From JEP 361
+[source,java]
+----
+int j = switch (day) {
+    case MONDAY  -> 0;
+    case TUESDAY -> 1;
+    default      -> {
+        int k = day.toString().length();
+        int result = f(k);
+        yield result; //<1>
+    }
+};
+----
+
+<1> Yield to produce the result of the block. Not return, because that is reserved to leave a method (or a lambda expression, which is also a method or rather function).
+
+You can also use the traditional ':' with the case labels. In that case you use the yield statement to forward the result. See https://openjdk.org/jeps/361#Yielding-a-value[Yielding a value].
+
+

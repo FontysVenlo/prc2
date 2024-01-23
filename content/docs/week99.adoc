@@ -1,6 +1,6 @@
 ---
 title: "99 Left Over"
-description: ""
+description: "Pattern matching for Records"
 date: 2024-01-22T10:31:29+02:00
 draft: false
 images: []
@@ -13,6 +13,10 @@ toc: true
 ---
 
 include::{topics}/instanceof.adoc[]
+
+include::{topics}/patternmatching.adoc[]
+
+include::{topics}/switchexpressions.adoc[]
 
 include::{topics}/sealedtypes.adoc[]
 

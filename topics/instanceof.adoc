@@ -1,4 +1,4 @@
-== Instanceof
+== `instanceof` operator
 
 Regularly you need to check for a _type_ before your can do an operation on a given object.
 Before you can use the object as a type, you need to cast it as that _type_ so the compiler will accept 

@@ -1,0 +1,44 @@
+== Pattern Matching for Records
+
+Records (Horstmann 12th Ed vol I, chapter 4.7) became available in Java 16 with https://openjdk.org/jeps/395[JEP 395].
+They provide a concise way to declare an _immutable_ class with the most common methods already implemented for you by the compiler.
+Since the definition of records is quite strick, the compiler can do quite a few tricks, as will be shown below.
+
+.Illustration record
+----
+record Person ( String fullName, LocalDate dob, String city, String country ){
+}
+----
+
+Important is to note that the accessor methods (getters in Java beans speak) have the _name_ of the field and the _name_ of the parameter name in the _canonical constructor_. So `String fullName()` as the getter for the `fullName` field in the example above.
+
+The most important restrictions on the record type are:
+
+* The instances cannot be mutated. Once created they always have the same information until garbage time.
+* You can't define other fields than those that are given in the _canonical constructor_, whose signature is more or less defined in the record header.
+* A record can't extend other classes, it implicitly extends the  `Record` class.
+** It *can* implement interfaces though.
+* The record is implicitly final, same as `enums`.
+* All fields of the record are final and therefore immutable. This makes fields of primitive types immutable, and reference fields always refer to the same object. However a field like an AtomicInteger, or a (mutable) collection can still be mutated. Use on your own risk.
+
+These restrictions allow the compiler to help you decompose or deconstruct a record into its parts, which can then be used for further processing.
+
+.Example decomposing a circle record
+[source,java]
+----
+BasicShape s = new Circle( d, 2.0D );
+
+if (s instanceof Circle(var basicPoint, var radius )){ //<1>
+    System.out.println( "diameter = " + radius*2 );    //<2>
+}
+
+if (s instanceof Circle(BasicPoint basicPoint, double radius )){ //<3>
+    System.out.println( "diameter = " + radius*2 );
+}
+----
+
+<1> If it is a circle, put the center point in `basicPoint` and the radius in `radius`
+<2> then use radius in the computation inside the if-block;
+<3> Using explicit types is not required but can provide documentation.
+
+
