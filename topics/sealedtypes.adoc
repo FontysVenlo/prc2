@@ -6,7 +6,48 @@ a type. That is the problem that *sealed types* address.
 
 Sealed Classes were finalized in Java 17 with https://openjdk.org/jeps/409[JEP 409].
 
-In the code snippets below we give a complete example of a simple  shape hierarchy.
+In the code snippets below we give a complete example of a simple shape hierarchy.
 
 .The sealed interface.
-[]
+[source,java]
+package nl.fontysvenlo.sealedshapes;
+
+sealed interface BasicShape<S extends BasicShape<S>> extends Comparable<BasicShape<S>> permits Triangle, Rectangle, Circle {
+
+    /**
+     * Compute area for all known subclasses.
+     *
+     * @return the area.
+     */
+    default double area() {
+        return switch ( this ) {
+            case Circle(var unused, double radius) ->
+                radius * radius * Math.PI;
+            case Rectangle(BasicPoint topLeft, BasicPoint bottomRight) ->
+                Math.abs( topLeft.x() - bottomRight.x() )
+                * Math.abs( topLeft.y() - bottomRight.y() );
+            case Triangle(BasicPoint a, BasicPoint b, BasicPoint c) -> {
+                double lA = b.distance( c );
+                double lB = c.distance( a );
+                double lC = a.distance( b );
+                double s = ( lA + lB + lC ) / 2D;
+                yield Math.sqrt( s * ( s - lA ) * ( s - lB ) * ( s - lC ) );
+            }
+
+        };
+//        return 0D;
+    }
+
+    /**
+     * Based on the area, the interface can provide the implementation for
+     * compareTo.
+     *
+     * @param other to compare to this.
+     * @return the outcome
+     */
+    @Override
+    public default int compareTo(BasicShape other) {
+        return Double.compare( this.area(), other.area() );
+    }
+
+}
