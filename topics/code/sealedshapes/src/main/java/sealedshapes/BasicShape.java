@@ -15,7 +15,7 @@ sealed interface BasicShape
     /**
      * Compute area for all known subclasses.
      *
-     * @returnthe area.
+     * @return the area.
      */
     default double area() {
         return switch ( this ) {
