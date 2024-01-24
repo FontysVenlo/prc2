@@ -78,15 +78,15 @@ default double area() { //<1>
     return switch ( this ) {  //<2>
         case Circle(var unused, double radius) ->
             radius * radius * Math.PI;
-        case Rectangle(BasicPoint topLeft, BasicPoint bottomRight) ->
-            Math.abs( topLeft.x() - bottomRight.x() )
-            * Math.abs( topLeft.y() - bottomRight.y() );
-        case Triangle(BasicPoint a, BasicPoint b, BasicPoint c) -> {
+       case Rectangle( BasicPoint( var tlx, var tly ), 
+                       BasicPoint( var brx, var bry ) ) -> //<3>
+                       abs( tlx - brx ) * abs( tly - bry );
+        case Triangle(BasicPoint a, BasicPoint b, BasicPoint c) -> { //<4>
             double lA = b.distance( c );
             double lB = c.distance( a );
             double lC = a.distance( b );
             double s = ( lA + lB + lC ) / 2D;
-            yield Math.sqrt( s * ( s - lA ) * ( s - lB ) * ( s - lC ) ); // <3>
+            yield Math.sqrt( s * ( s - lA ) * ( s - lB ) * ( s - lC ) ); //<5>
         }
     };
 }
@@ -94,6 +94,7 @@ default double area() { //<1>
 
 <1> The default keyword enables this implementation. You could even consider this final, but the language does not yet allow the combination of `default` and `final`, although it would be useful here.
 <2> this is one of the subtypes, and that fact is known to the compiler. The compiler also knows that the case labels cover all cases.
+<3> Note the match for the members of the two `BasicPoint`s `tlx, tly, brx, bry `, which are then used in the computation in the next line.
 <3> `yield`, not `return`.
 
 To make things complete, the code below shows that a record can implement instance and static methods too, like the method to compute the distance between this and another point and the static shortcut factory method to define a `new BasicPoint(...)` with `bp(...)` instead.

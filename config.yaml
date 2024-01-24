@@ -30,10 +30,10 @@ markup:
   tableOfContents:
     endLevel: 3
   asciidocext:
-    backend: html5s
+#    backend: html5s
     failureLevel: warn
-    extensions:
-      - "asciidoctor-html5s"
+    # extensions:
+    #   - "asciidoctor-html5s"
     attributes:
       toc: true
       toclevels: 2
