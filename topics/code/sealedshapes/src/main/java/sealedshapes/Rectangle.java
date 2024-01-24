@@ -5,8 +5,11 @@
 package sealedshapes;
 
 /**
- *
+ * Simple rectangle 
  * @author Pieter van den Hombergh {@code <pieter.van.den.hombergh@gmail.com>}
+ * 
+ * @param topLeft of the rectangle
+ * @param bottomRight of the rectangle
  */
 public record Rectangle(BasicPoint topLeft, BasicPoint bottomRight) implements BasicShape {
 

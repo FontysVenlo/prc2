@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+/**
+ * Example sealed classes module.
+ */
 module sealedshapes {
     exports sealedshapes;
 }

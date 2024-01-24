@@ -20,8 +20,8 @@ But how did you know that your phonebook was actually working? You could have
 implemented a method that didn't work, or maybe you forgot to add people to the
 phonebook, so the data wasn't actually stored. What you did was you ran the TMC
 tests. They kept telling you whether the phonebook was working as intended. The
-test said "when I look for Alice in your phonebook, I will receive Alice's
-phone number 1234-567.". And if the test didn't receive Alice's number, it
+test said "_when I look for Alice in your phonebook, I will receive Alice's
+phone number 1234-567._". And if the test didn't receive Alice's number, it
 would turn red and say something like "I expected 1234-567. But I received
 0042-987." Therefore, the test fails.
 
@@ -104,7 +104,7 @@ expect?
 The truth is, you never get around having to make implementation decisions. We
 just try to minimize our margin for error. So when you start writing your first
 test for your (non-existing) phonebook, you HAVE to have an idea of what the
-phonebook does. So perhaps you start with "I expect that the phonebook let's me
+phonebook does. So perhaps you start with "I expect that the phonebook lets me
 look up a person. When I look up Alice, I expect Alice's phone number.". What
 could such a test look like?
 

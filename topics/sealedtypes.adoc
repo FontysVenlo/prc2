@@ -8,6 +8,8 @@ Sealed Classes were finalized in Java 17 with https://openjdk.org/jeps/409[JEP 4
 
 In the code snippets below we give a complete example of a simple shape hierarchy.
 
+image::sealedshapes.svg[title="class diagram sealed interface BasicShape"]
+
 .The sealed interface.
 [source,java]
 ----
@@ -64,6 +66,12 @@ Now the only problem is to compute the area.
 This is where all come together, switch expressions, pattern matching for records and the use of the yield keyword.
 The area of the triangle is computed with https://en.wikipedia.org/wiki/Heron%27s_formula[Heron's formula].
 
+stem:[\text{with} s = frac{a+b+c}{2} \text{area}= \sqrt{s\times(s-a)\times(s-b)\times(s-c)}]
+
+
+
+image::triangle.svg[title="triangle corners and sides"]
+
 [source,java]
 ----
 default double area() { //<1>
@@ -89,6 +97,11 @@ default double area() { //<1>
 <2> this is one of the subtypes, and that fact is known to the compiler. The compiler also knows that the case labels cover all cases.
 <3> `yield`, not `return`.
 
+To make things complete, the code below shows that a record can implement instance and static methods too, like here the method to compute the distance between two points and the shortcut to define a `new BasicPoint(...)`, `bp(...)`.
 
-
+.Complete BasicPoint class. Note the additional methods. 
+[source,java]
+----
+include::code/sealedshapes/src/main/java/sealedshapes/BasicPoint.java[]
+----
 

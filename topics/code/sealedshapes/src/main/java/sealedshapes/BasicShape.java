@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package sealedshapes;
 
 /**
- *
+ * Example sealed intarface.
+ * 
  * @author Pieter van den Hombergh {@code <pieter.van.den.hombergh@gmail.com>}
  */
 sealed interface BasicShape
@@ -15,7 +12,7 @@ sealed interface BasicShape
     /**
      * Compute area for all known subclasses.
      *
-     * @returnthe area.
+     * @return the area.
      */
     default double area() {
         return switch ( this ) {
@@ -33,7 +30,6 @@ sealed interface BasicShape
             }
 
         };
-//        return 0D;
     }
 
     /**

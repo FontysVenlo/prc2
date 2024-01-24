@@ -6,11 +6,16 @@ package sealedshapes;
 import static sealedshapes.BasicPoint.bp;
 
 /**
- *
+ * Examples of usage.
  * @author Pieter van den Hombergh {@code <pieter.van.den.hombergh@gmail.com>}
  */
 public class Sealedshapes {
 
+    /**
+     * Demo program.
+     * 
+     * @param args not used
+     */
     public static void main(String[] args) {
         BasicPoint a = new BasicPoint( 0, 0 );
         BasicPoint b = new BasicPoint( 0, 2 );
@@ -36,10 +41,11 @@ public class Sealedshapes {
         System.out.println( "area Triangle = " + areaTriangle );
         System.out.println( "Hello World!" );
 
-        BasicShape s = new Circle( d, 2.0D );
+        var s = new Circle( d, 2.0D );
         
         if (s instanceof Circle(var bp, var rad)){
             System.out.println( "diameter = " + rad*2 );
         }
     }
+    private Sealedshapes(){}
 }

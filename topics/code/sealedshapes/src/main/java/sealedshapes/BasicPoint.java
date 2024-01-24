@@ -1,19 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Record.java to edit this template
- */
 package sealedshapes;
 
 /**
- *
+ * Helper class to define points and helper functions.
+ * 
  * @author Pieter van den Hombergh {@code <pieter.van.den.hombergh@gmail.com>}
+ * 
+ * @param x coordinate of point
+ * @param y coordinate of point
  */
 public record BasicPoint(double x, double y) {
 
     /**
-     * Distance between this BasicPoint and the other BasicPoint. The computation uses Pythagoras' formula to do the computation.
+     * Distance between this BasicPoint and the other BasicPoint. 
+     * The computation uses Pythagoras' formula to do the computation.
+     * 
      * @param other point
-     * @return length of the shortest straight line through this and the other point.
+     * @return length of the shortest straight line through this 
+     *         and the other point.
      */
     public double distance(BasicPoint other) {
         double xLen = Math.abs( x - other.x );
@@ -22,7 +25,9 @@ public record BasicPoint(double x, double y) {
     }
     
     /**
-     * Factory method to allow shorthand {@code bp(1,0D,2.0D)} to create a point. import static.
+     * Factory method to allow shorthand {@code bp(1,0D,2.0D)} 
+     *     to create a point. 
+     *     import static to have the most benefits.
      * @param x coordinate
      * @param y coordinate
      * @return  the record
