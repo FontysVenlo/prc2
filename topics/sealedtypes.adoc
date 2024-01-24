@@ -88,7 +88,6 @@ default double area() { //<1>
             double s = ( lA + lB + lC ) / 2D;
             yield Math.sqrt( s * ( s - lA ) * ( s - lB ) * ( s - lC ) ); // <3>
         }
-
     };
 }
 ----
@@ -97,7 +96,7 @@ default double area() { //<1>
 <2> this is one of the subtypes, and that fact is known to the compiler. The compiler also knows that the case labels cover all cases.
 <3> `yield`, not `return`.
 
-To make things complete, the code below shows that a record can implement instance and static methods too, like here the method to compute the distance between two points and the shortcut to define a `new BasicPoint(...)`, `bp(...)`.
+To make things complete, the code below shows that a record can implement instance and static methods too, like the method to compute the distance between this and another point and the static shortcut factory method to define a `new BasicPoint(...)` with `bp(...)` instead.
 
 .Complete BasicPoint class. Note the additional methods. 
 [source,java]
