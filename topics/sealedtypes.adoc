@@ -81,7 +81,7 @@ default double area() { //<1>
        case Rectangle( BasicPoint( var tlx, var tly ), 
                        BasicPoint( var brx, var bry ) ) -> //<3>
                        abs( tlx - brx ) * abs( tly - bry );
-        case Triangle(BasicPoint a, BasicPoint b, BasicPoint c) -> { //<4>
+        case Triangle( BasicPoint a, BasicPoint b, BasicPoint c ) -> { //<4>
             double lA = b.distance( c );
             double lB = c.distance( a );
             double lC = a.distance( b );
@@ -95,7 +95,8 @@ default double area() { //<1>
 <1> The default keyword enables this implementation. You could even consider this final, but the language does not yet allow the combination of `default` and `final`, although it would be useful here.
 <2> this is one of the subtypes, and that fact is known to the compiler. The compiler also knows that the case labels cover all cases.
 <3> Note the match for the members of the two `BasicPoint`s `tlx, tly, brx, bry `, which are then used in the computation in the next line.
-<3> `yield`, not `return`.
+<4> Get the defining corner points of the triangle.
+<5> `yield`, not `return`.
 
 To make things complete, the code below shows that a record can implement instance and static methods too, like the method to compute the distance between this and another point and the static shortcut factory method to define a `new BasicPoint(...)` with `bp(...)` instead.
 
