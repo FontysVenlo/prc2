@@ -33,7 +33,6 @@ sealed interface BasicShape
             }
 
         };
-//        return 0D;
     }
 
     /**
