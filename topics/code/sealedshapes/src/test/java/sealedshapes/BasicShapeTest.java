@@ -10,6 +10,7 @@ import static java.lang.Math.sqrt;
 import static sealedshapes.BasicPoint.bp;
 import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 
 /**
  *
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
  */
 public class BasicShapeTest {
 
+    @DisplayName("Comparing Rectangles")
     //@Disabled("think TDD")
     @Test
     public void testCompareRectangle() {
@@ -31,6 +33,7 @@ public class BasicShapeTest {
     /**
      *
      */
+    @DisplayName("Compare Rectangle and Triangle")
 //@Disabled("think TDD")
     @Test
     public void testRetangleTriangle() {
@@ -40,12 +43,16 @@ public class BasicShapeTest {
         BasicPoint d = new BasicPoint( 2, 2 );
         Rectangle r1 = new Rectangle( a, d );
         Triangle t1 = new Triangle( a, b, c );
-        int compareTo = t1.compareTo( r1 );
-        assertThat( signum(compareTo) ).isEqualTo( -1 );
+        System.out.println( "t2 = " + t1 + " area " + t1.area() );
+        Triangle t2 = new Triangle( b, c, a );
+        System.out.println( "t2 = " + t2 + " area " + t2.area() );
+        int compareTo1 = t1.compareTo( r1 );
+        assertThat( signum( compareTo1 ) ).isEqualTo( -1 );
         assertThat( (BasicShape) t1 ).isLessThan( r1 );
     }
 
     //@Disabled("think TDD")
+    @DisplayName("Circle smaller than square")
     @Test
     public void testCircleSmallerThanSquare() {
         BasicPoint center = bp( 1, 1 );
