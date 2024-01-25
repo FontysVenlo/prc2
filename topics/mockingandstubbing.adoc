@@ -107,7 +107,7 @@ mockito dependency, then download the javadoc, you can enjoy that while you are 
 
 Sometimes the class that you want to pass as a mock to the business code has a [big]*big* interface, with
 many methods, and you do not want to restrict the business code to just a few trained methods. That would
-constrain the methods the business class could use, and that serves no real purpose. In such cases it
+constrain the methods that the business class could use, which serves no real purpose. In such cases it
 may be better to provide a differently configured [blue]*real class*.
 
 
@@ -170,12 +170,12 @@ class PrintingBusiness
 
         out.format( "%s at %d", "Oplegkaas", 957 );
 
-        assertThat( cout.toString() ).contains( "at", "Opleg kaas", "957" );
+        assertThat( cout.toString() ).contains( "at", "Oplegkaas", "957" );
     }
 ----
 
-By implementing the AppendAndClear interface you can print to anything, for instance
-by using a StringBuilder as intermediate and then transfer the output to a GUI element in JavaFX or Swing.
+By implementing the `AppendAndClear` interface you can print to anything, for instance
+by using a `StringBuilder` as intermediate carrier and then transfer the output to a GUI element in JavaFX or Swing.
 
 .Definition of AppendAndClear interface.
 [source,java]

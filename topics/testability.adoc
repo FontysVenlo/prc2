@@ -13,10 +13,11 @@ Most of unit testing is https://en.wikipedia.org/wiki/White-box_testing[white bo
 
 [NOTE]
 ====
-For *business* code, organize your packages according to the collaborations the classes will have. In particular do [red]*NOT* organize classes according to type or kind,
-like collections with collections and exceptions with exceptions. To express it as a metaphor: If you always keep your screws, seats, and backrests in separate
-boxes, they will never build chairs. You need to put them together, to make them cooperate. +
-For a *library* code, other aspects such as find-ability may take precedence over tight packages. But when you study the java libraries
+For *business* code, organize your packages according to the collaborations the classes will have. 
+In particular do [red]*NOT* organize classes according to type or kind,
+like collections with collections and exceptions with exceptions. To express it as a metaphor: If you always keep your screws, seats, and back-rests in separate
+rooms, they will never build chairs. You need to put them together, to make them cooperate. +
+For *library* code, other aspects such as find-ability may take precedence over tight packages. But when you study the java libraries
 your will see classes in packages that are package private, to help the public types in the package to do their bidding.
 ====
 
@@ -42,7 +43,7 @@ Instead hand the service or resource to the business, or give it some provider o
 
 === Business class fit for testing
 
-WE'LL FURTHER EXPLAIN THIS CONCEPT IN CLASS AND IN THE CONTEXT OF PRJ2. THERE ARE QUITE SOME DESIGN IDEAS BEHIND IT, SO DON'T WORRY IF YOU DON'T UNDERSTAND IT IMMEDIATELY.
+[blue]*WE'LL FURTHER EXPLAIN THIS CONCEPT IN CLASS AND IN THE CONTEXT OF PRJ2. THERE ARE QUITE SOME DESIGN IDEAS BEHIND IT, SO DON'T WORRY IF YOU DON'T UNDERSTAND IT IMMEDIATELY.*
 
 Let us look at an example as a class diagram.
 
