@@ -6,6 +6,18 @@ a type. This is the problem that feature *sealed types* addresses.
 
 Sealed Classes were finalized in Java 17 with https://openjdk.org/jeps/409[JEP 409].
 
+.An example of its use inside the JDK itself from AbstractStringBuilder.
+[source,Java]
+----
+abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
+    permits StringBuilder, StringBuffer { //<1>
+...
+}
+----
+
+<1> Meaning that since Java 20 you can no longer extend `AbstractStringBuilder`, 
+    although that would be difficult anyway, because you it is a package private class inside the package `java.lang`. 
+
 In the code snippets below we give a complete example of a simple shape hierarchy.
 
 image::sealedshapes.svg[title="class diagram sealed interface BasicShape"]

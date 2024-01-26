@@ -11,7 +11,7 @@ menu:
 weight: 110
 toc: true
 :stem: latexmath
-
+  
 ---
 // added images and show how to include source code and latex
  

@@ -6,4 +6,5 @@ public interface EBird<EB extends EBird<EB>>  extends Flyer<EB>, Walker<EB>{
         System.out.println( "VROOOAAR" );
         return self();
     }
+    
 }
