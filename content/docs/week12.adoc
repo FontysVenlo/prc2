@@ -9,7 +9,7 @@ menu:
   docs:
     parent: ""
 weight: 110
-toc: false
+toc: true
 ---
 
 include::{topics}/security.adoc[]
