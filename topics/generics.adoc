@@ -438,6 +438,8 @@ X sureX = X.class.cast( object ); // <1>
 The cast convinces the compiler, which defers the check to the runtime. If there is no match at runtime, a `ClassCastException` will be thrown.
 The X can be of any type, including classes, interfaces, enums, and records.
 
+=== isAssignableFrom. Will a cast work?
+
 We can use this in a generic way too, by passing along the expected type.
 
 [source,java]
@@ -452,6 +454,9 @@ public <T> List<T> filterForType(List<?> list, Class<T> typeToken) { // <1>
     return result;
 }
 ----
+
+image::assignablefrom.svg[title="isAssignableFrom",role="center"]
+
 
 <1> T is the expected type of the elements in the result list.
 <2> The isAssignableFrom method checks if the type of the object is the same as, or a sub type of, the type represented by the type token.
