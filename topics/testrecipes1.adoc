@@ -5,20 +5,19 @@ This is the the first installment.
 
 *Equals* and *hashCode* are not twins in the direct sense, but indeed methods whose implementation should
 have a very direct connection.
-From the java https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#hashCode()[Object API ^] follows
+From the java https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode()[Object API ^] follows
  that:
 
 * Two objects that are equal by their equal method, than their hashCode should also be equal.
 * Note that the reverse is not true. If two hashCode are the same, that does not imply that the objects are equal.
 * A good hashCode 'spreads' the objects well, but this is not a very strict requirement or a requirement that can be enforced. A poor hashCode
-  will lead to poor Hash{Map|Set}  lookup performance.
+  will lead to poor Hash{Map|Set} lookup performance.
 
 Although hashCodes are invented to speedup finding object in a hash map or hash set, these collections use hashCode in the first part of the search,
 but must verify equality as final step(s).
 
 The thing is that the equals method must consider quite a few things, expressed with conditional evaluation (if-then-else).
-The good thing is an IDE typically provides a way to generate  equals and hashCode for you and these implementations are typically of good quality. But
-in particular the equals method there are quite some ifs, sometimes in disguise, coded as `&&`, so this will throw some flies in your code-coverage ointment.
+The good thing is an IDE typically provides a way to generate  equals and hashCode for you and these implementations are typically of good quality. But in particular in the equals method there are quite some ifs, sometimes in disguise, coded as `&&`, so this will throw some flies in your code-coverage ointment.
 
 However, we can balance this generated code by a piece of reusable test code, that can be used for almost all cases.
 In fact we have not found a case where it does not apply. +
@@ -49,9 +48,9 @@ The devil is in the equals details, because it has to consider:
 * Is the other object `null`? Return `false` if it is.
 * Now consider the type.footnote:[Not all equals implementation look at the type of this, See the java.util.List doc for a counter example].
 ** Is the other of the same type as `this`? If not return `false`.
-** Now we are in known terrain, the other is of the same type, so the object has the same fields. +
-  For each field test it `this.field.equals(other.field)`. If not return false.
-** Using `Objects.equals(this.fieldA, other.fieldB)` can be an efficient solution to avoid testing for nullity of either field.
+** Now we are in known terrain, the other is of the same type, so the object should have the same fields. +
+  For each `field` test it `this.field.equals(other.field)`. If not return false.
+** Using `Objects.equals(this.fieldA, other.fieldA)` can be an efficient solution to avoid testing for nullity of either field.
 
 .Generated equals. It is fine.
 [source,java]
@@ -91,19 +90,20 @@ Define those instances (for this example) as follows.
     //@Disabled
     @Test
     void testEqualsAndHash() {
-        Student ref = new Student( "Jan", LocalDate.of( 1999, 03, 23 ), 123 );
-        Student equ = new Student( "Jan", LocalDate.of( 1999, 03, 23 ), 123 );
-        Student sna = new Student( "Jen", LocalDate.of( 1999, 03, 23 ), 123 ); //<1>
-        Student sda = new Student( "Jan", LocalDate.of( 1998, 03, 23 ), 123 ); //<2>
-        Student sid = new Student( "Jan", LocalDate.of( 1999, 03, 23 ), 456 ); //<3>
+        Student ref = new Student( "Jan", LocalDate.of( 1999, 03, 23 ), 123 ); //<1>
+        Student equ = new Student( "Jan", LocalDate.of( 1999, 03, 23 ), 123 ); //<2>
+        Student sna = new Student( "Jen", LocalDate.of( 1999, 03, 23 ), 123 ); //<3>
+        Student sda = new Student( "Jan", LocalDate.of( 1998, 03, 23 ), 123 ); //<4>
+        Student sid = new Student( "Jan", LocalDate.of( 1999, 03, 23 ), 456 ); //<5>
         verifyEqualsAndHashCode( ref, equ, sna, sda, sid );
         //fail( "testMethod reached it's and. You will know what to do." );
     }
 ----
-
-<1> Differs in name.
-<2> Differs in birthdate (year).
-<3> Differs in id.
+<1> The reference object
+<2> The equal object, equals true
+<3> Differs in name.
+<4> Differs in birth date (year).
+<5> Differs in id.
 
 The implementation of the `verifyEqualsAndHashCode` has been done with generics and a dash of AssertJ stuff.
 
@@ -124,7 +124,7 @@ The implementation of the `verifyEqualsAndHashCode` has been done with generics 
          String cname = ref.getClass().getCanonicalName();
          // I got bitten here, assertJ equalTo does not invoke equals on the
          // object when ref and 'other' are same.
-         // THAT's why the first one differs from the rest.
+         // THAT's why the first ones differ from the rest.
          SoftAssertions.assertSoftly( softly-> {
            softly.assertThat( ref.equals( ref ) )
                    .as( cname + ".equals(this): with self should produce true" )

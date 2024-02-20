@@ -9,7 +9,7 @@ A maven repository is a server that provides ready built maven 'artifacts', such
 
 There is a default repository, called https://mvnrepository.com/repos/central[maven central]. You (as a team or company) can have your own repository.
 
-If you look at a maven repository you will see that it is organized along the three axes: groupId, artifactId and version. We have published our Fontys Venlo *informatics pom* under groupId io.github.fontysvenlo, artifactId informaticspom and current (February 2023) 0.9. 
+If you look at a maven repository you will see that it is organized along the three axes: groupId, artifactId and version. We have published our Fontys Venlo *informatics pom* under groupId io.github.fontysvenlo, artifactId informaticspom and current (February 2024) 1.2. 
 
 // === Maven Settings
 

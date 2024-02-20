@@ -1,0 +1,52 @@
+== `instanceof`` operator
+
+Regularly you need to check for a _type_ before your can do an operation on a given object.
+Before you can use the object as a type, you need to cast it as that _type_ so the compiler will accept 
+the operations you want to do with the type.
+
+.Test object for string-ness, if so, take length.
+[source,java]
+----
+
+    if ( obj instanceof String ) {
+        String s= (String) obj;
+        return s.length();
+    }
+----
+
+Since java 16, with https://openjdk.org/jeps/394[JEP 394] this has been simplified to let the `instanceof` operator not only do the 
+test, but also the cast, if the test is successful.
+
+.Test object for string-ness, if so, take length.
+[source,java]
+----
+
+    if ( obj instanceof String s ) { ;<1>
+        return s.length();
+    }
+----
+
+<1> Note the assignment to `s` and cast to `String` after the successful test.
+
+The variable `s` is only in scope (known) _inside_ the if block, and only if the test passes.
+
+As another illustration, an implementation of `equals` for a Person class.
+
+[source,java]
+----
+
+class Person{
+    String name;
+    LocalDate dob;
+    public boolean equals (Object o) {
+        if (o instanceof Person p) {
+            return this.name.equals(p.name) &&
+                this.dob.equals(p.dob);
+        }
+    }
+    return false;
+}
+----
+
+
+

@@ -11,4 +11,5 @@ public class ThunderBird implements EBird<ThunderBird>{
         
         b.fly().move().walk().fly().brood().fly().afterBurner();
     }
+    Integer x;
 }

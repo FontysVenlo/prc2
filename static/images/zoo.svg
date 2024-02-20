@@ -240,9 +240,9 @@
       ><path fill="none" d="M1 59.2188 L129.5 59.2188" clip-path="url(#clipPath9)"
       /><path fill="none" d="M1 64.2188 L129.5 64.2188" clip-path="url(#clipPath9)"
       /><text x="5" xml:space="preserve" y="79.3281" clip-path="url(#clipPath9)" font-weight="bold" stroke="none"
-      >+ brood(): B</text
+      >+ brood(): A</text
       ><text x="5" xml:space="preserve" y="95.4375" clip-path="url(#clipPath9)" font-weight="bold" stroke="none"
-      >+ self(): B</text
+      >+ self(): A</text
       ><text x="5" xml:space="preserve" y="111.5469" clip-path="url(#clipPath9)" stroke="none"
       > </text
     ></g

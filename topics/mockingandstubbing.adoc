@@ -73,7 +73,7 @@ Now over to the test class, which creates a mocked printer and hands it to the *
 .Business test class.
 [source,java]
 ----
-include::code/myfirstmock/src/test/java/myfirstmock/BusinessTest.java[lines=27..37]
+include::code/myfirstmock/src/test/java/myfirstmock/BusinessTest.java[lines=27..38]
 ----
 
 <1> Create the mocked printer.
@@ -86,7 +86,7 @@ This is of course a simple test and the only thing that it verifies is that the 
 .Verify that what is printed is okay.
 [source,java]
 ----
-include::code/myfirstmock/src/test/java/myfirstmock/BusinessTest.java[lines=39..57]
+include::code/myfirstmock/src/test/java/myfirstmock/BusinessTest.java[lines=39..58]
 ----
 
 <1> Setup mock as annotated field.
@@ -107,21 +107,20 @@ mockito dependency, then download the javadoc, you can enjoy that while you are 
 
 Sometimes the class that you want to pass as a mock to the business code has a [big]*big* interface, with
 many methods, and you do not want to restrict the business code to just a few trained methods. That would
-constrain the methods the business class could use, and that serves no real purpose. In such cases it
+constrain the methods that the business class could use, which serves no real purpose. In such cases it
 may be better to provide a differently configured [blue]*real class*.
 
 
-==== Input stubbing with a real,class.
+==== Input stubbing with a real class.
 
-An object that contains preconfigured data is called a *Stub*. +
-As an example: Assume you business class
-uses a Scanner as it's input. Scanner has 50-odd methods, which you certainly do not want to train _all_ when mocking.
+An object that contains pre-configured data is called a *Stub*. +
+As an example: Assume your business class uses a Scanner as it's input.
+https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Scanner.html[`Scanner`] has 50-odd methods, which you certainly do not want to train _all_ when mocking.
 
 But since you will pass a special Scanner to the business class anyway, the better way is to use a Scanner configured with one of
 it's constructors.
-In this case use `new Scanner( String s )`, in which the string `s` contains exactly the input you want to use in your test. The string
-can contain newlines, so that it appears as if the user entered multiple lines. This allows you to test a program with a dialog.
-Something along the line of  `new Scanner("12\n13\n");`, that is 12 newline 13.
+In this case use `new Scanner( String s )`, in which the string `s` contains exactly the input you want to use in your test. The string can contain newlines, so that it appears as if the user entered multiple lines. This allows you to test a program with a dialog.
+Something along the line of  `new Scanner("12\n13\n");`, that is '12', 'newline', and '13'.
 
 ==== Output mocking with a real classes
 
@@ -143,7 +142,7 @@ class PrintingBusiness
       final PrintStream out; // <1>
 
       PrintingBusiness() { // <2>
-          this.out=System.out;
+          this( System.out );
       }
 
       PrintingBusiness( PrintStream ps ) { //<3>
@@ -157,7 +156,7 @@ class PrintingBusiness
 ----
 
 <1> [blue]`final` to have a constructor set it
-<2> Default constructor uses System.out to print to.
+<2> Default constructor uses System.out to print to and forwards it to the next constructor.
 <3> Redirect output to other output, for test or 'printing' in a GUI.
 <4> All facilities of PrintStream are available, including formatted printing.
 
@@ -171,12 +170,12 @@ class PrintingBusiness
 
         out.format( "%s at %d", "Oplegkaas", 957 );
 
-        assertThat( cout.toString() ).contains( "at", "Opleg kaas", "957" );
+        assertThat( cout.toString() ).contains( "at", "Oplegkaas", "957" );
     }
 ----
 
-By implementing the AppendAndClear interface you can print to anything, for instance
-by using a StringBuilder as intermediate and then transfer the output to a GUI element in JavaFX or Swing.
+By implementing the `AppendAndClear` interface you can print to anything, for instance
+by using a `StringBuilder` as intermediate carrier and then transfer the output to a GUI element in JavaFX or Swing.
 
 .Definition of AppendAndClear interface.
 [source,java]

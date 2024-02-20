@@ -1,0 +1,120 @@
+== Sealed Types
+
+You know that a `final` class is a class that can not be extended. On the other hand, a non-final class, or an interface can be extended by anyone who feels fit to do so.
+There are use cases where the designer of a API or maybe type hierarchy wants _more control_ of what can extend (or implement)
+a type. This is the problem that feature *sealed types* addresses.
+
+Sealed Classes were finalized in Java 17 with https://openjdk.org/jeps/409[JEP 409].
+
+.An example of its use inside the JDK itself from AbstractStringBuilder.
+[source,Java]
+----
+abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
+    permits StringBuilder, StringBuffer { //<1>
+...
+}
+----
+
+<1> The only allowed extenders of this class are `StringBuilder` and `StringBuffer`, meaning that since Java 20 you can no longer extend `AbstractStringBuilder`, 
+    although that would be difficult anyway, because it is a package private class inside the package `java.lang` inside the module `java.base`.
+
+In the code snippets below we give a complete example of a simple shape hierarchy.
+
+image::sealedshapes.svg[title="class diagram sealed interface BasicShape"]
+
+.The sealed interface.
+[source,java]
+----
+sealed interface BasicShape // <1>
+        extends Comparable<BasicShape>  //<2>
+        permits Triangle, Rectangle, Circle {} //<3>
+----
+
+<1> Note the `sealed` keyword.
+<2> as promised, interfaces can be implemented, in fact as many as you want
+<3> the sealed keyword comes with `permits`, the other context sensitive keyword, and specifies which subtypes are allowed (and mandatory) and known.
+
+.The tests illustrate the use of this definition:
+[source,java]
+----
+@Test
+public void testRetangleTriangle() {
+    BasicPoint a = new BasicPoint( 0, 0 );
+    BasicPoint b = new BasicPoint( 0, 2 );
+    BasicPoint c = new BasicPoint( 2, 0 );
+    BasicPoint d = new BasicPoint( 2, 2 );
+    Rectangle r1 = new Rectangle( a, d );
+    Triangle t1 = new Triangle( a, b, c );
+    int compareTo = t1.compareTo( r1 );
+    assertThat( signum(compareTo) ).isEqualTo( -1 );
+    assertThat( (BasicShape) t1 ).isLessThan( r1 ); //<1>
+}
+----
+
+<1> help the compiler to understand that t1 is to be considered a BasicShape in this test.
+
+In this `BasicShape` example the definitions of the leaf records are trivial, as an example the circle.
+
+.Cirle record
+[source,java]
+----
+public record Circle(BasicPoint center, double radius) implements BasicShape {}
+----
+
+
+.The compareTo method is defined in terms of the area of the shape.
+[source,java]
+----
+@Override
+public default int compareTo(BasicShape other) { //<1>
+    return Double.compare( this.area(), other.area() );
+}
+----
+
+<1> note the `default` keyword here, which allows us to implement a method in the interface `BasicShape`.
+
+Now the only problem is to compute the area.
+
+This is where all come together, switch expressions, pattern matching for records and the use of the yield keyword.
+The area of the triangle is computed with https://en.wikipedia.org/wiki/Heron%27s_formula[Heron's formula].
+
+stem:[\text{with} s = frac{a+b+c}{2} \text{area}= \sqrt{s\times(s-a)\times(s-b)\times(s-c)}]
+
+
+
+image::triangle.svg[title="triangle corners and sides"]
+
+[source,java]
+----
+default double area() { //<1>
+    return switch ( this ) {  //<2>
+        case Circle(var unused, double radius) ->
+            radius * radius * Math.PI;
+       case Rectangle( BasicPoint( var tlx, var tly ), 
+                       BasicPoint( var brx, var bry ) ) -> //<3>
+                       abs( tlx - brx ) * abs( tly - bry );
+        case Triangle( BasicPoint a, BasicPoint b, BasicPoint c ) -> { //<4>
+            double lA = b.distance( c );
+            double lB = c.distance( a );
+            double lC = a.distance( b );
+            double s = ( lA + lB + lC ) / 2D;
+            yield Math.sqrt( s * ( s - lA ) * ( s - lB ) * ( s - lC ) ); //<5>
+        }
+    };
+}
+----
+
+<1> The default keyword enables this implementation. You could even consider this final, but the language does not yet allow the combination of `default` and `final`, although it would be useful here.
+<2> this is one of the subtypes, and that fact is known to the compiler. The compiler also knows that the case labels cover all cases.
+<3> Note the match for the members of the two `BasicPoint`s `tlx, tly, brx, bry `, which are then used in the computation in the next line.
+<4> Get the defining corner points of the triangle.
+<5> `yield`, not `return`.
+
+To make things complete, the code below shows that a record can implement instance and static methods too, like the method to compute the distance between this and another point and the static shortcut factory method to define a `new BasicPoint(...)` with `bp(...)` instead.
+
+.Complete BasicPoint class. Note the additional methods. 
+[source,java]
+----
+include::code/sealedshapes/src/main/java/sealedshapes/BasicPoint.java[]
+----
+

@@ -44,24 +44,24 @@ Do [red]*NOT* use `Program Files` under Windows, because of the space in the nam
 ====
 
 Installation of Java can be done either through a package manager or by downloading the
-the Java distribution from  https://adoptium.net/temurin/releases/?version=17[AdoptOpenJDK ^].
-For PRC2 we will use [blue]*Java 17*.
+the Java distribution from  https://adoptium.net/temurin/releases/?version=21[AdoptOpenJDK ^].
+For PRC2 we will use [blue]*Java 21*.
 
 ==== icon:linux[fw] Linux
 
 [NOTE]
 ====
-We are using Debian based Linux, such as Ubuntu, for the instructions on this page.
+We are using Debian based Linux, such as Fedora or Ubuntu, for the instructions on this page.
 We assume that that if you are running a different distribution of Linux that you can adapt the
 instructions to apply to that distribution (e.g. use the correct package manager Zypper, PacMan, etc.).
 ====
 
 With a package manager:
 
-.icon:linux[fw] install openjdk via apt-get
+.icon:linux[fw] install openjdk via apt-get on ubuntu
 [source,sh]
 ----
-sudo apt install openjdk-17-jdk
+sudo apt install openjdk-21-jdk
 ----
 
 .icon:linux[fw] install eclipse temurin via apt-get
@@ -71,21 +71,21 @@ apt-get install -y wget apt-transport-https gnupg
 wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | apt-key add -
 echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
 apt-get update # update if you haven't already
-apt-get install temurin-17-jdk
+apt-get install temurin-21-jdk
 ----
 
 Manual installation:
 
 In the example below we assume that the distribution is packed as a `tar.gz` archive.
-The example shows the archive name as of 10 February 2023,
-`OpenJDK17U-jdk_x64_linux_hotspot_17.0.6_10.tar.gz`
+The example shows the archive name as of 21 Januari 2024,
+`OpenJDK21U-jdk_x64_linux_hotspot_21.0.2_13.tar.gz`
 
 .icon:linux[fw] unpack java distribution using the command-line
 [source,sh]
 ----
 sudo mkdir -p /usr/lib/jvm
 cd /usr/lib/jvm
-sudo tar xf ~/Downloads/OpenJDK17U-jdk_x64_linux_hotspot_17.0.6_10.tar.gz
+sudo tar xf ~/Downloads/OpenJDK21U-jdk_x64_linux_hotspot_21.0.2_13.tar.gz
 ----
 
 ==== icon:apple[fw] macOS
@@ -103,13 +103,13 @@ brew install --cask temurin
 
 # To install specific version
 brew tap homebrew/cask-versions
-brew install --cask temurin17
+brew install --cask temurin21
 ----
 
 Manual installation:
 
 Download the correct distribution/version of choice from
-https://adoptium.net/temurin/releases/?version=17[AdoptOpenJDK ^].
+https://adoptium.net/temurin/releases/?version=21[AdoptOpenJDK ^].
 Install the same way as normal programs.
 
 ==== icon:windows[fw] Windows
@@ -121,13 +121,13 @@ First install the https://learn.microsoft.com/en-us/windows/package-manager/wing
 .icon:windows[fw] install via powershell
 [source,sh]
 ----
-winget install Microsoft.OpenJDK.17
+winget install Microsoft.OpenJDK.21
 ----
 
 Manual installation:
 
 Download the correct distribution/version of choice from
-https://adoptium.net/temurin/releases/?version=17[AdoptOpenJDK ^].
+https://adoptium.net/temurin/releases/?version=21[AdoptOpenJDK ^].
 Install the same way as normal programs,
 
 [WARNING]
@@ -254,6 +254,7 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 17.0.6)
 
 alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11.0.12`; java -version"
 alias j17="export JAVA_HOME=`/usr/libexec/java_home -v 17.0.6`; java -version"
+alias j21="export JAVA_HOME=`/usr/libexec/java_home -v 21.0.2`; java -version"
 
 # Add maven to path
 export PATH=/Applications/maven/apache-maven-3.9.0/bin:$PATH
@@ -271,8 +272,10 @@ We can now check that switching between versions works:
 java -version
 j11
 j17
+j21
 ----
 Check that the default Java version is correct
+Check that switching between versions works
 Check that switching between versions works
 Check that switching between versions works
 
@@ -308,15 +311,15 @@ Install manually:
 
 Fetch a fresh copy of https://maven.apache.org/[Apache Maven] from the website.
 
-To install it, do (example uses version 3.9.0  as of 2023-02-06)
+To install it, do (example uses version 3.9.6  as of 2024-01-21)
 
 .icon:linux[fw] install apache maven and add to path
 [source,sh]
 ----
 cd /usr/share
 sudo rm -fr maven
-sudo tar xf ~/Downloads/apache-maven-3.9.0-bin.tar.gz
-sudo ln -sf apache-maven-3.9.0/ maven
+sudo tar xf ~/Downloads/apache-maven-3.9.6-bin.tar.gz
+sudo ln -sf apache-maven-3.9.6/ maven
 cd /usr/bin
 sudo ln -sf ../share/maven/bin/mvn .
 ----
@@ -362,7 +365,7 @@ Install manually:
 
 === Install or update your IDE
 
-The official Java IDE at Fontys ICT Venlo is https://netbeans.apache.org/[Apache NetBeans IDE]. The long time stable version for the moment is 16.0.
+The official Java IDE at Fontys ICT Venlo is https://netbeans.apache.org/[Apache NetBeans IDE]. The latests version for the moment is 20.0.
 
 ==== icon:linux[fw] Linux
 
@@ -381,8 +384,8 @@ in the traditional (as in same directories as the installer would) `/usr/local`.
 [source,sh]
 ----
 cd /usr/local
-sudo unzip ~/Downloads/netbeans-16-bin.zip
-sudo mv netbeans{,-12.2}
+sudo unzip ~/Downloads/netbeans-20-bin.zip
+sudo mv netbeans{,-21}
 ----
 
 For extra creature comfort, add a simple netbeans script to your path
@@ -391,7 +394,7 @@ For extra creature comfort, add a simple netbeans script to your path
 [source,sh]
 ----
 #!/usr/bin/env bash
-/usr/local/netbeans-16/bin/netbeans "$@" & #<1>
+/usr/local/netbeans-20/bin/netbeans "$@" & #<1>
 ----
 
 <1> Invoke netbeans using its absolute path.
@@ -426,7 +429,7 @@ We do this by adding an executable file to the `PATH` so we can start Netbeans f
 ----
 cd /usr/local/bin #<1>
 touch netbeans #<2>
-echo \"/Applications/NetBeans/Apache\ NetBeans\ 16.app/Contents/Resources/NetBeans/netbeans/bin/netbeans\" --jdkhome 
+echo \"/Applications/NetBeans/Apache\ NetBeans\ 21.app/Contents/Resources/NetBeans/netbeans/bin/netbeans\" --jdkhome 
 \$JAVA_HOME \$\* \& > netbeans #<3>
 chmod +x netbeans #<4>
 ----

@@ -19,7 +19,8 @@ include::{topics}/parameterizedtests.adoc[]
 [TIP]
 ====
 Think test driven! So write tests FIRST, and then code. Testing is ensuring that the code is usable.
-To make code testable is also a design exercise: you need to make decisions about the design of your program when you write your tests. If you cannot test it, you cannot use it.
+To make code testable is also a design exercise: you need to make decisions about the design of your program when you write your tests. If you have no idea how to test it,
+you are equally clueless about how to use the designed classes.
 ====
 
 == Links

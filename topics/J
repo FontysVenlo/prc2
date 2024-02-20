@@ -28,8 +28,10 @@ case ${thisname} in
 	NJAVA_HOME=/usr/lib/jvm/java-8-oracle;;
     J11)
 	NJAVA_HOME=/usr/lib/jvm/jdk-11.0.2;;
-    J12)
-	NJAVA_HOME=/usr/lib/jvm/jdk-12;;
+    J17)
+	NJAVA_HOME=/usr/lib/jvm/jdk-17.0.5+8;;
+    J21)
+	NJAVA_HOME=/usr/lib/jvm/jdk-21.0.2+13;;
     *)
 	echo call me as 'eval $(J8)', 'eval $(J11)' or 'eval $(J12)'
 	exit 1

@@ -8,7 +8,7 @@
 * The Junit version is https://junit.org/junit5/docs/current/user-guide/[Junit 5].
 * "Using frameworks for testing" will start with using https://assertj.github.io/doc/[AssertJ],
   which is a modern and up to date Open Source testing framework. The documentation is of excellent quality and fun to read.
-* http://horstmann.com/corejava/corejava_11ed-bonuschapter13-javafx.pdf[JavaFX bonus chapter ^] to Core Java Volume I
+* http://horstmann.com/corejava/corejava_11ed-bonuschapter13-javafx.pdf[JavaFX bonus chapter ^] to Core Java Volume I (for the 11th Edition.)
 
 * https://www.oreilly.com/library/view/core-java-volume/9780137673810/[Core Java, Volume I: Fundamentals]
 * https://www.oreilly.com/library/view/core-java-vol/9780137870899/[Core Java, Volume II: Fundamentals] 

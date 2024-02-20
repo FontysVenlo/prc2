@@ -55,7 +55,7 @@ Quiz: what is the difference between the two here: equals and same?
 
 [TIP]
 ====
-To follow along, tweak your IDE. Make sure you have the link:/2021/tips.html#_adding_your_own_code_templates_to_netbeans_ide[code template] to create a test method.
+To follow along, tweak your IDE. Make sure you have the link:/prc2/pages/tips.html#_adding_your_own_code_templates_to_netbeans_ide[code template] to create a test method.
 Note that the template adds a *fail* line, which should be disabled once the test and the business code agree.
 ====
 
@@ -80,8 +80,8 @@ How the string is formatted does not matter for this test to pass. It only requi
 
 === Collection Containment
 
-For collections there are numerous tests. Collections in this context includes
-everything https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Iterable.html[Iterable],
+For collections, there are numerous tests. Collections in this context include
+everything https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Iterable.html[Iterable],
 making it very powerful as can be seen in the Javadoc page of Iterable
 by following the link in this sentence. Look at the sub-interfaces and the implementing classes.
 
@@ -100,9 +100,9 @@ by following the link in this sentence. Look at the sub-interfaces and the imple
 ----
 
 <1> Assume this to be in the business code or SUT.
-<2> Not really required by a good tip to make sure the test does not trip
+<2> Not required but a good tip to make sure a test does not trip
   over an NPE, which might be confusing.
-<3> The following contains test makes this actually redundant
+<3> The following `contains`-test makes this redundant
 <4> because we want these two at least.
 
 [source,java]
@@ -117,10 +117,10 @@ by following the link in this sentence. Look at the sub-interfaces and the imple
           .containsExactlyInAnyOrder( 12346, 12345, 12347 ); // <5>
 ----
 
-<1> Assume that the business code produces such list.
-<2> Mostly self (test) protect.
-<3> Just to show that you can test for not empty, but also exact size, greater etc. This assertion is actually made redundant by the test in 5.
-<4> Extract a feature out of each student using a lambda. Its function should be obvious
+<1> Assume that the business code produces such a list.
+<2> Mostly self (test) protection.
+<3> Just to show that you can test for not empty, but also exact size, greater, etc. This assertion is made redundant by the test in 5.
+<4> Extract a feature out of each student using a lambda. Its function should be obvious.
 <5> Then test the list of extracted values for containment.
 
 [TIP]
@@ -140,14 +140,14 @@ There are three cases:
 
 . You are not expecting an exception and do not (want to) care about it. +
   Then let it simply occur and if it is a checked exception make your test method throw it.
-. You want specific code [red,bold]*not* to throw an exception and your want to test for that. +
+. You want specific code [red,bold]*not* to throw an exception and you want to test for that. +
   Wrap the suspect code in a lambda and invoke it using `assertThatCode( suspectCode )`.
 . You [green,bold]*want* a specific exception to be thrown under specific a circumstance. +
-  Wrap the exception causing code in a lambda and catch and inspect the resulting exception using `assertThatThrownBy( causingCode )`.
+  Wrap the exception-causing code in a lambda and catch and inspect the resulting exception using `assertThatThrownBy( causingCode )`.
 
-In AssertJ the exception testing helper have a format that deviates from the `assertThat().someCheck(...)` style.
+In AssertJ the exception testing helpers have a format that deviates from the `assertThat().someCheck(...)` style.
 This inconsistency has to do with the way the exceptions causing code must be called, and cannot easily be avoided.
-We propagate one form, declaring a lambda first and use that as the parameter to exception asserter.
+We propagate one form, declaring a lambda first, and use that as the parameter to the exception asserter.
 
 ==== Ignore or pass on
 In case you are not interested in an exception in your test, but it is a checked exception, simply declare your test method to throw it.
@@ -218,19 +218,19 @@ in the same way as in the previous paragraph, then pass that `code` to the excep
     }
 ----
 
-<1> Someone that knows his classics understands that this crook can't be professor at Hogwarts.
+<1> Someone who knows his classics understands that this crook can't be a professor at Hogwarts.
 <2> The lambda defines the throwing code. `org.assertj.core.api.ThrowableAssert.ThrowingCallable` is the functional interface for this purpose.
 <3> Sometimes it is good to be a bit relaxed on the exception type like in this line.
 <4> Or you need to be quite specific. You need only one, so choose either line 2 or 3. This is just an illustration.
 <5> You might want to inspect the message for keywords.
 
-In this fluent style you can check many more things. See the https://assertj.github.io/doc/[AssertJ user guide]
+In this fluent style, you can check many more things. See the https://assertj.github.io/doc/[AssertJ user guide]
 and https://javadoc.io/doc/org.assertj/assertj-core/latest/index.html[API] for that.
 
 [TIP]
 ====
-The general advise is to have only one (1) assert per test method. This makes the test method very focused.
+The general advice is to have only one (1) assert per test method. This makes the test method very focused.
 Stick to this rule and do not test unrelated features.
 Also note that when a failure occurs (a test fails or an exception is thrown), the rest of the test is not executed anymore,
-and this will therefor obscure further asserts in the same test method.
+and this will therefore obscure further asserts in the same test method.
 ====

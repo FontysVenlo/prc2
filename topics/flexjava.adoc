@@ -26,15 +26,15 @@ The whole operation involves three modifications:
 
 . Set the variables in your `~/.bashrc`.
 . Add a helper script, called J, put it in a directory in your PATH. ${HOME}/bin is a good place, if that is on your path.
-. Create aliases, to make typing the command simple, like *j8* to switch to Java 8 and *j12* to do the same for Java 12.
+. Create aliases, to make typing the command simple, like *j17* to switch to Java 17 and *j21* to do the same for Java 21.
 
 === Setting in startup script
 
 .setting JAVA_HOME and PATH in ~/.bashrc
 [source,sh]
 ----
-## DEFAULT IS JAVA 8 HERE
-export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+## DEFAULT IS JAVA 21 HERE
+export JAVA_HOME=/usr/lib/jvm/jdk-21.0.1+12
 export PATH=${JAVA_HOME}/bin:$PATH
 ----
 
@@ -54,9 +54,10 @@ in a file called `${HOME}/.bash_aliases` and are loaded on login and each time y
 .using aliases to switch with simple command. Excerpt from my .bash_aliases file.
 [source,sh]
 ----
-alias j12='eval $(J12)'
-alias j11='eval $(J11)'
 alias j8='eval $(J8)'
+alias j12='eval $(J17)'
+alias j11='eval $(J11)'
+alias j21='eval $(J21)'
 ----
 
 .see it all work

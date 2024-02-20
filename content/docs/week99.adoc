@@ -1,0 +1,26 @@
+---
+title: "99 Left Over"
+description: "Pattern matching for Records"
+date: 2024-01-22T10:31:29+02:00
+draft: true
+images: []
+slug: "j17-21"
+menu: 
+  docs:
+    parent: ""
+weight: 110
+toc: true
+:stem: latexmath
+  
+---
+// added images and show how to include source code and latex
+ 
+include::{topics}/instanceof.adoc[]
+
+include::{topics}/patternmatching.adoc[]
+
+include::{topics}/switchexpressions.adoc[]
+
+include::{topics}/sealedtypes.adoc[]
+
+
