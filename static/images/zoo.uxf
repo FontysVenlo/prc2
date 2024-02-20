@@ -298,8 +298,8 @@ and leaves grow
            |
            V
 */         down/*
-bg=green
-transparency=80</panel_attributes>
+bg=#aaaaaa
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
