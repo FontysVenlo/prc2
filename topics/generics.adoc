@@ -1,8 +1,7 @@
 == Generics
 
-Generics is mainly a compiler feature. In java (at least the versions up to this moment, january 2024) it
-is even more so, because after the compiler had it's go with it, that same compiler largely discards the generic information,
-and the runtime, the JVM,
+Generics is mainly a compiler feature. In java (at least the versions up to this moment, March 2022) it
+is even more so, because after the compiler had it's go with it, it largely discards the generic information, and the runtime, the JVM,
 does not really care about generics and does not use it. The role of generics is to keep the programs type-safe.
 The compiler will check that a use of a method, field, or class complies with its definition,
 and if the use does [red]*not*, the compiler will produce an [red]*error*, to prevent the programmer from doing unsafe things.
@@ -12,7 +11,7 @@ and if the use does [red]*not*, the compiler will produce an [red]*error*, to pr
 Generics were introduced in Java 5.
 
 Generics help keeping the language safer by giving the compiler more ways to _reason_
-about the code and reject it when it is bad. That is what a _strictly typed_ language such as Java is all about.
+about the code and reject it when it is bad. That is what a strictly typed language is all about.
 
 With generics also *auto-boxing* was introduced. The concept was borrowed from *C#* and the dot-net framework.
 Auto-boxing is auto-magically converting/wrapping an `int` into an `Integer` (auto-box) when a
@@ -21,21 +20,20 @@ This makes primitive types to play 'nicely' with generics to some degree.
 
 Generics also helps avoiding code duplication, because you can have a _something_ of _anything_
 like a [blue]`List` of [blue]`Student` without any code duplication or any code generation under the hood, to create
-specialized classes per anything type. The compiler prevent you to stick non-student objects in said list.
-So this [blue]*List* exists once and is just as applicable to Student as is to Donkey, if you use the list accordingly
-like `List<Student>`  or `List<Donkey>`.
+specialized classes per anything type.
+So this [blue]*List* exists once and is just as applicable to Student as is to Donkey.
 
 A strong point of Java has always been the preservation of investment (in code). What worked once should still work.
 So code that was legal (and compiled) in the Java 1.1 era should still run, even if used today in its binary format. Heck, in closed
 source stuff that might be the only form you have, but your investment is preserved because of this backwards compatibility.
 
 This strong point has a flip side. Pré Java 5 does not understand generics, which would break the backwards compatibility. That
-is the reason why the generic info, after being used by the compiler for correctness verification is then thrown away by the same compiler. Little
+is why the generic info, after being used by the compiler for correctness verification is then thrown away by the same compiler. Little
 if anything of the generic information is preserved for the run time. As a matter of fact, the JVM has no notion of generics, nor does it
 need it to function. This has all kind of consequences.
 
-In modern Java code, in particular since Java 8 with Functional interfaces and Streams, generics are a *must*, because they provide safety on the one hand
-and the required flexibility on the other, required to make the new Java 8 features possible at all.
+In modern Java code, in particular since Java 8 with Functional interfaces and Streams, generics are a *must*, because the provide safety in the one hand
+and the required flexibility in the other, required to make the Java 8 features possible at all.
 
 ==== Raw types, pre-Java 5
 
@@ -91,7 +89,7 @@ class Student extends Person{}
 The compiler will allow you to do `pl.add(serena)`, and `sl.add(serena)` because serena is a `Student` and by extension a `Person`, but
 paul can't be added to `sl`, because as far as the compiler is concerned, paul is not a Student and 'would not fit'.
 
-[blue]#What the compiler tries to achieve is that if you define a collection to contain students, then it promises
+[green]#What the compiler tries to achieve is that if you define a collection to contain students, then it promises
 that only students will go in and will ever come out. It does that by checking and not accepting any potential violation of the promise.#
 
 By sticking to this promise, the objects you can receive will be of the correct type and you can do what the type allows, like method calls etc.
@@ -100,8 +98,8 @@ By sticking to this promise, the objects you can receive will be of the correct 
 === Cheating the compiler
 
 You can trick the compiler into breaking its promises. In the end, of course the compiler is not the victim, but the program is.
-It will make the JVM throw a [red]#ClassCastException# on retrieval of the non-fitting object. And as programs go, when they generate uncaught exceptions:
-they will be killed (aborted) by the JVM.
+It will generate a [red]#ClassCastException# on retrieval of the non-fitting object. And as programs go when they generate uncaught exceptions:
+they will be aborted by the JVM.
 
 .Sneaky code. Do not do this at home. You are only fooling yourselves.
 [source,java]
@@ -124,7 +122,7 @@ public static void main( String[] args ) {
 <3> so it will gladly accept this. You [red]#cheated!#
 <4> no sweat, our heroine pops out,
 <5> but the other object will make your program fail at this statement with a [red]`ClassCastException`.
-<6> Statement never reached because your program will have been [red]#terminated# by now.
+<6> Statement never reached because your program will have been #terminated# by now.
 
 ==== Type token.
 
@@ -178,8 +176,8 @@ then there are a few rules to apply to your generic code. It all has to do with 
 
 We will refer to the picture above. We have two scenarios:
 
-. A class that makes, _produces_, or  _supplies_ shapes. Imagine reading the shape definitions from a drawing file with vector graphics.
-. A class that should accept, or _consume_ shapes, like a canvas on which you can draw.
+. A class that makes or _supplies_ shapes. Imagine reading the shape definitions from a drawing file with vector graphics.
+. A class that should accept shapes, like a canvas on which you can draw.
 
 The supplier or *Producer* as it is called in the documentation, could be some collection such as a _list_ of any of the types in the class diagram:
 `Object`, `Serializable` (that is probably how the Objects were read from disk), but the most likely and useful would be the `Shape` type.
@@ -280,7 +278,7 @@ types, so that that type defines what can be done with it and all its derivative
 * With `super`, which defines the *lower-bound*, the bound is the bottom-most type of the acceptable types. It defines the receiver
  or consumer of the type. Because that lower bound is the sub-most type of the inheritance hierarchy it is _it_ and all above it, which says
  that any consumer (receiver) of such super-type will accept the sub-most or lowest type but also any of the super types. +
- [blue]`super` puts a bound on what a consumer like a collection, set, or list should accept.
+ [blue]`super` puts a bound on what a consumer like a collection, set or list should accept.
 
 [TIP]
 ====
@@ -292,13 +290,14 @@ Same for *get*, which may answer to the name *pull*, *pop*, *take*, *remove*, et
 ====
 
 *Extends* and covariance is easiest to understand. Contra-variance less so. +
-As an example for *super*, have a look at the https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Consumer.html[Consumer ^]
+As an example for *super*, have a look at the https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Consumer.html[Consumer ^]
 functional interface. There is a default helper method given that specifies that the Consumer named *after* in the `andThen(..)`
 method must be of type `Consumer<? super T>`,
 saying that said consumer must accept Ts, but may also accept any super type of T. And again any consumer that accepts T or any of its super types will do.
 You will see this pattern throughout the `java.util.function` package where a default followup method such as `andThen` or `compose` is specified.
 
-This last paragraph makes the point why Functional interfaces and all other goodies introduced in Java 8 heavily rely on generics.
+The last paragraph makes the point why Functional interfaces and all other goodies introduced in Java 8 heavily rely on generics.
+
 
 === Self use in Generic definitions
 
@@ -321,7 +320,8 @@ public abstract class Enum<E extends Enum<E>>
 This definition puts bounds or constraints on the type E, which must hence be a sub type (sub class) of `Enum` itself.
 
 [TIP]
-The _type declaring keywords_ in Java are [blue]#class#, [blue]#interface#, and since Java 5 [blue]#enum#.
+The _type declaring keywords_ in Java are [blue]#class#, [blue]#interface#, and since Java 5 [blue]#enum#. Java 14 introduced [blue]#record#,
+which looks a lot like enum in the technique of its definition. It makes an [blue]#enum# and a [blue]#record# final, but they can implement interfaces.
 
 Another one is in the use of `Comparable`, like in the `String` class,
 it says among others `String implements Comparable<String>`, to make Strings comparable to each other, but not to other types.
@@ -356,7 +356,7 @@ If you want a non-leaf (abstract) class or interface, your have to further use t
 ----
 public interface EBird<EB extends EBird<EB>>  extends Flyer<EB>, Walker<EB>{
 
-     default EB afterBurner(){
+     EB afterBurner(){
          System.out.println("VROOOAAAR");
          return self();
      }
@@ -402,7 +402,7 @@ include::code/genericzoo/src/main/java/zoo/Duck.java[]
 ----
 
 .you know it is just a model, think movies ...
-image:duckling.jpg[role="thumb left", width="150"]
+image:duckling.jpg["Quack" role="thumb left", width="150" caption="Quack]
 The Duck class above is the complete concrete leaf class, nothing has been left out. Everything is in the supers (the interfaces in this case), generics is
 just the thread that stitches the Duck together.
 
@@ -414,6 +414,80 @@ The techniques described here are heavily used in the https://assertj.github.io/
 The details of this SELF use can be found https://web.archive.org/web/20130721224442/http:/passion.forco.de/content/emulating-self-types-using-java-generics-simplify-fluent-api-implementation[here ^].
 
 
+== Dynamic type information
+
+Sometimes you have a situation where you want to know the type of an object at run-time. This is not the same as the generic type information, which is
+only used by the compiler to check the program for correctness. The JVM does not care about generics, and it does not use it. The JVM only knows about the
+raw types, which are the types that are left after the compiler has done its job with the generics.
+
+But in cases where you want to transfer the expected type information to the run-time, you can use the `Class` type, which is a special type in Java.
+The `Class` type is a type that represents the type of an object at run-time. It is a special type, because it is the only type in Java that is both a type and an object.
+The `Class` type is a type, because it represents the type of an object, and it is an object, because it is an instance of the `Class` type.
+
+You can get the `Class` object of a type by calling the `getClass` method on an object. The `getClass` method is a method that is defined in the `Object` class,
+You can then use this Class object to check is a given object is an instance of a class' type, and of you use that, it even convinces the compiler. 
+
+Let's look at an example. Suppose you have a method that takes a list of objects, and you want to check if the objects in the list are of a certain type.
+
+[source,java]
+----
+Object object =....
+X sureX = X.class.cast( object ); // <1>
+----
+
+The cast convinces the compiler, which defers the check to the runtime. If there is no match at runtime, a `ClassCastException` will be thrown.
+The X can be of any type, including classes, interfaces, enums, and records.
+
+=== isAssignableFrom. Will a cast work?
+
+We can use this in a generic way too, by passing along the expected type.
+
+[source,java]
+----
+public <T> List<T> filterForType(List<?> list, Class<T> typeToken) { // <1>
+    List<T> result = new ArrayList<>();
+    for ( Object object : list ) {
+        if ( typeToken.isAssignableFrom( object.getClass() ) ) { //<2>
+            result.add( typeToken.cast( object ) );
+        }
+    }
+    return result;
+}
+----
+
+image::assignablefrom.svg[title="isAssignableFrom",role="center"]
+
+
+<1> T is the expected type of the elements in the result list.
+<2> The isAssignableFrom method checks if the type of the object is the same as, or a sub type of, the type represented by the type token.
+For instance to check if an object represents a number you can do
+
+[source,java]
+----
+if ( Number.class.isAssignableFrom( object.getClass() ) ) { // <1>
+    Number number = Number.class.cast( object ); // <2>
+    Number number2 = (Number) object; // <3>
+}
+----
+
+<1> will n = object work?
+<2> Then you can do this or
+<3> this, and the compiler will not complain about the cast, because it recognizes the check before the cast.
+
+Note that this is different from the `instanceof` operator, which is a compile-time check, so it needs _static_ , at compile time known type information. You can see that from the fact that the `instanceof` operator is used with a compile time type, and not with a `Class` object.
+
+[source,java]
+----
+if ( object instanceof X ) { // <1>
+    X x = (X) object;
+}
+----
+  
+<1> The `instanceof` operator is a compile-time check, so it need _static_, at compile time known type information, `X` in this case.
+
+The `Class` type is also used in the reflection API, which is a set of classes and interfaces that allow you to inspect the information of classes at run-time. We will see more on that in a later week. 
+
 === Testing generics
 
 As explained, generics is mainly used at the source code level and compiler to check the program for correct use of the declared types and methods. As such, testing of the generic aspect of your code is done when your compiler is happy with it AND you have expressed your real intent. Sometimes the last part is the trickiest.
+
