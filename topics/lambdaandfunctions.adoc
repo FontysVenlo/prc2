@@ -80,7 +80,8 @@ by calling toString() on a lambda expression is something rather useless, concoc
 .toString() is useless with lambda expressions
 [source,java]
 ----
-  Comparator<Student> gradeComp = (a,b) -> Double.compare(a.getGrade(),b.getGrade());
+Comparator<Student> gradeComp = 
+      (a,b) -> Double.compare(a.getGrade(),b.getGrade());
 ----
 
 When you invoke toString() in say jshell, you get.
@@ -90,7 +91,8 @@ When you invoke toString() in say jshell, you get.
 jshell> class Student{ double grade; double getGrade(){return grade;}}
 |  created class Student
 
-jshell> Comparator<Student> gradeComp = (a,b) -> Double.compare(a.getGrade(),b.getGrade());
+jshell> Comparator<Student> gradeComp = (a,b) 
+    -> Double.compare(a.getGrade(),b.getGrade());
 gradeComp ==> $Lambda$16/0x00000008000b3040@1e88b3c
 
 jshell> gradeComp
