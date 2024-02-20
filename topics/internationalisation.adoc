@@ -90,7 +90,8 @@ static double getDoubleConsideringLocale( String input ) throws ParseException {
 * @return the double.
 * @throws ParseException if the string does not parse to double.
 */
-static double getDoubleConsideringLocale( Locale locale, String input ) throws ParseException {
+static double getDoubleConsideringLocale( Locale locale, String input )
+    throws ParseException {
     return DecimalFormat.getNumberInstance(locale).parse( input ).doubleValue();
 }
 ----

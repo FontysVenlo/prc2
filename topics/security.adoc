@@ -111,7 +111,11 @@ Now we can load the class from the server.
 public class Main {
     public static void main(String[] args) {
         try {
-            URLClassLoader loader = new URLClassLoader(new URL[] { new URL("http://localhost:8080/") });
+            URLClassLoader loader =
+              new URLClassLoader(new URL[] { 
+                  new URL("http://localhost:8080/") 
+              }
+            ); // <1>
             Class c = loader.loadClass ("Printer");
             Object o = c.getDeclaredConstructor().newInstance();
         } catch (Exception ex) {
@@ -124,6 +128,9 @@ public class Main {
 // Hello there from the internet
 ----
 
+<1> Malicious code, loads class from the internet?
+
+
 This of course means that whatever class we load can do everything on the file system e.g. read files, make requests.
 
 Loading files via HTTP is of course not safe as the identity of
@@ -131,7 +138,7 @@ the server cannot be established. Same goes for HTTPS if the
 application doesn't verify the certificate (which is not unheard of).
 
 For a real life example of a class loader exploit have a look at
-https://knowledgebase.progress.com/articles/Article/How-to-prevent-Java-RMI-class-loader-exploit-with-AdminServer,
+https://knowledgebase.progress.com/articles/Article/How-to-prevent-Java-RMI-class-loader-exploit-with-AdminServer[],
 where it was possible for unauthenticated users to load arbitrary
 classes via an exposed Java Remote Method Method Invocation (RMI)
  service.
@@ -452,11 +459,14 @@ there is a SQL injection possibility.
 <div class="clear-both"></div>
 ++++
 
-.Error message
+.Error message, wrapped for readability
 [source, sql]
 ----
-Unterminated string literal started at position 72 in SQL select username from users where username = 'testuser'' and password = ''. Expected char
+Unterminated string literal started at position 72 
+  in SQL select username from users 
+  where username = 'testuser'' and password = ''. Expected char -- <1>
 ----
+<1> 
 
 So lets try to login as `testuser` without knowing the password.
 We can do this by entering the username `testuser` and for the password
