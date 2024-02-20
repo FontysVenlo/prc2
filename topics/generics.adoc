@@ -402,7 +402,7 @@ include::code/genericzoo/src/main/java/zoo/Duck.java[]
 ----
 
 .you know it is just a model, think movies ...
-image:duckling.jpg[role="thumb left", width="150"]
+image:duckling.jpg["Quack" role="thumb left", width="150" caption="Quack]
 The Duck class above is the complete concrete leaf class, nothing has been left out. Everything is in the supers (the interfaces in this case), generics is
 just the thread that stitches the Duck together.
 
