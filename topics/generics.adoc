@@ -89,8 +89,11 @@ class Student extends Person{}
 The compiler will allow you to do `pl.add(serena)`, and `sl.add(serena)` because serena is a `Student` and by extension a `Person`, but
 paul can't be added to `sl`, because as far as the compiler is concerned, paul is not a Student and 'would not fit'.
 
-[green]#What the compiler tries to achieve is that if you define a collection to contain students, then it promises
-that only students will go in and will ever come out. It does that by checking and not accepting any potential violation of the promise.#
+[TIP]
+====
+What the compiler tries to achieve is that if you define a collection to contain students, then it promises
+that only students will go in and will ever come out. It does that by checking and not accepting any potential violation of the promise.
+====
 
 By sticking to this promise, the objects you can receive will be of the correct type and you can do what the type allows, like method calls etc.
 
