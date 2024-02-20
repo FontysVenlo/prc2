@@ -84,12 +84,13 @@ to the actual longer expected message, or even a message that is a format string
 .map from short string to test (Person) object.
 [source,java]
 ----
- static Map<String, Person> emap = Map.of(
-            "piet", new Person("Piet", "Puk", LocalDate.of(1955-03-18),"M"),
-            "piet2", new Person("Piet", "Puk", LocalDate.of(1955-03-18),"M"), // for equals test.
-            "rembrandt", new Person("Rembrandt", "van Rijn", LocalDate.of(1606,7,15),"M"),
-            "saskia", new Person("Saskia", "van Uylenburgh", LocalDate.of(1612,8,11),"F"),
-    );
+static Map<String, Person> emap = Map.of(
+    "piet", new Person("Piet", "Puk", LocalDate.of(1955-03-18),"M"),
+    // piet2 for equals test.
+    "piet2", new Person("Piet", "Puk", LocalDate.of(1955-03-18),"M"), 
+    "rembrandt", new Person("Rembrandt", "van Rijn", LocalDate.of(1606,7,15),"M"),
+    "saskia", new Person("Saskia", "van Uylenburgh", LocalDate.of(1612,8,11),"F"),
+  );
 ----
 
 It is particularly applicable to lambda expressions.
@@ -116,14 +117,14 @@ with *T*, *U*, and *R* all of the same type: Fraction. This is legal.
 .Using lambda names in test data
 [source,java]
 ----
-    @ParameterizedTest
-    @CsvSource(
-             {
-                "'one half times one third is 1 sixth', 'times', '(1/6)',1,2,1,3", // <1>
-                "'one thirds plus two thirds is 1'    , 'plus',      '1',1,3,2,3",
-                "'flip'                               , 'flip',      '3',1,3,1,3", // <2>
-                "'one half minus two thirds is'       , 'minus', '(-1/6)',1,2,2,3"
-            } )
+@ParameterizedTest
+@CsvSource(
+    {
+    "'one half times one third is 1 sixth', 'times', '(1/6)',1,2,1,3", // <1>
+    "'one thirds plus two thirds is 1'    , 'plus',      '1',1,3,2,3",
+    "'flip'                               , 'flip',      '3',1,3,1,3", // <2>
+    "'one half minus two thirds is'       , 'minus', '(-1/6)',1,2,2,3"
+  } )
 ----
 
 <1> The operation name is the second value in the csv record, here *times*. Note that you can quote strings, but that is not required.
@@ -132,22 +133,22 @@ with *T*, *U*, and *R* all of the same type: Fraction. This is legal.
 .Test method using the test data (Annotations left out, they are above).
 [source,java]
 ----
-    void fractionOps( String message, String opName, String expected,
-                  int a,int b, int c, int d ) { // <1>
-        // Arrange: read test values
-        Fraction f1 = frac( a, b ); // <2>
-        Fraction f2 = frac( c, d );
-        BiFunction<Fraction, Fraction, Fraction> op = ops.get( opName ); // <3>
+void fractionOps( String message, String opName, String expected,
+              int a,int b, int c, int d ) { // <1>
+    // Arrange: read test values
+    Fraction f1 = frac( a, b ); // <2>
+    Fraction f2 = frac( c, d );
+    BiFunction<Fraction, Fraction, Fraction> op = ops.get( opName ); // <3>
 
-        // Act
-        Fraction result = op.apply( f1, f2 ); // <4>
+    // Act
+    Fraction result = op.apply( f1, f2 ); // <4>
 
-        // Assert(That) left out as exercise.
-        // Use assertThat on the fraction object result
-        //   and check if it has the correct string value.
-        // Use the message in the as(...) method.
+    // Assert(That) left out as exercise.
+    // Use assertThat on the fraction object result
+    //   and check if it has the correct string value.
+    // Use the message in the as(...) method.
 
-    }
+}
 ----
 
 <1> The fraction parameters a,b,c, and d are captured from the csvrecord. This makes the parameter list a 
@@ -184,7 +185,8 @@ to your validator.
 ----
   @ParameterizedTest
   @CsvFileSource( resources = { "testdata.csv" } )
-  void testRegex( String message, String input, boolean matches, int groupCount ){
+  void testRegex( String message, String input, 
+          boolean matches, int groupCount ){
     // your code here
   }
 ----

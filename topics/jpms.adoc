@@ -126,7 +126,7 @@ module gui_module {
 
 And another example from our ALDA course in which a Service is provided:
 
-.ALDA sorting srevices
+.ALDA sorting services
 [source,java]
 ----
 module sortingserviceapi {
@@ -137,7 +137,8 @@ open module asortingservice {
     requires java.logging;
     requires sortingserviceapi;
     uses sortingservice.SortingServiceFactory; // <2>
-    provides sortingservice.SortingServiceFactory with asortingservice.SortingServices; // <3>
+    provides sortingservice.SortingServiceFactory 
+         with asortingservice.SortingServices; // <3>
 }
 ----
 
@@ -174,7 +175,7 @@ either globally or explicitly to module B ( e.g. `module A { exports aPackage to
 == Java Modules and Testing
 
 .Encapsulation gone wrong: So much for shining security armor.
-image:shiningArmor-cropped.png[role="thumb left", 400, title="So much for shining security armor"] Project Jigsaw,
+image:shiningArmor-cropped.png[role="thumb left", 400, title="So much for shining security armor", "Run Ivanhoe"] Project Jigsaw,
 now known as the **J**ava **P**latform **M**odule **S**ystem solves problems
 that lingered in the Java ecosystem since its inception. The standard encapsulation or visibility model
 with protection or visibility modes `private`, `package private (default)` provide too
@@ -226,7 +227,7 @@ of your business code. This is a bit handicapped by the way the JPMS allows acce
 //image::sourcetree-modular.png[title='default source tree ']
 
 .source tree of genericdao
-[source,sh]
+[source]
 ----
 src
 ├── main
@@ -290,16 +291,16 @@ and adapt it for your own purposes.
 .sebipom project with surefire.opens property to open op required packages for testing. Requires sebipom >= 3.0.2
 [source,xml]
 ----
-  <properties>
-    <surefire.opens> <!--1-->
-        --add-opens nl.fontys.sebivenlo.genericdao/genericdao.dao=ALL-UNNAMED <!--2-->
-        --add-opens nl.fontys.sebivenlo.genericdao/genericdao.memory=ALL-UNNAMED
-        --add-opens nl.fontys.sebivenlo.genericdao/genericdao.pgdao=ALL-UNNAMED
-        --add-opens nl.fontys.sebivenlo.genericdao/usertypes=ALL-UNNAMED
-        --add-opens nl.fontys.sebivenlo.genericdao/entities=ALL-UNNAMED,genericmapper
-    </surefire.opens>
-    <!--3-->
-  </properties>
+<properties>
+  <surefire.opens> <!--1-->
+    --add-opens nl.fontys.sebivenlo.genericdao/genericdao.dao=ALL-UNNAMED <!--2-->
+    --add-opens nl.fontys.sebivenlo.genericdao/genericdao.memory=ALL-UNNAMED
+    --add-opens nl.fontys.sebivenlo.genericdao/genericdao.pgdao=ALL-UNNAMED
+    --add-opens nl.fontys.sebivenlo.genericdao/usertypes=ALL-UNNAMED
+    --add-opens nl.fontys.sebivenlo.genericdao/entities=ALL-UNNAMED,genericmapper
+  </surefire.opens>
+  <!--3-->
+</properties>
 ----
 
 <1> We are adding a property for the surefire plugin which is picked up by sebipom.
