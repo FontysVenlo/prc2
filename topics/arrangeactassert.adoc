@@ -65,10 +65,11 @@ to generate a non-existing generic class, create two instance with different typ
 .complete a generic
 [source,java]
 ----
-Box<String> sb= new Box<String>(); // compiler complains about nonexisting Box class.
-Box<Integer> ib= new Box<Integer>(); // compiler complains about  nonexisting Box class.
+// on the next line the compiler complains about nonexisting Box class.
+Box<String> sb= new Box<String>(); 
+// on the next line the compiler complains about nonexisting Box class.
+Box<Integer> ib= new Box<Integer>(); 
 // now you can let the IDE to follow its urge to do the typing for you.
-
 ----
 
 The same applies to methods. If you want a specific return type, provide that in a declaration where you specify such type.
