@@ -15,7 +15,7 @@
       ><path d="M0 0 L0 270 L600 270 L600 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath4"
-      ><path d="M0 0 L0 90 L210 90 L210 0 Z"
+      ><path d="M0 0 L0 90 L250 90 L250 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath5"
       ><path d="M0 0 L0 30 L100 30 L100 0 Z"
@@ -82,15 +82,15 @@
       /><text x="5" font-size="14px" y="16.1094" clip-path="url(#clipPath3)" font-family="sans-serif" stroke="none" xml:space="preserve"
       >modular poject</text
     ></g
-    ><g fill="rgb(120,120,120)" fill-opacity="0.4902" transform="translate(60,320)" stroke-opacity="0.4902" stroke="rgb(120,120,120)"
-    ><rect x="0.5" width="208.5" height="88.5" y="0.5" clip-path="url(#clipPath4)" stroke="none"
+    ><g fill="rgb(170,170,170)" fill-opacity="0.4902" transform="translate(60,320)" stroke-opacity="0.4902" stroke="rgb(170,170,170)"
+    ><rect x="0.5" width="248.5" height="88.5" y="0.5" clip-path="url(#clipPath4)" stroke="none"
     /></g
     ><g transform="translate(60,320)"
-    ><rect fill="none" x="0.5" width="208.5" height="88.5" y="0.5" clip-path="url(#clipPath4)"
-      /><text x="74" font-size="14px" y="18.1094" clip-path="url(#clipPath4)" font-family="sans-serif" stroke="none" xml:space="preserve"
+    ><rect fill="none" x="0.5" width="248.5" height="88.5" y="0.5" clip-path="url(#clipPath4)"
+      /><text x="94" font-size="14px" y="18.1094" clip-path="url(#clipPath4)" font-family="sans-serif" stroke="none" xml:space="preserve"
       >ext deps </text
-      ><text x="22" font-size="14px" y="34.2188" clip-path="url(#clipPath4)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >(e.g. sebidao, sebipom)</text
+      ><text x="17" font-size="14px" y="34.2188" clip-path="url(#clipPath4)" font-family="sans-serif" stroke="none" xml:space="preserve"
+      >(e.g. sebidao, informaticspom)</text
     ></g
     ><g fill="rgb(255,255,255)" fill-opacity="0" transform="translate(300,50)" stroke-opacity="0" stroke="rgb(255,255,255)"
     ><rect x="0.5" width="98.5" height="28.5" y="0.5" clip-path="url(#clipPath5)" stroke="none"
