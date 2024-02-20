@@ -287,7 +287,7 @@ Because this happens during testing, surefire is instructed to tell the jvm (jav
 open those packages to the world. The snippet from the maven pom file that realizes that is given below. You can copy
 and adapt it for your own purposes.
 
-.sebipom project with surefire.opens property to open op required packages for testing. Requires sebipom >= 3.0.2
+.informaticspom project with surefire.opens property to open op required packages for testing. Requires informaticspom >= 3.0.2
 [source,xml]
 ----
   <properties>
@@ -302,7 +302,7 @@ and adapt it for your own purposes.
   </properties>
 ----
 
-<1> We are adding a property for the surefire plugin which is picked up by sebipom.
+<1> We are adding a property for the surefire plugin which is picked up by informaticspom.
 <2> In particular the arguments that are passed to the JVM that runs the tests,
   which appends *--add-opens* commands for all packages that require unit tests.
 <3> Other properties are left out for brevity.

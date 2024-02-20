@@ -17,7 +17,7 @@ We try to use the latest stable version of AssertJ and Junit 5.
 
 [TIP]
 ====
-Either use sebipom version 3.0.0 and up or add assertj.core to your test dependencies.
+Either use informaticspom version 3.0.0 and up or add assertj.core to your test dependencies.
 ====
 
 === Simple Tests
