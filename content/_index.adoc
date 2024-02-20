@@ -9,7 +9,7 @@ draft: false
 * Module description can be found on canvas
 
 This site contains the up-to-date course material, exercises and announcements about PRC2
-(Programming Concepts 2: the Test Driven Way), starting in February 2023.
+(Programming Concepts 2: the Test Driven Way), starting in February 2024.
 
 Responsible Teachers for 2024 PRC2: 
 
