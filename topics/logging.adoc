@@ -16,8 +16,13 @@ public static void main( String[] args ) {
 
 <1> Create a specific logger for this class.
 <2> This log statement only does 'work' when the log level is set to FINE or higher (FINER, FINEST)
+<<<<<<< Updated upstream
 <3> Note the use of positional parameters in the format string. It can be quite useful. See it as a free and random tip.
 <4> This lambda has the shape of a supplier and is only evaluated or computed when the logging level is active.
+=======
+<3> This lambda has the shape of a supplier and is only evaluated or computed when the logging level is active. This 
+make logging 'cheap' when the log level is not active.
+>>>>>>> Stashed changes
 
 === Replace `soutv`` by using a log macro
 
@@ -58,7 +63,7 @@ logdem.LogDem.level=FINE #<2>
 <2> specify for one class
 Then in the java startup (for instance in a run script or in one of the IDE settings), make sure this java property specifies the file.
 
-For NetBeans add [blue]`-Djava.util.logging.config.file=conf/logging.properties` to the java run actions.
+In your IDE add [blue]`-Djava.util.logging.config.file=conf/logging.properties` to the java run actions.
 
 Say the class that needs debugging is called `logging.Main`.  Then in the logging properties file (see above) add
  `logging.Main.level = FINE`, and make sure that you start the JVM with the proper login properties file.
@@ -69,7 +74,7 @@ You can also set the parameter in the 'run-configuration' of your project.
 Add the appropriate option there, e.g. -Djava.util.logging.config.file=conf/logging.properties
 
 .point to project specific log file.
-image::run-logging.png[]
+image::logging-activation.png[title="Project specific logging in NetBeans IDE"]
 
 ====
 

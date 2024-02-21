@@ -79,7 +79,8 @@ public void tLength( String line, String p1, String p2, double expected,
     * @return the double
     * @throws ParseException if the string does not parse to double.
     */
-static double getDoubleConsideringLocale( String input ) throws ParseException {
+static double getDoubleConsideringLocale( String input ) 
+   throws ParseException {
     return DecimalFormat.getNumberInstance().parse( input ).doubleValue(); // <1>
 }
 
@@ -90,8 +91,13 @@ static double getDoubleConsideringLocale( String input ) throws ParseException {
 * @return the double.
 * @throws ParseException if the string does not parse to double.
 */
+<<<<<<< Updated upstream
 static double getDoubleConsideringLocale( Locale locale, String input )
     throws ParseException {
+=======
+static double getDoubleConsideringLocale( Locale locale, String input ) 
+  throws ParseException {
+>>>>>>> Stashed changes
     return DecimalFormat.getNumberInstance(locale).parse( input ).doubleValue();
 }
 ----
