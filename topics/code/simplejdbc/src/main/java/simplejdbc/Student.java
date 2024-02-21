@@ -2,8 +2,6 @@ package simplejdbc;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
 /**
  * Simple student with LocalDate birthday.
