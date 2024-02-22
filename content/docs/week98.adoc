@@ -1,0 +1,18 @@
+---
+title: "98 Thinking harder"
+description: "Reflection and Code Generation"
+date: 2024-01-22T10:31:29+02:00
+draft: true
+images: []
+slug: "reflection-and-code-generation"
+menu: 
+  docs:
+    parent: ""
+weight: 110
+toc: true
+:stem: latexmath
+  
+---
+
+include::{topics}/reflectorgenerate.adoc[]
+
