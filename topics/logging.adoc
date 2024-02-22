@@ -16,13 +16,9 @@ public static void main( String[] args ) {
 
 <1> Create a specific logger for this class.
 <2> This log statement only does 'work' when the log level is set to FINE or higher (FINER, FINEST)
-<<<<<<< Updated upstream
 <3> Note the use of positional parameters in the format string. It can be quite useful. See it as a free and random tip.
-<4> This lambda has the shape of a supplier and is only evaluated or computed when the logging level is active.
-=======
-<3> This lambda has the shape of a supplier and is only evaluated or computed when the logging level is active. This 
+<4> The lambda has the shape of a supplier and is only evaluated or computed when the logging level is active. This 
 make logging 'cheap' when the log level is not active.
->>>>>>> Stashed changes
 
 === Replace `soutv`` by using a log macro
 
