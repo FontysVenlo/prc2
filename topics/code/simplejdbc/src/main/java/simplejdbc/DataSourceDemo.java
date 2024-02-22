@@ -22,10 +22,12 @@ public class DataSourceDemo {
 
     void demo() throws SQLException {  //<3>
         String query
-                = "select state.name as state,p.name as president,state.year_entered \n"
-                + " from president p "
-                + " join state state on(p.state_id_born=state.id)\n"
-                + " where state.name like 'N%'";
+                = """
+                  select state.name as state,p.name as president,state.year_entered
+                     from president p 
+                     join state state on(p.state_id_born=state.id)
+                     where state.name like 'N%'
+                  """;
         doQuery( query, System.out );
 
     }
