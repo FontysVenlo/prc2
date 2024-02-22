@@ -13,7 +13,7 @@
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.release>11</java.release>
+        <java.release>17</java.release>
         <exec.mainClass>simplejdbc.Main</exec.mainClass>
     </properties>
     <dependencies>
@@ -26,14 +26,7 @@
             <groupId>nl.fontys.sebivenlo</groupId>
             <artifactId>csvobjectstream</artifactId>
             <version>1.1</version>
-            <scope>test</scope>
             <type>jar</type>
         </dependency>
-<!--        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.16</version>
-            <type>jar</type>
-        </dependency>-->
     </dependencies>
 </project>
