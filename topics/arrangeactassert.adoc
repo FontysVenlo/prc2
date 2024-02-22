@@ -65,8 +65,8 @@ to generate a non-existing generic class, create two instance with different typ
 .complete a generic
 [source,java]
 ----
-Box<String> sb= new Box<String>(); // compiler will complain for non existing Box class.
-Box<Integer> ib= new Box<Integer>(); // compiler will complain for non existing Box class.
+Box<String> sb= new Box<String>(); // compiler complains about nonexisting Box class.
+Box<Integer> ib= new Box<Integer>(); // compiler complains about  nonexisting Box class.
 // now you can let the IDE to follow its urge to do the typing for you.
 
 ----
