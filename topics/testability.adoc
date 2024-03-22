@@ -48,11 +48,6 @@ Instead hand the service or resource to the business, or give it some provider o
 Let us look at an example as a class diagram.
 
 .Giving the business what it really needs make the business testable
-image::testable-business.gif[]
-
-For readers that like to watch still pictures:
-
-.business class in the application
 image::businessarch.svg[]
 
 .business class in the test lab

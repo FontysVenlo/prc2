@@ -83,19 +83,19 @@ specializations.
 .Low level API
 [source,java]
 ----
-    IntegerBinding sum( IntegerProperty n1, IntegerProperty n2 ) {
-        return new IntegerBinding() {      // <1>
+IntegerBinding sum( IntegerProperty n1, IntegerProperty n2 ) {
+    return new IntegerBinding() {      // <1>
 
-            {                              // <2>
-                super.bind( n1, n2 );
-            }
+        {                              // <2>
+            super.bind( n1, n2 );
+        }
 
-            @Override
-            protected int computeValue() { // <3>
-                return n1.get()+n2.get();
-            }
-        };
-    }
+        @Override
+        protected int computeValue() { // <3>
+            return n1.get()+n2.get();
+        }
+    };
+}
 ----
 
 <1> Anonymous inner class with `IntegerBinding` as [blue]#super# class.
@@ -205,15 +205,19 @@ In this case, because both the creation of the cache entries and the retrieval o
 
    /**
     * Create a binding to compute the area with a triangle determined by side
-    * lengths a, b and c. This method consults the cache and has the value computed
+    * lengths a, b and c. This method consults the cache 
+    * and has the value computed if required.
     *
     * @return the area binding
     */
    final DoubleBinding areaBinding() {
        if ( areaBinding == null ) {
-           areaBinding = areaBinding( distanceBinding( redCircle, greenCircle ), //<1>
+           areaBinding =
+               areaBinding( 
+                   distanceBinding( redCircle, greenCircle ), //<1>
                    distanceBinding( greenCircle, blueCircle ),
-                   distanceBinding( blueCircle, redCircle ) );
+                   distanceBinding( blueCircle, redCircle ) 
+                );
        }
        return areaBinding;
    }
@@ -273,14 +277,22 @@ load the FXML by itself.
 .With your own component, you have to define a `fx:root`. Example from FXTriangulator exercise.
 [source,xml]
 ----
-<fx:root type="javafx.scene.Group" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-    <Circle fx:id="redCircle" centerX="10.0" centerY="10.0" fill="RED" radius="5.0" />
-    <Circle fx:id="greenCircle" centerX="400.0" centerY="10.0" fill="GREEN" radius="5.0" />
-    <Circle fx:id="blueCircle" centerX="10.0" centerY="400.0" fill="BLUE" radius="5.0" />
+<fx:root type="javafx.scene.Group" xmlns="http://javafx.com/javafx/16" 
+       xmlns:fx="http://javafx.com/fxml/1"
+       >
+    <Circle fx:id="redCircle" centerX="10.0" centerY="10.0" 
+       fill="RED" radius="5.0" />
+    <Circle fx:id="greenCircle" centerX="400.0" centerY="10.0" 
+       fill="GREEN" radius="5.0" />
+    <Circle fx:id="blueCircle" centerX="10.0" centerY="400.0" 
+       fill="BLUE" radius="5.0" />
     <Circle fx:id="centerCircle" fill="GREY" radius="5.0" />
-   <Line id="redLine" fx:id="redLine" endX="10.0" endY="400.0" startX="400.5" startY="9.5" stroke="RED" />
-   <Line id="greenLine" fx:id="greenLine" endX="10.0" endY="400.0" startX="10.0" startY="10.0" stroke="GREEN" />
-   <Line id="blueLine" fx:id="blueLine" endX="10.0" endY="10.0" startX="400.0" startY="10.0" stroke="BLUE" />
+   <Line id="redLine" fx:id="redLine" endX="10.0" endY="400.0" 
+       startX="400.5" startY="9.5" stroke="RED" />
+   <Line id="greenLine" fx:id="greenLine" endX="10.0" endY="400.0" 
+        startX="10.0" startY="10.0" stroke="GREEN" />
+   <Line id="blueLine" fx:id="blueLine" endX="10.0" endY="10.0" 
+        startX="400.0" startY="10.0" stroke="BLUE" />
    <Label fx:id="redLabel" text="a" />
    <Label fx:id="greenLabel" text="b" />
    <Label fx:id="blueLabel" text="c" />

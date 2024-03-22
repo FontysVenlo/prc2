@@ -90,6 +90,8 @@ A common error made by novice programmers is to call a method inside a construct
 
 <1> Problematic call of someField.enter(this) inside constructor. Something to avoid.
 
+====
+
 The problem is that the constructor may not yet be complete, in particular when fields are defined and
 initialized later in the constructor or even after the constructor definition.
 
@@ -115,7 +117,7 @@ StateMachine init(){
 ----
     StateMachine sm = new StateMachine().init();
 ----
-====
+
 
 [TIP]
 Do not always use all tricks you've learned so far. They are not always needed.
@@ -150,7 +152,9 @@ The postcode railroad diagram reads as a digit followed by 3 more digits, a spac
 [source,java]
 ----
 // note that you can break off the regex in java and intersperse it with comments.
-String emailRegex="^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+"+ // quite some rubish before the at sign
+String emailRegex=
+      // quite some rubbish before the at sign
+     "^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+"+ 
      "@"+ // the at sign followed by a more restricted set of chars,
           //  with some lengths restrictions
      "[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?"+ // optional non capt grp

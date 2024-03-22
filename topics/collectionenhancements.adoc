@@ -29,6 +29,6 @@ and of course
     map.forEach((k, v) -> System.out.println(k + "=" + v));
 ----
 
-The fun thing is that all these methods are default methods, so they apply to all classes that implement the java.util.Map interface, including the ones you roll yourselves,
-might you feel the inclination. To implement a special map that has specific extra properties, you only need to extend https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/AbstractMap.html[AbstractMap]
+The fun thing is that all these methods are default methods, so they apply to all classes that implement the java.util.Map interface, including the ones you roll yourselves, might you feel the inclination. To implement a special map that has specific extra properties, 
+you only need to extend https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/AbstractMap.html[AbstractMap]
 which needs the implementation of one or two methods only, depending if you want an unmodifiable of modifiable one.

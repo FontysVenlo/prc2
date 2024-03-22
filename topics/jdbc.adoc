@@ -45,7 +45,9 @@ You can see that the properties file supports two environments, **dev**elopment 
                 source.setDatabaseName( props.getProperty( prefix + "dbname" ) );
                 source.setPassword( props
                         .getProperty( prefix + "password" ) );
-                String pingQuery = "SELECT current_database(), now()::TIMESTAMP as now;";
+                String pingQuery = """
+                    SELECT current_database(), now()::TIMESTAMP as now;
+                """
                 try ( Connection con = source.getConnection();
                     // ping the database for success.
                     PreparedStatement pst = con.prepareStatement( pingQuery ); ) {
@@ -53,12 +55,15 @@ You can see that the properties file supports two environments, **dev**elopment 
                             if ( rs.next() ) {
                                 Object db = rs.getObject(  "current_database");
                                 Object now = rs.getObject(  "now");
-                                System.out.println("connected to db "+ db.toString()+ ", date/time is " + now.toString() );
+                                System.out.println(
+                                    "connected to db %s, date/time is %s"
+                                    .formatted( db.toString(), now.toString() );
                             }
                         }
 
                 } catch ( SQLException ex ) {
-                    Logger.getLogger( PgJDBCUtils.class.getName() ).log( Level.SEVERE, null, ex );
+                    Logger.getLogger( PgJDBCUtils.class.getName() )
+                        .log( Level.SEVERE, null, ex );
                 }
                 return source;
             }
@@ -114,9 +119,14 @@ public class DataSourceDemo {
 
     void demo() throws SQLException {  //<3>
         String query
-                = "select state.name as state,p.name as president,state.year_entered \n"
-                  + " from president p join state state on(p.state_id_born=state.id)\n"
-                  + "where state.name like 'N%'";
+            = """
+            select state.name as state
+              ,p.name as president
+              ,state.year_entered
+            from president p 
+            join state s on(p.state_id_born=s.id)
+                where s.name like 'N%'
+            """;
             doQuery( query, System.out );
     }
 }
@@ -134,16 +144,16 @@ You will see some similarities in what you have seen in project 1, using php PDO
 .doQuery
 [source,java]
 ----
-    void doQuery( String query,
-                  PrintStream out ) throws SQLException {
-        try ( Connection con = datasource.getConnection();
-                Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery( query ) ) {
+void doQuery( String query,
+                PrintStream out ) throws SQLException {
+    try ( Connection con = datasource.getConnection();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery( query ) ) {
 
-            new ResultSetPrinter( rs ).printTable( out );
+        new ResultSetPrinter( rs ).printTable( out );
 
-        }
     }
+}
 ----
 
 The [blue]*ResultSetPrinter* tries to make a nice looking table of the result of the query.
@@ -180,7 +190,7 @@ returning *                                                          -- <3>
 <1> Fields can be supplied in any order, including definition order.
 <2> You do not need the spaces before the commas, we added them for readability.
 <3> It is smart to *always* expect back what has been inserted by the database, including generated id and
- other fields such as the database's notion of date or time. Even smarter, but a little more work
+ other fields such as the database's notion of date or time. Even smarter, but a little more work //'
 is to specify the columns instead of a `*`, so that the order in which you receive them is independent
 of database schema organization and _stable_.
 
@@ -206,16 +216,16 @@ Then creating the prepared statement and filling it with values is a simple loop
 .loop to substitute placeholders.
 [source,java]
 ----
-     try (
-          Connection con = datasource.getConnection();
-          PreparedStatement stmt = con.prepareStatement( query ); ) {
+try (
+    Connection con = datasource.getConnection();
+    PreparedStatement stmt = con.prepareStatement( query ); ) {
 
-            int count = 0;
-            for ( Object param : studentData ) {
-                stmt.setObject( ++count, param ); //<1>
-            }
-            return stmt.executeUpdate();
-     }
+    int count = 0;
+    for ( Object param : studentData ) {
+        stmt.setObject( ++count, param ); //<1>
+    }
+    return stmt.executeUpdate();
+}
 ----
 
 <1> note the pre-increment, so count starts with column *1*.
@@ -236,7 +246,7 @@ in an array and the rest can be packed into utility methods.
 
 The holy grail is to find a way to do all kind of queries against tables, and the only
 thing you need to know is the table name and what entities as Java objects can be expected to
-be read from or written to the table. However, start simple first! At some point you'll find duplicated code and you'll find a way to optimize your code. Typically, you'll use Generics, Lambda's and streams and a bit of reflection at some point. We think it's good to first face the issue of code that is difficult to maintain and afterwards find a solution for that, instead of providing you with a very generic and maybe complex solution without knowing which underlying problems it solves.  
+be read from or written to the table. However, start simple first! At some point you'll find duplicated code and you'll find a way to optimize your code. Typically, you'll use Generics, Lambda's and streams and a bit of reflection at some point. We think it's good to first face the issue of code that is difficult to maintain and afterwards find a solution for that, instead of providing you with a very generic and maybe complex solution without knowing which underlying problems it solves.  //'
 
 
 == Traditional preparing statements
@@ -249,8 +259,11 @@ is filling the account tables from some List of accounts.
 .load accounts from list. The code is part of a test suite to prepare the database for tests.
 [source,java]
 ----
-    static String addAccount = "insert into account(accountid,balance,maxdebit,customerid,astate) "
-                             + "values(?,?,?,?,?)";
+    static String addAccount = 
+       """
+        insert into account(accountid,balance,maxdebit,customerid,astate) 
+        values(                     ?,      ?,       ?,         ?,     ?)
+       """;
     static void loadAccounts() throws SQLException {
 
         try ( Connection con = olifantysSource.getConnection();
@@ -312,8 +325,7 @@ FROM   information_schema.columns WHERE table_name ='students' ORDER BY 1;
 
 you would get the following as output:
 
-[source,text]
-[.small-code-font-70]
+[source%autofit,text]
 ----
 ┌──────────────────┬─────────────┬───────────┬──────────────────────────┬─────────────┬──────────────┬────────────────────┐
 │ ordinal_position │ column_name │ data_type │      column_default      │ is_nullable │ is_generated │ datetime_precision │

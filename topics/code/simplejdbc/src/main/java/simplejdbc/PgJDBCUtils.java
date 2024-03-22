@@ -17,15 +17,15 @@ import javax.sql.DataSource;
 import org.postgresql.ds.PGSimpleDataSource;
 
 /**
+ * Some helpers for common tasks.
  *
  * @author hom
  */
 public class PgJDBCUtils {
 
-    static void doQuery( Connection con, String query,
-            PrintStream out ) throws SQLException {
-        try ( Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery( query ) ) {
+    public static void doQuery(Connection con, String query,
+            PrintStream out) throws SQLException {
+        try ( Statement st = con.createStatement(); ResultSet rs = st.executeQuery( query ) ) {
 
             new ResultSetPrinter( rs ).printTable( out );
 
@@ -33,56 +33,61 @@ public class PgJDBCUtils {
     }
 
     private static final Map<String, DataSource> datasourceByName = new HashMap<>();
+    private static Logger LOG = Logger.getLogger( PgJDBCUtils.class.getName() );
 
-    static DataSource getDataSource( final String sourceName ) {
+    public static DataSource getDataSource(final String sourceName) {
 
-        return datasourceByName.computeIfAbsent( sourceName,
-                ( s ) -> {
-                    Properties props = properties( "application.properties" );
-
-                    PGSimpleDataSource source = new PGSimpleDataSource();
-
-                    String prefix = sourceName + ".";
-                    String[] serverNames = {
-                        props.getProperty( prefix + "dbhost" )
-                    };
-                    source.setServerNames( serverNames );
-
-                    String user = props.getProperty( prefix + "username" );
-                    source.setUser( user );
-
-                    source.setDatabaseName( props.getProperty( prefix + "dbname" ) );
-                    source.setPassword( props
-                            .getProperty( prefix + "password" ) );
-                    String pingQuery = "SELECT current_database(), now()::TIMESTAMP as now;";
-                    try ( Connection con = source.getConnection();
-                    PreparedStatement pst = con.prepareStatement( pingQuery ); ) {
-                        try ( ResultSet rs = pst.executeQuery(); ) {
-                            if ( rs.next() ) {
-                                Object db = rs.getObject(  "current_database");
-                                Object now = rs.getObject(  "now");
-                                System.out.println("connected to db "+ db.toString()+ ", date/time is " + now.toString() );
-                            }
-                        }
-
-                    } catch ( SQLException ex ) {
-                        Logger.getLogger( PgJDBCUtils.class.getName() ).log( Level.SEVERE, null, ex );
-                    }
-                    return source;
-                }
-        );
+        LOG.fine( () -> " get DataSource sourceName = " + sourceName );
+        return datasourceByName.computeIfAbsent( sourceName, PgJDBCUtils::configureAndPing );
     }
 
-    static Properties properties( String propFileName ) {
+    /**
+     * Make sure that the data source is reachable.
+     *
+     * @param sourceName name of the resource
+     * @return a configureddatasource.
+     */
+    static DataSource configureAndPing(String sourceName) {
+
+        PgConfig cfg = PgConfig.getConfigForPrefix( sourceName );
+        PGSimpleDataSource source = new PGSimpleDataSource();
+        source = configureSource( source, cfg );
+        String databaseName = source.getDatabaseName();
+        String pingQuery = "SELECT current_database(), now()::TIMESTAMP as now;";
+        try ( Connection con = source.getConnection(); PreparedStatement pst = con.prepareStatement( pingQuery ); ) {
+            try ( ResultSet rs = pst.executeQuery(); ) {
+                if ( rs.next() ) {
+                    Object db = rs.getObject( "current_database" );
+                    Object now = rs.getObject( "now" );
+                    LOG.info( () -> "connected to db %s, date/time is %s ".formatted(
+                            db.toString(), now.toString() ) );
+                }
+            }
+        } catch ( SQLException ex ) {
+            LOG.severe( () -> "cannot connect to " + databaseName + "with configuration " + cfg );
+        }
+        return source;
+
+    }
+
+    private static PGSimpleDataSource configureSource(PGSimpleDataSource source, PgConfig cfg) {
+        source.setServerNames( cfg.hosts() );
+        source.setPortNumbers( cfg.ports() );
+        source.setUser( cfg.user() );
+        source.setDatabaseName( cfg.dbname() );
+        source.setPassword( cfg.password() );
+        return source;
+    }
+
+    static Properties properties(String propFileName) {
         Properties properties = new Properties();
         try (
                 FileInputStream fis = new FileInputStream( propFileName ); ) {
             properties.load( fis );
         } catch ( IOException ignored ) {
-            Logger.getLogger( PgJDBCUtils.class.getName() ).log(
-                    Level.INFO,
-                    "attempt to read from well file from known location '",
-                    ignored );
+            LOG.info( ()
+                    -> "attempt to read from well known file at well known location failed "
+                    + ignored.getMessage() );
         }
         return properties;
     }

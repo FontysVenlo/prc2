@@ -65,6 +65,7 @@ Lets see what this looks like in code.
 .The printer interface.
 [source,java]
 ----
+
 include::code/myfirstmock/src/main/java/myfirstmock/Printer.java[lines=8..19]
 ----
 
@@ -86,7 +87,27 @@ This is of course a simple test and the only thing that it verifies is that the 
 .Verify that what is printed is okay.
 [source,java]
 ----
-include::code/myfirstmock/src/test/java/myfirstmock/BusinessTest.java[lines=39..58]
+@Mock
+Printer printer; // <1>
+
+Business business;
+
+@BeforeEach
+void setup() {
+    business = new Business( printer );  // <2>
+}
+
+@Test
+void doesItPrintBusiness() {
+    var lineCaptor = ArgumentCaptor.forClass( String.class ); //<3>
+
+    business.work( "Linda" ); // <4>
+
+    verify( printer ).println( lineCaptor.capture() ); //<5>
+    assertThat( lineCaptor.getAllValues() ).contains( "Hello Linda" ); // <6>
+    //  fail("test does It print ended. You know what to do.");
+}
+
 ----
 
 <1> Setup mock as annotated field.

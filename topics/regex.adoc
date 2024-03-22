@@ -3,11 +3,10 @@
 An often heard saying is: _When you have a problem that can be solved with a regular
 expression, you actually have two problems, the problem and how to write the expression._
 
-There is indeed some truth in the saying: Regular expressions can be hard to read (and hence maintain), and sometime hard to write as well.
+There is indeed some truth in the saying: Regular expressions can be hard to read (and hence maintain), and sometimes hard to write as well.
 
 The problem lies in the fact that the format of the most popular form, the Perl dialect, is quite terse.
 However you can do quite a few things to improve at least their readability.
-
 
 
 video::EkluES9Rvak[youtube]
@@ -18,7 +17,7 @@ A simple string is also a regular expression. As far as there are no meta charac
 a string simply matches itself.
 
 * The first meta character you need to know is the dot [blue]`'.'`, which matches any character. So a line
-with a dot will match any line that is the same as the line with any substution for the dot character (including itself).
+ with a dot will match any line that is the same as the line with any substution for the dot character (including itself).
 * The second  meta character is the backslash [blue]`'\'`. It takes the special meaning (as in meta) of the following character away.
  Back to our matching line: if you want exactly a dot at the place of the dot, prefix it with a backslash, so it will be understood as a dot. Like this: [red]"\.".
   But since we using Java, and the backslash already has a special role in strings, you must double the backslash in most cases, thus: [blue]`"\\."`.
@@ -59,6 +58,86 @@ Sometimes you are not just interested in a match or not, but want to capture par
 For that you use the parenthesis '(' and ')'. A group, when found, will get a number (or even a name, but that is not in this lesson).
 Group 0 is typically the whole expression, and number one the first group identified with the parenthesis.
 
-So if you have a regular expression string line "a(eiou)", group number one will be the group containing the vowel following a, if any.
+So if you have a regular expression string line "a(e|i|o|u)", group number one will be the group containing the vowel following a, if any.
 
 To get acquainted with regular expressions, it is very helpful to write some tests, to verify your pattern or assumptions on the pattern.
+
+
+== Matches, Matchers, match Groups, and group names.
+
+The java.util.regex package contains the classes to work with regular expressions. The most important are the *Pattern* and *Matcher* classes.
+
+A Pattern is a compiled representation of a regular expression. It is used to create a Matcher object that will match the regular expression against an input string.
+
+In a pattern you can define groups of interest, for instance values that you want to extract from the input string. The Matcher object will then contain the groups that were found in the input string. You create a group by surrounding the part of the pattern with parenthesis.
+
+[source,java]
+----
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+public class Main {
+    public static void main(String[] args) {
+        String input = "The quick brown fox jumps over the lazy dog";
+        String pattern = "The (\\w+) brown (\\w+) jumps over the (\\w+) dog"; //<1>
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(input);
+        if (m.find()) { //<2>
+            System.out.println("Found a match");
+            System.out.println("Group 0: " + m.group(0)); //<3>
+            System.out.println("Group 1: " + m.group(1));
+            System.out.println("Group 2: " + m.group(2));
+            System.out.println("Group 3: " + m.group(3));
+        } else {
+            System.out.println("No match found");
+        }
+    }
+}
+----
+
+<1> There are three groups in the pattern. The first group matches the word after "The", the second group matches the word after "brown", and the third group matches the word after second "the".
+<2> There are _several_ methods to match a pattern against an input string. The `find` method is the most common one. It returns `true` if the pattern is found in the input string, and `false` otherwise. There is also a `matches()` method, which returns `true` if the pattern matches the whole input string, and `false` otherwise.
+The third method is `lookingAt()`, which returns `true` if the pattern matches the beginning of the input string, and `false` otherwise.
+<3> Group 0 is the whole match. The other groups are the parts of the input string that match the groups in the pattern.
+
+
+=== Named groups and comments to the regex
+
+You can give the groups names, so the code becomes less brittle when the pattern changes. This is done by using the syntax `(?<name>pattern)`.
+
+[source,java]
+----
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+public class Main {
+    public static void main(String[] args) {
+        String input = "The quick brown fox jumps over the lazy dog";
+        String pattern = 
+                      "The (?<first>\\w+)" // comment 1
+                      +" brown (?<second>\\w+)" // comment 2
+                      +" jumps over the (?<third>\\w+) dog"; // comment 3
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(input);
+        if (m.find()) {
+            System.out.println("Found a match");
+            System.out.println("Group 0: " + m.group(0));
+            System.out.println("Group first: " + m.group("first"));
+            System.out.println("Group second: " + m.group("second"));
+            System.out.println("Group third: " + m.group("third"));
+        } else {
+            System.out.println("No match found");
+        }
+    }
+}
+----
+
+The comments are not part of the pattern, but are there to explain the pattern. They are ignored by the compiler.
+But they are very useful to explain the pattern to others, or to yourself when you come back to the code after a while.
+
+=== Useful web sites
+
+* https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/regex/Pattern.html[Java Pattern class]
+* https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/regex/Matcher.html[Java Matcher class]
+* https://www.freeformatter.com/java-regex-tester.html[Java regex tester]
+
