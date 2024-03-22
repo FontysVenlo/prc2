@@ -51,12 +51,13 @@ tests and data in one glance.
 They typically fit easily on a screen. Remember the importance of readability of code. That too applies to test code.</p><hr></section><section class="doc-section level-2"><h3 id=_lookup_in_a_map>Lookup in a map.</h3><p>Sometimes there is no easy way to get from a string to some object, or even class.
 Examples are that you want to test for the correct <strong>type</strong> or <strong>exception</strong>, or supply a method name, but you cannot put that into a string without doing complex
 things like reflection which we may only do in later parts of the course. The trick is to use a <code>Map</code> that maps a string to the object of choice.</p><p>The lookup trick might also be applicable when you want to have short values in your test data table, like a message number which is mapped
-to the actual longer expected message, or even a message that is a format string and can be used in <code>Assertion.as( formatString, Object…​ args)</code>.</p><figure class=listing-block><figcaption>map from short string to test (Person) object.</figcaption><pre class=highlight><code class=language-java data-lang=java> static Map&lt;String, Person&gt; emap = Map.of(
-            &#34;piet&#34;, new Person(&#34;Piet&#34;, &#34;Puk&#34;, LocalDate.of(1955-03-18),&#34;M&#34;),
-            &#34;piet2&#34;, new Person(&#34;Piet&#34;, &#34;Puk&#34;, LocalDate.of(1955-03-18),&#34;M&#34;), // for equals test.
-            &#34;rembrandt&#34;, new Person(&#34;Rembrandt&#34;, &#34;van Rijn&#34;, LocalDate.of(1606,7,15),&#34;M&#34;),
-            &#34;saskia&#34;, new Person(&#34;Saskia&#34;, &#34;van Uylenburgh&#34;, LocalDate.of(1612,8,11),&#34;F&#34;),
-    );</code></pre></figure><p>It is particularly applicable to lambda expressions.
+to the actual longer expected message, or even a message that is a format string and can be used in <code>Assertion.as( formatString, Object…​ args)</code>.</p><figure class=listing-block><figcaption>map from short string to test (Person) object.</figcaption><pre class=highlight><code class=language-java data-lang=java>static Map&lt;String, Person&gt; emap = Map.of(
+    &#34;piet&#34;, new Person(&#34;Piet&#34;, &#34;Puk&#34;, LocalDate.of(1955-03-18),&#34;M&#34;),
+    // piet2 for equals test.
+    &#34;piet2&#34;, new Person(&#34;Piet&#34;, &#34;Puk&#34;, LocalDate.of(1955-03-18),&#34;M&#34;),
+    &#34;rembrandt&#34;, new Person(&#34;Rembrandt&#34;, &#34;van Rijn&#34;, LocalDate.of(1606,7,15),&#34;M&#34;),
+    &#34;saskia&#34;, new Person(&#34;Saskia&#34;, &#34;van Uylenburgh&#34;, LocalDate.of(1612,8,11),&#34;F&#34;),
+  );</code></pre></figure><p>It is particularly applicable to lambda expressions.
 You can translate a string into a lambda, by using a map. You can then use simple names (strings),
 that can be put in a csv record.</p><figure class=listing-block><figcaption>Map of string to lambda</figcaption><pre class=highlight><code class=language-java data-lang=java>    final Map&lt;String, BiFunction&lt;Fraction, Fraction, Fraction&gt;&gt; ops = <b class=conum>1</b>
       Map.of(
@@ -66,29 +67,29 @@ that can be put in a csv record.</p><figure class=listing-block><figcaption>Map 
               &#34;minus&#34;, ( f1, f2 ) -&gt; f1.minus( f2 ),
               &#34;divideBy&#34;, ( f1, f2 ) -&gt; f1.divideBy( f2 )
       );</code></pre><ol class="callout-list arabic"><li>Note that we use a <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/BiFunction.html>BiFunction&lt;T,U,R></a> existing functional interface,
-with <strong>T</strong>, <strong>U</strong>, and <strong>R</strong> all of the same type: Fraction. This is legal.</li><li>f2 is not used in the right hand side of the arrow. This is legal too.</li></ol></figure><figure class=listing-block><figcaption>Using lambda names in test data</figcaption><pre class=highlight><code class=language-java data-lang=java>    @ParameterizedTest
-    @CsvSource(
-             {
-                &#34;&#39;one half times one third is 1 sixth&#39;, &#39;times&#39;, &#39;(1/6)&#39;,1,2,1,3&#34;, <b class=conum>1</b>
-                &#34;&#39;one thirds plus two thirds is 1&#39;    , &#39;plus&#39;,      &#39;1&#39;,1,3,2,3&#34;,
-                &#34;&#39;flip&#39;                               , &#39;flip&#39;,      &#39;3&#39;,1,3,1,3&#34;, <b class=conum>2</b>
-                &#34;&#39;one half minus two thirds is&#39;       , &#39;minus&#39;, &#39;(-1/6)&#39;,1,2,2,3&#34;
-            } )</code></pre><ol class="callout-list arabic"><li>The operation name is the second value in the csv record, here <strong>times</strong>. Note that you can quote strings, but that is not required.</li><li>In the flip operation, the second fraction is ignored, so any legal value is allowed. Here we use the same values for both fractions.</li></ol></figure><figure class=listing-block><figcaption>Test method using the test data (Annotations left out, they are above).</figcaption><pre class=highlight><code class=language-java data-lang=java>    void fractionOps( String message, String opName, String expected,
-                  int a,int b, int c, int d ) { <b class=conum>1</b>
-        // Arrange: read test values
-        Fraction f1 = frac( a, b ); <b class=conum>2</b>
-        Fraction f2 = frac( c, d );
-        BiFunction&lt;Fraction, Fraction, Fraction&gt; op = ops.get( opName ); <b class=conum>3</b>
+with <strong>T</strong>, <strong>U</strong>, and <strong>R</strong> all of the same type: Fraction. This is legal.</li><li>f2 is not used in the right hand side of the arrow. This is legal too.</li></ol></figure><figure class=listing-block><figcaption>Using lambda names in test data</figcaption><pre class=highlight><code class=language-java data-lang=java>@ParameterizedTest
+@CsvSource(
+    {
+    &#34;&#39;one half times one third is 1 sixth&#39;, &#39;times&#39;, &#39;(1/6)&#39;,1,2,1,3&#34;, <b class=conum>1</b>
+    &#34;&#39;one thirds plus two thirds is 1&#39;    , &#39;plus&#39;,      &#39;1&#39;,1,3,2,3&#34;,
+    &#34;&#39;flip&#39;                               , &#39;flip&#39;,      &#39;3&#39;,1,3,1,3&#34;, <b class=conum>2</b>
+    &#34;&#39;one half minus two thirds is&#39;       , &#39;minus&#39;, &#39;(-1/6)&#39;,1,2,2,3&#34;
+  } )</code></pre><ol class="callout-list arabic"><li>The operation name is the second value in the csv record, here <strong>times</strong>. Note that you can quote strings, but that is not required.</li><li>In the flip operation, the second fraction is ignored, so any legal value is allowed. Here we use the same values for both fractions.</li></ol></figure><figure class=listing-block><figcaption>Test method using the test data (Annotations left out, they are above).</figcaption><pre class=highlight><code class=language-java data-lang=java>void fractionOps( String message, String opName, String expected,
+              int a,int b, int c, int d ) { <b class=conum>1</b>
+    // Arrange: read test values
+    Fraction f1 = frac( a, b ); <b class=conum>2</b>
+    Fraction f2 = frac( c, d );
+    BiFunction&lt;Fraction, Fraction, Fraction&gt; op = ops.get( opName ); <b class=conum>3</b>
 
-        // Act
-        Fraction result = op.apply( f1, f2 ); <b class=conum>4</b>
+    // Act
+    Fraction result = op.apply( f1, f2 ); <b class=conum>4</b>
 
-        // Assert(That) left out as exercise.
-        // Use assertThat on the fraction object result
-        //   and check if it has the correct string value.
-        // Use the message in the as(...) method.
+    // Assert(That) left out as exercise.
+    // Use assertThat on the fraction object result
+    //   and check if it has the correct string value.
+    // Use the message in the as(...) method.
 
-    }</code></pre><ol class="callout-list arabic"><li>The fraction parameters a,b,c, and d are captured from the csvrecord. This makes the parameter list a
+}</code></pre><ol class="callout-list arabic"><li>The fraction parameters a,b,c, and d are captured from the csvrecord. This makes the parameter list a
 tad longer, but also more understandable. JUnit 5 csvsource uses the annotation and the signature of the test method and can deal
 with most common types such as primitive, String and LocalDate (preferably in ISO-8601 format such as '2021-01-14' for the day of writing this). Strings in the csv-records will be automatically converted to the parameter types in your test methods in these cases.</li><li>The fraction instances are created from a, b, c, and d.</li><li>The operation (op) is looked up in the map.</li><li>Apply the operation, or rather the function and capture the result.</li></ol></figure><p>You can apply the same trick of looking up with enums too, even easier, because the enum itself can translate from String to value,
 as long as the spelling is exact that is minding upper and lower case usage.</p><p>Study the examples above, they might give you inspiration with the exercises coming up and will score you points during the exam.</p><aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip:</span></h6><p>As of the moment of writing (Januari 2021, Junit 5.7), the parameterized test <strong class=red>can’t</strong> deal with varargs parameters, that is a varying
@@ -97,7 +98,8 @@ You specify an external file as data source with to achieve the same, the annota
 or with the help of a spreadsheet program like Libreoffice calc or Microsoft excel.</p><p>Suppose you need to develop an input validator that has many test cases. Putting the inputs in a file along with other information relevant
 to your validator.</p><figure class=listing-block><figcaption>csvfile source</figcaption><pre class=highlight><code class=language-java data-lang=java>  @ParameterizedTest
   @CsvFileSource( resources = { &#34;testdata.csv&#34; } )
-  void testRegex( String message, String input, boolean matches, int groupCount ){
+  void testRegex( String message, String input,
+          boolean matches, int groupCount ){
     // your code here
   }</code></pre></figure><aside class="admonition-block note" role=note><h6 class="block-title label-only"><span class=title-label>Note:</span></h6><p>At the time of writing JUnit wants the csv file for CsvFileSource to be
 in the <code>{project-directory}src/test/resources</code> folder or a child folder thereof.
@@ -124,87 +126,87 @@ You would be almost right, but why test drive something that can be generated.<b
 then <strong class="red big">do not write/generate</strong> them. That would be unwanted code. But if the requirements DO insist on equals and hashCode,
 make sure that the fields to be considered match the requirements. Choose only final fields.</p><p>After having such a generated equals and hashCode you have the predicament of writing a test. HashCode is relatively easy. It should produce an
 integer, but what value is unspecified, so just invoking it would do the trick for test coverage.
-The devil is in the equals details, because it has to consider:</p><div class=ulist><ul><li>Is the other object <code>this</code>? If yes, return <code>true</code>.</li><li>Is the other object <code>null</code>? Return <code>false</code> if it is.</li><li>Now consider the type.<a class=footnote-ref id=_footnoteref_1 href=#_footnote_1 title="View footnote 1" role=doc-noteref>[1]</a>.<ul><li>Is the other of the same type as <code>this</code>? If not return <code>false</code>.</li><li>Now we are in known terrain, the other is of the same type, so the object should have the same fields.<br>For each <code>field</code> test it <code>this.field.equals(other.field)</code>. If not return false.</li><li>Using <code>Objects.equals(this.fieldA, other.fieldA)</code> can be an efficient solution to avoid testing for nullity of either field.</li></ul></li></ul></div><figure class=listing-block><figcaption>Generated equals. It is fine.</figcaption><pre class=highlight><code class=language-java data-lang=java>    @Override
-    public boolean equals( Object obj ) {
-        if ( this == obj ) {
-            return true;
-        }
-        if ( obj == null ) {
-            return false;
-        }
-        if ( getClass() != obj.getClass() ) {
-            return false;
-        }
-        final Student other = (Student) obj;
-        if ( this.id != other.id ) {
-            return false;
-        }
-        if ( !Objects.equals( this.name, other.name ) ) {
-            return false;
-        }
-        return Objects.equals( this.birthDate, other.birthDate );
-    }</code></pre></figure><p>You see a pattern here: The number of ifs is 3 + the number of fields.<br>To test this, and to make sure you hit all code paths, you need to test with this,
+The devil is in the equals details, because it has to consider:</p><div class=ulist><ul><li>Is the other object <code>this</code>? If yes, return <code>true</code>.</li><li>Is the other object <code>null</code>? Return <code>false</code> if it is.</li><li>Now consider the type.<a class=footnote-ref id=_footnoteref_1 href=#_footnote_1 title="View footnote 1" role=doc-noteref>[1]</a>.<ul><li>Is the other of the same type as <code>this</code>? If not return <code>false</code>.</li><li>Now we are in known terrain, the other is of the same type, so the object should have the same fields.<br>For each <code>field</code> test it <code>this.field.equals(other.field)</code>. If not return false.</li><li>Using <code>Objects.equals(this.fieldA, other.fieldA)</code> can be an efficient solution to avoid testing for nullity of either field.</li></ul></li></ul></div><figure class=listing-block><figcaption>Generated equals. It is fine.</figcaption><pre class=highlight><code class=language-java data-lang=java>@Override
+public boolean equals( Object obj ) {
+    if ( this == obj ) {
+        return true;
+    }
+    if ( obj == null ) {
+        return false;
+    }
+    if ( getClass() != obj.getClass() ) {
+        return false;
+    }
+    final Student other = (Student) obj;
+    if ( this.id != other.id ) {
+        return false;
+    }
+    if ( !Objects.equals( this.name, other.name ) ) {
+        return false;
+    }
+    return Objects.equals( this.birthDate, other.birthDate );
+}</code></pre></figure><p>You see a pattern here: The number of ifs is 3 + the number of fields.<br>To test this, and to make sure you hit all code paths, you need to test with this,
 with null, with an distinct (read newly constructed) object with all fields equal,
-and then one for each field, which differs from the reference object only in said field.</p><p>Define those instances (for this example) as follows.</p><figure class=listing-block><figcaption>Instances for complete equals and hashCode test and coverage</figcaption><pre class=highlight><code class=language-java data-lang=java>    //@Disabled
-    @Test
-    void testEqualsAndHash() {
-        Student ref = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 123 ); <b class=conum>1</b>
-        Student equ = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 123 ); <b class=conum>2</b>
-        Student sna = new Student( &#34;Jen&#34;, LocalDate.of( 1999, 03, 23 ), 123 ); <b class=conum>3</b>
-        Student sda = new Student( &#34;Jan&#34;, LocalDate.of( 1998, 03, 23 ), 123 ); <b class=conum>4</b>
-        Student sid = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 456 ); <b class=conum>5</b>
-        verifyEqualsAndHashCode( ref, equ, sna, sda, sid );
-        //fail( &#34;testMethod reached it&#39;s and. You will know what to do.&#34; );
-    }</code></pre><ol class="callout-list arabic"><li>The reference object</li><li>The equal object, equals true</li><li>Differs in name.</li><li>Differs in birth date (year).</li><li>Differs in id.</li></ol></figure><p>The implementation of the <code>verifyEqualsAndHashCode</code> has been done with generics and a dash of AssertJ stuff.</p><figure class=listing-block><figcaption>Sample test helper in separate class.</figcaption><pre class=highlight><code class=language-java data-lang=java>    /**
-     * Helper for equals tests, which are tedious to get completely covered.
-     *
-     * @param &lt;T&gt; type of class to test
-     * @param ref reference value
-     * @param equal one that should test equals true
-     * @param unEqual list of elements that should test unequal in all cases.
-     */
-     public static &lt;T&gt; void verifyEqualsAndHashCode( T ref, T equal, T... unEqual ) {
-         Object object = &#34;Hello&#34;;
-         T tnull = null;
-         String cname = ref.getClass().getCanonicalName();
-         // I got bitten here, assertJ equalTo does not invoke equals on the
-         // object when ref and &#39;other&#39; are same.
-         // THAT&#39;s why the first ones differ from the rest.
-         SoftAssertions.assertSoftly( softly-&gt; {
-           softly.assertThat( ref.equals( ref ) )
-                   .as( cname + &#34;.equals(this): with self should produce true&#34; )
-                   .isTrue();
-           softly.assertThat( ref.equals( tnull ) )
-                   .as( cname + &#34;.equals(null): ref object &#34;
-                           + safeToString( ref ) + &#34; and null should produce false&#34;
-                   )
-                   .isFalse();
-           softly.assertThat( ref.equals( object ) )
-                   .as( cname + &#34;.equals(new Object()): ref object&#34;
-                           + &#34; compared to other type should produce false&#34;
-                   )
-                   .isFalse();
-           softly.assertThat( ref.equals( equal ) )
-                   .as( cname + &#34; ref object [&#34; + safeToString( ref )
-                           + &#34;] and equal object [&#34; + safeToString( equal )
-                           + &#34;] should report equal&#34;
-                   )
-                   .isTrue();
-           for ( int i = 0; i &lt; unEqual.length; i++ ) {
-               T ueq = unEqual[ i ];
-               softly.assertThat( ref )
-                       .as(&#34;testing supposed unequal objects&#34;)
-               .isNotEqualTo( ueq );
-           }
-           // ref and equal should have same hashCode
-           softly.assertThat( ref.hashCode() )
-                   .as( cname + &#34; equal objects &#34;
-                           + ref.toString() + &#34; and &#34;
-                           + equal.toString() + &#34; should have same hashcode&#34;
-                   )
-                   .isEqualTo( equal.hashCode() );
-        });
-     }</code></pre></figure><p>The above code has been used before but now adapted for AssertJ and JUnit 5.</p><p>It is of course best to put this in some kind of test helper library, so you can reuse it over and over without having to
+and then one for each field, which differs from the reference object only in said field.</p><p>Define those instances (for this example) as follows.</p><figure class=listing-block><figcaption>Instances for complete equals and hashCode test and coverage</figcaption><pre class=highlight><code class=language-java data-lang=java>//@Disabled
+@Test
+void testEqualsAndHash() {
+    Student ref = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 123 ); <b class=conum>1</b>
+    Student equ = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 123 ); <b class=conum>2</b>
+    Student sna = new Student( &#34;Jen&#34;, LocalDate.of( 1999, 03, 23 ), 123 ); <b class=conum>3</b>
+    Student sda = new Student( &#34;Jan&#34;, LocalDate.of( 1998, 03, 23 ), 123 ); <b class=conum>4</b>
+    Student sid = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 456 ); <b class=conum>5</b>
+    verifyEqualsAndHashCode( ref, equ, sna, sda, sid );
+    //fail( &#34;testMethod reached it&#39;s and. You will know what to do.&#34; );
+}</code></pre><ol class="callout-list arabic"><li>The reference object</li><li>The equal object, equals true</li><li>Differs in name.</li><li>Differs in birth date (year).</li><li>Differs in id.</li></ol></figure><p>The implementation of the <code>verifyEqualsAndHashCode</code> has been done with generics and a dash of AssertJ stuff.</p><figure class=listing-block><figcaption>Sample test helper in separate class.</figcaption><pre class=highlight><code class=language-java data-lang=java>/**
+ * Helper for equals tests, which are tedious to get completely covered.
+ *
+ * @param &lt;T&gt; type of class to test
+ * @param ref reference value
+ * @param equal one that should test equals true
+ * @param unEqual list of elements that should test unequal in all cases.
+ */
+public static &lt;T&gt; void verifyEqualsAndHashCode( T ref, T equal, T... unEqual ) {
+    Object object = &#34;Hello&#34;;
+    T tnull = null;
+    String cname = ref.getClass().getCanonicalName();
+    // I got bitten here, assertJ equalTo does not invoke equals on the
+    // object when ref and &#39;other&#39; are same.
+    // THAT&#39;s why the first ones differ from the rest.
+    SoftAssertions.assertSoftly( softly-&gt; {
+    softly.assertThat( ref.equals( ref ) )
+            .as( cname + &#34;.equals(this): with self should produce true&#34; )
+            .isTrue();
+    softly.assertThat( ref.equals( tnull ) )
+            .as( cname + &#34;.equals(null): ref object &#34;
+                    + safeToString( ref ) + &#34; and null should produce false&#34;
+            )
+            .isFalse();
+    softly.assertThat( ref.equals( object ) )
+            .as( cname + &#34;.equals(new Object()): ref object&#34;
+                    + &#34; compared to other type should produce false&#34;
+            )
+            .isFalse();
+    softly.assertThat( ref.equals( equal ) )
+            .as( cname + &#34; ref object [&#34; + safeToString( ref )
+                    + &#34;] and equal object [&#34; + safeToString( equal )
+                    + &#34;] should report equal&#34;
+            )
+            .isTrue();
+    for ( int i = 0; i &lt; unEqual.length; i++ ) {
+        T ueq = unEqual[ i ];
+        softly.assertThat( ref )
+                .as(&#34;testing supposed unequal objects&#34;)
+        .isNotEqualTo( ueq );
+    }
+    // ref and equal should have same hashCode
+    softly.assertThat( ref.hashCode() )
+            .as( cname + &#34; equal objects &#34;
+                    + ref.toString() + &#34; and &#34;
+                    + equal.toString() + &#34; should have same hashcode&#34;
+            )
+            .isEqualTo( equal.hashCode() );
+});
+}</code></pre></figure><p>The above code has been used before but now adapted for AssertJ and JUnit 5.</p><p>It is of course best to put this in some kind of test helper library, so you can reuse it over and over without having to
 resort to copy and waste.</p><hr><aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip:</span></h6><p>Think test driven! So write tests FIRST, and then code. Testing is ensuring that the code is usable.
 To make code testable is also a design exercise: you need to make decisions about the design of your program when you write your tests. If you have no idea how to test it,
 you are equally clueless about how to use the designed classes.</p></aside></section><section class="doc-section level-1"><h2 id=_links>Links</h2><div class=ulist><ul><li><a href=https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests target=_blank rel=noopener>JUnit 5 Parameterized Tests</a></li><li><a href=https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-sources-CsvSource target=_blank rel=noopener>CSV Source Tests</a></li><li><a href=https://www.baeldung.com/parameterized-tests-junit-5 target=_blank rel=noopener>Baeldung on Parameterized Tests with JUnit 5</a></li></ul></div></section><section class=footnotes aria-label=Footnotes role=doc-endnotes><hr><ol class=footnotes><li class=footnote id=_footnote_1 role=doc-endnote>Not all equals implementation look at the type of this, See the java.util.List doc for a counter example <a class=footnote-backref href=#_footnoteref_1 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li></ol></section></article></div><footer class="text-sm leading-6 mt-12 mb-5">Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a></footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block"><h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5></div></div><div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div></div><script src=/prc2/js/main.min.956966b3103878d329f9460daf829f6ad1d50fc9e24d20ff0c5d93a4006065df877564edc24b6a2a5182bf4387d13d9f960a1df6fc9d259d38cfb8e83509c999.js integrity="sha512-lWlmsxA4eNMp+UYNr4KfatHVD8niTSD/DF2TpABgZd+HdWTtwktqKlGCv0OH0T2flgod9vydJZ04z7joNQnJmQ==" crossorigin=anonymous></script>

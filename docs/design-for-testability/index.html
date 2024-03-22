@@ -46,26 +46,26 @@ out of (return values) of the real object while it is used by the SUT. You can m
 
         verify( pr ).println( anyString() ); <b class=conum>4</b>
 
-    }</code></pre><ol class="callout-list arabic"><li>Create the mocked printer.</li><li>Create a Business object passing it the printer.</li><li>Make the business class work.</li><li>Ask the mocked printer if it was used.</li></ol></figure><p>This is of course a simple test and the only thing that it verifies is that the <code>printer.printLn(String)</code> has been used.</p><figure class=listing-block><figcaption>Verify that what is printed is okay.</figcaption><pre class=highlight><code class=language-java data-lang=java>    @Mock
-    Printer printer; <b class=conum>1</b>
+    }</code></pre><ol class="callout-list arabic"><li>Create the mocked printer.</li><li>Create a Business object passing it the printer.</li><li>Make the business class work.</li><li>Ask the mocked printer if it was used.</li></ol></figure><p>This is of course a simple test and the only thing that it verifies is that the <code>printer.printLn(String)</code> has been used.</p><figure class=listing-block><figcaption>Verify that what is printed is okay.</figcaption><pre class=highlight><code class=language-java data-lang=java>@Mock
+Printer printer; <b class=conum>1</b>
 
-    Business business;
+Business business;
 
-    @BeforeEach
-    void setup() {
-        business = new Business( printer );  <b class=conum>2</b>
-    }
+@BeforeEach
+void setup() {
+    business = new Business( printer );  <b class=conum>2</b>
+}
 
-    @Test
-    void doesItPrintBusiness() {
-        ArgumentCaptor&lt;String&gt; lineCaptor = ArgumentCaptor.forClass( String.class ); <b class=conum>3</b>
+@Test
+void doesItPrintBusiness() {
+    var lineCaptor = ArgumentCaptor.forClass( String.class ); <b class=conum>3</b>
 
-        business.work( &#34;Linda&#34; ); <b class=conum>4</b>
+    business.work( &#34;Linda&#34; ); <b class=conum>4</b>
 
-        verify( printer ).println( lineCaptor.capture() ); <b class=conum>5</b>
-        assertThat( lineCaptor.getAllValues() ).contains( &#34;Hello Linda&#34; ); <b class=conum>6</b>
-      //  fail(&#34;test does It print ended. You know what to do.&#34;);
-    }</code></pre><ol class="callout-list arabic"><li>Setup mock as annotated field.</li><li>Create the business (SUT) object in a setup method, so tests can avoid repeating this,<br>again passing the printer object via the business constructor.</li><li>Prepare a Mockito helper object to capture the data passed to the printer.</li><li>Make business do its thing.</li><li>Verify that <code>printer.println(…​)</code> is called. The captor object is used to
+    verify( printer ).println( lineCaptor.capture() ); <b class=conum>5</b>
+    assertThat( lineCaptor.getAllValues() ).contains( &#34;Hello Linda&#34; ); <b class=conum>6</b>
+    //  fail(&#34;test does It print ended. You know what to do.&#34;);
+}</code></pre><ol class="callout-list arabic"><li>Setup mock as annotated field.</li><li>Create the business (SUT) object in a setup method, so tests can avoid repeating this,<br>again passing the printer object via the business constructor.</li><li>Prepare a Mockito helper object to capture the data passed to the printer.</li><li>Make business do its thing.</li><li>Verify that <code>printer.println(…​)</code> is called. The captor object is used to
 collect all that has been received by the printer’s <code>printLn</code> method.</li><li>The expected data is passed to the printer, so a real printer would
 print it. The method <code>lineCaptor.getAllValues()</code> produces a List of the captured things, strings in this case.</li></ol></figure><p>Mockito is well documented with lots of examples in its <a href=https://javadoc.io/static/org.mockito/mockito-core/3.2.4/org/mockito/Mockito.html>java doc</a>.
 When you look to the test dependencies of your Maven project in NetBeans-IDE, right-click on the
@@ -216,7 +216,7 @@ those specific values or reactions that you need in your test, without having to
 the business code testable without making it dependent or even know the actual implementing classes. And that is really all that counts. The business code
 makes the application valuable, the rest is either plumbing or already available code.<a class=footnote-ref id=_footnoteref_3 href=#_footnote_3 title="View footnote 3" role=doc-noteref>[3]</a>.</p><section class="admonition-block warning" role=doc-notice><h6 class="block-title label-only"><span class=title-label>Warning:</span></h6><p><strong class=red>Never</strong> let the business code <em>create</em> its own persistence or or service object. You would
 <strong class="big red">loose control</strong> over what flows between service and business class,
-and makes it <em class=red>unobservable</em>, which is bad from the testing standpoint.</p></section><p>Instead hand the service or resource to the business, or give it some provider of a resource.</p><section class="doc-section level-2"><h3 id=_business_class_fit_for_testing>Business class fit for testing</h3><p><strong class=blue>WE’LL FURTHER EXPLAIN THIS CONCEPT IN CLASS AND IN THE CONTEXT OF PRJ2. THERE ARE QUITE SOME DESIGN IDEAS BEHIND IT, SO DON’T WORRY IF YOU DON’T UNDERSTAND IT IMMEDIATELY.</strong></p><p>Let us look at an example as a class diagram.</p><figure class=image-block><img src=/prc2/images/testable-business.gif alt="testable business"><figcaption>Figure 4. Giving the business what it really needs make the business testable</figcaption></figure><p>For readers that like to watch still pictures:</p><figure class=image-block><img src=/prc2/images/businessarch.svg alt=businessarch><figcaption>Figure 5. business class in the application</figcaption></figure><figure class=image-block><img src=/prc2/images/businesstest.svg alt=businesstest><figcaption>Figure 6. business class in the test lab</figcaption></figure><p>In the picture above you see a class diagram which shows a detail in which a business class
+and makes it <em class=red>unobservable</em>, which is bad from the testing standpoint.</p></section><p>Instead hand the service or resource to the business, or give it some provider of a resource.</p><section class="doc-section level-2"><h3 id=_business_class_fit_for_testing>Business class fit for testing</h3><p><strong class=blue>WE’LL FURTHER EXPLAIN THIS CONCEPT IN CLASS AND IN THE CONTEXT OF PRJ2. THERE ARE QUITE SOME DESIGN IDEAS BEHIND IT, SO DON’T WORRY IF YOU DON’T UNDERSTAND IT IMMEDIATELY.</strong></p><p>Let us look at an example as a class diagram.</p><figure class=image-block><img src=/prc2/images/businessarch.svg alt=businessarch><figcaption>Figure 4. Giving the business what it really needs make the business testable</figcaption></figure><figure class=image-block><img src=/prc2/images/businesstest.svg alt=businesstest><figcaption>Figure 5. business class in the test lab</figcaption></figure><p>In the picture above you see a class diagram which shows a detail in which a business class
 'lives' in an environment that is designed to make sure the business class sticks to its business:</p><p><i class="fa fa-check fa-fw green"></i> Dealing with business entities such as customers and products.<br><i class="fa fa-check fa-fw green"></i> Uses services to do the business' bidding, such as saving stuff to a database,
 provided as a service to the business class.<br><i class="fa fa-check fa-fw green"></i> And the business code <strong class=red>NOT</strong> responsible for <em class=blue>how</em> to show things in a UI.</p><p>In the above example we provide a <span class=blue>factory</span> or <span class=blue>provider</span> of the services that the business code requires.</p><p>The business class appears in two worlds:</p><div class="olist arabic"><ol class=arabic><li>A <em class=blue>business</em> world, the <strong class=blue>Application</strong>. This is the actual use and role in the whole application.
 In that world there is a so called Assembler, that stitches the parts of the application together and sets it on its way. Typically this Assembler

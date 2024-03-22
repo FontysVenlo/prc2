@@ -15,7 +15,7 @@ template=S
 --
 + area(): double
 + compareTo( other: BasicShape): int
-bg=#ccffcc</panel_attributes>
+bg=#88ff88</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -31,7 +31,8 @@ Circle
 --
 - center: BasicPoint
 - radius: double
---</panel_attributes>
+--
+bg=#ccffcc</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -43,12 +44,14 @@ Circle
       <h>140</h>
     </coordinates>
     <panel_attributes>{record}
+{not sealed}
 BasicPoint
 --
 - x: double
 - y: double
 --
-+ distancle(other BasicPoint): double</panel_attributes>
++ distancle(other BasicPoint): double
+bg=#cccccc</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -62,7 +65,8 @@ BasicPoint
     <panel_attributes>{record}
 Rectangle
 --
-- topLeft, bottomRight: BasicPoint</panel_attributes>
+- topLeft, bottomRight: BasicPoint
+bg=#ccffcc</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -75,7 +79,8 @@ Rectangle
     </coordinates>
     <panel_attributes>Triangle
 --
-- a,b,c: BasicPoint</panel_attributes>
+- a,b,c: BasicPoint
+bg=#ccffcc</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -86,7 +91,11 @@ Rectangle
       <w>30</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;.
+bg=#ccffcc
+fg=#008800
+lw=2
+</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
@@ -154,7 +163,11 @@ m2=1
       <w>100</w>
       <h>190</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;.
+bg=#ccffcc
+fg=#008800
+lw=2
+</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;50.0;80.0;50.0;80.0;170.0</additional_attributes>
   </element>
   <element>
@@ -165,7 +178,11 @@ m2=1
       <w>110</w>
       <h>300</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;.
+bg=#ccffcc
+fg=#008800
+lw=2
+</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0;90.0;40.0;90.0;280.0</additional_attributes>
   </element>
   <element>
@@ -215,8 +232,8 @@ lw=2
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>30</x>
-      <y>270</y>
+      <x>50</x>
+      <y>370</y>
       <w>340</w>
       <h>120</h>
     </coordinates>
@@ -226,7 +243,7 @@ and Triangle.
 
 Note that 'permits' has no 
 icon in UML. We used a closed triangle here.
-</panel_attributes>
+bg=#ccccff</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
