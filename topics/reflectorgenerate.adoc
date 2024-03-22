@@ -1,0 +1,154 @@
+== Reflection and Generating Code
+
+In an experiment when thinking of an exercise about reflection we dit some performance tests. We wanted to know how much slower reflection is compared to direct method calls. We also wanted to know how much slower it is to generate code at runtime compared to direct method calls. We used the following code to test this:
+
+We based our experiment on a record impelmentation of s Student class.
+
+```java`
+import java.io.Serializable;
+import java.time.LocalDate;
+
+public record Student(
+        Integer snummer,
+        String firstname,
+        String lastname,
+        LocalDate dob,
+        Integer cohort,
+        String email,
+        String gender,
+        String student_class,
+        Boolean active)
+        implements Serializable {
+}
+```
+
+we did the following experiments:
+
+* Add a special method to the Student class to get a new student with a modified field, like `Record newPiet = s.firstname("Piet")`. This is commonly known as a with-method.
+* Have a helper class that uses reflection to obtain all fields of the record and put them in an array. We used `class.getRecorComponents()`
+to obtain the meta information of the components of the record. We then used reflection to get the value of the fields using the accessor methods.
+Wer did not want to cheat by using the setAccessible method on the field. That might not be allowed in a record in a different moduel.
+* Use MethodHandles to obtain the value of the fields. This is more or less similar than the reflection above, with the hope that it is faster. It is not.
+* Use LambdaMetaFactory to generate a method that can be called to get the value of a field. This uses methodhandles and converts them into byte code  at runtime.
+* To get all the reflective,method handles, and meta factory code to an acceptable performance we cached the result of reflection and method hadles per record class at runtime.
+* Generate code at compile time to generate helper classes. Lastly we wrote some special methods in the Student class for each field, to have it generate a new record with said field updated.
+
+The results of the experiment are as follows:
+
+image::cached-benchmarks.svg[All withers compared]
+
+image::jmh-result-20240216-144818-compact-table.svg[Table with all results]
+
+What stands out in the experiments is that the generated code is the fastest. The methodhandles is the slowest. The  reflective accessor methods and the lambda meta factory are in between. The generated code is the fastest, but is relatively easy to do. A bit of reflection and some string manipulation does the trick.
+
+
+
+=== API design
+
+We want to delve a bit into reflection and code generation. We want to create a new record with a modified field. But not to deep.
+
+We can do with the informatiojn that is available in the record class. We can use
+
+```java`
+Student.class.getRecordComponents()
+```
+
+to get the all the information on the fields of the record. 
+
+From that information we generate a WitherBuilder for a concrete record class, in this case a StudentWitherBuilder. We generate a method for each field of the record.
+
+For each of these fields we need to generate a method that accepts the new value for that can be called to get the value of the field. We want to generate a method for each field. We want to generate the following code:
+
+
+We want the API to provide the following ergonomics:
+.puk
+```java`
+Record newPiet = s
+    .with() // <1>
+    .firstname("Piet")
+    .lastname("Puk")
+    .dob(LocalDate.of(2000, 1, 1))
+    .please(); // <2>
+```
+
+<1> returns a WitherBuilder that has a method for each field of the record.
+<2> returns the new record with the modified fields. Only after the please() method is called, the new record is created.
+
+For this we have a helper interface called Wither, that must be iplemented by the record class. The implementation involves no work at first, becase the method 
+is a default method that returns a WitherBuilder.
+
+```java`
+public interface Wither<T> {
+    default Object with(){
+        return null;
+    }
+}
+```
+
+This with method returns a WitherBuilder that has a method for each field of the record. The WitherBuilder has a method please() that returns the new record.
+
+```java`
+public interface WitherBuilder<T> {
+    default T please(){
+        /// do some real work here
+    }
+}
+```
+
+
+With that a record can be written as;
+
+```java`
+import java.io.Serializable;
+import java.time.LocalDate;
+
+public record Student(
+        Integer snummer,
+        String firstname,
+        String lastname,
+        LocalDate dob,
+        Integer cohort,
+        String email,
+        String gender,
+        String student_class,
+        Boolean active)
+        implements Serializable, 
+        Wither<Student> { // <1>
+}
+```
+<1> The record implements the Wither interface, so it has a with method that returns a WitherBuilder.
+
+Wnat we want to achieve is to generate a method that can be called to get the value of a field. We want to generate a method for each field. 
+
+The code for a field can be generated with this code, to be executed per field.
+
+```java`
+return String.format(
+    """
+    /**
+        * Sets component '%2$s' of the %5$s-record to given value.
+        * 
+        * Sets field number %4$s.
+        * 
+        * @param %2$s value to use for new record
+        * @return this builder %1$s
+        */
+    public %1$s %2$s(%3$s %2$s) {
+            this.%2$s = %2$s;
+            return self();
+    }
+    """, builderName, // <1>
+            rc[ i ].getName(), // <2>
+            paramType, // <3>
+            i, // <4>
+            clzName // <5>
+    );
+```
+
+<1> the name of wither the builder that is generated
+<2> the name of the field
+<3> the type of the field
+<4> the index of the field in the record components array
+<5> the class name of the record
+
+

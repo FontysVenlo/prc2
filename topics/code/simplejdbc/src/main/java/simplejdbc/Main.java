@@ -12,6 +12,7 @@ public class Main {
 
     public static void main( String[] args ) throws SQLException {
 
+        
         DataSource source = getDataSource("jdbc.pg.presidents");
         DataSourceDemo demo = new DataSourceDemo( source, System.out );
 
