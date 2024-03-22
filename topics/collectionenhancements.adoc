@@ -6,7 +6,7 @@ You might get new ideas or find a cool feature.
 === Improved Map in Java 8
 
 
-I personally find the java.util.Map quit interesting because it got a number of very cool features in
+I personally find the java.util.Map quite interesting because it got a number of very cool features in
 Java 7 and 8 that are really very helpful if you want to implement things like *caches*.
 If you are into caching and expect many entries, consider a https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/WeakHashMap.html[WeakHashMap],
 that also helps to solve the problem of keeping the cache small and auto-evacuate when entries are no longer used.
