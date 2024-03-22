@@ -12,7 +12,7 @@ An `Instant` does not have a human readable format. The two kinds of human time 
 _zoned time_. Local date/time has a date and/or time of day, but no associated time zone. Examples:
 
 image:calendar_example_LocalDate.png[width=25%, title="Local Date example"] Local Date example.
-image:alarmclock_example_LocalTime.jpg[width=25%, title="Local Time example"] Local Time Example.
+image:alarmclock.png[width=25%, title="Local Time example"] Local Time Example.
 
 Do not use zoned time, unless really necessary. Today's date can be retrieved using `LocalDate.now()`, an arbitrary date
 with `LocalDate.of(<year>, <month>, <day>)` like `LocalDate.of(2021, 5, 1)` being first of May 2021. The amount of time
@@ -79,7 +79,8 @@ public void tLength( String line, String p1, String p2, double expected,
     * @return the double
     * @throws ParseException if the string does not parse to double.
     */
-static double getDoubleConsideringLocale( String input ) throws ParseException {
+static double getDoubleConsideringLocale( String input ) 
+   throws ParseException {
     return DecimalFormat.getNumberInstance().parse( input ).doubleValue(); // <1>
 }
 
@@ -90,8 +91,13 @@ static double getDoubleConsideringLocale( String input ) throws ParseException {
 * @return the double.
 * @throws ParseException if the string does not parse to double.
 */
+<<<<<<< Updated upstream
 static double getDoubleConsideringLocale( Locale locale, String input )
     throws ParseException {
+=======
+static double getDoubleConsideringLocale( Locale locale, String input ) 
+  throws ParseException {
+>>>>>>> Stashed changes
     return DecimalFormat.getNumberInstance(locale).parse( input ).doubleValue();
 }
 ----

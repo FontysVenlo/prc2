@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>10</zoom_level>
+  <help_text>// Uncomment the following line to change the fontsize and font:
+fontsize=10
+// fontfamily=SansSerif //possible: SansSerif,Serif,Monospaced
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Welcome to UMLet!
+//
+// Double-click on elements to add them to the diagram, or to copy them
+// Edit elements by modifying the text in this panel
+// Hold Ctrl to select multiple elements
+// Use Ctrl+mouse to select via lasso
+//
+// Use +/- or Ctrl+mouse wheel to zoom
+// Drag a whole relation at its central square icon
+//
+// Press Ctrl+C to copy the whole diagram to the system clipboard (then just paste it to, eg, Word)
+// Edit the files in the "palettes" directory to create your own element palettes
+//
+// Select "Custom Elements &gt; New..." to create new element types
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// This text will be stored with each diagram;  use it for notes.</help_text>
+  <zoom_level>12</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>130</x>
-      <y>60</y>
-      <w>100</w>
-      <h>50</h>
+      <x>132</x>
+      <y>108</y>
+      <w>120</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 */A/*
@@ -17,37 +41,38 @@ bg=#aaffaa</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>260</x>
-      <y>80</y>
-      <w>100</w>
-      <h>30</h>
+      <x>324</x>
+      <y>108</y>
+      <w>120</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>SomeClass
+    <panel_attributes>B
 bg=#aaffaa</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
-      <y>200</y>
-      <w>100</w>
-      <h>40</h>
+      <x>204</x>
+      <y>276</y>
+      <w>120</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>SimpleClass
-bg=#aaffaa</panel_attributes>
+    <panel_attributes>*C*
+bg=#aaffaa
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>470</x>
-      <y>80</y>
-      <w>200</w>
-      <h>70</h>
+      <x>552</x>
+      <y>84</y>
+      <w>240</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>{class or interface}
-AlienTpe
+*AlienTpe*
 bg=#ffaaaa
 --
 */not assignable/*
@@ -57,99 +82,184 @@ bg=#ffaaaa
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>100</x>
-      <y>220</y>
-      <w>130</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-fg=#008800
-lw=3
-true &gt;</panel_attributes>
-    <additional_attributes>110.0;20.0;110.0;60.0;30.0;60.0;10.0;10.0;70.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>260</x>
-      <y>100</y>
-      <w>230</w>
-      <h>150</h>
+      <x>312</x>
+      <y>108</y>
+      <w>264</w>
+      <h>228</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 fg=#cc0000
 lw=3
 &lt; false</panel_attributes>
-    <additional_attributes>10.0;130.0;110.0;130.0;180.0;10.0;210.0;10.0</additional_attributes>
+    <additional_attributes>10.0;170.0;110.0;170.0;170.0;10.0;200.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>70</x>
-      <y>80</y>
-      <w>120</w>
-      <h>150</h>
+      <x>84</x>
+      <y>132</y>
+      <w>144</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 fg=#008800
 lw=3
 true &gt;</panel_attributes>
-    <additional_attributes>100.0;130.0;40.0;130.0;10.0;10.0;60.0;10.0</additional_attributes>
+    <additional_attributes>100.0;130.0;40.0;130.0;10.0;10.0;40.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>260</x>
-      <y>90</y>
-      <w>140</w>
-      <h>140</h>
+      <x>312</x>
+      <y>144</y>
+      <w>180</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 fg=#008800
 lw=3
 &lt; true</panel_attributes>
-    <additional_attributes>10.0;120.0;40.0;120.0;120.0;10.0;100.0;10.0</additional_attributes>
+    <additional_attributes>10.0;120.0;40.0;120.0;130.0;10.0;110.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>190</x>
-      <y>100</y>
-      <w>30</w>
-      <h>120</h>
+      <x>192</x>
+      <y>156</y>
+      <w>72</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 lw=3</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;40.0;40.0;40.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>288</x>
+      <y>156</y>
+      <w>108</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+lw=3</panel_attributes>
+    <additional_attributes>70.0;10.0;70.0;50.0;10.0;50.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>120</x>
+      <y>444</y>
+      <w>300</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>*Not allowed*
+H h= new C();
+/(you cannot really play mam or dad.)/
+
+bg=#ffaaaa</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>192</x>
+      <y>384</y>
+      <w>156</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>*H*
+bg=#ffaaaa</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>312</x>
+      <y>312</y>
+      <w>168</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+fg=#cc0000
+lw=3
+&lt; false</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;30.0;90.0;60.0;30.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>264</x>
+      <y>324</y>
+      <w>36</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+lw=3</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>540</x>
+      <y>192</y>
+      <w>300</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>*isAssignableFrom()*
+ A a = new H();
+ A c1 = new C();
+ C c2 = new H();
+ B b1 = new C();
+ B b2 = new C();
+ B b3 = new H();
+   
+some allowed assignments
+are left out, 
+*Do you known which ones?*
+bg=#aaffaa</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>240</x>
-      <y>100</y>
-      <w>80</w>
-      <h>120</h>
+      <y>108</y>
+      <w>108</w>
+      <h>48</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-
-lw=3</panel_attributes>
-    <additional_attributes>60.0;10.0;60.0;50.0;10.0;50.0;10.0;100.0</additional_attributes>
+    <panel_attributes>lt=&lt;.
+fg=#cc0000
+lw=3
+&lt; f</panel_attributes>
+    <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
   </element>
   <element>
-    <id>UMLNote</id>
+    <id>Relation</id>
     <coordinates>
-      <x>450</x>
-      <y>170</y>
-      <w>250</w>
-      <h>110</h>
+      <x>240</x>
+      <y>132</y>
+      <w>108</w>
+      <h>48</h>
     </coordinates>
-    <panel_attributes>*isAssignableFrom()*
-
-X.class.isAssignableFrom(Y)
-true where 
-A is A, SomeClass or SimpleClass
-i.e. in this color
-
-bg=#aaffaa</panel_attributes>
+    <panel_attributes>lt=&lt;.
+fg=#cc0000
+lw=3
+f &gt;</panel_attributes>
+    <additional_attributes>70.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>60</y>
+      <w>264</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>*Always point down*
+fg=#008800
+fontsize=18
+lw=0</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
