@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-   <zoom_level>12</zoom_level>
+  <zoom_level>12</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
@@ -126,7 +126,7 @@ lw=3</panel_attributes>
     <coordinates>
       <x>84</x>
       <y>408</y>
-      <w>300</w>
+      <w>420</w>
       <h>96</h>
     </coordinates>
     <panel_attributes>*Not allowed*
@@ -153,7 +153,7 @@ bg=#ffaaaa</panel_attributes>
     <coordinates>
       <x>276</x>
       <y>276</y>
-      <w>168</w>
+      <w>192</w>
       <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
