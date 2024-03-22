@@ -460,7 +460,7 @@ We use NetBeans IDE as default. We might not be able to answer any support quest
 
 //include::configuringmaven.adoc[]
 
-//include::sebipom.adoc[]
+//include::informaticspom.adoc[]
 
 == Additional Pointers
 
