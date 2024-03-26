@@ -10,7 +10,7 @@ border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate
 border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">03 Design for testability</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/generics/ class="block border-l pl-4 -ml-px
 border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">04 Generics</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/jpms-lambda-streams/ class="block border-l pl-4 -ml-px
 border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">05 JPMS, Lambda and Streams</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/database-access/ class="block border-l pl-4 -ml-px
-border-slate-500 dark:border-slate-400 text-black dark:text-slate-200">06 Database Access JDBC</a></li></ul></li></ul></nav></aside><div class=lg:pl-[19.5rem]><div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16"><article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500"><nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_java_database_connectivity>Java DataBase Connectivity</a><ol class="toc-list level-2"><li><a href=#_database_connection_credentials_and_java_properties>DataBase connection credentials and Java Properties</a></li><li><a href=#_using_a_data_source>Using a Data source</a></li><li><a href=#_resultset>ResultSet</a></li><li><a href=#_anatomy_of_a_prepared_statement>Anatomy of a prepared statement</a></li></ol></li><li><a href=#_traditional_preparing_statements>Traditional preparing statements</a><ol class="toc-list level-2"><li><a href=#_database_meta_information>Database Meta Information</a></li><li><a href=#_check_constraints>Check constraints</a></li></ol></li><li><a href=#_transactions>Transactions</a></li><li><a href=#_using_stored_procedures>Using Stored Procedures</a></li><li><a href=#_daos>DAO’s</a></li></ol></nav><section class="doc-section level-1"><h2 id=_java_database_connectivity>Java DataBase Connectivity</h2><section class="doc-section level-2"><h3 id=_database_connection_credentials_and_java_properties>DataBase connection credentials and Java Properties</h3><p>Some things do <mark>NOT</mark> belong in source code. In particular do not put <strong>credentials</strong> of any kind
+border-slate-500 dark:border-slate-400 text-black dark:text-slate-200">06 Database Access JDBC</a></li></ul></li></ul></nav></aside><div class=lg:pl-[19.5rem]><div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16"><article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500"><nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_java_database_connectivity>Java DataBase Connectivity</a><ol class="toc-list level-2"><li><a href=#_database_connection_credentials_and_java_properties>DataBase connection credentials and Java Properties</a></li><li><a href=#_using_a_data_source>Using a Data source</a></li><li><a href=#_resultset>ResultSet</a></li><li><a href=#_anatomy_of_a_prepared_statement>Anatomy of a prepared statement</a></li><li><a href=#_database_meta_information>Database Meta Information</a></li><li><a href=#_check_constraints>Check constraints</a></li></ol></li><li><a href=#_transactions>Transactions</a></li><li><a href=#_using_stored_procedures>Using Stored Procedures</a></li></ol></nav><section class="doc-section level-1"><h2 id=_java_database_connectivity>Java DataBase Connectivity</h2><section class="doc-section level-2"><h3 id=_database_connection_credentials_and_java_properties>DataBase connection credentials and Java Properties</h3><p>Some things do <mark>NOT</mark> belong in source code. In particular do not put <strong>credentials</strong> of any kind
 inside files that are committed to a version control system, such as source code. Make sure you configure your
 version control system such that such files are excluded from commits.</p><p>Instead put credentials in separate files, that are easily understood by both a human that uses it
 to configure access to a resource, and also by the programming language.<br>In java the tradition is to use so called properties files, which, also traditionally, have a file extension <code>.properties</code>.
@@ -37,65 +37,55 @@ jdbc.pg.presidents.dbname=presidents
 jdbc.pg.presidents.user=exam
 jdbc.pg.presidents.password=exam
 jdbc.pg.presidents.hosts=localhost
-jdbc.pg.presidents.ports=5433</code></pre></figure><p>You can see that the properties file supports two environments, <strong>dev</strong>elopment and <strong>prod</strong>uction.</p><figure class=listing-block><figcaption>Configuring a datasource. Put it in a utility class.</figcaption><pre class=highlight><code class=language-java data-lang=java>    static DataSource getDataSource( final String sourceName ) {
-        // dataSourceByName is a map, serving as a cache.
-        return datasourceByName.computeIfAbsent( sourceName,
-            ( s ) -&gt; {
-                Properties props = properties( &#34;application.properties&#34; );
+jdbc.pg.presidents.ports=5433</code></pre></figure><p>You can see that the properties file supports two environments, <strong>dev</strong>elopment and <strong>prod</strong>uction.</p><figure class=listing-block><figcaption>Configuring a datasource. Put it in a utility class.</figcaption><pre class=highlight><code class=language-java data-lang=java>public class DBProvider {
 
-                PGSimpleDataSource source = new PGSimpleDataSource();
+    static Map&lt;String, DataSource&gt; cache = new HashMap&lt;&gt;();
 
-                String prefix = sourceName + &#34;.&#34;; <b class=conum>1</b>
-                String[] serverNames = {
-                    props.getProperty( prefix + &#34;dbhost&#34; )
-                };
-                source.setServerNames( serverNames );
+    static DataSource getDataSource(final String sourceName) {
 
-                String user = props.getProperty( prefix + &#34;username&#34; );
-                source.setUser( user );
+        return cache.computeIfAbsent(sourceName,
+                (s) -&gt; {
+                    Properties props = getProperties(&#34;db.properties&#34;);
 
-                source.setDatabaseName( props.getProperty( prefix + &#34;dbname&#34; ) );
-                source.setPassword( props
-                        .getProperty( prefix + &#34;password&#34; ) );
-                String pingQuery = &#34;&#34;&#34;
-                    SELECT current_database(), now()::TIMESTAMP as now;
-                &#34;&#34;&#34;
-                try ( Connection con = source.getConnection();
-                    // ping the database for success.
-                    PreparedStatement pst = con.prepareStatement( pingQuery ); ) {
-                        try ( ResultSet rs = pst.executeQuery(); ) {
-                            if ( rs.next() ) {
-                                Object db = rs.getObject(  &#34;current_database&#34;);
-                                Object now = rs.getObject(  &#34;now&#34;);
-                                System.out.println(
-                                    &#34;connected to db %s, date/time is %s&#34;
-                                    .formatted( db.toString(), now.toString() );
-                            }
-                        }
+                    PGSimpleDataSource dataSource = new PGSimpleDataSource();
 
-                } catch ( SQLException ex ) {
-                    Logger.getLogger( PgJDBCUtils.class.getName() )
-                        .log( Level.SEVERE, null, ex );
+                    String prefix = sourceName + &#34;.&#34;;
+
+                    String[] serverNames = {props.getProperty(prefix + &#34;dbhost&#34;)};
+                    dataSource.setServerNames(serverNames);
+
+                    int[] portNumbers = {Integer.parseInt(props.getProperty(prefix + &#34;port&#34;))};
+                    dataSource.setPortNumbers(portNumbers);
+
+                    dataSource.setUser(props.getProperty(prefix + &#34;username&#34;));
+                    dataSource.setDatabaseName(props.getProperty(prefix + &#34;dbname&#34;));
+                    dataSource.setPassword(props.getProperty(prefix + &#34;password&#34;));
+                    dataSource.setCurrentSchema(props.getProperty(prefix + &#34;schema&#34;));
+
+                    return dataSource;
                 }
-                return source;
-            }
-            ); // end of lambda.
-      }
+        );
+    }
 
-      // read properties
-      static Properties properties( String propFileName ) {
-          Properties properties = new Properties();
-          try (
-                  FileInputStream fis = new FileInputStream( propFileName ); ) {
-              properties.load( fis );
-          } catch ( IOException ignored ) {
-              Logger.getLogger( PgJDBCUtils.class.getName() ).log(
-                      Level.INFO,
-                      &#34;attempt to read file from well known location failed&#39;&#34;,
-                      ignored );
-          }
-          return properties;
-      }</code></pre><ol class="callout-list arabic"><li>The sourceName is the key or namespace from where to pickup the connection details. Simple and effective.</li></ol></figure></section><section class="doc-section level-2"><h3 id=_using_a_data_source>Using a Data source</h3><p>There are some traditional ways to obtain a database connection. We use a <strong>DataSource</strong>, which itself
+    static Properties getProperties(String propertiesFileName){
+
+        System.out.println(&#34;The user working dir is &#34; + System.getProperty(&#34;user.dir&#34;));
+
+        // Usage of resource file is preferred way. No issues with working dir.
+        // Uses the default location of resources (in src/main/java/resources dir)
+        // getClassLoader() is necessary, unless you store your proprty file in a
+        // subfolder according to package name
+        // (src/main/resources/fontys/customerdbdemo in this case).
+
+        Properties properties = new Properties();
+        try (InputStream dbProperties = DBProvider.class.getClassLoader().getResourceAsStream(propertiesFileName);) {
+            properties.load(dbProperties);
+        } catch (IOException ex) {
+            Logger.getLogger(DBProvider.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return properties;
+    }
+}</code></pre></figure></section><section class="doc-section level-2"><h3 id=_using_a_data_source>Using a Data source</h3><p>There are some traditional ways to obtain a database connection. We use a <strong>DataSource</strong>, which itself
 can be seen as a resource.
 The data source can then be used to obtain a connection. In the example you see a class that needs a DataSource
 that is provided at construction time of the class, so it is available when the instance is created.
@@ -169,34 +159,7 @@ because in the common case, what you put in is of the right type, as long as you
 order of the parameter types intact.</p></aside><p>This approach can be used to make database access even simpler, so you only have to provide the data
 in an array and the rest can be packed into utility methods.</p><p>The holy grail is to find a way to do all kind of queries against tables, and the only
 thing you need to know is the table name and what entities as Java objects can be expected to
-be read from or written to the table. However, start simple first! At some point you’ll find duplicated code and you’ll find a way to optimize your code. Typically, you’ll use Generics, Lambda’s and streams and a bit of reflection at some point. We think it’s good to first face the issue of code that is difficult to maintain and afterwards find a solution for that, instead of providing you with a very generic and maybe complex solution without knowing which underlying problems it solves. //'</p></section></section><section class="doc-section level-1"><h2 id=_traditional_preparing_statements>Traditional preparing statements</h2><p>In tests you should use traditional approaches, instead of the mechanisms you
-are testing. The code below illustrates what that means.<br>It is used by code that tests the bank transfer service implemented in the database. This example
-is filling the account tables from some List of accounts.</p><figure class=listing-block><figcaption>load accounts from list. The code is part of a test suite to prepare the database for tests.</figcaption><pre class=highlight><code class=language-java data-lang=java>    static String addAccount =
-       &#34;&#34;&#34;
-        insert into account(accountid,balance,maxdebit,customerid,astate)
-        values(                     ?,      ?,       ?,         ?,     ?)
-       &#34;&#34;&#34;;
-    static void loadAccounts() throws SQLException {
-
-        try ( Connection con = olifantysSource.getConnection();
-                PreparedStatement pst = con.prepareStatement( addAccount ) ) {
-            for ( Account account : accounts ) {
-                pst.setObject( 1, account.accountid );
-                pst.setBigDecimal( 2, account.balance );
-                pst.setBigDecimal( 3, account.maxdebit );
-                pst.setObject( 4, account.customerid );
-                pst.setString( 5, account.astate );
-                pst.addBatch(); <b class=conum>1</b>
-            }
-            int[] results = pst.executeBatch();
-            System.out.println( &#34;results = &#34; + Arrays.toString( results ) );
-
-        } catch ( PSQLException e ) {
-            System.out.println( &#34;caused by &#34; + e.getNextException() );
-            throw e;
-        }
-    }</code></pre><ol class="callout-list arabic"><li>We do multiple inserts in one batch. Auto commit is off.
-The try-with-resources block takes care of the jdbc transaction.</li></ol></figure><section class="doc-section level-2"><h3 id=_database_meta_information>Database Meta Information</h3><p>DO Mention the <a href=https://www.baeldung.com/jdbc-database-metadata>metadata…​</a></p><p>In the previous part we have seen how to use reflection on java classes.</p><p>A similar and standardized concept also exists for databases. You can retrieve all kind
+be read from or written to the table. However, start simple first! At some point you’ll find duplicated code and you’ll find a way to optimize your code. Typically, you’ll use Generics, Lambda’s and streams and a bit of reflection at some point. We think it’s good to first face the issue of code that is difficult to maintain and afterwards find a solution for that, instead of providing you with a very generic and maybe complex solution without knowing which underlying problems it solves. //'</p></section><section class="doc-section level-2"><h3 id=_database_meta_information>Database Meta Information</h3><p>DO Mention the <a href=https://www.baeldung.com/jdbc-database-metadata>metadata…​</a></p><p>In the previous part we have seen how to use reflection on java classes.</p><p>A similar and standardized concept also exists for databases. You can retrieve all kind
 of <em>meta</em> information about the objects (such as tables and views) defined in your database.
 Accessing that data can be done with <strong>select</strong>ing data from special relations in a special schema,
 called the <code class=blue>information_schema</code>.</p><p>Suppose we have the following definition of a table <code>students</code> in the schema <code>public</code>:</p><div class=listing-block><pre class=highlight><code class=language-sql data-lang=sql>CREATE TABLE public.students (
@@ -277,5 +240,5 @@ make sure that nothing happens to compromise the data already stored <em>before<
 the resource all for itself, locking any other parties out.
 If something fails, the mess created can either be undone (rollback) or not committed, which in effect is the same.</p><p>Locking out sounds serious, and it is, on multiple accounts.</p><div class=ulist><ul><li>When using a <strong class=big>BIG</strong> lock, as locking out all other parties, things become <em class=big>VERY</em> slow.</li><li>When lock less, like just a table, or better still, only the records we want to modify, then
 <strong class=big>DEAD</strong>locks can occur, which is even more problematic than having to wait.</li><li>In all cases, when something goes awry, one may have to clean up mess in multiple places.</li></ul></div><p>All this can be related to quite difficult problems. Luckily there are solutions to that and,
-not unimportant, as far as the database goes, that can typically deal with the issues pretty well. Have a look at paragraph 5.9 for more information about transaction programming.</p></section><section class="doc-section level-1"><h2 id=_using_stored_procedures>Using Stored Procedures</h2><p>From the DBS1 course, you should know about stored procedures. Don’t hesitate to use functionalities of your DBMS.</p></section><section class="doc-section level-1"><h2 id=_daos>DAO’s</h2></section></article></div><footer class="text-sm leading-6 mt-12 mb-5">Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a></footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block"><h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5></div></div><div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div></div><script src=/prc2/js/main.min.956966b3103878d329f9460daf829f6ad1d50fc9e24d20ff0c5d93a4006065df877564edc24b6a2a5182bf4387d13d9f960a1df6fc9d259d38cfb8e83509c999.js integrity="sha512-lWlmsxA4eNMp+UYNr4KfatHVD8niTSD/DF2TpABgZd+HdWTtwktqKlGCv0OH0T2flgod9vydJZ04z7joNQnJmQ==" crossorigin=anonymous></script>
+not unimportant, as far as the database goes, that can typically deal with the issues pretty well. Have a look at paragraph 5.9 for more information about transaction programming.</p></section><section class="doc-section level-1"><h2 id=_using_stored_procedures>Using Stored Procedures</h2><p>From the DBS1 course, you should know about stored procedures. Don’t hesitate to use functionalities of your DBMS.</p></section></article></div><footer class="text-sm leading-6 mt-12 mb-5">Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a></footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block"><h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5></div></div><div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div></div><script src=/prc2/js/main.min.956966b3103878d329f9460daf829f6ad1d50fc9e24d20ff0c5d93a4006065df877564edc24b6a2a5182bf4387d13d9f960a1df6fc9d259d38cfb8e83509c999.js integrity="sha512-lWlmsxA4eNMp+UYNr4KfatHVD8niTSD/DF2TpABgZd+HdWTtwktqKlGCv0OH0T2flgod9vydJZ04z7joNQnJmQ==" crossorigin=anonymous></script>
 <script src=/prc2/js/highlight.min.cd8091de05577194483fff730f723dc2379226a640ef117b33ad133cc3da2f690d95af8fc32186b11dc10628e66e325b33bee2bf443c98315905e50f22aecc50.js integrity="sha512-zYCR3gVXcZRIP/9zD3I9wjeSJqZA7xF7M60TPMPaL2kNla+PwyGGsR3BBijmbjJbM77iv0Q8mDFZBeUPIq7MUA==" crossorigin=anonymous defer></script><div id=copied-alert class="invisible opacity-0 transition-all ease-in-out duration-400 fixed bottom-3 right-10 z-50 flex p-4 mb-4 text-sm text-gray-800 bg-gray-200 rounded-lg dark:bg-gray-500 dark:text-gray-200" role=alert><svg class="inline flex-shrink-0 mr-3 w-5 h-5" viewBox="0 0 24 24" width="24" height="24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><div><span class=font-medium>Code copied</span></div></div></body></html>
