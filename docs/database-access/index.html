@@ -1,0 +1,281 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>PRC2 - 06 Database Access JDBC</title><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/main.min.fea422d00131fac444371c3140cfca70adbb198dd44029dea4abd852b4fc81486ec33fa4c1135f96eb135dd1108ea88af008fcb26dfa29eafc54e25b9044089a.css integrity="sha512-/qQi0AEx+sRENxwxQM/KcK27GY3UQCnepKvYUrT8gUhuwz+kwRNflusTXdEQjqiK8Aj8sm36Ker8VOJbkEQImg==" crossorigin=anonymous><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous><script src=/prc2/js/init-darkmode.min.b7911813658cd032d0ed2d118da1fb57653d18386d8b1a26618f83f80019be21e977a1ddeeaeb51dcd1f7d21dfed542a8da077c29eb1ec03d84471bf90d3fabe.js integrity="sha512-t5EYE2WM0DLQ7S0RjaH7V2U9GDhtixomYY+D+AAZviHpd6Hd7q61Hc0ffSHf7VQqjaB3wp6x7APYRHG/kNP6vg==" crossorigin=anonymous></script>
+<link rel=apple-touch-icon sizes=180x180 href=https://fontysvenlo.github.io/prc2/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=https://fontysvenlo.github.io/prc2/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=https://fontysvenlo.github.io/prc2/favicon-16x16.png></head><body class="antialiased text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800"><header class="sticky top-0 z-40 w-full flex-none lg:border-b lg:border-gray-900/10 dark:border-gray-50/[0.06] bg-white dark:bg-gray-800
+border-b border-slate-900/10 lg:border-0 dark:border-slate-300/10"><div class="max-w-8xl mx-auto"><div class="py-4 lg:px-8 mx-4 lg:mx-0"><div class="relative flex items-center"><button id=menu-toggle type=button class="lg:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 mr-3">
+<span class=sr-only>Navigation</span><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<a class="mr-3 flex-none overflow-hidden md:w-auto dark:hover:text-gray-200 hover:text-gray-900" href=https://fontysvenlo.github.io/prc2/>PRC2</a><div class="relative flex ml-auto"><nav class="hidden md:flex items-center text-sm leading-6 font-semibold text-gray-700 dark:text-gray-200"><ul class="flex space-x-8"><li><a href=https://fontysvenlo.github.io/prc2/pages/tips/ class="hover:text-sky-500 dark:hover:text-sky-400">Tips</a></li><li><a href=https://fontysvenlo.github.io/prc2/pages/setup/ class="hover:text-sky-500 dark:hover:text-sky-400">Setup</a></li></ul></nav><div class="flex items-center lg:border-l border-gray-200 ml-6 pl-6 dark:border-gray-700"><button type=button id=theme-toggle>
+<span class="dark:hidden hover:text-sky-500"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span><span class="hidden dark:inline hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span></button>
+<a href=https://github.com/FontysVenlo/prc2 class="ml-6 block hover:text-sky-500 dark:hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a></div></div></div></div></div></header><div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8"><aside id=menu class="hidden lg:block fixed z-20 inset-0 top-[3.5rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto bg-white dark:bg-gray-800"><nav class="lg:leading-6 relative"><ul class="block md:hidden"><li class="mt-12 lg:mt-8"><h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">General</h5><ul class="space-y-2 border-l border-gray-100 dark:border-gray-700"><li><a href=https://fontysvenlo.github.io/prc2/pages/tips/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">Tips</a></li><li><a href=https://fontysvenlo.github.io/prc2/pages/setup/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">Setup</a></li></ul></li></ul><ul><li class="mt-12 lg:mt-8"><h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">Weeks</h5><ul class="space-y-2 border-l border-gray-100 dark:border-gray-700"><li><a href=https://fontysvenlo.github.io/prc2/docs/unit-testing-basics/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">01 Unit Testing Basics</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/parameterized-tests/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">02 Parameterized tests</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/design-for-testability/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">03 Design for testability</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/generics/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">04 Generics</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/jpms-lambda-streams/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">05 JPMS, Lambda and Streams</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/database-access/ class="block border-l pl-4 -ml-px
+border-slate-500 dark:border-slate-400 text-black dark:text-slate-200">06 Database Access JDBC</a></li></ul></li></ul></nav></aside><div class=lg:pl-[19.5rem]><div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16"><article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500"><nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_java_database_connectivity>Java DataBase Connectivity</a><ol class="toc-list level-2"><li><a href=#_database_connection_credentials_and_java_properties>DataBase connection credentials and Java Properties</a></li><li><a href=#_using_a_data_source>Using a Data source</a></li><li><a href=#_resultset>ResultSet</a></li><li><a href=#_anatomy_of_a_prepared_statement>Anatomy of a prepared statement</a></li></ol></li><li><a href=#_traditional_preparing_statements>Traditional preparing statements</a><ol class="toc-list level-2"><li><a href=#_database_meta_information>Database Meta Information</a></li><li><a href=#_check_constraints>Check constraints</a></li></ol></li><li><a href=#_transactions>Transactions</a></li><li><a href=#_using_stored_procedures>Using Stored Procedures</a></li><li><a href=#_daos>DAO’s</a></li></ol></nav><section class="doc-section level-1"><h2 id=_java_database_connectivity>Java DataBase Connectivity</h2><section class="doc-section level-2"><h3 id=_database_connection_credentials_and_java_properties>DataBase connection credentials and Java Properties</h3><p>Some things do <mark>NOT</mark> belong in source code. In particular do not put <strong>credentials</strong> of any kind
+inside files that are committed to a version control system, such as source code. Make sure you configure your
+version control system such that such files are excluded from commits.</p><p>Instead put credentials in separate files, that are easily understood by both a human that uses it
+to configure access to a resource, and also by the programming language.<br>In java the tradition is to use so called properties files, which, also traditionally, have a file extension <code>.properties</code>.
+It also helps to give such files well known names, so the program can refer to them by that name.</p><p>For the demonstrations in this part we will use the following properties file.</p><figure class=listing-block><figcaption><span class=black>application.properties</span> file specifying connection details for dev and prod</figcaption><pre class=highlight><code class=language-text data-lang=text># You can add comments here.
+
+# hosts and ports are plural
+# to be able to connect to multiple hosts and ports
+# which are probably used for pooling
+
+
+jdbc.pg.dev.dbname=dev
+jdbc.pg.dev.user=exam
+jdbc.pg.dev.password=exam
+jdbc.pg.dev.hosts=localhost
+
+jdbc.pg.prod.dbname=prod
+jdbc.pg.prod.user=appdbuser
+jdbc.pg.prod.password=verySecretPassw00rd
+jdbc.pg.prod.hosts=cluster1,cluster2,cluster3,fallback1
+jdbc.pg.presidents.ports=5432,5433,5434
+
+
+jdbc.pg.presidents.dbname=presidents
+jdbc.pg.presidents.user=exam
+jdbc.pg.presidents.password=exam
+jdbc.pg.presidents.hosts=localhost
+jdbc.pg.presidents.ports=5433</code></pre></figure><p>You can see that the properties file supports two environments, <strong>dev</strong>elopment and <strong>prod</strong>uction.</p><figure class=listing-block><figcaption>Configuring a datasource. Put it in a utility class.</figcaption><pre class=highlight><code class=language-java data-lang=java>    static DataSource getDataSource( final String sourceName ) {
+        // dataSourceByName is a map, serving as a cache.
+        return datasourceByName.computeIfAbsent( sourceName,
+            ( s ) -&gt; {
+                Properties props = properties( &#34;application.properties&#34; );
+
+                PGSimpleDataSource source = new PGSimpleDataSource();
+
+                String prefix = sourceName + &#34;.&#34;; <b class=conum>1</b>
+                String[] serverNames = {
+                    props.getProperty( prefix + &#34;dbhost&#34; )
+                };
+                source.setServerNames( serverNames );
+
+                String user = props.getProperty( prefix + &#34;username&#34; );
+                source.setUser( user );
+
+                source.setDatabaseName( props.getProperty( prefix + &#34;dbname&#34; ) );
+                source.setPassword( props
+                        .getProperty( prefix + &#34;password&#34; ) );
+                String pingQuery = &#34;&#34;&#34;
+                    SELECT current_database(), now()::TIMESTAMP as now;
+                &#34;&#34;&#34;
+                try ( Connection con = source.getConnection();
+                    // ping the database for success.
+                    PreparedStatement pst = con.prepareStatement( pingQuery ); ) {
+                        try ( ResultSet rs = pst.executeQuery(); ) {
+                            if ( rs.next() ) {
+                                Object db = rs.getObject(  &#34;current_database&#34;);
+                                Object now = rs.getObject(  &#34;now&#34;);
+                                System.out.println(
+                                    &#34;connected to db %s, date/time is %s&#34;
+                                    .formatted( db.toString(), now.toString() );
+                            }
+                        }
+
+                } catch ( SQLException ex ) {
+                    Logger.getLogger( PgJDBCUtils.class.getName() )
+                        .log( Level.SEVERE, null, ex );
+                }
+                return source;
+            }
+            ); // end of lambda.
+      }
+
+      // read properties
+      static Properties properties( String propFileName ) {
+          Properties properties = new Properties();
+          try (
+                  FileInputStream fis = new FileInputStream( propFileName ); ) {
+              properties.load( fis );
+          } catch ( IOException ignored ) {
+              Logger.getLogger( PgJDBCUtils.class.getName() ).log(
+                      Level.INFO,
+                      &#34;attempt to read file from well known location failed&#39;&#34;,
+                      ignored );
+          }
+          return properties;
+      }</code></pre><ol class="callout-list arabic"><li>The sourceName is the key or namespace from where to pickup the connection details. Simple and effective.</li></ol></figure></section><section class="doc-section level-2"><h3 id=_using_a_data_source>Using a Data source</h3><p>There are some traditional ways to obtain a database connection. We use a <strong>DataSource</strong>, which itself
+can be seen as a resource.
+The data source can then be used to obtain a connection. In the example you see a class that needs a DataSource
+that is provided at construction time of the class, so it is available when the instance is created.
+A connection is <code>AutoClosable</code> so candidate for <strong class=green>try-with-resources</strong>.</p><figure class=listing-block><figcaption>Using a datasource to obtain a connection and use the connection</figcaption><pre class=highlight><code class=language-java data-lang=java>package simplejdbc;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.sql.DataSource;
+
+/**
+ *
+ * @author hom
+ */
+public class DataSourceDemo {
+
+    final DataSource datasource; <b class=conum>1</b>
+
+    public DataSourceDemo( DataSource datasource ) { <b class=conum>2</b>
+        this.datasource = datasource;
+    }
+
+    void demo() throws SQLException {  <b class=conum>3</b>
+        String query
+            = &#34;&#34;&#34;
+            select state.name as state
+              ,p.name as president
+              ,state.year_entered
+            from president p
+            join state s on(p.state_id_born=s.id)
+                where s.name like &#39;N%&#39;
+            &#34;&#34;&#34;;
+            doQuery( query, System.out );
+    }
+}</code></pre><ol class="callout-list arabic"><li>Resource used in methods of this class.</li><li>Constructor receives the DataSource.</li><li>The method uses the DataSource to get a connection in the try-with-resources block<br>and passes it on to the method that executes the query and deals with the result by printing it.</li></ol></figure><p>The <code>doQuery(…​)</code> method uses the supplied connection to create a statement which is then executed to produce a ResultSet.
+You will see some similarities in what you have seen in project 1, using php PDO.</p><figure class=listing-block><figcaption>doQuery</figcaption><pre class=highlight><code class=language-java data-lang=java>void doQuery( String query,
+                PrintStream out ) throws SQLException {
+    try ( Connection con = datasource.getConnection();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery( query ) ) {
+
+        new ResultSetPrinter( rs ).printTable( out );
+
+    }
+}</code></pre></figure><p>The <strong class=blue>ResultSetPrinter</strong> tries to make a nice looking table of the result of the query.
+You can imagine that this is a bit of code, but that is not relevant for this demo of JDBC.</p></section><section class="doc-section level-2"><h3 id=_resultset>ResultSet</h3><p>For all queries that return a tabular result, the first JDBC class
+you will use is the <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/ResultSet.html><strong>ResultSet</strong></a>.
+The ResultSet also provides so called <strong>Meta Information</strong> that describes the types of the values
+in the columns, the number of columns, display size etc.<br>This can be used to:</p><div class=ulist><ul><li>produce a nice tabular format</li><li>by using a translation or mapping between the database types and Java types, how the column data is to be used, type wise.</li></ul></div></section><section class="doc-section level-2"><h3 id=_anatomy_of_a_prepared_statement>Anatomy of a prepared statement</h3><p>In the example earlier, the sql text used to create the statement is constant, because it needs no user input.
+If a statement does, you should always use a <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/PreparedStatement.html>PreparedStatement</a>.</p><p>In the JDBC standard you fill in the parameters from the user in multiple ways, but the simplest is to
+just use question marks (<code>?</code>) as placeholders and specify which columns and column values
+you want to insert or update, or you want to use in your select or delete query.</p><figure class=listing-block><figcaption>sql query text to insert a student.</figcaption><pre class=highlight><code class=language-sql data-lang=sql>insert into students (student_id , lastname, firstname, dob, gender) <b class=conum>1</b>
+            values   (?        ,          ?,         ?,   ?,      ?) <b class=conum>2</b>
+returning *                                                          <b class=conum>3</b></code></pre><ol class="callout-list arabic"><li>Fields can be supplied in any order, including definition order.</li><li>You do not need the spaces before the commas, we added them for readability.</li><li>It is smart to <strong>always</strong> expect back what has been inserted by the database, including generated id and
+other fields such as the database’s notion of date or time. Even smarter, but a little more work //'
+is to specify the columns instead of a <code>*</code>, so that the order in which you receive them is independent
+of database schema organization and <em>stable</em>.</li></ol></figure><aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip:</span></h6><p>Lots of problems can allegedly be solved with an extra level of <a href=https://en.wikipedia.org/wiki/Indirection>Indirection</a>.
+As an example: in programming there is the rule to not program against an implementation, but against an interface.
+With databases the indirection trick is: <strong>use views instead of tables</strong>.</p></aside><p>Now assume the SQL text contains the above.
+Also assume that we have an array of student data, simply as an array of objects.</p><figure class=listing-block><figcaption>student data in array</figcaption><pre class=highlight><code class=language-java data-lang=java> Object[] studentData = {123513, &#34;Klaassen&#34;, &#34;Jan&#34;, &#34;1993-05-12&#34; , &#34;M&#34;}; <b class=conum>1</b></code></pre></figure><p>Then creating the prepared statement and filling it with values is a simple loop:</p><figure class=listing-block><figcaption>loop to substitute placeholders.</figcaption><pre class=highlight><code class=language-java data-lang=java>try (
+    Connection con = datasource.getConnection();
+    PreparedStatement stmt = con.prepareStatement( query ); ) {
+
+    int count = 0;
+    for ( Object param : studentData ) {
+        stmt.setObject( ++count, param ); <b class=conum>1</b>
+    }
+    return stmt.executeUpdate();
+}</code></pre><ol class="callout-list arabic"><li>note the pre-increment, so count starts with column <strong>1</strong>.</li></ol></figure><p>You see that this is quite simple and other than what is specified in the query, there is
+no extra need for data conversion or named column use.</p><aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip:</span></h6><p>Contrary to what the documentation suggests, you can almost always use setObject,
+because in the common case, what you put in is of the right type, as long as you keep the
+order of the parameter types intact.</p></aside><p>This approach can be used to make database access even simpler, so you only have to provide the data
+in an array and the rest can be packed into utility methods.</p><p>The holy grail is to find a way to do all kind of queries against tables, and the only
+thing you need to know is the table name and what entities as Java objects can be expected to
+be read from or written to the table. However, start simple first! At some point you’ll find duplicated code and you’ll find a way to optimize your code. Typically, you’ll use Generics, Lambda’s and streams and a bit of reflection at some point. We think it’s good to first face the issue of code that is difficult to maintain and afterwards find a solution for that, instead of providing you with a very generic and maybe complex solution without knowing which underlying problems it solves. //'</p></section></section><section class="doc-section level-1"><h2 id=_traditional_preparing_statements>Traditional preparing statements</h2><p>In tests you should use traditional approaches, instead of the mechanisms you
+are testing. The code below illustrates what that means.<br>It is used by code that tests the bank transfer service implemented in the database. This example
+is filling the account tables from some List of accounts.</p><figure class=listing-block><figcaption>load accounts from list. The code is part of a test suite to prepare the database for tests.</figcaption><pre class=highlight><code class=language-java data-lang=java>    static String addAccount =
+       &#34;&#34;&#34;
+        insert into account(accountid,balance,maxdebit,customerid,astate)
+        values(                     ?,      ?,       ?,         ?,     ?)
+       &#34;&#34;&#34;;
+    static void loadAccounts() throws SQLException {
+
+        try ( Connection con = olifantysSource.getConnection();
+                PreparedStatement pst = con.prepareStatement( addAccount ) ) {
+            for ( Account account : accounts ) {
+                pst.setObject( 1, account.accountid );
+                pst.setBigDecimal( 2, account.balance );
+                pst.setBigDecimal( 3, account.maxdebit );
+                pst.setObject( 4, account.customerid );
+                pst.setString( 5, account.astate );
+                pst.addBatch(); <b class=conum>1</b>
+            }
+            int[] results = pst.executeBatch();
+            System.out.println( &#34;results = &#34; + Arrays.toString( results ) );
+
+        } catch ( PSQLException e ) {
+            System.out.println( &#34;caused by &#34; + e.getNextException() );
+            throw e;
+        }
+    }</code></pre><ol class="callout-list arabic"><li>We do multiple inserts in one batch. Auto commit is off.
+The try-with-resources block takes care of the jdbc transaction.</li></ol></figure><section class="doc-section level-2"><h3 id=_database_meta_information>Database Meta Information</h3><p>DO Mention the <a href=https://www.baeldung.com/jdbc-database-metadata>metadata…​</a></p><p>In the previous part we have seen how to use reflection on java classes.</p><p>A similar and standardized concept also exists for databases. You can retrieve all kind
+of <em>meta</em> information about the objects (such as tables and views) defined in your database.
+Accessing that data can be done with <strong>select</strong>ing data from special relations in a special schema,
+called the <code class=blue>information_schema</code>.</p><p>Suppose we have the following definition of a table <code>students</code> in the schema <code>public</code>:</p><div class=listing-block><pre class=highlight><code class=language-sql data-lang=sql>CREATE TABLE public.students (
+    student_id INTEGER PRIMARY KEY GENERATED BY DEFAULT AS IDENTITY, <b class=conum>1</b>
+    firstname TEXT NOT NULL,  <b class=conum>2</b>
+    lastname TEXT NOT NULL,
+    dob DATE NOT NULL,
+    cohort integer NOT NULL DEFAULT  EXTRACT(&#39;year&#39; from now()), <b class=conum>3</b>
+    email TEXT NOT NULL,
+    gender CHARACTER(1) NOT NULL check (gender in (&#39;F&#39;,&#39;M&#39;,&#39;U&#39;)), <b class=conum>4</b>
+    student_grp TEXT NOT NULL,
+    active BOOLEAN DEFAULT false NOT NULL
+);</code></pre><ol class="callout-list arabic"><li>ISO SQL for a <em>serial</em> column that by default is generated, and also is primary key.</li><li>All columns that 'traditionally' would be varchar are now text. Just as efficient less hassle. It will always fit.
+Only use varchar if your business requires a length constraint.</li><li>The cohort is the year of registration, which can be derived from the insertion moment.</li><li>Gender is a one character value with a restricted value set, much like an enum, but simpler.</li></ol></div><p>If after the definition your would ask the database what it knows about this table with</p><div class=listing-block><pre class=highlight><code class=language-sql data-lang=sql>SELECT ordinal_position, column_name,data_type, column_default, is_nullable,
+       is_generated, datetime_precision
+FROM   information_schema.columns WHERE table_name =&#39;students&#39; ORDER BY 1;</code></pre></div><p>you would get the following as output:</p><div class=listing-block><pre class=highlight><code class=language-text data-lang=text>┌──────────────────┬─────────────┬───────────┬──────────────────────────┬─────────────┬──────────────┬────────────────────┐
+│ ordinal_position │ column_name │ data_type │      column_default      │ is_nullable │ is_generated │ datetime_precision │
+╞══════════════════╪═════════════╪═══════════╪══════════════════════════╪═════════════╪══════════════╪════════════════════╡
+│                1 │ student_id  │ integer   │                          │ NO          │ NEVER        │                    │
+│                2 │ firstname   │ text      │                          │ NO          │ NEVER        │                    │
+│                3 │ lastname    │ text      │                          │ NO          │ NEVER        │                    │
+│                4 │ dob         │ date      │                          │ NO          │ NEVER        │                  0 │
+│                5 │ cohort      │ integer   │ EXTRACT(year FROM now()) │ NO          │ NEVER        │                    │
+│                6 │ email       │ text      │                          │ NO          │ NEVER        │                    │
+│                7 │ gender      │ character │                          │ NO          │ NEVER        │                    │
+│                8 │ student_grp │ text      │                          │ NO          │ NEVER        │                    │
+│                9 │ active      │ boolean   │ false                    │ NO          │ NEVER        │                    │
+└──────────────────┴─────────────┴───────────┴──────────────────────────┴─────────────┴──────────────┴────────────────────┘</code></pre></div><p>From this information you can imagine that it is relatively easy to <strong>generate</strong> the matching Java types as <span class=blue>record</span> type.</p><p>The resulting record would look like this:</p><div class=listing-block><pre class=highlight><code class=language-java data-lang=java>package entities;
+
+import java.time.LocalDate;
+
+public record Student (
+   int student_id,
+   String firstname,
+   String lastname,
+   LocalDate dob,
+   int cohort,
+   String email,
+   char gender,
+   String student_grp,
+   bool active
+){} <b class=conum>1</b></code></pre><ol class="callout-list arabic"><li>indeed, no body whatsoever.</li></ol></div><aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip:</span></h6><p>If your columns are nullable, choose a type that also 'accepts' null values, so in that case use a ref type, such as Integer or Boolean.
+If the columns in the table are declared as <strong>non-nullable</strong> you can use primitive types.</p></aside><p>Because in the Java layer you would like to have the meta information handy in a <span class=blue>Mapper</span>, you can generate the mapper at the same time from the database information
+instead of using reflection to the same effect.</p></section><section class="doc-section level-2"><h3 id=_check_constraints>Check constraints</h3><p>Similarly you can also get the information of the check constraints with another, a bit more involved query.</p><div class=listing-block><pre class=highlight><code class=language-sql data-lang=sql>-- retrieve the check constraints for the user schemas
+select tc.table_schema,                                                          
+       tc.table_name,
+       string_agg(col.column_name, &#39;, &#39;) as columns,
+       tc.constraint_name,
+       cc.check_clause
+from information_schema.table_constraints tc
+join information_schema.check_constraints cc
+     on tc.constraint_schema = cc.constraint_schema
+     and tc.constraint_name = cc.constraint_name
+join pg_namespace nsp on nsp.nspname = cc.constraint_schema
+join pg_constraint pgc on pgc.conname = cc.constraint_name
+                       and pgc.connamespace = nsp.oid
+                       and pgc.contype = &#39;c&#39;
+join information_schema.columns col
+     on col.table_schema = tc.table_schema
+     and col.table_name = tc.table_name
+     and col.ordinal_position = ANY(pgc.conkey)
+where tc.constraint_schema not in(&#39;pg_catalog&#39;, &#39;information_schema&#39;)
+group by tc.table_schema,
+         tc.table_name,
+         tc.constraint_name,
+         cc.check_clause
+order by tc.table_schema,
+         tc.table_name;</code></pre></div><p>which, because only one column in this schema actually declares a check constraint, results in:</p><div class="listing-block small-code-font-70"><pre class=highlight><code class=language-text data-lang=text>┌──────────────┬────────────┬─────────┬───────────────────────┬─────────────────────────────────────────────────────────────────┐
+│ table_schema │ table_name │ columns │    constraint_name    │                          check_clause                           │
+╞══════════════╪════════════╪═════════╪═══════════════════════╪═════════════════════════════════════════════════════════════════╡
+│ public       │ students   │ gender  │ students_gender_check │ ((gender = ANY (ARRAY[&#39;F&#39;::bpchar, &#39;M&#39;::bpchar, &#39;U&#39;::bpchar]))) │
+└──────────────┴────────────┴─────────┴───────────────────────┴─────────────────────────────────────────────────────────────────┘</code></pre></div><p>You can use the check constraints in your business code too, but actually deferring those checks as final checks to the database is just fine. The database
+layer with throw an appropriate exception when a value is not to the liking of a constraint.</p><p>You may want to use the check information in the user interface layer, to warn the user that a transaction will not succeed with a illegal or missing value.
+Parsing the check clause is of course a bit complex, but with a regex you can do a lot, and also know that most check constraint are relatively simple.</p></section></section><section class="doc-section level-1"><h2 id=_transactions>Transactions</h2><p>Things that can go wrong will go wrong. This problem is aggravated by having to use multiple <em>things</em>.
+Murphy says hello again :-).</p><p>A <strong>transaction</strong> is defined as a sequence of operations that can either succeed completely or be undone
+without any residual effect.<br>In plain English: It either happens fully, or we can forget about it.</p><p>For a persistence layer that means: if it cannot fulfill the obligation it should
+make sure that nothing happens to compromise the data already stored <em>before</em> the transaction.</p><p>The simple explanation of how this works is that the party that is busy with a resource gets
+the resource all for itself, locking any other parties out.
+If something fails, the mess created can either be undone (rollback) or not committed, which in effect is the same.</p><p>Locking out sounds serious, and it is, on multiple accounts.</p><div class=ulist><ul><li>When using a <strong class=big>BIG</strong> lock, as locking out all other parties, things become <em class=big>VERY</em> slow.</li><li>When lock less, like just a table, or better still, only the records we want to modify, then
+<strong class=big>DEAD</strong>locks can occur, which is even more problematic than having to wait.</li><li>In all cases, when something goes awry, one may have to clean up mess in multiple places.</li></ul></div><p>All this can be related to quite difficult problems. Luckily there are solutions to that and,
+not unimportant, as far as the database goes, that can typically deal with the issues pretty well. Have a look at paragraph 5.9 for more information about transaction programming.</p></section><section class="doc-section level-1"><h2 id=_using_stored_procedures>Using Stored Procedures</h2><p>From the DBS1 course, you should know about stored procedures. Don’t hesitate to use functionalities of your DBMS.</p></section><section class="doc-section level-1"><h2 id=_daos>DAO’s</h2></section></article></div><footer class="text-sm leading-6 mt-12 mb-5">Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a></footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block"><h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5></div></div><div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div></div><script src=/prc2/js/main.min.956966b3103878d329f9460daf829f6ad1d50fc9e24d20ff0c5d93a4006065df877564edc24b6a2a5182bf4387d13d9f960a1df6fc9d259d38cfb8e83509c999.js integrity="sha512-lWlmsxA4eNMp+UYNr4KfatHVD8niTSD/DF2TpABgZd+HdWTtwktqKlGCv0OH0T2flgod9vydJZ04z7joNQnJmQ==" crossorigin=anonymous></script>
+<script src=/prc2/js/highlight.min.cd8091de05577194483fff730f723dc2379226a640ef117b33ad133cc3da2f690d95af8fc32186b11dc10628e66e325b33bee2bf443c98315905e50f22aecc50.js integrity="sha512-zYCR3gVXcZRIP/9zD3I9wjeSJqZA7xF7M60TPMPaL2kNla+PwyGGsR3BBijmbjJbM77iv0Q8mDFZBeUPIq7MUA==" crossorigin=anonymous defer></script><div id=copied-alert class="invisible opacity-0 transition-all ease-in-out duration-400 fixed bottom-3 right-10 z-50 flex p-4 mb-4 text-sm text-gray-800 bg-gray-200 rounded-lg dark:bg-gray-500 dark:text-gray-200" role=alert><svg class="inline flex-shrink-0 mr-3 w-5 h-5" viewBox="0 0 24 24" width="24" height="24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><div><span class=font-medium>Code copied</span></div></div></body></html>
