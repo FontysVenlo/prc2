@@ -14,7 +14,7 @@ It also helps to give such files well known names, so the program can refer to t
 
 For the demonstrations in this part we will use the following properties file.
 
-.[black]#application.properties# file specifying connection details for dev and prod
+.[black]#db.properties# file specifying connection details for dev and prod
 [source,text]
 ----
 include::code/simplejdbc/application.properties[]
