@@ -76,7 +76,7 @@ public class DBProvider {
 }
 ----
 
-<1> The sourceName is the key or namespace from where to pickup the connection details. Simple and effective.
+// <1> The sourceName is the key or namespace from where to pickup the connection details. Simple and effective.
 
 === Using a Data source
 
