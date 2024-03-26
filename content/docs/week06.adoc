@@ -18,5 +18,5 @@ include::{topics}/transactions.adoc[]
 
 include::{topics}/storedprocedures.adoc[]
 
-include::{topics}/dao.adoc[]
+//include::{topics}/dao.adoc[]
 
