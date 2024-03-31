@@ -33,13 +33,8 @@ class StudentDemo {
 
     public List<Student> listAll() {
         var result = new ArrayList<Student>();
-<<<<<<< Updated upstream
-        try ( Connection con = ds.getConnection(); 
-                PreparedStatement pst = con.prepareStatement( query ); 
+        try ( Connection con = ds.getConnection();                PreparedStatement pst = con.prepareStatement( query );
                 ResultSet rs = pst.executeQuery(); ) {
-=======
-        try ( Connection con = ds.getConnection(); PreparedStatement pst = con.prepareStatement( query ); ResultSet rs = pst.executeQuery(); ) {
->>>>>>> Stashed changes
             while ( rs.next() ) {
                 Integer snummer = rs.getInt( 1 );
                 String firstname = rs.getString( 2 );
@@ -51,12 +46,8 @@ class StudentDemo {
                 String student_class = rs.getString( 8 );
                 Boolean active = rs.getBoolean( 9 );
 
-<<<<<<< Updated upstream
-                Student student = new Student( snummer, firstname, lastname, 
+                Student student = new Student( snummer, firstname, lastname,
                         dob, cohort, email, gender, student_class, active );
-=======
-                Student student = new Student( snummer, firstname, lastname, dob, cohort, email, gender, student_class, active );
->>>>>>> Stashed changes
                 result.add( student );
             }
         } catch ( Throwable ex ) {
@@ -65,18 +56,10 @@ class StudentDemo {
         return result;
     }
 
-<<<<<<< Updated upstream
-    private static final String insertSql = 
-        """
-        insert into students (student_id,firstname,lastname,dob,cohort,email,gender,student_grp,active)
-        values(                         ?,       ?,       ?,  ?,     ?,    ?,     ?,          ?,     ?)
-        """;
-=======
     private static final String insertSql = """
                      insert into students (student_id,firstname,lastname,dob,cohort,email,gender,student_grp,active)
                      values(                         ?,       ?,       ?,  ?,     ?,    ?,     ?,          ?,     ?)
                      """;
->>>>>>> Stashed changes
 
     public void insertStudents(List<Student> students) {
         try ( Connection con = ds.getConnection(); PreparedStatement pst = con.prepareStatement( insertSql ); ) {
@@ -115,7 +98,7 @@ class StudentDemo {
 
         myClass.stream().forEach( System.out::println );
 
-        if ( myClass.size() == 0 ) {
+        if ( myClass.isEmpty() ) {
             System.out.println( "Mh, none found. Where are they??" );
 
             System.out.println( "new balls please" );
