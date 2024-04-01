@@ -12,7 +12,7 @@ to configure access to a resource, and also by the programming language. +
 In java the tradition is to use so called properties files, which, also traditionally, have a file extension `.properties`.
 It also helps to give such files well known names, so the program can refer to them by that name.
 
-[WARM]
+[WARNING]
 ====
 Putting secrets like credentials in a properties file is not secure. It is just a way to separate configuration from code.
 You need to exclude the actual secrets from the code and from the project files that are under version control. The best way is
