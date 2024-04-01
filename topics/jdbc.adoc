@@ -12,9 +12,16 @@ to configure access to a resource, and also by the programming language. +
 In java the tradition is to use so called properties files, which, also traditionally, have a file extension `.properties`.
 It also helps to give such files well known names, so the program can refer to them by that name.
 
+[WARM]
+====
+Putting secrets like credentials in a properties file is not secure. It is just a way to separate configuration from code.
+You need to exclude the actual secrets from the code and from the project files that are under version control. The best way is
+to actually not put them in the project at all, but to use a secret manager or a vault. For now we will stick to the properties file and put it in the current dierctory, that is the directory from which you run the program. Another good place would be the user home directory or a child directory of that. For instance the same dierectory that stores the  maven stuff, the ${user.home}.m2/directory.
+====
+
 For the demonstrations in this part we will use the following properties file.
 
-.[black]#application.properties# file specifying connection details for dev and prod
+.[black]#db.properties# file specifying connection details for dev and prod
 [source,text]
 ----
 include::code/simplejdbc/application.properties[]
@@ -25,68 +32,61 @@ You can see that the properties file supports two environments, **dev**elopment 
 .Configuring a datasource. Put it in a utility class.
 [source,java]
 ----
-static DataSource getDataSource( final String sourceName ) {
-    // dataSourceByName is a map, serving as a cache.
-    return datasourceByName.computeIfAbsent( sourceName,
-    ( s ) -> {
-        Properties props = properties( "application.properties" );
-
-        PGSimpleDataSource source = new PGSimpleDataSource();
-
-        String prefix = sourceName + "."; //<1>
-        String[] serverNames = {
-            props.getProperty( prefix + "dbhost" )
-        };
-        source.setServerNames( serverNames );
-
-        String user = props.getProperty( prefix + "username" );
-        source.setUser( user );
-
-        source.setDatabaseName( props.getProperty( prefix + "dbname" ) );
-        source.setPassword( props
-                .getProperty( prefix + "password" ) );
-        String pingQuery = """
-            SELECT current_database(), now()::TIMESTAMP as now;
-        """
-        try ( Connection con = source.getConnection();
-            // ping the database for success.
-            PreparedStatement pst = con.prepareStatement( pingQuery ); ) {
-                try ( ResultSet rs = pst.executeQuery(); ) {
-                    if ( rs.next() ) {
-                        Object db = rs.getObject(  "current_database");
-                        Object now = rs.getObject(  "now");
-                        System.out.println(
-                            "connected to db %s, date/time is %s"
-                            .formatted( db.toString(), now.toString() );
-                    }
-                }
-
-        } catch ( SQLException ex ) {
-            Logger.getLogger( PgJDBCUtils.class.getName() )
-                .log( Level.SEVERE, null, ex );
-        }
-        return source;
-    }
-    ); // end of lambda.
-}
 
 // read properties
-static Properties properties( String propFileName ) {
-    Properties properties = new Properties();
-    try (
-            FileInputStream fis = new FileInputStream( propFileName ); ) {
-        properties.load( fis );
-    } catch ( IOException ignored ) {
-        Logger.getLogger( PgJDBCUtils.class.getName() ).log(
-                Level.INFO,
-                "attempt to read file from well known location failed'",
-                ignored );
+=======
+public class DBProvider {
+
+    static Map<String, DataSource> cache = new HashMap<>();
+
+    static DataSource getDataSource(final String sourceName) {
+
+        return cache.computeIfAbsent(sourceName,
+                (s) -> {
+                    Properties props = getProperties("db.properties");
+
+                    PGSimpleDataSource dataSource = new PGSimpleDataSource();
+
+                    String prefix = sourceName + ".";
+
+                    String[] serverNames = {props.getProperty(prefix + "dbhost")};
+                    dataSource.setServerNames(serverNames);
+
+                    int[] portNumbers = {Integer.parseInt(props.getProperty(prefix + "port"))};
+                    dataSource.setPortNumbers(portNumbers);
+
+                    dataSource.setUser(props.getProperty(prefix + "username"));
+                    dataSource.setDatabaseName(props.getProperty(prefix + "dbname"));
+                    dataSource.setPassword(props.getProperty(prefix + "password"));
+                    dataSource.setCurrentSchema(props.getProperty(prefix + "schema"));
+
+                    return dataSource;
+                }
+        );
     }
-    return properties;
+
+    /** 
+     * Reads properties from a file. The properties file is taken a well known location that is known by all developers.
+     * for instance {"user.home"}/.m2/db.properties.
+     */
+    static Properties getProperties(String propertiesFileName){
+        Properties properties = new Properties();
+        File propFile= Path.of(System.getProperty("user.home").resolve(".m2").resolve(propertiesFileName)).toFile();
+        try (
+                FileInputStream fis = new FileInputStream( propFile ); ) {
+            properties.load( fis );
+        } catch ( IOException ignored ) {
+            Logger.getLogger( DBProvider.class.getName() ).log(
+                    Level.INFO,
+                    "attempt to read file from well known location failed'",
+                    ignored );
+        }
+        return properties;
+    }
 }
 ----
 
-<1> The sourceName is the key or namespace from where to pickup the connection details. Simple and effective.
+// <1> The sourceName is the key or namespace from where to pickup the connection details. Simple and effective.
 
 === Using a Data source
 
@@ -248,45 +248,45 @@ The holy grail is to find a way to do all kind of queries against tables, and th
 thing you need to know is the table name and what entities as Java objects can be expected to
 be read from or written to the table. However, start simple first! At some point you'll find duplicated code and you'll find a way to optimize your code. Typically, you will use Generics, Lambdas and streams and a bit of reflection at some point. We think it is good to first face the issue of code that is difficult to maintain and afterwards find a solution for that, instead of providing you with a very generic and maybe complex solution without knowing which underlying problems it solves.
 
-== Traditional preparing statements
+// == Traditional preparing statements
 
-In tests you should use traditional approaches, instead of the mechanisms you
-are testing. The code below illustrates what that means. +
-It is used by code that tests the bank transfer service implemented in the database. This example
-is filling the account tables from some List of accounts.
+// In tests you should use traditional approaches, instead of the mechanisms you
+// are testing. The code below illustrates what that means. +
+// It is used by code that tests the bank transfer service implemented in the database. This example
+// is filling the account tables from some List of accounts.
 
-.load accounts from list. The code is part of a test suite to prepare the database for tests.
-[source,java]
-----
-    static String addAccount = 
-       """
-        insert into account(accountid,balance,maxdebit,customerid,astate) 
-        values(                     ?,      ?,       ?,         ?,     ?)
-       """;
-    static void loadAccounts() throws SQLException {
+// .load accounts from list. The code is part of a test suite to prepare the database for tests.
+// [source,java]
+// ----
+//     static String addAccount = 
+//        """
+//         insert into account(accountid,balance,maxdebit,customerid,astate) 
+//         values(                     ?,      ?,       ?,         ?,     ?)
+//        """;
+//     static void loadAccounts() throws SQLException {
 
-        try ( Connection con = olifantysSource.getConnection();
-                PreparedStatement pst = con.prepareStatement( addAccount ) ) {
-            for ( Account account : accounts ) {
-                pst.setObject( 1, account.accountid );
-                pst.setBigDecimal( 2, account.balance );
-                pst.setBigDecimal( 3, account.maxdebit );
-                pst.setObject( 4, account.customerid );
-                pst.setString( 5, account.astate );
-                pst.addBatch(); // <1>
-            }
-            int[] results = pst.executeBatch();
-            System.out.println( "results = " + Arrays.toString( results ) );
+//         try ( Connection con = olifantysSource.getConnection();
+//                 PreparedStatement pst = con.prepareStatement( addAccount ) ) {
+//             for ( Account account : accounts ) {
+//                 pst.setObject( 1, account.accountid );
+//                 pst.setBigDecimal( 2, account.balance );
+//                 pst.setBigDecimal( 3, account.maxdebit );
+//                 pst.setObject( 4, account.customerid );
+//                 pst.setString( 5, account.astate );
+//                 pst.addBatch(); // <1>
+//             }
+//             int[] results = pst.executeBatch();
+//             System.out.println( "results = " + Arrays.toString( results ) );
 
-        } catch ( PSQLException e ) {
-            System.out.println( "caused by " + e.getNextException() );
-            throw e;
-        }
-    }
-----
+//         } catch ( PSQLException e ) {
+//             System.out.println( "caused by " + e.getNextException() );
+//             throw e;
+//         }
+//     }
+// ----
 
-<1> We do multiple inserts in one batch. Auto commit is off.
- The try-with-resources block takes care of the jdbc transaction.
+// <1> We do multiple inserts in one batch. Auto commit is off.
+//  The try-with-resources block takes care of the jdbc transaction.
 
 ===  Database Meta Information
 
