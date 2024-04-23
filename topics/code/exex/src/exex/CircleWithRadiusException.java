@@ -3,7 +3,7 @@ package exex;
 public class CircleWithRadiusException {
 
     /**
-     * The radius of the circle
+     * The radius of the circle.
      */
     private double radius;
 
@@ -13,14 +13,14 @@ public class CircleWithRadiusException {
     private static int numberOfObjects = 0;
 
     /**
-     * Construct a circle with radius 1
+     * Construct a circle with radius 1.
      */
     public CircleWithRadiusException() {
         this(1.0);
     }
 
     /**
-     * Construct a circle with a specified radius
+     * Construct a circle with a specified radius.
      */
     public CircleWithRadiusException(double newRadius) {
         try {
@@ -32,7 +32,7 @@ public class CircleWithRadiusException {
     }
 
     /**
-     * Return radius
+     * Return radius.
      */
     public double getRadius() {
         return radius;
@@ -51,14 +51,14 @@ public class CircleWithRadiusException {
     }
 
     /**
-     * Return numberOfObjects
+     * Return numberOfObjects.
      */
     public static int getNumberOfObjects() {
         return numberOfObjects;
     }
 
     /**
-     * Return the area of this circle
+     * Return the area of this circle.
      */
     public double findArea() {
         return radius * radius * 3.14159;

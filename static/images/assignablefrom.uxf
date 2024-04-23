@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>12</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>96</x>
+      <y>72</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+*/A/*
+bg=#aaffaa</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>72</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>B
+bg=#aaffaa</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>168</x>
+      <y>240</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>*C*
+bg=#aaffaa
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>516</x>
+      <y>48</y>
+      <w>240</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>{class or interface}
+*AlienTpe*
+bg=#ffaaaa
+--
+*/not assignable/*
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>276</x>
+      <y>72</y>
+      <w>264</w>
+      <h>228</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+fg=#cc0000
+lw=3
+&lt; false</panel_attributes>
+    <additional_attributes>10.0;170.0;110.0;170.0;170.0;10.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>48</x>
+      <y>96</y>
+      <w>144</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+fg=#008800
+lw=3
+true &gt;</panel_attributes>
+    <additional_attributes>100.0;130.0;40.0;130.0;10.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>276</x>
+      <y>108</y>
+      <w>180</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+fg=#008800
+lw=3
+&lt; true</panel_attributes>
+    <additional_attributes>10.0;120.0;40.0;120.0;130.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>156</x>
+      <y>120</y>
+      <w>72</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+lw=3</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;40.0;40.0;40.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>252</x>
+      <y>120</y>
+      <w>108</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+lw=3</panel_attributes>
+    <additional_attributes>70.0;10.0;70.0;50.0;10.0;50.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>84</x>
+      <y>408</y>
+      <w>420</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>*Not allowed*
+H h= new C();
+/(you cannot really play mam or dad.)/
+
+bg=#ffaaaa</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>156</x>
+      <y>348</y>
+      <w>156</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>*H*
+bg=#ffaaaa</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>276</x>
+      <y>276</y>
+      <w>192</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+fg=#cc0000
+lw=3
+&lt; false</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;30.0;90.0;60.0;30.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>228</x>
+      <y>288</y>
+      <w>36</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+lw=3</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>504</x>
+      <y>156</y>
+      <w>300</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>*isAssignableFrom()*
+ A a = new H();
+ A c1 = new C();
+ C c2 = new H();
+ B b1 = new C();
+ B b2 = new C();
+ B b3 = new H();
+   
+some allowed assignments
+are left out, 
+*Do you known which ones?*
+bg=#aaffaa</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>204</x>
+      <y>72</y>
+      <w>108</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+fg=#cc0000
+lw=3
+&lt; f</panel_attributes>
+    <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>204</x>
+      <y>96</y>
+      <w>108</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+fg=#cc0000
+lw=3
+f &gt;</panel_attributes>
+    <additional_attributes>70.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>144</x>
+      <y>24</y>
+      <w>264</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>*Always point down*
+fg=#008800
+fontsize=18
+lw=0</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
