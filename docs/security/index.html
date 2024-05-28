@@ -1,0 +1,390 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>PRC2 - 12 Security</title><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/main.min.ede7dd340f864d554aac0f24504a61b25b50412db081218b3e87e08a8cac3acafa99c7a4d57e04ecb58a9416c51585b4aa787393c1b3a5b1bf22efcb28c95a19.css integrity="sha512-7efdNA+GTVVKrA8kUEphsltQQS2wgSGLPofgioysOsr6mcek1X4E7LWKlBbFFYW0qnhzk8GzpbG/Iu/LKMlaGQ==" crossorigin=anonymous><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous><script src=/prc2/js/init-darkmode.min.b7911813658cd032d0ed2d118da1fb57653d18386d8b1a26618f83f80019be21e977a1ddeeaeb51dcd1f7d21dfed542a8da077c29eb1ec03d84471bf90d3fabe.js integrity="sha512-t5EYE2WM0DLQ7S0RjaH7V2U9GDhtixomYY+D+AAZviHpd6Hd7q61Hc0ffSHf7VQqjaB3wp6x7APYRHG/kNP6vg==" crossorigin=anonymous></script>
+<link rel=apple-touch-icon sizes=180x180 href=https://fontysvenlo.github.io/prc2/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=https://fontysvenlo.github.io/prc2/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=https://fontysvenlo.github.io/prc2/favicon-16x16.png></head><body class="antialiased text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800"><header class="sticky top-0 z-40 w-full flex-none lg:border-b lg:border-gray-900/10 dark:border-gray-50/[0.06] bg-white dark:bg-gray-800
+border-b border-slate-900/10 lg:border-0 dark:border-slate-300/10"><div class="max-w-8xl mx-auto"><div class="py-4 lg:px-8 mx-4 lg:mx-0"><div class="relative flex items-center"><button id=menu-toggle type=button class="lg:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 mr-3">
+<span class=sr-only>Navigation</span><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<a class="mr-3 flex-none overflow-hidden md:w-auto dark:hover:text-gray-200 hover:text-gray-900" href=https://fontysvenlo.github.io/prc2/>PRC2</a><div class="relative flex ml-auto"><nav class="hidden md:flex items-center text-sm leading-6 font-semibold text-gray-700 dark:text-gray-200"><ul class="flex space-x-8"><li><a href=https://fontysvenlo.github.io/prc2/pages/tips/ class="hover:text-sky-500 dark:hover:text-sky-400">Tips</a></li><li><a href=https://fontysvenlo.github.io/prc2/pages/setup/ class="hover:text-sky-500 dark:hover:text-sky-400">Setup</a></li></ul></nav><div class="flex items-center lg:border-l border-gray-200 ml-6 pl-6 dark:border-gray-700"><button type=button id=theme-toggle>
+<span class="dark:hidden hover:text-sky-500"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span><span class="hidden dark:inline hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span></button>
+<a href=https://github.com/FontysVenlo/prc2 class="ml-6 block hover:text-sky-500 dark:hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a></div></div></div></div></div></header><div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8"><aside id=menu class="hidden lg:block fixed z-20 inset-0 top-[3.5rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto bg-white dark:bg-gray-800"><nav class="lg:leading-6 relative"><ul class="block md:hidden"><li class="mt-12 lg:mt-8"><h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">General</h5><ul class="space-y-2 border-l border-gray-100 dark:border-gray-700"><li><a href=https://fontysvenlo.github.io/prc2/pages/tips/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">Tips</a></li><li><a href=https://fontysvenlo.github.io/prc2/pages/setup/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">Setup</a></li></ul></li></ul><ul><li class="mt-12 lg:mt-8"><h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">Weeks</h5><ul class="space-y-2 border-l border-gray-100 dark:border-gray-700"><li><a href=https://fontysvenlo.github.io/prc2/docs/unit-testing-basics/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">01 Unit Testing Basics</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/parameterized-tests/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">02 Parameterized tests</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/design-for-testability/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">03 Design for testability</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/generics/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">04 Generics</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/jpms-lambda-streams/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">05 JPMS, Lambda and Streams</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/database-access/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">06 Database Access JDBC</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/javafx/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">07 JavaFX</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/statemachine/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">08 The State of Things</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/reflection/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">09 Reflection</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/internationalisation/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">10 I18N, exceptions and logging</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/security/ class="block border-l pl-4 -ml-px
+border-slate-500 dark:border-slate-400 text-black dark:text-slate-200">12 Security</a></li></ul></li></ul></nav></aside><div class=lg:pl-[19.5rem]><div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16"><article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500"><nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_security>Security</a><ol class="toc-list level-2"><li><a href=#_java_security>Java (security)</a></li><li><a href=#_web_application>Web application</a></li></ol></li></ol></nav><section class="doc-section level-1"><h2 id=_security>Security</h2><p>Security is an important aspect of programming.
+By applying security principles while programming we can prevent bugs and exploits.
+These exploits could lead to data leakage, (distributed) denial of service (DDOS) or even remote code execution.</p><p>We will look back at subjects that were discussed in previous weeks and
+see common security mistakes and how we can prevent them.</p><section class="doc-section level-2"><h3 id=_java_security>Java (security)</h3><p>Lets first have a closer look at how Java works and what
+mechanisms it has in place to help the developer prevent bugs
+(that could potentially lead to security exploits).</p><p>These chapters are based on chapter 10 of Core Java, Volume II–Advanced Features.</p><section class="doc-section level-3"><h4 id=_class_loader>Class loader</h4><p>The Java compiler (javac) converts the source code into code for
+the Java Virtual Machine (JVM). This virtual machine code is
+stored in <code>.class</code> files. Each class file contains the definition
+and implementation for one class or interface.</p><p>The virtual machine loads these classes using the class loader.
+There are three different class loaders:</p><div class="olist arabic"><ol class=arabic><li><strong>Bootstrap class loader</strong>: loads classes from a couple of base modules and some internal JDK modules</li><li><strong>Platform class loader</strong>: loads all classes of the Java platform not loaded by the bootstrap class loader</li><li><strong>System (or Application)</strong>: loads classes from the module path
+and the class path</li></ol></div><p>Sow how does the JVM load a class:</p><div class="olist arabic"><ol class=arabic><li>First it checks if the class is already loaded<ol class=loweralpha type=a><li>If it is already loaded it will use the loaded class</li></ol></li><li>If not loaded the JVM requests the class loader to load the class</li><li>The System class delegates the loading of the class to the
+Platform class loader</li><li>The Platform class loader delegates the loading of the class to
+the Bootstrap class loader</li><li>The Bootstrap class loader searches if the class is available in the Bootstrap JMOD files<ol class=loweralpha type=a><li>If available then it will load the class</li><li>Else it delegates loading back to the Platform class loader</li></ol></li><li>The Platform class loader searches if the class is available in the Platform JMOD files<ol class=loweralpha type=a><li>If available then it will load the class</li><li>Else it delegates loading back to System class loader</li></ol></li><li>The System class loader searches if the class is available on
+the class path or module path<ol class=loweralpha type=a><li>If available then it will load the class</li><li>Else it will throw a ClassNotFoundException</li></ol></li></ol></div><p>These different class loaders can be seen in action in the following
+code snippet.</p><figure class=listing-block><figcaption>Different class loaders</figcaption><pre class=highlight><code class=language-java data-lang=java>import java.sql.SQLInput;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(List.class.getClassLoader());
+        System.out.println(SQLInput.class.getClassLoader());
+        System.out.println(Main.class.getClassLoader());
+    }
+}
+
+// Output
+//
+// null
+// jdk.internal.loader.ClassLoaders$PlatformClassLoader@3cd1a2f1
+// jdk.internal.loader.ClassLoaders$AppClassLoader@55054057</code></pre></figure><p><strong class=red>Security</strong></p><p>There a different types of class loaders, one of which is the
+<code>URLClassloader</code>, this one can, as the name suggests, load classes
+from an URL. Lets have a look at an example, first create the
+class we want to load</p><figure class=listing-block><figcaption>Printer</figcaption><pre class=highlight><code class=language-java data-lang=java>public class Printer{
+	public Printer(){
+		System.out.println(&#34;Hello there from the internet&#34;);
+	}
+}</code></pre></figure><p>Now compile the class and start a simple server that can serve
+the compiled class file.</p><figure class=listing-block><figcaption>Compile and serve class file on localhost</figcaption><pre class=highlight><code class=language-sh data-lang=sh>javac Printer.java
+python3 -m http.server 8080</code></pre></figure><p>Now we can load the class from the server.</p><figure class=listing-block><figcaption>URLClassLoader</figcaption><pre class=highlight><code class=language-java data-lang=java>public class Main {
+    public static void main(String[] args) {
+        try {
+            URLClassLoader loader =
+              new URLClassLoader(new URL[] {
+                  new URL(&#34;http://localhost:8080/&#34;)
+              }
+            ); <b class=conum>1</b>
+            Class c = loader.loadClass (&#34;Printer&#34;);
+            Object o = c.getDeclaredConstructor().newInstance();
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+}
+// Output
+//
+// Hello there from the internet</code></pre><ol class="callout-list arabic"><li>Malicious code, loads class from the internet?</li></ol></figure><p>This of course means that whatever class we load can do everything on the file system e.g. read files, make requests.</p><p>Loading files via HTTP is of course not safe as the identity of
+the server cannot be established. Same goes for HTTPS if the
+application doesn’t verify the certificate (which is not unheard of).</p><p>For a real life example of a class loader exploit have a look at
+<a class=bare href=https://knowledgebase.progress.com/articles/Article/How-to-prevent-Java-RMI-class-loader-exploit-with-AdminServer>https://knowledgebase.progress.com/articles/Article/How-to-prevent-Java-RMI-class-loader-exploit-with-AdminServer</a>,
+where it was possible for unauthenticated users to load arbitrary
+classes via an exposed Java Remote Method Invocation (RMI)
+service.</p></section><section class="doc-section level-3"><h4 id=_byte_code_verifier>Byte code verifier</h4><p>So now we know how the JVM loads class files. But what are these
+files and how does the JVM interpret them?</p><p>Java source code is first compiled to an intermediate
+representation called Java bytecode.
+This bytecode can then be interpreted by the Java Virtual Machine (JVM). The specification of the Java bytecode and the JVM can be found <a href=https://docs.oracle.com/javase/specs/index.html>here</a>.</p><p>This way developers only have to write and compile the Java code once and they can run it on all platforms that
+have a JVM implementation available.</p><p>Lets have a look at how the Java compiler compiles a source
+file (Verifier.java) to byte code (Verifier.class).</p><figure class=listing-block><figcaption>Verifier.java</figcaption><pre class=highlight><code class=language-java data-lang=java>package verifier;
+
+public class Verifier {
+    public static void main(String[] args) {
+        System.out.println(&#34;1 + 2 = &#34; + calc());
+    }
+
+    public static int calc(){
+        int x = 1;
+        int y = 2;
+        int result = x + y;
+        return result;
+    }
+}</code></pre></figure><figure class=listing-block><figcaption>We can use the following command to get the bytecode in mnemonic form:</figcaption><pre class=highlight><code class=language-sh data-lang=sh>javap -c verifier.Verifier</code></pre></figure><figure class=listing-block><figcaption>Bytecode of the calc method</figcaption><pre class=highlight><code>public static int calc();
+    Code:
+       0: iconst_1  // 0x04: Push int constant 1 onto operant stack
+       1: istore_0  // 0x3B: Store int into 1st local variable
+       2: iconst_2  // 0x05: Push int constant 2 onto operant stack
+       3: istore_1  // 0x3C: Store int into second local variable
+       4: iload_0   // 0x1A: Load int from 1st local variable
+       5: iload_1   // 0x1B: Load int from 2nd local variable
+       6: iadd      // 0x60: Add int
+       7: istore_2  // 0x3D: Store int in 3rd local variable
+       8: iload_2   // 0x1C: Load int from 3rd local variable
+       9: ireturn   // 0xAC: Return int from method</code></pre></figure><p>Before the bytecode is loaded by the class loader it is first verified. You might ask yourself why does the class file needs
+to be verified before it’s loaded. As we have seen in the previous
+chapter class files can be loaded from anywhere and there is no
+guarantee that the class file is not corrupted.</p><p>The class loader verifies the following properties:</p><div class=ulist><ul><li>Variables are initialized before use</li><li>Method calls match the types of object references</li><li>Rules for accessing private data and method are not violated</li><li>Local variable accesses fall within runtime stack</li><li>The runtime stack does not overflow</li></ul></div><p>So what happens if we try to load a class that doesn’t pass any of
+these checks? Lets change the <code>Verifier.class</code> file using a
+<a href=https://en.wikipedia.org/wiki/Hex_editor>hex editor</a>.</p><figure class=image-block id=img-sunset><img src=/prc2/images/verifier_hex.png alt="Verifier.class open inside hex editor"><figcaption><code>Verifier.class</code> open in hex editor, <code>calc</code> function highlighted</figcaption></figure><p>Lets change <code>3C</code> to <code>3B</code>, thus not initializing variable <code>y</code>. If we now try to run the program we get the following error:</p><div class=listing-block><pre class=highlight><code>Error: Unable to initialize main class verifier.Verifier
+Caused by: java.lang.VerifyError: Bad local variable type</code></pre></div></section></section><section class="doc-section level-2"><h3 id=_web_application>Web application</h3><p>During PRC1, PRC2, PRJ1 and PRJ2 we have seen a lot of concepts
+that apply to all kinds of different programming languages.
+To show some common security pitfalls we have developed a simple,
+but <strong class=red>insecure</strong> web application.</p><p>The web application is build in Java and is using <a href=https://javalin.io/>Javalin</a> to set-up a simple web framework.</p><div class=ex><details class=ex><summary class=ex>Structure of the application</summary><figure class=listing-block><figcaption>The main application</figcaption><pre class=highlight><code class=language-java data-lang=java>public class App {
+
+    public static void main(String[] args) {
+        Javalin app = Javalin.create(config -&gt; {
+            // Add static files (images, html, css, javascript)
+            config.addStaticFiles(&#34;public&#34;);
+        });
+        // Start at port 8080
+        app.start(8080);
+
+        // Use database helper from PRC2 to get a datasource
+        final var db = DBHelper.getDataSource(&#34;jdbc.pg&#34;);
+
+        app.post(&#34;/login&#34;, ctx -&gt; {
+            // Convert JSON data to Login (username, password)
+            var data = ctx.bodyAsClass(Login.class);
+
+            // Get a database connection
+            var connection = db.getConnection();
+            // Create a statement
+            var statement = connection.createStatement();
+
+            // Build query to check if the username exists with the given password
+            var query = &#34;select username from users where username = &#39;&#34;
+            + data.getUsername() + &#34;&#39; and password = &#39;&#34; + data.getPassword() + &#34;&#39;&#34;;
+
+            try{
+                // Execute the query
+                var rs = statement.executeQuery(query);
+                // Check if user with password exists
+                if(rs.next()){
+                    ctx.status(200);
+                    // Return the username
+                    ctx.json(rs.getString(&#34;username&#34;));
+                }else{
+                    // User doesn&#39;t exist, return error message
+                    ctx.status(401);
+                    ctx.result(&#34;The combination of username/password is not known.&#34;);
+                }
+            }catch(PSQLException ex){
+                // Somethin went wrong with the query
+                ctx.status(500);
+                ctx.result(ex.getMessage());
+            }
+        });
+    }
+}</code></pre></figure><figure class=listing-block><figcaption>Structure of the users table</figcaption><pre class=highlight><code class=language-sql data-lang=sql>CREATE TABLE prc2.users(
+    id SERIAL PRIMARY KEY,
+    username TEXT,
+    password TEXT
+);</code></pre></figure><p>Make sure to populate the table if you want to follow the examples.
+For the example we will be using the user <code>testuser</code>.</p><figure class=listing-block><figcaption>index.html with a login form</figcaption><pre class=highlight><code class=language-html data-lang=html>&lt;!DOCTYPE html&gt;
+&lt;html lang=&#34;en&#34;&gt;
+&lt;head&gt;
+    &lt;meta charset=&#34;utf-8&#34;&gt;
+    &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1, shrink-to-fit=no&#34;&gt;
+    &lt;title&gt;Login&lt;/title&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;css/style.css&#34;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div class=&#34;container&#34;&gt;
+        &lt;div class=&#34;login&#34;&gt;
+            &lt;form id=&#34;login&#34; method=&#34;POST&#34; action=&#34;login&#34;&gt;
+                &lt;div class=&#34;form-title&#34;&gt;
+                    Login
+                &lt;/div&gt;
+                &lt;div class=&#34;form-row&#34;&gt;
+                    &lt;label for=&#34;username&#34; class=&#34;hidden&#34;&gt;Username&lt;/label&gt;
+                    &lt;input type=&#34;text&#34; id=&#34;username&#34; name=&#34;username&#34; placeholder=&#34;username&#34;&gt;
+                &lt;/div&gt;
+                &lt;div class=&#34;form-row&#34;&gt;
+                    &lt;label for=&#34;password&#34; class=&#34;hidden&#34;&gt;Password&lt;/label&gt;
+                    &lt;input type=&#34;password&#34; id=&#34;password&#34; name=&#34;password&#34; placeholder=&#34;password&#34;&gt;
+                &lt;/div&gt;
+                &lt;div class=&#34;form-row errors hidden&#34;&gt;
+
+                &lt;/div&gt;
+                &lt;div class=&#34;form-actions&#34;&gt;
+                    &lt;button class=&#34;btn full-width&#34; type=&#34;submit&#34;&gt;Login&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+
+&lt;script src=&#34;js/form.js&#34;&gt;&lt;/script&gt;
+
+&lt;/html&gt;</code></pre></figure><figure class=listing-block><figcaption>form.js Retrieve form data and send it as JSON</figcaption><pre class=highlight><code class=language-js data-lang=js>const loginForm = document.querySelector(&#34;form#login&#34;);
+const errors = document.querySelector(&#34;.errors&#34;);
+
+const submit = (event) =&gt; {
+    // Stop the event
+    event.preventDefault();
+
+    // Retrieve the values
+    const form = new FormData(event.target);
+
+    // Create new object from form entries
+    const data = Object.fromEntries(form.entries());
+
+    login(data);
+}
+
+const setup = () =&gt; {
+    // Check that login form exists
+    if(!loginForm){
+        console.error(&#34;Login form not found&#34;);
+        return;
+    }
+    // Add form submit handler
+    loginForm.addEventListener(&#34;submit&#34;, submit);
+};
+
+const showErrors = (error) =&gt; {
+    if(!errors){
+        return;
+    }
+    errors.innerHTML = error.message;
+    errors.classList.remove(&#34;hidden&#34;);
+};
+
+const removeErrors = () =&gt; {
+    if(!errors){
+        return;
+    }
+    errors.innerHTML = &#34;&#34;;
+    errors.classList.add(&#34;hidden&#34;)
+}
+
+const login = async (data) =&gt; {
+    // Clean up old errors
+    removeErrors();
+
+    try{
+        const message = await loginFetch(data);
+        window.alert(`Welcome back ${message}`);
+    }catch(error){
+        showErrors(error);
+    }
+}
+
+const loginFetch = async (data) =&gt; {
+    const response =  await fetch(&#34;login&#34;, {
+        method: &#34;POST&#34;,
+        headers: { &#34;Content-Type&#34;: &#34;application/json&#34; },
+        body: JSON.stringify(data)
+    });
+    if(!response.ok){
+        throw new Error(await response.text());
+    }
+    return await response.json();
+}
+
+setup();</code></pre></figure></details></div><section class="doc-section level-3"><h4 id=_sql_injection>SQL injection</h4><p>In the images below we can see the normal usage of the web app.
+On the left we have successful login and on the right an unsuccessful.</p><figure class="image-block related thumb left"><img src=/prc2/images/security_successful_login.png alt="security successful login" width="Successful login" "><figcaption>Figure 1. Successful login for user <code>testuser</code></figcaption></figure><figure class="image-block related thumb right"><img src=/prc2/images/security_unsuccessful_login.png alt="security unsuccessful login" width="Unsuccessful login"><figcaption>Figure 2. Unsuccessful login</figcaption></figure><p>We can check if this form is susceptible for SQL injection by adding different
+quotes and other characters that are used inside SQL.
+For example input a single quote <code>'</code> anywhere in the username
+or password field. We get an error back telling us that the string
+is unterminated.</p><p>Notice the useful error message, we will get back to this in the
+section error handling.</p><p>For now lets focus on the unterminated string, this means that
+there is a SQL injection possibility.</p><div class=clear-both></div><figure class=listing-block><figcaption>Error message, wrapped for readability</figcaption><pre class=highlight><code class=language-sql data-lang=sql>Unterminated string literal started at position 72
+  in SQL select username from users
+  where username = &#39;testuser&#39;&#39; and password = &#39;&#39;. Expected char <b class=conum>1</b></code></pre></figure><p>&lt;1></p><p>So lets try to login as <code>testuser</code> without knowing the password.
+We can do this by entering the username <code>testuser</code> and for the password
+we need to enter something that is always <code>true</code>.</p><div class=listing-block><pre class=highlight><code class=language-sql data-lang=sql>&#39; or &#39;1&#39; = &#39;1</code></pre></div><p>Now we can login as any user as long as we know the username.
+But how can we retrieve the password for a given user?
+We can use a <code>UNION</code> SQL statement to retrieve data and union it with
+the selected username.
+Using the following query we retrieve the password for <code>testuser</code></p><div class=listing-block><pre class=highlight><code class=language-sql data-lang=sql>&#39; UNION SELECT password FROM users WHERE username=&#39;testuser</code></pre></div><p>We can even retrieve a combination of users and their given
+passwords with the following query:</p><div class=listing-block><pre class=highlight><code class=language-sql data-lang=sql>&#39; UNION SELECT CONCAT(username, &#39; : &#39;, password) FROM users OFFSET 1 -- --&#39;</code></pre></div><div class=ulist><ul><li>CONCAT: Concatenate the username and password</li><li>OFFSET: By changing the offset we can enumerate the complete users table</li><li> – --: SQL comment used to drop the rest of the query</li></ul></div><p>If the database is not correctly configured we can even enumerate the complete
+database and retrieve data from other databases/schemas/tables.</p><p>For example if the current database and schema would contain a table <code>secrets</code>
+that has one column named <code>secret</code> we could retrieve the secrets as follows:</p><div class=listing-block><pre class=highlight><code class=language-sql data-lang=sql>&#39; union select table_schema from information_schema.tables where table_name = &#39;users&#39;-- --  <b class=conum>1</b>
+&#39; union select table_name from information_schema.tables where table_schema=&#39;public&#39;-- --   <b class=conum>2</b>
+&#39; union select column_name from information_schema.columns where table_name=&#39;secrets&#39;-- --  <b class=conum>3</b>
+&#39; union select secret from secrets-- --                                                     <b class=conum>4</b></code></pre><ol class="callout-list arabic"><li>Get the schema for the current table → return <code>public</code></li><li>Get all the tables for the current schema → shows that a table named <code>secrets</code> exists</li><li>Get all the columns for table <code>secrets</code> → returns <code>secret</code></li><li>Get the secret</li></ol></div><p>The strange colouring in the box above is due to the fact that we confuse the asciidoctor syntax highlighting.</p></section><section class="doc-section level-3"><h4 id=_database_management>Database management</h4><p>The reason that the in the previous section we were able to retrieve
+the secret was because the application logs in under the user <code>postgres</code>.
+This <code>postgres</code> user is a <code>superuser</code>, which means it can do <strong class=red>everything</strong>.</p><p>The application for now only needs <strong class=blue>read</strong> access to the <code>users</code> table, so lets
+create a new user and only give it the <code>select</code> right on the table <code>users</code>.</p><div class=listing-block><pre class=highlight><code class=language-sql data-lang=sql>CREATE ROLE app LOGIN;          <b class=conum>1</b>
+GRANT SELECT ON users TO app;   <b class=conum>2</b></code></pre><ol class="callout-list arabic"><li>Create a <code>role</code> (user) called <code>app</code> and give it login rights</li><li>Give the <code>role</code> app <code>select</code> rights on the <code>user</code> table</li></ol></div><p>If we now try to run a SQL injection using the <code>secrets</code> table again
+we are met with the following error message:</p><div class=listing-block><pre class=highlight><code>ERROR: permission denied for table secrets</code></pre></div><p>And if we try to to find out what other tables there are in the
+<code>public</code> schema, we will only find the <code>users</code> table.</p><p>We added access control at a <code>table</code> level, however it is also
+possible to this on different levels.
+You can grant permissions on a database level, schema level, table
+level, and column level using the
+<a href=https://www.postgresql.org/docs/current/sql-grant.html>grant</a> permission.<br>It’s even possible to add access control on a row level using
+<a href=https://www.postgresql.org/docs/current/ddl-rowsecurity.html>policies</a>.</p><p>It’s also possible to create a <code>group role</code> such that a user can belong
+to a group and inherit all the rights of that group.</p><p>This is of course only a step in the right direction, there are more steps
+that can be taken to harden your database (depending on your needs):</p><div class=ulist><ul><li>Disable login (only local over unix socket, possible on Windows also since the support of unix sockets there too. (Java 16))</li><li>Only login in from localhost or specific IP</li><li>Login using certificates instead of password</li><li>Enable logging</li><li>Enable TLS</li></ul></div></section><section class="doc-section level-3"><h4 id=_password_management>Password management</h4><p>While doing the SQL injection attacks we were able to retrieve the passwords
+in plain text. This is of course a complete no-go in term of security.</p><p>So how to do password management the right way?</p><p>The best way is to not store a password at all. This might sound a bit
+weird, but you probably use or at least have seen the <code>login in with</code>
+(Google, Apple, Github, etc.) buttons on websites.
+This way of login in uses the <a href=https://oauth.net/2/>OAUTH</a> (2.0) protocol.
+Using this protocol the client will retrieve an access token from
+the Authorization server that can then be used on the Resource server.
+So the application will never receive the user’s password.</p><p>If you can’t or don’t want to provide OAUTH 2.0 login functionality,
+it’s best to not roll your own implementation for storing passwords
+(nor for authentication/authorization). So if possible use the
+functionality of the framework you are using. If you are not using a
+framework or the framework doesn’t offer this functionality, see if there
+is a reputable library that can do the work for you.</p><p>Finally if you have to store your password manually, make sure to
+use current best practices.</p><p>First of all the password should be hashed using a cryptographic
+hash function. A cryptographic hash function has the following
+properties:</p><div class=ulist><ul><li>One way: it’s not possible to compute the original text from the hash</li><li>Deterministic: the same text will always produce the same hash</li><li>Diffusion: changing just one bit, should change the hash significantly</li><li>Collision resistance: It’s not feasible to find two passwords that
+both have the same hash</li><li>Fast: the hashing algorithm should be fast</li></ul></div><p>Let’s have a look at the sha256 hash of a text and what happens if we
+slightly change the text (adding a '.' at the end).</p><div class=listing-block><pre class=highlight><code>Text:   This is a test string to hash
+Sha256: f70b476ff948472f8e4e52793a5a2779e636c20dd5336d3a8a4455374318db35
+Text:   This is a test string to hash.
+Sha256: 862a9e0d0890a7a28e27c558c80820a0db36eea02e51e2dee8094deade308319</code></pre></div><p>However just storing the hash in the database instead of the
+password is still not safe. This is because of the <code>deterministic</code> property of hashing.
+An attacker
+can pre-compute a large table of hashes for common passwords and easily
+check if the hashed password matches a known hash from the table.</p><p>To combat this a <code>salt</code> is used. A salt is a large random, non-secret
+that can be stored with the password hash. The salt is added to the
+hashing process to produce unique hashes even if users have the same or a
+common password.</p><figure class=table-block><figcaption>Table 1. Hash with salt example</figcaption><table class="frame-all grid-all stretch"><col style=width:25%><col style=width:25%><col style=width:25%><col style=width:25%><thead><tr><th class="halign-left valign-top">Password</th><th class="halign-left valign-top">Salt</th><th class="halign-left valign-top">String to be hashed</th><th class="halign-left valign-top">Sha256 hash</th></tr></thead><tbody><tr><td class="halign-left valign-top">secret</td><td class="halign-left valign-top">DWEFAVLJQFEOHSZG</td><td class="halign-left valign-top">secretDWEFAVLJQFEOHSZG</td><td class="halign-left valign-top">7ddc02be0b03aef77cc7298083aabc2417fac820263ecfc0f799876fc04c7d30</td></tr><tr><td class="halign-left valign-top">secret</td><td class="halign-left valign-top">OJYKWXMKWYXNTTUW</td><td class="halign-left valign-top">secretOJYKWXMKWYXNTTUW</td><td class="halign-left valign-top">f8da88f1240307b1441bcdfe0ba1c9d9bc0c6113dbfaa8fc869f3a6f42b5dba7</td></tr></tbody></table></figure><p>The last problem comes from the <code>fast</code> property of normal hashes.
+You want to make it hard for an attacker to bruteforce retrieved hashes.
+To do this you intentionally make the hashing algorithm slower, especially
+you make it slower to do on GPUs as these are used in the bruteforce process.</p><p>This leaves us with a couple of recommended hashing algorithms:</p><div class="olist arabic"><ol class=arabic><li>bcrypt</li><li>algon2(id)</li><li>scrypt</li><li>PBKDF2</li></ol></div></section><section class="doc-section level-3"><h4 id=_transport_layer_security>Transport layer security</h4><p>When you start the web application by default it will run over
+HTTP. Running a website (or other service) over HTTP has two
+major problems.</p><p>The first problem is that the traffic between the client and
+the server is <strong class=red>not</strong> encrypted. In theory everyone can see all
+the traffic between you and the server.</p><p>We will use <a href=https://www.wireshark.org/>Wireshark</a> to show how we can see traffic
+to and from our application.</p><p>First start the web application, it will be available on
+<code>localhost:8080</code> by default. (You can also start another server
+e.g. <code>python3 -m http.server 8080</code>).<br>Secondly start wireshark and select the right interface to capture
+traffic on.</p><p>If you are on linux or Mac you can use the <code>loopback</code>
+interface to capture traffic on localhost.<br>Otherwise capture traffic on your main interface. Find out the
+local ip address of your device: <code>ipconfig</code>. And now use another
+device to connect to the server, e.g. if you local ip address
+is <code>10.0.0.1</code>, then enter <code>10.0.0.1:8080</code> in the browser.</p><p>You should now be able to see traffic from and to the server
+in Wireshark. When you try to login you should see a <code>POST</code>
+request to <code>/login</code>, see the image below.</p><div class=image-block><img src=/prc2/images/wireshark_request.png alt="Wireshark showing the request"></div><p>Right click the request > Follow > TCP Stream will show the complete
+TCP stream (request and answer) as shown below. You can clearly
+see the username and password in the request.</p><div class=image-block><img src=/prc2/images/wireshark_tcp_stream.png alt="Wireshark tcp stream"></div><p>The second major problem with running a service over HTTP is
+that there is no way to verify that the server is who it claims
+to be. Nor that the traffic from the server is actually (unmodified)
+traffic from the server.<br>If connected to a public WIFI the owner of the WIFI can change
+the messages to and from the server to anything they like
+and there is no way of knowing.
+Not just on public WIFI but also on trusted networks are
+there ways to do a Man-in-the-middle (MITM) attack and
+intercept and change HTTP traffic.</p><p>The solution to both these problems if to use HTTPS.</p><div class="olist arabic"><ol class=arabic><li>Certificate: by using HTTPS the server provides a certificate
+that is signed by and Certificate Authority (CA) to prove that
+the server is who it claims to be.</li><li>Encryption: the server certificate is used to generate a
+session key, which is used to encrypt all traffic to and from
+the server.</li></ol></div><p>Nowadays it is really easy and <strong class=green>free</strong> to get a certificate
+for a public facing server by using
+<a href=https://letsencrypt.org/>Let’s encrypt</a>.</p><div class=image-block><img src=/prc2/images/lets_encrypt.png alt="Let's encrypt on PRC2 website"></div><p>It’s even possible to create your own <code>CA</code> to sign certificates
+on your local network. You can do this by using
+tools such as <code>openssl</code>, the Java <code>keytool</code> or use a tool such as <code>mkcert</code> that
+streamlines the process for you.</p><div class=image-block><img src=/prc2/images/https_localhost.png alt="Self-signed certificate on localhost"></div></section><section class="doc-section level-3"><h4 id=_error_handling>Error handling</h4><p>Showing errors in the front-end can be very helpful,
+especially during development.<br>However these errors also pose a security risk as it
+can help attackers better understand the system.</p><p>In our vulnerable web application we have already seen
+a very big security risk where the SQL exception
+gets displayed on the front-end, thereby given attackers
+access to the complete query that gets executed.</p><p>But error handling can also be a bit more subtle.
+In the following example the web application will
+return a <code>Username not found</code> when the account does
+not exist and a <code>Wrong password.</code> when it does exist,
+but a wrong password is entered. From a user perspective
+this is of course very nice, you know that you either
+entered the wrong username or the wrong password.</p><div class=listing-block><pre class=highlight><code class=language-java data-lang=java>if(username == null){
+    return &#34;Username not found.&#34;
+}else if(password == null){
+    return &#34;Wrong password.&#34;
+}</code></pre></div><p>However an attacker can use this functionality to check
+which usernames exist, by means of the returned error
+message. They may try to find an <code>admin</code> account and try
+to guess/brute-force the password for that account.</p><p>To combat such an attack it is better to return a less
+descriptive error message, such as <code>Username or password incorrect</code>.
+This way an attacker can not tell if the username exists
+or that the password is wrong.</p></section></section></section></article></div><footer class="text-sm leading-6 mt-12 mb-5">Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a></footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block"><h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5></div></div><div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div></div><script src=/prc2/js/main.min.956966b3103878d329f9460daf829f6ad1d50fc9e24d20ff0c5d93a4006065df877564edc24b6a2a5182bf4387d13d9f960a1df6fc9d259d38cfb8e83509c999.js integrity="sha512-lWlmsxA4eNMp+UYNr4KfatHVD8niTSD/DF2TpABgZd+HdWTtwktqKlGCv0OH0T2flgod9vydJZ04z7joNQnJmQ==" crossorigin=anonymous></script>
+<script src=/prc2/js/highlight.min.cd8091de05577194483fff730f723dc2379226a640ef117b33ad133cc3da2f690d95af8fc32186b11dc10628e66e325b33bee2bf443c98315905e50f22aecc50.js integrity="sha512-zYCR3gVXcZRIP/9zD3I9wjeSJqZA7xF7M60TPMPaL2kNla+PwyGGsR3BBijmbjJbM77iv0Q8mDFZBeUPIq7MUA==" crossorigin=anonymous defer></script><div id=copied-alert class="invisible opacity-0 transition-all ease-in-out duration-400 fixed bottom-3 right-10 z-50 flex p-4 mb-4 text-sm text-gray-800 bg-gray-200 rounded-lg dark:bg-gray-500 dark:text-gray-200" role=alert><svg class="inline flex-shrink-0 mr-3 w-5 h-5" viewBox="0 0 24 24" width="24" height="24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><div><span class=font-medium>Code copied</span></div></div></body></html>
