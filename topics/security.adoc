@@ -140,7 +140,7 @@ application doesn't verify the certificate (which is not unheard of).
 For a real life example of a class loader exploit have a look at
 https://knowledgebase.progress.com/articles/Article/How-to-prevent-Java-RMI-class-loader-exploit-with-AdminServer[],
 where it was possible for unauthenticated users to load arbitrary
-classes via an exposed Java Remote Method Method Invocation (RMI)
+classes via an exposed Java Remote Method Invocation (RMI)
  service.
 
 // Maybe add example of showing of custom class loader for loading
@@ -511,7 +511,7 @@ that has one column named `secret` we could retrieve the secrets as follows:
 <3> Get all the columns for table `secrets` -> returns `secret`
 <4> Get the secret
 
-The strange coloring in the box above is due to the fact that we confuse the ascidoctor syntax highlighting.
+The strange colouring in the box above is due to the fact that we confuse the asciidoctor syntax highlighting.
 
 
 ==== Database management
@@ -569,7 +569,7 @@ So how to do password management the right way?
 The best way is to not store a password at all. This might sound a bit
 weird, but you probably use or at least have seen the `login in with`
 (Google, Apple, Github, etc.) buttons on websites.
-This way of loggin in uses the https://oauth.net/2/[OAUTH] (2.0) protocol.
+This way of login in uses the https://oauth.net/2/[OAUTH] (2.0) protocol.
 Using this protocol the client will retrieve an access token from
 the Authorization server that can then be used on the Resource server.
 So the application will never receive the user's password.
@@ -590,7 +590,7 @@ properties:
 
 * One way: it's not possible to compute the original text from the hash
 * Deterministic: the same text will always produce the same hash
-* Diffusion: changin just one bit, should change the hash significantly
+* Diffusion: changing just one bit, should change the hash significantly
 * Collision resistance: It's not feasible to find two passwords that
 both have the same hash
 * Fast: the hashing algorithm should be fast
@@ -644,7 +644,7 @@ This leaves us with a couple of recommended hashing algorithms:
 
 ==== Transport layer security
 
-When you start the web applicatio by default it will run over
+When you start the web application by default it will run over
 HTTP. Running a website (or other service) over HTTP has two
 major problems.
 
