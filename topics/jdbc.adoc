@@ -12,6 +12,13 @@ to configure access to a resource, and also by the programming language. +
 In java the tradition is to use so called properties files, which, also traditionally, have a file extension `.properties`.
 It also helps to give such files well known names, so the program can refer to them by that name.
 
+[WARNING]
+====
+Putting secrets like credentials in a properties file is not secure. It is just a way to separate configuration from code.
+You need to exclude the actual secrets from the code and from the project files that are under version control. The best way is
+to actually not put them in the project at all, but to use a secret manager or a vault. For now we will stick to the properties file and put it in the current dierctory, that is the directory from which you run the program. Another good place would be the user home directory or a child directory of that. For instance the same dierectory that stores the  maven stuff, the ${user.home}.m2/directory.
+====
+
 For the demonstrations in this part we will use the following properties file.
 
 .[black]#db.properties# file specifying connection details for dev and prod
@@ -25,6 +32,9 @@ You can see that the properties file supports two environments, **dev**elopment 
 .Configuring a datasource. Put it in a utility class.
 [source,java]
 ----
+
+// read properties
+=======
 public class DBProvider {
 
     static Map<String, DataSource> cache = new HashMap<>();
@@ -55,21 +65,21 @@ public class DBProvider {
         );
     }
 
+    /** 
+     * Reads properties from a file. The properties file is taken a well known location that is known by all developers.
+     * for instance {"user.home"}/.m2/db.properties.
+     */
     static Properties getProperties(String propertiesFileName){
-        
-        System.out.println("The user working dir is " + System.getProperty("user.dir"));
-        
-        // Usage of resource file is preferred way. No issues with working dir.
-        // Uses the default location of resources (in src/main/java/resources dir)
-        // getClassLoader() is necessary, unless you store your proprty file in a 
-        // subfolder according to package name 
-        // (src/main/resources/fontys/customerdbdemo in this case).
-        
         Properties properties = new Properties();
-        try (InputStream dbProperties = DBProvider.class.getClassLoader().getResourceAsStream(propertiesFileName);) {
-            properties.load(dbProperties);
-        } catch (IOException ex) {
-            Logger.getLogger(DBProvider.class.getName()).log(Level.SEVERE, null, ex);
+        File propFile= Path.of(System.getProperty("user.home").resolve(".m2").resolve(propertiesFileName)).toFile();
+        try (
+                FileInputStream fis = new FileInputStream( propFile ); ) {
+            properties.load( fis );
+        } catch ( IOException ignored ) {
+            Logger.getLogger( DBProvider.class.getName() ).log(
+                    Level.INFO,
+                    "attempt to read file from well known location failed'",
+                    ignored );
         }
         return properties;
     }
@@ -180,7 +190,7 @@ returning *                                                          -- <3>
 <1> Fields can be supplied in any order, including definition order.
 <2> You do not need the spaces before the commas, we added them for readability.
 <3> It is smart to *always* expect back what has been inserted by the database, including generated id and
- other fields such as the database's notion of date or time. Even smarter, but a little more work //'
+ other fields such as the databases notion of date or time. Even smarter, but a little more work
 is to specify the columns instead of a `*`, so that the order in which you receive them is independent
 of database schema organization and _stable_.
 
@@ -236,8 +246,7 @@ in an array and the rest can be packed into utility methods.
 
 The holy grail is to find a way to do all kind of queries against tables, and the only
 thing you need to know is the table name and what entities as Java objects can be expected to
-be read from or written to the table. However, start simple first! At some point you'll find duplicated code and you'll find a way to optimize your code. Typically, you'll use Generics, Lambda's and streams and a bit of reflection at some point. We think it's good to first face the issue of code that is difficult to maintain and afterwards find a solution for that, instead of providing you with a very generic and maybe complex solution without knowing which underlying problems it solves.  //'
-
+be read from or written to the table. However, start simple first! At some point you'll find duplicated code and you'll find a way to optimize your code. Typically, you will use Generics, Lambdas and streams and a bit of reflection at some point. We think it is good to first face the issue of code that is difficult to maintain and afterwards find a solution for that, instead of providing you with a very generic and maybe complex solution without knowing which underlying problems it solves.
 
 // == Traditional preparing statements
 

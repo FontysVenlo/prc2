@@ -84,3 +84,4 @@ This file contains the configuration for `Hugo`, `asciidoctor` and `sebi-theme`.
 ### Package.json
 
 This file contains the needed packages to be able to build the website.
+
