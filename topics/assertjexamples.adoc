@@ -17,7 +17,7 @@ We try to use the latest stable version of AssertJ and Junit 5.
 
 [TIP]
 ====
-Either use sebipom version 3.0.0 and up or add assertj.core to your test dependencies.
+Either use informaticspom version 1.3 and up or add assertj.core to your test dependencies.
 ====
 
 === Simple Tests
@@ -56,7 +56,7 @@ Quiz: what is the difference between the two here: equals and same?
 [TIP]
 ====
 To follow along, tweak your IDE. Make sure you have the link:/prc2/pages/tips.html#_adding_your_own_code_templates_to_netbeans_ide[code template] to create a test method.
-Note that the template adds a *fail* line, which should be disabled once the test and the business code agree.
+Note that the template adds a [red]*fail* line, which should be disabled once the test and the business code agree.
 ====
 
 === String Containment
@@ -64,7 +64,7 @@ Note that the template adds a *fail* line, which should be disabled once the tes
 .test string containment
 [source,java]
 ----
-  Student student = ....
+  // Student student = ....
 
   assertThat( student.toString() )
       .isNotNull()                              // <1>

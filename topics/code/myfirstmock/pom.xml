@@ -6,9 +6,9 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <parent>
-        <groupId>nl.fontys.sebivenlo</groupId>
-        <artifactId>sebipom</artifactId>
-        <version>2.3.7</version>
+        <groupId>io.github.fontysvenlo</groupId>
+        <artifactId>informaticspom</artifactId>
+        <version>1.3</version>
         <relativePath/>
     </parent>
     <properties>
