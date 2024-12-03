@@ -20,7 +20,7 @@ icon:linux[fw] `$ sha512sum /path/to/file` +
 icon:apple[fw] `$ shasum -a 256 /path/to/file` +
 icon:windows[fw] `$ certUtil -hashfile /path/to/file SHA256`
 
-You can check the download of that version of netbeans, and the command should produce the same signature as is available on the download website.
+You can check the download of that version of your IDE, and the command should produce the same signature as is available on the download website.
 ====
 
 
@@ -199,7 +199,7 @@ and to make it easy to switch between Java versions.
 The first command lists the most recent version of Java on your system
 The second command lists all installed versions of Java on your system
 
-We can now setup an environment to easily switch between Java versions and later on even launch Netbeans with the intended Java version.
+We can now setup an environment to easily switch between Java versions and later on even launch most IDEs with the intended Java version.
 The only thing we need to do for this is set the `JAVA_HOME` environment variable to link to the correct Java version.
 
 .icon:apple[fw] Set the `JAVA_HOME` environment
@@ -235,7 +235,7 @@ for this we need to let the terminal know to load our aliases on startup.
 Depending on the type of terminal you are using, we need the specify the aliases at different places.
 
 Since macOS Catalina (10.15) the default shell (which is used by the terminal) is ZShell (zsh).
-This means we can specify our aliases in either `.zshrc` or in `.zprofile` in our home directory. We suggest to 
+This means we can specify our aliases in either `.zshrc` or in `.zprofile` in our home directory. We suggest to
 create an additional configuration file `.java_setup` in your home directory.
 
 [#java_setup]
@@ -292,9 +292,8 @@ We will use *Apache Maven*, or *maven* for short throughout the PRC2 course, so 
 
 The application is called *Maven* but as command spelled as `mvn`.
 
-Maven is the default build tool in the Java world and can build your program from sources without the use of and IDE. This makes your
-project agnostic to the IDE used, so they work with NetBeans as first class projects out of the box and also with other IDEs with little or no tweaks to that IDE.
-It is also the way the teachers use to compile and test the students work for the practical assignments and performance assessments.
+Maven is the default build tool in the Java world and can build your program from sources without the use of and IDE. This makes your project agnostic to the IDE used. Most IDEs will detect your project as a maven project if the `pom.xml` file is present in the root of your project.
+Maven is also the way the teachers use to compile and test the students work for the practical assignments and performance assessments.
 
 ==== icon:linux[fw] Linux
 
@@ -338,7 +337,7 @@ brew install maven
 
 Install manually:
 
-Fetch a fresh copy of https://maven.apache.org/[Apache Maven] from the website. Unzip the archive at 
+Fetch a fresh copy of https://maven.apache.org/[Apache Maven] from the website. Unzip the archive at
 an appropriate location (e.g. /Applications). Make sure to put maven on the path, see <<java_setup, java_setup>>.
 
 Once this is done, entering  `mvn --version` should produce output.
@@ -365,98 +364,12 @@ Install manually:
 
 === Install or update your IDE
 
-The official Java IDE at Fontys ICT Venlo is https://netbeans.apache.org/[Apache NetBeans IDE]. The latests version for the moment is 20.0.
+You are free to choose your own Integrated Development Environment (IDE). An IDE allows you to write, compile, run and debug your programs in one place.
+Popular choices are:
 
-==== icon:linux[fw] Linux
-
-You can either install Netbeans from Ubuntu Software (Snap) or download the binaries.
-
-[#netbeans_manual]
-To install the binaries of Apache NetBeans on Ubuntu simply fetch the binary as zip file and unpack it,
-then either add the contained *bin* directory to the path, or make a wrapper `netbeans`
-command in your personal `~/bin` directory.
-
-For my installation I simply used the binaries, in the zip file, and install it
-in the traditional (as in same directories as the installer would) `/usr/local`.
-`/opt` is also a good choice as installation directory.
-
-.icon:linux[fw] Assuming you downloaded the binary, installing it is easy
-[source,sh]
-----
-cd /usr/local
-sudo unzip ~/Downloads/netbeans-20-bin.zip
-sudo mv netbeans{,-21}
-----
-
-For extra creature comfort, add a simple netbeans script to your path
-
-.netbeans script in ~/bin
-[source,sh]
-----
-#!/usr/bin/env bash
-/usr/local/netbeans-20/bin/netbeans "$@" & #<1>
-----
-
-<1> Invoke netbeans using its absolute path.
-
-Then make that script executable with `chmod +x netbeans`.
-
-NetBeans IDE should now be startable from the command line (fine for me) as well as from the menu.
-
-==== icon:apple[fw] macOS
-
-It is possible to install Netbeans by downloading the installer, manual extracting the binaries or by using HomeBrew.
-
-Installing with the installer:
-
-. Download the installer from https://netbeans.apache.org/download/index.html
-. Install as normal
-
-.icon:apple[fw] Install Netbeans using HomeBrew
-[source,sh]
-----
-brew install --cask netbeans
-----
-
-Installing the binaries manually, see installation guidelines for maven on MacOS.
-
-As an extra we can start Netbeans from the command-line using the Java version we want to use.
-
-We do this by adding an executable file to the `PATH` so we can start Netbeans from the terminal with the correct Java version.
-
-.icon:apple[fw] Create `netbeans` file in `/usr/local/bin`
-[source,sh]
-----
-cd /usr/local/bin #<1>
-touch netbeans #<2>
-echo \"/Applications/NetBeans/Apache\ NetBeans\ 21.app/Contents/Resources/NetBeans/netbeans/bin/netbeans\" --jdkhome 
-\$JAVA_HOME \$\* \& > netbeans #<3>
-chmod +x netbeans #<4>
-----
-<1> Change to the right directory
-<2> Create new file called netbeans
-<3> Write the correct command into netbeans
-<4> Make the file executable
-
-As you can see, when invoking it this way, you can inform Netbeans about which java version to use (as set in your `JAVA_HOME` environment variable).
-Furthermore you can pass the project name as a parameter (defined by `$*``) so you don’t need to open the project manually anymore in NetBeans.
-Finally the `&` means that NetBeans runs as a background process without blocking your Terminal session, so your Terminal session is immediately available again.
-
-.icon:apple[fw] Open `myProject` in Netbeans using Java version 17
-[source,sh]
-----
-j17
-netbeans myProject
-----
-
-==== icon:windows[fw] Windows
-
-. Download the installer from https://netbeans.apache.org/download/index.html
-. Install as usual, make sure to change to `path`
-
-==== Other IDE's
-
-We use NetBeans IDE as default. We might not be able to answer any support questions on other IDE's.
+- https://code.visualstudio.com/[Visual Studio Code]
+- https://www.jetbrains.com/idea/[IntelliJ IDEA]
+- https://netbeans.apache.org/[NetBeans]
 
 //include::configuringmaven.adoc[]
 

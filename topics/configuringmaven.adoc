@@ -4,17 +4,23 @@ Maven and maven projects are first class citizens in the NetBeans world.
 
 Since we build with maven, we are not really bound to particular IDE,
 other than for editing and maybe the odd debug session.footnote:[Working test driven will typically not need those].
-This means that you can use other IDE's, but expect no help from the teachers.
+If you choose to a use an IDE that is not prescribed by teachers, expect no help from the teachers.
 
 We have many things to share with you, and we use maven for that.
 
 We share libraries and project configuration files (pom.xml) with our students. To make them
-work as intended, you will need to configure the maven `settings.xml` only once. Since this is a maven setting, your IDE should
-pick these settings up as well. Certainly NetBeans IDE will.
+work as intended, you will need to configure the maven `settings.xml` only once. Since this is a maven setting, your IDE should pick these settings up as well.
 
-Start NetBeans IDE and create a Java project with New Project ▷ Java with Maven ▷ Java Application.
+# Finding your settings.xml
+Maven will find user global settings in `${user.home}/.m2/settings.xml`. E.g. on Windows this is `C:\Users\yourname\.m2\settings.xml`.
+Either, create/edit it:
 
-In the project, right click on Project Files and choose *create settings.xml*.
+1. Manually, by creating the file and adding the content below, or
+2. Via your IDE (if supported) e.g. NetBeans IDE can create it for you via the following steps:
+- Start NetBeans IDE and create a Java project with New Project ▷ Java with Maven ▷ Java Application.
+- In the project, right click on Project Files and choose *create settings.xml*.
+
+# Editing your settings.xml
 Add the Fontys Venlo repository to the settings, which is best done by replacing the xml in the settings
 file with
 
