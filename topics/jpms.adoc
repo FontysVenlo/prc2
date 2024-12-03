@@ -83,7 +83,7 @@ module assembler_module{
 .DataRecords
 [source,java]
 ----
-module datarecords_module {       
+module datarecords_module {
     exports datarecords;
 }
 ----
@@ -91,7 +91,7 @@ module datarecords_module {
 .Persistence
 [source,java]
 ----
-module persistence_module { 
+module persistence_module {
     requires datarecords_module;
     exports persistence;
 }
@@ -100,10 +100,10 @@ module persistence_module {
 .BusinessLogic
 [source,java]
 ----
-module businesslogic_module {   
+module businesslogic_module {
     requires transitive datarecords_module;
     requires transitive persistence_module;
-    
+
     exports businesslogic;
 }
 ----
@@ -119,7 +119,7 @@ module gui_module {
     requires businesslogic_module;
 
     opens gui to javafx.fxml;
-    
+
     exports gui;
 }
 ----
@@ -137,18 +137,18 @@ open module asortingservice {
     requires java.logging;
     requires sortingserviceapi;
     uses sortingservice.SortingServiceFactory; // <2>
-    provides sortingservice.SortingServiceFactory 
+    provides sortingservice.SortingServiceFactory
          with asortingservice.SortingServices; // <3>
 }
 ----
 
 <1> defines sortingservice.SortingServiceFactory in package sortingservice; this is an interface.
 <2> uses and
-<3> provides an inplementation of the SortingServiceFactory interface with a specific implementation: SortingServices.
+<3> provides an implementation of the SortingServiceFactory interface with a specific implementation: SortingServices.
 
 [WARNING,BIG]
 ====
-JPMS explicitely forbids:
+JPMS explicitly forbids:
 
 * Split packages, that is using the same package name in different modules with different content.
 * Cyclic dependencies as in A requires B requires A.
@@ -242,7 +242,7 @@ src
             ├── dao
             ├── memory
             └── pgdao
-        
+
 ----
 
 We are using maven, in which the unit test plugin is called *surefire*, the integration test plugin (which we
