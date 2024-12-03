@@ -235,7 +235,7 @@ for this we need to let the terminal know to load our aliases on startup.
 Depending on the type of terminal you are using, we need the specify the aliases at different places.
 
 Since macOS Catalina (10.15) the default shell (which is used by the terminal) is ZShell (zsh).
-This means we can specify our aliases in either `.zshrc` or in `.zprofile` in our home directory. We suggest to 
+This means we can specify our aliases in either `.zshrc` or in `.zprofile` in our home directory. We suggest to
 create an additional configuration file `.java_setup` in your home directory.
 
 [#java_setup]
@@ -338,7 +338,7 @@ brew install maven
 
 Install manually:
 
-Fetch a fresh copy of https://maven.apache.org/[Apache Maven] from the website. Unzip the archive at 
+Fetch a fresh copy of https://maven.apache.org/[Apache Maven] from the website. Unzip the archive at
 an appropriate location (e.g. /Applications). Make sure to put maven on the path, see <<java_setup, java_setup>>.
 
 Once this is done, entering  `mvn --version` should produce output.
@@ -355,7 +355,7 @@ Install manually:
 . Download the zip file from https://maven.apache.org/download.cgi.
 . Extract the zip file to `C:\usr\lib`
 . Add the `bin` directory to the `path`
-.. Goto `Settings > About > Advanced System Settings > Adavanced Tab > Environment Variables`
+.. Goto `Settings > About > Advanced System Settings > Advanced Tab > Environment Variables`
 .. Select `Path` and `Edit`
 .. `New` and fill in the path `C:\usr\lib\apache-maven-3.6.3\bin`
 . Close `System Properties`
@@ -429,7 +429,7 @@ We do this by adding an executable file to the `PATH` so we can start Netbeans f
 ----
 cd /usr/local/bin #<1>
 touch netbeans #<2>
-echo \"/Applications/NetBeans/Apache\ NetBeans\ 21.app/Contents/Resources/NetBeans/netbeans/bin/netbeans\" --jdkhome 
+echo \"/Applications/NetBeans/Apache\ NetBeans\ 21.app/Contents/Resources/NetBeans/netbeans/bin/netbeans\" --jdkhome
 \$JAVA_HOME \$\* \& > netbeans #<3>
 chmod +x netbeans #<4>
 ----
@@ -460,7 +460,7 @@ We use NetBeans IDE as default. We might not be able to answer any support quest
 
 //include::configuringmaven.adoc[]
 
-//include::sebipom.adoc[]
+//include::informaticspom.adoc[]
 
 == Additional Pointers
 

@@ -51,4 +51,4 @@ file with
 The link:topics/settings.xml.txt[raw settings file].
 
 Note that the project provided through the PRC2 personal repository will [role:red]*NOT* work without
-the settings file above. From February 2020 will use sebipom version 2.3.0 or above.
+the settings file above.

@@ -10,13 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-/**
- *
- * @author insert your name here.
- */
 public class CabbageTest {
 
-    final static Cabbage SPROUT = new Cabbage( "Brussel Sprouts", 10, 0.2, STRONG );
+    final static Cabbage SPROUT = new Cabbage( "Brussels Sprouts", 10, 0.2, STRONG );
     final static Cabbage CAULIFLOWER = new Cabbage( "Cauliflower", 1000, 1.5, DISTINCT );
     final static Cabbage KALE = new Cabbage( "Kale", 500, 0.700, WEAK );
     final static Cabbage WHITE = new Cabbage( "White Cabbage", 1200, 1.2, DISTINCT );
@@ -85,14 +81,14 @@ public class CabbageTest {
     static TD td( String message, String compator, int expected, Cabbage a, Cabbage b ) {
         return new TD( message, compator, expected, a, b );
     }
-    
+
     //@Disabled("Think TDD")
     @Test
     public void tEqualsAndHashCode() {
-        
-        Cabbage cab1 = 
-        
+
+        Cabbage cab1 =
+
         fail( "tEqualsAndHashCode completed succesfully; you know what to do" );
     }
-    
+
 }
