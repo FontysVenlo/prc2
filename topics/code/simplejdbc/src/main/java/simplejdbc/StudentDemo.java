@@ -33,8 +33,7 @@ class StudentDemo {
 
     public List<Student> listAll() {
         var result = new ArrayList<Student>();
-        try ( Connection con = ds.getConnection(); 
-                PreparedStatement pst = con.prepareStatement( query ); 
+        try ( Connection con = ds.getConnection();                PreparedStatement pst = con.prepareStatement( query );
                 ResultSet rs = pst.executeQuery(); ) {
             while ( rs.next() ) {
                 Integer snummer = rs.getInt( 1 );
@@ -47,7 +46,7 @@ class StudentDemo {
                 String student_class = rs.getString( 8 );
                 Boolean active = rs.getBoolean( 9 );
 
-                Student student = new Student( snummer, firstname, lastname, 
+                Student student = new Student( snummer, firstname, lastname,
                         dob, cohort, email, gender, student_class, active );
                 result.add( student );
             }
@@ -57,11 +56,10 @@ class StudentDemo {
         return result;
     }
 
-    private static final String insertSql = 
-        """
-        insert into students (student_id,firstname,lastname,dob,cohort,email,gender,student_grp,active)
-        values(                         ?,       ?,       ?,  ?,     ?,    ?,     ?,          ?,     ?)
-        """;
+    private static final String insertSql = """
+                     insert into students (student_id,firstname,lastname,dob,cohort,email,gender,student_grp,active)
+                     values(                         ?,       ?,       ?,  ?,     ?,    ?,     ?,          ?,     ?)
+                     """;
 
     public void insertStudents(List<Student> students) {
         try ( Connection con = ds.getConnection(); PreparedStatement pst = con.prepareStatement( insertSql ); ) {
@@ -100,7 +98,7 @@ class StudentDemo {
 
         myClass.stream().forEach( System.out::println );
 
-        if ( myClass.size() == 0 ) {
+        if ( myClass.isEmpty() ) {
             System.out.println( "Mh, none found. Where are they??" );
 
             System.out.println( "new balls please" );
