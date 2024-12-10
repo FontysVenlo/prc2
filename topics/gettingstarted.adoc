@@ -236,7 +236,6 @@ Depending on the type of terminal you are using, we need the specify the aliases
 
 Since macOS Catalina (10.15) the default shell (which is used by the terminal) is ZShell (zsh).
 This means we can specify our aliases in either `.zshrc` or in `.zprofile` in our home directory. We suggest to
-This means we can specify our aliases in either `.zshrc` or in `.zprofile` in our home directory. We suggest to
 create an additional configuration file `.java_setup` in your home directory.
 
 [#java_setup]
@@ -338,9 +337,9 @@ brew install maven
 
 Install manually:
 
-Fetch a fresh copy of https://maven.apache.org/[Apache Maven] from the website. Unzip the archive at
-Fetch a fresh copy of https://maven.apache.org/[Apache Maven] from the website. Unzip the archive at
-an appropriate location (e.g. /Applications). Make sure to put maven on the path, see <<java_setup, java_setup>>.
+Fetch a fresh copy of https://maven.apache.org/[Apache Maven] from the website.
+Unzip the archive at an appropriate location (e.g. /Applications).
+Make sure to put maven on the path, see <<java_setup, java_setup>>.
 
 Once this is done, entering  `mvn --version` should produce output.
 
