@@ -20,7 +20,7 @@ icon:linux[fw] `$ sha512sum /path/to/file` +
 icon:apple[fw] `$ shasum -a 256 /path/to/file` +
 icon:windows[fw] `$ certUtil -hashfile /path/to/file SHA256`
 
-You can check the download of that version of netbeans, and the command should produce the same signature as is available on the download website.
+You can check the download of that version of your IDE, and the command should produce the same signature as is available on the download website.
 ====
 
 
@@ -199,7 +199,7 @@ and to make it easy to switch between Java versions.
 The first command lists the most recent version of Java on your system
 The second command lists all installed versions of Java on your system
 
-We can now setup an environment to easily switch between Java versions and later on even launch Netbeans with the intended Java version.
+We can now setup an environment to easily switch between Java versions and later on even launch most IDEs with the intended Java version.
 The only thing we need to do for this is set the `JAVA_HOME` environment variable to link to the correct Java version.
 
 .icon:apple[fw] Set the `JAVA_HOME` environment
@@ -235,7 +235,7 @@ for this we need to let the terminal know to load our aliases on startup.
 Depending on the type of terminal you are using, we need the specify the aliases at different places.
 
 Since macOS Catalina (10.15) the default shell (which is used by the terminal) is ZShell (zsh).
-This means we can specify our aliases in either `.zshrc` or in `.zprofile` in our home directory. We suggest to 
+This means we can specify our aliases in either `.zshrc` or in `.zprofile` in our home directory. We suggest to
 create an additional configuration file `.java_setup` in your home directory.
 
 [#java_setup]
@@ -292,9 +292,8 @@ We will use *Apache Maven*, or *maven* for short throughout the PRC2 course, so 
 
 The application is called *Maven* but as command spelled as `mvn`.
 
-Maven is the default build tool in the Java world and can build your program from sources without the use of and IDE. This makes your
-project agnostic to the IDE used, so they work with NetBeans as first class projects out of the box and also with other IDEs with little or no tweaks to that IDE.
-It is also the way the teachers use to compile and test the students work for the practical assignments and performance assessments.
+Maven is the default build tool in the Java world and can build your program from sources without the use of and IDE. This makes your project agnostic to the IDE used. Most IDEs will detect your project as a maven project if the `pom.xml` file is present in the root of your project.
+Maven is also the way the teachers use to compile and test the students work for the practical assignments and performance assessments.
 
 ==== icon:linux[fw] Linux
 
@@ -338,8 +337,9 @@ brew install maven
 
 Install manually:
 
-Fetch a fresh copy of https://maven.apache.org/[Apache Maven] from the website. Unzip the archive at 
-an appropriate location (e.g. /Applications). Make sure to put maven on the path, see <<java_setup, java_setup>>.
+Fetch a fresh copy of https://maven.apache.org/[Apache Maven] from the website.
+Unzip the archive at an appropriate location (e.g. /Applications).
+Make sure to put maven on the path, see <<java_setup, java_setup>>.
 
 Once this is done, entering  `mvn --version` should produce output.
 
@@ -355,7 +355,7 @@ Install manually:
 . Download the zip file from https://maven.apache.org/download.cgi.
 . Extract the zip file to `C:\usr\lib`
 . Add the `bin` directory to the `path`
-.. Goto `Settings > About > Advanced System Settings > Adavanced Tab > Environment Variables`
+.. Goto `Settings > About > Advanced System Settings > Advanced Tab > Environment Variables`
 .. Select `Path` and `Edit`
 .. `New` and fill in the path `C:\usr\lib\apache-maven-3.6.3\bin`
 . Close `System Properties`
@@ -429,7 +429,7 @@ We do this by adding an executable file to the `PATH` so we can start Netbeans f
 ----
 cd /usr/local/bin #<1>
 touch netbeans #<2>
-echo \"/Applications/NetBeans/Apache\ NetBeans\ 21.app/Contents/Resources/NetBeans/netbeans/bin/netbeans\" --jdkhome 
+echo \"/Applications/NetBeans/Apache\ NetBeans\ 21.app/Contents/Resources/NetBeans/netbeans/bin/netbeans\" --jdkhome
 \$JAVA_HOME \$\* \& > netbeans #<3>
 chmod +x netbeans #<4>
 ----
@@ -457,10 +457,16 @@ netbeans myProject
 ==== Other IDE's
 
 We use NetBeans IDE as default. We might not be able to answer any support questions on other IDE's.
+You are free to choose your own Integrated Development Environment (IDE). An IDE allows you to write, compile, run and debug your programs in one place.
+Popular choices are:
+
+- https://code.visualstudio.com/[Visual Studio Code]
+- https://www.jetbrains.com/idea/[IntelliJ IDEA]
+- https://netbeans.apache.org/[NetBeans]
 
 //include::configuringmaven.adoc[]
 
-//include::sebipom.adoc[]
+//include::informaticspom.adoc[]
 
 == Additional Pointers
 

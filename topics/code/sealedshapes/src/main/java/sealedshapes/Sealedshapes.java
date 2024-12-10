@@ -3,8 +3,6 @@
  */
 package sealedshapes;
 
-import static sealedshapes.BasicPoint.bp;
-
 /**
  * Examples of usage.
  * @author Pieter van den Hombergh {@code <pieter.van.den.hombergh@gmail.com>}
@@ -13,7 +11,7 @@ public class Sealedshapes {
 
     /**
      * Demo program.
-     * 
+     *
      * @param args not used
      */
     public static void main(String[] args) {
@@ -42,7 +40,7 @@ public class Sealedshapes {
         System.out.println( "Hello World!" );
 
         var s = new Circle( d, 2.0D );
-        
+
         if (s instanceof Circle(var bp, var rad)){
             System.out.println( "diameter = " + rad*2 );
         }

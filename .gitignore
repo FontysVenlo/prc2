@@ -3,6 +3,7 @@
 /resources
 /themes
 .hugo_build.lock
+hugo
 
 ## OS Files
 # Windows
@@ -13,14 +14,15 @@ $RECYCLE.BIN/
 
 # OSX
 .DS_Store
-hugo
 
 # Javascript
 node_modules
 
+# Java
 **/target
 
+# IDE files
 **/.vscode
-doit
+**/nbproject/
 
-/nbproject/private/
+doit

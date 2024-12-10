@@ -79,7 +79,7 @@ public void tLength( String line, String p1, String p2, double expected,
     * @return the double
     * @throws ParseException if the string does not parse to double.
     */
-static double getDoubleConsideringLocale( String input ) 
+static double getDoubleConsideringLocale( String input )
    throws ParseException {
     return DecimalFormat.getNumberInstance().parse( input ).doubleValue(); // <1>
 }
@@ -95,7 +95,7 @@ static double getDoubleConsideringLocale( String input )
 static double getDoubleConsideringLocale( Locale locale, String input )
     throws ParseException {
 =======
-static double getDoubleConsideringLocale( Locale locale, String input ) 
+static double getDoubleConsideringLocale( Locale locale, String input )
   throws ParseException {
 >>>>>>> Stashed changes
     return DecimalFormat.getNumberInstance(locale).parse( input ).doubleValue();
@@ -137,7 +137,7 @@ assertThatThrownBy( () -> {
 <2> Get the assertion for in String. Do [red]*not* use `toString()`, because that produces a _String_, not an [blue]*AbstractStringAssert*.
 <3> And use the assert to check that the string contains the required key information.
 
-.If you turn on type hints in NetBeans-IDE (or in intelij) you can see what the type is on which you call `contains(keys)`
+.If you turn on type hints in NetBeans-IDE (or in vscode/intelij) you can see what the type is on which you call `contains(keys)`
 image::assertjtypehints.png
 
 

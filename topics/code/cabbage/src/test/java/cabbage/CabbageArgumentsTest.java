@@ -15,16 +15,12 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
 
 public class CabbageArgumentsTest {
 
-    static final Cabbage SPROUT = new Cabbage( "Brussel Sprouts", 10, 0.2,
-                                               STRONG );
-    static final Cabbage CAULIFLOWER = new Cabbage( "Cauliflower", 1000, 1.5,
-                                                    DISTINCT );
+    static final Cabbage SPROUT = new Cabbage( "Brussels Sprouts", 10, 0.2, STRONG );
+    static final Cabbage CAULIFLOWER = new Cabbage( "Cauliflower", 1000, 1.5, DISTINCT );
     static final Cabbage KALE = new Cabbage( "Kale", 500, 0.700, WEAK );
-    static final Cabbage WHITE = new Cabbage( "White Cabbage", 1200, 1.2,
-                                              DISTINCT );
+    static final Cabbage WHITE = new Cabbage( "White Cabbage", 1200, 1.2, DISTINCT );
     static final Cabbage CABBAGE = new Cabbage( "Cabbage", 600, 0.480, STRONG );
-    static final Cabbage SAVOY = new Cabbage( "Savoy Cabbage", 800, 1.8,
-                                              VERY_STRONG );
+    static final Cabbage SAVOY = new Cabbage( "Savoy Cabbage", 800, 1.8, VERY_STRONG );
 
     static Map<String, Comparator<Cabbage>> comparators
             = Map.of(
