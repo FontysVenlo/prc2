@@ -87,7 +87,7 @@ to the actual longer expected message, or even a message that is a format string
 static Map<String, Person> emap = Map.of(
     "piet", new Person("Piet", "Puk", LocalDate.of(1955-03-18),"M"),
     // piet2 for equals test.
-    "piet2", new Person("Piet", "Puk", LocalDate.of(1955-03-18),"M"), 
+    "piet2", new Person("Piet", "Puk", LocalDate.of(1955-03-18),"M"),
     "rembrandt", new Person("Rembrandt", "van Rijn", LocalDate.of(1606,7,15),"M"),
     "saskia", new Person("Saskia", "van Uylenburgh", LocalDate.of(1612,8,11),"F"),
   );
@@ -95,7 +95,7 @@ static Map<String, Person> emap = Map.of(
 
 It is particularly applicable to lambda expressions.
 You can translate a string into a lambda, by using a map. You can then use simple names (strings),
-that can be put in a csv record. 
+that can be put in a csv record.
 
 .Map of string to lambda
 [source,java]
@@ -151,7 +151,7 @@ void fractionOps( String message, String opName, String expected,
 }
 ----
 
-<1> The fraction parameters a,b,c, and d are captured from the csvrecord. This makes the parameter list a 
+<1> The fraction parameters a,b,c, and d are captured from the csvrecord. This makes the parameter list a
   tad longer, but also more understandable. JUnit 5 csvsource uses the annotation and the signature of the test method and can deal
   with most common types such as primitive, String and LocalDate (preferably in ISO-8601 format such as '2021-01-14' for the day of writing this). Strings in the csv-records will be automatically converted to the parameter types in your test methods in these cases.
 <2> The fraction instances are created from a, b, c, and d.
@@ -165,13 +165,13 @@ Study the examples above, they might give you inspiration with the exercises com
 
 [TIP]
 ====
-As of the moment of writing (Januari 2021, Junit 5.7), the parameterized test [red]*can't* deal with varargs parameters, that is a varying
+As of the moment of writing (January 2021, Junit 5.7), the parameterized test [red]*can't* deal with varargs parameters, that is a varying
 list of parameters, with the triple dot notation.
 ====
 
 === Test data from a file
 
-Sometimes the amount of data you have in your test data-set is so big that it does not comfortably fit inside a `@CsvSoure` annotation.
+Sometimes the amount of data you have in your test data-set is so big that it does not comfortably fit inside a `@CsvSource` annotation.
 You specify an external file as data source with to achieve the same, the annotation now is `@CsvFileSource`, which takes files as argument.
 
 The file, as you might have guessed, can be a csv file, which can be edited quite comfortably with a https://plugins.netbeans.apache.org/catalogue/?id=1[NetBeans plugin]
@@ -185,7 +185,7 @@ to your validator.
 ----
   @ParameterizedTest
   @CsvFileSource( resources = { "testdata.csv" } )
-  void testRegex( String message, String input, 
+  void testRegex( String message, String input,
           boolean matches, int groupCount ){
     // your code here
   }
@@ -196,7 +196,7 @@ to your validator.
 
 [NOTE]
 ====
-At the time of writing JUnit wants the csv file for CsvFileSource to be 
+At the time of writing JUnit wants the csv file for CsvFileSource to be
 in the `{project-directory}src/test/resources` folder or a child folder thereof.
 To be able to do that, you *first* need to create that folder.
 ====
@@ -209,7 +209,7 @@ In some cases, multiple tests need the same data. In the case of a CsvSourceFile
 them. This is an _acceptable form_ of copy and waste, because the annotations all point to one source of truth, the CSV file.
 
 Sometimes you would like to keep or even generate the test data inside the test class.
-Do not take the simple and naive route to simply copy-and-waste the (largish) cvssource data,
+Do not take the simple and naive route to simply copy-and-waste the (largish) csvsource data,
 but instead stick to the https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[D.R.Y. rule].
 
 One problem is that a method in Java can return only one result, either object or primitive type. Luckily

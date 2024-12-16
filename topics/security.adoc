@@ -112,8 +112,8 @@ public class Main {
     public static void main(String[] args) {
         try {
             URLClassLoader loader =
-              new URLClassLoader(new URL[] { 
-                  new URL("http://localhost:8080/") 
+              new URLClassLoader(new URL[] {
+                  new URL("http://localhost:8080/")
               }
             ); // <1>
             Class c = loader.loadClass ("Printer");
@@ -447,7 +447,7 @@ We can check if this form is susceptible for SQL injection by adding different
 quotes and other characters that are used inside SQL.
 For example input a single quote `'` anywhere in the username
 or password field. We get an error back telling us that the string
-is unterminated. 
+is unterminated.
 
 Notice the useful error message, we will get back to this in the
 section error handling.
@@ -462,11 +462,11 @@ there is a SQL injection possibility.
 .Error message, wrapped for readability
 [source, sql]
 ----
-Unterminated string literal started at position 72 
-  in SQL select username from users 
+Unterminated string literal started at position 72
+  in SQL select username from users
   where username = 'testuser'' and password = ''. Expected char -- <1>
 ----
-<1> 
+<1>
 
 So lets try to login as `testuser` without knowing the password.
 We can do this by entering the username `testuser` and for the password
@@ -759,7 +759,7 @@ descriptive error message, such as `Username or password incorrect`.
 This way an attacker can not tell if the username exists
 or that the password is wrong.
 // Errors can be helpful, but can pose a security risk
-// Don't pass SQL execptions
+// Don't pass SQL exceptions
 // Also watch out what errors/exception can tell an attacker
 
 // ==== Regex
