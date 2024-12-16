@@ -1,0 +1,3 @@
+== Managing different Java versions
+
+If needed, consider using a tool like https://sdkman.io/[sdkman] to manage your java versions.
