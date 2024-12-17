@@ -10,7 +10,7 @@ The rationale for that is:
 * AssertJ tests tend to be quite *readable*, once you get used to the fluent style. You will see long method names,
   but they help understanding what is going on a no-brainer.
 * AssertJ can protect the test methods against unexpected exceptions, such as null pointers (NPE) before doing further tests.
-* With the exception of _testing exceptions_, the userinterface and api of AssertJ is quite consistent. +
+* With the exception of _testing exceptions_, the user interface and api of AssertJ is quite consistent. +
   You always start with `assertThat( objectOfInterest ).assertingMethod(...)`. +
 
 We try to use the latest stable version of AssertJ and Junit 5.
@@ -214,7 +214,7 @@ in the same way as in the previous paragraph, then pass that `code` to the excep
                 .isInstanceOf( Exception.class) // <3>
                 .isExactlyInstanceOf( IllegalArgumentException.class) // <4>
                 .hasMessageContainingAll( "should","teach"); // <5>
-        // fail( "addIllegalProfessor completed succesfully; you know what to do" );
+        // fail( "addIllegalProfessor completed successfully; you know what to do" );
     }
 ----
 

@@ -45,7 +45,7 @@ image::module-graph.png[]
 
 Having a modular project or a non-modular project depends on the presence of a small file with a well defined name in a specific place.
 
-The module-info.java file should reside in the root folder of the java sources (which makes the defaul package). The name of the file
+The module-info.java file should reside in the root folder of the java sources (which makes the default package). The name of the file
 is not a valid java type name and that is on purpose. The resulting class file contains the module declarations
 which specifies what a module *needs* (_reads_ in JPMS terms) and what it provides (exports).
 

@@ -15,7 +15,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
 }
 ----
 
-<1> The only allowed extenders of this class are `StringBuilder` and `StringBuffer`, meaning that since Java 20 you can no longer extend `AbstractStringBuilder`, 
+<1> The only allowed extenders of this class are `StringBuilder` and `StringBuffer`, meaning that since Java 20 you can no longer extend `AbstractStringBuilder`,
     although that would be difficult anyway, because it is a package private class inside the package `java.lang` inside the module `java.base`.
 
 In the code snippets below we give a complete example of a simple shape hierarchy.
@@ -55,7 +55,7 @@ public void testRetangleTriangle() {
 
 In this `BasicShape` example the definitions of the leaf records are trivial, as an example the circle.
 
-.Cirle record
+.Circle record
 [source,java]
 ----
 public record Circle(BasicPoint center, double radius) implements BasicShape {}
@@ -90,7 +90,7 @@ default double area() { //<1>
     return switch ( this ) {  //<2>
         case Circle(var unused, double radius) ->
             radius * radius * Math.PI;
-       case Rectangle( BasicPoint( var tlx, var tly ), 
+       case Rectangle( BasicPoint( var tlx, var tly ),
                        BasicPoint( var brx, var bry ) ) -> //<3>
                        abs( tlx - brx ) * abs( tly - bry );
         case Triangle( BasicPoint a, BasicPoint b, BasicPoint c ) -> { //<4>
@@ -112,7 +112,7 @@ default double area() { //<1>
 
 To make things complete, the code below shows that a record can implement instance and static methods too, like the method to compute the distance between this and another point and the static shortcut factory method to define a `new BasicPoint(...)` with `bp(...)` instead.
 
-.Complete BasicPoint class. Note the additional methods. 
+.Complete BasicPoint class. Note the additional methods.
 [source,java]
 ----
 include::code/sealedshapes/src/main/java/sealedshapes/BasicPoint.java[]

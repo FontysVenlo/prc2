@@ -9,13 +9,13 @@ For a scene to be taken, there is typically quite some preparation involved like
 on a thin cable from the ceiling, making sure the *crook* is in the right position so he can land or receive the first punches and so on. +
 Then the director calls *action* and the scene is acted out +
 If the director is satisfied, all is okay +
-If not, he will want a redo later on. 
+If not, he will want a redo later on.
 
 A very popular style to write unit tests is the triple-A or *Arrange-Act-Assert*.
 
 [blue]*Arrange* simply means that you set up the objects you need in the tests:
 
-** The **S**ystem **U**nder **T**est, the [blue,bold]**SUT** its the term in the tesing world. In movies it is the protagonist or main actor.
+** The **S**ystem **U**nder **T**est, the [blue,bold]**SUT** its the term in the testing world. In movies it is the protagonist or main actor.
 ** The **D**ependent **O**n **C**omponents or [blue,bold]**DOC**s, the scenario needs to play out the action. Supporting actors or even props in the movies.
 
 [blue]*Act* is quite similar to a film directory shouting *action*, that is do what you prepared for. +
@@ -89,7 +89,7 @@ After saving all files, you will have convinced both IDE and compiler.
 
 .It is good to have a thinking pause
 Let the IDE and framework do (most) of the typing work for you, by providing clues. If you do that smartly, it
-will be easy to write code that is correct and acceptable by the compiler. A thinking pause can also useful 
+will be easy to write code that is correct and acceptable by the compiler. A thinking pause can also useful
  for the IDE, for it might need some processing first to find possible completions.
 [big]*Being lazy is good, both for code and smart people.*
 ====

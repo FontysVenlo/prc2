@@ -5,7 +5,7 @@ lead: ""
 date: 2022-02-02T10:43:27+01:00
 draft: false
 images: []
-menu: 
+menu:
   pages:
     parent: ""
 weight: 010
@@ -24,4 +24,4 @@ include::{topics}/mavenonsteroids.adoc[]
 
 include::{topics}/mavenmodules.adoc[]
 
-include::{topics}/flexjava.adoc[]
+include::{topics}/javaversions.adoc[]

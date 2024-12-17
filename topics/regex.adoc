@@ -17,7 +17,7 @@ A simple string is also a regular expression. As far as there are no meta charac
 a string simply matches itself.
 
 * The first meta character you need to know is the dot [blue]`'.'`, which matches any character. So a line
- with a dot will match any line that is the same as the line with any substution for the dot character (including itself).
+ with a dot will match any line that is the same as the line with any substitution for the dot character (including itself).
 * The second  meta character is the backslash [blue]`'\'`. It takes the special meaning (as in meta) of the following character away.
  Back to our matching line: if you want exactly a dot at the place of the dot, prefix it with a backslash, so it will be understood as a dot. Like this: [red]"\.".
   But since we using Java, and the backslash already has a special role in strings, you must double the backslash in most cases, thus: [blue]`"\\."`.
@@ -25,8 +25,8 @@ a string simply matches itself.
 ** ? 0 or one, aka at most.  So "a?" means at most one a.
 ** + at least one.
 ** * any number of times, including zero.
-** numberic quantifier, using braces ('{' and  '}''). For instance "a{1,4}" means a between 1 and 4 times, inclusive.
-You can also write "a{3}" meaning exaclty 3 as. Or a lower (a{2,} for at least 2 a)  or upper boundary (a{,12}) at most 12.
+** numeric quantifier, using braces ('{' and  '}''). For instance "a{1,4}" means a between 1 and 4 times, inclusive.
+You can also write "a{3}" meaning exactly 3 as. Or a lower (a{2,} for at least 2 a)  or upper boundary (a{,12}) at most 12.
 * character classes
 ** user specified: [aeiou] matches the English vowels, [a-p] the first 16 characters of the alphabet, [a-pA-P] the same, but ignoring case.
 * predefined :
@@ -113,7 +113,7 @@ import java.util.regex.Matcher;
 public class Main {
     public static void main(String[] args) {
         String input = "The quick brown fox jumps over the lazy dog";
-        String pattern = 
+        String pattern =
                       "The (?<first>\\w+)" // comment 1
                       +" brown (?<second>\\w+)" // comment 2
                       +" jumps over the (?<third>\\w+) dog"; // comment 3

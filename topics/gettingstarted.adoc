@@ -77,7 +77,7 @@ apt-get install temurin-21-jdk
 Manual installation:
 
 In the example below we assume that the distribution is packed as a `tar.gz` archive.
-The example shows the archive name as of 21 Januari 2024,
+The example shows the archive name as of 21 January 2024,
 `OpenJDK21U-jdk_x64_linux_hotspot_21.0.2_13.tar.gz`
 
 .icon:linux[fw] unpack java distribution using the command-line
@@ -401,7 +401,7 @@ For extra creature comfort, add a simple netbeans script to your path
 
 Then make that script executable with `chmod +x netbeans`.
 
-NetBeans IDE should now be startable from the command line (fine for me) as well as from the menu.
+NetBeans IDE should now be runnable from the command line (fine for me) as well as from the menu.
 
 ==== icon:apple[fw] macOS
 

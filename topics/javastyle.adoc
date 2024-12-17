@@ -151,7 +151,7 @@ In particular in a project like PRJ2, you should have multiple authors if that b
 ====
 You can configure your IDE to insert the proper author info. In NetBeans IDE go to templates, settings, and
 uncomment the `user` property and make it have the proper information. This is particularly important if
-your user name on your machine is `pattatje` or some other obscure name that the teachers might not know.
+your user name on your machine is `patatje` or some other obscure name that the teachers might not know.
 ====
 
 *Do Not* skimp on Javadoc style. It is just as wrong as writing  "Alice and Bob [role="red"]*goes* to town".
