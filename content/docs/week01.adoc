@@ -19,12 +19,13 @@ test each and every part manually. You clicked on the nice TestMyCode (TMC) butt
 There is a catch though: Out there in the real world, there won't be any button doing that magic for you, nor will some teacher or school
 provide the tests for you, so [red]*you will be on your own*.#
 
-But fret not! Writing tests is typically much simpler than writing the actual code. At least, it is when you follow a basic set of steps:
+But fret not! Writing tests is typically much simpler than writing the actual code. At least it is, when you know the anatomy of a test:
 
 . [blue]**A**rrange: Prepare or set up the thing you want to test
 . [blue]**A**ct: Interact with the object you are testing
-. [blue]**A**ssert or Ensure that the observable result(s) is/are as expected.
-. If it says [red]*boom*, then at least you learned something ....
+. [blue]**A**ssert that the observable result(s) is/are as expected
+
+Finally, if a test says [red]*boom*, then at least you learned something ...
 
 // :sectums!:
 // == Reading
@@ -43,7 +44,7 @@ But fret not! Writing tests is typically much simpler than writing the actual co
 
 * Test Driven Development.
 * Maven configuration as exercise.
-* **A**rrange **A**ct **A**ssert
+* **A**rrange **A**ct **A**ssert.
 * JUnit (5) as test framework.
 * AssertJ as assertion library.
 
