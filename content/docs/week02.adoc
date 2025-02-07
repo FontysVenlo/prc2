@@ -5,7 +5,7 @@ date: 2022-02-01T14:17:33+01:00
 draft: false
 images: []
 slug: "parameterized-tests"
-menu: 
+menu:
   docs:
     parent: ""
 weight: 020
@@ -13,6 +13,18 @@ toc: true
 ---
 
 :imagesdir: /prc2_web/
+
+== Clean tests
+Bad tests are anything but a pleasure to work with. They are slow, hard to understand, and hard to maintain.
+In order to write clean tests, we follow the F.I.R.S.T. principles of tests:
+
+// Source: Clean code, Robert C. Martin
+
+- **Fast**: Tests should run quickly.
+- **Independent**: Tests should not depend on each other. When the state of one test affects the outcome of another, it can be hard to understand why a test fails and makes it harder to run single tests or run tests in parallel.
+- **Repeatable**: Tests should be repeatable in any environment. This means that tests should not depend on external resources like databases, network, or file systems.
+- **Self-Validating**: Tests should be able to determine if they pass or fail without human intervention. This means that the test should contain assertions that determine if the test passes or fails.
+- **Timely**: Tests should be written before the code they test. This is the essence of Test-Driven Development (TDD). If you write tests after the code, you might find out the code is hard to test.
 
 include::{topics}/parameterizedtests.adoc[]
 
