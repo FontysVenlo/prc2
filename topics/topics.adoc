@@ -3,7 +3,7 @@
 In the topics table below, *Vol I* is _Core Java Volume I, Fundamentals_ and *Vol II* is _Core Java Volume II, Advanced Features_
 both by Cay S. Horstmann and both in the 12th edition.
 
-[cols="2,200,100,200",options="header"
+[cols="2,200,100,200",options="header"]
 |=======
 | Week | Topic | Book | Exercises
 | 1 | Test Driven, Unit Testing basics, Parameterized Tests | Vol I 5.6 enum classes | Phonebook, Minibar
