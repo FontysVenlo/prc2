@@ -1,0 +1,211 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>PRC2 - 02 Parameterized tests</title><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/main.min.d3ef8433f226f2b9051022947c27d66cc51686f46c6f4a00b71c25f7490ba7f45ef1d9f99726cbb0c0f91752d938146a56914b5ec0b6a752e39a0dc2b4b07c57.css integrity="sha512-0++EM/Im8rkFECKUfCfWbMUWhvRsb0oAtxwl90kLp/Re8dn5lybLsMD5F1LZOBRqVpFLXsC2p1Ljmg3CtLB8Vw==" crossorigin=anonymous><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous><script src=/prc2/js/init-darkmode.min.b7911813658cd032d0ed2d118da1fb57653d18386d8b1a26618f83f80019be21e977a1ddeeaeb51dcd1f7d21dfed542a8da077c29eb1ec03d84471bf90d3fabe.js integrity="sha512-t5EYE2WM0DLQ7S0RjaH7V2U9GDhtixomYY+D+AAZviHpd6Hd7q61Hc0ffSHf7VQqjaB3wp6x7APYRHG/kNP6vg==" crossorigin=anonymous></script>
+<link rel=apple-touch-icon sizes=180x180 href=https://fontysvenlo.github.io/prc2/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=https://fontysvenlo.github.io/prc2/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=https://fontysvenlo.github.io/prc2/favicon-16x16.png></head><body class="antialiased text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800"><header class="sticky top-0 z-40 w-full flex-none lg:border-b lg:border-gray-900/10 dark:border-gray-50/[0.06] bg-white dark:bg-gray-800
+border-b border-slate-900/10 lg:border-0 dark:border-slate-300/10"><div class="max-w-8xl mx-auto"><div class="py-4 lg:px-8 mx-4 lg:mx-0"><div class="relative flex items-center"><button id=menu-toggle type=button class="lg:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 mr-3">
+<span class=sr-only>Navigation</span><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<a class="mr-3 flex-none overflow-hidden md:w-auto dark:hover:text-gray-200 hover:text-gray-900" href=https://fontysvenlo.github.io/prc2/>PRC2</a><div class="relative flex ml-auto"><nav class="hidden md:flex items-center text-sm leading-6 font-semibold text-gray-700 dark:text-gray-200"><ul class="flex space-x-8"><li><a href=https://fontysvenlo.github.io/prc2/pages/tips/ class="hover:text-sky-500 dark:hover:text-sky-400">Tips</a></li><li><a href=https://fontysvenlo.github.io/prc2/pages/setup/ class="hover:text-sky-500 dark:hover:text-sky-400">Setup</a></li></ul></nav><div class="flex items-center lg:border-l border-gray-200 ml-6 pl-6 dark:border-gray-700"><button type=button id=theme-toggle>
+<span class="dark:hidden hover:text-sky-500"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span><span class="hidden dark:inline hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span></button>
+<a href=https://github.com/FontysVenlo/prc2 class="ml-6 block hover:text-sky-500 dark:hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a></div></div></div></div></div></header><div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8"><aside id=menu class="hidden lg:block fixed z-20 inset-0 top-[3.5rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto bg-white dark:bg-gray-800"><nav class="lg:leading-6 relative"><ul class="block md:hidden"><li class="mt-12 lg:mt-8"><h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">General</h5><ul class="space-y-2 border-l border-gray-100 dark:border-gray-700"><li><a href=https://fontysvenlo.github.io/prc2/pages/tips/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">Tips</a></li><li><a href=https://fontysvenlo.github.io/prc2/pages/setup/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">Setup</a></li></ul></li></ul><ul><li class="mt-12 lg:mt-8"><h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">Weeks</h5><ul class="space-y-2 border-l border-gray-100 dark:border-gray-700"><li><a href=https://fontysvenlo.github.io/prc2/docs/unit-testing-basics/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">01 Unit Testing Basics</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/parameterized-tests/ class="block border-l pl-4 -ml-px
+border-slate-500 dark:border-slate-400 text-black dark:text-slate-200">02 Parameterized tests</a></li></ul></li></ul></nav></aside><div class=lg:pl-[19.5rem]><div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16"><article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500"><nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_clean_tests>Clean tests</a></li><li><a href=#_parameterized_tests>Parameterized tests</a><ol class="toc-list level-2"><li><a href=#_parameterized_test_junit_5_style>Parameterized test, Junit 5 style</a></li><li><a href=#_lookup_in_a_map>Lookup in a map.</a></li><li><a href=#_test_data_from_a_file>Test data from a file</a></li><li><a href=#_repeated_use_of_same_data>Repeated use of same data.</a></li></ol></li><li><a href=#_test_recipe_i_test_equals_and_hashcode>Test Recipe I, Test Equals and hashCode</a></li><li><a href=#_links>Links</a></li></ol></nav><section class="doc-section level-1"><h2 id=_clean_tests>Clean tests</h2><p>Bad tests are anything but a pleasure to work with. They are slow, hard to understand, and hard to maintain.
+In order to write clean tests, we follow the F.I.R.S.T. principles of tests:</p><div class=ulist><ul><li><strong>Fast</strong>: Tests should run quickly.</li><li><strong>Independent</strong>: Tests should not depend on each other. When the state of one test affects the outcome of another, it can be hard to understand why a test fails and makes it harder to run single tests or run tests in parallel.</li><li><strong>Repeatable</strong>: Tests should be repeatable in any environment. This means that tests should not depend on external resources like databases, network, or file systems.</li><li><strong>Self-Validating</strong>: Tests should be able to determine if they pass or fail without human intervention. This means that the test should contain assertions that determine if the test passes or fails.</li><li><strong>Timely</strong>: Tests should be written before the code they test. This is the essence of Test-Driven Development (TDD). If you write tests after the code, you might find out the code is hard to test.</li></ul></div></section><section class="doc-section level-1"><h2 id=_parameterized_tests>Parameterized tests</h2><p><span class=big>You will often see that test methods look a lot like each other. As an example:
+In the fraction exercise, in most test methods you have two inputs and one or two results,
+then an operation is done followed by some assertion, often of the same kind.
+This quickly leads to the habit of <em>copy and waste</em> programming. Many errors are introduced this way: You copy the original,
+tweak the copy a bit and you are done. Then you forget one required tweak, because they are easy to miss, but you do not notice it until too late.</span></p><section class="admonition-block warning" role=doc-notice><h6 class="block-title label-only"><span class=title-label>Warning:</span></h6><figure class="image-block related thumb right"><img src=/prc2/images/waste.jpg alt=waste width=480><figcaption>Figure 1. Do not become a ctrl+c, ctrl+v junky. That only produces junk.</figcaption></figure><p>Avoid <em class=big>copy and waste</em> at almost all times. It is <strong class="big red">NOT</strong> a good programming style. If you see it in your code, refactor it to
+remove the copies, but instead make calls to one version of it. This will make you have <em>less</em> code overall. Coding excellence is never measured
+in number of code lines, but in quality of the code. Think of gems. They are precious because they are rare.</p><p>The <em>copy and waste</em> problem can even become worse: When the original has a flaw, you are just multiplying the
+number of flaws in your code. This observation applies to test code just as well.<br></p><p><strong>CODE THAT ISN’T WRITTEN CAN’T BE WRONG</strong>.</p></section><section class="doc-section level-2"><h3 id=_parameterized_test_junit_5_style>Parameterized test, Junit 5 style</h3><p>Below you see an example on how you can condense the <code>toString()</code> tests of fraction from 5 very similar test methods into 5 strings containing the test data
+and 1 (say one) test method.<br>Paraphrasing a saying: <em class="green big">Killing many bugs with one test</em>.</p><figure class=listing-block><figcaption>Complete fraction test class with parameterized test, using an in-code csv source</figcaption><pre class=highlight><code class=language-java data-lang=java>package fraction;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
+import org.junit.jupiter.params.provider.CsvSource;
+
+public class FractionCSVSourceTest {
+
+    @ParameterizedTest
+    @CsvSource( {
+           //&#34;message,          expected,     n,   d&#34;, <b class=conum>1</b>
+           &#34;&#39;two thirds&#39;,        &#39;(2/3)&#39;,     2,   3&#34;, <b class=conum>2</b>
+           &#34;&#39;whole number,           &#39;2&#39;,     2,   1&#34;,
+           &#34;&#39;one third&#39;,         &#39;(1/3)&#39;,    -3,  -9&#34;,
+           &#34;&#39;minus two fifths&#39;,  &#39;(-2/5)&#39;,   12, -30&#34;,
+           &#34;&#39;one + two fifths&#39;, &#39;(-1-(2/5))&#39;,   35, -25&#34;
+    } )
+    void fractionOps( String message, String expectedString,
+            int numerator, int denominator ) { <b class=conum>3</b>
+
+        Fraction f = new Fraction( numerator, denominator );
+        assertThat( f.toString() )
+                .as( message )
+                .isEqualTo( expectedString );
+    }
+}</code></pre><ol class="callout-list arabic"><li>Adding a comment is always a good idea. You may also want your values aligned for improved readability.</li><li>Parameters are separated by commas, which maybe in the test values. In that case you can demarcate Strings with single quotes inside the csv record string.
+If you need another separator instead of comma, you can specify that too,
+see <a href=https://junit.org/junit5/docs/current/api/org.junit.jupiter.params/org/junit/jupiter/params/provider/CsvSource.html target=_blank rel=noopener>CsvSource API </a>.</li><li>The parameters are passed in as the type(s) provided by the test method’s signature. The Junit-5 framework will (try to) parse the csv record elements accordingly.</li></ol></figure><p>For more details see <a href=https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests target=_blank rel=noopener>Junit 5 parameterized tests </a>.</p><p>The CsvSource version of parameterized test is the simplest to use and easily understood.
+It keeps data and the test together, nicely near to each other, so it make it easy to read the
+tests and data in one glance.
+They typically fit easily on a screen. Remember the importance of readability of code. That too applies to test code.</p><hr></section><section class="doc-section level-2"><h3 id=_lookup_in_a_map>Lookup in a map.</h3><p>Sometimes there is no easy way to get from a string to some object, or even class.
+Examples are that you want to test for the correct <strong>type</strong> or <strong>exception</strong>, or supply a method name, but you cannot put that into a string without doing complex
+things like reflection which we may only do in later parts of the course. The trick is to use a <code>Map</code> that maps a string to the object of choice.</p><p>The lookup trick might also be applicable when you want to have short values in your test data table, like a message number which is mapped
+to the actual longer expected message, or even a message that is a format string and can be used in <code>Assertion.as( formatString, Object…​ args)</code>.</p><figure class=listing-block><figcaption>map from short string to test (Person) object.</figcaption><pre class=highlight><code class=language-java data-lang=java>static Map&lt;String, Person&gt; emap = Map.of(
+    &#34;piet&#34;, new Person(&#34;Piet&#34;, &#34;Puk&#34;, LocalDate.of(1955-03-18),&#34;M&#34;),
+    // piet2 for equals test.
+    &#34;piet2&#34;, new Person(&#34;Piet&#34;, &#34;Puk&#34;, LocalDate.of(1955-03-18),&#34;M&#34;),
+    &#34;rembrandt&#34;, new Person(&#34;Rembrandt&#34;, &#34;van Rijn&#34;, LocalDate.of(1606,7,15),&#34;M&#34;),
+    &#34;saskia&#34;, new Person(&#34;Saskia&#34;, &#34;van Uylenburgh&#34;, LocalDate.of(1612,8,11),&#34;F&#34;),
+  );</code></pre></figure><p>It is particularly applicable to lambda expressions.
+You can translate a string into a lambda, by using a map. You can then use simple names (strings),
+that can be put in a csv record.</p><figure class=listing-block><figcaption>Map of string to lambda</figcaption><pre class=highlight><code class=language-java data-lang=java>    final Map&lt;String, BiFunction&lt;Fraction, Fraction, Fraction&gt;&gt; ops = <b class=conum>1</b>
+      Map.of(
+              &#34;times&#34;, ( f1, f2 ) -&gt; f1.times( f2 ),
+              &#34;plus&#34;, ( f1, f2 ) -&gt; f1.plus( f2 ),
+              &#34;flip&#34;, ( f1, f2 ) -&gt; f1.flip(), <b class=conum>2</b>
+              &#34;minus&#34;, ( f1, f2 ) -&gt; f1.minus( f2 ),
+              &#34;divideBy&#34;, ( f1, f2 ) -&gt; f1.divideBy( f2 )
+      );</code></pre><ol class="callout-list arabic"><li>Note that we use a <a href=https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/BiFunction.html>BiFunction&lt;T,U,R></a> existing functional interface,
+with <strong>T</strong>, <strong>U</strong>, and <strong>R</strong> all of the same type: Fraction. This is legal.</li><li>f2 is not used in the right hand side of the arrow. This is legal too.</li></ol></figure><figure class=listing-block><figcaption>Using lambda names in test data</figcaption><pre class=highlight><code class=language-java data-lang=java>@ParameterizedTest
+@CsvSource(
+    {
+    &#34;&#39;one half times one third is 1 sixth&#39;, &#39;times&#39;, &#39;(1/6)&#39;,1,2,1,3&#34;, <b class=conum>1</b>
+    &#34;&#39;one thirds plus two thirds is 1&#39;    , &#39;plus&#39;,      &#39;1&#39;,1,3,2,3&#34;,
+    &#34;&#39;flip&#39;                               , &#39;flip&#39;,      &#39;3&#39;,1,3,1,3&#34;, <b class=conum>2</b>
+    &#34;&#39;one half minus two thirds is&#39;       , &#39;minus&#39;, &#39;(-1/6)&#39;,1,2,2,3&#34;
+  } )</code></pre><ol class="callout-list arabic"><li>The operation name is the second value in the csv record, here <strong>times</strong>. Note that you can quote strings, but that is not required.</li><li>In the flip operation, the second fraction is ignored, so any legal value is allowed. Here we use the same values for both fractions.</li></ol></figure><figure class=listing-block><figcaption>Test method using the test data (Annotations left out, they are above).</figcaption><pre class=highlight><code class=language-java data-lang=java>void fractionOps( String message, String opName, String expected,
+              int a,int b, int c, int d ) { <b class=conum>1</b>
+    // Arrange: read test values
+    Fraction f1 = frac( a, b ); <b class=conum>2</b>
+    Fraction f2 = frac( c, d );
+    BiFunction&lt;Fraction, Fraction, Fraction&gt; op = ops.get( opName ); <b class=conum>3</b>
+
+    // Act
+    Fraction result = op.apply( f1, f2 ); <b class=conum>4</b>
+
+    // Assert(That) left out as exercise.
+    // Use assertThat on the fraction object result
+    //   and check if it has the correct string value.
+    // Use the message in the as(...) method.
+
+}</code></pre><ol class="callout-list arabic"><li>The fraction parameters a,b,c, and d are captured from the csvrecord. This makes the parameter list a
+tad longer, but also more understandable. JUnit 5 csvsource uses the annotation and the signature of the test method and can deal
+with most common types such as primitive, String and LocalDate (preferably in ISO-8601 format such as '2021-01-14' for the day of writing this). Strings in the csv-records will be automatically converted to the parameter types in your test methods in these cases.</li><li>The fraction instances are created from a, b, c, and d.</li><li>The operation (op) is looked up in the map.</li><li>Apply the operation, or rather the function and capture the result.</li></ol></figure><p>You can apply the same trick of looking up with enums too, even easier, because the enum itself can translate from String to value,
+as long as the spelling is exact that is minding upper and lower case usage.</p><p>Study the examples above, they might give you inspiration with the exercises coming up and will score you points during the exam.</p><aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip:</span></h6><p>As of the moment of writing (January 2021, Junit 5.7), the parameterized test <strong class=red>can’t</strong> deal with varargs parameters, that is a varying
+list of parameters, with the triple dot notation.</p></aside></section><section class="doc-section level-2"><h3 id=_test_data_from_a_file>Test data from a file</h3><p>Sometimes the amount of data you have in your test data-set is so big that it does not comfortably fit inside a <code>@CsvSource</code> annotation.
+You specify an external file as data source with to achieve the same, the annotation now is <code>@CsvFileSource</code>, which takes files as argument.</p><p>The file, as you might have guessed, can be a csv file, which can be edited quite comfortably with a <a href="https://plugins.netbeans.apache.org/catalogue/?id=1">NetBeans plugin</a>
+or with the help of a spreadsheet program like Libreoffice calc or Microsoft excel.</p><p>Suppose you need to develop an input validator that has many test cases. Putting the inputs in a file along with other information relevant
+to your validator.</p><figure class=listing-block><figcaption>csvfile source</figcaption><pre class=highlight><code class=language-java data-lang=java>  @ParameterizedTest
+  @CsvFileSource( resources = { &#34;testdata.csv&#34; } )
+  void testRegex( String message, String input,
+          boolean matches, int groupCount ){
+    // your code here
+  }</code></pre></figure><aside class="admonition-block note" role=note><h6 class="block-title label-only"><span class=title-label>Note:</span></h6><p>At the time of writing JUnit wants the csv file for CsvFileSource to be
+in the <code>{project-directory}src/test/resources</code> folder or a child folder thereof.
+To be able to do that, you <strong>first</strong> need to create that folder.</p></aside></section><section class="doc-section level-2"><h3 id=_repeated_use_of_same_data>Repeated use of same data.</h3><p>In some cases, multiple tests need the same data. In the case of a CsvSourceFile, that is easily covered: Simple copy the annotations to all places where you need
+them. This is an <em>acceptable form</em> of copy and waste, because the annotations all point to one source of truth, the CSV file.</p><p>Sometimes you would like to keep or even generate the test data inside the test class.
+Do not take the simple and naive route to simply copy-and-waste the (largish) csvsource data,
+but instead stick to the <a href=https://en.wikipedia.org/wiki/Don%27t_repeat_yourself>D.R.Y. rule</a>.</p><p>One problem is that a method in Java can return only one result, either object or primitive type. Luckily
+an array is also an object in Java.</p><p>There are two solutions to this issue.</p><div class="olist arabic"><ol class=arabic><li>Create special test data objects of a special test data class, either inside your or outside your test class
+easy to make a test data class to carry the test data. In this case make a data providing method and use the method name in the <code>@MethodSource</code> annotation.
+The test method should understand the test data object.</li><li>Use the JUnit5 provided <code>ArgumentsProvider</code>. This wraps an array of objects into one object, so that all can be returned as one (array) value in a stream.<br>This saves the implementation of a (simple) test data class.</li></ol></div><p>Have a look at the <a href=https://junit.org/junit5/docs/current/user-guide/>JUnit5 documentation</a> to find a further explanation and examples.</p><hr><p>Because we are collecting test tricks, here is another one:</p></section></section><section class="doc-section level-1"><h2 id=_test_recipe_i_test_equals_and_hashcode>Test Recipe I, Test Equals and hashCode</h2><p>We may sprinkle our testing stuff with a few recipes for often occurring tests.
+This is the the first installment.</p><p><strong>Equals</strong> and <strong>hashCode</strong> are not twins in the direct sense, but indeed methods whose implementation should
+have a very direct connection.
+From the java <a href=https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode() target=_blank rel=noopener>Object API</a> follows
+that:</p><div class=ulist><ul><li>Two objects that are equal by their equal method, than their hashCode should also be equal.</li><li>Note that the reverse is not true. If two hashCode are the same, that does not imply that the objects are equal.</li><li>A good hashCode 'spreads' the objects well, but this is not a very strict requirement or a requirement that can be enforced. A poor hashCode
+will lead to poor Hash{Map|Set} lookup performance.</li></ul></div><p>Although hashCodes are invented to speedup finding object in a hash map or hash set, these collections use hashCode in the first part of the search,
+but must verify equality as final step(s).</p><p>The thing is that the equals method must consider quite a few things, expressed with conditional evaluation (if-then-else).
+The good thing is an IDE typically provides a way to generate equals and hashCode for you and these implementations are typically of good quality. But in particular in the equals method there are quite some ifs, sometimes in disguise, coded as <code>&&</code>, so this will throw some flies in your code-coverage ointment.</p><p>However, we can balance this generated code by a piece of reusable test code, that can be used for almost all cases.
+In fact we have not found a case where it does not apply.<br>Let us first explain the usage and then the implementation.<br>Suppose you have an object with three fields, <code>name</code>, <code>birthDate</code> and <code>id</code>. All these fields should be considered in equals and hashCode.<br>As an exercise, create such and object now in your IDE, call it Student, why not.</p><div class=listing-block><pre class=highlight><code class=language-java data-lang=java>class Student {
+  final String name;
+  final LocalDate birthDate;
+  final int id;
+}</code></pre></div><p>From the above, the IDE can generate a <strong>constructor</strong>, <strong>equals</strong> and <strong>hashCode</strong> and <strong>toString</strong>. What are you waiting for? Because it is not test driven?
+You would be almost right, but why test drive something that can be generated.<br>However, if your spec does <strong class=red>not</strong> demand equals and hashCode,
+then <strong class="red big">do not write/generate</strong> them. That would be unwanted code. But if the requirements DO insist on equals and hashCode,
+make sure that the fields to be considered match the requirements. Choose only final fields.</p><p>After having such a generated equals and hashCode you have the predicament of writing a test. HashCode is relatively easy. It should produce an
+integer, but what value is unspecified, so just invoking it would do the trick for test coverage.
+The devil is in the equals details, because it has to consider:</p><div class=ulist><ul><li>Is the other object <code>this</code>? If yes, return <code>true</code>.</li><li>Is the other object <code>null</code>? Return <code>false</code> if it is.</li><li>Now consider the type.<a class=footnote-ref id=_footnoteref_1 href=#_footnote_1 title="View footnote 1" role=doc-noteref>[1]</a>.<ul><li>Is the other of the same type as <code>this</code>? If not return <code>false</code>.</li><li>Now we are in known terrain, the other is of the same type, so the object should have the same fields.<br>For each <code>field</code> test it <code>this.field.equals(other.field)</code>. If not return false.</li><li>Using <code>Objects.equals(this.fieldA, other.fieldA)</code> can be an efficient solution to avoid testing for nullity of either field.</li></ul></li></ul></div><figure class=listing-block><figcaption>Generated equals. It is fine.</figcaption><pre class=highlight><code class=language-java data-lang=java>@Override
+public boolean equals( Object obj ) {
+    if ( this == obj ) {
+        return true;
+    }
+    if ( obj == null ) {
+        return false;
+    }
+    if ( getClass() != obj.getClass() ) {
+        return false;
+    }
+    final Student other = (Student) obj;
+    if ( this.id != other.id ) {
+        return false;
+    }
+    if ( !Objects.equals( this.name, other.name ) ) {
+        return false;
+    }
+    return Objects.equals( this.birthDate, other.birthDate );
+}</code></pre></figure><p>You see a pattern here: The number of ifs is 3 + the number of fields.<br>To test this, and to make sure you hit all code paths, you need to test with this,
+with null, with an distinct (read newly constructed) object with all fields equal,
+and then one for each field, which differs from the reference object only in said field.</p><p>Define those instances (for this example) as follows.</p><figure class=listing-block><figcaption>Instances for complete equals and hashCode test and coverage</figcaption><pre class=highlight><code class=language-java data-lang=java>//@Disabled
+@Test
+void testEqualsAndHash() {
+    Student ref = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 123 ); <b class=conum>1</b>
+    Student equ = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 123 ); <b class=conum>2</b>
+    Student sna = new Student( &#34;Jen&#34;, LocalDate.of( 1999, 03, 23 ), 123 ); <b class=conum>3</b>
+    Student sda = new Student( &#34;Jan&#34;, LocalDate.of( 1998, 03, 23 ), 123 ); <b class=conum>4</b>
+    Student sid = new Student( &#34;Jan&#34;, LocalDate.of( 1999, 03, 23 ), 456 ); <b class=conum>5</b>
+    verifyEqualsAndHashCode( ref, equ, sna, sda, sid );
+    //fail( &#34;testMethod reached it&#39;s and. You will know what to do.&#34; );
+}</code></pre><ol class="callout-list arabic"><li>The reference object</li><li>The equal object, equals true</li><li>Differs in name.</li><li>Differs in birth date (year).</li><li>Differs in id.</li></ol></figure><p>The implementation of the <code>verifyEqualsAndHashCode</code> has been done with generics and a dash of AssertJ stuff.</p><figure class=listing-block><figcaption>Sample test helper in separate class.</figcaption><pre class=highlight><code class=language-java data-lang=java>/**
+ * Helper for equals tests, which are tedious to get completely covered.
+ *
+ * @param &lt;T&gt; type of class to test
+ * @param ref reference value
+ * @param equal one that should test equals true
+ * @param unEqual list of elements that should test unequal in all cases.
+ */
+public static &lt;T&gt; void verifyEqualsAndHashCode( T ref, T equal, T... unEqual ) {
+    Object object = &#34;Hello&#34;;
+    T tnull = null;
+    String cname = ref.getClass().getCanonicalName();
+    // I got bitten here, assertJ equalTo does not invoke equals on the
+    // object when ref and &#39;other&#39; are same.
+    // THAT&#39;s why the first ones differ from the rest.
+    SoftAssertions.assertSoftly( softly-&gt; {
+    softly.assertThat( ref.equals( ref ) )
+            .as( cname + &#34;.equals(this): with self should produce true&#34; )
+            .isTrue();
+    softly.assertThat( ref.equals( tnull ) )
+            .as( cname + &#34;.equals(null): ref object &#34;
+                    + safeToString( ref ) + &#34; and null should produce false&#34;
+            )
+            .isFalse();
+    softly.assertThat( ref.equals( object ) )
+            .as( cname + &#34;.equals(new Object()): ref object&#34;
+                    + &#34; compared to other type should produce false&#34;
+            )
+            .isFalse();
+    softly.assertThat( ref.equals( equal ) )
+            .as( cname + &#34; ref object [&#34; + safeToString( ref )
+                    + &#34;] and equal object [&#34; + safeToString( equal )
+                    + &#34;] should report equal&#34;
+            )
+            .isTrue();
+    for ( int i = 0; i &lt; unEqual.length; i++ ) {
+        T ueq = unEqual[ i ];
+        softly.assertThat( ref )
+                .as(&#34;testing supposed unequal objects&#34;)
+        .isNotEqualTo( ueq );
+    }
+    // ref and equal should have same hashCode
+    softly.assertThat( ref.hashCode() )
+            .as( cname + &#34; equal objects &#34;
+                    + ref.toString() + &#34; and &#34;
+                    + equal.toString() + &#34; should have same hashcode&#34;
+            )
+            .isEqualTo( equal.hashCode() );
+});
+}</code></pre></figure><p>The above code has been used before but now adapted for AssertJ and JUnit 5.</p><p>It is of course best to put this in some kind of test helper library, so you can reuse it over and over without having to
+resort to copy and waste.</p><hr><aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip:</span></h6><p>Think test driven! So write tests FIRST, and then code. Testing is ensuring that the code is usable.
+To make code testable is also a design exercise: you need to make decisions about the design of your program when you write your tests. If you have no idea how to test it,
+you are equally clueless about how to use the designed classes.</p></aside></section><section class="doc-section level-1"><h2 id=_links>Links</h2><div class=ulist><ul><li><a href=https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests target=_blank rel=noopener>JUnit 5 Parameterized Tests</a></li><li><a href=https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-sources-CsvSource target=_blank rel=noopener>CSV Source Tests</a></li><li><a href=https://www.baeldung.com/parameterized-tests-junit-5 target=_blank rel=noopener>Baeldung on Parameterized Tests with JUnit 5</a></li></ul></div></section><section class=footnotes aria-label=Footnotes role=doc-endnotes><hr><ol class=footnotes><li class=footnote id=_footnote_1 role=doc-endnote>Not all equals implementation look at the type of this, See the java.util.List doc for a counter example <a class=footnote-backref href=#_footnoteref_1 role=doc-backlink title="Jump to the first occurrence in the text">↩</a></li></ol></section></article></div><footer class="text-sm leading-6 mt-12 mb-5">Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a></footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block"><h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5></div></div><div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div></div><script src=/prc2/js/main.min.956966b3103878d329f9460daf829f6ad1d50fc9e24d20ff0c5d93a4006065df877564edc24b6a2a5182bf4387d13d9f960a1df6fc9d259d38cfb8e83509c999.js integrity="sha512-lWlmsxA4eNMp+UYNr4KfatHVD8niTSD/DF2TpABgZd+HdWTtwktqKlGCv0OH0T2flgod9vydJZ04z7joNQnJmQ==" crossorigin=anonymous></script>
+<script src=/prc2/js/highlight.min.cd8091de05577194483fff730f723dc2379226a640ef117b33ad133cc3da2f690d95af8fc32186b11dc10628e66e325b33bee2bf443c98315905e50f22aecc50.js integrity="sha512-zYCR3gVXcZRIP/9zD3I9wjeSJqZA7xF7M60TPMPaL2kNla+PwyGGsR3BBijmbjJbM77iv0Q8mDFZBeUPIq7MUA==" crossorigin=anonymous defer></script><div id=copied-alert class="invisible opacity-0 transition-all ease-in-out duration-400 fixed bottom-3 right-10 z-50 flex p-4 mb-4 text-sm text-gray-800 bg-gray-200 rounded-lg dark:bg-gray-500 dark:text-gray-200" role=alert><svg class="inline flex-shrink-0 mr-3 w-5 h-5" viewBox="0 0 24 24" width="24" height="24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><div><span class=font-medium>Code copied</span></div></div></body></html>
