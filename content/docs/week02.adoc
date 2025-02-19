@@ -14,29 +14,403 @@ toc: true
 
 :imagesdir: /prc2_web/
 
-== Clean tests
-Bad tests are anything but a pleasure to work with. They are slow, hard to understand, and hard to maintain.
-In order to write clean tests, we follow the F.I.R.S.T. principles of tests:
+## REST
 
-// Source: Clean code, Robert C. Martin
+For project 2 you have to build a REST (REpresisential State Transfer) Application Programmable Interface (API). 
+Before we explain what a REST API is, we first explain what the problem was with the way of designing your API in project 1 and the very basics of HTTP.
 
-- **Fast**: Tests should run quickly.
-- **Independent**: Tests should not depend on each other. When the state of one test affects the outcome of another, it can be hard to understand why a test fails and makes it harder to run single tests or run tests in parallel.
-- **Repeatable**: Tests should be repeatable in any environment. This means that tests should not depend on external resources like databases, network, or file systems.
-- **Self-Validating**: Tests should be able to determine if they pass or fail without human intervention. This means that the test should contain assertions that determine if the test passes or fails.
-- **Timely**: Tests should be written before the code they test. This is the essence of Test-Driven Development (TDD). If you write tests after the code, you might find out the code is hard to test.
+### Project 1
 
-include::{topics}/parameterizedtests.adoc[]
+In project 1 you have to build an web application that needs to support the creating, updating and deletion of resources (e.g. playlists, events, etc.).
+However the way the API was structured between groups is completely different, and worse even within the same group (application) there are differences.
 
-[TIP]
-====
-Think test driven! So write tests FIRST, and then code. Testing is ensuring that the code is usable.
-To make code testable is also a design exercise: you need to make decisions about the design of your program when you write your tests. If you have no idea how to test it,
-you are equally clueless about how to use the designed classes.
-====
+Take for example the create, update, delete for a event (within the same group), we find the following urls:
 
-== Links
+- create_event.php
+- UpdateEvent.php
+- event_delete.php
 
-* https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests[JUnit 5 Parameterized Tests ^]
-* https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-sources-CsvSource[CSV Source Tests ^]
-* https://www.baeldung.com/parameterized-tests-junit-5[Baeldung on Parameterized Tests with JUnit 5 ^]
+There is no consistency in the naming of the Uniform Resource Locator (URL), and it get's even worse of you compare it between project groups:
+
+- /event/create.php
+- EventCreator.php
+- event.php
+- newEvent.php
+- event_creation.php
+- event-creation.php
+- events.php
+- etc...
+
+Image you are a developer taking over such a project, there is no way to know for a resource, what the URLs are for Create, Read, Update, Delete (CRUD) operations.
+This is one of the pain points REST API fixes, by introducing __Uniform interface__, more about this in the next sections.
+
+In project 1, you have seen both GET and POST request methods. Hopefully you used the GET method only for retrieving data and used the POST method for all other data manipulation. But what if you want to create and update a resource, let's say an event. What you probably did was create two different URLs to handle create (e.g. `create-event.php` or `event/create.php`) and one for updating (e.g `update-event.php` or `event/update.php`). This works fine, but what if you for example also want to support partial update of an event? You can add another URL (e.g. `partial-update-event.php` or `event/partial-update.php`), but you can see that you are starting to get a lot very specific URLs and you need to make sure that you need the same naming convention for all resources. A REST API helps alleviate this problem by not only supporting GET and POST request parameters, but also PUT, PATCH and DELETE.
+
+## HTTP basics
+
+Before we can start explaining the principles of REST, let's first have a look at Hyper Test Transfer Protocol (HTTP). The website you build in project 1 was using HTTP for all requests and responses between the client (web browser) and the server (Apache).
+
+What is HTTP:
+
+- Protocol for transferring data between a client (web browser, mobile app, cURL, etc.) and a server (Apache, nginx, node, etc.)
+- The client always initiates the connection
+- The messages always define what the content of the message is
+- The protocol is stateless
+** Every request should contain all the content for the server to know what to do (for example, a server cannot store which connection belongs to which user)
+
+For example when your request `index.php` the web browser makes a request to the server, the server receives the requests and responds with the HTML page. The browser will parse the HTML and see that you have specified a CSS style sheet and will make another request to the server for `style.css`, the server response by sending the style sheet. 
+
+But what does a request and response actually look like? How does the server know what resource is requested and how does the client know what kind of content is returned? This is all part of the HTTP request and response specification.
+
+### HTTP Request
+
+The basic form of a HTTP request is very simple, it consists of three parts:
+
+`<request method> <URI> <HTTP version>`
+
+1. Request method: is one of the following GET, POST, PUT, PATCH, DELETE (there are a few https://en.wikipedia.org/wiki/HTTP#Request_methods[more])
+2. Uniform Resource Identifier: this is the resource you are requesting (e.g. `index.php`, `style.css`, `event/create.php`)
+3. HTTP version: the version of HTTP that is being used to make the request (https://en.wikipedia.org/wiki/HTTP#HTTP/1.1[HTTP/1.1], https://en.wikipedia.org/wiki/HTTP/2[HTTP/2.0] or https://en.wikipedia.org/wiki/HTTP/3[HTTP/3.0])
+
+So a simple HTTP request could be as follows:
+
+`GET /images/logo.png HTTP/1.1` or `POST /event/create.php HTTP/2.0`
+
+#### Headers
+
+In the previous section we explain that HTTP is stateless and that we should send everything the server needs as part of the request. To do this HTTP supports adding https://en.wikipedia.org/wiki/Metadata[metadata] to a request, this is done in the form of headers. You already used headers as part of project 1, for example to send cookie data from the client to the server. Headers are added to the request as key-value pairs (think of a hashmap).
+
+Some of the most common headers for a request are:
+
+[cols="2,3,2", options="header"]
+|===
+| Header             | Description | Example
+| **Host**          | Specifies the domain name of the server being contacted. | `Host: example.com`
+| **User-Agent**    | Identifies the client making the request (browser, API client, etc.). | `User-Agent: Mozilla/5.0`
+| **Accept**        | Informs the server about the content types the client can handle. | `Accept: application/json`
+| **Accept-Encoding** | Specifies the encoding types the client supports for compression. | `Accept-Encoding: gzip, deflate`
+| **Accept-Language** | Specifies the preferred languages for the response. | `Accept-Language: en-US,en;q=0.9`
+| **Authorization**  | Provides credentials for authentication (e.g., API tokens, Basic Auth). | `Authorization: Bearer <token>`
+| **Content-Type**  | Specifies the type of data in the request body (used in POST, PUT, PATCH). | `Content-Type: application/json`
+| **Content-Length** | Indicates the size of the request body in bytes. | `Content-Length: 256`
+| **Referer**       | Specifies the URL of the page that made the request. | `Referer: https://example.com/home`
+| **Origin**        | Indicates where the request originates (used in CORS). | `Origin: https://example.com`
+| **Cookie**        | Sends cookies stored in the client to the server. | `Cookie: sessionId=abc123`
+| **Connection**    | Controls whether the connection stays open (`keep-alive`) or closes after the request. | `Connection: keep-alive`
+|===
+
+You see for example the `Cookie` header, this is how you transfer the cookies from the client to the server, that way the server can check the cookie data to, for example, retrieve the logged in user.
+
+So now a HTTP request could like as follows
+
+[source]
+----
+GET /home.html HTTP/1.1
+Host: developer.mozilla.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:50.0) Gecko/20100101 Firefox/50.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: https://developer.mozilla.org/testpage.html
+----
+
+#### Body content
+
+So now we can make a request and we can send additional metadata to the server, but what about if we want to send more data. In project 1 you would send form data to the server and this form data could even contain binary data (e.g. images, music files, etc.). So HTTP should support sending this data, it does that by putting the data in the body. Of course you need to specify what kind of data that you are sending by setting the correct `Content-Type` header. In project 1 you would add `enctype='multipart/form-data'` to your form to send binary data, the browser would then send the data using an HTTP request with `Content-Type: 'multipart/form-data'`.
+
+Say we want to send some JavaScript Object Notation (https://en.wikipedia.org/wiki/JSON[JSON]) data to our API, first we add the `Content-Type` header, to specify that we are sending JSON (`application/json`) and then we can add the JSON to the body (after specifying the headers).
+
+[source]
+----
+POST /api/users HTTP/1.1
+Host: example.com
+Content-Type: application/json
+Accept: application/json
+Content-Length: 67
+
+{
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "age": 30
+}
+----
+
+Now we know how we can make a full HTTP request.
+
+### HTTP response
+
+After making an HTTP request, the server responds with an HTTP response. The HTTP response is build up in almost the same manner as an HTTP request.
+
+An HTTP response looks as follows:
+
+`<HTTP version> <status code> <status message>`
+
+1. HTTP version: same as with the request
+2. Status code: this code indicates what happened (more in the next section)
+3. Status message: a short message explaining the status code
+
+So a simple response could be as follows:
+
+`HTTP/1.1 200 OK` or `HTTP/2.0 404 Not Found`
+
+#### Status codes
+
+HTTP uses status codes to indicate what happened, there are a lot of https://developer.mozilla.org/en-US/docs/Web/HTTP/Status[status codes] available. Status codes can be divided into five groups:
+
+1. Information (`100-199`)
+2. Successful (`200-299`)
+3. Redirection (`300-399`)
+4. Client error (`400-499`)
+5. Server error (`500-599`)
+
+The first category "Informational" you will not see a lot, but the others we expect you to use as part of the REST API design. So lets have a look at the most common status codes per category:
+
+##### 2xx - Success
+* 200 OK - The request was successful.
+* 201 Created - The request resulted in a new resource being created.
+* 204 No Content - The request was successful, but there is no content to return.
+
+##### 3xx - Redirection
+* 301 Moved Permanently - The resource has been permanently moved to a new URL.
+* 302 Found (Temporary Redirect) - The resource is temporarily available at a different URL.
+* 304 Not Modified - The resource has not changed since the last request, so the cached version should be used.
+
+##### 4xx - Client Errors
+* 400 Bad Request - The server cannot process the request due to client error (e.g., malformed syntax).
+* 401 Unauthorized - Authentication is required but has not been provided or failed.
+* 403 Forbidden - The client is not allowed to access the requested resource.
+* 404 Not Found - The requested resource could not be found.
+* 405 Method Not Allowed - The request method (GET, POST, etc.) is not supported for the resource.
+* 415 Unsupported Media Type - The server does not support the media format of the request.
+* 422 Unprocessable Entity - The request is syntactically correct but cannot be processed due to semantic errors (e.g., validation failure in API requests).
+* 429 Too Many Requests - The user has sent too many requests in a given amount of time (rate limiting).
+
+
+##### 5xx - Server Errors
+* 500 Internal Server Error - A generic error when something unexpected happens on the server.
+* 502 Bad Gateway - The server received an invalid response from an upstream server.
+* 503 Service Unavailable - The server is temporarily unable to handle the request (e.g., overloaded or under maintenance).
+* 504 Gateway Timeout - The server did not receive a timely response from an upstream server.
+
+We will come back to status codes as part of the REST API design, in on of the next sections.
+
+#### Headers
+
+Not only the request, but also the response can contain metadata in the form of headers. Some of the most common response headers are the following:
+
+[cols="2,3,2", options="header"]
+|===
+| Header             | Description | Example
+| **Content-Type**  | Specifies the format of the response body. | `Content-Type: application/json`
+| **Content-Length** | Indicates the size of the response body in bytes. | `Content-Length: 512`
+| **Cache-Control**  | Defines caching rules for the response. | `Cache-Control: no-cache, must-revalidate`
+| **Expires**       | Specifies when the response expires (used with caching). | `Expires: Tue, 20 Feb 2025 12:00:00 GMT`
+| **Set-Cookie**    | Sends cookies to be stored by the client. | `Set-Cookie: sessionId=xyz456; HttpOnly`
+| **Server**        | Provides information about the web server. | `Server: nginx/1.18.0`
+| **Location**      | Redirects the client to another URL (used with `3xx` status codes). | `Location: https://example.com/login`
+| **Access-Control-Allow-Origin** | Used in CORS to specify allowed origins. | `Access-Control-Allow-Origin: *`
+| **WWW-Authenticate** | Indicates authentication methods required (used with `401 Unauthorized`). | `WWW-Authenticate: Basic realm="Secure Area"`
+| **Content-Encoding** | Specifies the encoding used for the response body. | `Content-Encoding: gzip`
+| **Connection**    | Determines whether the connection remains open. | `Connection: keep-alive`
+|===
+
+Now you can see how for example the Cookie data was actually set on the client, it can be send as part of the response with the `Cookie` header. Some of you might have redirected clients after submitting a form, or when the user was not logged-in, this was done using the `Location` header.
+
+Adding the headers to the request, we can get a request that looks as follows:
+
+[source]
+----
+HTTP/1.1 200 OK
+Content-Type: text/html
+Set-Cookie: sessionId=abc123; HttpOnly; Secure; Path=/
+Location: https://example.com/dashboard
+Content-Length: 0
+----
+
+#### Body
+
+Same as for the request we can add a body to the response, so we can get a full response as follows:
+
+[source]
+----
+HTTP/1.1 201 Created
+Content-Type: application/json
+Content-Length: 75
+
+{
+  "id": 123,
+  "name": "New Resource",
+  "status": "created"
+}
+----
+
+## Rest basics
+
+So let's finally have a look at REST. REST is an architectural style that defines how to use HTTP requests methods, response codes and URL naming scheme to build APIs that are scalable, maintainable and performant.
+
+REST is build for the client - server applications:
+
+  - Client and server are separate entities
+  - Client sends requests, server processes requests and responds
+  - Focus is on resources
+  - Resources are identified by URIs
+  - HTTP requests methods are used to indicate purpose
+  - Status codes to indicate response
+
+REST has six architectural constraints:
+
+### Client-Server Architecture
+
+- The system is divided into two separate entities: the client and the server.
+- The client is responsible for the user interface and requests data from the server.
+- The server processes requests and sends responses.
+- This separation allows independent evolution of the frontend and backend.
+
+*Example:*  
+A mobile app (client) requests data from a REST API (server), and the API responds with the requested data without knowing how the client will use it.
+
+---
+
+### Statelessness
+
+- Each client request must contain all necessary information for the server to process it.
+- The server does not maintain any session state between requests.
+- Statelessness improves scalability by eliminating the need for server-side session storage.
+
+*Example:*  
+A request to get user data:
+[source]
+----
+GET /users/123
+Authorization: Bearer token123
+----
+The server does not remember the user between requests. The client includes authentication in every request.
+
+---
+
+=== Cacheability
+
+- Responses should explicitly define whether they are cacheable using HTTP headers.
+- Caching improves performance by reducing redundant requests to the server.
+
+*Example:*  
+A cacheable response:
+[source]
+----
+Cache-Control: max-age=3600
+----
+This tells clients they can reuse the response for 1 hour without making another request.
+
+---
+
+=== Layered System
+
+- REST allows intermediary layers (e.g., load balancers, proxies) between the client and server.
+- The client does not need to know if it is communicating with the actual server or an intermediary.
+
+*Example:*  
+A request may pass through a load balancer before reaching the API server, distributing traffic across multiple backend servers.
+
+---
+
+=== Code on Demand (Optional)
+
+- The server can send executable code (e.g., JavaScript) to the client for execution.
+- This is rarely used in most REST APIs.
+
+*Example:*  
+An API sends a JavaScript function to a web client to validate input before submitting a request.
+
+---
+
+=== Uniform Interface
+
+The Uniform Interface is a key principle of REST. It ensures that interactions with a RESTful API follow a consistent structure. This is important to apply in project 2, so we go a bit deeper into this principle in the next section.
+
+---
+
+## Uniform Interface in Depth
+
+Let's have a look at how the define our REST interface.
+
+### Identification of Resources
+
+- Each resource should be uniquely identified using a URI (Uniform Resource Identifier).
+- Resources should be noun-based and use plural forms where applicable.
+
+*Good Examples:*
+[source]
+----
+/users          -> List of users
+/users/123      -> Specific user
+/orders/567     -> Specific order
+----
+
+*Bad Examples:*
+[source]
+----
+/getUsers       -> Verb-based, violates REST principles
+/retrieve-order?id=567 -> Query parameters should not define resource structure
+----
+
+---
+
+### Manipulation of Resources through Representations
+
+- Clients interact with resources using representations such as JSON or XML.
+** We use JSON for project 2
+- The client should be able to modify a resource by sending an updated representation.
+
+*Example:* Updating a user's profile:
+[source,json]
+----
+PUT /users/123
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com"
+}
+----
+The API updates the user’s data and returns a response.
+
+---
+
+### Self-Descriptive Messages
+
+- Each HTTP request must contain all necessary information for the server to process it.
+- HTTP headers provide metadata such as authentication, content type, and cache control.
+
+*Example:* Request to fetch user details:
+[source]
+----
+GET /users/123 HTTP/1.1
+Host: api.example.com
+Authorization: Bearer token123
+Accept: application/json
+----
+- `Authorization`: Authentication information.
+- `Accept`: Indicates the expected response format.
+
+---
+
+### Hypermedia as the Engine of Application State (HATEOAS)
+
+- The API should provide links to related resources in responses, allowing clients to navigate dynamically.
+
+*Example:* A `GET /users/123` response with hypermedia links:
+[source,json]
+----
+{
+  "id": 123,
+  "name": "John Doe",
+  "email": "john@example.com",
+  "links": {
+    "self": "/users/123",
+    "orders": "/users/123/orders"
+  }
+}
+----
+The client can follow the `"orders"` link to fetch the user’s orders.
+
+---
