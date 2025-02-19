@@ -344,6 +344,7 @@ Let's have a look at how the define our REST interface.
 /users          -> List of users
 /users/123      -> Specific user
 /orders/567     -> Specific order
+/users/123/orders -> Orders for a specific user
 ----
 
 *Bad Examples:*
@@ -352,6 +353,8 @@ Let's have a look at how the define our REST interface.
 /getUsers       -> Verb-based, violates REST principles
 /retrieve-order?id=567 -> Query parameters should not define resource structure
 ----
+
+Have a look at https://restfulapi.net/resource-naming/[resource-naming].
 
 ---
 
@@ -414,3 +417,78 @@ Accept: application/json
 The client can follow the `"orders"` link to fetch the user’s orders.
 
 ---
+
+### HTTP methods in REST
+
+As you may have noticed in the Uniform interface, we do not have different URIs for creating and updating for example, instead we use HTTP requests methods to indicate what we want to do with a resource.
+
+[options="header"]
+|===
+| HTTP Method | Collection (`/resources`) | Collection Response Codes | Specific Resource (`/resources/{id}`) | Resource Response Codes
+
+| **GET**
+| Retrieve all resources, can use pagination, sorting, filtering, etc.
+| `200 OK`
+| Retrieve a specific resource
+| `200 OK`, `404 Not Found`
+
+| **POST**
+| Create a new resource
+| `201 Created`, `400 Bad Request`, `422 Unprocessable Content`
+| N/A (not typically used)
+| N/A
+
+| **PUT**
+| Replace all resources (rarely used)
+| `200 OK`, `204 No Content`, `405 Method Not Allowed`
+| Replace a specific resource (update)
+| `200 OK`, `204 No Content`, `400 Bad Request`, `404 Not Found`, `422 Unprocessable Content`
+
+| **PATCH**
+| Modify the collection
+| `200 OK`, `204 No Content`, `405 Method Not Allowed`
+| Partially update a specific resource
+| `200 OK`, `204 No Content`, `400 Bad Request`, `404 Not Found`, `422 Unprocessable Content`
+
+| **DELETE**
+| Delete all resources (rarely used)
+| `204 No Content`, `405 Method Not Allowed`
+| Delete a specific resource
+| `200 OK`, `204 No Content`, `404 Not Found`
+|===
+
+As already discussed in project 1, the GET method is not allowed to change any state, while the POST method is allowed to change state. REST uses the HTTP request methods in the same way, have a look at the following table:
+
+[options="header"]
+|===
+| HTTP Method | Safe | Idempotent | Description
+
+| **GET**
+| Yes
+| Yes
+| Retrieves a resource without modifying it.
+
+| **POST**
+| No
+| No
+| Creates a new resource; multiple requests may create multiple resources.
+
+| **PUT**
+| No
+| Yes
+| Replaces a resource completely; multiple identical requests have the same effect.
+
+| **PATCH**
+| No
+| No
+| Partially updates a resource; multiple requests may have different effects (think of adding to a list).
+
+| **DELETE**
+| No
+| Yes
+| Deletes a resource; multiple requests result in the resource being deleted (or remaining deleted).
+
+|===
+
+*Safe Methods*: A method is considered safe if it does not modify the resource on the server (i.e., it only retrieves data).
+*Idempotent Methods*: A method is idempotent if making multiple identical requests results in the same effect as making a single request.
