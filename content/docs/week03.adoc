@@ -14,7 +14,7 @@ toc: true
 
 
 ## REST API end-to-end testing
-Last week we discussed REST interfaces and up till now we have been unit testing and testing manually.
+Last week we discussed REST interfaces and up to now we have been unit testing and testing manually.
 Sometimes we want to test the whole system (end-to-end), to see if all different parts work together.
 
 This week, when the project 2 starting-point repository was shared with you, you will also see an example of how you could set up your tests.
@@ -29,7 +29,7 @@ link to official documentation: https://rest-assured.io/
 
 Since we need to test the whole system, we need to have a database running. We could use a real database, but that would make our tests slow and dependent on the database. Instead, we can use a library called Testcontainers that can start a real database in a docker container for us. This way we can have a real database running, but it is isolated and we can control it from our tests.
 
-Hint: you can also add a initialize the database container with a script, so you don't have with an empty database.
+Hint: you can also add a initialize the database container with a script, so you don't start with an empty database.
 
 link to official documentation: https://java.testcontainers.org/
 
