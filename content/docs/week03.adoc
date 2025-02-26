@@ -2,7 +2,7 @@
 title: "03 Design for testability"
 description: ""
 date: 2022-02-02T11:28:06+01:00
-draft: true
+draft: false
 images: []
 slug: "design-for-testability"
 menu:
