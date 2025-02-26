@@ -36,7 +36,7 @@ link to official documentation: https://java.testcontainers.org/
 ### Design and end-to-end testing
 End-to-end tests tend to be slow, hard to maintain, can be flaky and give less precise errors. Therefore, it is important to have many isolated tests, to catch the bugs early and to make sure that the different parts of the system work as expected.
 
-Isolated tests, have the advantage (besides being more scalable), is that they put pressure on the design of your application:
+Isolated tests, have the advantage (besides being more scalable), that they put pressure on the design of your application:
 In order to test a class in isolation, you need to make sure that the class is loosely coupled with other classes. This is a good thing, because it makes your code more modular and easier to maintain.
 
 So, by TDD-ing, we don't only get feedback on the behavior of the code, but also of the design of the code - You could say "if its hard to test, we didn't build it right".
