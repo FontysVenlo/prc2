@@ -1,11 +1,12 @@
 == Test-ability
 
-[big]*A very important [green]#non functional# requirement of good software is [green]_Test-ability_. +
+[big]_A very important [green]#non-functional# requirement of good software is [green]#test-ability#_.
+
 A program that is not testable is not maintainable, because it takes a lot of effort to find out whether a change in the code has broken something else. *
 
 What makes software testable?
 
-image::testability_tarlinder.jpg[role="left", width=600, title="The testability attribute decomposed"]
+image::testability_tarlinder.png[role="left", width=600, title="The testability attribute decomposed"]
 
 - Controllability: How easy is it to bring the system in a state where you can test it?
 - Observability: How easy is it to see what the system is doing?
@@ -57,7 +58,7 @@ Instead hand the service or resource to the business, or give it some provider o
 
 === Business class fit for testing
 
-[blue]*WE'LL FURTHER EXPLAIN THIS CONCEPT IN CLASS AND IN THE CONTEXT OF PRJ2. THERE ARE QUITE SOME DESIGN IDEAS BEHIND IT, SO DON'T WORRY IF YOU DON'T UNDERSTAND IT IMMEDIATELY.*
+[blue]*We'll further explain this concept in class and in the context of PRJ2. There are quite some design ideas behind it, so don't worry if you don't understanding it immediately.*
 
 Let us look at an example as a class diagram.
 
