@@ -1,10 +1,10 @@
 ---
-title: "03 Design for testability"
+title: "03 Testability and mocking"
 description: ""
 date: 2022-02-02T11:28:06+01:00
 draft: false
 images: []
-slug: "design-for-testability"
+slug: "testability and mocking"
 menu:
   docs:
     parent: ""
@@ -12,6 +12,13 @@ weight: 030
 toc: true
 ---
 
+## week 3
+
+We'll cover the following topics this week:
+
+- Testing a REST application
+- Testable Design
+- Mocking and Stubbing
 
 ## REST API end-to-end testing
 Last week we discussed REST interfaces and up to now we have been unit testing and testing manually.
