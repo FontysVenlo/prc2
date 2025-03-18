@@ -1,10 +1,10 @@
 ---
-title: "06 Database Access JDBC"
+title: "06 Generics"
 description: ""
-date: 2022-03-23T13:53:06+01:00
+date: 2025-03-27T13:53:06+01:00
 draft: true
 images: []
-slug: "database-access"
+slug: "generics"
 menu: 
   docs:
     parent: ""
@@ -12,11 +12,10 @@ weight: 060
 toc: true
 ---
 
-include::{topics}/jdbc.adoc[]
+include::{topics}/generics.adoc[]
 
-include::{topics}/transactions.adoc[]
+== Reading
 
-include::{topics}/storedprocedures.adoc[]
+* Horstmann, Ed 12, chapter 8, Generic Programming section 8.1-8.8
 
-//include::{topics}/dao.adoc[]
 
