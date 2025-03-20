@@ -1,16 +1,54 @@
 ---
-title: "03 Design for testability"
+title: "03 Testability and mocking"
 description: ""
 date: 2022-02-02T11:28:06+01:00
-draft: true
+draft: false
 images: []
-slug: "design-for-testability"
+slug: "testability-and-mocking"
 menu:
   docs:
     parent: ""
 weight: 030
 toc: true
 ---
+
+## week 3
+
+We'll cover the following topics this week:
+
+- Testing a REST application
+- Testable Design
+- Mocking and Stubbing
+
+## REST API end-to-end testing
+Last week we discussed REST interfaces and up to now we have been unit testing and testing manually.
+Sometimes we want to test the whole system (end-to-end), to see if all different parts work together.
+
+This week, when the project 2 starting-point repository was shared with you, you will also see an example of how you could set up your tests.
+
+### REST-assured
+In the repository we use a library called REST Assured that can help you with this. It is a Java library that provides a domain-specific language (DSL) for writing powerful, maintainable tests specifically for REST APIs.
+The syntax uses 'given-when-then' to describe the test steps - which is very similar, but a bit more explicit compared 'arrange-act-assert' in unit testing and makes it easy to read.
+
+link to official documentation: https://rest-assured.io/
+
+### Test containers
+
+Since we need to test the whole system, we need to have a database running. We could use a real database, but that would make our tests slow and dependent on the database. Instead, we can use a library called Testcontainers that can start a real database in a docker container for us. This way we can have a real database running, but it is isolated and we can control it from our tests.
+
+Hint: you can also add a initialize the database container with a script, so you don't start with an empty database.
+
+link to official documentation: https://java.testcontainers.org/
+
+### Design and end-to-end testing
+End-to-end tests tend to be slow, hard to maintain, can be flaky and give less precise errors. Therefore, it is important to have many isolated tests, to catch the bugs early and to make sure that the different parts of the system work as expected.
+
+Isolated tests, have the advantage (besides being more scalable), that they put pressure on the design of your application:
+In order to test a class in isolation, you need to make sure that the class is loosely coupled with other classes. This is a good thing, because it makes your code more modular and easier to maintain.
+
+So, by TDD-ing, we don't only get feedback on the behavior of the code, but also of the design of the code - You could say "if its hard to test, we didn't build it right".
+
+If you're interested, an interesting resource on how the way you test impacts your design (and vice versa): https://blog.thecodewhisperer.com/permalink/integrated-tests-are-a-scam or https://www.youtube.com/watch?v=fhFa4tkFUFw&t=13s by J.B. Rainsberger
 
 include::{topics}/testability.adoc[]
 
