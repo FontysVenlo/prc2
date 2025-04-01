@@ -1,8 +1,8 @@
 ---
-title: "08 The State of Things"
+title: "07 The State of Things"
 description: ""
-date: 2022-04-14T12:02:24+02:00
-draft: true
+date: 2025-04-03T12:02:24+02:00
+draft: false
 images: []
 slug: "statemachine"
 menu: 
