@@ -32,10 +32,10 @@ objects to realize the effect of changing the software path. The objects all imp
 Then, whenever a state switching event occurs, the current state object is replaced by the state object for the new state.
 
 
-image::Transition.png[title="Transitions"]
-From AADE course, we learned that a life cycle of a system changes throw using by so called transitions. To change the state from wait to lock, trigger event  was needed with a guard (condition) and then we did some activity.
+// image::Transition.png[title="Transitions"]
+// From AADE course, we learned that a life cycle of a system changes throw using by so called transitions. To change the state from wait to lock, trigger event  was needed with a guard (condition) and then we did some activity.
 
-image::The-killer-rabit.png[title="state machine diagram"]
+// image::The-killer-rabit.png[title="state machine diagram"]
 
 
 image:railway-switch.gif[role="thumb left", title="railway switch from 'https://en.wikipedia.org/wiki/Railroad_switch'"] As another analogy, you can think of a railway switch.
