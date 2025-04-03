@@ -166,7 +166,7 @@ String emailRegex=
 image::email-regex.svg[]
 
 Note that there is not one TRUE regex for email addresses. If you want to know the nitty-gritty details
-of valid email addresses look at RFC 8398 or RFC 5322, or ask in CSAR class.
+of valid email addresses look at RFC 8398 or RFC 5322, or ask in CAN class.
 
 [WARNING]
 ====
