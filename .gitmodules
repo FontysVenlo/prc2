@@ -1,3 +1,4 @@
 [submodule "themes/sebi-theme"]
 	path = themes/sebi-theme
 	url = ../sebi-theme.git
+	branch = main
