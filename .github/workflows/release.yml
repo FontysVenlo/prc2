@@ -49,8 +49,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-
-  
-  update-reference:
-    uses: FontysVenlo/prc2-workflows/.github/workflows/update-submodules.yml@main
-    secrets: inherit
