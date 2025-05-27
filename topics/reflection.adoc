@@ -7,28 +7,449 @@ Reflection or class introspection is used to leverage the information that is av
 available about a class and by implication about the instances of the class can help to avoid _copy-and-waste_ programming.
 It helps keeping the code https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[DRY]
 
-Please find a nice tutorial here: https://www.baeldung.com/java-reflection[ Baeldung Reflection tutorial ]
-
 Reflection is a multi-edged tool.
 
 * Reflection can be used to access parts of instances that would otherwise not be available.
 * Reflection can be used to list information about fields, methods, and constructors.
 * Access via reflection is slower than regular access, because of the safety/security checks that are made on each access
 * It is also slow for the extra indirection needed to do the work when compared to the optimized instructions for say access a field.
-* It is [red]*less type-safe*, so you loose much of the comfort you have in the IDE, such as code-completion or intellisense(tm). For
+* It is *less type-safe*, so you loose much of the comfort you have in the IDE, such as code-completion or intellisense(tm). For
 instance you lookup a method by name (a String) and that makes you deal with at least one exception. This still does not produce
-the actual method, but instead a [blue]#Method# object which you must give the reference to the object on which you want to apply the method and the parameters
+the actual method, but instead a #Method# object which you must give the reference to the object on which you want to apply the method and the parameters
 to that method in an `Object[]` array.
 
-Some of the problems can be mitigated a little with the proper amount of smartness, in particular caching previous results.
+Reflection is typically used in frameworks, like Unit Testing frameworks or Object Relational Mappers (ORM).
 
-Reflection is typically used in frameworks, like Unit Testing frameworks or Object Relational Mappers (ORM). We'll have a look at these
-use cases in the lecture.
+=== Basic of reflection
 
-=== Note
+In the following examples we will be using the following `Student` class.
 
-Reflection should NOT be used on a daily basis but be reserved for special cases, such as making a tool set (maybe called a framework), that can then make work a bit more efficient for the programmer. Frameworks typically pay their keep with a little performance degradation, because they need some extra work either at application startup, in preparation of the executable, when used or all of the former.
+.Simple student class
+[source,java]
+----
+public class Student {
+    
+    private final String name;
 
-If the use of a framework makes the normal programming more complex, you might want to consider not using it.
-In all cases, you should be aware of the consequences.
+    public Student(){
+        this("John Doe");
+    }
+    
+    public Student(String name){
+        this.name = name;
+    }
 
+    public String getName() {
+        return name;
+    }
+    
+    public static void sayHello(){
+        System.out.println("Hello world!");
+    }
+    
+    public static void sayHello(String to){
+        System.out.println("Hello " + to);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+}
+----
+
+==== Getting the class type
+
+If we want to use reflection, we need to first know which class we are talking about. We can do this in three different ways
+
+.Basic reflection API
+[source,java]
+----
+// 1. Get the class type from an instance
+Student jane = new Student("Jane Doe");
+Class<?> janeClass = jane.getClass();
+System.out.println("Class: " + janeClass);
+
+// 2. Get the class type from the class
+Class<?> classType = Student.class;
+System.out.println("Class: " + classType);
+
+// 3. Get the class type based on a String (fully qualified name)
+String className = "io.github.fontysvenlo.reflection.demo.Student";
+Class<?> stringClass = Class.forName(className);
+System.out.println("Class: " + stringClass);
+// NOTE: this can fail if the class does not exist (ClassNotFoundException)
+----
+
+==== Creating new instances
+
+Using reflection we can create new instances from a given class type.
+
+.Creating an instance from class type
+[source,java]
+----
+// 1. First we need to find constructor(s)
+Constructor<?>[] constructors = stringClass.getConstructors();
+// See which constructors we have
+for (Constructor<?> constructor : constructors) {
+    System.out.println("Constructor: " + constructor);
+}
+
+// 2. Create a new instance
+
+// Using the constructor from the array
+Constructor<?> firstConstructor = constructors[0];
+Object instance = firstConstructor.newInstance();
+System.out.println(instance);
+
+// Using the default constructor
+Constructor<?> defaultConstructor = classType.getConstructor();
+System.out.println(defaultConstructor.newInstance());
+
+// Finding a specific constructor
+Constructor<?> parameterConstructor = classType.getConstructor(String.class);
+System.out.println(parameterConstructor.newInstance("Parameter Constructor"));
+----
+
+==== Manipulating methods/fields
+
+Using the class type and the instance we can manipulate methods and fields. This includes reading values from private fields, calling methods, etc.
+
+.Manipulating fields/methods
+[source,java]
+----
+// Get method based on name
+Method getName = classType.getMethod("getName");
+
+// We need an instance to be able to invoke instance methods
+System.out.println(getName.invoke(instance));
+System.out.println(getName.invoke(jane));
+
+// We do not need an instance for static methods
+Method sayHello = classType.getMethod("sayHello");
+sayHello.invoke(null);
+
+// We can see that a method is static (and more)
+int modifiers = sayHello.getModifiers();
+System.out.println("Modifiers: " + modifiers);
+System.out.println("Modifiers: " + Integer.toBinaryString(modifiers));
+System.out.println("Modifiers: " + Modifier.toString(modifiers));
+
+// Method that takes parameters
+Method sayHelloParam = classType.getMethod("sayHello", String.class);
+sayHelloParam.invoke(null, "Ibrahim");
+
+// We can do the same for fields
+Field nameField = classType.getDeclaredField("name");
+// Because it is private we need to set it accessible first
+nameField.setAccessible(true);
+System.out.println(nameField.get(instance));
+System.out.println(nameField.get(jane));
+----
+
+You can see we use the `getModifiers` method to get link:https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/reflect/Modifier.html[modifiers] for fields/methods. Java uses a single integer to basically encode a lot of different booleans in an efficient manner. Every boolean, take for example wether the field is link:https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/reflect/Modifier.html#FINAL[FINAL], is store in a single bit of this integer. This is commonly referred to as bit flags or modifier mask (C#: link:https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum#enumeration-types-as-bit-flags[enum flag], C: link:https://en.wikipedia.org/wiki/Bit_field#C_programming_language[bit field]).
+
+To retrieve a value we can use bit manipulation to retrieve a specific bit. For example if we are only interested to check if something is public or final we can do this in the following way
+
+[source,java]
+----
+// For some method or field
+int modifiers = method.getModifiers();
+
+// Manually checking
+boolean isPublic = (modifiers & 1) != 0;// Modifiers.PUBLIC == 1
+boolean isFinal = (modifiers & 2) != 0;// Modifiers.Final == 16
+boolean isPublicFinal = (modifiers & 17) == 17; // Modifiers.PUBLIC | Modifiers.Final) == 17
+----
+
+This following table shows the modifiers and there values.
+[cols="1,1,1,1", options="header"]
+|===
+| Modifier      | Constant              | Decimal | Binary
+
+| public        | Modifier.PUBLIC       | 1       | 000000000001
+| private       | Modifier.PRIVATE      | 2       | 000000000010
+| protected     | Modifier.PROTECTED    | 4       | 000000000100
+| static        | Modifier.STATIC       | 8       | 000000001000
+| final         | Modifier.FINAL        | 16      | 000000010000
+| synchronized  | Modifier.SYNCHRONIZED | 32      | 000000100000
+| volatile      | Modifier.VOLATILE     | 64      | 000001000000
+| transient     | Modifier.TRANSIENT    | 128     | 000010000000
+| native        | Modifier.NATIVE       | 256     | 000100000000
+| interface     | Modifier.INTERFACE    | 512     | 001000000000
+| abstract      | Modifier.ABSTRACT     | 1024    | 010000000000
+|===
+
+=== Annotations
+
+Java annotations are a form of metadata introduced in Java 5 (JDK 5) that allow developers to add supplementary information to Java code elements. Annotations provide a way to attach metadata to classes, methods, fields, parameters, and other program elements without affecting the program's execution. They are extensively used in modern Java programming for various purposes, including documentation, code organization, and runtime processing.
+
+Java has some built-in annotations such as:
+
+ - `@Override`
+ - `@Deprecated`
+ - `@SuppressWarnings`
+
+Other annotatiuons you know from other libraries such as:
+
+ - `@Test`
+ - `@ParameterizedTest`
+
+==== Creating custom annotations
+
+.Custom Java annotation
+[source,java]
+----
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface Hidden {
+
+    String value() default "";
+}
+----
+
+The `@interface`` keyword in Java is used to define a custom annotation. It's not a regular interface, but rather a special construct used to declare metadata that can be attached to classes, methods, fields, etc.
+
+Retention: annotations can have different link:https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/annotation/Retention.html[retentions], indicating how long they should be link:https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/lang/annotation/RetentionPolicy.html[retained]. The retention policies are SOURCE, CLASS, and RUNTIME, see link:https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/lang/annotation/RetentionPolicy.html#enum-constant-summary[descriptions]. So if we want to be able to read the annotation during runtime, we should annotate it with `RetentationPolicy.RUNTIME`.
+
+Target: annotations can be applied to different program elements, known as link:https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/lang/annotation/Target.html[targets]. Targets are of type link:https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/lang/annotation/ElementType.html[ElementType]. Common targets include TYPE (classes and interfaces), METHOD, FIELD, PARAMETER, and PACKAGE, see link:https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/lang/annotation/ElementType.html#enum-constant-summary[target values].
+
+
+===== Annotation parameters
+
+Annotation can optionally take parameters.
+You define parameters in an annotation using methods without bodies.
+
+.Parameters for Annotations
+[source,java]
+----
+public @interface Author {
+    String name();                      // required parameter
+    int year();                         // required parameter
+    String[] reviewers() default {};    // optional parameter with default
+}
+
+// Valid book
+@Author(name = "Alice", year = 2024, reviewers = {"Bob", "Charlie"})
+public class MyBook {
+}
+
+// Valid book with default value
+@Author(name = "Dana", year = 2025)
+public class AnotherBook {
+}
+----
+
+If the annotation has a single element named `value()`, you can omit the `value=` part, as we have seen in the `Hidden` annotation.
+
+==== Annotations and reflection
+
+Let's have a look at how we can define a custom annotation and use reflection to interact with this.
+
+First we add the annotation to a field in our `Student` class.
+
+.Add annotation to our `Student` class
+[source,java]
+----
+@Hidden("rumpelstiltskin")
+private final String cantSeeMe = "How?";
+----
+
+Notice how we do not add any getters for this field.
+
+However we can fiend all fields using reflection as seen before. We can however also ask if element types, such as fields or methods have any annotations. We can use this to find the hidden annotation and retrieve the field we want.
+
+We can get and print the value of the annotation using the following code
+
+.Finding `Hidden` annotation using reflection
+[source, java]
+----
+for(Field field : classType.getDeclaredFields()) {
+    if(field.isAnnotationPresent(Hidden.class)){
+        Hidden hidden = field.getAnnotation(Hidden.class);
+        String value = hidden.value();
+        System.out.println(value);
+    }
+}
+----
+
+=== Reflection and JPMS
+
+In one of the previous lessons we talked about the Java Platform Module System. We saw that if we use JPMS and we have two modules `A` and `B`, where `B` depends on `A` we have to explicitly export functionality from `A` and next to that  we have to explicitly `require` module `A` inside module `B`.
+
+When we use the JPMS we can use reflection on public parts of the exported functionality. We can no longer use reflection on the private parts, for example `setAccessible(true)` will no longer work and throw an exception.
+
+Therefore a new keyword is introduces, named `opens`, this specifically opens functionality to be used by reflection in another module.
+
+Let's have a look at what we can do with the any combination of `exports` and `opens`, see the following table for what we mean with `encapsulated`, `only-exported`, `only-opens` and `full`.
+
+[options="header"]
+|===
+| Package      | Exported | Opened
+| encapsulated | x        | x
+| only-exported     | v        | x
+| only-opens        | x        | v
+| full         | v        | v
+|===
+
+The following table shows what is possible to do in another module.
+
+[options="header"]
+|===
+| Class         | Access instance (Normal) | Access public functionality (Normal) | Access private functionality (Normal) | Access instance (Reflective) | Access public functionality(Reflective) | Access private functionality (Reflective)
+| Encapsulated  | x                 | x               | x                | x                      | x                   | x
+| Only-Exported | v                 | v               | x                | v                      | v                   | x
+| Only-Opens    | x                 | x               | x                | v                      | v                   | v
+| Full          | v                 | v               | x                | v                      | v                   | v
+|===
+
+Here we can see the difference between the normal way of interacting with an object or by using reflection and how it chages depending how the module is exported.
+
+=== Real world example
+
+Large frameworks often use reflection and annotations to provide functionality, one such frameworks you have been using the complete semester, namely JUnit. JUnit uses the `@Test` annotations to see which methods are tests and it finds these methods using reflection.
+
+We can recreate a very simple variant of JUnit ourselves using the knowledge we just gained.
+
+We need the following:
+
+What do we need?
+
+- Annotations: so we can find the test methods
+- Asserts: so we can check the expected value against the actual value
+- Executor: something that finds all test files, finds all the annotated methods and executes the methods
+
+==== Test annotation
+
+.Test annotation
+[source,java]
+----
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface FontysTest {
+    String description() default "";
+}
+----
+
+==== Test assertions
+
+.Custom assertions
+[source,java]
+----
+public class FontysAssert {
+    
+    public static <T> void assertEquals(T actual, T expected){        
+        if(actual.equals(expected)){
+            System.out.println("GREEN TEST :-) ");
+        } else {
+            System.out.println("RED!!! Expected: " + expected + ", but actual value was: " + actual);
+        }        
+    }
+}
+----
+
+==== Example tests for calculator
+
+```java
+@FontysTest
+public void testCalculator_1(){    
+    Calculator calc = new Calculator();
+    int expected = 10;
+    int actual = calc.add(7, 3);
+    
+    assertEquals(actual, expected);
+}
+
+@FontysTest
+public void testCalculator_2(){
+    
+    Calculator calc = new Calculator();
+    int expected = -2;
+    int actual = calc.add(3, -5);
+    
+    assertEquals(actual, expected);
+}
+```
+
+==== Test executor
+
+Test executor which does the following
+
+1. Load package
+2. Find all classes that end in `FontysTest`
+3. Find methods that are annotated with `FontysTest`
+4. Create instance of class
+5. Execute methods
+
+[source,java]
+----
+public class TestExecutor {
+
+    public static void main(String[] args) throws NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        String packageName = "io.github.fontysvenlo.calculator";
+
+        // Find all classes in the package that contain the String "FontysTest"
+        Set<Class<?>> testClasses = findAllTestClassesUsingClassLoader(packageName);
+        
+        if (testClasses.isEmpty()) {
+            System.out.println("No test classes found! Class name should contain FontysTest");
+            return;
+        } else {
+            System.out.println( testClasses );
+        }
+
+        for (Class<?> testClass : testClasses) {
+
+            // Find all methods in test class
+            Method[] declaredMethods = testClass.getDeclaredMethods();
+
+            // Filter the methods that are annotated with our FontysTest annotation
+            List<Method> testMethods = Arrays.stream(declaredMethods)
+                    .filter(method -> method.isAnnotationPresent(FontysTest.class))
+                    .toList();
+
+            if (testMethods.isEmpty()) {
+                System.out.println("No test Methods found in test class " + testClass.getSimpleName());
+                return;
+            }
+
+            // Create instance of test class
+            Constructor<?> constructor = testClass.getConstructor();
+            Object testClassInstance = constructor.newInstance();
+
+            for (Method testMethod : testMethods) {
+                    // Invoke test method on that instance
+                    System.out.println("Test method: " + testMethod.getName());
+                    testMethod.invoke(testClassInstance);
+            }
+        }
+    }
+    
+    public static Set<Class<?>> findAllTestClassesUsingClassLoader(String packageName) {
+        InputStream stream = ClassLoader.getSystemClassLoader()
+                .getResourceAsStream(packageName.replaceAll("\\.", "/"));
+
+        if(stream == null){
+            return new HashSet<>();
+        }
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+        return reader.lines()
+                .filter(line -> line.endsWith("FontysTest.class"))
+                .map(line -> getClass(line, packageName))
+                .collect(Collectors.toSet());
+    }
+    
+    private static Class<?> getClass(String className, String packageName) {
+        try {
+            return Class.forName(packageName + "."
+                    + className.substring(0, className.lastIndexOf('.')));
+        } catch (ClassNotFoundException e) {
+            // Wrap it in a RuntimeException, so we can use it in our map
+            throw new RuntimeException(e);
+        }
+    }
+}
+----
