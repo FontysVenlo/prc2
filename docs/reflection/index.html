@@ -1,0 +1,242 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>PRC2 - 12 Reflection</title><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/main.min.ede7dd340f864d554aac0f24504a61b25b50412db081218b3e87e08a8cac3acafa99c7a4d57e04ecb58a9416c51585b4aa787393c1b3a5b1bf22efcb28c95a19.css integrity="sha512-7efdNA+GTVVKrA8kUEphsltQQS2wgSGLPofgioysOsr6mcek1X4E7LWKlBbFFYW0qnhzk8GzpbG/Iu/LKMlaGQ==" crossorigin=anonymous><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous><script src=/prc2/js/init-darkmode.min.b7911813658cd032d0ed2d118da1fb57653d18386d8b1a26618f83f80019be21e977a1ddeeaeb51dcd1f7d21dfed542a8da077c29eb1ec03d84471bf90d3fabe.js integrity="sha512-t5EYE2WM0DLQ7S0RjaH7V2U9GDhtixomYY+D+AAZviHpd6Hd7q61Hc0ffSHf7VQqjaB3wp6x7APYRHG/kNP6vg==" crossorigin=anonymous></script>
+<link rel=apple-touch-icon sizes=180x180 href=https://fontysvenlo.github.io/prc2/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=https://fontysvenlo.github.io/prc2/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=https://fontysvenlo.github.io/prc2/favicon-16x16.png></head><body class="antialiased text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800"><header class="sticky top-0 z-40 w-full flex-none lg:border-b lg:border-gray-900/10 dark:border-gray-50/[0.06] bg-white dark:bg-gray-800
+border-b border-slate-900/10 lg:border-0 dark:border-slate-300/10"><div class="max-w-8xl mx-auto"><div class="py-4 lg:px-8 mx-4 lg:mx-0"><div class="relative flex items-center"><button id=menu-toggle type=button class="lg:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 mr-3">
+<span class=sr-only>Navigation</span><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<a class="mr-3 flex-none overflow-hidden md:w-auto dark:hover:text-gray-200 hover:text-gray-900" href=https://fontysvenlo.github.io/prc2/>PRC2</a><div class="relative flex ml-auto"><nav class="hidden md:flex items-center text-sm leading-6 font-semibold text-gray-700 dark:text-gray-200"><ul class="flex space-x-8"><li><a href=https://fontysvenlo.github.io/prc2/pages/tips/ class="hover:text-sky-500 dark:hover:text-sky-400">Tips</a></li><li><a href=https://fontysvenlo.github.io/prc2/pages/setup/ class="hover:text-sky-500 dark:hover:text-sky-400">Setup</a></li></ul></nav><div class="flex items-center lg:border-l border-gray-200 ml-6 pl-6 dark:border-gray-700"><button type=button id=theme-toggle>
+<span class="dark:hidden hover:text-sky-500"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span><span class="hidden dark:inline hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span></button>
+<a href=https://github.com/FontysVenlo/prc2 class="ml-6 block hover:text-sky-500 dark:hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a></div></div></div></div></div></header><div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8"><aside id=menu class="hidden lg:block fixed z-20 inset-0 top-[3.5rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto bg-white dark:bg-gray-800"><nav class="lg:leading-6 relative"><ul class="block md:hidden"><li class="mt-12 lg:mt-8"><h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">General</h5><ul class="space-y-2 border-l border-gray-100 dark:border-gray-700"><li><a href=https://fontysvenlo.github.io/prc2/pages/tips/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">Tips</a></li><li><a href=https://fontysvenlo.github.io/prc2/pages/setup/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">Setup</a></li></ul></li></ul><ul><li class="mt-12 lg:mt-8"><h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">Weeks</h5><ul class="space-y-2 border-l border-gray-100 dark:border-gray-700"><li><a href=https://fontysvenlo.github.io/prc2/docs/unit-testing-basics/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">01 Unit Testing Basics</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/rest/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">02 REST API</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/testability-and-mocking/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">03 Testability and mocking</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/database-access/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">04 Database Access JDBC</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/jpms-lambda-streams/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">05 JPMS, Lambda and Streams</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/generics/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">06 Generics</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/statemachine/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">07 The State of Things</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/internationalisation/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">10 I18N, exceptions and logging</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/security/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">12 Security</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/reflection/ class="block border-l pl-4 -ml-px
+border-slate-500 dark:border-slate-400 text-black dark:text-slate-200">12 Reflection</a></li></ul></li></ul></nav></aside><div class=lg:pl-[19.5rem]><div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16"><article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500"><nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_reflection>Reflection</a><ol class="toc-list level-2"><li><a href=#_basic_of_reflection>Basic of reflection</a></li><li><a href=#_annotations>Annotations</a></li><li><a href=#_reflection_and_jpms>Reflection and JPMS</a></li><li><a href=#_real_world_example>Real world example</a></li></ol></li></ol></nav><section class="doc-section level-1"><h2 id=_reflection>Reflection</h2><p>Reflection enables a developer to write programs that manipulate Java code dynamically. It is an API that enables you to inspect
+types (classes, interfaces), fields, constructors, methods, packages, annotations etc. during runtime.</p><p>Reflection or class introspection is used to leverage the information that is available in classes. Using the information that is
+available about a class and by implication about the instances of the class can help to avoid <em>copy-and-waste</em> programming.
+It helps keeping the code <a href=https://en.wikipedia.org/wiki/Don%27t_repeat_yourself>DRY</a></p><p>Reflection is a multi-edged tool.</p><div class=ulist><ul><li>Reflection can be used to access parts of instances that would otherwise not be available.</li><li>Reflection can be used to list information about fields, methods, and constructors.</li><li>Access via reflection is slower than regular access, because of the safety/security checks that are made on each access</li><li>It is also slow for the extra indirection needed to do the work when compared to the optimized instructions for say access a field.</li><li>It is <strong>less type-safe</strong>, so you loose much of the comfort you have in the IDE, such as code-completion or intellisense(tm). For
+instance you lookup a method by name (a String) and that makes you deal with at least one exception. This still does not produce
+the actual method, but instead a <mark>Method</mark> object which you must give the reference to the object on which you want to apply the method and the parameters
+to that method in an <code>Object[]</code> array.</li></ul></div><p>Reflection is typically used in frameworks, like Unit Testing frameworks or Object Relational Mappers (ORM).</p><section class="doc-section level-2"><h3 id=_basic_of_reflection>Basic of reflection</h3><p>In the following examples we will be using the following <code>Student</code> class.</p><figure class=listing-block><figcaption>Simple student class</figcaption><pre class=highlight><code class=language-java data-lang=java>public class Student {
+
+    private final String name;
+
+    public Student(){
+        this(&#34;John Doe&#34;);
+    }
+
+    public Student(String name){
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public static void sayHello(){
+        System.out.println(&#34;Hello world!&#34;);
+    }
+
+    public static void sayHello(String to){
+        System.out.println(&#34;Hello &#34; + to);
+    }
+
+    @Override
+    public String toString() {
+        return &#34;Student{&#34; +
+                &#34;name=&#39;&#34; + name + &#39;\&#39;&#39; +
+                &#39;}&#39;;
+    }
+}</code></pre></figure><section class="doc-section level-3"><h4 id=_getting_the_class_type>Getting the class type</h4><p>If we want to use reflection, we need to first know which class we are talking about. We can do this in three different ways</p><figure class=listing-block><figcaption>Basic reflection API</figcaption><pre class=highlight><code class=language-java data-lang=java>// 1. Get the class type from an instance
+Student jane = new Student(&#34;Jane Doe&#34;);
+Class&lt;?&gt; janeClass = jane.getClass();
+System.out.println(&#34;Class: &#34; + janeClass);
+
+// 2. Get the class type from the class
+Class&lt;?&gt; classType = Student.class;
+System.out.println(&#34;Class: &#34; + classType);
+
+// 3. Get the class type based on a String (fully qualified name)
+String className = &#34;io.github.fontysvenlo.reflection.demo.Student&#34;;
+Class&lt;?&gt; stringClass = Class.forName(className);
+System.out.println(&#34;Class: &#34; + stringClass);
+// NOTE: this can fail if the class does not exist (ClassNotFoundException)</code></pre></figure></section><section class="doc-section level-3"><h4 id=_creating_new_instances>Creating new instances</h4><p>Using reflection we can create new instances from a given class type.</p><figure class=listing-block><figcaption>Creating an instance from class type</figcaption><pre class=highlight><code class=language-java data-lang=java>// 1. First we need to find constructor(s)
+Constructor&lt;?&gt;[] constructors = stringClass.getConstructors();
+// See which constructors we have
+for (Constructor&lt;?&gt; constructor : constructors) {
+    System.out.println(&#34;Constructor: &#34; + constructor);
+}
+
+// 2. Create a new instance
+
+// Using the constructor from the array
+Constructor&lt;?&gt; firstConstructor = constructors[0];
+Object instance = firstConstructor.newInstance();
+System.out.println(instance);
+
+// Using the default constructor
+Constructor&lt;?&gt; defaultConstructor = classType.getConstructor();
+System.out.println(defaultConstructor.newInstance());
+
+// Finding a specific constructor
+Constructor&lt;?&gt; parameterConstructor = classType.getConstructor(String.class);
+System.out.println(parameterConstructor.newInstance(&#34;Parameter Constructor&#34;));</code></pre></figure></section><section class="doc-section level-3"><h4 id=_manipulating_methodsfields>Manipulating methods/fields</h4><p>Using the class type and the instance we can manipulate methods and fields. This includes reading values from private fields, calling methods, etc.</p><figure class=listing-block><figcaption>Manipulating fields/methods</figcaption><pre class=highlight><code class=language-java data-lang=java>// Get method based on name
+Method getName = classType.getMethod(&#34;getName&#34;);
+
+// We need an instance to be able to invoke instance methods
+System.out.println(getName.invoke(instance));
+System.out.println(getName.invoke(jane));
+
+// We do not need an instance for static methods
+Method sayHello = classType.getMethod(&#34;sayHello&#34;);
+sayHello.invoke(null);
+
+// We can see that a method is static (and more)
+int modifiers = sayHello.getModifiers();
+System.out.println(&#34;Modifiers: &#34; + modifiers);
+System.out.println(&#34;Modifiers: &#34; + Integer.toBinaryString(modifiers));
+System.out.println(&#34;Modifiers: &#34; + Modifier.toString(modifiers));
+
+// Method that takes parameters
+Method sayHelloParam = classType.getMethod(&#34;sayHello&#34;, String.class);
+sayHelloParam.invoke(null, &#34;Ibrahim&#34;);
+
+// We can do the same for fields
+Field nameField = classType.getDeclaredField(&#34;name&#34;);
+// Because it is private we need to set it accessible first
+nameField.setAccessible(true);
+System.out.println(nameField.get(instance));
+System.out.println(nameField.get(jane));</code></pre></figure><p>You can see we use the <code>getModifiers</code> method to get <a href=https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/reflect/Modifier.html>modifiers</a> for fields/methods. Java uses a single integer to basically encode a lot of different booleans in an efficient manner. Every boolean, take for example wether the field is <a href=https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/reflect/Modifier.html#FINAL>FINAL</a>, is store in a single bit of this integer. This is commonly referred to as bit flags or modifier mask (C#: <a href=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum#enumeration-types-as-bit-flags>enum flag</a>, C: <a href=https://en.wikipedia.org/wiki/Bit_field#C_programming_language>bit field</a>).</p><p>To retrieve a value we can use bit manipulation to retrieve a specific bit. For example if we are only interested to check if something is public or final we can do this in the following way</p><div class=listing-block><pre class=highlight><code class=language-java data-lang=java>// For some method or field
+int modifiers = method.getModifiers();
+
+// Manually checking
+boolean isPublic = (modifiers &amp; 1) != 0;// Modifiers.PUBLIC == 1
+boolean isFinal = (modifiers &amp; 2) != 0;// Modifiers.Final == 16
+boolean isPublicFinal = (modifiers &amp; 17) == 17; // Modifiers.PUBLIC | Modifiers.Final) == 17</code></pre></div><p>This following table shows the modifiers and there values.</p><div class=table-block><table class="frame-all grid-all stretch"><col style=width:25%><col style=width:25%><col style=width:25%><col style=width:25%><thead><tr><th class="halign-left valign-top">Modifier</th><th class="halign-left valign-top">Constant</th><th class="halign-left valign-top">Decimal</th><th class="halign-left valign-top">Binary</th></tr></thead><tbody><tr><td class="halign-left valign-top">public</td><td class="halign-left valign-top">Modifier.PUBLIC</td><td class="halign-left valign-top">1</td><td class="halign-left valign-top">000000000001</td></tr><tr><td class="halign-left valign-top">private</td><td class="halign-left valign-top">Modifier.PRIVATE</td><td class="halign-left valign-top">2</td><td class="halign-left valign-top">000000000010</td></tr><tr><td class="halign-left valign-top">protected</td><td class="halign-left valign-top">Modifier.PROTECTED</td><td class="halign-left valign-top">4</td><td class="halign-left valign-top">000000000100</td></tr><tr><td class="halign-left valign-top">static</td><td class="halign-left valign-top">Modifier.STATIC</td><td class="halign-left valign-top">8</td><td class="halign-left valign-top">000000001000</td></tr><tr><td class="halign-left valign-top">final</td><td class="halign-left valign-top">Modifier.FINAL</td><td class="halign-left valign-top">16</td><td class="halign-left valign-top">000000010000</td></tr><tr><td class="halign-left valign-top">synchronized</td><td class="halign-left valign-top">Modifier.SYNCHRONIZED</td><td class="halign-left valign-top">32</td><td class="halign-left valign-top">000000100000</td></tr><tr><td class="halign-left valign-top">volatile</td><td class="halign-left valign-top">Modifier.VOLATILE</td><td class="halign-left valign-top">64</td><td class="halign-left valign-top">000001000000</td></tr><tr><td class="halign-left valign-top">transient</td><td class="halign-left valign-top">Modifier.TRANSIENT</td><td class="halign-left valign-top">128</td><td class="halign-left valign-top">000010000000</td></tr><tr><td class="halign-left valign-top">native</td><td class="halign-left valign-top">Modifier.NATIVE</td><td class="halign-left valign-top">256</td><td class="halign-left valign-top">000100000000</td></tr><tr><td class="halign-left valign-top">interface</td><td class="halign-left valign-top">Modifier.INTERFACE</td><td class="halign-left valign-top">512</td><td class="halign-left valign-top">001000000000</td></tr><tr><td class="halign-left valign-top">abstract</td><td class="halign-left valign-top">Modifier.ABSTRACT</td><td class="halign-left valign-top">1024</td><td class="halign-left valign-top">010000000000</td></tr></tbody></table></div></section></section><section class="doc-section level-2"><h3 id=_annotations>Annotations</h3><p>Java annotations are a form of metadata introduced in Java 5 (JDK 5) that allow developers to add supplementary information to Java code elements. Annotations provide a way to attach metadata to classes, methods, fields, parameters, and other program elements without affecting the program’s execution. They are extensively used in modern Java programming for various purposes, including documentation, code organization, and runtime processing.</p><p>Java has some built-in annotations such as:</p><div class=ulist><ul><li><code>@Override</code></li><li><code>@Deprecated</code></li><li><code>@SuppressWarnings</code></li></ul></div><p>Other annotatiuons you know from other libraries such as:</p><div class=ulist><ul><li><code>@Test</code></li><li><code>@ParameterizedTest</code></li></ul></div><section class="doc-section level-3"><h4 id=_creating_custom_annotations>Creating custom annotations</h4><figure class=listing-block><figcaption>Custom Java annotation</figcaption><pre class=highlight><code class=language-java data-lang=java>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface Hidden {
+
+    String value() default &#34;&#34;;
+}</code></pre></figure><p>The <code>@interface`</code> keyword in Java is used to define a custom annotation. It’s not a regular interface, but rather a special construct used to declare metadata that can be attached to classes, methods, fields, etc.</p><p>Retention: annotations can have different <a href=https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/annotation/Retention.html>retentions</a>, indicating how long they should be <a href=https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/lang/annotation/RetentionPolicy.html>retained</a>. The retention policies are SOURCE, CLASS, and RUNTIME, see <a href=https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/lang/annotation/RetentionPolicy.html#enum-constant-summary>descriptions</a>. So if we want to be able to read the annotation during runtime, we should annotate it with <code>RetentationPolicy.RUNTIME</code>.</p><p>Target: annotations can be applied to different program elements, known as <a href=https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/lang/annotation/Target.html>targets</a>. Targets are of type <a href=https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/lang/annotation/ElementType.html>ElementType</a>. Common targets include TYPE (classes and interfaces), METHOD, FIELD, PARAMETER, and PACKAGE, see <a href=https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/lang/annotation/ElementType.html#enum-constant-summary>target values</a>.</p><section class="doc-section level-4"><h5 id=_annotation_parameters>Annotation parameters</h5><p>Annotation can optionally take parameters.
+You define parameters in an annotation using methods without bodies.</p><figure class=listing-block><figcaption>Parameters for Annotations</figcaption><pre class=highlight><code class=language-java data-lang=java>public @interface Author {
+    String name();                      // required parameter
+    int year();                         // required parameter
+    String[] reviewers() default {};    // optional parameter with default
+}
+
+// Valid book
+@Author(name = &#34;Alice&#34;, year = 2024, reviewers = {&#34;Bob&#34;, &#34;Charlie&#34;})
+public class MyBook {
+}
+
+// Valid book with default value
+@Author(name = &#34;Dana&#34;, year = 2025)
+public class AnotherBook {
+}</code></pre></figure><p>If the annotation has a single element named <code>value()</code>, you can omit the <code>value=</code> part, as we have seen in the <code>Hidden</code> annotation.</p></section></section><section class="doc-section level-3"><h4 id=_annotations_and_reflection>Annotations and reflection</h4><p>Let’s have a look at how we can define a custom annotation and use reflection to interact with this.</p><p>First we add the annotation to a field in our <code>Student</code> class.</p><figure class=listing-block><figcaption>Add annotation to our <code>Student</code> class</figcaption><pre class=highlight><code class=language-java data-lang=java>@Hidden(&#34;rumpelstiltskin&#34;)
+private final String cantSeeMe = &#34;How?&#34;;</code></pre></figure><p>Notice how we do not add any getters for this field.</p><p>However we can fiend all fields using reflection as seen before. We can however also ask if element types, such as fields or methods have any annotations. We can use this to find the hidden annotation and retrieve the field we want.</p><p>We can get and print the value of the annotation using the following code</p><figure class=listing-block><figcaption>Finding <code>Hidden</code> annotation using reflection</figcaption><pre class=highlight><code class=language-java data-lang=java>for(Field field : classType.getDeclaredFields()) {
+    if(field.isAnnotationPresent(Hidden.class)){
+        Hidden hidden = field.getAnnotation(Hidden.class);
+        String value = hidden.value();
+        System.out.println(value);
+    }
+}</code></pre></figure></section></section><section class="doc-section level-2"><h3 id=_reflection_and_jpms>Reflection and JPMS</h3><p>In one of the previous lessons we talked about the Java Platform Module System. We saw that if we use JPMS and we have two modules <code>A</code> and <code>B</code>, where <code>B</code> depends on <code>A</code> we have to explicitly export functionality from <code>A</code> and next to that we have to explicitly <code>require</code> module <code>A</code> inside module <code>B</code>.</p><p>When we use the JPMS we can use reflection on public parts of the exported functionality. We can no longer use reflection on the private parts, for example <code>setAccessible(true)</code> will no longer work and throw an exception.</p><p>Therefore a new keyword is introduces, named <code>opens</code>, this specifically opens functionality to be used by reflection in another module.</p><p>Let’s have a look at what we can do with the any combination of <code>exports</code> and <code>opens</code>, see the following table for what we mean with <code>encapsulated</code>, <code>only-exported</code>, <code>only-opens</code> and <code>full</code>.</p><div class=table-block><table class="frame-all grid-all stretch"><col style=width:33.3333%><col style=width:33.3333%><col style=width:33.3334%><thead><tr><th class="halign-left valign-top">Package</th><th class="halign-left valign-top">Exported</th><th class="halign-left valign-top">Opened</th></tr></thead><tbody><tr><td class="halign-left valign-top">encapsulated</td><td class="halign-left valign-top">x</td><td class="halign-left valign-top">x</td></tr><tr><td class="halign-left valign-top">only-exported</td><td class="halign-left valign-top">v</td><td class="halign-left valign-top">x</td></tr><tr><td class="halign-left valign-top">only-opens</td><td class="halign-left valign-top">x</td><td class="halign-left valign-top">v</td></tr><tr><td class="halign-left valign-top">full</td><td class="halign-left valign-top">v</td><td class="halign-left valign-top">v</td></tr></tbody></table></div><p>The following table shows what is possible to do in another module.</p><div class=table-block><table class="frame-all grid-all stretch"><col style=width:14.2857%><col style=width:14.2857%><col style=width:14.2857%><col style=width:14.2857%><col style=width:14.2857%><col style=width:14.2857%><col style=width:14.2858%><thead><tr><th class="halign-left valign-top">Class</th><th class="halign-left valign-top">Access instance (Normal)</th><th class="halign-left valign-top">Access public functionality (Normal)</th><th class="halign-left valign-top">Access private functionality (Normal)</th><th class="halign-left valign-top">Access instance (Reflective)</th><th class="halign-left valign-top">Access public functionality(Reflective)</th><th class="halign-left valign-top">Access private functionality (Reflective)</th></tr></thead><tbody><tr><td class="halign-left valign-top">Encapsulated</td><td class="halign-left valign-top">x</td><td class="halign-left valign-top">x</td><td class="halign-left valign-top">x</td><td class="halign-left valign-top">x</td><td class="halign-left valign-top">x</td><td class="halign-left valign-top">x</td></tr><tr><td class="halign-left valign-top">Only-Exported</td><td class="halign-left valign-top">v</td><td class="halign-left valign-top">v</td><td class="halign-left valign-top">x</td><td class="halign-left valign-top">v</td><td class="halign-left valign-top">v</td><td class="halign-left valign-top">x</td></tr><tr><td class="halign-left valign-top">Only-Opens</td><td class="halign-left valign-top">x</td><td class="halign-left valign-top">x</td><td class="halign-left valign-top">x</td><td class="halign-left valign-top">v</td><td class="halign-left valign-top">v</td><td class="halign-left valign-top">v</td></tr><tr><td class="halign-left valign-top">Full</td><td class="halign-left valign-top">v</td><td class="halign-left valign-top">v</td><td class="halign-left valign-top">x</td><td class="halign-left valign-top">v</td><td class="halign-left valign-top">v</td><td class="halign-left valign-top">v</td></tr></tbody></table></div><p>Here we can see the difference between the normal way of interacting with an object or by using reflection and how it chages depending how the module is exported.</p></section><section class="doc-section level-2"><h3 id=_real_world_example>Real world example</h3><p>Large frameworks often use reflection and annotations to provide functionality, one such frameworks you have been using the complete semester, namely JUnit. JUnit uses the <code>@Test</code> annotations to see which methods are tests and it finds these methods using reflection.</p><p>We can recreate a very simple variant of JUnit ourselves using the knowledge we just gained.</p><p>We need the following:</p><p>What do we need?</p><div class=ulist><ul><li>Annotations: so we can find the test methods</li><li>Asserts: so we can check the expected value against the actual value</li><li>Executor: something that finds all test files, finds all the annotated methods and executes the methods</li></ul></div><section class="doc-section level-3"><h4 id=_test_annotation>Test annotation</h4><figure class=listing-block><figcaption>Test annotation</figcaption><pre class=highlight><code class=language-java data-lang=java>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface FontysTest {
+    String description() default &#34;&#34;;
+}</code></pre></figure></section><section class="doc-section level-3"><h4 id=_test_assertions>Test assertions</h4><figure class=listing-block><figcaption>Custom assertions</figcaption><pre class=highlight><code class=language-java data-lang=java>public class FontysAssert {
+
+    public static &lt;T&gt; void assertEquals(T actual, T expected){
+        if(actual.equals(expected)){
+            System.out.println(&#34;GREEN TEST :-) &#34;);
+        } else {
+            System.out.println(&#34;RED!!! Expected: &#34; + expected + &#34;, but actual value was: &#34; + actual);
+        }
+    }
+}</code></pre></figure></section><section class="doc-section level-3"><h4 id=_example_tests_for_calculator>Example tests for calculator</h4><div class=listing-block><pre class=highlight><code class=language-java data-lang=java>@FontysTest
+public void testCalculator_1(){
+    Calculator calc = new Calculator();
+    int expected = 10;
+    int actual = calc.add(7, 3);
+
+    assertEquals(actual, expected);
+}
+
+@FontysTest
+public void testCalculator_2(){
+
+    Calculator calc = new Calculator();
+    int expected = -2;
+    int actual = calc.add(3, -5);
+
+    assertEquals(actual, expected);
+}</code></pre></div></section><section class="doc-section level-3"><h4 id=_test_executor>Test executor</h4><p>Test executor which does the following</p><div class="olist arabic"><ol class=arabic><li>Load package</li><li>Find all classes that end in <code>FontysTest</code></li><li>Find methods that are annotated with <code>FontysTest</code></li><li>Create instance of class</li><li>Execute methods</li></ol></div><div class=listing-block><pre class=highlight><code class=language-java data-lang=java>public class TestExecutor {
+
+    public static void main(String[] args) throws NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        String packageName = &#34;io.github.fontysvenlo.calculator&#34;;
+
+        // Find all classes in the package that contain the String &#34;FontysTest&#34;
+        Set&lt;Class&lt;?&gt;&gt; testClasses = findAllTestClassesUsingClassLoader(packageName);
+
+        if (testClasses.isEmpty()) {
+            System.out.println(&#34;No test classes found! Class name should contain FontysTest&#34;);
+            return;
+        } else {
+            System.out.println( testClasses );
+        }
+
+        for (Class&lt;?&gt; testClass : testClasses) {
+
+            // Find all methods in test class
+            Method[] declaredMethods = testClass.getDeclaredMethods();
+
+            // Filter the methods that are annotated with our FontysTest annotation
+            List&lt;Method&gt; testMethods = Arrays.stream(declaredMethods)
+                    .filter(method -&gt; method.isAnnotationPresent(FontysTest.class))
+                    .toList();
+
+            if (testMethods.isEmpty()) {
+                System.out.println(&#34;No test Methods found in test class &#34; + testClass.getSimpleName());
+                return;
+            }
+
+            // Create instance of test class
+            Constructor&lt;?&gt; constructor = testClass.getConstructor();
+            Object testClassInstance = constructor.newInstance();
+
+            for (Method testMethod : testMethods) {
+                    // Invoke test method on that instance
+                    System.out.println(&#34;Test method: &#34; + testMethod.getName());
+                    testMethod.invoke(testClassInstance);
+            }
+        }
+    }
+
+    public static Set&lt;Class&lt;?&gt;&gt; findAllTestClassesUsingClassLoader(String packageName) {
+        InputStream stream = ClassLoader.getSystemClassLoader()
+                .getResourceAsStream(packageName.replaceAll(&#34;\\.&#34;, &#34;/&#34;));
+
+        if(stream == null){
+            return new HashSet&lt;&gt;();
+        }
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+        return reader.lines()
+                .filter(line -&gt; line.endsWith(&#34;FontysTest.class&#34;))
+                .map(line -&gt; getClass(line, packageName))
+                .collect(Collectors.toSet());
+    }
+
+    private static Class&lt;?&gt; getClass(String className, String packageName) {
+        try {
+            return Class.forName(packageName + &#34;.&#34;
+                    + className.substring(0, className.lastIndexOf(&#39;.&#39;)));
+        } catch (ClassNotFoundException e) {
+            // Wrap it in a RuntimeException, so we can use it in our map
+            throw new RuntimeException(e);
+        }
+    }
+}</code></pre></div></section></section></section></article></div><footer class="text-sm leading-6 mt-12 mb-5">Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a></footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block"><h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5></div></div><div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div></div><script src=/prc2/js/main.min.956966b3103878d329f9460daf829f6ad1d50fc9e24d20ff0c5d93a4006065df877564edc24b6a2a5182bf4387d13d9f960a1df6fc9d259d38cfb8e83509c999.js integrity="sha512-lWlmsxA4eNMp+UYNr4KfatHVD8niTSD/DF2TpABgZd+HdWTtwktqKlGCv0OH0T2flgod9vydJZ04z7joNQnJmQ==" crossorigin=anonymous></script>
+<script src=/prc2/js/highlight.min.cd8091de05577194483fff730f723dc2379226a640ef117b33ad133cc3da2f690d95af8fc32186b11dc10628e66e325b33bee2bf443c98315905e50f22aecc50.js integrity="sha512-zYCR3gVXcZRIP/9zD3I9wjeSJqZA7xF7M60TPMPaL2kNla+PwyGGsR3BBijmbjJbM77iv0Q8mDFZBeUPIq7MUA==" crossorigin=anonymous defer></script><div id=copied-alert class="invisible opacity-0 transition-all ease-in-out duration-400 fixed bottom-3 right-10 z-50 flex p-4 mb-4 text-sm text-gray-800 bg-gray-200 rounded-lg dark:bg-gray-500 dark:text-gray-200" role=alert><svg class="inline flex-shrink-0 mr-3 w-5 h-5" viewBox="0 0 24 24" width="24" height="24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><div><span class=font-medium>Code copied</span></div></div></body></html>
