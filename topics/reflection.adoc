@@ -149,7 +149,7 @@ System.out.println(nameField.get(instance));
 System.out.println(nameField.get(jane));
 ----
 
-You can see we use the `getModifiers` method to get link:https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/reflect/Modifier.html[modifiers] for fields/methods. Java uses a single integer to basically encode a lot of different booleans in an efficient manner. Every boolean, take for example wether the field is link:https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/reflect/Modifier.html#FINAL[FINAL], is store in a single bit of this integer. This is commonly refered to as bit flags or modifier mask (C#: link:https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum#enumeration-types-as-bit-flags[enum flag], C: link:https://en.wikipedia.org/wiki/Bit_field#C_programming_language[bit field]).
+You can see we use the `getModifiers` method to get link:https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/reflect/Modifier.html[modifiers] for fields/methods. Java uses a single integer to basically encode a lot of different booleans in an efficient manner. Every boolean, take for example wether the field is link:https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/reflect/Modifier.html#FINAL[FINAL], is store in a single bit of this integer. This is commonly referred to as bit flags or modifier mask (C#: link:https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum#enumeration-types-as-bit-flags[enum flag], C: link:https://en.wikipedia.org/wiki/Bit_field#C_programming_language[bit field]).
 
 To retrieve a value we can use bit manipulation to retrieve a specific bit. For example if we are only interested to check if something is public or final we can do this in the following way
 
@@ -277,7 +277,7 @@ for(Field field : classType.getDeclaredFields()) {
 
 === Reflection and JPMS
 
-In one of the previous lessons we talked about the Java Platform Module System. We saw that if we use JPMS and we have two modules `A` and `B`, where `B` depends on `A` we have to explicitly export functionality from `A` and next to that  we have to explicity `require` module `A` inside module `B`.
+In one of the previous lessons we talked about the Java Platform Module System. We saw that if we use JPMS and we have two modules `A` and `B`, where `B` depends on `A` we have to explicitly export functionality from `A` and next to that  we have to explicitly `require` module `A` inside module `B`.
 
 When we use the JPMS we can use reflection on public parts of the exported functionality. We can no longer use reflection on the private parts, for example `setAccessible(true)` will no longer work and throw an exception.
 
