@@ -1,14 +1,14 @@
 ---
-title: "09 Reflection"
+title: "12 Reflection"
 description: ""
 date: 2022-05-11T12:02:24+02:00
-draft: true
+draft: false
 images: []
 slug: "reflection"
 menu: 
   docs:
     parent: ""
-weight: 100
+weight: 120
 toc: true
 ---
 
