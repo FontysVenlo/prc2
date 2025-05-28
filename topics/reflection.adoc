@@ -20,7 +20,7 @@ to that method in an `Object[]` array.
 
 Reflection is typically used in frameworks, like Unit Testing frameworks or Object Relational Mappers (ORM).
 
-=== Basic of reflection
+=== Basics of reflection
 
 In the following examples we will be using the following `Student` class.
 
