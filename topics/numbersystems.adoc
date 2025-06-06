@@ -1,0 +1,440 @@
+== Number systems
+
+Take the binary word `01100010 01110101 01110011 01111001` — what does it mean? That depends on the representation.
+
+* `1651864441` if interpreted as an integer
+* `1.13194324E21` when interpreted as a floating point (float)
+* `"busy"` when interpreted as an ASCII string
+
+So the meaning of the bits depends on the intended interpretation.
+
+== Decimal System
+
+In most of our everyday life we use the decimal system. So how does this system work?
+
+* Numbers available: `0 1 2 3 4 5 6 7 8 9`
+* Powers of ten: `10^5 10^4 10^3 10^2 10^1 10^0`
+
+We can write for example the number `124` as `1 * 10^2 + 2 * 10^1 + 4 * 10^0`.
+
+=== Arithmetic
+
+Addition
+
+[source]
+----
+overflow   110 
+            753
+            491+
+           -----
+           1244
+----
+
+Subtraction
+
+[source]
+----
+borrow      1
+            753
+            491-
+            ----
+            262
+----
+
+Multiplication
+
+[source]
+----
+  612
+   24x
+-----
+ 2448 <- multiple by 4
+12240 <- move one to the left and multiply by 2
+-----
+14688 <- addition
+----
+
+Division
+
+Have a look at link:https://www.mathsisfun.com/long_division.html[], where this example is explained in more detail.
+
+[source]
+----
+   017
+   ----
+25|425
+   25
+   ----
+   175
+   175
+   ----
+     0
+----
+
+== Binary System
+
+How can we represent numbers in binary form?
+
+* Numbers available: `0 1`
+* Powers of two: `2^5 2^4 2^3 2^2 2^1 2^0`
+
+Same principles apply as with the decimal system `1101` is `1 * 2^3 + 1 * 2^2 + 0 * 2^1 + 1 * 2^0` or `13` in decimal.
+
+=== Storing Negative Numbers
+
+The most obvious solution is to use a single bit (commonly the most significant bit) as a sign bit.
+
+[source]
+----
++7: 0000 0111
+-7: 1000 0111
+----
+
+Problems:
+
+* Two zeroes, we get both `0` and `-0`
+* Addition needs to check if one of the numbers is negative, see example below
+* Range: `(-2^{n-1}+1, 2^{n-1}-1)`, we lose a number because of the double zero
+
+Let's have a look at the addition with negative numbers. On the left we do `7 + 3` and on the right we do `7 + -3`. We can see that addition works for positive numbers, however it fails for negative, here we get `-10` instead of `4`.
+
+[source]
+----
+0000 0111   0000 0111
+0000 0011+  1000 0011+
+----------  ---------
+0000 1010   1000 1010
+----
+
+=== Two's Complement
+
+A better system was developed that fixes all of the problems at once. The system is called the two's complement and looks as follows for 3-bit number. Notice how all negative numbers still have a `1` as most significant bit.
+
+[source]
+----
+    unsigned    signed
+000 0           0
+001 1           1
+010 2           2
+011 3           3
+100 4           -4
+101 5           -3
+110 6           -2
+111 7           -1
+----
+
+Benefits:
+
+* Only one zero
+* Addition works with negative numbers
+* Range: `(-2^{n-1}, 2^{n-1}-1)`
+
+This is also how Java stores numbers:
+
+[source,java]
+----
+Integer.toBinaryString(2);
+Integer.toBinaryString(-2);
+----
+
+=== Convert into two's complement
+
+Let's have a look at how to convert a number to its two's complement, let's take `3` as an example:
+
+1. Convert to one's complement → flip all bits
+2. Add 1
+
+[source]
+----
+3: 0000 0011
+   1111 1100 <- convert to one's complement
+
+   1111 1100
+   0000 0001  + <- add 1
+   ------------
+   1111 1101
+----
+
+==== Addition
+
+[source]
+----
+overflow    
+7           0000 0111
+3+          0000 0011+
+---         ----------
+10          0000 1010
+----
+
+==== Subtraction as Addition
+
+[source]
+----
+overflow    11111 111
+ 7           0000 0111
+ 3-          1111 1101+
+---          ----------
+ 4           0000 0100
+----
+
+==== Multiplication
+
+[source]
+----
+0000 0100   4
+1111 1101  -3x
+--------------
+0000 0100
+0000 000
+0001 00
+0010 0
+0100
+100
+----------
+1111 0100   -12
+----
+
+==== Division
+
+[source]
+----
+      0010100
+    -----------
+100 | 1010000 
+      100
+      -------
+      00100
+        100
+        -----
+        000
+----
+
+== Floating Point Numbers
+
+So far we have a look at whole numbers, let's have a look at numbers with a decimal part, aka floating point numbers.
+
+=== Decimal System
+
+What you are use to in the decimal system.
+
+[source]
+----
+10^5 10^4 10^3 10^2 10^1 10^0 . 10^-1 10^-2
+                                1/10  1/100
+----
+
+=== Binary System
+
+We can do the same in the binary system.
+
+[source]
+----
+2^5 2^4 2^3 2^2 2^1 2^0 . 2^-1 2^-2
+                          1/2  1/4
+----
+
+If we have 8-bit unsigned floating point:
+
+[source]
+----
+integer portion . decimal portion
+0000.0000 -> 0
+1111.1111 -> 15.9375
+----
+
+Some examples:
+
+* Can store `2.5`
+* Cannot store `16`
+* Cannot store `2^-5 = 0.03125`
+
+We could store `16` or `2^-5` if we are allowed to move the decimal point position.
+
+=== Scientific Notation
+
+Moving the decimal point is something that is done in the scientific notation.
+
+[source]
+----
+300 000 000 : 3.0x10^8
+0.00000015  : 1.5x10^-7
+----
+
+Arithmetic with scientific notation:
+
+[source]
+----
+3.0x10^8
+1.5x10^-7 x
+-----------
+4.5x10^1
+-----------
+45
+----
+
+=== IEEE-754 Format (32-bit float)
+
+Floating point numbers are based on this scientific notation.
+
+* 32 bits total
+* 1 bit sign
+* 8 bits exponent
+* 23 bits mantissa
+
+Formula:
+
+[source]
+----
+(sign) x (1 + mantissa) x 2^(exponent - 127)
+----
+
+Example:
+
+[source]
+----
+0        10000101    10010001000000000000000
+|sign|  |exponent|   |mantissa             |
+
+Exponent: 10000101 → 133
+Offset: 133 - 127 = 6
+
+Mantissa bits: 10010001 → 1/2 + 1/16 + 1/256
+Total: 1 + 1/2 + 1/16 + 1/256 = 401/256
+
+Final value = + (401/256) x 2^6 = 100.25
+----
+
+Show in Java:
+
+[source,java]
+----
+var bits = Float.floatToIntBits(100.25f);
+Integer.toBinaryString(bits);
+----
+
+=== From Decimal to Binary
+
+Let's take our number `100.25` again and go in the other direction.
+
+
+Integer part:
+
+[source]
+----
+We take our number, divide by two and write down the remainder:
+
+100 0 ^
+50  0 |
+25  1 |
+12  0 | 
+6   0 |
+3   1 |
+1   1 | Reading up gives 1100100
+0
+----
+
+Decimal part:
+
+[source]
+----
+Multiply with two and if the decimal is greater than 1 then 1 else 0.
+After it becomes greater then 1, subtract 1.
+
+0.25 * 2 = 0.5  | 0 |
+0.5 * 2 = 1     | 1 v Reading down gives  01
+0
+----
+
+We can now put these together with a dot in between:
+
+`1100100.01 * 2^0`
+
+Shift to the left until the last 1:
+
+`1.10010001 * 2^6`, (we did 6 shifts), we now have our mantissa
+
+Next convert the exponent to binary, but first we need to offset 127 (remember that we subtract 127 to get the real exponent, so now we need to add 127 to it)
+
+[source]
+----
+6 + 127 = 133
+
+133 1
+66  0
+33  1
+16  0
+8   0
+4   0
+2   0
+1   1 -> 10000101
+----
+
+Final float binary:
+
+[source]
+----
+0 10000101 10010001 000000000000000
+----
+
+=== Why 0.1 Can't Be Represented Exactly
+
+There are some problems with floating point numbers, on of the is that not every number can be represented correctly. 
+
+[source]
+----
+0.1 * 2 = 0.2 → 0
+0.2 * 2 = 0.4 → 0
+0.4 * 2 = 0.8 → 0
+0.8 * 2 = 1.6 → 1
+0.6 * 2 = 1.2 → 1
+0.2 * 2 = 0.4 → 0
+...
+
+→ repeating pattern
+----
+
+You have seen this also in the decimal system `1/3 -> 0.33333...`.
+
+Java:
+
+[source,java]
+----
+bits = Float.floatToRawIntBits(0.1f);
+Integer.toBinaryString(bits);
+----
+
+=== Double Precision
+
+The double is defined as follows:
+
+* 64-bit
+* 1 bit sign
+* 11 bits exponent
+* 52 bits mantissa
+
+== BigDecimal
+
+If we want to keep precision, Java supports `BigDecimal` and `BigInteger`, which have virtually infinite precision.
+
+[source,java]
+----
+// Wrong usage
+System.out.println("Wrong usage, damage has already been done...");
+BigDecimal bd1 = new BigDecimal(0.1);
+BigDecimal bd2 = new BigDecimal(5.8);
+
+BigDecimal bd3 = bd1.add(bd2);
+bd3.setScale(2, RoundingMode.UP); // bd3 is unchanged
+
+System.out.println("bd3 = " + bd3);
+System.out.println("bd3 (rounded) = " + bd3.setScale(2, RoundingMode.UP));
+System.out.println();
+
+// Correct usage
+System.out.println("Correct usage of BigDecimal");
+BigDecimal bd4 = new BigDecimal("0.1");
+BigDecimal bd5 = new BigDecimal("5.8");
+
+BigDecimal bd6 = bd4.add(bd5);
+System.out.println("bd6 = " + bd6);
+----
