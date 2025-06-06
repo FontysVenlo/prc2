@@ -1,0 +1,156 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>PRC2 - 09 Number systems</title><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/main.min.ede7dd340f864d554aac0f24504a61b25b50412db081218b3e87e08a8cac3acafa99c7a4d57e04ecb58a9416c51585b4aa787393c1b3a5b1bf22efcb28c95a19.css integrity="sha512-7efdNA+GTVVKrA8kUEphsltQQS2wgSGLPofgioysOsr6mcek1X4E7LWKlBbFFYW0qnhzk8GzpbG/Iu/LKMlaGQ==" crossorigin=anonymous><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/highlight.9e5322c61da2ab0997ce2db01648537ffacdb7b808fc24af4d99ff51257c59db9500031551feb8e62cafde7a246ae2c0015c2862637519a22eb0b49fa7b9d2f9.css integrity="sha512-nlMixh2iqwmXzi2wFkhTf/rNt7gI/CSvTZn/USV8WduVAAMVUf645iyv3nokauLAAVwoYmN1GaIusLSfp7nS+Q==" crossorigin=anonymous><link rel=stylesheet href=https://fontysvenlo.github.io/prc2/css/fontawesome.18a15c01c2df9b660114c44bfe1cd143dc48faeea9d5bc11a5b70509d8ec85ae65ac4c6dab72eb09a5c4770d45d6a2d802d28924e739d852a37c1b14f3a9cc61.css integrity="sha512-GKFcAcLfm2YBFMRL/hzRQ9xI+u6p1bwRpbcFCdjsha5lrExtq3LrCaXEdw1F1qLYAtKJJOc52FKjfBsU86nMYQ==" crossorigin=anonymous><script src=/prc2/js/init-darkmode.min.b7911813658cd032d0ed2d118da1fb57653d18386d8b1a26618f83f80019be21e977a1ddeeaeb51dcd1f7d21dfed542a8da077c29eb1ec03d84471bf90d3fabe.js integrity="sha512-t5EYE2WM0DLQ7S0RjaH7V2U9GDhtixomYY+D+AAZviHpd6Hd7q61Hc0ffSHf7VQqjaB3wp6x7APYRHG/kNP6vg==" crossorigin=anonymous></script>
+<link rel=apple-touch-icon sizes=180x180 href=https://fontysvenlo.github.io/prc2/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=https://fontysvenlo.github.io/prc2/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=https://fontysvenlo.github.io/prc2/favicon-16x16.png></head><body class="antialiased text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800"><header class="sticky top-0 z-40 w-full flex-none lg:border-b lg:border-gray-900/10 dark:border-gray-50/[0.06] bg-white dark:bg-gray-800
+border-b border-slate-900/10 lg:border-0 dark:border-slate-300/10"><div class="max-w-8xl mx-auto"><div class="py-4 lg:px-8 mx-4 lg:mx-0"><div class="relative flex items-center"><button id=menu-toggle type=button class="lg:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 mr-3">
+<span class=sr-only>Navigation</span><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<a class="mr-3 flex-none overflow-hidden md:w-auto dark:hover:text-gray-200 hover:text-gray-900" href=https://fontysvenlo.github.io/prc2/>PRC2</a><div class="relative flex ml-auto"><nav class="hidden md:flex items-center text-sm leading-6 font-semibold text-gray-700 dark:text-gray-200"><ul class="flex space-x-8"><li><a href=https://fontysvenlo.github.io/prc2/pages/tips/ class="hover:text-sky-500 dark:hover:text-sky-400">Tips</a></li><li><a href=https://fontysvenlo.github.io/prc2/pages/setup/ class="hover:text-sky-500 dark:hover:text-sky-400">Setup</a></li></ul></nav><div class="flex items-center lg:border-l border-gray-200 ml-6 pl-6 dark:border-gray-700"><button type=button id=theme-toggle>
+<span class="dark:hidden hover:text-sky-500"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span><span class="hidden dark:inline hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span></button>
+<a href=https://github.com/FontysVenlo/prc2 class="ml-6 block hover:text-sky-500 dark:hover:text-sky-400"><svg viewBox="0 0 24 24" width="24" height="24" class="w-5 h-5" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a></div></div></div></div></div></header><div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8"><aside id=menu class="hidden lg:block fixed z-20 inset-0 top-[3.5rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto bg-white dark:bg-gray-800"><nav class="lg:leading-6 relative"><ul class="block md:hidden"><li class="mt-12 lg:mt-8"><h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">General</h5><ul class="space-y-2 border-l border-gray-100 dark:border-gray-700"><li><a href=https://fontysvenlo.github.io/prc2/pages/tips/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">Tips</a></li><li><a href=https://fontysvenlo.github.io/prc2/pages/setup/ class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">Setup</a></li></ul></li></ul><ul><li class="mt-12 lg:mt-8"><h5 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200">Weeks</h5><ul class="space-y-2 border-l border-gray-100 dark:border-gray-700"><li><a href=https://fontysvenlo.github.io/prc2/docs/unit-testing-basics/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">01 Unit Testing Basics</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/rest/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">02 REST API</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/testability-and-mocking/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">03 Testability and mocking</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/database-access/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">04 Database Access JDBC</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/jpms-lambda-streams/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">05 JPMS, Lambda and Streams</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/generics/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">06 Generics</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/statemachine/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">07 The State of Things</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/numbersystems/ class="block border-l pl-4 -ml-px
+border-slate-500 dark:border-slate-400 text-black dark:text-slate-200">09 Number systems</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/internationalisation/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">10 I18N, exceptions and logging</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/security/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">11 Security</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/reflection/ class="block border-l pl-4 -ml-px
+border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">12 Reflection</a></li></ul></li></ul></nav></aside><div class=lg:pl-[19.5rem]><div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16"><article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500"><nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_number_systems>Number systems</a></li><li><a href=#_decimal_system>Decimal System</a><ol class="toc-list level-2"><li><a href=#_arithmetic>Arithmetic</a></li></ol></li><li><a href=#_binary_system>Binary System</a><ol class="toc-list level-2"><li><a href=#_storing_negative_numbers>Storing Negative Numbers</a></li><li><a href=#_twos_complement>Two’s Complement</a></li><li><a href=#_convert_into_twos_complement>Convert into two’s complement</a></li></ol></li><li><a href=#_floating_point_numbers>Floating Point Numbers</a><ol class="toc-list level-2"><li><a href=#_decimal_system_2>Decimal System</a></li><li><a href=#_binary_system_2>Binary System</a></li><li><a href=#_scientific_notation>Scientific Notation</a></li><li><a href=#_ieee_754_format_32_bit_float>IEEE-754 Format (32-bit float)</a></li><li><a href=#_from_decimal_to_binary>From Decimal to Binary</a></li><li><a href=#_why_0_1_cant_be_represented_exactly>Why 0.1 Can’t Be Represented Exactly</a></li><li><a href=#_double_precision>Double Precision</a></li></ol></li><li><a href=#_bigdecimal>BigDecimal</a></li></ol></nav><section class="doc-section level-1"><h2 id=_number_systems>Number systems</h2><p>Take the binary word <code>01100010 01110101 01110011 01111001</code> — what does it mean? That depends on the representation.</p><div class=ulist><ul><li><code>1651864441</code> if interpreted as an integer</li><li><code>1.13194324E21</code> when interpreted as a floating point (float)</li><li><code>"busy"</code> when interpreted as an ASCII string</li></ul></div><p>So the meaning of the bits depends on the intended interpretation.</p></section><section class="doc-section level-1"><h2 id=_decimal_system>Decimal System</h2><p>In most of our everyday life we use the decimal system. So how does this system work?</p><div class=ulist><ul><li>Numbers available: <code>0 1 2 3 4 5 6 7 8 9</code></li><li>Powers of ten: <code>10^5 10^4 10^3 10^2 10^1 10^0</code></li></ul></div><p>We can write for example the number <code>124</code> as <code>1 * 10^2 + 2 * 10^1 + 4 * 10^0</code>.</p><section class="doc-section level-2"><h3 id=_arithmetic>Arithmetic</h3><p>Addition</p><div class=listing-block><pre class=highlight><code>overflow   110
+            753
+            491+
+           -----
+           1244</code></pre></div><p>Subtraction</p><div class=listing-block><pre class=highlight><code>borrow      1
+            753
+            491-
+            ----
+            262</code></pre></div><p>Multiplication</p><div class=listing-block><pre class=highlight><code>  612
+   24x
+-----
+ 2448 &lt;- multiple by 4
+12240 &lt;- move one to the left and multiply by 2
+-----
+14688 &lt;- addition</code></pre></div><p>Division</p><p>Have a look at <a class=bare href=https://www.mathsisfun.com/long_division.html>https://www.mathsisfun.com/long_division.html</a>, where this example is explained in more detail.</p><div class=listing-block><pre class=highlight><code>   017
+   ----
+25|425
+   25
+   ----
+   175
+   175
+   ----
+     0</code></pre></div></section></section><section class="doc-section level-1"><h2 id=_binary_system>Binary System</h2><p>How can we represent numbers in binary form?</p><div class=ulist><ul><li>Numbers available: <code>0 1</code></li><li>Powers of two: <code>2^5 2^4 2^3 2^2 2^1 2^0</code></li></ul></div><p>Same principles apply as with the decimal system <code>1101</code> is <code>1 * 2^3 + 1 * 2^2 + 0 * 2^1 + 1 * 2^0</code> or <code>13</code> in decimal.</p><section class="doc-section level-2"><h3 id=_storing_negative_numbers>Storing Negative Numbers</h3><p>The most obvious solution is to use a single bit (commonly the most significant bit) as a sign bit.</p><div class=listing-block><pre class=highlight><code>+7: 0000 0111
+-7: 1000 0111</code></pre></div><p>Problems:</p><div class=ulist><ul><li>Two zeroes, we get both <code>0</code> and <code>-0</code></li><li>Addition needs to check if one of the numbers is negative, see example below</li><li>Range: <code>(-2^{n-1}+1, 2^{n-1}-1)</code>, we lose a number because of the double zero</li></ul></div><p>Let’s have a look at the addition with negative numbers. On the left we do <code>7 + 3</code> and on the right we do <code>7 + -3</code>. We can see that addition works for positive numbers, however it fails for negative, here we get <code>-10</code> instead of <code>4</code>.</p><div class=listing-block><pre class=highlight><code>0000 0111   0000 0111
+0000 0011+  1000 0011+
+----------  ---------
+0000 1010   1000 1010</code></pre></div></section><section class="doc-section level-2"><h3 id=_twos_complement>Two’s Complement</h3><p>A better system was developed that fixes all of the problems at once. The system is called the two’s complement and looks as follows for 3-bit number. Notice how all negative numbers still have a <code>1</code> as most significant bit.</p><div class=listing-block><pre class=highlight><code>    unsigned    signed
+000 0           0
+001 1           1
+010 2           2
+011 3           3
+100 4           -4
+101 5           -3
+110 6           -2
+111 7           -1</code></pre></div><p>Benefits:</p><div class=ulist><ul><li>Only one zero</li><li>Addition works with negative numbers</li><li>Range: <code>(-2^{n-1}, 2^{n-1}-1)</code></li></ul></div><p>This is also how Java stores numbers:</p><div class=listing-block><pre class=highlight><code class=language-java data-lang=java>Integer.toBinaryString(2);
+Integer.toBinaryString(-2);</code></pre></div></section><section class="doc-section level-2"><h3 id=_convert_into_twos_complement>Convert into two’s complement</h3><p>Let’s have a look at how to convert a number to its two’s complement, let’s take <code>3</code> as an example:</p><div class="olist arabic"><ol class=arabic><li>Convert to one’s complement → flip all bits</li><li>Add 1</li></ol></div><div class=listing-block><pre class=highlight><code>3: 0000 0011
+   1111 1100 &lt;- convert to one&#39;s complement
+
+   1111 1100
+   0000 0001  + &lt;- add 1
+   ------------
+   1111 1101</code></pre></div><section class="doc-section level-3"><h4 id=_addition>Addition</h4><div class=listing-block><pre class=highlight><code>overflow
+7           0000 0111
+3+          0000 0011+
+---         ----------
+10          0000 1010</code></pre></div></section><section class="doc-section level-3"><h4 id=_subtraction_as_addition>Subtraction as Addition</h4><div class=listing-block><pre class=highlight><code>overflow    11111 111
+ 7           0000 0111
+ 3-          1111 1101+
+---          ----------
+ 4           0000 0100</code></pre></div></section><section class="doc-section level-3"><h4 id=_multiplication>Multiplication</h4><div class=listing-block><pre class=highlight><code>0000 0100   4
+1111 1101  -3x
+--------------
+0000 0100
+0000 000
+0001 00
+0010 0
+0100
+100
+----------
+1111 0100   -12</code></pre></div></section><section class="doc-section level-3"><h4 id=_division>Division</h4><div class=listing-block><pre class=highlight><code>      0010100
+    -----------
+100 | 1010000
+      100
+      -------
+      00100
+        100
+        -----
+        000</code></pre></div></section></section></section><section class="doc-section level-1"><h2 id=_floating_point_numbers>Floating Point Numbers</h2><p>So far we have a look at whole numbers, let’s have a look at numbers with a decimal part, aka floating point numbers.</p><section class="doc-section level-2"><h3 id=_decimal_system_2>Decimal System</h3><p>What you are use to in the decimal system.</p><div class=listing-block><pre class=highlight><code>10^5 10^4 10^3 10^2 10^1 10^0 . 10^-1 10^-2
+                                1/10  1/100</code></pre></div></section><section class="doc-section level-2"><h3 id=_binary_system_2>Binary System</h3><p>We can do the same in the binary system.</p><div class=listing-block><pre class=highlight><code>2^5 2^4 2^3 2^2 2^1 2^0 . 2^-1 2^-2
+                          1/2  1/4</code></pre></div><p>If we have 8-bit unsigned floating point:</p><div class=listing-block><pre class=highlight><code>integer portion . decimal portion
+0000.0000 -&gt; 0
+1111.1111 -&gt; 15.9375</code></pre></div><p>Some examples:</p><div class=ulist><ul><li>Can store <code>2.5</code></li><li>Cannot store <code>16</code></li><li>Cannot store <code>2^-5 = 0.03125</code></li></ul></div><p>We could store <code>16</code> or <code>2^-5</code> if we are allowed to move the decimal point position.</p></section><section class="doc-section level-2"><h3 id=_scientific_notation>Scientific Notation</h3><p>Moving the decimal point is something that is done in the scientific notation.</p><div class=listing-block><pre class=highlight><code>300 000 000 : 3.0x10^8
+0.00000015  : 1.5x10^-7</code></pre></div><p>Arithmetic with scientific notation:</p><div class=listing-block><pre class=highlight><code>3.0x10^8
+1.5x10^-7 x
+-----------
+4.5x10^1
+-----------
+45</code></pre></div></section><section class="doc-section level-2"><h3 id=_ieee_754_format_32_bit_float>IEEE-754 Format (32-bit float)</h3><p>Floating point numbers are based on this scientific notation.</p><div class=ulist><ul><li>32 bits total</li><li>1 bit sign</li><li>8 bits exponent</li><li>23 bits mantissa</li></ul></div><p>Formula:</p><div class=listing-block><pre class=highlight><code>(sign) x (1 + mantissa) x 2^(exponent - 127)</code></pre></div><p>Example:</p><div class=listing-block><pre class=highlight><code>0        10000101    10010001000000000000000
+|sign|  |exponent|   |mantissa             |
+
+Exponent: 10000101 → 133
+Offset: 133 - 127 = 6
+
+Mantissa bits: 10010001 → 1/2 + 1/16 + 1/256
+Total: 1 + 1/2 + 1/16 + 1/256 = 401/256
+
+Final value = + (401/256) x 2^6 = 100.25</code></pre></div><p>Show in Java:</p><div class=listing-block><pre class=highlight><code class=language-java data-lang=java>var bits = Float.floatToIntBits(100.25f);
+Integer.toBinaryString(bits);</code></pre></div></section><section class="doc-section level-2"><h3 id=_from_decimal_to_binary>From Decimal to Binary</h3><p>Let’s take our number <code>100.25</code> again and go in the other direction.</p><p>Integer part:</p><div class=listing-block><pre class=highlight><code>We take our number, divide by two and write down the remainder:
+
+100 0 ^
+50  0 |
+25  1 |
+12  0 |
+6   0 |
+3   1 |
+1   1 | Reading up gives 1100100
+0</code></pre></div><p>Decimal part:</p><div class=listing-block><pre class=highlight><code>Multiply with two and if the decimal is greater than 1 then 1 else 0.
+After it becomes greater then 1, subtract 1.
+
+0.25 * 2 = 0.5  | 0 |
+0.5 * 2 = 1     | 1 v Reading down gives  01
+0</code></pre></div><p>We can now put these together with a dot in between:</p><p><code>1100100.01 * 2^0</code></p><p>Shift to the left until the last 1:</p><p><code>1.10010001 * 2^6</code>, (we did 6 shifts), we now have our mantissa</p><p>Next convert the exponent to binary, but first we need to offset 127 (remember that we subtract 127 to get the real exponent, so now we need to add 127 to it)</p><div class=listing-block><pre class=highlight><code>6 + 127 = 133
+
+133 1
+66  0
+33  1
+16  0
+8   0
+4   0
+2   0
+1   1 -&gt; 10000101</code></pre></div><p>Final float binary:</p><div class=listing-block><pre class=highlight><code>0 10000101 10010001 000000000000000</code></pre></div></section><section class="doc-section level-2"><h3 id=_why_0_1_cant_be_represented_exactly>Why 0.1 Can’t Be Represented Exactly</h3><p>There are some problems with floating point numbers, on of the is that not every number can be represented correctly.</p><div class=listing-block><pre class=highlight><code>0.1 * 2 = 0.2 → 0
+0.2 * 2 = 0.4 → 0
+0.4 * 2 = 0.8 → 0
+0.8 * 2 = 1.6 → 1
+0.6 * 2 = 1.2 → 1
+0.2 * 2 = 0.4 → 0
+...
+
+→ repeating pattern</code></pre></div><p>You have seen this also in the decimal system <code>1/3 → 0.33333…​</code>.</p><p>Java:</p><div class=listing-block><pre class=highlight><code class=language-java data-lang=java>bits = Float.floatToRawIntBits(0.1f);
+Integer.toBinaryString(bits);</code></pre></div></section><section class="doc-section level-2"><h3 id=_double_precision>Double Precision</h3><p>The double is defined as follows:</p><div class=ulist><ul><li>64-bit</li><li>1 bit sign</li><li>11 bits exponent</li><li>52 bits mantissa</li></ul></div></section></section><section class="doc-section level-1"><h2 id=_bigdecimal>BigDecimal</h2><p>If we want to keep precision, Java supports <code>BigDecimal</code> and <code>BigInteger</code>, which have virtually infinite precision.</p><div class=listing-block><pre class=highlight><code class=language-java data-lang=java>// Wrong usage
+System.out.println(&#34;Wrong usage, damage has already been done...&#34;);
+BigDecimal bd1 = new BigDecimal(0.1);
+BigDecimal bd2 = new BigDecimal(5.8);
+
+BigDecimal bd3 = bd1.add(bd2);
+bd3.setScale(2, RoundingMode.UP); // bd3 is unchanged
+
+System.out.println(&#34;bd3 = &#34; + bd3);
+System.out.println(&#34;bd3 (rounded) = &#34; + bd3.setScale(2, RoundingMode.UP));
+System.out.println();
+
+// Correct usage
+System.out.println(&#34;Correct usage of BigDecimal&#34;);
+BigDecimal bd4 = new BigDecimal(&#34;0.1&#34;);
+BigDecimal bd5 = new BigDecimal(&#34;5.8&#34;);
+
+BigDecimal bd6 = bd4.add(bd5);
+System.out.println(&#34;bd6 = &#34; + bd6);</code></pre></div></section></article></div><footer class="text-sm leading-6 mt-12 mb-5">Theme provided by <a class="text-pink-500 underline" href=https://github.com/FontysVenlo/sebi-theme target=_blank>SeBi Venlo</a></footer><div class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block"><h5 id=toc-header class="text-slate-900 font-semibold mb-4 text-sm leading-6 dark:text-slate-200">On this page</h5></div></div><div class="hidden lg:hidden fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/60" id=menu-backdrop></div></div><script src=/prc2/js/main.min.956966b3103878d329f9460daf829f6ad1d50fc9e24d20ff0c5d93a4006065df877564edc24b6a2a5182bf4387d13d9f960a1df6fc9d259d38cfb8e83509c999.js integrity="sha512-lWlmsxA4eNMp+UYNr4KfatHVD8niTSD/DF2TpABgZd+HdWTtwktqKlGCv0OH0T2flgod9vydJZ04z7joNQnJmQ==" crossorigin=anonymous></script>
+<script src=/prc2/js/highlight.min.cd8091de05577194483fff730f723dc2379226a640ef117b33ad133cc3da2f690d95af8fc32186b11dc10628e66e325b33bee2bf443c98315905e50f22aecc50.js integrity="sha512-zYCR3gVXcZRIP/9zD3I9wjeSJqZA7xF7M60TPMPaL2kNla+PwyGGsR3BBijmbjJbM77iv0Q8mDFZBeUPIq7MUA==" crossorigin=anonymous defer></script><div id=copied-alert class="invisible opacity-0 transition-all ease-in-out duration-400 fixed bottom-3 right-10 z-50 flex p-4 mb-4 text-sm text-gray-800 bg-gray-200 rounded-lg dark:bg-gray-500 dark:text-gray-200" role=alert><svg class="inline flex-shrink-0 mr-3 w-5 h-5" viewBox="0 0 24 24" width="24" height="24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><div><span class=font-medium>Code copied</span></div></div></body></html>
