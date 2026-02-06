@@ -2,7 +2,7 @@
 title: "09 Number systems"
 description: ""
 date: 2025-04-03T12:02:24+02:00
-draft: false
+draft: true
 images: []
 slug: "numbersystems"
 menu: 
