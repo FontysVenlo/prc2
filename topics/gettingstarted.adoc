@@ -44,8 +44,8 @@ Do [red]*NOT* use `Program Files` under Windows, because of the space in the nam
 ====
 
 Installation of Java can be done either through a package manager or by downloading the
-the Java distribution from  https://adoptium.net/temurin/releases/?version=21[AdoptOpenJDK ^].
-For PRC2 we will use [blue]*Java 21*.
+the Java distribution from  https://adoptium.net/temurin/releases/?version=25[AdoptOpenJDK ^].
+For PRC2 we will use [blue]*Java 25*.
 
 ==== icon:linux[fw] Linux
 
@@ -61,7 +61,7 @@ With a package manager:
 .icon:linux[fw] install openjdk via apt-get on ubuntu
 [source,sh]
 ----
-sudo apt install openjdk-21-jdk
+sudo apt install openjdk-25-jdk
 ----
 
 .icon:linux[fw] install eclipse temurin via apt-get
@@ -71,7 +71,7 @@ apt-get install -y wget apt-transport-https gnupg
 wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | apt-key add -
 echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
 apt-get update # update if you haven't already
-apt-get install temurin-21-jdk
+apt-get install temurin-25-jdk
 ----
 
 Manual installation:
@@ -103,13 +103,13 @@ brew install --cask temurin
 
 # To install specific version
 brew tap homebrew/cask-versions
-brew install --cask temurin21
+brew install --cask temurin25
 ----
 
 Manual installation:
 
 Download the correct distribution/version of choice from
-https://adoptium.net/temurin/releases/?version=21[AdoptOpenJDK ^].
+https://adoptium.net/temurin/releases/?version=25[AdoptOpenJDK ^].
 Install the same way as normal programs.
 
 ==== icon:windows[fw] Windows
@@ -121,13 +121,13 @@ First install the https://learn.microsoft.com/en-us/windows/package-manager/wing
 .icon:windows[fw] install via powershell
 [source,sh]
 ----
-winget install Microsoft.OpenJDK.21
+winget install Microsoft.OpenJDK.25
 ----
 
 Manual installation:
 
 Download the correct distribution/version of choice from
-https://adoptium.net/temurin/releases/?version=21[AdoptOpenJDK ^].
+https://adoptium.net/temurin/releases/?version=25[AdoptOpenJDK ^].
 Install the same way as normal programs,
 
 [WARNING]
@@ -154,8 +154,8 @@ Since we want the best Java experience, we will use some common environment vari
 .icon:linux[fw] Define JAVA_HOME
 [source,sh]
 ----
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 #<1>
-export JAVA_HOME=/usr/lib/jvm/temurin-17-jdk #<2>
+export JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 #<1>
+export JAVA_HOME=/usr/lib/jvm/temurin-25-jdk #<2>
 ----
 <1> Path for manual installation
 <2> Path for package manager installation
@@ -173,7 +173,7 @@ To avoid having to do this every time you start the command-line, add the comman
 .icon:linux[fw] Add JAVA_HOME to PATH
 [source,sh]
 ----
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64
 export PATH=${JAVA_HOME}/bin:$PATH
 ----
 
@@ -250,11 +250,11 @@ source .java_setup
 [source,sh]
 ----
 # Set your default JAVA_HOME
-export JAVA_HOME=$(/usr/libexec/java_home -v 17.0.6)
+export JAVA_HOME=$(/usr/libexec/java_home -v 25.0.1)
 
 alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11.0.12`; java -version"
 alias j17="export JAVA_HOME=`/usr/libexec/java_home -v 17.0.6`; java -version"
-alias j21="export JAVA_HOME=`/usr/libexec/java_home -v 21.0.2`; java -version"
+alias j25="export JAVA_HOME=`/usr/libexec/java_home -v 25.0.1`; java -version"
 
 # Add maven to path
 export PATH=/Applications/maven/apache-maven-3.9.0/bin:$PATH
@@ -272,7 +272,7 @@ We can now check that switching between versions works:
 java -version
 j11
 j17
-j21
+j25
 ----
 Check that the default Java version is correct
 Check that switching between versions works
@@ -442,10 +442,10 @@ As you can see, when invoking it this way, you can inform Netbeans about which j
 Furthermore you can pass the project name as a parameter (defined by `$*``) so you don’t need to open the project manually anymore in NetBeans.
 Finally the `&` means that NetBeans runs as a background process without blocking your Terminal session, so your Terminal session is immediately available again.
 
-.icon:apple[fw] Open `myProject` in Netbeans using Java version 17
+.icon:apple[fw] Open `myProject` in Netbeans using Java version 25
 [source,sh]
 ----
-j17
+j25
 netbeans myProject
 ----
 

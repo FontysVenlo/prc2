@@ -1,6 +1,6 @@
 ---
 title: "Welcome"
-date: 2022-02-02T15:04:33+01:00
+date: 2026-02-02T15:04:33+01:00
 draft: false
 ---
 
@@ -9,13 +9,14 @@ draft: false
 * Module description can be found on canvas
 
 This site contains the up-to-date course material, exercises and announcements about PRC2
-(Programming Concepts 2: the Test-Driven Way), starting in February 2025.
+(Programming Concepts 2: the Test-Driven Way), starting in February 2026.
 
-Responsible Teachers for 2025 PRC2:
+Responsible Teachers for 2026 PRC2:
 
 - Martijn Bonajo
 - Ibrahim Kouzak
 - Lennart Tange
+- Richard van den Ham
 
 include::{topics}/literature.adoc[]
 
@@ -35,8 +36,8 @@ include::{topics}/topics.adoc[]
 ====
 You should start with the exercises in the week they are listed in and hand them in
 by committing your work to your personal *github* repository. +
-*Best* is to do that before next week's lesson, so you even if you were not able to
-even when trying, you will at least have some questions.
+*Best* is to do that before next week's lesson, so that even if you were not able to
+finish, you will at least have some questions.
 
 [big red]*We will use a strict deadline policy for the assignments.* +
 *The hand in deadline is two lesson weeks after the publication date.*
@@ -56,6 +57,6 @@ The approach to follow is having not only a correct implementation, but also som
 
 The ubiquitous question is always: Where do I start?
 
-The answer is surprisingly simple: at the requirements of class, method or whatever you want to develop. And always start at the simple end.
+The answer is surprisingly simple: at the requirements of a class, method or whatever you want to develop. And always start at the simple end.
 So if a requirement says that a fresh Stack is empty, that means you can write a test that asserts that a `new` instance of your class reports that it is
 empty when the `isEmpty()` is called.
