@@ -47,18 +47,18 @@ both by Cay S. Horstmann and both in the 12th edition.
 
 | 9    
 | I18N / Exceptions / Logging  
-| Vol I, ch. 7; Vol II, ch. 6 (time API) and 7 (LOgging) 
+| Vol I, ch. 7; Vol II, ch. 6 (time API) and 7 (Logging) 
 | Pub Exceptions
 
 | 10   
 | Security  
 | - 
-| tbd
+| Classloader
 
 | 11   
 | Number systems and storage in Java  
 | - 
-| tbd
+| Numbersystems
 
 | 12   
 | Concurrency 
