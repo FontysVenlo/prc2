@@ -60,7 +60,7 @@ What is HTTP:
 
 For example, when you request `index.php` the web browser makes a request to the server, the server receives the request and responds with the HTML page. The browser will parse the HTML and see that you have specified a CSS style sheet and will make another request to the server for `style.css`; the server responds by sending the style sheet.
 
-But what does a request and response actually look like? How does the server know what resource is requested and how does the client know what kind of content is returned? This is all part of the HTTP request and response specification.
+But what does an HTTP request and response actually look like? How does the server know what resource is requested and how does the client know what kind of content is returned? This is all part of the HTTP request and response specification.
 
 === HTTP request
 
