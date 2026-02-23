@@ -14,23 +14,23 @@ toc: true
 
 :imagesdir: /prc2_web/
 
-## REST
+== REST
 
-For project 2 you have to build a REST (REpresisential State Transfer) Application Programmable Interface (API). 
+For project 2 you have to build a REST (Representational State Transfer) Application Programming Interface (API).
 Before we explain what a REST API is, we first explain what the problem was with the way of designing your API in project 1 and the very basics of HTTP.
 
-### Project 1
+=== Project 1
 
-In project 1 you have to build an web application that needs to support the creating, updating and deletion of resources (e.g. playlists, events, etc.).
+In project 1 you have to build a web application that needs to support the creation, updating and deletion of resources (e.g. playlists, events, etc.).
 However the way the API was structured between groups is completely different, and worse even within the same group (application) there are differences.
 
-Take for example the create, update, delete for a event (within the same group), we find the following urls:
+Take for example the create, update, delete for an event (within the same group), we find the following URLs:
 
 - create_event.php
 - UpdateEvent.php
 - event_delete.php
 
-There is no consistency in the naming of the Uniform Resource Locator (URL), and it get's even worse of you compare it between project groups:
+There is no consistency in the naming of the Uniform Resource Locator (URL), and it gets even worse if you compare it between project groups:
 
 - /event/create.php
 - EventCreator.php
@@ -41,30 +41,30 @@ There is no consistency in the naming of the Uniform Resource Locator (URL), and
 - events.php
 - etc...
 
-Image you are a developer taking over such a project, there is no way to know for a resource, what the URLs are for Create, Read, Update, Delete (CRUD) operations.
-This is one of the pain points REST API fixes, by introducing __Uniform interface__, more about this in the next sections.
+Imagine you are a developer taking over such a project: there is no way to know, for a resource, what the URLs are for Create, Read, Update, Delete (CRUD) operations.
+This is one of the pain points REST helps fix, by introducing a __Uniform interface__. More about this in the next sections.
 
-In project 1, you have seen both GET and POST request methods. Hopefully you used the GET method only for retrieving data and used the POST method for all other data manipulation. But what if you want to create and update a resource, let's say an event. What you probably did was create two different URLs to handle create (e.g. `create-event.php` or `event/create.php`) and one for updating (e.g `update-event.php` or `event/update.php`). This works fine, but what if you for example also want to support partial update of an event? You can add another URL (e.g. `partial-update-event.php` or `event/partial-update.php`), but you can see that you are starting to get a lot very specific URLs and you need to make sure that you need the same naming convention for all resources. A REST API helps alleviate this problem by not only supporting GET and POST request parameters, but also PUT, PATCH and DELETE.
+In project 1, you have seen both GET and POST request methods. Hopefully you used the GET method only for retrieving data and used the POST method for all other data manipulation. But what if you want to create and update a resource, let's say an event? What you probably did was create two different URLs/endpoints to handle create (e.g. `create-event.php` or `event/create.php`) and one for updating (e.g `update-event.php` or `event/update.php`). This works fine, but what if you also want to support partial update of an event? You can add another endpoint (e.g. `partial-update-event.php` or `event/partial-update.php`), but you can see that you are starting to get a lot of very specific endpoints and you need to make sure you use the same naming convention for all resources. A REST API helps alleviate this problem by not only supporting GET and POST, but also PUT, PATCH and DELETE.
 
-## HTTP basics
+== HTTP basics
 
-Before we can start explaining the principles of REST, let's first have a look at Hyper Test Transfer Protocol (HTTP). The website you build in project 1 was using HTTP for all requests and responses between the client (web browser) and the server (Apache).
+Before we can start explaining the principles of REST, let's first have a look at Hypertext Transfer Protocol (HTTP). The website you built in project 1 was using HTTP for all requests and responses between the client (web browser) and the server (Apache).
 
 What is HTTP:
 
 - Protocol for transferring data between a client (web browser, mobile app, cURL, etc.) and a server (Apache, nginx, node, etc.)
 - The client always initiates the connection
-- The messages always define what the content of the message is
+- Requests and responses describe their content using metadata (headers)
 - The protocol is stateless
-** Every request should contain all the content for the server to know what to do (for example, a server cannot store which connection belongs to which user)
+- Every request should contain all the information for the server to know what to do (for example, a server cannot remember which connection belongs to which user)
 
-For example when your request `index.php` the web browser makes a request to the server, the server receives the requests and responds with the HTML page. The browser will parse the HTML and see that you have specified a CSS style sheet and will make another request to the server for `style.css`, the server response by sending the style sheet. 
+For example, when you request `index.php` the web browser makes a request to the server, the server receives the request and responds with the HTML page. The browser will parse the HTML and see that you have specified a CSS style sheet and will make another request to the server for `style.css`; the server responds by sending the style sheet.
 
 But what does a request and response actually look like? How does the server know what resource is requested and how does the client know what kind of content is returned? This is all part of the HTTP request and response specification.
 
-### HTTP Request
+=== HTTP request
 
-The basic form of a HTTP request is very simple, it consists of three parts:
+The basic form of an HTTP request is very simple; it consists of three parts:
 
 `<request method> <URI> <HTTP version>`
 
@@ -76,9 +76,9 @@ So a simple HTTP request could be as follows:
 
 `GET /images/logo.png HTTP/1.1` or `POST /event/create.php HTTP/2.0`
 
-#### Headers
+==== Headers
 
-In the previous section we explain that HTTP is stateless and that we should send everything the server needs as part of the request. To do this HTTP supports adding https://en.wikipedia.org/wiki/Metadata[metadata] to a request, this is done in the form of headers. You already used headers as part of project 1, for example to send cookie data from the client to the server. Headers are added to the request as key-value pairs (think of a hashmap).
+In the previous section we explained that HTTP is stateless and that we should send everything the server needs as part of the request. To do this, HTTP supports adding https://en.wikipedia.org/wiki/Metadata[metadata] to a request; this is done in the form of headers. You already used headers as part of project 1, for example to send cookie data from the client to the server. Headers are added to the request as key-value pairs (think of a hash map).
 
 Some of the most common headers for a request are:
 
@@ -101,7 +101,7 @@ Some of the most common headers for a request are:
 
 You see for example the `Cookie` header, this is how you transfer the cookies from the client to the server, that way the server can check the cookie data to, for example, retrieve the logged in user.
 
-So now a HTTP request could like as follows
+So now an HTTP request could look as follows:
 
 [source]
 ----
@@ -114,9 +114,9 @@ Accept-Encoding: gzip, deflate, br
 Referer: https://developer.mozilla.org/testpage.html
 ----
 
-#### Body content
+==== Body content
 
-So now we can make a request and we can send additional metadata to the server, but what about if we want to send more data. In project 1 you would send form data to the server and this form data could even contain binary data (e.g. images, music files, etc.). So HTTP should support sending this data, it does that by putting the data in the body. Of course you need to specify what kind of data that you are sending by setting the correct `Content-Type` header. In project 1 you would add `enctype='multipart/form-data'` to your form to send binary data, the browser would then send the data using an HTTP request with `Content-Type: 'multipart/form-data'`.
+So now we can make a request and we can send additional metadata to the server, but what if we want to send more data? In project 1 you would send form data to the server and this form data could even contain binary data (e.g. images, music files, etc.). HTTP supports sending this data by putting it in the body. Of course you need to specify what kind of data you are sending by setting the correct `Content-Type` header. In project 1 you would add `enctype='multipart/form-data'` to your form to send binary data; the browser would then send the data using an HTTP request with `Content-Type: multipart/form-data`.
 
 Say we want to send some JavaScript Object Notation (https://en.wikipedia.org/wiki/JSON[JSON]) data to our API, first we add the `Content-Type` header, to specify that we are sending JSON (`application/json`) and then we can add the JSON to the body (after specifying the headers).
 
@@ -137,9 +137,9 @@ Content-Length: 67
 
 Now we know how we can make a full HTTP request.
 
-### HTTP response
+=== HTTP response
 
-After making an HTTP request, the server responds with an HTTP response. The HTTP response is build up in almost the same manner as an HTTP request.
+After making an HTTP request, the server responds with an HTTP response. The HTTP response is built up in almost the same manner as an HTTP request.
 
 An HTTP response looks as follows:
 
@@ -153,7 +153,7 @@ So a simple response could be as follows:
 
 `HTTP/1.1 200 OK` or `HTTP/2.0 404 Not Found`
 
-#### Status codes
+==== Status codes
 
 HTTP uses status codes to indicate what happened, there are a lot of https://developer.mozilla.org/en-US/docs/Web/HTTP/Status[status codes] available. Status codes can be divided into five groups:
 
@@ -163,19 +163,19 @@ HTTP uses status codes to indicate what happened, there are a lot of https://dev
 4. Client error (`400-499`)
 5. Server error (`500-599`)
 
-The first category "Informational" you will not see a lot, but the others we expect you to use as part of the REST API design. So lets have a look at the most common status codes per category:
+The first category "Informational" you will not see a lot, but the others we expect you to use as part of the REST API design. So let's have a look at the most common status codes per category:
 
-##### 2xx - Success
+===== 2xx - Success
 * 200 OK - The request was successful.
 * 201 Created - The request resulted in a new resource being created.
 * 204 No Content - The request was successful, but there is no content to return.
 
-##### 3xx - Redirection
+===== 3xx - Redirection
 * 301 Moved Permanently - The resource has been permanently moved to a new URL.
 * 302 Found (Temporary Redirect) - The resource is temporarily available at a different URL.
 * 304 Not Modified - The resource has not changed since the last request, so the cached version should be used.
 
-##### 4xx - Client Errors
+===== 4xx - Client Errors
 * 400 Bad Request - The server cannot process the request due to client error (e.g., malformed syntax).
 * 401 Unauthorized - Authentication is required but has not been provided or failed.
 * 403 Forbidden - The client is not allowed to access the requested resource.
@@ -186,15 +186,15 @@ The first category "Informational" you will not see a lot, but the others we exp
 * 429 Too Many Requests - The user has sent too many requests in a given amount of time (rate limiting).
 
 
-##### 5xx - Server Errors
+===== 5xx - Server Errors
 * 500 Internal Server Error - A generic error when something unexpected happens on the server.
 * 502 Bad Gateway - The server received an invalid response from an upstream server.
 * 503 Service Unavailable - The server is temporarily unable to handle the request (e.g., overloaded or under maintenance).
 * 504 Gateway Timeout - The server did not receive a timely response from an upstream server.
 
-We will come back to status codes as part of the REST API design, in on of the next sections.
+We will come back to status codes as part of the REST API design, in one of the next sections.
 
-#### Headers
+==== Headers
 
 Not only the request, but also the response can contain metadata in the form of headers. Some of the most common response headers are the following:
 
@@ -214,9 +214,9 @@ Not only the request, but also the response can contain metadata in the form of 
 | **Connection**    | Determines whether the connection remains open. | `Connection: keep-alive`
 |===
 
-Now you can see how for example the Cookie data was actually set on the client, it can be send as part of the response with the `Cookie` header. Some of you might have redirected clients after submitting a form, or when the user was not logged-in, this was done using the `Location` header.
+Now you can see how, for example, cookie data is actually set on the client: it is sent as part of the response with the `Set-Cookie` header (the `Cookie` header is sent by the client in the request). Some of you might have redirected clients after submitting a form, or when the user was not logged in; this was done using the `Location` header.
 
-Adding the headers to the request, we can get a request that looks as follows:
+Adding the headers to the response, we can get a response that looks as follows:
 
 [source]
 ----
@@ -227,7 +227,7 @@ Location: https://example.com/dashboard
 Content-Length: 0
 ----
 
-#### Body
+==== Body
 
 Same as for the request we can add a body to the response, so we can get a full response as follows:
 
@@ -244,40 +244,40 @@ Content-Length: 75
 }
 ----
 
-## Rest basics
+== REST basics
 
-So let's finally have a look at REST. REST is an architectural style that defines how to use HTTP requests methods, response codes and URL naming scheme to build APIs that are scalable, maintainable and performant.
+So let's finally have a look at REST. REST is an architectural style that defines how to use HTTP request methods, response codes and URL naming schemes to build APIs that are scalable, maintainable and performant.
 
-REST is build for the client - server applications:
+REST is built for client-server applications:
 
   - Client and server are separate entities
   - Client sends requests, server processes requests and responds
   - Focus is on resources
   - Resources are identified by URIs
-  - HTTP requests methods are used to indicate purpose
+  - HTTP request methods are used to indicate purpose
   - Status codes to indicate response
 
 REST has six architectural constraints:
 
-### Client-Server Architecture
+=== Client-Server Architecture
 
 - The system is divided into two separate entities: the client and the server.
 - The client is responsible for the user interface and requests data from the server.
 - The server processes requests and sends responses.
 - This separation allows independent evolution of the frontend and backend.
 
-*Example:*  
+*Example:*
 A mobile app (client) requests data from a REST API (server), and the API responds with the requested data without knowing how the client will use it.
 
----
+'''
 
-### Statelessness
+=== Statelessness
 
 - Each client request must contain all necessary information for the server to process it.
 - The server does not maintain any session state between requests.
 - Statelessness improves scalability by eliminating the need for server-side session storage.
 
-*Example:*  
+*Example:*
 A request to get user data:
 [source]
 ----
@@ -286,14 +286,14 @@ Authorization: Bearer token123
 ----
 The server does not remember the user between requests. The client includes authentication in every request.
 
----
+'''
 
 === Cacheability
 
 - Responses should explicitly define whether they are cacheable using HTTP headers.
 - Caching improves performance by reducing redundant requests to the server.
 
-*Example:*  
+*Example:*
 A cacheable response:
 [source]
 ----
@@ -301,39 +301,37 @@ Cache-Control: max-age=3600
 ----
 This tells clients they can reuse the response for 1 hour without making another request.
 
----
+'''
 
 === Layered System
 
 - REST allows intermediary layers (e.g., load balancers, proxies) between the client and server.
 - The client does not need to know if it is communicating with the actual server or an intermediary.
 
-*Example:*  
+*Example:*
 A request may pass through a load balancer before reaching the API server, distributing traffic across multiple backend servers.
 
----
+'''
 
 === Code on Demand (Optional)
 
 - The server can send executable code (e.g., JavaScript) to the client for execution.
 - This is rarely used in most REST APIs.
 
-*Example:*  
+*Example:*
 An API sends a JavaScript function to a web client to validate input before submitting a request.
 
----
+'''
 
 === Uniform Interface
 
 The Uniform Interface is a key principle of REST. It ensures that interactions with a RESTful API follow a consistent structure. This is important to apply in project 2, so we go a bit deeper into this principle in the next section.
 
----
+== Uniform Interface in Depth
 
-## Uniform Interface in Depth
+Let's have a look at how we define our REST interface.
 
-Let's have a look at how the define our REST interface.
-
-### Identification of Resources
+=== Identification of Resources
 
 - Each resource should be uniquely identified using a URI (Uniform Resource Identifier).
 - Resources should be noun-based and use plural forms where applicable.
@@ -356,12 +354,12 @@ Let's have a look at how the define our REST interface.
 
 Have a look at https://restfulapi.net/resource-naming/[resource-naming].
 
----
+'''
 
-### Manipulation of Resources through Representations
+=== Manipulation of Resources through Representations
 
 - Clients interact with resources using representations such as JSON or XML.
-** We use JSON for project 2
+- We use JSON for project 2.
 - The client should be able to modify a resource by sending an updated representation.
 
 *Example:* Updating a user's profile:
@@ -377,9 +375,9 @@ Content-Type: application/json
 ----
 The API updates the user’s data and returns a response.
 
----
+'''
 
-### Self-Descriptive Messages
+=== Self-Descriptive Messages
 
 - Each HTTP request must contain all necessary information for the server to process it.
 - HTTP headers provide metadata such as authentication, content type, and cache control.
@@ -395,9 +393,9 @@ Accept: application/json
 - `Authorization`: Authentication information.
 - `Accept`: Indicates the expected response format.
 
----
+'''
 
-### Hypermedia as the Engine of Application State (HATEOAS)
+=== Hypermedia as the Engine of Application State (HATEOAS)
 
 - The API should provide links to related resources in responses, allowing clients to navigate dynamically.
 
@@ -416,11 +414,11 @@ Accept: application/json
 ----
 The client can follow the `"orders"` link to fetch the user’s orders.
 
----
+'''
 
-### HTTP methods in REST
+=== HTTP methods in REST
 
-As you may have noticed in the Uniform interface, we do not have different URIs for creating and updating for example, instead we use HTTP requests methods to indicate what we want to do with a resource.
+As you may have noticed in the Uniform Interface section, we do not have different URIs for creating and updating, for example. Instead we use HTTP request methods to indicate what we want to do with a resource.
 
 [options="header"]
 |===
@@ -434,7 +432,7 @@ As you may have noticed in the Uniform interface, we do not have different URIs 
 
 | **POST**
 | Create a new resource
-| `201 Created`, `400 Bad Request`, `422 Unprocessable Content`
+| `201 Created`, `400 Bad Request`, `422 Unprocessable Entity`
 | N/A (not typically used)
 | N/A
 
@@ -442,13 +440,13 @@ As you may have noticed in the Uniform interface, we do not have different URIs 
 | Replace all resources (rarely used)
 | `200 OK`, `204 No Content`, `405 Method Not Allowed`
 | Replace a specific resource (update)
-| `200 OK`, `204 No Content`, `400 Bad Request`, `404 Not Found`, `422 Unprocessable Content`
+| `200 OK`, `204 No Content`, `400 Bad Request`, `404 Not Found`, `422 Unprocessable Entity`
 
 | **PATCH**
 | Modify the collection
 | `200 OK`, `204 No Content`, `405 Method Not Allowed`
 | Partially update a specific resource
-| `200 OK`, `204 No Content`, `400 Bad Request`, `404 Not Found`, `422 Unprocessable Content`
+| `200 OK`, `204 No Content`, `400 Bad Request`, `404 Not Found`, `422 Unprocessable Entity`
 
 | **DELETE**
 | Delete all resources (rarely used)
