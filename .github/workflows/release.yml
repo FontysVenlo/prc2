@@ -16,14 +16,14 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
       - name: Install dependencies
         run: npm ci          
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.119.0'
+          hugo-version: '0.156.0'
           extended: true
         
       - uses: ruby/setup-ruby@v1
@@ -33,9 +33,9 @@ jobs:
           
       - run: gem install asciidoctor-html5s
 
-      - uses: reitzig/actions-asciidoctor@v2.0.1
+      - uses: reitzig/actions-asciidoctor@v2.0.3
         with:
-          version: 2.0.18
+          version: 2.0.26
 
       - name: Build
         run: hugo
@@ -44,7 +44,7 @@ jobs:
         run: hugo --minify
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
