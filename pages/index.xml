@@ -1,1 +1,229 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on PRC2</title><link>https://fontysvenlo.github.io/prc2/pages/</link><description>Recent content in Pages on PRC2</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 02 Feb 2022 10:43:27 +0100</lastBuildDate><atom:link href="https://fontysvenlo.github.io/prc2/pages/index.xml" rel="self" type="application/rss+xml"/><item><title>Tips</title><link>https://fontysvenlo.github.io/prc2/pages/tips/</link><pubDate>Wed, 02 Feb 2022 10:43:27 +0100</pubDate><guid>https://fontysvenlo.github.io/prc2/pages/tips/</guid><description>Table of ContentsJava StyleWhere have you put your Curly Braces.Javadoc styleAdding your own code templates to NetBeans IDEMavenMaven RepositoriesInformatics pomMaven on Steroids or: use it properlyMaven ModulesManaging different Java versionsJava StyleJava is a language and languages come with a culture. One such cultural aspect is the way you format your code, like placing your brackets, parenthesis, spaces and curly braces. This coding style is intended to help you read the code, recognize the structure at a glance and find the interesting details easily and spot on.</description></item><item><title>Setup</title><link>https://fontysvenlo.github.io/prc2/pages/setup/</link><pubDate>Tue, 01 Feb 2022 14:30:36 +0100</pubDate><guid>https://fontysvenlo.github.io/prc2/pages/setup/</guid><description>Table of ContentsGetting StartedSetting up the correct environmentInstall JavaMake Java available on the PATHInstall Apache MavenInstall or update your IDEAdditional PointersGetting StartedTo work successfully with the programs needed for PRC2, you need to install them first. Properly installing Java and other programs is not hard but must be done precisely. What will follow is a description on how to do that under Ubuntu Linux, macOS and Windows. You can adapt this configuration for other operating systems too, possibly with a few tweaks.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on PRC2</title><link>https://fontysvenlo.github.io/prc2/pages/</link><description>Recent content in Pages on PRC2</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 02 Feb 2022 10:43:27 +0100</lastBuildDate><atom:link href="https://fontysvenlo.github.io/prc2/pages/index.xml" rel="self" type="application/rss+xml"/><item><title>Tips</title><link>https://fontysvenlo.github.io/prc2/pages/tips/</link><pubDate>Wed, 02 Feb 2022 10:43:27 +0100</pubDate><guid>https://fontysvenlo.github.io/prc2/pages/tips/</guid><description>&lt;nav id="toc" class="toc" role="doc-toc"&gt;&lt;h2 id="toc-title"&gt;Table of Contents&lt;/h2&gt;&lt;ol class="toc-list level-1"&gt;&lt;li&gt;&lt;a href="#_java_style"&gt;Java Style&lt;/a&gt;&lt;ol class="toc-list level-2"&gt;&lt;li&gt;&lt;a href="#_where_have_you_put_your_curly_braces"&gt;Where have you put your Curly Braces.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_javadoc_style"&gt;Javadoc style&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_adding_your_own_code_templates_to_netbeans_ide"&gt;Adding your own code templates to NetBeans IDE&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_maven"&gt;Maven&lt;/a&gt;&lt;ol class="toc-list level-2"&gt;&lt;li&gt;&lt;a href="#_maven_repositories"&gt;Maven Repositories&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_informatics_pom"&gt;Informatics pom&lt;/a&gt;&lt;ol class="toc-list level-2"&gt;&lt;li&gt;&lt;a href="#_maven_on_steroids_or_use_it_properly"&gt;Maven on Steroids or: use it properly&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_maven_modules"&gt;Maven Modules&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_managing_different_java_versions"&gt;Managing different Java versions&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/nav&gt;&lt;section class="doc-section level-1"&gt;&lt;h2 id="_java_style"&gt;Java Style&lt;/h2&gt;&lt;p&gt;Java is a language and languages come with a culture.
+One such cultural aspect is the way you format your code, like placing your brackets, parenthesis, spaces and curly braces.
+This coding style is intended to help you read the code, recognize the structure at a glance and find the interesting details easily and spot on.&lt;/p&gt;
+&lt;p&gt;The official Java style is derived from the Kernighan and Ritchie (K&amp;amp;R) style for the &lt;strong&gt;C&lt;/strong&gt; programming language. Since syntactically Java inherits quite a lot from C, that would be logical choice.&lt;/p&gt;
+&lt;p&gt;The current and preferred way of using this java style is best described in the &lt;a href="https://google.github.io/styleguide/javaguide.html"&gt;Google Java Style Guide&lt;/a&gt;.&lt;/p&gt;
+&lt;section class="doc-section level-2"&gt;&lt;h3 id="_where_have_you_put_your_curly_braces"&gt;Where have you put your Curly Braces.&lt;/h3&gt;&lt;p&gt;Most holy wars are fought over the placement of the curlies &amp;#39;{}&amp;#39;, and in some cases other brackets &lt;code&gt;[]&lt;/code&gt; or parenthesis &lt;code&gt;()&lt;/code&gt; and &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; too.
+In particular: Put them at the beginning of the line or at the end. The Java Style Guide is quite clear about that: &lt;a href="https://google.github.io/styleguide/javaguide.html#s4.1-braces"&gt;Braces&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;My personal motivation would be: If your understand that C and Java are block oriented languages, then you immediately will understand that placing a brace at the beginning of a line
+can only mean that you start a new block. This allows you to define a local scope. This is what you already know from for loops. Well the loop need not be there to allow yourselves to have some very local variables, like in the example below.&lt;/p&gt;
+&lt;p&gt;If you understand this block aspect of the K&amp;amp;R style, you know that you do not have to search for the name of a method, a class start or anything else. The block is just a block with local scope. It helps readability, because you can define
+your local variables at the place your need them and confine them there, without having the locals interfere with anything else in the method or class.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;example of block with scoped local variable&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-Java" data-lang="Java"&gt; {
+ int i=0;
+ // do something with i
+ }&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;This often overlooked feature can help big time to help improve the readability
+of your code, in particular when the method is getting big. But since having big methods is a bit of a no go area in a modern programming
+style.&lt;a class="footnote-ref" id="_footnoteref_1" href="#_footnote_1" title="View footnote 1" role="doc-noteref"&gt;[1]&lt;/a&gt;, your rarely see it in practice.&lt;/p&gt;
+&lt;p&gt;In Java there is also another reason. You can have blocks at the class level, which allow you to define some kind of anonymous constructor. Remember Anonymous Inner Classes? Well, sometimes
+you want to have a constructor, just to initialise things. Here is an examples from the Java FX binding chapter.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;initialize a binding in an &amp;#39;Anonymous&amp;#39; constructor, lines 10..12, which is a block with no name…​&lt;/figcaption&gt;
+&lt;pre class="highlight linenums"&gt;&lt;code class="language-Java" data-lang="Java"&gt; public static void main( String[] args ) {
+
+ final DoubleProperty a = new SimpleDoubleProperty( 1 );
+ final DoubleProperty b = new SimpleDoubleProperty( 2 );
+ final DoubleProperty c = new SimpleDoubleProperty( 3 );
+ final DoubleProperty d = new SimpleDoubleProperty( 4 );
+
+ DoubleBinding db = new DoubleBinding() {
+
+ { &lt;b class="conum"&gt;1&lt;/b&gt;
+ super.bind( a, b, c, d );
+ } &lt;b class="conum"&gt;2&lt;/b&gt;
+
+ @Override
+ protected double computeValue() {
+ return ( a.get() * b.get() ) + ( c.get() * d.get() );
+ }
+ };
+
+ System.out.println( db.get() );
+ b.set( 3 );
+ System.err.println( db.get() );
+ }&lt;/code&gt;&lt;/pre&gt;&lt;ol class="callout-list arabic"&gt;&lt;li&gt;Start of anonymous block in line 10.&lt;/li&gt;&lt;li&gt;End of anonymous block in line 12.&lt;/li&gt;&lt;/ol&gt;&lt;/figure&gt;
+
+&lt;aside class="admonition-block tip" role="doc-tip"&gt;&lt;h6 class="block-title label-only"&gt;&lt;span class="title-label"&gt;Tip: &lt;/span&gt;&lt;/h6&gt;&lt;p&gt;So whenever you find a closing bracket, you only have to look up in the same column to find what it belongs to. If you find the start of a method, then that’s what its is, if you find
+an opening bracket, stop looking, you have found its meaning, a block.&lt;/p&gt;&lt;/aside&gt;&lt;/section&gt;
+&lt;section class="doc-section level-2"&gt;&lt;h3 id="_javadoc_style"&gt;Javadoc style&lt;/h3&gt;&lt;p&gt;See &lt;a href="https://google.github.io/styleguide/javaguide.html#s7-javadoc"&gt;Javadoc style guide&lt;/a&gt; and
+&lt;a href="https://www.oracle.com/technetwork/java/javase/documentation/index-137868.html"&gt;How to write doc comments&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Not only does Java code have a proper style, the same applies to java-doc.&lt;/p&gt;
+&lt;div class="ulist"&gt;&lt;ul&gt;&lt;li&gt;Public means documented, as in proper javadoc.&lt;ul&gt;&lt;li&gt;Everything that is marked public is part of the public API and must be documented.&lt;/li&gt;&lt;li&gt;&lt;code&gt;protected&lt;/code&gt; and &lt;code&gt;public&lt;/code&gt; are alike here. They provide access to members from classes
+outside the package and must be documented.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Because all &lt;a class="footnote-ref" id="_footnoteref_2" href="#_footnote_2" title="View footnote 2" role="doc-noteref"&gt;[2]&lt;/a&gt; members
+in an interface default to public you need to document them too.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</description></item><item><title>Setup</title><link>https://fontysvenlo.github.io/prc2/pages/setup/</link><pubDate>Tue, 01 Feb 2022 14:30:36 +0100</pubDate><guid>https://fontysvenlo.github.io/prc2/pages/setup/</guid><description>&lt;nav id="toc" class="toc" role="doc-toc"&gt;&lt;h2 id="toc-title"&gt;Table of Contents&lt;/h2&gt;&lt;ol class="toc-list level-1"&gt;&lt;li&gt;&lt;a href="#_getting_started"&gt;Getting Started&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_setting_up_the_correct_environment"&gt;Setting up the correct environment&lt;/a&gt;&lt;ol class="toc-list level-2"&gt;&lt;li&gt;&lt;a href="#_install_java"&gt;Install Java&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_make_java_available_on_the_path"&gt;Make Java available on the PATH&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_install_apache_maven"&gt;Install Apache Maven&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_install_or_update_your_ide"&gt;Install or update your IDE&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_additional_pointers"&gt;Additional Pointers&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/nav&gt;&lt;section class="doc-section level-1"&gt;&lt;h2 id="_getting_started"&gt;Getting Started&lt;/h2&gt;&lt;p&gt;To work successfully with the programs needed for PRC2, you need to install them first.
+Properly installing Java and other programs is not hard but must be done precisely.
+What will follow is a description on how to do that under Ubuntu Linux, macOS and Windows.
+You can adapt this configuration for other operating systems too, possibly with a few tweaks.&lt;/p&gt;
+&lt;aside class="admonition-block tip" role="doc-tip"&gt;&lt;h6 class="block-title label-only"&gt;&lt;span class="title-label"&gt;Tip: &lt;/span&gt;&lt;/h6&gt;&lt;p&gt;It is best to get fairly familiar with the command line pretty soon, because in the end it will make you much more effective.
+Since 2018, &lt;a href="https://www.youtube.com/watch?v=x73WTEltyHU"&gt;bash&lt;/a&gt; is also available on Windows 10, and it is the default shell of Ubuntu-Linux and was the default shell on macOS until version 10.15. The default shell on macOS is now Zsh, we will specify the differences between bash and zsh where necessary.&lt;/p&gt;&lt;/aside&gt;
+&lt;section class="admonition-block warning" role="doc-notice"&gt;&lt;h6 class="block-title label-only"&gt;&lt;span class="title-label"&gt;Warning: &lt;/span&gt;&lt;/h6&gt;&lt;p&gt;Before you install any software from the internet, please validate the the package. You typically see signature files such as SHA-256 or PGP-ASC, os something similar,
+which can help to ascertain that the package is the one you think it is. For instance with:&lt;/p&gt;
+&lt;p&gt;&lt;i class="fa fa-linux fa-fw"&gt;&lt;/i&gt; &lt;code&gt;$ sha512sum /path/to/file&lt;/code&gt;&lt;br/&gt;
+&lt;i class="fa fa-apple fa-fw"&gt;&lt;/i&gt; &lt;code&gt;$ shasum -a 256 /path/to/file&lt;/code&gt;&lt;br/&gt;
+&lt;i class="fa fa-windows fa-fw"&gt;&lt;/i&gt; &lt;code&gt;$ certUtil -hashfile /path/to/file SHA256&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;You can check the download of that version of your IDE, and the command should produce the same signature as is available on the download website.&lt;/p&gt;&lt;/section&gt;&lt;/section&gt;
+&lt;section class="doc-section level-1"&gt;&lt;h2 id="_setting_up_the_correct_environment"&gt;Setting up the correct environment&lt;/h2&gt;&lt;section class="doc-section level-2"&gt;&lt;h3 id="_install_java"&gt;Install Java&lt;/h3&gt;&lt;p&gt;The default installation paths are:&lt;/p&gt;
+&lt;p&gt;&lt;i class="fa fa-linux fa-fw"&gt;&lt;/i&gt; &lt;code&gt;/usr/lib/jvm&lt;/code&gt;&lt;br/&gt;
+&lt;i class="fa fa-apple fa-fw"&gt;&lt;/i&gt; &lt;code&gt;/Library/Java/JavaVirtualMachines/&lt;/code&gt;&lt;br/&gt;
+&lt;i class="fa fa-windows fa-fw"&gt;&lt;/i&gt; &lt;code&gt;C:\Program Files\AdoptOpenJDK\&lt;/code&gt;&lt;/p&gt;
+&lt;section class="admonition-block warning" role="doc-notice"&gt;&lt;h6 class="block-title label-only"&gt;&lt;span class="title-label"&gt;Warning: &lt;/span&gt;&lt;/h6&gt;&lt;p&gt;Do &lt;strong class="red"&gt;NOT&lt;/strong&gt; use &lt;code&gt;Program Files&lt;/code&gt; under Windows, because of the space in the name,
+ but instead create a separate directory simply called
+ e.g. &lt;code&gt;c:\usr\lib\jvm&lt;/code&gt; if you insist on using Windows.
+ On other OSs it is also important to make sure paths do NOT contains spaces,
+ as spaces are also used as separators for arguments&lt;/p&gt;&lt;/section&gt;
+&lt;p&gt;Installation of Java can be done either through a package manager or by downloading the
+the Java distribution from &lt;a href="https://adoptium.net/temurin/releases/?version=25" target="_blank" rel="noopener"&gt;AdoptOpenJDK &lt;/a&gt;.
+For PRC2 we will use &lt;strong class="blue"&gt;Java 25&lt;/strong&gt;.&lt;/p&gt;
+&lt;section class="doc-section level-3"&gt;&lt;h4 id="_linux"&gt;&lt;i class="fa fa-linux fa-fw"&gt;&lt;/i&gt; Linux&lt;/h4&gt;&lt;aside class="admonition-block note" role="note"&gt;&lt;h6 class="block-title label-only"&gt;&lt;span class="title-label"&gt;Note: &lt;/span&gt;&lt;/h6&gt;&lt;p&gt;We are using Debian based Linux, such as Fedora or Ubuntu, for the instructions on this page.
+We assume that that if you are running a different distribution of Linux that you can adapt the
+instructions to apply to that distribution (e.g. use the correct package manager Zypper, PacMan, etc.).&lt;/p&gt;&lt;/aside&gt;
+&lt;p&gt;With a package manager:&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-linux fa-fw"&gt;&lt;/i&gt; install openjdk via apt-get on ubuntu&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;sudo apt install openjdk-25-jdk&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-linux fa-fw"&gt;&lt;/i&gt; install eclipse temurin via apt-get&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;apt-get install -y wget apt-transport-https gnupg
+wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | apt-key add -
+echo &amp;#34;deb https://packages.adoptium.net/artifactory/deb $(awk -F= &amp;#39;/^VERSION_CODENAME/{print$2}&amp;#39; /etc/os-release) main&amp;#34; | tee /etc/apt/sources.list.d/adoptium.list
+apt-get update # update if you haven&amp;#39;t already
+apt-get install temurin-25-jdk&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;Manual installation:&lt;/p&gt;
+&lt;p&gt;In the example below we assume that the distribution is packed as a &lt;code&gt;tar.gz&lt;/code&gt; archive.
+The example shows the archive name as of 21 January 2024,
+&lt;code&gt;OpenJDK21U-jdk_x64_linux_hotspot_21.0.2_13.tar.gz&lt;/code&gt;&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-linux fa-fw"&gt;&lt;/i&gt; unpack java distribution using the command-line&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;sudo mkdir -p /usr/lib/jvm
+cd /usr/lib/jvm
+sudo tar xf ~/Downloads/OpenJDK21U-jdk_x64_linux_hotspot_21.0.2_13.tar.gz&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;&lt;/section&gt;
+&lt;section class="doc-section level-3"&gt;&lt;h4 id="_macos"&gt;&lt;i class="fa fa-apple fa-fw"&gt;&lt;/i&gt; macOS&lt;/h4&gt;&lt;p&gt;With HomeBrew:&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-apple fa-fw"&gt;&lt;/i&gt; install via HomeBrew&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;# Untap AdoptOpenJDK first
+brew untap AdoptOpenJDK/openjdk
+
+# If you want to download latest version
+brew install --cask temurin
+
+# To install specific version
+brew tap homebrew/cask-versions
+brew install --cask temurin25&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;Manual installation:&lt;/p&gt;
+&lt;p&gt;Download the correct distribution/version of choice from
+&lt;a href="https://adoptium.net/temurin/releases/?version=25" target="_blank" rel="noopener"&gt;AdoptOpenJDK &lt;/a&gt;.
+Install the same way as normal programs.&lt;/p&gt;&lt;/section&gt;
+&lt;section class="doc-section level-3"&gt;&lt;h4 id="_windows"&gt;&lt;i class="fa fa-windows fa-fw"&gt;&lt;/i&gt; Windows&lt;/h4&gt;&lt;p&gt;Install with the Windows Package Manager:&lt;/p&gt;
+&lt;p&gt;First install the &lt;a href="https://learn.microsoft.com/en-us/windows/package-manager/winget/#install-winget"&gt;winget&lt;/a&gt;&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-windows fa-fw"&gt;&lt;/i&gt; install via powershell&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;winget install Microsoft.OpenJDK.25&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;Manual installation:&lt;/p&gt;
+&lt;p&gt;Download the correct distribution/version of choice from
+&lt;a href="https://adoptium.net/temurin/releases/?version=25" target="_blank" rel="noopener"&gt;AdoptOpenJDK &lt;/a&gt;.
+Install the same way as normal programs,&lt;/p&gt;
+&lt;section class="admonition-block warning" role="doc-notice"&gt;&lt;h6 class="block-title label-only"&gt;&lt;span class="title-label"&gt;Warning: &lt;/span&gt;&lt;/h6&gt;&lt;p&gt;Do &lt;strong class="red"&gt;NOT&lt;/strong&gt; forget to change the install path during installation.&lt;br/&gt;
+e.g. &lt;code&gt;C:\usr\lib\jvm\&lt;/code&gt;&lt;br/&gt;
+Also make sure to check Add to path and Add JAVA HOME.&lt;/p&gt;&lt;/section&gt;&lt;/section&gt;&lt;/section&gt;
+&lt;section class="doc-section level-2"&gt;&lt;h3 id="_make_java_available_on_the_path"&gt;Make Java available on the PATH&lt;/h3&gt;&lt;p&gt;If you used a package manager or an installer to install Java, then Java should already be added to your path.
+However if you manually extracted the binaries then you should still add Java to the path.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;$PATH&lt;/code&gt; environment variable is used by the command line processor to find the commands or programs whose name you type as first word in a command line.
+If you type &lt;code&gt;java -version&lt;/code&gt;, and your shell says &lt;code&gt;command not found&lt;/code&gt;, then your path does not include the java program yet.&lt;/p&gt;
+&lt;p&gt;Since we want the best Java experience, we will use some common environment variables.&lt;/p&gt;
+&lt;section class="doc-section level-3"&gt;&lt;h4 id="_linux_2"&gt;&lt;i class="fa fa-linux fa-fw"&gt;&lt;/i&gt; Linux&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;JAVA_HOME&lt;/strong&gt; Define JAVA_HOME first. That will help Java, but also tell other programs to find the desired Java version.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-linux fa-fw"&gt;&lt;/i&gt; Define JAVA_HOME&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;export JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 &lt;b class="conum"&gt;1&lt;/b&gt;
+export JAVA_HOME=/usr/lib/jvm/temurin-25-jdk &lt;b class="conum"&gt;2&lt;/b&gt;&lt;/code&gt;&lt;/pre&gt;&lt;ol class="callout-list arabic"&gt;&lt;li&gt;Path for manual installation&lt;/li&gt;&lt;li&gt;Path for package manager installation&lt;/li&gt;&lt;/ol&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;PATH&lt;/strong&gt; Prepend the directory under JAVA_HOME to your path, so all java related programs, such as &lt;code&gt;java&lt;/code&gt; , &lt;code&gt;javac&lt;/code&gt;, &lt;code&gt;jar&lt;/code&gt; etc can be found, by just typing the name.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-linux fa-fw"&gt;&lt;/i&gt; Append Java to the path&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;export PATH=${JAVA_HOME}/bin:$PATH&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;To avoid having to do this every time you start the command-line, add the commands to your &lt;code&gt;&lt;sub&gt;/.bashrc&lt;/sub&gt;&lt;/code&gt;/&lt;code&gt;/.zshrc&lt;/code&gt; script file, at the bottom.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-linux fa-fw"&gt;&lt;/i&gt; Add JAVA_HOME to PATH&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;export JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64
+export PATH=${JAVA_HOME}/bin:$PATH&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;To switch Java versions use the following command:&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-linux fa-fw"&gt;&lt;/i&gt; Switch Java versions&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;sudo update-alternatives --config java&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;&lt;/section&gt;
+&lt;section class="doc-section level-3"&gt;&lt;h4 id="_macos_2"&gt;&lt;i class="fa fa-apple fa-fw"&gt;&lt;/i&gt; macOS&lt;/h4&gt;&lt;p&gt;These instructions will guide you to setup the correct environment on macOS
+and to make it easy to switch between Java versions.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-apple fa-fw"&gt;&lt;/i&gt; List version(s) of Java&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;/usr/libexec/java_home
+/usr/libexec/java_home -V&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;The first command lists the most recent version of Java on your system
+The second command lists all installed versions of Java on your system&lt;/p&gt;
+&lt;p&gt;We can now setup an environment to easily switch between Java versions and later on even launch most IDEs with the intended Java version.
+The only thing we need to do for this is set the &lt;code&gt;JAVA_HOME&lt;/code&gt; environment variable to link to the correct Java version.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-apple fa-fw"&gt;&lt;/i&gt; Set the &lt;code&gt;JAVA_HOME&lt;/code&gt; environment&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;export JAVA_HOME=&amp;lt;path_to_java_home&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;Where the &amp;lt;path_to_java_home&amp;gt; can be obtained by the command above with the -V parameter.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-apple fa-fw"&gt;&lt;/i&gt; Check that &lt;code&gt;JAVA_HOME&lt;/code&gt; is set correctly&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;echo $JAVA_HOME&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;However instead of hardcoding the path it is better to retrieve the path while setting the environment.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-apple fa-fw"&gt;&lt;/i&gt; Set &lt;code&gt;JAVA_HOME&lt;/code&gt; dynamically with the following command (e.g. for Java 15):&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;export JAVA_HOME=$(/usr/libexec/java_home)&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;$() means that the invocation between parenthesis is resolved first.&lt;/p&gt;
+&lt;p&gt;This sets the correct Java environment for your current Terminal session.
+When opening a new terminal the default Java environment will be active again.
+To make switching between Java versions in the terminal easier we can set-up what is called an alias.
+An alias is basically a shortcut, you specify the keyboard shortcut and which commands should be executed.
+We want these aliases to always be available,
+for this we need to let the terminal know to load our aliases on startup.
+Depending on the type of terminal you are using, we need the specify the aliases at different places.&lt;/p&gt;
+&lt;p&gt;Since macOS Catalina (10.15) the default shell (which is used by the terminal) is ZShell (zsh).
+This means we can specify our aliases in either &lt;code&gt;.zshrc&lt;/code&gt; or in &lt;code&gt;.zprofile&lt;/code&gt; in our home directory. We suggest to
+create an additional configuration file &lt;code&gt;.java_setup&lt;/code&gt; in your home directory.&lt;/p&gt;
+&lt;figure class="listing-block" id="java_setup"&gt;&lt;figcaption&gt;&lt;i class="fa fa-apple fa-fw"&gt;&lt;/i&gt; Add the following lines to ~/.zshrc:&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;# Include java environment setup
+source .java_setup&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-apple fa-fw"&gt;&lt;/i&gt; Add the following lines to ~/.java_setup:&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;# Set your default JAVA_HOME
+export JAVA_HOME=$(/usr/libexec/java_home -v 25.0.1)
+
+alias j11=&amp;#34;export JAVA_HOME=`/usr/libexec/java_home -v 11.0.12`; java -version&amp;#34;
+alias j17=&amp;#34;export JAVA_HOME=`/usr/libexec/java_home -v 17.0.6`; java -version&amp;#34;
+alias j25=&amp;#34;export JAVA_HOME=`/usr/libexec/java_home -v 25.0.1`; java -version&amp;#34;
+
+# Add maven to path
+export PATH=/Applications/maven/apache-maven-3.9.0/bin:$PATH&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;We now need to either restart the terminal for the aliases to take effect or source the &lt;code&gt;.zshrc&lt;/code&gt; file:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;source ~/.zshrc&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;We can now check that switching between versions works:&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-apple fa-fw"&gt;&lt;/i&gt; switching between Java versions&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;java -version
+j11
+j17
+j25&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;Check that the default Java version is correct
+Check that switching between versions works
+Check that switching between versions works
+Check that switching between versions works&lt;/p&gt;
+&lt;p&gt;Now we have set-up a way to easily switch between Java versions in the terminal.&lt;/p&gt;&lt;/section&gt;
+&lt;section class="doc-section level-3"&gt;&lt;h4 id="_windows_2"&gt;&lt;i class="fa fa-windows fa-fw"&gt;&lt;/i&gt; Windows&lt;/h4&gt;&lt;p&gt;Java should already be added to the path by the installer,
+as it is a default setting during installation.&lt;/p&gt;&lt;/section&gt;&lt;/section&gt;
+&lt;section class="doc-section level-2"&gt;&lt;h3 id="_install_apache_maven"&gt;Install Apache Maven&lt;/h3&gt;&lt;p&gt;We will use &lt;strong&gt;Apache Maven&lt;/strong&gt;, or &lt;strong&gt;maven&lt;/strong&gt; for short throughout the PRC2 course, so you will need that too.&lt;/p&gt;
+&lt;p&gt;The application is called &lt;strong&gt;Maven&lt;/strong&gt; but as command spelled as &lt;code&gt;mvn&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Maven is the default build tool in the Java world and can build your program from sources without the use of and IDE. This makes your project agnostic to the IDE used. Most IDEs will detect your project as a maven project if the &lt;code&gt;pom.xml&lt;/code&gt; file is present in the root of your project.
+Maven is also the way the teachers use to compile and test the students work for the practical assignments and performance assessments.&lt;/p&gt;
+&lt;section class="doc-section level-3"&gt;&lt;h4 id="_linux_3"&gt;&lt;i class="fa fa-linux fa-fw"&gt;&lt;/i&gt; Linux&lt;/h4&gt;&lt;p&gt;Install with package manager:&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-linux fa-fw"&gt;&lt;/i&gt; Install maven using apt-get&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;sudo apt install maven&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;Install manually:&lt;/p&gt;
+&lt;p id="maven_manual"&gt;Fetch a fresh copy of &lt;a href="https://maven.apache.org/"&gt;Apache Maven&lt;/a&gt; from the website.&lt;/p&gt;
+&lt;p&gt;To install it, do (example uses version 3.9.6 as of 2024-01-21)&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-linux fa-fw"&gt;&lt;/i&gt; install apache maven and add to path&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;cd /usr/share
+sudo rm -fr maven
+sudo tar xf ~/Downloads/apache-maven-3.9.6-bin.tar.gz
+sudo ln -sf apache-maven-3.9.6/ maven
+cd /usr/bin
+sudo ln -sf ../share/maven/bin/mvn .&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;Once this is done, entering &lt;code&gt;mvn --version&lt;/code&gt; should produce output.&lt;/p&gt;&lt;/section&gt;
+&lt;section class="doc-section level-3"&gt;&lt;h4 id="_macos_3"&gt;&lt;i class="fa fa-apple fa-fw"&gt;&lt;/i&gt; macOS&lt;/h4&gt;&lt;p&gt;Install with HomeBrew:&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;i class="fa fa-apple fa-fw"&gt;&lt;/i&gt; Install Maven using HomeBrew&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh" data-lang="sh"&gt;brew install maven&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;Install manually:&lt;/p&gt;
+&lt;p&gt;Fetch a fresh copy of &lt;a href="https://maven.apache.org/"&gt;Apache Maven&lt;/a&gt; from the website.
+Unzip the archive at an appropriate location (e.g. /Applications).
+Make sure to put maven on the path, see &lt;a href="#java_setup"&gt;java_setup&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Once this is done, entering &lt;code&gt;mvn --version&lt;/code&gt; should produce output.&lt;/p&gt;&lt;/section&gt;
+&lt;section class="doc-section level-3"&gt;&lt;h4 id="_windows_3"&gt;&lt;i class="fa fa-windows fa-fw"&gt;&lt;/i&gt; Windows&lt;/h4&gt;&lt;p&gt;Install with Chocolately:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;choco install maven&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Install manually:&lt;/p&gt;
+&lt;div class="olist arabic"&gt;&lt;ol class="arabic"&gt;&lt;li&gt;Download the zip file from &lt;a class="bare" href="https://maven.apache.org/download.cgi"&gt;https://maven.apache.org/download.cgi&lt;/a&gt;.&lt;/li&gt;&lt;li&gt;Extract the zip file to &lt;code&gt;C:\usr\lib&lt;/code&gt;&lt;/li&gt;&lt;li&gt;Add the &lt;code&gt;bin&lt;/code&gt; directory to the &lt;code&gt;path&lt;/code&gt;&lt;ol class="loweralpha" type="a"&gt;&lt;li&gt;Goto &lt;code&gt;Settings &amp;gt; About &amp;gt; Advanced System Settings &amp;gt; Advanced Tab &amp;gt; Environment Variables&lt;/code&gt;&lt;/li&gt;&lt;li&gt;Select &lt;code&gt;Path&lt;/code&gt; and &lt;code&gt;Edit&lt;/code&gt;&lt;/li&gt;&lt;li&gt;&lt;code&gt;New&lt;/code&gt; and fill in the path &lt;code&gt;C:\usr\lib\apache-maven-3.6.3\bin&lt;/code&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;li&gt;Close &lt;code&gt;System Properties&lt;/code&gt;&lt;/li&gt;&lt;li&gt;Start &lt;code&gt;cmd&lt;/code&gt;&lt;/li&gt;&lt;li&gt;&lt;code&gt;mvn -v&lt;/code&gt; should return a version&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;</description></item></channel></rss>
