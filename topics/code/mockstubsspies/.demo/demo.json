@@ -1,0 +1,347 @@
+{
+  "$schema": "https://demotime.show/demo-time.schema.json",
+  "title": "TDD with Mocks — Minibar",
+  "description": "Live TDD demo introducing Mockito mocks, stubs, and spies using a Minibar/Stock domain",
+  "version": 3,
+  "scenes": [
+    {
+      "id": "scene-00",
+      "title": "Reset demo state",
+      "moves": [
+        {
+          "action": "create",
+          "path": "src/main/java/myfirstmock/Stock.java",
+          "contentPath": ".demo/content/Stock-v1.java"
+        },
+        {
+          "action": "create",
+          "path": "src/test/java/myfirstmock/MinibarTest.java",
+          "contentPath": ".demo/content/MinibarTest-scaffold.java"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "command": "rm -f src/main/java/myfirstmock/Minibar.java src/main/java/myfirstmock/SimpleStock.java && rm -rf target"
+        }
+      ]
+    },
+    {
+      "id": "scene-01",
+      "title": "Why mocks?",
+      "moves": [
+        {
+          "action": "openSlide",
+          "path": ".demo/slides/01-intro.md"
+        }
+      ]
+    },
+    {
+      "id": "scene-02",
+      "title": "Show Stock interface",
+      "moves": [
+        {
+          "action": "open",
+          "path": "src/main/java/myfirstmock/Stock.java"
+        },
+        {
+          "action": "highlight",
+          "path": "src/main/java/myfirstmock/Stock.java",
+          "position": "8:19"
+        }
+      ]
+    },
+    {
+      "id": "scene-03",
+      "title": "Show test scaffold",
+      "moves": [
+        {
+          "action": "open",
+          "path": "src/test/java/myfirstmock/MinibarTest.java"
+        },
+        {
+          "action": "highlight",
+          "path": "src/test/java/myfirstmock/MinibarTest.java",
+          "position": "6:12"
+        }
+      ]
+    },
+    {
+      "id": "scene-04",
+      "title": "Write first test",
+      "moves": [
+        {
+          "action": "create",
+          "path": "src/test/java/myfirstmock/MinibarTest.java",
+          "contentPath": ".demo/content/MinibarTest-v1.java"
+        },
+        {
+          "action": "open",
+          "path": "src/test/java/myfirstmock/MinibarTest.java"
+        }
+      ]
+    },
+    {
+      "id": "scene-05",
+      "title": "Explain mock + verify",
+      "moves": [
+        {
+          "action": "openSlide",
+          "path": ".demo/slides/02-verify.md"
+        }
+      ]
+    },
+    {
+      "id": "scene-06",
+      "title": "RED: run tests (no Minibar yet)",
+      "moves": [
+        {
+          "action": "executeTerminalCommand",
+          "command": "mvn test"
+        }
+      ]
+    },
+    {
+      "id": "scene-07",
+      "title": "Create Minibar (GREEN)",
+      "moves": [
+        {
+          "action": "create",
+          "path": "src/main/java/myfirstmock/Minibar.java",
+          "contentPath": ".demo/content/Minibar-v1.java"
+        },
+        {
+          "action": "open",
+          "path": "src/main/java/myfirstmock/Minibar.java"
+        }
+      ]
+    },
+    {
+      "id": "scene-08",
+      "title": "GREEN: run tests",
+      "moves": [
+        {
+          "action": "executeTerminalCommand",
+          "command": "mvn test"
+        }
+      ]
+    },
+    {
+      "id": "scene-09",
+      "title": "Explain @Mock",
+      "moves": [
+        {
+          "action": "openSlide",
+          "path": ".demo/slides/03-annotation.md"
+        }
+      ]
+    },
+    {
+      "id": "scene-10",
+      "title": "Add @Mock + test 2",
+      "moves": [
+        {
+          "action": "create",
+          "path": "src/test/java/myfirstmock/MinibarTest.java",
+          "contentPath": ".demo/content/MinibarTest-v2.java"
+        },
+        {
+          "action": "open",
+          "path": "src/test/java/myfirstmock/MinibarTest.java"
+        },
+        {
+          "action": "highlight",
+          "path": "src/test/java/myfirstmock/MinibarTest.java",
+          "position": "24:38"
+        }
+      ]
+    },
+    {
+      "id": "scene-11",
+      "title": "GREEN: run tests",
+      "moves": [
+        {
+          "action": "executeTerminalCommand",
+          "command": "mvn test"
+        }
+      ]
+    },
+    {
+      "id": "scene-12",
+      "title": "What is a stub?",
+      "moves": [
+        {
+          "action": "openSlide",
+          "path": ".demo/slides/04-stub.md"
+        }
+      ]
+    },
+    {
+      "id": "scene-13",
+      "title": "Add availability API to Stock",
+      "moves": [
+        {
+          "action": "create",
+          "path": "src/main/java/myfirstmock/Stock.java",
+          "contentPath": ".demo/content/Stock-v2.java"
+        },
+        {
+          "action": "open",
+          "path": "src/main/java/myfirstmock/Stock.java"
+        },
+        {
+          "action": "highlight",
+          "path": "src/main/java/myfirstmock/Stock.java",
+          "position": "14:19"
+        }
+      ]
+    },
+    {
+      "id": "scene-13b",
+      "title": "Use availability check in Minibar",
+      "moves": [
+        {
+          "action": "create",
+          "path": "src/main/java/myfirstmock/Minibar.java",
+          "contentPath": ".demo/content/Minibar-v2.java"
+        },
+        {
+          "action": "open",
+          "path": "src/main/java/myfirstmock/Minibar.java"
+        },
+        {
+          "action": "highlight",
+          "path": "src/main/java/myfirstmock/Minibar.java",
+          "position": "12:14"
+        }
+      ]
+    },
+    {
+      "id": "scene-14",
+      "title": "RED: tests fail (unstubbed boolean defaults to false)",
+      "moves": [
+        {
+          "action": "executeTerminalCommand",
+          "command": "mvn test"
+        }
+      ]
+    },
+    {
+      "id": "scene-15",
+      "title": "Fix existing tests with stubs",
+      "moves": [
+        {
+          "action": "create",
+          "path": "src/test/java/myfirstmock/MinibarTest.java",
+          "contentPath": ".demo/content/MinibarTest-v3a.java"
+        },
+        {
+          "action": "open",
+          "path": "src/test/java/myfirstmock/MinibarTest.java"
+        },
+        {
+          "action": "highlight",
+          "path": "src/test/java/myfirstmock/MinibarTest.java",
+          "position": "38"
+        }
+      ]
+    },
+    {
+      "id": "scene-16",
+      "title": "GREEN: existing tests pass",
+      "moves": [
+        {
+          "action": "executeTerminalCommand",
+          "command": "mvn test"
+        }
+      ]
+    },
+    {
+      "id": "scene-16b",
+      "title": "Add out-of-stock test",
+      "moves": [
+        {
+          "action": "create",
+          "path": "src/test/java/myfirstmock/MinibarTest.java",
+          "contentPath": ".demo/content/MinibarTest-v3.java"
+        },
+        {
+          "action": "open",
+          "path": "src/test/java/myfirstmock/MinibarTest.java"
+        },
+        {
+          "action": "highlight",
+          "path": "src/test/java/myfirstmock/MinibarTest.java",
+          "position": "43:49"
+        }
+      ]
+    },
+    {
+      "id": "scene-16c",
+      "title": "GREEN: new test passes",
+      "moves": [
+        {
+          "action": "executeTerminalCommand",
+          "command": "mvn test"
+        }
+      ]
+    },
+    {
+      "id": "scene-17",
+      "title": "What is a spy?",
+      "moves": [
+        {
+          "action": "openSlide",
+          "path": ".demo/slides/05-spy.md"
+        }
+      ]
+    },
+    {
+      "id": "scene-18",
+      "title": "Add spy test",
+      "moves": [
+        {
+          "action": "create",
+          "path": "src/main/java/myfirstmock/SimpleStock.java",
+          "contentPath": ".demo/content/SimpleStock.java"
+        },
+        {
+          "action": "open",
+          "path": "src/main/java/myfirstmock/SimpleStock.java"
+        },
+        {
+          "action": "create",
+          "path": "src/test/java/myfirstmock/MinibarTest.java",
+          "contentPath": ".demo/content/MinibarTest-v4.java"
+        },
+        {
+          "action": "open",
+          "path": "src/test/java/myfirstmock/MinibarTest.java"
+        },
+        {
+          "action": "highlight",
+          "path": "src/test/java/myfirstmock/MinibarTest.java",
+          "position": "51:64"
+        }
+      ]
+    },
+    {
+      "id": "scene-19",
+      "title": "GREEN: all tests pass",
+      "moves": [
+        {
+          "action": "executeTerminalCommand",
+          "command": "mvn test"
+        }
+      ]
+    },
+    {
+      "id": "scene-20",
+      "title": "Recap",
+      "moves": [
+        {
+          "action": "openSlide",
+          "path": ".demo/slides/06-recap.md"
+        }
+      ]
+    }
+  ]
+}
