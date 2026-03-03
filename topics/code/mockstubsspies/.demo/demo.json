@@ -19,8 +19,16 @@
           "contentPath": ".demo/content/MinibarTest-scaffold.java"
         },
         {
+          "action": "deleteFile",
+          "path": "src/main/java/myfirstmock/Minibar.java"
+        },
+        {
+          "action": "deleteFile",
+          "path": "src/main/java/myfirstmock/SimpleStock.java"
+        },
+        {
           "action": "executeTerminalCommand",
-          "command": "rm -f src/main/java/myfirstmock/Minibar.java src/main/java/myfirstmock/SimpleStock.java && rm -rf target"
+          "command": "mvn clean"
         }
       ]
     },
