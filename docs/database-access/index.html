@@ -10,7 +10,7 @@ border-b border-slate-900/10 lg:border-0 dark:border-slate-300/10"><div class="m
 border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">01 Unit Testing Basics</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/rest/ class="block border-l pl-4 -ml-px
 border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">02 REST API</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/testability-and-mocking/ class="block border-l pl-4 -ml-px
 border-transparent hover:border-slate-400 dark:hover:border-slate-400 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200">03 Testability and mocking</a></li><li><a href=https://fontysvenlo.github.io/prc2/docs/database-access/ class="block border-l pl-4 -ml-px
-border-slate-500 dark:border-slate-400 text-black dark:text-slate-200">04 Database Access JDBC</a></li></ul></li></ul></nav></aside><div class=lg:pl-[19.5rem]><div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16"><article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500"><nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_java_database_connectivity>Java DataBase Connectivity</a><ol class="toc-list level-2"><li><a href=#_database_connection_credentials_and_java_properties>DataBase connection credentials and Java Properties</a></li><li><a href=#_using_a_data_source>Using a Data source</a></li><li><a href=#_resultset>ResultSet</a></li><li><a href=#_anatomy_of_a_prepared_statement>Anatomy of a prepared statement</a></li><li><a href=#_database_meta_information>Database Meta Information</a></li><li><a href=#_check_constraints>Check constraints</a></li></ol></li><li><a href=#_transactions>Transactions</a></li><li><a href=#_using_stored_procedures>Using Stored Procedures</a></li></ol></nav><section class="doc-section level-1"><h2 id=_java_database_connectivity>Java DataBase Connectivity</h2><section class="doc-section level-2"><h3 id=_database_connection_credentials_and_java_properties>DataBase connection credentials and Java Properties</h3><p>Some things do <mark>NOT</mark> belong in source code. In particular do not put <strong>credentials</strong> of any kind
+border-slate-500 dark:border-slate-400 text-black dark:text-slate-200">04 Database Access JDBC</a></li></ul></li></ul></nav></aside><div class=lg:pl-[19.5rem]><div class="max-w-3xl mx-auto xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16"><article id=main-content class="prose prose-slate dark:prose-invert max-w-none dark:prose-a:text-fuchsia-400 prose-a:text-fuchsia-500"><nav id=toc class=toc role=doc-toc><h2 id=toc-title>Table of Contents</h2><ol class="toc-list level-1"><li><a href=#_java_database_connectivity>Java DataBase Connectivity</a><ol class="toc-list level-2"><li><a href=#_database_connection_credentials_and_java_properties>DataBase connection credentials and Java Properties</a></li><li><a href=#_using_a_data_source>Using a Data source</a></li><li><a href=#_resultset>ResultSet</a></li><li><a href=#_anatomy_of_a_prepared_statement>Anatomy of a prepared statement</a></li></ol></li><li><a href=#_transactions>Transactions</a></li><li><a href=#_using_stored_procedures>Using Stored Procedures</a></li></ol></nav><section class="doc-section level-1"><h2 id=_java_database_connectivity>Java DataBase Connectivity</h2><section class="doc-section level-2"><h3 id=_database_connection_credentials_and_java_properties>DataBase connection credentials and Java Properties</h3><p>Some things do <mark>NOT</mark> belong in source code. In particular do not put <strong>credentials</strong> of any kind
 inside files that are committed to a version control system, such as source code. Make sure you configure your
 version control system such that such files are excluded from commits.</p><p>Instead put credentials in separate files, that are easily understood by both a human that uses it
 to configure access to a resource, and also by the programming language.<br>In java the tradition is to use so called properties files, which, also traditionally, have a file extension <code>.properties</code>.
@@ -141,81 +141,7 @@ because in the common case, what you put in is of the right type, as long as you
 order of the parameter types intact.</p></aside><p>This approach can be used to make database access even simpler, so you only have to provide the data
 in an array and the rest can be packed into utility methods.</p><p>The holy grail is to find a way to do all kind of queries against tables, and the only
 thing you need to know is the table name and what entities as Java objects can be expected to
-be read from or written to the table. However, start simple first! At some point you’ll find duplicated code and you’ll find a way to optimize your code. Typically, you’ll use Generics, Lambda’s and streams and a bit of reflection at some point. We think it’s good to first face the issue of code that is difficult to maintain and afterwards find a solution for that, instead of providing you with a very generic and maybe complex solution without knowing which underlying problems it solves. //'</p></section><section class="doc-section level-2"><h3 id=_database_meta_information>Database Meta Information</h3><p>DO Mention the <a href=https://www.baeldung.com/jdbc-database-metadata>metadata…​</a></p><p>In the previous part we have seen how to use reflection on java classes.</p><p>A similar and standardized concept also exists for databases. You can retrieve all kind
-of <em>meta</em> information about the objects (such as tables and views) defined in your database.
-Accessing that data can be done with <strong>select</strong>ing data from special relations in a special schema,
-called the <code class=blue>information_schema</code>.</p><p>Suppose we have the following definition of a table <code>students</code> in the schema <code>public</code>:</p><div class=listing-block><pre class=highlight><code class=language-sql data-lang=sql>CREATE TABLE public.students (
-    student_id INTEGER PRIMARY KEY GENERATED BY DEFAULT AS IDENTITY, <b class=conum>1</b>
-    firstname TEXT NOT NULL,  <b class=conum>2</b>
-    lastname TEXT NOT NULL,
-    dob DATE NOT NULL,
-    cohort integer NOT NULL DEFAULT  EXTRACT(&#39;year&#39; from now()), <b class=conum>3</b>
-    email TEXT NOT NULL,
-    gender CHARACTER(1) NOT NULL check (gender in (&#39;F&#39;,&#39;M&#39;,&#39;U&#39;)), <b class=conum>4</b>
-    student_grp TEXT NOT NULL,
-    active BOOLEAN DEFAULT false NOT NULL
-);</code></pre><ol class="callout-list arabic"><li>ISO SQL for a <em>serial</em> column that by default is generated, and also is primary key.</li><li>All columns that 'traditionally' would be varchar are now text. Just as efficient less hassle. It will always fit.
-Only use varchar if your business requires a length constraint.</li><li>The cohort is the year of registration, which can be derived from the insertion moment.</li><li>Gender is a one character value with a restricted value set, much like an enum, but simpler.</li></ol></div><p>If after the definition your would ask the database what it knows about this table with</p><div class=listing-block><pre class=highlight><code class=language-sql data-lang=sql>SELECT ordinal_position, column_name,data_type, column_default, is_nullable,
-       is_generated, datetime_precision
-FROM   information_schema.columns WHERE table_name =&#39;students&#39; ORDER BY 1;</code></pre></div><p>you would get the following as output:</p><div class=listing-block><pre class=highlight><code class=language-text data-lang=text>┌──────────────────┬─────────────┬───────────┬──────────────────────────┬─────────────┬──────────────┬────────────────────┐
-│ ordinal_position │ column_name │ data_type │      column_default      │ is_nullable │ is_generated │ datetime_precision │
-╞══════════════════╪═════════════╪═══════════╪══════════════════════════╪═════════════╪══════════════╪════════════════════╡
-│                1 │ student_id  │ integer   │                          │ NO          │ NEVER        │                    │
-│                2 │ firstname   │ text      │                          │ NO          │ NEVER        │                    │
-│                3 │ lastname    │ text      │                          │ NO          │ NEVER        │                    │
-│                4 │ dob         │ date      │                          │ NO          │ NEVER        │                  0 │
-│                5 │ cohort      │ integer   │ EXTRACT(year FROM now()) │ NO          │ NEVER        │                    │
-│                6 │ email       │ text      │                          │ NO          │ NEVER        │                    │
-│                7 │ gender      │ character │                          │ NO          │ NEVER        │                    │
-│                8 │ student_grp │ text      │                          │ NO          │ NEVER        │                    │
-│                9 │ active      │ boolean   │ false                    │ NO          │ NEVER        │                    │
-└──────────────────┴─────────────┴───────────┴──────────────────────────┴─────────────┴──────────────┴────────────────────┘</code></pre></div><p>From this information you can imagine that it is relatively easy to <strong>generate</strong> the matching Java types as <span class=blue>record</span> type.</p><p>The resulting record would look like this:</p><div class=listing-block><pre class=highlight><code class=language-java data-lang=java>package entities;
-
-import java.time.LocalDate;
-
-public record Student (
-   int student_id,
-   String firstname,
-   String lastname,
-   LocalDate dob,
-   int cohort,
-   String email,
-   char gender,
-   String student_grp,
-   bool active
-){} <b class=conum>1</b></code></pre><ol class="callout-list arabic"><li>indeed, no body whatsoever.</li></ol></div><aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip:</span></h6><p>If your columns are nullable, choose a type that also 'accepts' null values, so in that case use a ref type, such as Integer or Boolean.
-If the columns in the table are declared as <strong>non-nullable</strong> you can use primitive types.</p></aside><p>Because in the Java layer you would like to have the meta information handy in a <span class=blue>Mapper</span>, you can generate the mapper at the same time from the database information
-instead of using reflection to the same effect.</p></section><section class="doc-section level-2"><h3 id=_check_constraints>Check constraints</h3><p>Similarly you can also get the information of the check constraints with another, a bit more involved query.</p><div class=listing-block><pre class=highlight><code class=language-sql data-lang=sql>-- retrieve the check constraints for the user schemas
-select tc.table_schema,                                                          
-       tc.table_name,
-       string_agg(col.column_name, &#39;, &#39;) as columns,
-       tc.constraint_name,
-       cc.check_clause
-from information_schema.table_constraints tc
-join information_schema.check_constraints cc
-     on tc.constraint_schema = cc.constraint_schema
-     and tc.constraint_name = cc.constraint_name
-join pg_namespace nsp on nsp.nspname = cc.constraint_schema
-join pg_constraint pgc on pgc.conname = cc.constraint_name
-                       and pgc.connamespace = nsp.oid
-                       and pgc.contype = &#39;c&#39;
-join information_schema.columns col
-     on col.table_schema = tc.table_schema
-     and col.table_name = tc.table_name
-     and col.ordinal_position = ANY(pgc.conkey)
-where tc.constraint_schema not in(&#39;pg_catalog&#39;, &#39;information_schema&#39;)
-group by tc.table_schema,
-         tc.table_name,
-         tc.constraint_name,
-         cc.check_clause
-order by tc.table_schema,
-         tc.table_name;</code></pre></div><p>which, because only one column in this schema actually declares a check constraint, results in:</p><div class="listing-block small-code-font-70"><pre class=highlight><code class=language-text data-lang=text>┌──────────────┬────────────┬─────────┬───────────────────────┬─────────────────────────────────────────────────────────────────┐
-│ table_schema │ table_name │ columns │    constraint_name    │                          check_clause                           │
-╞══════════════╪════════════╪═════════╪═══════════════════════╪═════════════════════════════════════════════════════════════════╡
-│ public       │ students   │ gender  │ students_gender_check │ ((gender = ANY (ARRAY[&#39;F&#39;::bpchar, &#39;M&#39;::bpchar, &#39;U&#39;::bpchar]))) │
-└──────────────┴────────────┴─────────┴───────────────────────┴─────────────────────────────────────────────────────────────────┘</code></pre></div><p>You can use the check constraints in your business code too, but actually deferring those checks as final checks to the database is just fine. The database
-layer with throw an appropriate exception when a value is not to the liking of a constraint.</p><p>You may want to use the check information in the user interface layer, to warn the user that a transaction will not succeed with a illegal or missing value.
-Parsing the check clause is of course a bit complex, but with a regex you can do a lot, and also know that most check constraint are relatively simple.</p></section></section><section class="doc-section level-1"><h2 id=_transactions>Transactions</h2><p>Things that can go wrong will go wrong. This problem is aggravated by having to use multiple <em>things</em>.
+be read from or written to the table. However, start simple first! At some point you’ll find duplicated code and you’ll find a way to optimize your code. Typically, you’ll use Generics, Lambda’s and streams and a bit of reflection at some point. We think it’s good to first face the issue of code that is difficult to maintain and afterwards find a solution for that, instead of providing you with a very generic and maybe complex solution without knowing which underlying problems it solves. //'</p></section></section><section class="doc-section level-1"><h2 id=_transactions>Transactions</h2><p>Things that can go wrong will go wrong. This problem is aggravated by having to use multiple <em>things</em>.
 Murphy says hello again :-).</p><p>A <strong>transaction</strong> is defined as a sequence of operations that can either succeed completely or be undone
 without any residual effect.<br>In plain English: It either happens fully, or we can forget about it.</p><p>For a persistence layer that means: if it cannot fulfill the obligation it should
 make sure that nothing happens to compromise the data already stored <em>before</em> the transaction.</p><p>The simple explanation of how this works is that the party that is busy with a resource gets
