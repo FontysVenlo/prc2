@@ -232,116 +232,116 @@ thing you need to know is the table name and what entities as Java objects can b
 be read from or written to the table. However, start simple first! At some point you'll find duplicated code and you'll find a way to optimize your code. Typically, you'll use Generics, Lambda's and streams and a bit of reflection at some point. We think it's good to first face the issue of code that is difficult to maintain and afterwards find a solution for that, instead of providing you with a very generic and maybe complex solution without knowing which underlying problems it solves.  //'
 
 
-===  Database Meta Information
+// ===  Database Meta Information
 
-DO Mention the https://www.baeldung.com/jdbc-database-metadata[metadata...]
+// DO Mention the https://www.baeldung.com/jdbc-database-metadata[metadata...]
 
-In the previous part we have seen how to use reflection on java classes.
+// In the previous part we have seen how to use reflection on java classes.
 
-A similar and standardized concept also exists for databases. You can retrieve all kind
-of _meta_ information about the objects (such as tables and views) defined in your database.
-Accessing that data can be done with **select**ing  data from special relations in a special schema,
-called the [blue]`information_schema`.
+// A similar and standardized concept also exists for databases. You can retrieve all kind
+// of _meta_ information about the objects (such as tables and views) defined in your database.
+// Accessing that data can be done with **select**ing  data from special relations in a special schema,
+// called the [blue]`information_schema`.
 
-Suppose we have the following definition of a table `students` in the schema `public`:
+// Suppose we have the following definition of a table `students` in the schema `public`:
 
-[source,sql]
-----
-include::code/sql/sampleschool.sql[lines=9..19]
-----
+// [source,sql]
+// ----
+// include::code/sql/sampleschool.sql[lines=9..19]
+// ----
 
-<1> ISO SQL for a _serial_ column that by default is generated, and also is primary key.
-<2> All columns that 'traditionally' would be varchar are now text. Just as efficient less hassle. It will always fit.
-Only use varchar if your business requires a length constraint.
-<3> The cohort is the year of registration, which can be derived from the insertion moment.
-<4> Gender is a one character value with a restricted value set, much like an enum, but simpler.
+// <1> ISO SQL for a _serial_ column that by default is generated, and also is primary key.
+// <2> All columns that 'traditionally' would be varchar are now text. Just as efficient less hassle. It will always fit.
+// Only use varchar if your business requires a length constraint.
+// <3> The cohort is the year of registration, which can be derived from the insertion moment.
+// <4> Gender is a one character value with a restricted value set, much like an enum, but simpler.
 
 
-If after the definition your would ask the database what it knows about this table with
+// If after the definition your would ask the database what it knows about this table with
 
-[source,sql]
-----
-SELECT ordinal_position, column_name,data_type, column_default, is_nullable,
-       is_generated, datetime_precision
-FROM   information_schema.columns WHERE table_name ='students' ORDER BY 1;
-----
+// [source,sql]
+// ----
+// SELECT ordinal_position, column_name,data_type, column_default, is_nullable,
+//        is_generated, datetime_precision
+// FROM   information_schema.columns WHERE table_name ='students' ORDER BY 1;
+// ----
 
-you would get the following as output:
+// you would get the following as output:
 
-[source%autofit,text]
-----
-┌──────────────────┬─────────────┬───────────┬──────────────────────────┬─────────────┬──────────────┬────────────────────┐
-│ ordinal_position │ column_name │ data_type │      column_default      │ is_nullable │ is_generated │ datetime_precision │
-╞══════════════════╪═════════════╪═══════════╪══════════════════════════╪═════════════╪══════════════╪════════════════════╡
-│                1 │ student_id  │ integer   │                          │ NO          │ NEVER        │                    │
-│                2 │ firstname   │ text      │                          │ NO          │ NEVER        │                    │
-│                3 │ lastname    │ text      │                          │ NO          │ NEVER        │                    │
-│                4 │ dob         │ date      │                          │ NO          │ NEVER        │                  0 │
-│                5 │ cohort      │ integer   │ EXTRACT(year FROM now()) │ NO          │ NEVER        │                    │
-│                6 │ email       │ text      │                          │ NO          │ NEVER        │                    │
-│                7 │ gender      │ character │                          │ NO          │ NEVER        │                    │
-│                8 │ student_grp │ text      │                          │ NO          │ NEVER        │                    │
-│                9 │ active      │ boolean   │ false                    │ NO          │ NEVER        │                    │
-└──────────────────┴─────────────┴───────────┴──────────────────────────┴─────────────┴──────────────┴────────────────────┘
-----
+// [source%autofit,text]
+// ----
+// ┌──────────────────┬─────────────┬───────────┬──────────────────────────┬─────────────┬──────────────┬────────────────────┐
+// │ ordinal_position │ column_name │ data_type │      column_default      │ is_nullable │ is_generated │ datetime_precision │
+// ╞══════════════════╪═════════════╪═══════════╪══════════════════════════╪═════════════╪══════════════╪════════════════════╡
+// │                1 │ student_id  │ integer   │                          │ NO          │ NEVER        │                    │
+// │                2 │ firstname   │ text      │                          │ NO          │ NEVER        │                    │
+// │                3 │ lastname    │ text      │                          │ NO          │ NEVER        │                    │
+// │                4 │ dob         │ date      │                          │ NO          │ NEVER        │                  0 │
+// │                5 │ cohort      │ integer   │ EXTRACT(year FROM now()) │ NO          │ NEVER        │                    │
+// │                6 │ email       │ text      │                          │ NO          │ NEVER        │                    │
+// │                7 │ gender      │ character │                          │ NO          │ NEVER        │                    │
+// │                8 │ student_grp │ text      │                          │ NO          │ NEVER        │                    │
+// │                9 │ active      │ boolean   │ false                    │ NO          │ NEVER        │                    │
+// └──────────────────┴─────────────┴───────────┴──────────────────────────┴─────────────┴──────────────┴────────────────────┘
+// ----
 
-From this information you can imagine that it is relatively easy to *generate* the matching Java types as [blue]#record# type.
+// From this information you can imagine that it is relatively easy to *generate* the matching Java types as [blue]#record# type.
 
-The resulting record would look like this:
+// The resulting record would look like this:
 
-[source,java]
-----
-package entities;
+// [source,java]
+// ----
+// package entities;
 
-import java.time.LocalDate;
+// import java.time.LocalDate;
 
-public record Student (
-   int student_id,
-   String firstname,
-   String lastname,
-   LocalDate dob,
-   int cohort,
-   String email,
-   char gender,
-   String student_grp,
-   bool active
-){} //<1>
-----
+// public record Student (
+//    int student_id,
+//    String firstname,
+//    String lastname,
+//    LocalDate dob,
+//    int cohort,
+//    String email,
+//    char gender,
+//    String student_grp,
+//    bool active
+// ){} //<1>
+// ----
 
-<1> indeed, no body whatsoever.
+// <1> indeed, no body whatsoever.
 
-[TIP]
-====
-If your columns are nullable, choose a type that also 'accepts' null values, so in that case use a ref type, such as Integer or Boolean.
-If the columns in the table are declared as *non-nullable* you can use primitive types.
-====
+// [TIP]
+// ====
+// If your columns are nullable, choose a type that also 'accepts' null values, so in that case use a ref type, such as Integer or Boolean.
+// If the columns in the table are declared as *non-nullable* you can use primitive types.
+// ====
 
-Because in the Java layer you would like to have the meta information handy in a [blue]#Mapper#, you can generate the mapper at the same time from the database information
-instead of using reflection to the same effect.
+// Because in the Java layer you would like to have the meta information handy in a [blue]#Mapper#, you can generate the mapper at the same time from the database information
+// instead of using reflection to the same effect.
 
-=== Check constraints
+// === Check constraints
 
-Similarly you can also get the information of the check constraints with another, a bit more involved query.
+// Similarly you can also get the information of the check constraints with another, a bit more involved query.
 
-[source,sql]
-----
-include::code/sql/check_constraints_query.sql[]
-----
+// [source,sql]
+// ----
+// include::code/sql/check_constraints_query.sql[]
+// ----
 
-which, because only one column in this schema actually declares a check constraint, results in:
+// which, because only one column in this schema actually declares a check constraint, results in:
 
-[source,text]
-[.small-code-font-70]
-----
-┌──────────────┬────────────┬─────────┬───────────────────────┬─────────────────────────────────────────────────────────────────┐
-│ table_schema │ table_name │ columns │    constraint_name    │                          check_clause                           │
-╞══════════════╪════════════╪═════════╪═══════════════════════╪═════════════════════════════════════════════════════════════════╡
-│ public       │ students   │ gender  │ students_gender_check │ ((gender = ANY (ARRAY['F'::bpchar, 'M'::bpchar, 'U'::bpchar]))) │
-└──────────────┴────────────┴─────────┴───────────────────────┴─────────────────────────────────────────────────────────────────┘
-----
+// [source,text]
+// [.small-code-font-70]
+// ----
+// ┌──────────────┬────────────┬─────────┬───────────────────────┬─────────────────────────────────────────────────────────────────┐
+// │ table_schema │ table_name │ columns │    constraint_name    │                          check_clause                           │
+// ╞══════════════╪════════════╪═════════╪═══════════════════════╪═════════════════════════════════════════════════════════════════╡
+// │ public       │ students   │ gender  │ students_gender_check │ ((gender = ANY (ARRAY['F'::bpchar, 'M'::bpchar, 'U'::bpchar]))) │
+// └──────────────┴────────────┴─────────┴───────────────────────┴─────────────────────────────────────────────────────────────────┘
+// ----
 
-You can use the check constraints in your business code too, but actually deferring those checks as final  checks to the database is just fine. The database
-layer with throw an appropriate exception when a value is not to the liking of a constraint.
+// You can use the check constraints in your business code too, but actually deferring those checks as final  checks to the database is just fine. The database
+// layer with throw an appropriate exception when a value is not to the liking of a constraint.
 
-You may want to use the check information in the user interface layer, to warn the user that a transaction will not succeed with a illegal or missing value.
-Parsing the check clause is of course a bit complex, but with a regex you can do a lot, and also know that most check constraint are relatively simple.
+// You may want to use the check information in the user interface layer, to warn the user that a transaction will not succeed with a illegal or missing value.
+// Parsing the check clause is of course a bit complex, but with a regex you can do a lot, and also know that most check constraint are relatively simple.
