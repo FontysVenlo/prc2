@@ -257,4 +257,147 @@ In order to test a class in isolation, you need to make sure that the class is l
 &lt;p&gt;What makes software testable?&lt;/p&gt;
 &lt;figure class="image-block left"&gt;&lt;img src="https://fontysvenlo.github.io/prc2/images/testability_tarlinder.png" alt="testability tarlinder" width="600"/&gt;
 &lt;figcaption&gt;Figure 1. The testability attribute decomposed&lt;/figcaption&gt;&lt;/figure&gt;
-&lt;div class="ulist"&gt;&lt;ul&gt;&lt;li&gt;Controllability: How easy is it to bring the system in a state where you can test it?&lt;/li&gt;&lt;li&gt;Observability: How easy is it to see what the system is doing?&lt;/li&gt;&lt;li&gt;Smallness: How small is the system that you’re testing?&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</description></item></channel></rss>
+&lt;div class="ulist"&gt;&lt;ul&gt;&lt;li&gt;Controllability: How easy is it to bring the system in a state where you can test it?&lt;/li&gt;&lt;li&gt;Observability: How easy is it to see what the system is doing?&lt;/li&gt;&lt;li&gt;Smallness: How small is the system that you’re testing?&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</description></item><item><title>04 Database Access JDBC</title><link>https://fontysvenlo.github.io/prc2/docs/database-access/</link><pubDate>Thu, 13 Mar 2025 13:53:06 +0100</pubDate><guid>https://fontysvenlo.github.io/prc2/docs/database-access/</guid><description>&lt;nav id="toc" class="toc" role="doc-toc"&gt;&lt;h2 id="toc-title"&gt;Table of Contents&lt;/h2&gt;&lt;ol class="toc-list level-1"&gt;&lt;li&gt;&lt;a href="#_java_database_connectivity"&gt;Java DataBase Connectivity&lt;/a&gt;&lt;ol class="toc-list level-2"&gt;&lt;li&gt;&lt;a href="#_database_connection_credentials_and_java_properties"&gt;DataBase connection credentials and Java Properties&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_using_a_data_source"&gt;Using a Data source&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_resultset"&gt;ResultSet&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_anatomy_of_a_prepared_statement"&gt;Anatomy of a prepared statement&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_database_meta_information"&gt;Database Meta Information&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_check_constraints"&gt;Check constraints&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_transactions"&gt;Transactions&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_using_stored_procedures"&gt;Using Stored Procedures&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/nav&gt;&lt;section class="doc-section level-1"&gt;&lt;h2 id="_java_database_connectivity"&gt;Java DataBase Connectivity&lt;/h2&gt;&lt;section class="doc-section level-2"&gt;&lt;h3 id="_database_connection_credentials_and_java_properties"&gt;DataBase connection credentials and Java Properties&lt;/h3&gt;&lt;p&gt;Some things do &lt;mark&gt;NOT&lt;/mark&gt; belong in source code. In particular do not put &lt;strong&gt;credentials&lt;/strong&gt; of any kind
+inside files that are committed to a version control system, such as source code. Make sure you configure your
+version control system such that such files are excluded from commits.&lt;/p&gt;
+&lt;p&gt;Instead put credentials in separate files, that are easily understood by both a human that uses it
+to configure access to a resource, and also by the programming language.&lt;br/&gt;
+In java the tradition is to use so called properties files, which, also traditionally, have a file extension &lt;code&gt;.properties&lt;/code&gt;.
+It also helps to give such files well known names, so the program can refer to them by that name.&lt;/p&gt;
+&lt;p&gt;For the demonstrations in this part we will use the following properties file.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;span class="black"&gt;db.properties&lt;/span&gt; file specifying connection details for dev and prod&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-text" data-lang="text"&gt;# You can add comments here.
+
+# hosts and ports are plural
+# to be able to connect to multiple hosts and ports
+# which are probably used for pooling
+
+
+jdbc.pg.dev.dbname=dev
+jdbc.pg.dev.user=exam
+jdbc.pg.dev.password=exam
+jdbc.pg.dev.hosts=localhost
+
+jdbc.pg.prod.dbname=prod
+jdbc.pg.prod.user=appdbuser
+jdbc.pg.prod.password=verySecretPassw00rd
+jdbc.pg.prod.hosts=cluster1,cluster2,cluster3,fallback1
+jdbc.pg.presidents.ports=5432,5433,5434
+
+
+jdbc.pg.presidents.dbname=presidents
+jdbc.pg.presidents.user=exam
+jdbc.pg.presidents.password=exam
+jdbc.pg.presidents.hosts=localhost
+jdbc.pg.presidents.ports=5433&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;You can see that the properties file supports two environments, &lt;strong&gt;dev&lt;/strong&gt;elopment and &lt;strong&gt;prod&lt;/strong&gt;uction.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;Configuring a datasource. Put it in a utility class.&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;public class DBProvider {
+
+ static Map&amp;lt;String, DataSource&amp;gt; cache = new HashMap&amp;lt;&amp;gt;();
+
+ static DataSource getDataSource(final String sourceName) {
+
+ return cache.computeIfAbsent(sourceName,
+ (s) -&amp;gt; {
+ Properties props = getProperties(&amp;#34;db.properties&amp;#34;);
+
+ PGSimpleDataSource dataSource = new PGSimpleDataSource();
+
+ String prefix = sourceName + &amp;#34;.&amp;#34;;
+
+ String[] serverNames = {props.getProperty(prefix + &amp;#34;dbhost&amp;#34;)};
+ dataSource.setServerNames(serverNames);
+
+ int[] portNumbers = {Integer.parseInt(props.getProperty(prefix + &amp;#34;port&amp;#34;))};
+ dataSource.setPortNumbers(portNumbers);
+
+ dataSource.setUser(props.getProperty(prefix + &amp;#34;username&amp;#34;));
+ dataSource.setDatabaseName(props.getProperty(prefix + &amp;#34;dbname&amp;#34;));
+ dataSource.setPassword(props.getProperty(prefix + &amp;#34;password&amp;#34;));
+ dataSource.setCurrentSchema(props.getProperty(prefix + &amp;#34;schema&amp;#34;));
+
+ return dataSource;
+ }
+ );
+ }
+
+ static Properties getProperties(String propertiesFileName){
+
+ System.out.println(&amp;#34;The user working dir is &amp;#34; + System.getProperty(&amp;#34;user.dir&amp;#34;));
+
+ // Usage of resource file is preferred way. No issues with working dir.
+ // Uses the default location of resources (in src/main/java/resources dir)
+ // getClassLoader() is necessary, unless you store your property file in a
+ // subfolder according to package name
+ // (src/main/resources/fontys/customerdbdemo in this case).
+
+ Properties properties = new Properties();
+ try (InputStream dbProperties = DBProvider.class.getClassLoader().getResourceAsStream(propertiesFileName);) {
+ properties.load(dbProperties);
+ } catch (IOException ex) {
+ Logger.getLogger(DBProvider.class.getName()).log(Level.SEVERE, null, ex);
+ }
+ return properties;
+ }
+}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;&lt;/section&gt;
+&lt;section class="doc-section level-2"&gt;&lt;h3 id="_using_a_data_source"&gt;Using a Data source&lt;/h3&gt;&lt;p&gt;There are some traditional ways to obtain a database connection. We use a &lt;strong&gt;DataSource&lt;/strong&gt;, which itself
+can be seen as a resource.
+The data source can then be used to obtain a connection. In the example you see a class that needs a DataSource
+that is provided at construction time of the class, so it is available when the instance is created.
+A connection is &lt;code&gt;AutoClosable&lt;/code&gt; so candidate for &lt;strong class="green"&gt;try-with-resources&lt;/strong&gt;.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;Using a datasource to obtain a connection and use the connection&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;package simplejdbc;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.sql.DataSource;
+
+/**
+ *
+ * @author hom
+ */
+public class DataSourceDemo {
+
+ final DataSource datasource; &lt;b class="conum"&gt;1&lt;/b&gt;
+
+ public DataSourceDemo( DataSource datasource ) { &lt;b class="conum"&gt;2&lt;/b&gt;
+ this.datasource = datasource;
+ }
+
+ void demo() throws SQLException { &lt;b class="conum"&gt;3&lt;/b&gt;
+ String query
+ = &amp;#34;&amp;#34;&amp;#34;
+ select state.name as state
+ ,p.name as president
+ ,state.year_entered
+ from president p
+ join state s on(p.state_id_born=s.id)
+ where s.name like &amp;#39;N%&amp;#39;
+ &amp;#34;&amp;#34;&amp;#34;;
+ doQuery( query, System.out );
+ }
+}&lt;/code&gt;&lt;/pre&gt;&lt;ol class="callout-list arabic"&gt;&lt;li&gt;Resource used in methods of this class.&lt;/li&gt;&lt;li&gt;Constructor receives the DataSource.&lt;/li&gt;&lt;li&gt;The method uses the DataSource to get a connection in the try-with-resources block&lt;br/&gt;
+and passes it on to the method that executes the query and deals with the result by printing it.&lt;/li&gt;&lt;/ol&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &lt;code&gt;doQuery(…​)&lt;/code&gt; method uses the supplied connection to create a statement which is then executed to produce a ResultSet.
+You will see some similarities in what you have seen in project 1, using php PDO.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;doQuery&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;void doQuery( String query,
+ PrintStream out ) throws SQLException {
+ try ( Connection con = datasource.getConnection();
+ Statement st = con.createStatement();
+ ResultSet rs = st.executeQuery( query ) ) {
+
+ new ResultSetPrinter( rs ).printTable( out );
+
+ }
+}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;The &lt;strong class="blue"&gt;ResultSetPrinter&lt;/strong&gt; tries to make a nice looking table of the result of the query.
+You can imagine that this is a bit of code, but that is not relevant for this demo of JDBC.&lt;/p&gt;&lt;/section&gt;
+&lt;section class="doc-section level-2"&gt;&lt;h3 id="_resultset"&gt;ResultSet&lt;/h3&gt;&lt;p&gt;For all queries that return a tabular result, the first JDBC class
+you will use is the &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/ResultSet.html"&gt;&lt;strong&gt;ResultSet&lt;/strong&gt;&lt;/a&gt;.
+The ResultSet also provides so called &lt;strong&gt;Meta Information&lt;/strong&gt; that describes the types of the values
+in the columns, the number of columns, display size etc.&lt;br/&gt;
+This can be used to:&lt;/p&gt;
+&lt;div class="ulist"&gt;&lt;ul&gt;&lt;li&gt;produce a nice tabular format&lt;/li&gt;&lt;li&gt;by using a translation or mapping between the database types and Java types, how the column data is to be used, type wise.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</description></item></channel></rss>
