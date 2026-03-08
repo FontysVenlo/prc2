@@ -14,30 +14,17 @@ border-slate-500 dark:border-slate-400 text-black dark:text-slate-200">04 Databa
 inside files that are committed to a version control system, such as source code. Make sure you configure your
 version control system such that such files are excluded from commits.</p><p>Instead put credentials in separate files, that are easily understood by both a human that uses it
 to configure access to a resource, and also by the programming language.<br>In java the tradition is to use so called properties files, which, also traditionally, have a file extension <code>.properties</code>.
-It also helps to give such files well known names, so the program can refer to them by that name.</p><p>For the demonstrations in this part we will use the following properties file.</p><figure class=listing-block><figcaption><span class=black>db.properties</span> file specifying connection details for dev and prod</figcaption><pre class=highlight><code class=language-text data-lang=text># You can add comments here.
+It also helps to give such files well known names, so the program can refer to them by that name.</p><p>For the demonstrations in this part we will use the following properties file.</p><figure class=listing-block><figcaption><span class=black>db.properties</span> file</figcaption><pre class=highlight><code class=language-text data-lang=text># You can add comments here.
 
 # hosts and ports are plural
 # to be able to connect to multiple hosts and ports
-# which are probably used for pooling
 
+# Make sure that you don&#39;t push this file to a repository, as it contains sensitive information such as database credentials.
 
-jdbc.pg.dev.dbname=dev
-jdbc.pg.dev.user=exam
-jdbc.pg.dev.password=exam
-jdbc.pg.dev.hosts=localhost
-
-jdbc.pg.prod.dbname=prod
-jdbc.pg.prod.user=appdbuser
-jdbc.pg.prod.password=verySecretPassw00rd
-jdbc.pg.prod.hosts=cluster1,cluster2,cluster3,fallback1
-jdbc.pg.presidents.ports=5432,5433,5434
-
-
-jdbc.pg.presidents.dbname=presidents
-jdbc.pg.presidents.user=exam
-jdbc.pg.presidents.password=exam
-jdbc.pg.presidents.hosts=localhost
-jdbc.pg.presidents.ports=5433</code></pre></figure><p>You can see that the properties file supports two environments, <strong>dev</strong>elopment and <strong>prod</strong>uction.</p><figure class=listing-block><figcaption>Configuring a datasource. Put it in a utility class.</figcaption><pre class=highlight><code class=language-java data-lang=java>public class DBProvider {
+dbname=aisdb
+user=aisuser
+password=aispassword
+hosts=localhost</code></pre></figure><figure class=listing-block><figcaption>Configuring a datasource. Put it in a utility class.</figcaption><pre class=highlight><code class=language-java data-lang=java>public class DBProvider {
 
     static Map&lt;String, DataSource&gt; cache = new HashMap&lt;&gt;();
 
@@ -69,13 +56,8 @@ jdbc.pg.presidents.ports=5433</code></pre></figure><p>You can see that the prope
 
     static Properties getProperties(String propertiesFileName){
 
-        System.out.println(&#34;The user working dir is &#34; + System.getProperty(&#34;user.dir&#34;));
-
         // Usage of resource file is preferred way. No issues with working dir.
         // Uses the default location of resources (in src/main/java/resources dir)
-        // getClassLoader() is necessary, unless you store your property file in a
-        // subfolder according to package name
-        // (src/main/resources/fontys/customerdbdemo in this case).
 
         Properties properties = new Properties();
         try (InputStream dbProperties = DBProvider.class.getClassLoader().getResourceAsStream(propertiesFileName);) {

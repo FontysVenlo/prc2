@@ -265,32 +265,18 @@ to configure access to a resource, and also by the programming language.&lt;br/&
 In java the tradition is to use so called properties files, which, also traditionally, have a file extension &lt;code&gt;.properties&lt;/code&gt;.
 It also helps to give such files well known names, so the program can refer to them by that name.&lt;/p&gt;
 &lt;p&gt;For the demonstrations in this part we will use the following properties file.&lt;/p&gt;
-&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;span class="black"&gt;db.properties&lt;/span&gt; file specifying connection details for dev and prod&lt;/figcaption&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;&lt;span class="black"&gt;db.properties&lt;/span&gt; file&lt;/figcaption&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-text" data-lang="text"&gt;# You can add comments here.
 
 # hosts and ports are plural
 # to be able to connect to multiple hosts and ports
-# which are probably used for pooling
 
+# Make sure that you don&amp;#39;t push this file to a repository, as it contains sensitive information such as database credentials.
 
-jdbc.pg.dev.dbname=dev
-jdbc.pg.dev.user=exam
-jdbc.pg.dev.password=exam
-jdbc.pg.dev.hosts=localhost
-
-jdbc.pg.prod.dbname=prod
-jdbc.pg.prod.user=appdbuser
-jdbc.pg.prod.password=verySecretPassw00rd
-jdbc.pg.prod.hosts=cluster1,cluster2,cluster3,fallback1
-jdbc.pg.presidents.ports=5432,5433,5434
-
-
-jdbc.pg.presidents.dbname=presidents
-jdbc.pg.presidents.user=exam
-jdbc.pg.presidents.password=exam
-jdbc.pg.presidents.hosts=localhost
-jdbc.pg.presidents.ports=5433&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-&lt;p&gt;You can see that the properties file supports two environments, &lt;strong&gt;dev&lt;/strong&gt;elopment and &lt;strong&gt;prod&lt;/strong&gt;uction.&lt;/p&gt;
+dbname=aisdb
+user=aisuser
+password=aispassword
+hosts=localhost&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;figure class="listing-block"&gt;&lt;figcaption&gt;Configuring a datasource. Put it in a utility class.&lt;/figcaption&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;public class DBProvider {
 
@@ -324,13 +310,8 @@ jdbc.pg.presidents.ports=5433&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
  static Properties getProperties(String propertiesFileName){
 
- System.out.println(&amp;#34;The user working dir is &amp;#34; + System.getProperty(&amp;#34;user.dir&amp;#34;));
-
  // Usage of resource file is preferred way. No issues with working dir.
  // Uses the default location of resources (in src/main/java/resources dir)
- // getClassLoader() is necessary, unless you store your property file in a
- // subfolder according to package name
- // (src/main/resources/fontys/customerdbdemo in this case).
 
  Properties properties = new Properties();
  try (InputStream dbProperties = DBProvider.class.getClassLoader().getResourceAsStream(propertiesFileName);) {
