@@ -14,13 +14,11 @@ It also helps to give such files well known names, so the program can refer to t
 
 For the demonstrations in this part we will use the following properties file.
 
-.[black]#db.properties# file specifying connection details for dev and prod
+.[black]#db.properties# file
 [source,text]
 ----
 include::code/simplejdbc/application.properties[]
 ----
-
-You can see that the properties file supports two environments, **dev**elopment and **prod**uction.
 
 .Configuring a datasource. Put it in a utility class.
 [source,java]
@@ -57,13 +55,8 @@ public class DBProvider {
 
     static Properties getProperties(String propertiesFileName){
 
-        System.out.println("The user working dir is " + System.getProperty("user.dir"));
-
         // Usage of resource file is preferred way. No issues with working dir.
         // Uses the default location of resources (in src/main/java/resources dir)
-        // getClassLoader() is necessary, unless you store your property file in a
-        // subfolder according to package name
-        // (src/main/resources/fontys/customerdbdemo in this case).
 
         Properties properties = new Properties();
         try (InputStream dbProperties = DBProvider.class.getClassLoader().getResourceAsStream(propertiesFileName);) {
