@@ -17,7 +17,7 @@ For the demonstrations in this part we will use the following properties file.
 .[black]#db.properties# file
 [source,text]
 ----
-include::code/simplejdbc/application.properties[]
+include::code/simplejdbc/db.properties[]
 ----
 
 .Configuring a datasource. Put it in a utility class.
@@ -69,8 +69,6 @@ public class DBProvider {
 }
 ----
 
-// <1> The sourceName is the key or namespace from where to pickup the connection details. Simple and effective.
-
 === Using a Data source
 
 There are some traditional ways to obtain a database connection. We use a *DataSource*, which itself
@@ -103,9 +101,9 @@ public class DataSourceDemo {
     void demo() throws SQLException {  //<3>
         String query
             = """
-            select state.name as state
+            select s.name as state
               ,p.name as president
-              ,state.year_entered
+              ,s.year_entered
             from president p
             join state s on(p.state_id_born=s.id)
                 where s.name like 'N%'
@@ -117,8 +115,8 @@ public class DataSourceDemo {
 
 <1> Resource used in methods of this class.
 <2> Constructor receives the DataSource.
-<3> The method uses the DataSource to get a connection in the try-with-resources block +
-  and passes it on to the method that executes the query and deals with the result by printing it.
+<3> The method calls `doQuery`, which uses the DataSource field to obtain its own connection in a try-with-resources block +
+  and executes the query, dealing with the result by printing it.
 
 
 The `doQuery(...)` method uses the supplied connection to create a statement which is then executed to produce a ResultSet.
@@ -192,6 +190,8 @@ Also assume that we have an array of student data, simply as an array of objects
 ----
  Object[] studentData = {123513, "Klaassen", "Jan", "1993-05-12" , "M"}; //<1>
 ----
+
+<1> Values correspond to the columns in the insert statement: `student_id`, `lastname`, `firstname`, `dob`, `gender`.
 
 
 Then creating the prepared statement and filling it with values is a simple loop:
