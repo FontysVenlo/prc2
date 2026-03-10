@@ -273,10 +273,12 @@ It also helps to give such files well known names, so the program can refer to t
 
 # Make sure that you don&amp;#39;t push this file to a repository, as it contains sensitive information such as database credentials.
 
-dbname=aisdb
-user=aisuser
-password=aispassword
-hosts=localhost&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+db.dbhost=localhost
+db.port=5432
+db.username=aisuser
+db.dbname=aisdb
+db.password=aispassword
+db.schema=public&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;figure class="listing-block"&gt;&lt;figcaption&gt;Configuring a datasource. Put it in a utility class.&lt;/figcaption&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;public class DBProvider {
 
@@ -349,17 +351,17 @@ public class DataSourceDemo {
  void demo() throws SQLException { &lt;b class="conum"&gt;3&lt;/b&gt;
  String query
  = &amp;#34;&amp;#34;&amp;#34;
- select state.name as state
+ select s.name as state
  ,p.name as president
- ,state.year_entered
+ ,s.year_entered
  from president p
  join state s on(p.state_id_born=s.id)
  where s.name like &amp;#39;N%&amp;#39;
  &amp;#34;&amp;#34;&amp;#34;;
  doQuery( query, System.out );
  }
-}&lt;/code&gt;&lt;/pre&gt;&lt;ol class="callout-list arabic"&gt;&lt;li&gt;Resource used in methods of this class.&lt;/li&gt;&lt;li&gt;Constructor receives the DataSource.&lt;/li&gt;&lt;li&gt;The method uses the DataSource to get a connection in the try-with-resources block&lt;br/&gt;
-and passes it on to the method that executes the query and deals with the result by printing it.&lt;/li&gt;&lt;/ol&gt;&lt;/figure&gt;
+}&lt;/code&gt;&lt;/pre&gt;&lt;ol class="callout-list arabic"&gt;&lt;li&gt;Resource used in methods of this class.&lt;/li&gt;&lt;li&gt;Constructor receives the DataSource.&lt;/li&gt;&lt;li&gt;The method calls &lt;code&gt;doQuery&lt;/code&gt;, which uses the DataSource field to obtain its own connection in a try-with-resources block&lt;br/&gt;
+and executes the query, dealing with the result by printing it.&lt;/li&gt;&lt;/ol&gt;&lt;/figure&gt;
 
 &lt;p&gt;The &lt;code&gt;doQuery(…​)&lt;/code&gt; method uses the supplied connection to create a statement which is then executed to produce a ResultSet.
 You will see some similarities in what you have seen in project 1, using php PDO.&lt;/p&gt;

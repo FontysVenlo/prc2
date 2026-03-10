@@ -21,10 +21,12 @@ It also helps to give such files well known names, so the program can refer to t
 
 # Make sure that you don&#39;t push this file to a repository, as it contains sensitive information such as database credentials.
 
-dbname=aisdb
-user=aisuser
-password=aispassword
-hosts=localhost</code></pre></figure><figure class=listing-block><figcaption>Configuring a datasource. Put it in a utility class.</figcaption><pre class=highlight><code class=language-java data-lang=java>public class DBProvider {
+db.dbhost=localhost
+db.port=5432
+db.username=aisuser
+db.dbname=aisdb
+db.password=aispassword
+db.schema=public</code></pre></figure><figure class=listing-block><figcaption>Configuring a datasource. Put it in a utility class.</figcaption><pre class=highlight><code class=language-java data-lang=java>public class DBProvider {
 
     static Map&lt;String, DataSource&gt; cache = new HashMap&lt;&gt;();
 
@@ -92,16 +94,16 @@ public class DataSourceDemo {
     void demo() throws SQLException {  <b class=conum>3</b>
         String query
             = &#34;&#34;&#34;
-            select state.name as state
+            select s.name as state
               ,p.name as president
-              ,state.year_entered
+              ,s.year_entered
             from president p
             join state s on(p.state_id_born=s.id)
                 where s.name like &#39;N%&#39;
             &#34;&#34;&#34;;
             doQuery( query, System.out );
     }
-}</code></pre><ol class="callout-list arabic"><li>Resource used in methods of this class.</li><li>Constructor receives the DataSource.</li><li>The method uses the DataSource to get a connection in the try-with-resources block<br>and passes it on to the method that executes the query and deals with the result by printing it.</li></ol></figure><p>The <code>doQuery(…​)</code> method uses the supplied connection to create a statement which is then executed to produce a ResultSet.
+}</code></pre><ol class="callout-list arabic"><li>Resource used in methods of this class.</li><li>Constructor receives the DataSource.</li><li>The method calls <code>doQuery</code>, which uses the DataSource field to obtain its own connection in a try-with-resources block<br>and executes the query, dealing with the result by printing it.</li></ol></figure><p>The <code>doQuery(…​)</code> method uses the supplied connection to create a statement which is then executed to produce a ResultSet.
 You will see some similarities in what you have seen in project 1, using php PDO.</p><figure class=listing-block><figcaption>doQuery</figcaption><pre class=highlight><code class=language-java data-lang=java>void doQuery( String query,
                 PrintStream out ) throws SQLException {
     try ( Connection con = datasource.getConnection();
@@ -126,7 +128,7 @@ is to specify the columns instead of a <code>*</code>, so that the order in whic
 of database schema organization and <em>stable</em>.</li></ol></figure><aside class="admonition-block tip" role=doc-tip><h6 class="block-title label-only"><span class=title-label>Tip:</span></h6><p>Lots of problems can allegedly be solved with an extra level of <a href=https://en.wikipedia.org/wiki/Indirection>Indirection</a>.
 As an example: in programming there is the rule to not program against an implementation, but against an interface.
 With databases the indirection trick is: <strong>use views instead of tables</strong>.</p></aside><p>Now assume the SQL text contains the above.
-Also assume that we have an array of student data, simply as an array of objects.</p><figure class=listing-block><figcaption>student data in array</figcaption><pre class=highlight><code class=language-java data-lang=java> Object[] studentData = {123513, &#34;Klaassen&#34;, &#34;Jan&#34;, &#34;1993-05-12&#34; , &#34;M&#34;}; <b class=conum>1</b></code></pre></figure><p>Then creating the prepared statement and filling it with values is a simple loop:</p><figure class=listing-block><figcaption>loop to substitute placeholders.</figcaption><pre class=highlight><code class=language-java data-lang=java>try (
+Also assume that we have an array of student data, simply as an array of objects.</p><figure class=listing-block><figcaption>student data in array</figcaption><pre class=highlight><code class=language-java data-lang=java> Object[] studentData = {123513, &#34;Klaassen&#34;, &#34;Jan&#34;, &#34;1993-05-12&#34; , &#34;M&#34;}; <b class=conum>1</b></code></pre><ol class="callout-list arabic"><li>Values correspond to the columns in the insert statement: <code>student_id</code>, <code>lastname</code>, <code>firstname</code>, <code>dob</code>, <code>gender</code>.</li></ol></figure><p>Then creating the prepared statement and filling it with values is a simple loop:</p><figure class=listing-block><figcaption>loop to substitute placeholders.</figcaption><pre class=highlight><code class=language-java data-lang=java>try (
     Connection con = datasource.getConnection();
     PreparedStatement stmt = con.prepareStatement( query ); ) {
 
