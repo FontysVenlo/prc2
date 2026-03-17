@@ -15,6 +15,7 @@ Sometimes it is handy to directly connect to your database using the PostgreSQL 
 Within the command line client, you can easily get insights into your database, for example by listing all tables with the command "\dt", or by describing a table with the command "\d tablename". with "\q" you can leave the client application again. Valuable is also "\h" to get an overview of all possible commands, or "\h DELETE" to learn everything about the syntax of the DELETE command, or "\h <command>" more general to get help.
 
 So far about the command line client. Dont forget the "Never evers" that we discussed in class:
+
 * Never write SQL queries in another layer than the Persistence layer.
 * Never use the "postgres" user in your application, because that user has too much privileges. Create a specific user for your application with only the necessary privileges. Be careful using the "postgres" user in general.
 * Never write user names and passwords hard-coded in your source code, because that is a security risk and also would make it difficult to change the credentials when needed. Use configuration files or environment variables to store the credentials securely and separately from the source code.
