@@ -2,7 +2,7 @@
 
 === The database in the layered architecture
 
-image:DatabaseInLayeredArchitecture.png[width=50%, title="Database in layered architecture"] Database in layered architecture.
+image:DatabaseInLayeredArchitecture.png[width=80%, title="Database in layered architecture"] Database in layered architecture.
 
 As you can see in the image above, to connect to a database managment system from your code you need a driver, which is a piece of software that implements the JDBC API and translates the calls to the database specific protocol. The driver is provided by the database vendor, or by a third party. You need to include the driver in your project as a dependency, so that it is available at runtime.
 
