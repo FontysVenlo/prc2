@@ -45,4 +45,106 @@ and backward compatibility, so old programs keep working but can be maintained b
 &lt;p&gt;The important major releases were:&lt;/p&gt;
 &lt;div class="ulist"&gt;&lt;ul&gt;&lt;li&gt;Java 1. Duh.&lt;/li&gt;&lt;li&gt;Java 1.2 introducing the collection framework.&lt;/li&gt;&lt;li&gt;Java 5 introduces Generics and the first version of the concurrency framework. It also changed the naming scheme. Internally it still is Java 1.5.&lt;/li&gt;&lt;li&gt;Java 8 introduced a functional style of programming using Functional interfaces and lambda expressions&lt;/li&gt;&lt;li&gt;Java 9 introduced the Java Platform Module System, and the project under which it came into being was called &lt;strong&gt;JigSaw&lt;/strong&gt;.&lt;br/&gt;
  That last name points to the idea of taking the JDK and run-time library apart and recompose it using a better partitioning,
-actually applying separation of concerns in a big way. The project has been a multi year undertaking.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</description></item></channel></rss>
+actually applying separation of concerns in a big way. The project has been a multi year undertaking.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</description></item><item><title>06 Generics</title><link>https://fontysvenlo.github.io/prc2/docs/generics/</link><pubDate>Thu, 27 Mar 2025 13:53:06 +0100</pubDate><guid>https://fontysvenlo.github.io/prc2/docs/generics/</guid><description>&lt;nav id="toc" class="toc" role="doc-toc"&gt;&lt;h2 id="toc-title"&gt;Table of Contents&lt;/h2&gt;&lt;ol class="toc-list level-1"&gt;&lt;li&gt;&lt;a href="#_generics"&gt;Generics&lt;/a&gt;&lt;ol class="toc-list level-2"&gt;&lt;li&gt;&lt;a href="#_generics_the_fine_print"&gt;Generics, the fine print&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_cheating_the_compiler"&gt;Cheating the compiler&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_wildcard_and_bounds"&gt;Wildcard and bounds&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_lower_bound_or_contra_variant"&gt;Lower bound or Contra variant&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_self_use_in_generic_definitions"&gt;Self use in Generic definitions&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_dynamic_type_information"&gt;Dynamic type information&lt;/a&gt;&lt;ol class="toc-list level-2"&gt;&lt;li&gt;&lt;a href="#_isassignablefrom_will_a_cast_work"&gt;isAssignableFrom. Will a cast work?&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_testing_generics"&gt;Testing generics&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#_reading"&gt;Reading&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/nav&gt;&lt;section class="doc-section level-1"&gt;&lt;h2 id="_generics"&gt;Generics&lt;/h2&gt;&lt;p&gt;Generics is mainly a compiler feature. In java (at least the versions up to this moment, March 2026) it
+is even more so, because after the compiler had it’s go with it, it largely discards the generic information, and the runtime, the JVM,
+does not really care about generics and does not use it. The role of generics is to keep the programs type-safe.
+The compiler will check that a use of a method, field, or class complies with its definition,
+and if the use does &lt;strong class="red"&gt;not&lt;/strong&gt;, the compiler will produce an &lt;strong class="red"&gt;error&lt;/strong&gt;, to prevent the programmer from doing unsafe things.&lt;/p&gt;
+&lt;section class="doc-section level-2"&gt;&lt;h3 id="_generics_the_fine_print"&gt;Generics, the fine print&lt;/h3&gt;&lt;p&gt;Generics were introduced in Java 5.&lt;/p&gt;
+&lt;p&gt;Generics help keeping the language safer by giving the compiler more ways to &lt;em&gt;reason&lt;/em&gt;
+about the code and reject it when it is bad. That is what a strictly typed language is all about.&lt;/p&gt;
+&lt;p&gt;With generics also &lt;strong&gt;auto-boxing&lt;/strong&gt; was introduced. The concept was borrowed from &lt;strong&gt;C#&lt;/strong&gt; and the dot-net framework.
+Auto-boxing is automatically converting/wrapping an &lt;code&gt;int&lt;/code&gt; into an &lt;code&gt;Integer&lt;/code&gt; (auto-box) when a
+reference type is needed and backwards when the reference type Integer is given and an &lt;code&gt;int&lt;/code&gt; is needed (auto-unboxing).
+This makes primitive types to play &amp;#39;nicely&amp;#39; with generics to some degree.&lt;/p&gt;
+&lt;p&gt;Generics also helps avoiding code duplication, because you can have a &lt;em&gt;something&lt;/em&gt; of &lt;em&gt;anything&lt;/em&gt;
+like a &lt;code class="blue"&gt;List&lt;/code&gt; of &lt;code class="blue"&gt;Student&lt;/code&gt; without any code duplication or any code generation under the hood, to create
+specialized classes per anything type.
+So this &lt;strong class="blue"&gt;List&lt;/strong&gt; exists once and is just as applicable to Student as is to Donkey.&lt;/p&gt;
+&lt;p&gt;A strong point of Java has always been the preservation of investment (in code). What worked once should still work.
+So code that was legal (and compiled) in the Java 1.1 era should still run, even if used today in its binary format. Heck, in closed
+source stuff that might be the only form you have, but your investment is preserved because of this backwards compatibility.&lt;/p&gt;
+&lt;p&gt;This strong point has a flip side. Pré Java 5 does not understand generics, which would break the backwards compatibility. That
+is why the generic info, after being used by the compiler for correctness verification is then thrown away by the same compiler. Little
+if anything of the generic information is preserved for the run time. As a matter of fact, the JVM has no notion of generics, nor does it
+need it to function. This has all kind of consequences.&lt;/p&gt;
+&lt;p&gt;In modern Java code, in particular since Java 8 with Functional interfaces and Streams, generics are a &lt;strong&gt;must&lt;/strong&gt;, because the provide safety in the one hand
+and the required flexibility in the other, required to make the Java 8 features possible at all.&lt;/p&gt;
+&lt;section class="doc-section level-3"&gt;&lt;h4 id="_raw_types_pre_java_5"&gt;Raw types, pre-Java 5&lt;/h4&gt;&lt;p&gt;The pre-java 5 days did not have generics. All types that have been generified since then still exist in their original,
+nowadays called &lt;strong class="blue"&gt;raw&lt;/strong&gt; form. From the above you can infer that this is what the JVM sees and uses.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;Using a map in pre Java 5 times&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-java" data-lang="java"&gt; Map studentsMap = new HashMap(); &lt;b class="conum"&gt;1&lt;/b&gt;
+
+ studentsMap.put( Integer.valueOf( 313581 ) ,new Student( &amp;#34;Potter&amp;#34;,&amp;#34;Harry&amp;#34; ) );
+
+ // some time later
+ Student harry = (Student) studentsMap.get(Integer.valueOf( 313581 ) ); &lt;b class="conum"&gt;2&lt;/b&gt;&lt;/code&gt;&lt;/pre&gt;&lt;ol class="callout-list arabic"&gt;&lt;li&gt;The map has no clue about of the types of key or value, so Object is the best it can do.&lt;br/&gt;
+Also note that you had to turn the &lt;code&gt;int&lt;/code&gt; into an &lt;code&gt;Integer&lt;/code&gt; object manually, because auto-boxing did not exist.&lt;/li&gt;&lt;li&gt;Retrieving the object from a map is again wrapping the &lt;code&gt;int&lt;/code&gt; and also &lt;em&gt;cast&lt;/em&gt; the object back to the expected type.&lt;/li&gt;&lt;/ol&gt;&lt;/figure&gt;
+
+&lt;p&gt;In the above pieces of code all kinds of things can go wrong. You could put any pair of objects of any type in the map and the compiler
+had no way of checking what you did made sense.&lt;/p&gt;&lt;/section&gt;
+&lt;section class="doc-section level-3"&gt;&lt;h4 id="_generic_types_the_modern_way"&gt;Generic types, the modern way.&lt;/h4&gt;&lt;figure class="listing-block"&gt;&lt;figcaption&gt;example lists and maps&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-java" data-lang="java"&gt; List&amp;lt;String&amp;gt; l1 = new ArrayList&amp;lt;&amp;gt;();
+ List&amp;lt;Student&amp;gt; stuList = new ArrayList&amp;lt;&amp;gt;();
+ Map&amp;lt;String,BiFunction&amp;lt;Double,Integer,Integer&amp;gt;&amp;gt; operatorMap;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;The thing is that the compiler is very finicky. It should be, very precise and meticulous.
+As an example, say you have a simple person hierarchy: Person is extended by Student.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;some regular people in lists.&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;class Person{}
+class Student extends Person{}
+
+// in some code
+ void m(){
+ Person paul = ....
+ Student serena = ...
+ List&amp;lt;Person&amp;gt; pl;
+ List&amp;lt;Student&amp;gt; sl;
+
+ }&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;The compiler will allow you to do &lt;code&gt;pl.add(serena)&lt;/code&gt;, and &lt;code&gt;sl.add(serena)&lt;/code&gt; because serena is a &lt;code&gt;Student&lt;/code&gt; and by extension a &lt;code&gt;Person&lt;/code&gt;, but
+paul can’t be added to &lt;code&gt;sl&lt;/code&gt;, because as far as the compiler is concerned, paul is not a Student and &amp;#39;would not fit&amp;#39;.&lt;/p&gt;
+&lt;aside class="admonition-block tip" role="doc-tip"&gt;&lt;h6 class="block-title label-only"&gt;&lt;span class="title-label"&gt;Tip: &lt;/span&gt;&lt;/h6&gt;&lt;p&gt;What the compiler tries to achieve is that if you define a collection to contain students, then it promises
+that only students will go in and will ever come out. It does that by checking and not accepting any potential violation of the promise.&lt;/p&gt;&lt;/aside&gt;
+&lt;p&gt;By sticking to this promise, the objects you can receive will be of the correct type and you can do what the type allows, like method calls etc.&lt;/p&gt;&lt;/section&gt;&lt;/section&gt;
+&lt;section class="doc-section level-2"&gt;&lt;h3 id="_cheating_the_compiler"&gt;Cheating the compiler&lt;/h3&gt;&lt;p&gt;You can trick the compiler into breaking its promises. In the end, of course the compiler is not the victim, but the program is.
+It will generate a &lt;span class="red"&gt;ClassCastException&lt;/span&gt; on retrieval of the non-fitting object. And as programs go when they generate uncaught exceptions:
+they will be aborted by the JVM.&lt;/p&gt;
+&lt;figure class="listing-block"&gt;&lt;figcaption&gt;Sneaky code. Do not do this at home. You are only fooling yourselves.&lt;/figcaption&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-java" data-lang="java"&gt;public static void main( String[] args ) {
+ List&amp;lt;Student&amp;gt; sl = new ArrayList&amp;lt;Student&amp;gt;();
+ sl.add( new Student( &amp;#34;Hermione&amp;#34; )); &lt;b class="conum"&gt;1&lt;/b&gt;
+ List ol = (List) sl; &lt;b class="conum"&gt;2&lt;/b&gt;
+ ol.add( new Person(&amp;#34;Voldemort&amp;#34;) ); &lt;b class="conum"&gt;3&lt;/b&gt;
+
+ // somewhere else in the scenario
+ Student hermione = sl.get( 0 ); &lt;b class="conum"&gt;4&lt;/b&gt;
+ Student lilly = sl.get( 1 ); &lt;b class="conum"&gt;5&lt;/b&gt;
+ System.out.println( &amp;#34;lilly = &amp;#34; + lilly ); &lt;b class="conum"&gt;6&lt;/b&gt;
+ }&lt;/code&gt;&lt;/pre&gt;&lt;ol class="callout-list arabic"&gt;&lt;li&gt;accepted.&lt;/li&gt;&lt;li&gt;give the compiler a raw alias.&lt;/li&gt;&lt;li&gt;so it will gladly accept this. You &lt;span class="red"&gt;cheated!&lt;/span&gt;&lt;/li&gt;&lt;li&gt;no sweat, our heroine pops out,&lt;/li&gt;&lt;li&gt;but the other object will make your program fail at this statement with a &lt;code class="red"&gt;ClassCastException&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Statement never reached because your program will have been &lt;mark&gt;terminated&lt;/mark&gt; by now.&lt;/li&gt;&lt;/ol&gt;&lt;/figure&gt;
+
+&lt;section class="doc-section level-3"&gt;&lt;h4 id="_type_token"&gt;Type token.&lt;/h4&gt;&lt;p&gt;&lt;img src="https://fontysvenlo.github.io/prc2/images/towerguard.png" alt="towerguard" width="140px" title="guards guards" class="thumb right"/&gt;
+Sometimes you have a problem, which can only be solved by explicitly providing the generic information to
+the code at run-time. This use is called &amp;#39;providing a type-token&amp;#39;.&lt;br/&gt;
+An example of such use is the method &lt;a href="file:///usr/share/doc/openjdk-11-doc/docs/api/java.base/java/util/Collections.html#checkedList(java.util.List,java.lang.Class)"&gt;Collections.checkedList( &amp;lt;List&amp;lt;E&amp;gt;, Class&amp;lt;E&amp;gt; type )&lt;/a&gt;,&lt;br/&gt;
+whose usage example is &lt;code&gt;List&amp;lt;Student&amp;gt; studList = Collections.checkedList( students, Student.class )&lt;/code&gt;.&lt;br/&gt;
+The type token will play the role of a &lt;strong class="blue"&gt;sentinel&lt;/strong&gt; or &lt;strong class="blue"&gt;guard&lt;/strong&gt;, because all Class objects have a &lt;code&gt;cast&lt;/code&gt; method that checks if the cast is legal, and if it is,
+applies the cast to the incoming object; if not it will throw a &lt;span class="red"&gt;ClassCastException&lt;/span&gt;.
+This will prevent even the sneakiest code, including code predating Java 5 and the code above, to sneak in a none-student object.
+This guard will also throw an exception, and actually the same one, but now at the side of the culprit, because the exception will be thrown at insertion.
+You should not do this as normal usage, because the check on every insertion goes with a cost (CPU cycles), but it can be helpful to detect problems caused
+by some naughty code, because now a violation against the promise will result in an exception at run-time,
+a &lt;code&gt;ClassCastException&lt;/code&gt; to be exact at the moment of insertion, so any sneaky code can be caught &lt;em class="red"&gt;red-handed&lt;/em&gt;,
+leaving a nice big stack trace as a trail for all to see.&lt;/p&gt;
+&lt;p&gt;There are other uses of type-tokens, which you may see later in the course.&lt;/p&gt;&lt;/section&gt;&lt;/section&gt;
+&lt;section class="doc-section level-2"&gt;&lt;h3 id="_wildcard_and_bounds"&gt;Wildcard and bounds&lt;/h3&gt;&lt;p&gt;Read Horstmann section 8.8.&lt;/p&gt;
+&lt;p&gt;With the definition in the previous paragraphs, you are losing some flexibility, compared to raw types. In particular, you may want
+to insert sub types of a class into a collection, or retrieve sub types of a class from a collection.&lt;/p&gt;
+&lt;p&gt;Using wildcards and bounds will give back some of the flexibility while still upholding type-safety.
+The wildcard has been given the character symbol &lt;strong class="bold"&gt;&amp;#39;?&amp;#39;&lt;/strong&gt;, the question mark.&lt;/p&gt;
+&lt;section class="doc-section level-3"&gt;&lt;h4 id="_unbound_wildcard"&gt;Unbound wildcard.&lt;/h4&gt;&lt;p&gt;The unbound wildcard is something that should be used sparingly. The best example is the new definition of the Class type.
+In pre Java-5 times that was &lt;code&gt;Class someClass&lt;/code&gt; that is a raw class, nowadays it is &lt;code&gt;Class&amp;lt;?&amp;gt; someClass&lt;/code&gt; which actually sounds as a class of any kind.
+There is little difference but the compiler will be nicer to you. There are some corner cases where you can’t avoid it and then the form using the wildcard
+is the correct choice.&lt;/p&gt;&lt;/section&gt;
+&lt;section class="doc-section level-3"&gt;&lt;h4 id="_upper_bound_or_covariant"&gt;Upper bound or Covariant&lt;/h4&gt;&lt;figure class="image-block" id="supers"&gt;&lt;img src="https://fontysvenlo.github.io/prc2/images/acceptablesupers.svg" alt="acceptablesupers"/&gt;
+&lt;figcaption&gt;Figure 1. Hierarchy of shapes, assume mathematical shapes, so a line has no width and hence no surface area. Nor does an arc.&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;details class="blue"&gt;&lt;summary&gt;Quiz: Can you name the super types of circle in the class diagram above?&lt;/summary&gt;&lt;div class="content"&gt;&lt;p&gt;Shape, Object, Serializable, ArcLike, Surface, and Circle itself.&lt;/p&gt;&lt;/div&gt;</description></item></channel></rss>
