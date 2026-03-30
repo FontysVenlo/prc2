@@ -2,7 +2,7 @@
 title: "07 The State of Things"
 description: ""
 date: 2025-04-03T12:02:24+02:00
-draft: true
+draft: false
 images: []
 slug: "statemachine"
 menu: 
