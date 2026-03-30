@@ -1,6 +1,6 @@
 == Generics
 
-Generics is mainly a compiler feature. In java (at least the versions up to this moment, March 2022) it
+Generics is mainly a compiler feature. In java (at least the versions up to this moment, March 2026) it
 is even more so, because after the compiler had it's go with it, it largely discards the generic information, and the runtime, the JVM,
 does not really care about generics and does not use it. The role of generics is to keep the programs type-safe.
 The compiler will check that a use of a method, field, or class complies with its definition,
@@ -14,7 +14,7 @@ Generics help keeping the language safer by giving the compiler more ways to _re
 about the code and reject it when it is bad. That is what a strictly typed language is all about.
 
 With generics also *auto-boxing* was introduced. The concept was borrowed from *C#* and the dot-net framework.
-Auto-boxing is auto-magically converting/wrapping an `int` into an `Integer` (auto-box) when a
+Auto-boxing is automatically converting/wrapping an `int` into an `Integer` (auto-box) when a
 reference type is needed and backwards when the reference type Integer is given and an `int` is needed (auto-unboxing).
 This makes primitive types to play 'nicely' with generics to some degree.
 
