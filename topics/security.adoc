@@ -32,7 +32,7 @@ There are three different class loaders:
 . *System (or Application)*: loads classes from the module path
 and the class path
 
-Sow how does the JVM load a class:
+So how does the JVM load a class:
 
 . First it checks if the class is already loaded
 .. If it is already loaded it will use the loaded class
@@ -188,7 +188,7 @@ public class Verifier {
 javap -c verifier.Verifier
 ----
 
-.This gives the following result for the calc method:
+This gives the following result for the calc method:
 .Bytecode of the calc method
 [source]
 ----
@@ -229,10 +229,10 @@ https://en.wikipedia.org/wiki/Hex_editor[hex editor].
 image::verifier_hex.png[Verifier.class open inside hex editor]
 
 Lets change `3C` to `3B`, thus not initializing variable `y`. If we now try to run the program we get the following error:
-```
+....
 Error: Unable to initialize main class verifier.Verifier
 Caused by: java.lang.VerifyError: Bad local variable type
-```
+....
 
 === Web application
 
@@ -290,7 +290,7 @@ public class App {
                     ctx.result("The combination of username/password is not known.");
                 }
             }catch(PSQLException ex){
-                // Somethin went wrong with the query
+                // Something went wrong with the query
                 ctx.status(500);
                 ctx.result(ex.getMessage());
             }
@@ -397,7 +397,7 @@ const removeErrors = () => {
         return;
     }
     errors.innerHTML = "";
-    errors.classList.add("hidden")
+    errors.classList.add("hidden");
 }
 
 const login = async (data) => {
@@ -438,7 +438,7 @@ In the images below we can see the normal usage of the web app.
 On the left we have successful login and on the right an unsuccessful.
 
 .Successful login for user `testuser`
-image::security_successful_login.png[role=related thumb left, Successful login"]
+image::security_successful_login.png[role=related thumb left, Successful login]
 
 .Unsuccessful login
 image::security_unsuccessful_login.png[role=related thumb right, Unsuccessful login]
@@ -466,7 +466,7 @@ Unterminated string literal started at position 72
   in SQL select username from users
   where username = 'testuser'' and password = ''. Expected char -- <1>
 ----
-<1>
+<1> The unterminated string reveals the full query structure, confirming SQL injection is possible.
 
 So lets try to login as `testuser` without knowing the password.
 We can do this by entering the username `testuser` and for the password
@@ -533,9 +533,9 @@ GRANT SELECT ON users TO app;   <2>
 
 If we now try to run a SQL injection using the `secrets` table again
 we are met with the following error message:
-```
+....
 ERROR: permission denied for table secrets
-```
+....
 And if we try to to find out what other tables there are in the
 `public` schema, we will only find the `users` table.
 
@@ -597,12 +597,12 @@ both have the same hash
 
 Let's have a look at the sha256 hash of a text and what happens if we
 slightly change the text (adding a '.' at the end).
-```
+....
 Text:   This is a test string to hash
 Sha256: f70b476ff948472f8e4e52793a5a2779e636c20dd5336d3a8a4455374318db35
 Text:   This is a test string to hash.
 Sha256: 862a9e0d0890a7a28e27c558c80820a0db36eea02e51e2dee8094deade308319
-```
+....
 
 However just storing the hash in the database instead of the
 password is still not safe. This is because of the `deterministic` property of hashing.
@@ -638,7 +638,7 @@ you make it slower to do on GPUs as these are used in the bruteforce process.
 This leaves us with a couple of recommended hashing algorithms:
 
 . bcrypt
-. algon2(id)
+. argon2(id)
 . scrypt
 . PBKDF2
 
@@ -692,7 +692,7 @@ Not just on public WIFI but also on trusted networks are
 there ways to do a Man-in-the-middle (MITM) attack and
 intercept and change HTTP traffic.
 
-The solution to both these problems if to use HTTPS.
+The solution to both these problems is to use HTTPS.
 
 . Certificate: by using HTTPS the server provides a certificate
 that is signed by and Certificate Authority (CA) to prove that
