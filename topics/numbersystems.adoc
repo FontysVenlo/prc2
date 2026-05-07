@@ -211,11 +211,11 @@ overflow    11111 111
 
 == Floating Point Numbers
 
-So far we have a look at whole numbers, let's have a look at numbers with a decimal part, aka floating point numbers.
+So far we have looked at whole numbers, let's have a look at numbers with a decimal part, aka floating point numbers.
 
 === Decimal System
 
-What you are use to in the decimal system.
+What you are used to in the decimal system.
 
 [source]
 ----
@@ -287,6 +287,14 @@ Formula:
 ----
 (sign) x (1 + mantissa) x 2^(exponent - 127)
 ----
+
+The `1 +` in the formula reflects the *hidden (implicit) bit*.
+In normalised form the leading bit before the decimal point is always `1`
+(e.g. `1.10010001 x 2^6`).
+Because it is always `1` it does not need to be stored — the 23 mantissa bits
+only store the *fractional part* after the `1.`.
+When interpreting the stored value you always add that implicit `1` back,
+which is what the `1 + mantissa` in the formula does.
 
 Example:
 
@@ -378,7 +386,7 @@ Final float binary:
 
 === Why 0.1 Can't Be Represented Exactly
 
-There are some problems with floating point numbers, on of the is that not every number can be represented correctly. 
+There are some problems with floating point numbers, one of them is that not every number can be represented correctly. 
 
 [source]
 ----
@@ -411,6 +419,41 @@ The double is defined as follows:
 * 1 bit sign
 * 11 bits exponent
 * 52 bits mantissa
+
+The formula is the same as for a float, but with a larger exponent bias of *1023*:
+
+[source]
+----
+(-1)^sign x (1 + mantissa) x 2^(exponent - 1023)
+----
+
+Using our earlier example `100.25`:
+
+[source]
+----
+Integer part:    1100100
+Fractional part: 01
+Combined:        1100100.01 x 2^0
+
+Normalise (shift left 6):   1.10010001 x 2^6
+
+Exponent: 6 + 1023 = 1029
+1029 in binary:  10000000101  (11 bits)
+
+Mantissa (52 bits, fractional part only):
+1001000100000000000000000000000000000000000000000000
+
+Final double binary:
+0 10000000101 1001000100000000000000000000000000000000000000000000
+----
+
+Show in Java:
+
+[source,java]
+----
+var bits = Double.doubleToLongBits(100.25);
+Long.toBinaryString(bits);
+----
 
 == BigDecimal
 
