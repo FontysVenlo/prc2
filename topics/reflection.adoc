@@ -159,9 +159,9 @@ To retrieve a value we can use bit manipulation to retrieve a specific bit. For 
 int modifiers = method.getModifiers();
 
 // Manually checking
-boolean isPublic = (modifiers & 1) != 0;// Modifiers.PUBLIC == 1
-boolean isFinal = (modifiers & 2) != 0;// Modifiers.Final == 16
-boolean isPublicFinal = (modifiers & 17) == 17; // Modifiers.PUBLIC | Modifiers.Final) == 17
+boolean isPublic = (modifiers & 1) != 0;// Modifier.PUBLIC == 1
+boolean isFinal = (modifiers & 16) != 0;// Modifier.FINAL == 16
+boolean isPublicFinal = (modifiers & 17) == 17; // Modifier.PUBLIC | Modifier.FINAL == 17
 ----
 
 This following table shows the modifiers and there values.
@@ -182,6 +182,44 @@ This following table shows the modifiers and there values.
 | abstract      | Modifier.ABSTRACT     | 1024    | 010000000000
 |===
 
+==== Traversing the class hierarchy
+
+Beyond inspecting a single class, reflection lets you walk the full
+class hierarchy at runtime.
+
+.Class hierarchy traversal
+[source,java]
+----
+// Get the direct superclass (returns null for Object and interfaces)
+Class<?> superClass = ArrayList.class.getSuperclass();
+// -> class java.util.AbstractList
+
+// Get the interfaces directly implemented (or extended, for interfaces)
+Class<?>[] interfaces = ArrayList.class.getInterfaces();
+// -> [RandomAccess, Cloneable, Serializable, List]
+
+// Check whether a Class object represents an interface
+boolean isInterface = Runnable.class.isInterface();  // true
+boolean isClass     = ArrayList.class.isInterface(); // false
+----
+
+When iterating over fields you can also ask a `Field` for its declared type
+and the class it originally came from.
+
+.Field type and origin
+[source,java]
+----
+Field f = classType.getDeclaredField("name");
+
+// The declared type of the field
+Class<?> fieldType = f.getType();
+// -> class java.lang.String
+
+// The class that declared the field (useful when fields come from supertypes)
+Class<?> declaringClass = f.getDeclaringClass();
+// -> class Student
+----
+
 === Annotations
 
 Java annotations are a form of metadata introduced in Java 5 (JDK 5) that allow developers to add supplementary information to Java code elements. Annotations provide a way to attach metadata to classes, methods, fields, parameters, and other program elements without affecting the program's execution. They are extensively used in modern Java programming for various purposes, including documentation, code organization, and runtime processing.
@@ -192,7 +230,7 @@ Java has some built-in annotations such as:
  - `@Deprecated`
  - `@SuppressWarnings`
 
-Other annotatiuons you know from other libraries such as:
+Other annotations you know from other libraries such as:
 
  - `@Test`
  - `@ParameterizedTest`
@@ -210,7 +248,7 @@ public @interface Hidden {
 }
 ----
 
-The `@interface`` keyword in Java is used to define a custom annotation. It's not a regular interface, but rather a special construct used to declare metadata that can be attached to classes, methods, fields, etc.
+The `@interface` keyword in Java is used to define a custom annotation. It's not a regular interface, but rather a special construct used to declare metadata that can be attached to classes, methods, fields, etc.
 
 Retention: annotations can have different link:https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/annotation/Retention.html[retentions], indicating how long they should be link:https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/lang/annotation/RetentionPolicy.html[retained]. The retention policies are SOURCE, CLASS, and RUNTIME, see link:https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/lang/annotation/RetentionPolicy.html#enum-constant-summary[descriptions]. So if we want to be able to read the annotation during runtime, we should annotate it with `RetentationPolicy.RUNTIME`.
 
@@ -274,6 +312,25 @@ for(Field field : classType.getDeclaredFields()) {
     }
 }
 ----
+
+The previous example works well when you know exactly which annotation you are
+looking for. Sometimes you want to process *all* annotations on a field without
+knowing their types upfront. For this, use `getAnnotations()` and dispatch on
+`annotationType()`.
+
+.Processing all annotations on a field
+[source,java]
+----
+for (Annotation annotation : field.getAnnotations()) {    // <1>
+    if (annotation.annotationType() == Hidden.class) {    // <2>
+        Hidden hidden = (Hidden) annotation;              // <3>
+        System.out.println(hidden.value());
+    }
+}
+----
+<1> `getAnnotations()` returns every annotation present on the field.
+<2> `annotationType()` returns the annotation's class, used to dispatch.
+<3> Cast to the concrete annotation type to access its parameters.
 
 === Reflection and JPMS
 
@@ -352,26 +409,26 @@ public class FontysAssert {
 
 ==== Example tests for calculator
 
-```java
+[source,java]
+----
 @FontysTest
-public void testCalculator_1(){    
+public void testCalculator_1(){
     Calculator calc = new Calculator();
     int expected = 10;
     int actual = calc.add(7, 3);
-    
+
     assertEquals(actual, expected);
 }
 
 @FontysTest
 public void testCalculator_2(){
-    
     Calculator calc = new Calculator();
     int expected = -2;
     int actual = calc.add(3, -5);
-    
+
     assertEquals(actual, expected);
 }
-```
+----
 
 ==== Test executor
 
