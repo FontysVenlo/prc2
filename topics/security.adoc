@@ -143,10 +143,50 @@ where it was possible for unauthenticated users to load arbitrary
 classes via an exposed Java Remote Method Invocation (RMI)
  service.
 
-// Maybe add example of showing of custom class loader for loading
-// encrypted class files?
+==== Java Cryptography API
 
-// TODO: jar can be signed and also verified https://docs.oracle.com/javase/tutorial/deployment/jar/signing.html
+One legitimate use of a custom class loader is loading *encrypted* class files.
+The class loader decrypts the bytes before handing them to the JVM, so the
+`.class` files on disk are never readable in plain form.
+
+Java's `javax.crypto` package provides the building blocks needed.
+
+*Symmetric vs asymmetric encryption* +
+Symmetric algorithms (AES, ChaCha20) use the same key for encryption and
+decryption and are fast — suitable for bulk data such as class files.
+Asymmetric algorithms (RSA, EC) use a key pair and are much slower; they are
+typically used to exchange a symmetric key rather than to encrypt data directly.
+
+*AES-GCM* +
+AES (Advanced Encryption Standard) in GCM (Galois/Counter Mode) is the
+recommended symmetric algorithm. GCM is an _authenticated encryption_ mode:
+it produces a short authentication tag alongside the ciphertext, so any
+tampering is detected on decryption.
+
+Two parameters are required beyond the key:
+
+* *Key* — 16, 24 or 32 bytes (128, 192, or 256-bit AES)
+* *IV / nonce* — 12 bytes for GCM. Must be unique per encryption; it does *not* need to be secret and is typically stored alongside the ciphertext.
+
+.Decrypting bytes with AES/GCM/NoPadding
+[source, java]
+----
+byte[] key = ...; // 16 bytes
+byte[] iv  = ...; // 12 bytes
+
+SecretKeySpec keySpec = new SecretKeySpec(key, "AES");          // <1>
+GCMParameterSpec gcmSpec = new GCMParameterSpec(128, iv);       // <2>
+
+Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");        // <3>
+cipher.init(Cipher.DECRYPT_MODE, keySpec, gcmSpec);             // <4>
+
+byte[] plaintext = cipher.doFinal(ciphertext);                  // <5>
+----
+<1> Wrap the raw key bytes in a `SecretKeySpec` for AES.
+<2> `GCMParameterSpec(tagLengthBits, iv)` — 128-bit tag is the standard.
+<3> Request an AES/GCM cipher instance from the JCA provider.
+<4> Initialise for decryption using the key and IV.
+<5> Decrypt (and verify the authentication tag) in one call.
 
 ==== Byte code verifier
 
