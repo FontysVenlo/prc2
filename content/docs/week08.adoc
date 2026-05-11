@@ -2,7 +2,7 @@
 title: "08 I18N, exceptions and logging"
 description: ""
 date: 2025-04-24T10:31:29+02:00
-draft: true
+draft: false
 images: []
 slug: "internationalisation"
 menu: 

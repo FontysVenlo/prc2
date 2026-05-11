@@ -5,11 +5,11 @@ Logging can be a very powerful instrument to squeeze very much or very precise i
 .Using a supplier suppresses the generation of the log when the log level is not active.
 [source,java]
 ----
-public static void main( String[] args ) {
-    Logger logger = Logger.getLogger( Main.class.getName() ); // <1>
-    logger.log( Level.FINE,                                   // <2>
-       ()-> String.format("Hello %1$s args length= %2$d ",    //<3>
-                          "world", args.length)               //<4>
+public static void main(String[] args) {
+    Logger logger = Logger.getLogger(Main.class.getName()); // <1>
+    logger.log(Level.FINE,                                  // <2>
+       ()-> String.format("Hello %1$s args length= %2$d ",  //<3>
+                          "world", args.length)             //<4>
     );
 }
 ----
@@ -72,6 +72,27 @@ Add the appropriate option there, e.g. -Djava.util.logging.config.file=conf/logg
 image::logging-activation.png[title="Project specific logging in NetBeans IDE"]
 
 ====
+
+=== Logging with i18n messages
+
+You can combine logging with `ResourceBundle` and `MessageFormat` to produce localised log messages.
+This is useful when the locale may change between runs (e.g. per user or per test).
+
+.Log a message using a ResourceBundle key and MessageFormat
+[source,java]
+----
+ResourceBundle bundle = ResourceBundle.getBundle(
+        "greetings", Locale.getDefault());
+String pattern = bundle.getString("farewell");                           // <1>
+String date    = LocalDate.now().format(
+        DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));            // <2>
+logger.log(Level.INFO, () ->
+        MessageFormat.format(pattern, "World", date));                   // <3>
+----
+
+<1> Look up the localised pattern from the bundle; `farewell=Goodbye, {0}. See you on {1}.` in the default locale.
+<2> Format today's date according to the current locale (e.g. `"Monday, 11 May 2026"` in English).
+<3> Supply the lambda so the string is only built when the INFO level is actually active.
 
 Read a bit more about logging in the book and get some additional information using https://sematext.com/blog/java-logging/.
 

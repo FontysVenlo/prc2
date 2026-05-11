@@ -16,15 +16,15 @@ public class CircleWithException {
      * Construct a circle with radius 1
      */
     public CircleWithException() {
-        this( 1.0 );
+        this(1.0);
     }
 
     /**
      * Construct a circle with a specified radius
      */
-    public CircleWithException( double newRadius ) {
-        setRadius( newRadius );
-        numberOfObjects ++;
+    public CircleWithException(double newRadius) {
+        setRadius(newRadius);
+        numberOfObjects++;
     }
 
     /**
@@ -37,13 +37,13 @@ public class CircleWithException {
     /**
      * Set a new radius
      */
-    public void setRadius( double newRadius )
+    public void setRadius(double newRadius)
             throws IllegalArgumentException {
-        if ( newRadius >= 0 ) {
+        if (newRadius >= 0) {
             radius = newRadius;
         } else {
             throw new IllegalArgumentException(
-                    "Radius cannot be negative" );
+                    "Radius cannot be negative");
         }
     }
 

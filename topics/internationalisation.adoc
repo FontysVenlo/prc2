@@ -50,20 +50,20 @@ so that the whole test method reads
 [source,java]
 ----
 @ParameterizedTest
-@CsvSource( {
+@CsvSource({
     "a,greenCircle,blueCircle,500.0,400.0,100.0,100.0,500.0",
     "b,redCircle,blueCircle,400.0,100.0,100.0,100.0,500.0",
-    "c,greenCircle,redCircle,300.0,100.0,100.0,400.0,100.0", } )
-public void tLength( String line, String p1, String p2, double expected,
-        double x1, double y1, double x2, double y2 ) throws ParseException {
+    "c,greenCircle,redCircle,300.0,100.0,100.0,400.0,100.0", })
+public void tLength(String line, String p1, String p2, double expected,
+        double x1, double y1, double x2, double y2) throws ParseException {
     double xOrg = stage.getX();
     double yOrg = stage.getY();
     FxRobot rob = new FxRobot();
-    rob.drag( '#' + p1 ).dropTo( xOrg + x1, yOrg + y1 );
-    rob.drag( '#' + p2 ).dropTo( xOrg + x2, yOrg + y2 );
-    String ltext = labelMap.get( line ).apply( triangulator ).getText();
-    double l = getDoubleConsideringLocale( ltext.split( ":" )[ 1 ] ); // <1>
-    assertThat( l ).isCloseTo( expected, within( 0.1 ) );
+    rob.drag('#' + p1).dropTo(xOrg + x1, yOrg + y1);
+    rob.drag('#' + p2).dropTo(xOrg + x2, yOrg + y2);
+    String ltext = labelMap.get(line).apply(triangulator).getText();
+    double l = getDoubleConsideringLocale(ltext.split(":")[1]); // <1>
+    assertThat(l).isCloseTo(expected, within(0.1));
 //        fail( "method tLength reached end. You know what to do." );
 }
 ----
@@ -79,9 +79,9 @@ public void tLength( String line, String p1, String p2, double expected,
     * @return the double
     * @throws ParseException if the string does not parse to double.
     */
-static double getDoubleConsideringLocale( String input )
+static double getDoubleConsideringLocale(String input)
    throws ParseException {
-    return DecimalFormat.getNumberInstance().parse( input ).doubleValue(); // <1>
+    return DecimalFormat.getNumberInstance().parse(input).doubleValue(); // <1>
 }
 
 /**
@@ -91,14 +91,9 @@ static double getDoubleConsideringLocale( String input )
 * @return the double.
 * @throws ParseException if the string does not parse to double.
 */
-<<<<<<< Updated upstream
-static double getDoubleConsideringLocale( Locale locale, String input )
+static double getDoubleConsideringLocale(Locale locale, String input)
     throws ParseException {
-=======
-static double getDoubleConsideringLocale( Locale locale, String input )
-  throws ParseException {
->>>>>>> Stashed changes
-    return DecimalFormat.getNumberInstance(locale).parse( input ).doubleValue();
+    return DecimalFormat.getNumberInstance(locale).parse(input).doubleValue();
 }
 ----
 
@@ -107,11 +102,53 @@ static double getDoubleConsideringLocale( Locale locale, String input )
 .Set the locale for the execution. Useful for tests.
 [source,java]
 ----
-Locale.setDefault( Locale.GERMANY ); // <1>
+Locale.setDefault(Locale.GERMANY); // <1>
 ----
 
 <1> Set the locale to GERMANY if it isn't already. Similar for other languages.
 
+
+=== ResourceBundle and MessageFormat
+
+Java's `ResourceBundle` is the standard mechanism for externalising locale-specific strings into `.properties` files.
+Place one base file plus one file per supported locale under `src/main/resources`:
+
+----
+src/main/resources/pub/inthepub.properties          ← default (English)
+src/main/resources/pub/inthepub_nl_NL.properties    ← Dutch
+src/main/resources/pub/inthepub_de_DE.properties    ← German
+----
+
+A `.properties` file is a plain key=value text file.
+Keys that contain `{0}`, `{1}`, … are parameterised placeholders:
+
+.greetings.properties
+[source,properties]
+----
+greeting=Hello, {0}!
+farewell=Goodbye, {0}. See you on {1}.
+----
+
+To load the bundle for the current locale and look up a key at runtime:
+
+.Looking up and formatting a localized message
+[source,java]
+----
+ResourceBundle bundle = ResourceBundle.getBundle(
+        "greetings",          // <1>
+        Locale.getDefault()); // <2>
+if (bundle.containsKey("greeting")) {                        // <3>
+    String pattern = bundle.getString("greeting");
+    String message = MessageFormat.format(pattern, "World"); // <4>
+}
+----
+
+<1> Base name of the properties file (no extension, no locale suffix) — Java appends `_nl_NL` etc. automatically.
+<2> Use the current default locale. Change it with `Locale.setDefault(...)`, e.g. in a test.
+<3> `containsKey` guards against `MissingResourceException` when a key is absent.
+<4> `MessageFormat.format` substitutes `{0}`, `{1}`, … with the supplied arguments.
+
+The JVM picks the most specific file available: `inthepub_nl_NL.properties` → `inthepub_nl.properties` → `inthepub.properties` (fallback).
 
 === Testing Localized Exceptions
 
@@ -121,23 +158,22 @@ To get to the localized message, which contains the message as translated by the
 
 Luckily, AssertJ allows you to extract information from a Throwable, by using an extractor function. Now the Lambda bells should ring.
 
-.To make a long story very short: here is an example:
+.To make a long story very short: here is an example (using the pub exercise domain):
 [source,java]
 ----
-String[] keys = keyWords.split( "\\|");
-assertThatThrownBy( () -> {
-            MainSimulation.main( args );
-} ).isExactlyInstanceOf( exceptionMap.get( expectionClassName ) )
-        .extracting( e -> e.getLocalizedMessage() ) // <1>
+Locale.setDefault(Locale.forLanguageTag("nl-NL"));
+assertThatThrownBy(() -> barkeeper.serve(drinker, volume))
+        .isExactlyInstanceOf(EmptyStockException.class)
+        .extracting(e -> e.getLocalizedMessage()) // <1>
         .asString()           //<2>
-        .contains( keys ); //<3>
+        .contains("uitverkocht"); //<3>
 ----
 
 <1> extract using [blue]`Function<? super Throwable,​T>`, [black]`e -> getLocalizedMessage()` in this case.
 <2> Get the assertion for in String. Do [red]*not* use `toString()`, because that produces a _String_, not an [blue]*AbstractStringAssert*.
 <3> And use the assert to check that the string contains the required key information.
 
-.If you turn on type hints in NetBeans-IDE (or in vscode/intelij) you can see what the type is on which you call `contains(keys)`
+.If you turn on type hints in NetBeans-IDE (or in VS Code/IntelliJ) you can see what the type is on which you call `contains(keys)`
 image::assertjtypehints.png
 
 

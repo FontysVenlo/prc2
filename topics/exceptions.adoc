@@ -148,10 +148,10 @@ Although you cannot simply iterate through these exceptions, getting all in a lo
 [source,java]
 ----
 Throwable t = ex.getCause();
-while ( t != null ) {
+while (t != null) {
   // do something with t like print or getMessage;
 
-  t= t.getCause();
+  t = t.getCause();
 }
 ----
 

@@ -11,21 +11,21 @@ import java.util.Scanner;
  */
 public class Trywith {
 
-    public static void main( String[] args ) throws IOException {
+    public static void main(String[] args) throws IOException {
 
         try (
-          File f = new File( "data.txt" );
+          File f = new File("data.txt");
           Scanner scanner = new Scanner(f); //<1>
         ) {
           String s1 = scanner.next();
-        } catch ( FileNotFoundException fnfe ) {
+        } catch (FileNotFoundException fnfe) {
             // deal with exceptions.
         } //<2>
     }
 
     interface Ikk{
         private static void hello(){
-            System.out.println( "Hello" );
+            System.out.println("Hello");
         }
     }
 }
