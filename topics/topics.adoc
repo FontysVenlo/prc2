@@ -50,25 +50,26 @@ both by Cay S. Horstmann and both in the 12th edition.
 | Vol I, ch. 7; Vol II, ch. 6 (time API) and 7 (Logging) 
 | Pub Exceptions
 
-| 10   
-| Security  
-| - 
-| Classloader
+
+| 10
+| Reflection
+| 
+| Genealogy, Table generator
 
 | 11   
+| Security  
+| - 
+| SQL Injection, Encrypted Classloader
+
+| 12   
 | Number systems and storage in Java  
 | - 
 | Numbersystems
 
-| 12   
+| 13   
 | Concurrency 
 | - 
 | tbd
-
-| 13   
-| tbd  
-|   
-|
 
 | 14   
 | tbd  
