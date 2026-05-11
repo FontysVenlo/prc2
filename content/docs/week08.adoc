@@ -1,10 +1,10 @@
 ---
-title: "07 The State of Things"
+title: "08 I18N, exceptions and logging"
 description: ""
-date: 2025-04-03T12:02:24+02:00
-draft: false
+date: 2025-04-24T10:31:29+02:00
+draft: true
 images: []
-slug: "statemachine"
+slug: "internationalisation"
 menu: 
   docs:
     parent: ""
@@ -12,4 +12,8 @@ weight: 080
 toc: true
 ---
 
-include::{topics}/statemachines.adoc[]
+include::{topics}/internationalisation.adoc[]
+
+include::{topics}/exceptions.adoc[]
+
+include::{topics}/logging.adoc[]

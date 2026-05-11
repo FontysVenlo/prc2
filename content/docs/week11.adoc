@@ -1,10 +1,10 @@
 ---
-title: "10 I18N, exceptions and logging"
+title: "11 Number systems"
 description: ""
-date: 2025-04-24T10:31:29+02:00
+date: 2025-04-03T12:02:24+02:00
 draft: true
 images: []
-slug: "internationalisation"
+slug: "numbersystems"
 menu: 
   docs:
     parent: ""
@@ -12,8 +12,4 @@ weight: 110
 toc: true
 ---
 
-include::{topics}/internationalisation.adoc[]
-
-include::{topics}/exceptions.adoc[]
-
-include::{topics}/logging.adoc[]
+include::{topics}/numbersystems.adoc[]

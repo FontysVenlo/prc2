@@ -1,15 +1,13 @@
 ---
-title: "11 Security"
+title: "12 Concurrency"
 description: ""
-date: 2022-05-18T10:31:29+02:00
+date: 2025-04-03T12:02:24+02:00
 draft: true
 images: []
-slug: "security"
+slug: "concurrency"
 menu: 
   docs:
     parent: ""
-weight: 110
+weight: 120
 toc: true
 ---
-
-include::{topics}/security.adoc[]
