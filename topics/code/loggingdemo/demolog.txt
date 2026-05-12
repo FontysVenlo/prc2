@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-05-08T22:51:36.563450Z</date>
+  <millis>1683586296563</millis>
+  <nanos>450000</nanos>
+  <sequence>5</sequence>
+  <logger>fontys.exceptiondemo.Main</logger>
+  <level>FINEST</level>
+  <class>fontys.exceptiondemo.Main</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>This is the finest logmessage, should also be logged in file</message>
+</record>
+</log>
