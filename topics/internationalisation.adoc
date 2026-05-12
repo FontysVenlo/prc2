@@ -32,81 +32,6 @@ standard formatters, `Locale` specific formatters and formatters with custom pat
 This paragraph is based on Core Java Volume 2, 11th edition, chapter 6 by Cay Horstmann.
 
 
-=== Number Formats
-
-Some of you might have noticed that one of the teacher tests in the FXTriangulate exercise fails on your machine.
-
-This is because on the machine we developed, the locale is set to en_US.
-This causes the numbers to be formatted in the way that [blue]`Double.parseDouble(String input)` expects it.
-If you run the same tests on a machine with say a German Locale, the test that reads the length back from the label,
-use Double.parseDouble(), which is then surprised to find a comma instead of the decimal point, and fails with a format exception.
-
-To solve that, modify the test in method [blue]#tLength# such that the line +
-`double l = Double.parseDouble( ltext.split( ":" )[ 1 ] );` reads +
-`double l = getDoubleConsideringLocale( ltext.split( ":" )[ 1 ] );`,
-so that the whole test method reads
-
-.fxtriangulate.GUITest.tLength
-[source,java]
-----
-@ParameterizedTest
-@CsvSource({
-    "a,greenCircle,blueCircle,500.0,400.0,100.0,100.0,500.0",
-    "b,redCircle,blueCircle,400.0,100.0,100.0,100.0,500.0",
-    "c,greenCircle,redCircle,300.0,100.0,100.0,400.0,100.0", })
-public void tLength(String line, String p1, String p2, double expected,
-        double x1, double y1, double x2, double y2) throws ParseException {
-    double xOrg = stage.getX();
-    double yOrg = stage.getY();
-    FxRobot rob = new FxRobot();
-    rob.drag('#' + p1).dropTo(xOrg + x1, yOrg + y1);
-    rob.drag('#' + p2).dropTo(xOrg + x2, yOrg + y2);
-    String ltext = labelMap.get(line).apply(triangulator).getText();
-    double l = getDoubleConsideringLocale(ltext.split(":")[1]); // <1>
-    assertThat(l).isCloseTo(expected, within(0.1));
-//        fail( "method tLength reached end. You know what to do." );
-}
-----
-
-<1> changed line.
-
-.Consider the local in which the number is written.
-[source,java]
-----
-/**
-    * Use the default locale to parse a double value from a string.
-    * @param input string
-    * @return the double
-    * @throws ParseException if the string does not parse to double.
-    */
-static double getDoubleConsideringLocale(String input)
-   throws ParseException {
-    return DecimalFormat.getNumberInstance().parse(input).doubleValue(); // <1>
-}
-
-/**
-* Use the given locale to parse a double value from a string.
-* @param locale to use.
-* @param input string.
-* @return the double.
-* @throws ParseException if the string does not parse to double.
-*/
-static double getDoubleConsideringLocale(Locale locale, String input)
-    throws ParseException {
-    return DecimalFormat.getNumberInstance(locale).parse(input).doubleValue();
-}
-----
-
-<1> DecimalFormat.getNumberInstance gets a format that understands the default locale.
-
-.Set the locale for the execution. Useful for tests.
-[source,java]
-----
-Locale.setDefault(Locale.GERMANY); // <1>
-----
-
-<1> Set the locale to GERMANY if it isn't already. Similar for other languages.
-
 
 === ResourceBundle and MessageFormat
 
@@ -152,7 +77,7 @@ The JVM picks the most specific file available: `inthepub_nl_NL.properties` → 
 
 === Testing Localized Exceptions
 
-The standard way of testing exceptions with assertj is explained in link:week01.html#_assert_exceptions[week01].
+The standard way of testing exceptions with assertj is explained in week01.
 
 To get to the localized message, which contains the message as translated by the locale framework is a bit more involved.
 
@@ -178,7 +103,4 @@ image::assertjtypehints.png
 
 
 === Additional Pointers
-* If you haven't read the Horstmann book but you need an introduction into Internationalization,
- read this tutorial from DZONE link:https://dzone.com/articles/a-beginners-guide-to-java-internationalization[here].
- Make sure to read the bit about Resource Bundles, as you use them in the exercise for this week.
-* Jakob Jenkov also has a tutorial on http://tutorials.jenkov.com/java-internationalization/index.html[Java Internationalization ^]
+* If you haven't read the Horstmann book but you need an introduction into Internationalization, Jakob Jenkov has a tutorial on http://tutorials.jenkov.com/java-internationalization/index.html[Java Internationalization ^]
