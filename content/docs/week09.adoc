@@ -2,7 +2,7 @@
 title: "09 Reflection"
 description: ""
 date: 2022-05-11T12:02:24+02:00
-draft: true
+draft: false
 images: []
 slug: "reflection"
 menu: 
