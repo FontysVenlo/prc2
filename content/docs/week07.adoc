@@ -8,7 +8,7 @@ slug: "statemachine"
 menu: 
   docs:
     parent: ""
-weight: 070
+weight: 70
 toc: true
 ---
 
