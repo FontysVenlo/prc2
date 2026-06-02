@@ -12,7 +12,7 @@ So the meaning of the bits depends on the intended interpretation.
 
 In most of our everyday life we use the decimal system. So how does this system work?
 
-* Numbers available: `0 1 2 3 4 5 6 7 8 9`
+* Digits available: `0 1 2 3 4 5 6 7 8 9`
 * Powers of ten: `10^5 10^4 10^3 10^2 10^1 10^0`
 
 We can write for example the number `124` as `1 * 10^2 + 2 * 10^1 + 4 * 10^0`.
@@ -48,7 +48,7 @@ Multiplication
   612
    24x
 -----
- 2448 <- multiple by 4
+ 2448 <- multiply by 4
 12240 <- move one to the left and multiply by 2
 -----
 14688 <- addition
@@ -75,7 +75,7 @@ Have a look at link:https://www.mathsisfun.com/long_division.html[], where this 
 
 How can we represent numbers in binary form?
 
-* Numbers available: `0 1`
+* Digits available: `0 1`
 * Powers of two: `2^5 2^4 2^3 2^2 2^1 2^0`
 
 Same principles apply as with the decimal system `1101` is `1 * 2^3 + 1 * 2^2 + 0 * 2^1 + 1 * 2^0` or `13` in decimal.
@@ -285,7 +285,7 @@ Formula:
 
 [source]
 ----
-(sign) x (1 + mantissa) x 2^(exponent - 127)
+(-1)^sign x (1 + mantissa) x 2^(exponent - 127)
 ----
 
 The `1 +` in the formula reflects the *hidden (implicit) bit*.
@@ -346,7 +346,7 @@ Decimal part:
 [source]
 ----
 Multiply with two and if the decimal is greater than 1 then 1 else 0.
-After it becomes greater then 1, subtract 1.
+After it becomes greater than 1, subtract 1.
 
 0.25 * 2 = 0.5  | 0 |
 0.5 * 2 = 1     | 1 v Reading down gives  01
