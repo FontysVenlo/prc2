@@ -384,6 +384,25 @@ Final float binary:
 0 10000101 10010001 000000000000000
 ----
 
+=== Special Case: Zero
+
+The formula always adds an implicit `1` (`1 + mantissa`), so the smallest normal number we can build is `1.0 x 2^(exponent - 127)`. This means there is no combination of bits that gives us exactly `0`, and we also cannot normalise `0`: there is no leading `1` bit to shift to.
+
+IEEE-754 solves this by reserving the exponent value `0000 0000`. When the exponent and the mantissa are all zero, the value is defined to be zero (the implicit `1` is dropped):
+
+[source]
+----
+0 00000000 00000000000000000000000 -> +0
+1 00000000 00000000000000000000000 -> -0
+----
+
+Because the sign bit is independent, we even get both `+0` and `-0` (they still compare as equal in Java).
+
+The same trick is used for a few other values that cannot be written in normal form:
+
+* exponent all `1`s, mantissa `0` → ± infinity
+* exponent all `1`s, mantissa not `0` → NaN (not a number)
+
 === Why 0.1 Can't Be Represented Exactly
 
 There are some problems with floating point numbers, one of them is that not every number can be represented correctly. 
